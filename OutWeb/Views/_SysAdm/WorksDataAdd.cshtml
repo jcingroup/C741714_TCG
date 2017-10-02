@@ -1,0 +1,20 @@
+﻿@using OutWeb.Models.Manage.WorksModels
+@model WorksDetailsDataModel
+
+@{
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    ViewBag.Crumb = "案例分享管理";
+    ViewBag.subnav = "Works";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">新增</small></h3>
+@using (Html.BeginForm("WorksDataAdd", "_SysAdm", FormMethod.Post, new { id = "formManageWorksData", @class = "form-list", @enctype = "multipart/form-data" }))
+{
+    Html.RenderPartial("_WorksDataPartial", Model);
+}

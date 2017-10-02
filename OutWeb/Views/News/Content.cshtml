@@ -1,0 +1,21 @@
+﻿@using OutWeb.Models.FrontEnd.NewsFrontEndModels
+@model NewsFrontEndDetalisDataModel
+@{
+    ViewBag.Title = "消息報報";
+    ViewBag.BodyClass = "News";
+}
+
+<h1 class="title"><span class="underline">@ViewBag.Title</span></h1>
+
+<article class="wrap news-post text-left">
+    <span class="date">@Model.PublishDateStr</span>
+    <header>@Model.Title</header>
+
+    <main class="editor">
+        @Html.Raw(Model.NewsContent)
+    </main>
+
+    <footer class="text-center mt-32">
+        <a href="~/News" class="btn lg">回列表</a>
+    </footer>
+</article>

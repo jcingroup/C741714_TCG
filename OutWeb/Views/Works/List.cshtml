@@ -1,0 +1,30 @@
+﻿@using OutWeb.Models.FrontEnd.WorksFrontEndModels
+@model List<WorksFrontEndDataModel>
+@{
+    ViewBag.Title = "案例分享";
+    ViewBag.BodyClass = "Works";
+}
+
+<h1 class="title"><span class="underline">@ViewBag.Title</span></h1>
+
+<div class="wrap clearfix">
+    @* 寬度不超過450，高度不超過265 *@
+
+    @foreach (var data in Model)
+    {
+        string imgUrl = data.ImagesData == null ? string.Empty : data.ImagesData.FileUrl;
+
+        <figure class="newslist">
+            <div class="cut">
+                <img src="~/@imgUrl" alt="案例分享列表圖">
+            </div>
+            <a href="@Url.Content("~/Works/Content?ID="+data.ID)"></a>
+            <figcaption>
+                <h4>@data.WorksTitle</h4>
+                <a href="@Url.Content("~/Works/Content?ID="+data.ID)" class="more">more</a>
+                <small class="date">@data.WorksPulishDateStr</small>
+        </figcaption>
+    </figure>
+    }
+
+</div>

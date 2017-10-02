@@ -1,0 +1,21 @@
+﻿@using OutWeb.Models.Manage.ProductKindModels
+@model ProductKindDetailsDataModel
+@{
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    ViewBag.Crumb = "產品分類資料維護";
+    ViewBag.subnav = "Products";
+    ViewBag.subnav2 = "ProductKind";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>產品分類管理 &#10095;</li>
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+@using (Html.BeginForm("ProductKindAdd", "_SysAdm", FormMethod.Post, new { id = "formManageProductKindData", @class = "form-list" }))
+{
+    Html.RenderPartial("_ProductKindDataPartia", Model);
+}

@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.mainName = "WTB 懷特博管理系統";
+}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.mainName</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed">
+    <link rel="stylesheet" href="~/Content/css/vendor/open-iconic.css">
+    <link rel="stylesheet" href="~/Content/css/grid.css">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+    @if (ViewBag.IsFirstPage)
+    {
+        <link rel="stylesheet" href="~/Content/css/login.css">
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/Content/css/admin.css">
+    }
+    @Scripts.Render("~/bundles/js")
+
+
+    @RenderSection("IncludeCSS", false)
+
+
+    @RenderSection("css", false)
+</head>
+
+<body>
+
+    <div class="wrapper">
+        @if (!ViewBag.IsFirstPage)
+        {
+            <header id="header">
+                <h1 class="site-title">@ViewBag.mainName</h1>
+
+                <nav class="navbar">
+                    <span class="nav-link">登入身份: 管理者</span>
+
+                    <a href="~/Home" class="nav-link oi home" data-glyph="home">
+                        回首頁
+                    </a>
+                        <a href="~/_SysAdm/LogOut" class="nav-link oi logout" data-glyph="power-standby">
+                            登出
+                        </a>
+</nav>
+            </header><!-- header //-->
+        }
+
+        <main id="main">
+
+            @if (ViewBag.IsFirstPage)
+            {
+                @RenderBody()
+            }
+            else
+            {
+                <div id="content" class="font-md">
+                    @RenderSection("Breadcrumb", false)
+                    @RenderBody()
+                </div><!-- content //-->
+
+                <aside id="sidebar">
+                    <h6 class="oi" data-glyph="menu">功能選單 MENU</h6>
+
+                    <header class='collapse-toggle oi @(ViewBag.subnav == "Products" ? "active" : "")' data-glyph="beaker">產品管理</header>
+                    <nav class='collapse-content @(ViewBag.subnav == "Products" ? "in" : "")'>
+                        <a href="~/_SysAdm/ProductKindList" class='@(ViewBag.subnav2 == "ProductKind" ? "active" : "")'>分類維護</a>
+                        <a href="~/_SysAdm/ProductList" class='@(ViewBag.subnav2 == "Product" ? "active" : "")'>產品資料維護</a>
+                    </nav>
+
+                    <a href="~/_SysAdm/NewsList" class='collapse-toggle oi @(ViewBag.subnav == "News" ? "active" : "")' data-glyph="bell">消息報報管理</a>
+
+                    <a href="~/_SysAdm/WorksList" class='collapse-toggle oi @(ViewBag.subnav == "Works" ? "active" : "")' data-glyph="flag">案例分享管理</a>
+
+                    <a href="~/_SysAdm/Agents" class='collapse-toggle oi @(ViewBag.subnav == "Agents" ? "active" : "")' data-glyph="clipboard">代理商管理</a>
+
+                    <header class='collapse-toggle oi @(ViewBag.subnav == "Cog" ? "active" : "")' data-glyph="cog">系統設定</header>
+                    <nav class='collapse-content @(ViewBag.subnav == "Cog" ? "in" : "")'>
+                        <a href="~/_SysAdm/ChangePW" class='@(ViewBag.subnav2 == "ChangPW" ? "active" : "")'>變更密碼</a>
+                    </nav>
+                </aside><!-- sidebar //-->
+            }
+
+        </main><!-- main //-->
+
+    </div><!-- wrapper //-->
+
+    @if (ViewBag.IsFirstPage) {
+        <footer id="footer" class="text-muted">
+            <div class="copyright font-sp">Powered By <a class="hover-info" href="http://www.jcin.com.tw" target="new">JCIN INFORMATION CO.</a></div>
+            <small>本網站適用 Chrome, firefox, IE10.0+, 最佳瀏覽解析度為 1280*800 以上</small>
+        </footer><!-- footer //-->
+    }
+
+    @* 引用 jQuery *@
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
+
+    @if (!ViewBag.IsFirstPage)
+    {
+        <script>
+            // 左選單縮放特效
+            var $collapse = $('.collapse-toggle');
+            var fall = '.collapse-content';
+
+            $collapse.click(function (e) {
+                $(this).addClass('active').next(fall).slideToggle();
+                $(this).siblings().removeClass('active').next(fall).slideUp();
+                // event.preventDefault();
+            });
+        </script>
+    }
+    @RenderSection("IncludeScript", false)
+    @RenderSection("scripts", false)
+</body>
+</html>

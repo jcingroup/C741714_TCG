@@ -1,0 +1,20 @@
+﻿@using OutWeb.Models.Manage.ManageNewsModels
+@model NewsDetailsDataModel
+@{
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    ViewBag.Crumb = "消息報報管理";
+    ViewBag.subnav = "News";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+
+@using (Html.BeginForm("NewsEdit", "_SysAdm", FormMethod.Post, new { id = "formManageNewsData", @class = "form-list" }))
+{
+    Html.RenderPartial("_NewsDataPartial", Model);
+}

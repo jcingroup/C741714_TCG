@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>@ViewBag.Title - WTB 懷特博 WhiteBoard</title>
+    <link rel="stylesheet" href="~/Content/css/vendor/open-iconic.css">
+    <link rel="stylesheet" href="~/Content/css/grid.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
+@if (ViewBag.IsFirstPage)
+{
+    <link rel="stylesheet" href="~/Content/css/index.css">
+}
+else
+{
+    <link rel="stylesheet" href="~/Content/css/page.css">
+}
+    @RenderSection("css", false)
+</head>
+<body class="@ViewBag.BodyClass">
+    <div id="wrapper">
+        <header id="header">
+            <div class="wrap">
+                <h1 class="logo" onclick="location.href='@Url.Content("~/Home")'" title="回首頁" tabindex="-1">
+                    WTB 懷特博 WhiteBoard
+                </h1>
+                <nav id="menu">
+                    <a href="~/Home/AboutUs" class="@(ViewBag.BodyClass == "AboutUs" ? "current" : "")">關於懷特博WTB</a>
+                    <a href="~/Products" class="@(ViewBag.BodyClass == "Products" ? "current" : "")">產品介紹</a>
+                    <a href="~/News" class="@(ViewBag.BodyClass == "News" ? "current" : "")">消息報報</a>
+                    <a href="~/Works" class="@(ViewBag.BodyClass == "Works" ? "current" : "")">案例分享</a>
+                    <a href="~/Home/ContactUs" class="@(ViewBag.BodyClass == "ContactUs" ? "current" : "")">聯絡我們</a>
+                    <a href="~/Agents" class="@(ViewBag.BodyClass == "Agents" ? "current" : "")">代理商</a>
+                    <a href="https://www.facebook.com/whiteboardcoltd" class="fb-link" title="WTB懷特博 Facebook粉絲團" target="_blank">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.1h-54.4c0 0 0-22.1 0-33.7 0-13.9 2.8-19.5 16.3-19.5 10.9 0 38.2 0 38.2 0V82.9c0 0-40.2 0-48.8 0 -52.5 0-76.1 23.1-76.1 67.3C211.9 188.8 211.9 197.4 211.9 197.4z"/>
+                        </svg>
+                    </a>
+                </nav>
+            </div>
+        </header>
+
+        @if (!ViewBag.IsFirstPage) {
+            <section id="banner" class="swiper-container">
+                <main class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-image: url(/Content/images/banner.jpg);"></div>
+                </main>
+            </section>
+        }
+
+        @RenderBody()
+
+    </div><!-- wrapper //-->
+
+    <a href="#header" class="goTop oi" data-glyph="chevron-top" title="TOP"></a>
+
+    <footer id="footer">
+        <div class="wrap">
+            <div class="copyright pull-left">
+                <img class="mr-8" src="~/Content/images/logo-s.gif" alt="logo">
+                懷特博實業有限公司 &copy; 2017 White Board
+            </div>
+            <nav class="foot-nav pull-right">
+                <a href="~/Home/AboutUs" class="@(ViewBag.BodyClass == "AboutUs" ? "current" : "")">關於懷特博WTB</a>
+                <a href="~/Products" class="@(ViewBag.BodyClass == "Products" ? "current" : "")">產品介紹</a>
+                <a href="~/News" class="@(ViewBag.BodyClass == "News" ? "current" : "")">消息報報</a>
+                <a href="~/Works" class="@(ViewBag.BodyClass == "Works" ? "current" : "")">案例分享</a>
+                <a href="~/Home/ContactUs" class="@(ViewBag.BodyClass == "ContactUs" ? "current" : "")">聯絡我們</a>
+                <a href="~/Agents" class="@(ViewBag.BodyClass == "Agents" ? "current" : "")">代理商</a>
+            </nav>
+        </div>
+    </footer><!-- footer //-->
+
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
+    <script src="~/Content/js/swiper.min.js"></script>
+    <script src="~/Content/js/jquery.waypoints.min.js"></script>
+    <script>
+        // slider 輪播效果
+        var swiperBanner = new Swiper(document.getElementById('banner'), {
+            pagination: '.swiper-pager',
+            paginationClickable: true,
+            autoplay: 5000,
+            autoplayDisableOnInteraction: false,
+            speed: 1000,
+            // grabCursor: true,
+            effect: 'fade'
+        });
+
+        // 卷軸卷動效果
+        $('body').waypoint(function(direction) {
+            if( direction === 'down' ) {
+                $('body').addClass('scrolled');
+                $('.goTop').fadeIn();
+            }
+            else if( direction === 'up' ){
+                $('body').removeClass('scrolled');
+                $('.goTop').fadeOut();
+            }
+        }, { offset: -1 } );
+
+        // 點選後跳到 href 指向的位置
+        $('.scroll').click(function () {
+            var scrollToAnchor = $(this).attr('href');
+            $('html, body').stop(true).animate({
+                scrollTop: $(scrollToAnchor).offset().top - 40
+            }, 750);
+            return false;
+        });
+        $('.goTop').click(function () {
+            $('body, html').stop(true).animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+
+        // dropdown
+        var $dropbtn = $(".dropdown-toggle"),
+            dropcontent = ".dropdown-content";
+        $dropbtn.click(function(event){
+            event.stopPropagation();
+            $(this).next(dropcontent).slideToggle("300");
+        });
+        $(window).click(function() {
+            //Hide the menus if visible
+            $(dropcontent).slideUp("500")
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

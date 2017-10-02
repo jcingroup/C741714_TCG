@@ -1,0 +1,60 @@
+﻿@using OutWeb.Models.FrontEnd.NewsFrontEndModels
+@model List<NewsFrontEndDataModel>
+
+@{
+    ViewBag.Title = "首頁";
+}
+
+@section css {
+}
+@section scripts {
+}
+
+<section id="banner" class="swiper-container">
+    <main class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image: url(/Content/images/index/banner.jpg);"></div>
+    </main>
+    <div class="swiper-pager"></div>
+    <article class="card">
+        <header class="underline font-sp b">
+            <small class="block text-right font-xxl mb-8">懷特博</small>
+            White Board
+        </header>
+        <main class="b">
+            一向秉持最專業及誠信負責的態度來<br>
+            服務每一位客戶，<br>
+            從原料製程、成品製程、產品製程，<br>
+            皆有專人監督，品質有保障，<br>
+            直接銷售服務更迅速
+        </main>
+        <footer class="font-sp font-tiny">White Board Industrial LTD., Co.</footer>
+    </article>
+</section>
+
+<section class="news wrap">
+    <h3 class="title"><span class="underline">消息報報</span></h3>
+
+    @* 套程式 - 最多3則 *@
+    @* 圖片滿版時 class="pic-full" 寬度不超過450，高度不超過265 *@
+
+    @foreach (var data in Model)
+    {
+        string imgUrl = data.ImagesData == null ?string.Empty: data.ImagesData.FileUrl;
+
+        <figure class="newslist">
+            <div class="cut">
+                <img src="~/@imgUrl" alt="最新消息列表圖">
+            </div>
+            <a href="@Url.Content("~/News/Content?ID="+data.ID)"></a>
+            <figcaption>
+                <h4>@data.Title</h4>
+                <a href="@Url.Content("~/News/Content?ID="+data.ID)" class="more">more</a>
+                <small class="date">@data.PublishDateStr</small>
+            </figcaption>
+        </figure>
+    }
+
+    <footer class="text-right center">
+        <a href="~/News" class="news-more font-sp">more <i class="align-middle font-xxl">&#9656;</i></a>
+    </footer>
+</section>

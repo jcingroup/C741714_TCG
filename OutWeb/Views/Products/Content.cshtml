@@ -1,0 +1,81 @@
+﻿@using OutWeb.Models.FrontEnd.ProductFrontEndModels
+@model ProductFrontEndDataModel
+@{
+    ViewBag.Title = "產品介紹";
+    ViewBag.BodyClass = "Products";
+}
+
+<h1 class="title"><span class="underline">@ViewBag.Title</span></h1>
+
+<div class="wrap row">
+    <aside class="col-5 product-img">
+        <section class="swiper-container gallery">
+            <main class="swiper-wrapper">
+                @foreach (var data in Model.OtherImagesData)
+                {
+                    <div class="swiper-slide"><img src="~/@data.FileUrl" alt="產品大圖"></div>
+                }
+            </main>
+            <div class="swiper-button-next swiper-button-white"></div>
+            <div class="swiper-button-prev swiper-button-white"></div>
+        </section>
+        <section class="swiper-container thumbs">
+            <main class="swiper-wrapper">
+                @foreach (var data in Model.OtherImagesData)
+                {
+                    <div class="swiper-slide"><img src="~/@data.FileUrl" alt="產品大圖"></div>
+                }
+            </main>
+        </section>
+    </aside>
+
+    <article class="col-7 product-intro pl-32 text-left">
+        <h3 class="mt-16 mb-32">@Model.ProductName</h3>
+        <dl class="field">
+            <dt class="col-1">分類</dt>
+            <dd class="col-11">@Model.ProductKindName</dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-1">型號</dt>
+            <dd class="col-11">@Model.ProductType</dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-1">規格</dt>
+            <dd class="col-11">@Model.ProductSpecification</dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-1">材質</dt>
+            <dd class="col-11">@Model.ProductMaterial</dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-1">特色</dt>
+            <dd class="col-11">
+                @Html.Raw(Model.ProductFeatures)
+            </dd>
+        </dl>
+    </article>
+</div>
+
+@* 下面是編輯器內容，有資料的話才顯示*@
+<div class="wrap clearfix editor text-left">
+    @Html.Raw(Model.Content)
+</div>
+
+@section scripts {
+    <script>
+        var gallery = new Swiper('.gallery', {
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            spaceBetween: 10,
+        });
+        var thumbs = new Swiper('.thumbs', {
+            spaceBetween: 10,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            touchRatio: 0.2,
+            slideToClickedSlide: true
+        });
+        gallery.params.control = thumbs;
+        thumbs.params.control = gallery;
+    </script>
+}

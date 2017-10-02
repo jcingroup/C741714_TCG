@@ -1,0 +1,29 @@
+﻿@using OutWeb.Models.FrontEnd.ProductFrontEndModels
+@model List<ProductFrontEndDataModel>
+@{
+    ViewBag.Title = "產品介紹";
+    ViewBag.BodyClass = "Products";
+}
+
+<h1 class="title"><span class="underline">@ViewBag.Title</span></h1>
+
+<div class="wrap clearfix">
+    @*  列表圖: 寬度不超過480，高度不超過300  *@
+
+    @foreach (var data in Model)
+    {
+        string imgUrl = data.ImagesData == null ? string.Empty : data.ImagesData.FileUrl;
+
+        <figure class="piclist">
+            <div class="cut">
+                <img src="~/@imgUrl" alt="產品列表圖">
+            </div>
+            <a href="@Url.Content("~/Products/Content?ID="+data.ID)"></a>
+            <figcaption>
+                <h4>@data.ProductName</h4>
+            <a href="@Url.Content("~/Products/Content?ID="+data.ID)" class="more">view</a>
+        </figcaption>
+    </figure>
+    }
+
+</div>
