@@ -146,6 +146,7 @@ namespace OutWeb.Controllers
         }
         #endregion 新聞公告聲明
 
+
         #region 焦點專欄 分類
         public ActionResult FocusKindList()
         {
