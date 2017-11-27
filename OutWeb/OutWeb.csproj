@@ -1569,6 +1569,7 @@
     <Content Include="Views\_SysAdm\_WorksDataPartial.cshtml" />
     <Content Include="Views\_SysAdm\WorksDataAdd.cshtml" />
     <Content Include="Views\_SysAdm\WorksDataEdit.cshtml" />
+    <Content Include="Views\_SysAdm\AboutUs.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

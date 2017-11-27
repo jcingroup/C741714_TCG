@@ -68,20 +68,37 @@
                 <aside id="sidebar">
                     <h6 class="oi" data-glyph="menu">功能選單 MENU</h6>
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "Products" ? "active" : "")' data-glyph="beaker">產品管理</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "Products" ? "in" : "")'>
-                        <a href="~/_SysAdm/ProductKindList" class='@(ViewBag.subnav2 == "ProductKind" ? "active" : "")'>分類維護</a>
-                        <a href="~/_SysAdm/ProductList" class='@(ViewBag.subnav2 == "Product" ? "active" : "")'>產品資料維護</a>
+                    <header class='collapse-toggle oi @(ViewBag.subnav == "AboutUs" ? "active" : "")' data-glyph="globe">什麼是台灣民政府</header>
+                    <nav class='collapse-content @(ViewBag.subnav == "AboutUs" ? "in" : "")'>
+                        <a href="~/_SysAdm/AboutUs" class='@(ViewBag.subnav2 == "AboutUs" ? "active" : "")'>單一網頁內容編輯</a>
+                        <a href="~/_SysAdm/EduKindList" class='@(ViewBag.subnav2 == "EduKind" ? "active" : "")'>教育專欄 分類管理</a>
+                        <a href="~/_SysAdm/EduDataList" class='@(ViewBag.subnav2 == "EduData" ? "active" : "")'>教育專欄 文章管理</a>
                     </nav>
 
-                    <a href="~/_SysAdm/NewsList" class='collapse-toggle oi @(ViewBag.subnav == "News" ? "active" : "")' data-glyph="bell">消息報報管理</a>
+                    <header class='collapse-toggle oi @(ViewBag.subnav == "JoinUs" ? "active" : "")' data-glyph="person">加入台灣民政府</header>
+                    <nav class='collapse-content @(ViewBag.subnav == "JoinUs" ? "in" : "")'>
+                        <a href="~/_SysAdm/JoinUs" class='@(ViewBag.subnav2 == "JoinUs" ? "active" : "")'>單一網頁內容編輯</a>
+                        <a href="~/_SysAdm/SchoolVideo" class='@(ViewBag.subnav2 == "SchoolVideo" ? "active" : "")'>法理學院 課堂直播</a>
+                        <a href="~/_SysAdm/SchoolDataList" class='@(ViewBag.subnav2 == "SchoolData" ? "active" : "")'>法理學院 歷屆合照</a>
+                    </nav>
 
-                    <a href="~/_SysAdm/WorksList" class='collapse-toggle oi @(ViewBag.subnav == "Works" ? "active" : "")' data-glyph="flag">案例分享管理</a>
+                    <header class='collapse-toggle oi @(ViewBag.subnav == "Event" ? "active" : "")' data-glyph="image">活動寫真</header>
+                    <nav class='collapse-content @(ViewBag.subnav == "Products" ? "in" : "")'>
+                        <a href="~/_SysAdm/EventHistoryList" class='@(ViewBag.subnav2 == "EventHistory" ? "active" : "")'>歷史活動</a>
+                        <a href="~/_SysAdm/EventStatesList" class='@(ViewBag.subnav2 == "EventStates" ? "active" : "")'>各州活動</a>
+                        <a href="~/_SysAdm/StatesVideoList" class='@(ViewBag.subnav2 == "EventStatesVideo" ? "active" : "")'>各州直播影片</a>
+                    </nav>
 
-                    <a href="~/_SysAdm/Agents" class='collapse-toggle oi @(ViewBag.subnav == "Agents" ? "active" : "")' data-glyph="clipboard">代理商管理</a>
+                    <a href="~/_SysAdm/NewsList" class='collapse-toggle oi @(ViewBag.subnav == "News" ? "active" : "")' data-glyph="bell">新聞 公告 聲明</a>
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "Cog" ? "active" : "")' data-glyph="cog">系統設定</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "Cog" ? "in" : "")'>
+                    <header class='collapse-toggle oi @(ViewBag.subnav == "Focus" ? "active" : "")' data-glyph="eye">焦點專欄管理</header>
+                    <nav class='collapse-content @(ViewBag.subnav == "Focus" ? "in" : "")'>
+                        <a href="~/_SysAdm/FocusKindList" class='@(ViewBag.subnav2 == "FocusKind" ? "active" : "")'>分類管理</a>
+                        <a href="~/_SysAdm/FocusDataList" class='@(ViewBag.subnav2 == "FocusData" ? "active" : "")'>文章管理</a>
+                    </nav>
+
+                    <header class='collapse-toggle oi @(ViewBag.subnav == "Setting" ? "active" : "")' data-glyph="cog">系統設定</header>
+                    <nav class='collapse-content @(ViewBag.subnav == "Setting" ? "in" : "")'>
                         <a href="~/_SysAdm/ChangePW" class='@(ViewBag.subnav2 == "ChangPW" ? "active" : "")'>變更密碼</a>
                     </nav>
                 </aside><!-- sidebar //-->
