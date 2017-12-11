@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.mainName = "WTB 懷特博管理系統";
+    ViewBag.mainName = "TCG 台灣民政府 管理系統";
 }
 
 <!DOCTYPE html>
@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="~/Content/css/vendor/open-iconic.css">
     <link rel="stylesheet" href="~/Content/css/grid.css">
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-
 
     @if (ViewBag.IsFirstPage)
     {
@@ -83,10 +82,10 @@
                     </nav>
 
                     <header class='collapse-toggle oi @(ViewBag.subnav == "Event" ? "active" : "")' data-glyph="image">活動寫真</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "Products" ? "in" : "")'>
+                    <nav class='collapse-content @(ViewBag.subnav == "Event" ? "in" : "")'>
                         <a href="~/_SysAdm/EventHistoryList" class='@(ViewBag.subnav2 == "EventHistory" ? "active" : "")'>歷史活動</a>
                         <a href="~/_SysAdm/EventStatesList" class='@(ViewBag.subnav2 == "EventStates" ? "active" : "")'>各州活動</a>
-                        <a href="~/_SysAdm/StatesVideoList" class='@(ViewBag.subnav2 == "EventStatesVideo" ? "active" : "")'>各州直播影片</a>
+                        <a href="~/_SysAdm/StatesVideoList" class='@(ViewBag.subnav2 == "StatesVideo" ? "active" : "")'>各州直播網址</a>
                     </nav>
 
                     <a href="~/_SysAdm/NewsList" class='collapse-toggle oi @(ViewBag.subnav == "News" ? "active" : "")' data-glyph="bell">新聞 公告 聲明</a>

@@ -1488,6 +1488,7 @@
     <Content Include="Content\images\banner.jpg" />
     <Content Include="Content\images\bannerBg.gif" />
     <Content Include="Content\images\icon-view.png" />
+    <Content Include="Content\images\icon-word.jpg" />
     <Content Include="Content\images\index\banner.jpg" />
     <Content Include="Content\images\logo-s.gif" />
     <Content Include="Content\images\logo.png" />
@@ -1536,11 +1537,6 @@
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
     <Content Include="Views\SignIn\Login.cshtml" />
-    <Content Include="Views\_SysAdm\ProductDataAdd.cshtml" />
-    <Content Include="Views\_SysAdm\ProductKindList.cshtml" />
-    <Content Include="Views\_SysAdm\ProductList.cshtml" />
-    <Content Include="Views\_SysAdm\_NewsDataPartial.cshtml" />
-    <Content Include="Views\_SysAdm\_ProductDataPartial.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1559,17 +1555,30 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_SysAdm\NewsEdit.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\_SysAdm\ProductDataEdit.cshtml" />
-    <Content Include="Views\_SysAdm\_ProductKindDataPartia.cshtml" />
-    <Content Include="Views\_SysAdm\ProductKindAdd.cshtml" />
-    <Content Include="Views\_SysAdm\ProductKindEdit.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Products\List.cshtml" />
     <Content Include="Views\Products\Content.cshtml" />
-    <Content Include="Views\_SysAdm\_WorksDataPartial.cshtml" />
-    <Content Include="Views\_SysAdm\WorksDataAdd.cshtml" />
-    <Content Include="Views\_SysAdm\WorksDataEdit.cshtml" />
     <Content Include="Views\_SysAdm\AboutUs.cshtml" />
+    <Content Include="Views\_SysAdm\EduDataAdd.cshtml" />
+    <Content Include="Views\_SysAdm\EduDataEdit.cshtml" />
+    <Content Include="Views\_SysAdm\EduDataList.cshtml" />
+    <Content Include="Views\_SysAdm\EduKindList.cshtml" />
+    <Content Include="Views\_SysAdm\EventHistoryAdd.cshtml" />
+    <Content Include="Views\_SysAdm\EventHistoryEdit.cshtml" />
+    <Content Include="Views\_SysAdm\EventHistoryList.cshtml" />
+    <Content Include="Views\_SysAdm\EventStatesAdd.cshtml" />
+    <Content Include="Views\_SysAdm\EventStatesEdit.cshtml" />
+    <Content Include="Views\_SysAdm\EventStatesList.cshtml" />
+    <Content Include="Views\_SysAdm\FocusDataAdd.cshtml" />
+    <Content Include="Views\_SysAdm\FocusDataEdit.cshtml" />
+    <Content Include="Views\_SysAdm\FocusDataList.cshtml" />
+    <Content Include="Views\_SysAdm\FocusKindList.cshtml" />
+    <Content Include="Views\_SysAdm\JoinUs.cshtml" />
+    <Content Include="Views\_SysAdm\SchoolDataAdd.cshtml" />
+    <Content Include="Views\_SysAdm\SchoolDataEdit.cshtml" />
+    <Content Include="Views\_SysAdm\SchoolDataList.cshtml" />
+    <Content Include="Views\_SysAdm\SchoolVideo.cshtml" />
+    <Content Include="Views\_SysAdm\StatesVideoList.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1653,14 +1662,11 @@
     <Content Include="Views\Works\List.cshtml" />
     <Content Include="Views\News\List.cshtml" />
     <Content Include="Views\_SysAdm\ChangePW.cshtml" />
-    <Content Include="Views\_SysAdm\Login_old.cshtml" />
     <Content Include="Views\_SysAdm\NewsAdd.cshtml" />
     <Content Include="Views\_SysAdm\NewsList.cshtml" />
     <Content Include="Views\Shared\_MLayout.cshtml" />
     <Content Include="Views\News\Content.cshtml" />
     <Content Include="Views\Works\Content.cshtml" />
-    <Content Include="Views\_SysAdm\WorksList.cshtml" />
-    <Content Include="Views\_SysAdm\Agents.cshtml" />
     <Content Include="Views\Agents\Agents.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,30 +1,128 @@
 ﻿@{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Crumb = "單一網頁內容編輯";
+    ViewBag.Crumb = "教育專欄文章管理";
     ViewBag.subnav = "AboutUs";
-    ViewBag.subnav2 = "AboutUs";
+    ViewBag.subnav2 = "EduData";
 }
 
 @section Breadcrumb {
     <ul class="breadcrumb">
+        <li>什麼是台灣民政府 &gt;</li>
         <li>@ViewBag.Crumb</li>
     </ul>
 }
 
+@section IncludeScript {
+    <script>
+        $('.slide-trigger').click(function(){
+            $(this).parents('.pages').children('.pages-content').slideToggle();
+        });
+    </script>
+}
+
 <h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+
+<dl class="field">
+    <dt class="col-1"><sup title="必填">*</sup> 語系</dt>
+    <dd class="col-6">
+        <select name="" id="" class="form-element" required>
+            <option value="">繁體中文版</option>
+            <option value="">英文版</option>
+            <option value="">日文版</option>
+        </select>
+    </dd>
+</dl>
+
+<dl class="field">
+    <dt class="col-1"><sup title="必填">*</sup> 分類</dt>
+    <dd class="col-6">
+        <select name="" id="" class="form-element" required>
+            <option value="">台灣戰爭史 回顧</option>
+            <option value="">台灣歷史 郭泓斌</option>
+        </select>
+    </dd>
+</dl>
+
+<dl class="field">
+    <dt class="col-1"><sup title="必填">*</sup> 日期</dt>
+    <dd class="col-6">
+        <input type="date" class="form-element" required>
+    </dd>
+</dl>
+
+<dl class="field">
+    <dt class="col-1"><sup title="必填">*</sup> 標題</dt>
+    <dd class="col-6">
+        <input type="text" class="form-element" required>
+    </dd>
+</dl>
+
+<dl class="field">
+    <dt class="col-1"><sup title="必填">*</sup> 狀態</dt>
+    <dd class="col-6">
+        <input type="radio" class="radio" name="publish" id="public" checked>
+        <label for="public"></label>
+        發佈
+        <input type="radio" class="radio" name="publish" id="draft">
+        <label for="draft"></label>
+        草稿
+    </dd>
+</dl>
+
+<dl class="field">
+    <dt class="col-1"><sup title="必填">*</sup> 排序</dt>
+    <dd class="col-3">
+        <input type="text" class="form-element" value="0" required>
+    </dd>
+    <dd class="col-5">
+        <small class="text-secondary">數字愈大愈前面</small>
+    </dd>
+</dl>
+
+<hr class="my-16">
 
 <div class="alert-warning mb-16">
     <strong>編輯器注意事項:</strong><br>
-    從 WORD 複製文字時，請使用下方的 <img src="/Content/images/icon-word.jpg" /> 圖示來貼上 WORD 文字，避免跑版<br />
+    從 WORD 複製文字時，請使用下方的 <img src="~/Content/images/icon-word.jpg" /> 圖示來貼上 WORD 文字，避免跑版<br />
     編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除) ，以免行動裝置顯示時會跑版。<br />
     檔案尺寸寬度超過 1600 或 高度超過1200 的圖片會被壓縮(PNG透明背景會變成不透明)
 </div>
 
-<textarea rows="18" name="contenttext"></textarea>
+<div class="mb-12 clearfix">
+    <h4 class="pull-left my-0">
+        分頁
+        <small class="text-muted">(共1頁)</small>
+    </h4>
+    <button class="btn success sm oi ml-16" data-glyph="plus">新增</button>
+</div>
+
+<div class="pages">
+    <header class="table-head form-inline">
+        <button class="slide-trigger btn primary pull-right">收合/展開</button>
+        <label for="" class="sr-only">標題</label>
+        <input type="text" placeholder="標題" style="width: 255px;" required>
+        <label for="" class="sr-only">狀態</label>
+        <select name="" id="" required>
+            <option value="" selected disabled>狀態</option>
+            <option value="">發佈</option>
+            <option value="">草稿</option>
+        </select>
+        <label for="" class="sr-only">排序</label>
+        <input type="text" placeholder="排序 (數字愈大愈前面)" required>
+        <button class="btn danger oi" data-glyph="trash">刪除</button>
+
+    </header>
+    <div class="pages-content">
+        <textarea rows="18" name="contenttext"></textarea>
+    </div>
+</div>
 
 <footer class="submit-bar clear mt-24">
     <button type="submit" class="btn success oi" data-glyph="circle-check">
         確認儲存
+    </button>
+    <button type="button" class="btn warning oi" data-glyph="x" onclick="location.href='EduDataList'">
+        取消，回列表
     </button>
 </footer>
 
