@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "台灣戰爭史回顧"; @* 分類名稱 *@
+    ViewBag.BodyClass = "AboutUs Education";
+}
+
+@section breadcrumb {
+    <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
+    <li><a href="~/AboutUs/EducationCategory">教育專欄</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<h1 class="sr-only">教育專欄</h1>
+
+<ul class="tabs list-inline text-center">
+    <li class="back"></li>
+</ul>
+
+<p class="back">
+    <a href="~/AboutUs/EducationList"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+</p>
+
+<h2 class="title">
+    <small class="date">2015-01-26</small>
+    美國政府明白表示：「反對台灣獨立」?
+</h2>
+    
+@*下面是編輯器內容，有資料的話才顯示*@
+<div class="clearfix editor">
+    <h3>台灣民政府 中央參眾議院聯合審查會議修正 台灣基本法</h3>
+    <p>前言：</p>
+    <p>台灣：福爾摩沙周邊群島和澎湖列島(總稱台灣)是大日本帝國台灣人民必須守護的領域，為確保領域內人民與全世界人民能共同合作，取得進步繁榮成果,讓民主、自由、和平帶來福祉。台灣民政府管轄權力源自日本天皇陛下天賦不可放棄權利及義務和人民的期盼而信託，其權力應由人民所組成代表行使，其福祉由領域內人民分享，這是萬國公法與國際法的精神與目的，台灣基本法以此精神與目的為法源，台灣民政府以天皇陛下詔書、舊金山和平條約、戰爭法精神與目的而組織，並制定台灣基本法。</p>
+    <p>大日本帝國台灣人民期盼和平、自由、民主、穩定與繁榮已久，深知人類相互關係良好的源由，是堅信仁慈、公義、和平與自由的基本價值，是一心守護領域內人民安全與生存，是竭力守護賴以生存而進步的基本價值。</p>
+    <p>堅信任何國家都需要尊重基本價值，而且必須優先遵守萬國公法與國際法，這是經過歷史反覆教訓而實證的法則，也是人類追求維持國際和平、穩定與繁榮的法則。</p>
+    <p>台灣民政府領域內所有人民，誓以台灣基本法來守護人類賴以生存與進步的基本價值，是為了台灣人民的生存和進步。</p>
+</div>
+
+<ul class="pager list-unstyled">
+
+    <li class="prev">
+        @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
+        <a href="~/AboutUs/EducationContent">
+            <i class="oi" data-glyph="chevron-left"></i>
+            上一篇
+        </a>
+    </li>
+
+    <li class="next">
+        @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
+        <a href="~/AboutUs/EducationContent">
+            下一篇
+            <i class="oi" data-glyph="chevron-right"></i>
+        </a>
+    </li>
+
+</div>

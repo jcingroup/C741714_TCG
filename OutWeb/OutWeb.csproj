@@ -162,11 +162,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Authorize\AuthAttribute.cs" />
     <Compile Include="Authorize\ErrorHandlerAttribute.cs" />
-    <Compile Include="Controllers\AgentsController.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\ImgHandlerController.cs" />
+    <Compile Include="Controllers\JoinUsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\WorksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1579,6 +1579,7 @@
     <Content Include="Views\_SysAdm\SchoolDataList.cshtml" />
     <Content Include="Views\_SysAdm\SchoolVideo.cshtml" />
     <Content Include="Views\_SysAdm\StatesVideoList.cshtml" />
+    <Content Include="Views\AboutUs\TCG.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

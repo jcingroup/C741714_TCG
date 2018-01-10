@@ -7,8 +7,6 @@ namespace OutWeb.Controllers
 {
     public class NewsController : Controller
     {
-        FontEndModule m_module = new FontEndModule();
-        FontEndModule Module { get { return this.m_module; } set { this.m_module = value; } }
         public NewsController()
         {
             ViewBag.IsFirstPage = false;
@@ -16,24 +14,85 @@ namespace OutWeb.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("List");
+            return RedirectToAction("Featured");
         }
 
-        // 套程式-最新消息
-        // 列表
-        public ActionResult List()
+        // 最新訊息
+        public ActionResult Featured()
         {
-            List<NewsFrontEndDataModel> model = this.Module.GetNewsListFrontEnd(0);
-            return View(model);
+            return View();
         }
 
-        // 內容
-        public ActionResult Content(int? ID)
+        // 活動寫真 - 最新活動
+        public ActionResult LatestEvent()
         {
-            if (ID == null)
-                return RedirectToAction("List");
-            NewsFrontEndDetalisDataModel model = this.Module.GetNewsByIDFrontEnd((int)ID);
-            return View(model);
+            return View();
+        }
+
+        // 活動寫真 - 歷史活動列表
+        public ActionResult EventHistoryList()
+        {
+            return View();
+        }
+
+        // 活動寫真 - 歷史活動內容
+        public ActionResult EventHistoryContent()
+        {
+            return View();
+        }
+
+        // 活動寫真 - 各州活動分類
+        public ActionResult EventStatesCategory()
+        {
+            return View();
+        }
+
+        // 活動寫真 - 各州活動列表
+        public ActionResult EventStatesList()
+        {
+            return View();
+        }
+
+        // 活動寫真 - 各州活動內容
+        public ActionResult EventStatesContent()
+        {
+            return View();
+        }
+
+        // 新聞公告聲明 - 最新消息
+        public ActionResult LatestNews()
+        {
+            return View();
+        }
+
+        // 新聞公告聲明 - 列表
+        public ActionResult NewsList()
+        {
+            return View();
+        }
+
+        // 新聞公告聲明 - 內容
+        public ActionResult NewsContent()
+        {
+            return View();
+        }
+
+        // 焦點專欄 - 分類
+        public ActionResult FocusCategory()
+        {
+            return View();
+        }
+
+        // 焦點專欄 - 列表
+        public ActionResult FocusList()
+        {
+            return View();
+        }
+
+        // 焦點專欄 - 內容
+        public ActionResult FocusContent()
+        {
+            return View();
         }
     }
 }

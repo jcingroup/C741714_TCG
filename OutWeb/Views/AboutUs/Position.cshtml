@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "主張與立場";
+    ViewBag.BodyClass = "AboutUs Profile";
+}
+
+@section breadcrumb {
+    <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
+    <li><a href="~/AboutUs/Position">關於我們</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<h1 class="sr-only">關於我們</h1>
+
+<ul class="tabs list-inline text-center">
+    <li><a class="current" href="~/AboutUs/Position">主張與立場</a></li>
+    <li><a href="~/AboutUs/Statement">台灣地位的聲明</a></li>
+    <li><a href="~/AboutUs/Law">法律依據</a></li>
+</ul>
+
+<h2 class="title">@ViewBag.Title</h2>
+
+@*下面是編輯器內容，有資料的話才顯示*@
+<div class="clearfix editor">
+    <h3>台灣民政府的主張</h3>
+    <p>大日本帝國 1941年12月7日 經由奇襲美國夏威夷珍珠港而開戰，日本台灣也由台灣高雄機場出動零式戰鬥機，轟炸、消滅當時麥克阿瑟為首的菲律賓克拉克空軍基地。兩國的戰爭因此開啟，1945年4月1日本天皇宣布台灣地區實施明治憲法，讓台灣人擁有參戰權和參政權，從那時起，依照萬國公法台灣已經變成日本天皇領土，日本天皇不只有管轄權
+        (殖民地) 也開始擁有台灣主權。</p>
+    <p>美軍在日本投扔兩顆原子彈而終結戰爭。戰後依照盟軍分配占領，日本本土由美軍佔領，琉球群島交給聯合國託管，再交美國占領。日本台灣則交美國占領再由中華民國代替美軍佔領，一直到今天台灣國際地位不明。</p>
+    <p>Military government may be exercised not only during the time that war is flagrant, but down to the period when it comports
+        with the policy of the dominant power to establish civil jurisdiction. Military government continues till legally
+        supplanted. “This system legally might remain in force after the termination of the war and until modified either
+        by the direct legislation of Congress or by the territorial government established by its authority.”</p>
+    <p>軍事政府的運作可以開始自交戰時期，延伸至戰勝國協助被佔領地區，設置民事管轄機構（民政府），軍事政府持續至被合法取代為止，軍事政府即使在戰爭結束後，仍然可以合法被運作，直至國會直接立法，或由佔領當局設立地方政府已改變。</p>
+    <p>中華民國起初在台灣設置有中國台灣行政長官公署當成 中國台灣民政府 (19470601) 改制成為台灣省政府。還有中國台灣警備總部當成中國台灣軍政府，後來改制成為中華民國海巡署。這是中華民國依照戰爭法對台灣占領的單位變革。</p>
+    <p>一般而言，由佔領當局所設立之「當地地方政府」，可以是在地人民之「民政府」，或是征服國之「殖民政府」，並非佔領國憲法所能管轄，而是由軍事政府來管轄，其「地方政府」之行政長官是依照「指派」而非經「選舉」。佔領地如果是由「割讓取得」，則軍事政府移轉管轄權之對象有可能是「殖民政府」，或是在地人民之「民政府」。但是，如果由「非割讓取得」，則軍事政府移轉管轄權給在地人民之「民政府」，或「獨立政府」。下列戰爭後佔領地之軍事政府移轉情況：</p>
+</div>
+

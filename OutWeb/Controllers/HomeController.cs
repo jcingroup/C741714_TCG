@@ -12,19 +12,16 @@ namespace OutWeb.Controllers
 {
     public class HomeController : Controller
     {
-        FontEndModule m_module = new FontEndModule();
-        FontEndModule Module { get { return this.m_module; } set { this.m_module = value; } }
         public HomeController()
         {
             ViewBag.IsFirstPage = false;
         }
 
-        // all 靜態
+        // 首頁
         public ActionResult Index()
         {
             ViewBag.IsFirstPage = true;
-            List<NewsFrontEndDataModel> model = this.Module.GetNewsListFrontEnd(3);
-            return View(model);
+            return View();
         }
 
         // 公司簡介
