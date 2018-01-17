@@ -1,0 +1,76 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    ViewBag.Title = "TCG 台灣民政府 管理系統";
+    ViewBag.BodyClass = "Login";
+    ViewBag.IsFirstPage = true;
+    string Url_Path = "~/_SysAdm/";
+}
+
+@section scripts{
+    @* Google reCaptcha 驗證工具 *@
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+}
+
+<script type="text/javascript">
+    function form_ok() {
+        form1.submit();
+    }
+
+    $(function () {
+        $("#valiCode").bind("click", function () {
+
+            this.src = "@Url.Content(Url_Path + "GetValidateCode")?time=" + (new Date()).getTime();
+        });
+    });
+</script>
+
+<h1 class="site-title">
+    @ViewBag.Title
+    <small class="text-muted ml-8 font-sp">Web Manager</small>
+</h1>
+<h6 class="sub-copyright">Taiwan Civil Government &copy; 2017</h6>
+
+<form class="text-left" name="form1" id="form1" action="@Url.Content(Url_Path + "Login_Chk")" method="post">
+    @Html.AntiForgeryToken()
+    <header class="title font-sp">System Login</header>
+
+    <main>
+        <label>帳號 Username</label>
+        <input type="text" class="form-element" placeholder="帳號" name="account" id="account" value="" placeholder="請輸入帳號" required>
+        <label>密碼 Password</label>
+        <input type="password" class="form-element" name="pwd" id="pwd" value="" placeholder="請輸入密碼" required>
+        <label>驗證碼 Code</label>
+        <div class="fields clearfix">
+            <div class="md-12">
+                @* Google reCaptcha 驗證工具 *@
+                @*<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>*@
+                <img id="valiCode" style="cursor: pointer;height:30px;" src="@Url.Content(Url_Path + "GetValidateCode")" alt="驗証碼" />
+            </div>
+            <div class="md-12">
+                <input type="text" class="form-element" name="ValidCode" id="ValidCode" value="" required>
+            </div>
+        </div>
+    </main>
+
+    <footer class="action-bar text-center">
+        <button type="button" id="btn_login" name="btn_login" class="btn info" onclick="form_ok();">登入 LOGIN</button>
+    </footer>
+</form>
+@if (TempData["message"] != null)
+{
+    <script type="text/javascript">
+            var message = @Html.Raw(Json.Encode(TempData["message"]));
+            alert(message);
+    </script>
+}
+<script>
+    //禁止按下enter
+    $('#form1').on('keyup keypress', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+</script>

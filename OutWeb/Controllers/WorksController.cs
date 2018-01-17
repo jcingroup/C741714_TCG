@@ -1,14 +1,10 @@
-﻿using OutWeb.Models.FrontEnd.WorksFrontEndModels;
-using OutWeb.Modules.FontEnd;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace OutWeb.Controllers
 {
     public class WorksController : Controller
     {
-        FontEndModule m_module = new FontEndModule();
-        FontEndModule Module { get { return this.m_module; } set { this.m_module = value; } }
         public WorksController()
         {
             ViewBag.IsFirstPage = false;
@@ -23,8 +19,8 @@ namespace OutWeb.Controllers
         // 列表
         public ActionResult List()
         {
-            List<WorksFrontEndDataModel> model = this.Module.GetWorksListFrontEnd();
-            return View(model);
+            //List<WorksFrontEndDataModel> model = this.Module.GetWorksListFrontEnd();
+            return View();
         }
 
         // 內容
@@ -32,8 +28,8 @@ namespace OutWeb.Controllers
         {
             if (ID == null)
                 return RedirectToAction("List");
-            WorksFrontEndDataModel model = this.Module.GetWorksByIDFrontEnd((int)ID);
-            return View(model);
+            //WorksFrontEndDataModel model = this.Module.GetWorksByIDFrontEnd((int)ID);
+            return View();
         }
     }
 }
