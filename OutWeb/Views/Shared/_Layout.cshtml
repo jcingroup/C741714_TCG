@@ -1,15 +1,16 @@
 ﻿<!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-tw">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>@ViewBag.Title - WTB 懷特博 WhiteBoard</title>
+    <title>@ViewBag.Title - 台灣民政府 Taiwan Civil Government</title>
     <link rel="stylesheet" href="~/Content/css/vendor/open-iconic.css">
+    <link rel="stylesheet" href="~/Content/css/vendor/icomoon.css">
     <link rel="stylesheet" href="~/Content/css/grid.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
-    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
+    <!-- <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css"> -->
 @if (ViewBag.IsFirstPage)
 {
     <link rel="stylesheet" href="~/Content/css/index.css">
@@ -22,84 +23,130 @@ else
 </head>
 <body class="@ViewBag.BodyClass">
     <div id="wrapper">
+
         <header id="header">
             <div class="wrap">
-                <h1 class="logo" onclick="location.href='@Url.Content("~/Home")'" title="回首頁" tabindex="-1">
-                    WTB 懷特博 WhiteBoard
+                <ul class="topNav list-inline">
+                    <li class="lang"><a href="">English</a></li>
+                    <li class="lang"><a href="">日本語</a></li>
+                    <li class="search">
+                        <i class="oi" data-glyph="magnifying-glass"></i>
+                    </li>
+                    <li class="share">
+                        <a href="#">
+                            <i class="oi" data-glyph="share"></i>
+                        </a>
+                    </li>
+                    <li class="menu">
+                        <a href="#">
+                            <i class="oi" data-glyph="menu"></i>
+                            MENU
+                        </a>
+                    </li>
+                </ul>
+
+                <h1 class="logo">
+                    <a href="~/Home" title="回首頁">台灣民政府 Taiwan Civil Government</a>
                 </h1>
+            </div>
+
+            @if (ViewBag.IsFirstPage) {
                 <nav id="menu">
-                    <a href="~/Home/AboutUs" class="@(ViewBag.BodyClass == "AboutUs" ? "current" : "")">關於懷特博WTB</a>
-                    <a href="~/Products" class="@(ViewBag.BodyClass == "Products" ? "current" : "")">產品介紹</a>
-                    <a href="~/News" class="@(ViewBag.BodyClass == "News" ? "current" : "")">消息報報</a>
-                    <a href="~/Works" class="@(ViewBag.BodyClass == "Works" ? "current" : "")">案例分享</a>
-                    <a href="~/Home/ContactUs" class="@(ViewBag.BodyClass == "ContactUs" ? "current" : "")">聯絡我們</a>
-                    <a href="~/Agents" class="@(ViewBag.BodyClass == "Agents" ? "current" : "")">代理商</a>
-                    <a href="https://www.facebook.com/whiteboardcoltd" class="fb-link" title="WTB懷特博 Facebook粉絲團" target="_blank">
-                        <svg viewBox="0 0 512 512">
-                            <path d="M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.1h-54.4c0 0 0-22.1 0-33.7 0-13.9 2.8-19.5 16.3-19.5 10.9 0 38.2 0 38.2 0V82.9c0 0-40.2 0-48.8 0 -52.5 0-76.1 23.1-76.1 67.3C211.9 188.8 211.9 197.4 211.9 197.4z"/>
-                        </svg>
+                    <a href="~/AboutUs">
+                        <i class="icon-about"></i>
+                        什麼是<br>台灣民政府
+                    </a>
+                    <a href="~/JoinUs">
+                        <i class="icon-join-us"></i>
+                        如何加入<br>台灣民政府
+                    </a>
+                    <a href="~/News">
+                        <i class="icon-news"></i>
+                        最新訊息
                     </a>
                 </nav>
-            </div>
+            }
+            else {
+                <section id="banner"></section>
+                <nav id="menu">
+                    <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs">
+                        <i class="icon-about"></i>
+                        什麼是台灣民政府
+                    </a>
+                    <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs">
+                        <i class="icon-join-us"></i>
+                        如何加入台灣民政府
+                    </a>
+                    <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/News">
+                        <i class="icon-news"></i>
+                        最新訊息
+                    </a>
+
+                    <ul class="submenu list-unstyled">
+                        <li class="@(ViewBag.BodyClass.Contains("AboutUs") ? "" : "hidden")">
+                            <a class="@(ViewBag.BodyClass.Contains("TCG") ? "current" : "")" href="~/AboutUs/TCG">什麼是台灣民政府</a>
+                            <a class="@(ViewBag.BodyClass.Contains("Profile") ? "current" : "")" href="~/AboutUs/Position">關於我們</a>
+                            <a class="@(ViewBag.BodyClass.Contains("Education") ? "current" : "")" href="~/AboutUs/EducationCategory">教育專欄</a>
+                            <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization">行政區域圖&amp;組織架構</a>
+                        </li>
+                        <li class="@(ViewBag.BodyClass.Contains("JoinUs") ? "" : "hidden")">
+                                <a href="">什麼是台灣民政府</a>
+                                <a href="">關於我們</a>
+                                <a href="">教育專欄</a>
+                                <a href="">行政區域圖&amp;組織架構</a>
+                            </li>
+                    </ul>
+                </nav>
+            }
         </header>
 
-        @if (!ViewBag.IsFirstPage) {
-            <section id="banner" class="swiper-container">
-                <main class="swiper-wrapper">
-                    <div class="swiper-slide" style="background-image: url(/Content/images/banner.jpg);"></div>
-                </main>
-            </section>
+        @if (ViewBag.IsFirstPage) {
+            @RenderBody()
         }
-
-        @RenderBody()
+        else {
+            <ul class="breadcrumb">
+                <li><a href="~/Index"><i class="oi" data-glyph="home"></i></a></li>
+                @RenderSection("breadcrumb", false)
+            </ul>
+            <main id="main" class="wrap">
+                @RenderBody()
+            </main>
+        }
 
     </div><!-- wrapper //-->
 
-    <a href="#header" class="goTop oi" data-glyph="chevron-top" title="TOP"></a>
+    @if (!ViewBag.IsFirstPage) {
 
-    <footer id="footer">
-        <div class="wrap">
-            <div class="copyright pull-left">
-                <img class="mr-8" src="~/Content/images/logo-s.gif" alt="logo">
-                懷特博實業有限公司 &copy; 2017 White Board
+        <a href="#header" class="goTop oi" data-glyph="chevron-top" title="TOP"></a>
+
+        <footer id="footer">
+            <div class="wrap">
+                <div class="copyright pull-left">
+                    <strong>台灣民政府 中央會館</strong> Central Government Headquarters &copy; 2017
+                </div>
+                <nav class="foot-nav pull-right">
+                    <span>新竹州桃園郡33391龜山鄉員林坑路100-1號</span>
+                    <span>(03) 355-6363</span>
+                </nav>
             </div>
-            <nav class="foot-nav pull-right">
-                <a href="~/Home/AboutUs" class="@(ViewBag.BodyClass == "AboutUs" ? "current" : "")">關於懷特博WTB</a>
-                <a href="~/Products" class="@(ViewBag.BodyClass == "Products" ? "current" : "")">產品介紹</a>
-                <a href="~/News" class="@(ViewBag.BodyClass == "News" ? "current" : "")">消息報報</a>
-                <a href="~/Works" class="@(ViewBag.BodyClass == "Works" ? "current" : "")">案例分享</a>
-                <a href="~/Home/ContactUs" class="@(ViewBag.BodyClass == "ContactUs" ? "current" : "")">聯絡我們</a>
-                <a href="~/Agents" class="@(ViewBag.BodyClass == "Agents" ? "current" : "")">代理商</a>
-            </nav>
-        </div>
-    </footer><!-- footer //-->
+        </footer><!-- footer //-->
+
+    }
 
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
-    <script src="~/Content/js/swiper.min.js"></script>
-    <script src="~/Content/js/jquery.waypoints.min.js"></script>
+    <!-- <script src="~/Content/js/jquery.waypoints.min.js"></script> -->
     <script>
-        // slider 輪播效果
-        var swiperBanner = new Swiper(document.getElementById('banner'), {
-            pagination: '.swiper-pager',
-            paginationClickable: true,
-            autoplay: 5000,
-            autoplayDisableOnInteraction: false,
-            speed: 1000,
-            // grabCursor: true,
-            effect: 'fade'
-        });
-
         // 卷軸卷動效果
-        $('body').waypoint(function(direction) {
-            if( direction === 'down' ) {
-                $('body').addClass('scrolled');
-                $('.goTop').fadeIn();
-            }
-            else if( direction === 'up' ){
-                $('body').removeClass('scrolled');
-                $('.goTop').fadeOut();
-            }
-        }, { offset: -1 } );
+        // $('body').waypoint(function(direction) {
+        //     if( direction === 'down' ) {
+        //         $('body').addClass('scrolled');
+        //         $('.goTop').fadeIn();
+        //     }
+        //     else if( direction === 'up' ){
+        //         $('body').removeClass('scrolled');
+        //         $('.goTop').fadeOut();
+        //     }
+        // }, { offset: -1 } );
 
         // 點選後跳到 href 指向的位置
         $('.scroll').click(function () {

@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "台灣戰爭史回顧"; @* 分類名稱 *@
+    ViewBag.BodyClass = "AboutUs Education";
+}
+
+@section breadcrumb {
+    <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
+    <li><a href="~/AboutUs/EducationCategory">教育專欄</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+@section scripts {
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+    <script>
+	// init controller
+	var controller = new ScrollMagic.Controller();
+
+	// build scene
+	var scene = new ScrollMagic.Scene({triggerElement: "#main #loader", triggerHook: "onEnter"})
+					.addTo(controller)
+					.on("enter", function (e) {
+						if (!$("#loader").hasClass("active")) {
+							$("#loader").addClass("active");
+							if (console){
+								console.log("loading new items");
+							}
+						}
+					});
+</script>
+}
+
+<h1 class="sr-only">教育專欄</h1>
+
+<ul class="tabs list-inline text-center">
+    <li class="back"></li>
+</ul>
+
+<p class="back">
+    <a href="~/AboutUs/EducationCategory"><i class="oi" data-glyph="caret-left"></i> 回上層</a>
+</p>
+
+<h2 class="title">@ViewBag.Title</h2>
+
+
+@* 每頁10筆資料 *@
+<div class="articles">
+
+    <article class="article">
+        <small class="date">2015-01-26</small>
+        <h3>美國政府明白表示：「反對台灣獨立」?</h3>
+        @* 編輯器內容 取前 145 個字，有資料的話才顯示 *@
+        <p>美國政府明白表示：「反對台灣獨立」。本土台灣人似乎不能了解：「為什麼？」，1952年4月28日，舊金山和平條約生效，美國依照條約第23條對，日本台灣實施主要佔領權佔領，依照第四b條規定，取得日本台灣領土之『處分與分配權』」。所以，美國與中國簽訂「上海公報」或「台灣關係法」，都是該條約所賦予的「權利」。</p>
+        <a href="~/AboutUs/EducationContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
+    </article>
+
+    <article class="article">
+        <small class="date">2015-01-26</small>
+        <h3>美國政府明白表示：「反對台灣獨立」?</h3>
+        @* 編輯器內容 取前 145 個字，有資料的話才顯示 *@
+        <p>美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示</p>
+        <a href="~/AboutUs/EducationContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
+    </article>
+
+</div>
+
+@* 每頁10筆資料 *@
+<div class="articles">
+
+    <article class="article">
+        <small class="date">2015-01-26</small>
+        <h3>美國政府明白表示：「反對台灣獨立」?</h3>
+        @* 編輯器內容 取前 145 個字，有資料的話才顯示 *@
+        <p>美國政府明白表示：「反對台灣獨立」。本土台灣人似乎不能了解：「為什麼？」，1952年4月28日，舊金山和平條約生效，美國依照條約第23條對，日本台灣實施主要佔領權佔領，依照第四b條規定，取得日本台灣領土之『處分與分配權』」。所以，美國與中國簽訂「上海公報」或「台灣關係法」，都是該條約所賦予的「權利」。</p>
+        <a href="~/AboutUs/EducationContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
+    </article>
+
+    <article class="article">
+        <small class="date">2015-01-26</small>
+        <h3>美國政府明白表示：「反對台灣獨立」?</h3>
+        @* 編輯器內容 取前 145 個字，有資料的話才顯示 *@
+        <p>美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示</p>
+        <a href="~/AboutUs/EducationContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
+    </article>
+
+</div>
+
+<!-- <ul class="pagination list-inline text-center">
+    <li class="prev">
+        <a href="#">
+            <i class="oi" data-glyph="caret-left"></i>
+            上一頁
+        </a>
+    </li>
+    <li>
+        <form action="" class="form-inline">
+            第
+            <select name="" id="" class="form-element">
+                <option value="1">1</option>
+            </select>
+            頁
+        </form>
+    </li>
+    <li class="next">
+        <a href="#">
+            下一頁
+            <i class="oi" data-glyph="caret-right"></i>
+        </a>
+    </li>
+</ul> -->
+
+<div id="loader">
+	LOADING...
+</div>
