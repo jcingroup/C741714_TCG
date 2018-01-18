@@ -626,13 +626,16 @@
     <Content Include="Content\css\vendor\swiper.min.css" />
     <Content Include="Content\css\vendor\typeahead.css" />
     <Content Include="Content\font\open-iconic\open-iconic.svg" />
+    <Content Include="Content\images\._logo_s.png" />
+    <Content Include="Content\images\._menu.png" />
+    <Content Include="Content\images\banner.gif" />
     <Content Include="Content\images\banner.jpg" />
     <Content Include="Content\images\bannerBg.gif" />
     <Content Include="Content\images\icon-view.png" />
     <Content Include="Content\images\icon-word.jpg" />
     <Content Include="Content\images\index\banner.jpg" />
-    <Content Include="Content\images\logo-s.gif" />
-    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo.gif" />
+    <Content Include="Content\images\logo_s.png" />
     <Content Include="Content\images\pic-temp.jpg" />
     <Content Include="Content\images\pic-temp2.jpg" />
     <Content Include="Content\images\pic-temp3.jpg" />
@@ -762,12 +765,20 @@
     <Content Include="Views\_SysAdm\Login.cshtml" />
     <Content Include="Views\_SysAdm\News_Cate_Data.cshtml" />
     <Content Include="Views\_SysAdm\News_Cate_List.cshtml" />
+    <Content Include="Views\AboutUs\EducationCategory.cshtml" />
+    <Content Include="Views\AboutUs\EducationContent.cshtml" />
+    <Content Include="Views\AboutUs\EducationList.cshtml" />
+    <Content Include="Views\AboutUs\Law.cshtml" />
+    <Content Include="Views\AboutUs\Position.cshtml" />
+    <Content Include="Views\AboutUs\Statement.cshtml" />
+    <Content Include="Views\AboutUs\TCG.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
     <Folder Include="Models\" />
     <Folder Include="Modules\" />
   </ItemGroup>
