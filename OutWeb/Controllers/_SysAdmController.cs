@@ -36,7 +36,7 @@ namespace OutWeb.Controllers
         {
             if (Convert.ToString(Session["IsLogined"]) == "Y")
             {
-                return RedirectToAction("NewsList");
+                return RedirectToAction("News_List");
             }
             else
             {
@@ -150,7 +150,7 @@ namespace OutWeb.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("NewsList");
+                    return RedirectToAction("Index");
                 }
 
             }
@@ -464,18 +464,101 @@ namespace OutWeb.Controllers
         #endregion
         #endregion
 
-        public ActionResult NewsList()
+        #region 消息陳列 News_List
+        public ActionResult News_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_index = "",string txt_lang = "", string txt_cate = "")
         {
+            //定義變數
+            string c_sort = "";
+            DataTable dt;
+            DataTable d_lang;
+            DataTable d_cate;
+            string err_msg = "";
+
+            //排序設定
+            if (txt_sort.Trim().Length > 0)
+            {
+                c_sort = c_sort + "a1." + txt_sort;
+            }
+            if (txt_a_d.Trim().Length > 0)
+            {
+                c_sort = c_sort + " " + txt_a_d;
+            }
+
+            //抓取消息資料
+            dt = CNews.News_List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_start_date, txt_end_date, txt_index,txt_cate,txt_lang);
+            //語系
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            //消息類別
+            d_cate = CNews.News_Cate_List(ref err_msg, "", "sort", "Y","",txt_lang);
+            //設定傳值
+            ViewData["page"] = page;
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["txt_title_query"] = txt_title_query;
+            ViewData["txt_start_date"] = txt_start_date;
+            ViewData["txt_end_date"] = txt_end_date;
+            ViewData["txt_sort"] = txt_sort;
+            ViewData["txt_a_d"] = txt_a_d;
+            ViewData["txt_lang"] = txt_lang;
+            ViewData["txt_cate"] = txt_cate;
+
             return View();
         }
-        public ActionResult NewsAdd()
+        #endregion
+
+        #region 最新消息新增 News_Add
+        public ActionResult News_Add()
         {
-            return View();
+            ViewData["action_sty"] = "add";
+
+            return View("News_Data");
         }
-        public ActionResult NewsEdit()
+        #endregion
+
+
+        #region 最新消息修改 News_Edit
+        public ActionResult News_Edit(string n_id = "")
         {
-            return View();
+            string err_msg = "";
+            DataTable d_news = CNews.News_List(ref err_msg, n_id);
+            ViewData["d_news"] = d_news;
+            ViewData["action_sty"] = "edit";
+
+            return View("News_Data");
         }
+        #endregion
+
+        #region 最新消息刪除 News_Del
+        public ActionResult News_Del(string n_id = "")
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            CNews.News_Del(n_id);
+            return RedirectToAction("News_List");
+        }
+        #endregion
+
+        #region 最新消息儲存 News_Save
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult News_Save(string action_sty, string n_id, string n_title, string n_date, string n_desc, string show, string hot, string sort, string n_memo,string lang_id, string cate_id)
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+
+            switch (action_sty)
+            {
+                case "add":
+                    CNews.News_Insert(n_title, n_date, n_desc, show, hot, sort, n_memo,lang_id,cate_id);
+                    break;
+                case "edit":
+                    CNews.News_Update(n_id, n_title, n_date, n_desc, show, hot, sort, n_memo,lang_id,cate_id);
+                    break;
+            }
+
+            return RedirectToAction("News_List");
+        }
+
+        #endregion
 
         #endregion 新聞公告聲明
 
@@ -529,5 +612,22 @@ namespace OutWeb.Controllers
         //    return View();
         //}
         //#endregion
+
+        #region ajax_get
+
+        #region 消息類別 new_Cate_get
+        public ActionResult News_Cate_Get(string lang)
+        {
+            string str_return = "";
+            string err_msg = "";
+            DataTable dt;
+            dt = CNews.News_Cate_List(ref err_msg, "", "sort", "Y", "", lang);
+            str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+
+            return Content(str_return);
+        }
+        #endregion
+
+        #endregion
     }
 }
