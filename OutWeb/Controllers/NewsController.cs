@@ -13,23 +13,79 @@ namespace OutWeb.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("List");
+            return RedirectToAction("Latest");
         }
 
-        // 套程式-最新消息
-        // 列表
-        public ActionResult List()
+        // 最新訊息
+        public ActionResult Latest()
         {
-            //List<NewsFrontEndDataModel> model = this.Module.GetNewsListFrontEnd(0);
             return View();
         }
 
-        // 內容
-        public ActionResult Content(int? ID)
+        // 最新訊息 - 活動寫真 - 最新活動
+        public ActionResult EventLatest()
         {
-            if (ID == null)
-                return RedirectToAction("List");
-            //NewsFrontEndDetalisDataModel model = this.Module.GetNewsByIDFrontEnd((int)ID);
+            return View();
+        }
+
+        // 最新訊息 - 活動寫真 - 歷史活動列表
+        public ActionResult EventHistoryList()
+        {
+            return View();
+        }
+        // 最新訊息 - 活動寫真 - 歷史活動內容
+        public ActionResult EventHistoryContent()
+        {
+            return View();
+        }
+
+        // 最新訊息 - 活動寫真 - 各州活動分類
+        public ActionResult EventStatesCategory()
+        {
+            return View();
+        }
+        // 最新訊息 - 活動寫真 - 各州活動列表
+        public ActionResult EventStatesList()
+        {
+            return View();
+        }
+        // 最新訊息 - 活動寫真 - 各州活動內容
+        public ActionResult EventStatesContent()
+        {
+            return View();
+        }
+
+        // 最新訊息 - 新聞 公告 聲明 - 最新消息
+        public ActionResult AnnouncementLatest()
+        {
+            return View();
+        }
+        // 最新訊息 - 新聞 公告 聲明 列表
+        public ActionResult AnnouncementList()
+        {
+            return View();
+        }
+        // 最新訊息 - 新聞 公告 聲明 內容
+        public ActionResult AnnouncementContent()
+        {
+            return View();
+        }
+
+        // 焦點專欄 - 分類
+        public ActionResult FocusCategory()
+        {
+            return View();
+        }
+
+        // 焦點專欄 - 列表
+        public ActionResult FocusList()
+        {
+            return View();
+        }
+
+        // 焦點專欄 - 內容
+        public ActionResult FocusContent()
+        {
             return View();
         }
     }

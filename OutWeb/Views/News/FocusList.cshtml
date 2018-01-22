@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "焦點專欄";
+    ViewBag.BodyClass = "News Focus";
+}
+
+@section breadcrumb {
+    <li><a href="~/News">最新訊息</a></li>
+    <li><a href="~/News/FocusCategory">焦點專欄</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<h1 class="title">@ViewBag.Title</h1>

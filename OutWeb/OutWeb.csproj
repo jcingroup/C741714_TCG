@@ -230,7 +230,6 @@
     <Content Include="ckeditor\build-config.js" />
     <Content Include="ckeditor\ckeditor.js" />
     <Content Include="ckeditor\config.js" />
-    <Content Include="ckeditor\configMin.js" />
     <Content Include="ckeditor\contents.css" />
     <Content Include="ckeditor\lang\en.js" />
     <Content Include="ckeditor\lang\zh.js" />
@@ -623,20 +622,22 @@
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\page.css" />
+    <Content Include="Content\css\vendor\icomoon.css" />
     <Content Include="Content\css\vendor\lightbox.min.css" />
     <Content Include="Content\css\vendor\open-iconic.css" />
     <Content Include="Content\css\vendor\swiper.min.css" />
     <Content Include="Content\css\vendor\typeahead.css" />
+    <Content Include="Content\font\icomoon\icomoon.svg" />
     <Content Include="Content\font\open-iconic\open-iconic.svg" />
-    <Content Include="Content\images\._logo_s.png" />
-    <Content Include="Content\images\._menu.png" />
-    <Content Include="Content\images\banner.gif" />
     <Content Include="Content\images\banner.jpg" />
-    <Content Include="Content\images\bannerBg.gif" />
     <Content Include="Content\images\icon-view.png" />
     <Content Include="Content\images\icon-word.jpg" />
     <Content Include="Content\images\index\banner.jpg" />
-    <Content Include="Content\images\logo.gif" />
+    <Content Include="Content\images\index\logo.png" />
+    <Content Include="Content\images\JoinUs\caption-advanced.gif" />
+    <Content Include="Content\images\JoinUs\caption-primary.gif" />
+    <Content Include="Content\images\JoinUs\gallery-sp.jpg" />
+    <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logo_s.png" />
     <Content Include="Content\images\pic-temp.jpg" />
     <Content Include="Content\images\pic-temp2.jpg" />
@@ -677,7 +678,6 @@
     </Content>
     <Content Include="ckeditor\plugins\scayt\LICENSE.md" />
     <Content Include="ckeditor\plugins\scayt\README.md" />
-    <Content Include="ckeditor\plugins\Thumbs.db" />
     <Content Include="ckeditor\plugins\wsc\LICENSE.md" />
     <Content Include="ckeditor\plugins\wsc\README.md" />
     <Content Include="ckeditor\skins\bootstrapck\dev\locations.json" />
@@ -707,6 +707,9 @@
     <Content Include="ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
     <Content Include="ckeditor\skins\moono\readme.md" />
+    <Content Include="Content\font\icomoon\icomoon.eot" />
+    <Content Include="Content\font\icomoon\icomoon.ttf" />
+    <Content Include="Content\font\icomoon\icomoon.woff" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -722,6 +725,11 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Views\JoinUs\Apply.cshtml" />
+    <Content Include="Views\JoinUs\Consult.cshtml" />
+    <Content Include="Views\JoinUs\Gallery.cshtml" />
+    <Content Include="Views\JoinUs\Live.cshtml" />
+    <Content Include="Views\JoinUs\Schedule.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -741,8 +749,6 @@
     <Content Include="Views\_SysAdm\NewsEdit.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
-    <Content Include="Views\Products\List.cshtml" />
-    <Content Include="Views\Products\Content.cshtml" />
     <Content Include="Views\_SysAdm\AboutUs.cshtml" />
     <Content Include="Views\_SysAdm\EduDataAdd.cshtml" />
     <Content Include="Views\_SysAdm\EduDataEdit.cshtml" />
@@ -775,6 +781,20 @@
     <Content Include="Views\AboutUs\Statement.cshtml" />
     <Content Include="Views\AboutUs\TCG.cshtml" />
     <Content Include="Views\_SysAdm\News_Data.cshtml" />
+    <Content Include="Views\AboutUs\Organization.cshtml" />
+    <Content Include="Views\News\AnnouncementContent.cshtml" />
+    <Content Include="Views\News\AnnouncementLatest.cshtml" />
+    <Content Include="Views\News\AnnouncementList.cshtml" />
+    <Content Include="Views\News\EventHistoryContent.cshtml" />
+    <Content Include="Views\News\EventHistoryList.cshtml" />
+    <Content Include="Views\News\EventLatest.cshtml" />
+    <Content Include="Views\News\EventStatesCategory.cshtml" />
+    <Content Include="Views\News\EventStatesContent.cshtml" />
+    <Content Include="Views\News\EventStatesList.cshtml" />
+    <Content Include="Views\News\FocusCategory.cshtml" />
+    <Content Include="Views\News\FocusContent.cshtml" />
+    <Content Include="Views\News\FocusList.cshtml" />
+    <Content Include="Views\News\Latest.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -805,12 +825,10 @@
     <None Include="Properties\PublishProfiles\Demo.pubxml" />
     <None Include="Properties\PublishProfiles\Server.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <Content Include="Views\News\List.cshtml" />
     <Content Include="Views\_SysAdm\ChangePW.cshtml" />
     <Content Include="Views\_SysAdm\NewsAdd.cshtml" />
     <Content Include="Views\_SysAdm\News_List.cshtml" />
     <Content Include="Views\Shared\_MLayout.cshtml" />
-    <Content Include="Views\News\Content.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

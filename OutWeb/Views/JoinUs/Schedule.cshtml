@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "開課時間表";
+    ViewBag.BodyClass = "JoinUs School";
+}
+
+@section breadcrumb {
+    <li><a href="~/JoinUs">如何加入台灣民政府</a></li>
+    <li><a href="~/JoinUs/Live">參加台灣法理學院</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<h1 class="sr-only">如何加入台灣民政府</h1>
+
+<ul class="tabs list-inline text-center">
+    <li><a href="~/JoinUs/Live">課堂 LIVE 直播</a></li>
+    <li><a class="current" href="~/JoinUs/Schedule">開課時間表</a></li>
+    <li><a href="~/JoinUs/Gallery">歷屆合照</a></li>
+    @* 歷屆課程影片網址來源: 後台 > 加入台灣民政府 > 參加台灣法理學院 > 歷屆課程影片 *@
+    <li><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">歷屆課程影片</a></li>
+</ul>
+
+<h2 class="title">@ViewBag.Title</h2>
+
+<div class="clearfix editor">
+
+    <iframe class="calendar" src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;height=400&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=6tkmi89t522780142r1u1b4ep8%40group.calendar.google.com&amp;color=%23182C57&amp;src=7m2501qkk7nivpuiu7fv7t0soc%40group.calendar.google.com&amp;color=%23711616&amp;src=zh.taiwan%23holiday%40group.v.calendar.google.com&amp;color=%23125A12&amp;ctz=Asia%2FTaipei" frameborder="0" scrolling="no"></iframe>
+    <ul class="list-unstyled list-dotted">
+        <li><strong>資格限定：</strong>不拘</li>
+        <li><strong>報到時間：</strong>開課當天 下午1:00 至 下午6:00</li>
+        <li><strong>費用：</strong>住宿(三天兩夜)、伙食、講義 共 6,000 元(高級班 10,000元)</li>
+        <li><strong>地址：</strong>桃園縣龜山區員林坑路100-1號</li>
+        <li><strong>電話：</strong>(03)355-6363</li>
+    </ul>
+    
+</div>

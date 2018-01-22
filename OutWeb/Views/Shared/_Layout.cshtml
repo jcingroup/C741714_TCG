@@ -10,15 +10,14 @@
     <link rel="stylesheet" href="~/Content/css/vendor/icomoon.css">
     <link rel="stylesheet" href="~/Content/css/grid.css">
     <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css"> -->
-@if (ViewBag.IsFirstPage)
-{
-    <link rel="stylesheet" href="~/Content/css/index.css">
-}
-else
-{
-    <link rel="stylesheet" href="~/Content/css/page.css">
-}
+    @if (ViewBag.IsFirstPage)
+    {
+        <link rel="stylesheet" href="~/Content/css/index.css">
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/Content/css/page.css">
+    }
     @RenderSection("css", false)
 </head>
 <body class="@ViewBag.BodyClass">
@@ -92,13 +91,13 @@ else
                         <li class="@(ViewBag.BodyClass.Contains("JoinUs") ? "" : "hidden")">
                             <a class="@(ViewBag.BodyClass.Contains("Apply") ? "current" : "")" href="~/JoinUs/Apply">申請民政府身分證</a>
                             <a class="@(ViewBag.BodyClass.Contains("Consult") ? "current" : "")" href="~/JoinUs/Consult">地方服務處諮詢</a>
-                            <a class="@(ViewBag.BodyClass.Contains("School") ? "current" : "")" href="~/JoinUs/School">參加台灣法理學院</a>
+                            <a class="@(ViewBag.BodyClass.Contains("School") ? "current" : "")" href="~/JoinUs/Live">參加台灣法理學院</a>
                         </li>
-                        <li class="@(ViewBag.BodyClass.Contains("Bulletin") ? "" : "hidden")">
-                            <a class="@(ViewBag.BodyClass.Contains("Latest") ? "current" : "")" href="~/Bulletin/Latest">最新訊息</a>
-                            <a class="@(ViewBag.BodyClass.Contains("Event") ? "current" : "")" href="~/Bulletin/EventLatest">活動寫真</a>
-                            <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/Bulletin/NewsLatest">新聞 公告 聲明</a>
-                            <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/Bulletin/FocusCategory">新聞 公告 聲明</a>
+                        <li class="@(ViewBag.BodyClass.Contains("News") ? "" : "hidden")">
+                            <a class="@(ViewBag.BodyClass.Contains("Latest") ? "current" : "")" href="~/News/Latest">最新訊息</a>
+                            <a class="@(ViewBag.BodyClass.Contains("Event") ? "current" : "")" href="~/News/EventLatest">活動寫真</a>
+                            <a class="@(ViewBag.BodyClass.Contains("Announcement") ? "current" : "")" href="~/News/AnnouncementLatest">新聞 公告 聲明</a>
+                            <a class="@(ViewBag.BodyClass.Contains("Focus") ? "current" : "")" href="~/News/FocusCategory">焦點專欄</a>
                         </li>
                     </ul>
                 </nav>

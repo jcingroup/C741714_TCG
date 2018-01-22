@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "歷史活動";
+    ViewBag.BodyClass = "News Event";
+}
+
+@section breadcrumb {
+    <li><a href="~/News">最新訊息</a></li>
+    <li><a href="~/News/EventLatest">活動寫真</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<h1 class="title">@ViewBag.Title</h1>

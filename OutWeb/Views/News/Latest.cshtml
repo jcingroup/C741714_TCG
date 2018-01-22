@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "最新訊息";
+    ViewBag.BodyClass = "News Latest";
+}
+
+@section breadcrumb {
+    <li><a href="~/News">最新訊息</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+@section css {
+    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
+}
+
+@section scripts {
+    <script src="~/Content/js/swiper.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var mySwiper = new Swiper ('.swiper-container', {
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            })
+        });
+    </script>
+}
+
+<h1 class="sr-only">@ViewBag.Title</h1>
+
+<!-- Slider main container -->
+<div class="swiper-container">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+        ...
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+ 
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+ 
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+</div>
