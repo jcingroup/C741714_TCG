@@ -9,4 +9,38 @@
     <li>@ViewBag.Title</li>
 }
 
-<h1 class="title">@ViewBag.Title</h1>
+<h1 class="sr-only">活動寫真</h1>
+
+<p class="back">
+    <a href="~/News/EventHistoryList"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+</p>
+
+<h2 class="title">
+    <small class="date">2018-01-20</small>
+    2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會
+</h2>
+    
+@*下面是編輯器內容，有資料的話才顯示*@
+<div class="clearfix editor">
+    
+</div>
+
+<ul class="pager list-unstyled">
+
+    <li class="prev">
+        @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
+        <a href="~/News/EventHistoryContent">
+            <i class="oi" data-glyph="chevron-left"></i>
+            上一篇
+        </a>
+    </li>
+
+    <li class="next">
+        @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
+        <a href="~/News/EventHistoryContent">
+            下一篇
+            <i class="oi" data-glyph="chevron-right"></i>
+        </a>
+    </li>
+
+</ul>

@@ -40,8 +40,8 @@
 </div>
 
 <ul class="pager list-inline text-center">
-    @* 沒有上一頁或下一頁：li + class "hidden" *@
     <li class="prev hidden">
+        @* 有資料的話才顯示 *@
         <a href="#">
             <i class="oi" data-glyph="chevron-left"></i>
             上一頁
@@ -57,6 +57,7 @@
         </form>
     </li>
     <li class="next">
+        @* 有資料的話才顯示 *@
         <a href="#">
             下一頁
             <i class="oi" data-glyph="chevron-right"></i>
