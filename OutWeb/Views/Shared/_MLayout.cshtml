@@ -44,12 +44,8 @@
             else
             {
                 <header id="header">
-                    <h1 class="logo">
-                        <a href="@Url.Content(ManagePath)" title="回登入首頁" tabindex="-1">
-                            @ViewBag.mainName
-                        </a>
-                    </h1>
-
+                    <h1 class="site-title">@ViewBag.mainName</h1>
+        
                     <nav class="navbar">
                         <span class="nav-link">登入身份: @Convert.ToString(Session["Account"])</span>
 

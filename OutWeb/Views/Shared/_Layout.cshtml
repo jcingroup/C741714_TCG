@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/Content/css/vendor/open-iconic.css">
     <link rel="stylesheet" href="~/Content/css/vendor/icomoon.css">
     <link rel="stylesheet" href="~/Content/css/grid.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
     <!-- <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css"> -->
 @if (ViewBag.IsFirstPage)
 {
@@ -68,7 +68,7 @@ else
             }
             else {
                 <section id="banner"></section>
-                <nav id="menu">
+                <nav id="menu" class="wrap">
                     <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs">
                         <i class="icon-about"></i>
                         什麼是台灣民政府
@@ -90,11 +90,16 @@ else
                             <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization">行政區域圖&amp;組織架構</a>
                         </li>
                         <li class="@(ViewBag.BodyClass.Contains("JoinUs") ? "" : "hidden")">
-                                <a href="">什麼是台灣民政府</a>
-                                <a href="">關於我們</a>
-                                <a href="">教育專欄</a>
-                                <a href="">行政區域圖&amp;組織架構</a>
-                            </li>
+                            <a class="@(ViewBag.BodyClass.Contains("Apply") ? "current" : "")" href="~/JoinUs/Apply">申請民政府身分證</a>
+                            <a class="@(ViewBag.BodyClass.Contains("Consult") ? "current" : "")" href="~/JoinUs/Consult">地方服務處諮詢</a>
+                            <a class="@(ViewBag.BodyClass.Contains("School") ? "current" : "")" href="~/JoinUs/School">參加台灣法理學院</a>
+                        </li>
+                        <li class="@(ViewBag.BodyClass.Contains("Bulletin") ? "" : "hidden")">
+                            <a class="@(ViewBag.BodyClass.Contains("Latest") ? "current" : "")" href="~/Bulletin/Latest">最新訊息</a>
+                            <a class="@(ViewBag.BodyClass.Contains("Event") ? "current" : "")" href="~/Bulletin/EventLatest">活動寫真</a>
+                            <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/Bulletin/NewsLatest">新聞 公告 聲明</a>
+                            <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/Bulletin/FocusCategory">新聞 公告 聲明</a>
+                        </li>
                     </ul>
                 </nav>
             }
@@ -104,11 +109,11 @@ else
             @RenderBody()
         }
         else {
-            <ul class="breadcrumb">
-                <li><a href="~/Index"><i class="oi" data-glyph="home"></i></a></li>
-                @RenderSection("breadcrumb", false)
-            </ul>
             <main id="main" class="wrap">
+                <ul class="breadcrumb">
+                    <li><a href="~/Index"><i class="oi" data-glyph="home"></i></a></li>
+                    @RenderSection("breadcrumb", false)
+                </ul>
                 @RenderBody()
             </main>
         }
