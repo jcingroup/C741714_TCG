@@ -1,0 +1,407 @@
+﻿@using System.Data
+@{
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    ViewBag.Crumb = "最新消息";
+    ViewBag.subnav = "News";
+    ViewBag.subnav2 = "News_List";
+
+    string SysPath = "~/_SysAdm/";
+    string cFile = "News_List";
+    string cFile_Add = "News_Add";
+    string cFile_Del = "News_Del";
+    string cFile_Edit = "News_Edit";
+
+    DataTable dt = (DataTable)ViewData["dt"];
+    DataTable d_lang = (DataTable)ViewData["d_lang"];
+    DataTable d_cate = (DataTable)ViewData["d_cate"];
+
+    int row_count = 0;
+    int page_count = 50;
+    int page = (int)ViewData["page"];
+    int pre_page = 0;
+    int top_page = 0;
+    int next_page = 0;
+    int end_page = 0;
+    int min_row = 0;
+    int max_row = 0;
+    int total_page = 0;
+
+    string n_id = "";
+    string n_title = "";
+    string n_date = "";
+    string n_sort = "";
+    string is_index = "";
+    string show = "";
+    string show_class = "";
+    string str_index = "";
+    string index_class = "";
+    string lang_name = "";
+    string cate_name = "";
+    string txt_title_query = (string)ViewData["txt_title_query"];
+    string txt_sort = (string)ViewData["txt_sort"];
+    string txt_a_d = (string)ViewData["txt_a_d"];
+    string txt_start_date = (string)ViewData["txt_start_date"];
+    string txt_end_date = (string)ViewData["txt_end_date"];
+    string txt_lang = (string)ViewData["txt_lang_id"];
+    string txt_cate = (string)ViewData["txt_cate_id"];
+
+    string c_selected = "";
+
+    string a_d = "";
+
+    if (txt_a_d == "")
+    {
+        a_d = "asc";
+    }
+    else
+    {
+        a_d = "desc";
+    }
+
+    string class_title = "";
+    string class_date = "";
+    string class_sort = "";
+    string class_status = "";
+    string class_index = "";
+    string class_lang = "";
+    string class_cate = "";
+
+    switch (txt_sort)
+    {
+        case "n_title":
+            class_title = a_d;
+            break;
+        case "n_date":
+            class_date = a_d;
+            break;
+        case "sort":
+            class_sort = a_d;
+            break;
+        case "is_index":
+            class_index = a_d;
+            break;
+        case "status":
+            class_status = a_d;
+            break;
+        case "lang_id":
+            class_lang = a_d;
+            break;
+        case "cate_id":
+            class_cate = a_d;
+            break;
+    }
+
+    row_count = dt.Rows.Count;
+    if (row_count % page_count > 0)
+    {
+        total_page = (row_count / page_count) + 1;
+    }
+    else
+    {
+        total_page = row_count / page_count;
+    }
+
+    if (page > total_page)
+    {
+        page = total_page;
+    }
+    else if (page < 1)
+    {
+        page = 1;
+    }
+
+    top_page = 1;
+
+    if (page > 1)
+    {
+        pre_page = page - 1;
+    }
+    else
+    {
+        pre_page = 1;
+    }
+
+    if (total_page > page)
+    {
+        next_page = page + 1;
+    }
+    else
+    {
+        next_page = total_page;
+    }
+
+    end_page = total_page;
+
+    min_row = page_count * (page - 1) + 1;
+    max_row = page_count * page;
+    if (max_row > row_count)
+    {
+        max_row = row_count;
+    }
+
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="title">@ViewBag.Crumb</h3>
+@* 引用 ajax_lib *@
+<script src="~/Scripts/ajax_lib.js"></script>
+<script>
+    function del(url) {
+        if (confirm("確定刪除??")) {
+            location.href = url;
+            //alert("你按下確定");
+        }
+        else {
+            //alert("你按下取消");
+        }
+    }
+</script>
+
+<div class="btn-group mb-8">
+    <button type="button" onclick="location.href='@Url.Content(SysPath + cFile_Add)';" class="btn success oi" data-glyph="plus">
+        新增
+    </button>
+</div>
+<form name="form1" id="form1" action="" method="post">
+    <input type="hidden" id="txt_sort" name="txt_sort" value="@txt_sort" />
+    <input type="hidden" id="txt_a_d" name="txt_a_d" value="@txt_a_d" />
+    <header class="table-head form-inline">
+        <label>標題</label>
+        <input type="text" placeholder="請輸入關鍵字..." id="txt_title_query" name="txt_title_query">
+        @* 用 datetimepicker (之類的東西) 選日期 *@
+        <label>起</label>
+        <input type="date" id="txt_start_date" name="txt_start_date" value="@txt_start_date">
+        ~
+        <label>迄</label>
+        <input type="date" id="txt_end_date" name="txt_end_date" value="@txt_end_date">
+        <label>語系</label>
+        <select class="form-element" id="txt_lang" name="txt_lang" onclick="get_cate();">
+            <option value="">全部</option>
+            @if (d_lang.Rows.Count > 0)
+            {
+                for (int i = 0; i < d_lang.Rows.Count; i++)
+                {
+                    if (d_lang.Rows[i]["lang_id"].ToString() == txt_lang)
+                    {
+                        c_selected = "selected";
+                    }
+                    else
+                    {
+                        c_selected = "";
+                    }
+                    <option value="@d_lang.Rows[i]["lang_id"].ToString()" @c_selected>@d_lang.Rows[i]["lang_name"].ToString()</option>
+                }
+            }
+        </select>
+
+
+        <label>分類</label>
+        <select class="form-element" id="txt_cate" name="txt_cate">
+            <option value="">全部</option>
+            @if (d_cate.Rows.Count > 0)
+            {
+                for (int i = 0; i < d_cate.Rows.Count; i++)
+                {
+                    if (d_cate.Rows[i]["id"].ToString() == txt_lang)
+                    {
+                        c_selected = "selected";
+                    }
+                    else
+                    {
+                        c_selected = "";
+                    }
+                    <option value="@d_cate.Rows[i]["id"].ToString()" @c_selected>@d_cate.Rows[i]["cate_name"].ToString()</option>
+                }
+            }
+        </select>
+        <label>狀態</label>
+        <select id="txt_show" name="txt_show">
+            <option value="">全部</option>
+            <option value="Y">發佈</option>
+            <option value="N">草稿</option>
+        </select>
+        <label>顯示於輪播區</label>
+        <select id="txt_index" name="txt_index">
+            <option value="">全部</option>
+            <option value="Y">是</option>
+            <option value="N">否</option>
+        </select>
+        <button class="btn sm oi" data-glyph="magnifying-glass" id="btn_query" name="btn_query" onclick="form_ok();">搜尋</button>
+    </header>
+    <table class="table-list table-hover table-striped">
+        <colgroup>
+            <col style="width: 10%">
+            <col style="width: 13%">
+            <col style="width: 10%">
+            <col>
+            <col style="width: 10%">
+            <col style="width: 10%">
+            <col style="width: 13%">
+            <col style="width: 10%">
+        </colgroup>
+        <tr>
+            @* 點選排序功能 (點一下遞增, 點兩下遞減)
+                <button class="th-sort-toggle"></button>
+                遞增 asc
+                <button class="th-sort-toggle asc"></button>
+                遞減 desc
+                <button class="th-sort-toggle desc"></button>
+            *@
+            <th class="item-edit">編輯</th>
+            <th>
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                <button class="text-xs-center th-sort-toggle @class_date" name="btn_date" id="btn_date" onclick="sort('n_date');">發佈日期</button>
+            </th>
+            <th>
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                <button class="text-xs-center th-sort-toggle @class_date" name="btn_date" id="btn_date" onclick="sort('cate_id');">分類</button>
+            </th>
+            <th class="text-left">標題</th>
+            <th>
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                <button class="text-xs-center th-sort-toggle @class_date" name="btn_date" id="btn_date" onclick="sort('lang_id');">語系</button>
+            </th>
+            <th>
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                <button class="text-xs-center th-sort-toggle @class_date" name="btn_date" id="btn_date" onclick="sort('status');">狀態</button>
+            </th>
+            <th>
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                <button class="text-xs-center th-sort-toggle @class_date" name="btn_date" id="btn_date" onclick="sort('is_index');">顯示於輪播區</button>
+            </th>
+            <th>
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                <button class="text-xs-center th-sort-toggle @class_date" name="btn_date" id="btn_date" onclick="sort('sort');">排序</button>
+            </th>
+        </tr>
+        @*
+            無資料
+            <tr class="bg-pale-red"><td colspan="8">查無資料!</td></tr>
+        *@
+        @* 建議: 1頁10筆資料 *@
+        @if (dt.Rows.Count > 0)
+        {
+            for (int i = min_row - 1; i < max_row; i++)
+            {
+                n_id = dt.Rows[i]["id"].ToString();
+                n_title = dt.Rows[i]["n_title"].ToString();
+                n_date = dt.Rows[i]["n_date"].ToString();
+                n_sort = dt.Rows[i]["sort"].ToString();
+                lang_name = dt.Rows[i]["lang_name"].ToString();
+                cate_name = dt.Rows[i]["cate_name"].ToString();
+                is_index = dt.Rows[i]["is_index"].ToString();
+                if (dt.Rows[i]["status"].ToString() == "Y")
+                {
+                    show = "發佈";
+                    show_class = "label-success";
+                }
+                else
+                {
+                    show = "草稿";
+                    show_class = "";
+                }
+
+                if (dt.Rows[i]["is_index"].ToString() == "Y")
+                {
+                    str_index = "是";
+                    index_class = "label-success";
+                }
+                else
+                {
+                    str_index = "否";
+                    index_class = "";
+                }
+                    <tr>
+                        <td>
+                            <button class="hover-danger oi delete-btn" title="刪除" type="button" data-glyph="trash" onclick="del('@Url.Content(SysPath + cFile_Del + "?n_id=" + n_id)');"></button>
+                            <button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?n_id=" + n_id)';"></button>
+                        </td>
+                        <td class="text-left">@n_date</td>
+                        <td>@cate_name</td>
+                        <td class="text-left">@n_title</td>
+                        <td>@lang_name</td>
+                        <td><span class="label @show_class">@show</span></td>
+                        <td><span class="label @index_class">@str_index</span></td>
+                        <td>@n_sort</td>
+                    </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td class="text-left" colspan="8">
+                    無資料
+                </td>
+            </tr>
+        }
+
+    </table>
+    <footer class="table-foot">
+        <small class="float-r">第 @min_row - @max_row 筆，共 @row_count 筆</small>
+        <nav class="pager">
+            <a href="@Url.Content(SysPath + cFile + "?page=" + top_page.ToString())" class="oi" data-glyph="media-step-backward" title="到最前頁"></a>
+            <a href="@Url.Content(SysPath + cFile + "?page=" + pre_page.ToString())" class="oi" data-glyph="caret-left" title="上一頁"></a>
+            <span>
+                第
+                <input type="text" class="form-control form-control-sm text-xs-center" style="width:100px" name="page" id="page" value="@page">
+                頁，共 @total_page 頁
+            </span>
+            <a href="@Url.Content(SysPath + cFile + "?page=" + next_page.ToString())" class="oi" data-glyph="caret-right" title="下一頁"></a>
+            <a href="@Url.Content(SysPath + cFile + "?page=" + end_page.ToString())" class="oi" data-glyph="media-step-forward" title="到最後頁"></a>
+        </nav>
+    </footer>
+</form>
+<script>
+        $('#form1').on('keyup keypress', function (e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode === 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        //$('#page').on('keydown', function (e) {
+        //    if (e.which == 13) {
+        //        //alert('clicked');
+        //        document.form1.submit();
+        //    }
+        //});
+
+
+        function form_ok() {
+            $('#form1').submit();
+        }
+
+        function sort(c_sort) {
+            var pre_sort = $('#txt_sort').val();
+            var pre_a_d = $('#txt_a_d').val();
+            var a_d = "";
+            var s_sort = "";
+            var class_a_d = "";
+
+            s_sort = c_sort;
+            if (pre_sort == c_sort) {
+                if (pre_a_d == "") {
+                    a_d = "desc";
+                }
+                else {
+                    a_d = "";
+                }
+            }
+            else {
+                a_d = "";
+            }
+
+            //alert("pre_sort:" + pre_sort + ";pre_a_d:" + pre_a_d + ";a_d:" + a_d + ";s_sort=" + s_sort)
+
+            $('#txt_sort').val(s_sort);
+            $('#txt_a_d').val(a_d);
+
+            $('#form1').submit();
+
+        }
+</script>

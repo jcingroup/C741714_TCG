@@ -44,8 +44,12 @@
             else
             {
                 <header id="header">
-                    <h1 class="site-title">@ViewBag.mainName</h1>
-        
+                    <h1 class="site-title">
+                        <a href="@Url.Content(ManagePath)" title="回登入首頁" tabindex="-1">
+                            <font color="white">@ViewBag.mainName</font>
+                        </a>
+                    </h1>
+
                     <nav class="navbar">
                         <span class="nav-link">登入身份: @Convert.ToString(Session["Account"])</span>
 
@@ -99,7 +103,7 @@
                     </nav>
 
                     <header class='collapse-toggle oi @(ViewBag.subnav == "News" ? "active" : "")' data-glyph="eye">最新消息</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "Focus" ? "in" : "")'>
+                    <nav class='collapse-content @(ViewBag.subnav == "News" ? "in" : "")'>
                         <a href="~/_SysAdm/News_Cate_List" class='@(ViewBag.subnav2 == "News_Cate" ? "active" : "")'>類別管理</a>
                         <a href="~/_SysAdm/NewsList" class='@(ViewBag.subnav2 == "News_List" ? "active" : "")'>消息管理</a>
                     </nav>

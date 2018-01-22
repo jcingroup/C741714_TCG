@@ -774,6 +774,7 @@
     <Content Include="Views\AboutUs\Position.cshtml" />
     <Content Include="Views\AboutUs\Statement.cshtml" />
     <Content Include="Views\AboutUs\TCG.cshtml" />
+    <Content Include="Views\_SysAdm\News_Data.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -807,7 +808,7 @@
     <Content Include="Views\News\List.cshtml" />
     <Content Include="Views\_SysAdm\ChangePW.cshtml" />
     <Content Include="Views\_SysAdm\NewsAdd.cshtml" />
-    <Content Include="Views\_SysAdm\NewsList.cshtml" />
+    <Content Include="Views\_SysAdm\News_List.cshtml" />
     <Content Include="Views\Shared\_MLayout.cshtml" />
     <Content Include="Views\News\Content.cshtml" />
   </ItemGroup>

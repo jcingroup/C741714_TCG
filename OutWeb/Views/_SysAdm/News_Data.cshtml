@@ -1,0 +1,319 @@
+﻿@using System.Data
+@{
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    ViewBag.Crumb = "最新消息管理";
+    ViewBag.subnav = "News";
+    ViewBag.subnav2 = "News_List";
+
+    //變數設定
+
+    DataTable d_news = (DataTable)ViewData["d_news"];
+    DataTable d_img = (DataTable)ViewData["d_img"];
+    DataTable d_lang = (DataTable)ViewData["d_lang"];
+    DataTable d_cate = (DataTable)ViewData["d_cate"];
+
+    string n_id = "";
+    string n_title = "";
+    string n_desc = "";
+    string n_memo = "";
+    string n_date = "";
+    string n_url = "";
+    string sort = "";
+    string action_sty = (string)ViewData["action_sty"];
+    string action_name = "";
+    string c_status = "";
+    string c_front_status = "";
+    string c_front_status_Y = "";
+    string c_front_status_N = "";
+    string is_index = "";
+    string c_index_status = "";
+    string c_index_status_Y = "";
+    string c_index_status_N = "";
+    
+    string img_no = "";
+    string img_path = "../Images/";
+    string small_img = "";
+    string big_img = "";
+    string img_id = "";
+    string lang = "";
+    string lang_selected = "";
+
+    string cate_id = "";
+    string cate_selected = "";
+
+    img_no = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+    if (action_sty == "add")
+    {
+        action_name = "新增";
+
+        n_id = "";
+        n_title = "";
+        n_desc = "";
+        n_date = DateTime.Today.ToString("yyyy-MM-dd");
+        n_url = "";
+        n_memo = "";
+        c_status = "N";
+        c_front_status_N = "checked";
+        c_front_status_Y = "";
+        is_index = "N";
+        c_index_status_N = "checked";
+        c_index_status_Y = "";
+        lang = "";
+        cate_id = "";
+        sort = "0";
+
+    }
+    else if (action_sty == "edit")
+    {
+        action_name = "修改";
+
+        //d_news = (DataTable)ViewData["d_news"];
+
+        //d_scenic_img_b = (DataTable)ViewData["d_scenic_img_b"];
+        //d_scenic_img_s = (DataTable)ViewData["d_scenic_img_s"];
+
+        n_id = d_news.Rows[0]["n_id"].ToString();
+        n_title = d_news.Rows[0]["n_title"].ToString();
+        n_desc = d_news.Rows[0]["n_desc"].ToString();
+        n_memo = d_news.Rows[0]["n_memo"].ToString();
+        n_date = d_news.Rows[0]["n_date"].ToString();
+        n_url = d_news.Rows[0]["n_url"].ToString();
+        is_index = d_news.Rows[0]["is_index"].ToString();
+        c_status = d_news.Rows[0]["status"].ToString();
+        sort = d_news.Rows[0]["sort"].ToString();
+        lang = d_news.Rows[0]["lang_id"].ToString();
+        cate_id = d_news.Rows[0]["cate_id"].ToString();
+
+        switch (c_status)
+        {
+            case "Y":
+                c_front_status_Y = "checked";
+                c_front_status_N = "";
+                break;
+            case "N":
+                c_front_status_Y = "";
+                c_front_status_N = "checked";
+                break;
+        }
+
+        switch (is_index)
+        {
+            case "Y":
+                c_index_status_Y = "checked";
+                c_index_status_N = "";
+                break;
+            case "N":
+                c_index_status_Y = "";
+                c_index_status_N = "checked";
+                break;
+        }
+    }
+
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
+
+@section IncludeScript {
+    <script>
+        $('.slide-trigger').click(function(){
+            $(this).parents('.pages').children('.pages-content').slideToggle();
+        });
+    </script>
+}
+
+<h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+@* 引用 ajaxfileupload *@
+<script src="~/Scripts/ajaxfileupload.js"></script>
+@* 引用 ajax_lib *@
+<script src="~/Scripts/ajax_lib.js"></script>
+@*1.引用ckeditor.js*@
+<script src="~/ckeditor/ckeditor.js"></script>
+<script>
+    function form_ok() {
+        var sshow = "";
+        var shot = "";
+        var cmsg = "";
+        var n_title = "";
+        var n_date = "";
+        n_title = $("#n_title").val();
+        n_date = $("#n_date").val();
+
+        if(n_title == "")
+        {
+            if (cmsg != "")
+            {
+                cmsg += "\n";
+            }
+            cmsg += "請輸入標題";
+        }
+
+        if (n_date == "") {
+            if (cmsg != "") {
+                cmsg += "\n";
+            }
+            cmsg += "請輸入發佈日期";
+        }
+
+        if (cmsg != "")
+        {
+            alert(cmsg);
+        }
+        else
+        {
+            form1.submit();
+        }
+        //alert("show:" + $("#show").val() + ";hot:" + $("#hot").val());
+
+    }
+</script>
+<form class="form-list" action="News_Save" name="form1" id="form1" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="action_sty" id="action_sty" value="@action_sty" />
+    <input type="hidden" name="n_id" id="n_id" value="@n_id" />
+
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 語系</dt>
+        <dd class="col-6">
+            <select id="lang_id" name="lang_id" class="form-element" required>
+                @if (d_lang.Rows.Count > 0)
+            {
+                for (int i = 0; i < d_lang.Rows.Count; i++)
+                {
+                    if (d_lang.Rows[i]["lang_id"].ToString() == lang)
+                    {
+                        lang_selected = "selected";
+                    }
+                    else
+                    {
+                        lang_selected = "";
+                    }
+                    <option value="@d_lang.Rows[i]["lang_id"].ToString()" @lang_selected>@d_lang.Rows[i]["lang_name"].ToString()</option>
+                    }
+                }
+            </select>
+        </dd>
+    </dl>
+
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 分類</dt>
+        <dd class="col-6">
+            <select id="cate_id" name="cate_id" class="form-element" required>
+                @if (d_cate.Rows.Count > 0)
+            {
+                for (int i = 0; i < d_cate.Rows.Count; i++)
+                {
+                    if (d_cate.Rows[i]["id"].ToString() == cate_id)
+                    {
+                        cate_selected = "selected";
+                    }
+                    else
+                    {
+                        cate_selected = "";
+                    }
+                    <option value="@d_cate.Rows[i]["id"].ToString()" @cate_selected>@d_cate.Rows[i]["cate_name"].ToString()</option>
+                    }
+                }
+            </select>
+        </dd>
+    </dl>
+
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 日期</dt>
+        <dd class="col-6">
+            <input type="date" class="form-element" required id="n_date" name="n_date" value="@n_date">
+        </dd>
+    </dl>
+
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 標題</dt>
+        <dd class="col-6">
+            <input type="text" class="form-element" required id="n_title" name="n_title" value="@n_title">
+        </dd>
+    </dl>
+
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 狀態</dt>
+        <dd class="col-6">
+            <input type="radio" class="radio" name="show" id="show" value="Y" @c_front_status_Y>
+            <label for="public"></label>
+            發佈
+            <input type="radio" class="radio" name="show" id="show" value="N" @c_front_status_N>
+            <label for="draft"></label>
+            草稿
+        </dd>
+    </dl>
+
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 輪播</dt>
+        <dd class="col-3">
+            <input type="radio" class="radio" name="hot" id="hot" value="Y" @c_index_status_Y>
+            <label for="carouselY"></label>
+            是
+            <input type="radio" class="radio" name="hot" id="hot" value="N" @c_index_status_N>
+            <label for="carouselN"></label>
+            否
+        </dd>
+        <dd class="col-5">
+            <small class="text-secondary">如選「是」 ，本篇將顯示於最新資訊的輪播區塊</small>
+        </dd>
+    </dl>
+
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 排序</dt>
+        <dd class="col-3">
+            @*<input type="text" class="form-element" value="0" required>*@
+            <input type="number" min="0" class="form-element" id="sort" name="sort" value="@sort" required>
+        </dd>
+        <dd class="col-5">
+            <small class="text-secondary">數字愈大愈前面</small>
+        </dd>
+    </dl>
+
+    <dl class="field">
+        <dt class="col-1">代表圖</dt>
+        <dd class="col-6">
+            <div class="input-file">
+                <input type="file">
+            </div>
+            <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*450px，建議檔案大小不超過 1000kb</small>
+            <div class="uploaded">
+                <button class="close" type="button">×</button>
+                <img src="" width="100">
+            </div>
+        </dd>
+    </dl>
+
+    <hr class="my-16">
+
+    <fieldset class="m-t-24">
+        <legend class="underline">[ 內容 ]</legend>
+        <div class="alert-warning mb-16">
+            <strong>編輯器注意事項:</strong><br>
+            從 WORD 複製文字時，請使用下方的 <img src="~/Content/images/icon-word.jpg" /> 圖示來貼上 WORD 文字，避免跑版<br />
+            編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除) ，以免行動裝置顯示時會跑版。<br />
+            檔案尺寸寬度超過 1600 或 高度超過1200 的圖片會被壓縮(PNG透明背景會變成不透明)
+        </div>
+
+        @* 編輯器(含圖片上傳功能) *@
+        <textarea class="ckeditor" rows="18" placeholder="請輸入最新消息內容" name="n_desc" id="n_desc">@n_desc</textarea>
+        @*加入圖片上傳頁籤，放在頁面底下，放在頁面head區的話，會抓不到myText DOM*@
+        <script type="text/javascript">
+                    CKEDITOR.replace('n_desc'
+                , { filebrowserImageUploadUrl: '@Url.Content("~/Manage/UploadPicture")' }
+                );
+        </script>
+    </fieldset>
+
+    <footer class="submit-bar clear mt-24">
+        <button type="button" class="btn success oi" data-glyph="circle-check" onclick="form_ok();" name="btn_ok" id="btn_ok" >
+            確認儲存
+        </button>
+        <button type="button" class="btn warning oi" data-glyph="x" onclick="location.href='NewsList'" id="btn_back" name="btn_back" >
+            取消，回列表
+        </button>
+    </footer>
+</form>

@@ -457,13 +457,15 @@ namespace OutWeb.Service
 
             string[] Array_news_id;
             string[] Array_title_query;
-            string[] Array_news_cate;
+            string[] Array_cate_id;
             string[] Array_lang_id;
 
             try
             {
                 Array_news_id = news_id.Split(',');
                 Array_title_query = title_query.Split(',');
+                Array_lang_id = lang_id.Split(',');
+                Array_cate_id = cate_id.Split(',');
 
                 csql = "select "
                      + "  a1.* "
@@ -527,6 +529,34 @@ namespace OutWeb.Service
                     csql = csql + "and a1.is_index = @is_index ";
                 }
 
+                if (lang_id.Trim().Length > 0)
+                {
+                    csql = csql + " and a1.lang_id in (";
+                    for (int i = 0; i < Array_lang_id.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_lang_id" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+                if (cate_id.Trim().Length > 0)
+                {
+                    csql = csql + " and a1.cate_id in (";
+                    for (int i = 0; i < Array_cate_id.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_cate_id" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
                 csql = csql + ")a1 ";
 
                 if (sort.Trim().Length > 0)
@@ -577,6 +607,22 @@ namespace OutWeb.Service
                 {
                     cmd.Parameters.AddWithValue("@is_index", is_index);
                 }
+
+                if (lang_id.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_lang_id.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_lang_id" + i.ToString(), Array_lang_id[i]);
+                    }
+                }
+
+                if (news_id.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_cate_id.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_cate_id" + i.ToString(), Array_cate_id[i]);
+                    }
+                }
                 //--------------------------------------------------------------//
 
                 if (ds.Tables["news"] != null)
@@ -612,7 +658,7 @@ namespace OutWeb.Service
         #endregion
 
         #region 消息資料新增 News_Insert
-        public string News_Insert(string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "")
+        public string News_Insert(string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "",string lang_id = "", string cate_id = "")
         {
             string c_msg = "";
 
@@ -650,8 +696,8 @@ namespace OutWeb.Service
                 }
                 //===============================================================================//
 
-                csql = @"insert into News(n_title,n_date,n_desc,is_index,sort,status,n_memo) "
-                     + "values(@n_title,@n_date,@n_desc,@is_index,@sort,@is_show,@n_memo)";
+                csql = @"insert into News(n_title,n_date,n_desc,is_index,sort,status,n_memo,lang_id,cate_id) "
+                     + "values(@n_title,@n_date,@n_desc,@is_index,@sort,@is_show,@n_memo,@lang_id,@cate_id)";
 
                 cmd.CommandText = csql;
 
@@ -664,6 +710,8 @@ namespace OutWeb.Service
                 cmd.Parameters.AddWithValue("@sort", sort);
                 cmd.Parameters.AddWithValue("@is_show", is_show);
                 cmd.Parameters.AddWithValue("@n_memo", n_memo);
+                cmd.Parameters.AddWithValue("@lang_id", lang_id);
+                cmd.Parameters.AddWithValue("@cate_id", cate_id);
 
                 cmd.ExecuteNonQuery();
 
@@ -689,7 +737,7 @@ namespace OutWeb.Service
 
         #region 消息資料更新 News_Update
         //更新內容
-        public string News_Update(string n_id = "", string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "")
+        public string News_Update(string n_id = "", string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "",string lang_id = "", string cate_id = "")
         {
             string c_msg = "";
             SqlConnection conn = new SqlConnection(conn_str);
@@ -713,10 +761,12 @@ namespace OutWeb.Service
                      + ", is_index = @is_index "
                      + ", sort = @sort "
                      + ", n_memo = @n_memo "
-                     + ", _UPD_ID = 'System' "
-                     + ", _UPD_DT = getdate() "
+                     + ", lang_id = @lang_id "
+                     + ", cate_id = @cate_id "
+                     + ", UPD_ID = 'System' "
+                     + ", UPD_DT = getdate() "
                      + "where "
-                     + "  n_id = @n_id ";
+                     + "  id = @n_id ";
 
                 cmd.CommandText = csql;
 
@@ -729,6 +779,8 @@ namespace OutWeb.Service
                 cmd.Parameters.AddWithValue("@sort", sort);
                 cmd.Parameters.AddWithValue("@is_show", is_show);
                 cmd.Parameters.AddWithValue("@n_memo", n_memo);
+                cmd.Parameters.AddWithValue("@lang_id", lang_id);
+                cmd.Parameters.AddWithValue("@cate_id", cate_id);
 
                 cmd.ExecuteNonQuery();
             }
@@ -771,7 +823,7 @@ namespace OutWeb.Service
                 csql = @"delete from "
                      + "  news "
                      + "where "
-                     + "  n_id = @n_id ";
+                     + "  id = @n_id ";
 
                 cmd.CommandText = csql;
 
