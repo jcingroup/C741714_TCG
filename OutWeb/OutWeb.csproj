@@ -638,6 +638,7 @@
     <Content Include="Content\images\JoinUs\caption-primary.gif" />
     <Content Include="Content\images\JoinUs\gallery-sp.jpg" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo_s.gif" />
     <Content Include="Content\images\logo_s.png" />
     <Content Include="Content\images\pic-temp.jpg" />
     <Content Include="Content\images\pic-temp2.jpg" />
