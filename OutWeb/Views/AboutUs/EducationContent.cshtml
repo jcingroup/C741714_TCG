@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "台灣戰爭史回顧"; @* 分類名稱 *@
+    ViewBag.Title = "美國政府明白表示：「反對台灣獨立」?"; @* 文章標題 *@
     ViewBag.BodyClass = "AboutUs Education";
 }
 
 @section breadcrumb {
     <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
     <li><a href="~/AboutUs/EducationCategory">教育專欄</a></li>
-    <li>@ViewBag.Title</li>
+    <li>台灣戰爭史回顧</li> @* 分類名稱 *@
 }
 
 <h1 class="sr-only">教育專欄</h1>
@@ -17,7 +17,7 @@
 
 <h2 class="title">
     <small class="date">2015-01-26</small>
-    美國政府明白表示：「反對台灣獨立」?
+    @ViewBag.Title
 </h2>
     
 @*下面是編輯器內容，有資料的話才顯示*@
