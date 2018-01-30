@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "新聞 公告 聲明";
+    ViewBag.Title = "2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會"; @* 文章標題 *@
     ViewBag.BodyClass = "News Announcement";
 }
 
@@ -9,4 +9,99 @@
     <li>@ViewBag.Title</li>
 }
 
-<h1 class="title">@ViewBag.Title</h1>
+@section css {
+    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
+}
+
+@section scripts {
+    <script src="~/Content/js/swiper.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 'auto',
+            spaceBetween: 0,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        $(".tabs .tab-nav").click(function(e){
+            $(this).parent().siblings().children(".tab-nav").removeClass("current");
+            $(this).addClass("current");
+
+            var target = $(this).attr("href");
+
+            $(target).siblings(".tab").hide().removeClass("current");
+            $(target).fadeIn().addClass("current");
+
+            e.preventDefault();
+        });
+    </script>
+}
+
+<h1 class="sr-only">中央新聞</h1>
+
+<p class="back">
+    <a href="~/News/EventHistoryList"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+</p>
+
+<h2 class="title">
+    <small class="date">2018-01-20</small>
+    @ViewBag.Title
+</h2>
+
+<div class="tab-content clearfix editor">
+
+    @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
+    <div class="tabs slider">
+        <div class="swiper-container">
+            <ul class="swiper-wrapper list-inline">
+                <li class="swiper-slide">
+                    <a class="tab-nav current" href="#tab1">文章分頁1</a>
+                </li>
+                <li class="swiper-slide">
+                    <a class="tab-nav" href="#tab2">文章分頁2文章分頁2文章分頁2</a>
+                </li>
+                <li class="swiper-slide">
+                    <a class="tab-nav" href="#tab3">文章分頁3文章分頁3</a>
+                </li>
+            </ul>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    
+    @* 文章分頁，有資料才顯示，第一頁 class + current *@
+    <div class="tab current" id="tab1">
+        <p>2015年3月12日  台灣民政府秘書長夫人林梓安女士在美國華盛頓特區，國家記者俱樂部舉行本土台灣人首次國際記者會，秘書長夫人林梓安發表英語演講，現場感動所有記者，對台灣人遭遇深表同情，演講影片已經在國際間廣達一億人次觀看過。</p>
+    </div>
+
+    <div class="tab" id="tab2">
+        <p>文章分頁2</p>
+    </div>
+
+    <div class="tab" id="tab3">
+        <p>文章分頁3</p>
+    </div>
+
+</div>
+
+<ul class="pager list-unstyled">
+
+    <li class="prev">
+        @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
+        <a href="~/News/EventHistoryContent">
+            <i class="oi" data-glyph="chevron-left"></i>
+            上一篇
+        </a>
+    </li>
+
+    <li class="next">
+        @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
+        <a href="~/News/EventHistoryContent">
+            下一篇
+            <i class="oi" data-glyph="chevron-right"></i>
+        </a>
+    </li>
+
+</ul>

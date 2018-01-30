@@ -26,12 +26,12 @@
         });
 
         $(".tabs .tab-nav").click(function(e){
-            $(".tabs .tab-nav.current").removeClass("current");
+            $(this).parent().siblings().children(".tab-nav").removeClass("current");
             $(this).addClass("current");
 
             var target = $(this).attr("href");
 
-            $(".tab-content .tab").hide().removeClass("current");
+            $(target).siblings(".tab").hide().removeClass("current");
             $(target).fadeIn().addClass("current");
 
             e.preventDefault();
@@ -52,7 +52,7 @@
 
 <div class="tab-content clearfix editor">
 
-    @* 文章分頁 頁籤切換 *@
+    @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
     <div class="tabs slider">
         <div class="swiper-container">
             <ul class="swiper-wrapper list-inline">

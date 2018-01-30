@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="日屬美佔, 1945年4月1日, usmgtcg, 林志昇, 身分證, 台灣民政府官網, 台灣民政府, 日本天皇, USMG, 台灣身分證, 台灣政府, TCG, 何瑞元, 詔書, 台灣名政府, 台灣平民政府, 臺灣民政府, 台湾民政府, Taiwan, Government, 日本台灣, Civil, 台灣, 官網">
     <meta name="description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
     <title>@ViewBag.Title - 台灣民政府 Taiwan Civil Government</title>
@@ -40,7 +41,12 @@
                     <li class="lang"><a href="">English</a></li>
                     <li class="lang"><a href="">日本語</a></li>
                     <li class="search">
-                        <i class="oi" data-glyph="magnifying-glass"></i>
+                        <i class="search-trigger oi" data-glyph="magnifying-glass"></i>
+                        @* 全文檢索: 找標題/內文 關鍵字 *@
+                        <form class="search-form form-inline" action="">
+                            <input type="text" class="form-element" placeholder="請在此輸入">
+                            <button class="btn sm">搜尋</button>
+                        </form>
                     </li>
                     <li class="share">
                         <a href="#">
@@ -148,19 +154,10 @@
     }
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <!-- <script src="~/Content/js/jquery.waypoints.min.js"></script> -->
     <script>
-        // 卷軸卷動效果
-        // $('body').waypoint(function(direction) {
-        //     if( direction === 'down' ) {
-        //         $('body').addClass('scrolled');
-        //         $('.goTop').fadeIn();
-        //     }
-        //     else if( direction === 'up' ){
-        //         $('body').removeClass('scrolled');
-        //         $('.goTop').fadeOut();
-        //     }
-        // }, { offset: -1 } );
+        $(".search-trigger").click(function(){
+            $(this).attr('data-glyph', $(this).attr('data-glyph') == 'magnifying-glass' ? 'x' : 'magnifying-glass')
+        });
 
         // 點選後跳到 href 指向的位置
         $('.scroll').click(function () {
@@ -173,18 +170,6 @@
         $('.goTop').click(function () {
             $('body, html').stop(true).animate({ scrollTop: 0 }, 800);
             return false;
-        });
-
-        // dropdown
-        var $dropbtn = $(".dropdown-toggle"),
-            dropcontent = ".dropdown-content";
-        $dropbtn.click(function(event){
-            event.stopPropagation();
-            $(this).next(dropcontent).slideToggle("300");
-        });
-        $(window).click(function() {
-            //Hide the menus if visible
-            $(dropcontent).slideUp("500")
         });
     </script>
 

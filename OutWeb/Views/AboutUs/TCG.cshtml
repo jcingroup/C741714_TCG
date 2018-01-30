@@ -8,14 +8,71 @@
     <li>@ViewBag.Title</li>
 }
 
+@section scripts {
+    <script src="~/Content/js/swiper.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 'auto',
+            spaceBetween: 0,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        $(".tabs .tab-nav").click(function(e){
+            $(this).parent().siblings().children(".tab-nav").removeClass("current");
+            $(this).addClass("current");
+
+            var target = $(this).attr("href");
+
+            $(target).siblings(".tab").hide().removeClass("current");
+            $(target).fadeIn().addClass("current");
+
+            e.preventDefault();
+        });
+    </script>
+}
+
 <h1 class="title">@ViewBag.Title</h1>
 
-@*下面是編輯器內容，有資料的話才顯示*@
-<div class="clearfix editor">
-    <p>大日本帝國 1941年12月7日 經由奇襲美國夏威夷珍珠港而開戰，日本台灣也由台灣高雄機場出動零式戰鬥機，轟炸、消滅當時麥克阿瑟為首的菲律賓克拉克空軍基地。兩國的戰爭因此開啟，1945年4月1日本天皇宣布台灣地區實施明治憲法，讓台灣人擁有參戰權和參政權，從那時起，依照萬國公法台灣已經變成日本天皇領土，日本天皇不只有管轄權 (殖民地) 也開始擁有台灣主權。</p>
-    <p>美軍在日本投扔兩顆原子彈而終結戰爭。戰後依照盟軍分配占領，日本本土由美軍佔領，琉球群島交給聯合國託管，再交美國占領。日本台灣則交美國占領再由中華民國代替美軍佔領，一直到今天台灣國際地位不明。</p>
-    <p>Military government may be exercised not only during the time that war is flagrant, but down to the period when it comports with the policy of the dominant power to establish civil jurisdiction. Military government continues till legally supplanted. “This system legally might remain in force after the termination of the war and until modified either by the direct legislation of Congress or by the territorial government established by its authority.”</p>
-    <p>軍事政府的運作可以開始自交戰時期，延伸至戰勝國協助被佔領地區，設置民事管轄機構（民政府），軍事政府持續至被合法取代為止，軍事政府即使在戰爭結束後，仍然可以合法被運作，直至國會直接立法，或由佔領當局設立地方政府已改變。</p>
-    <p>中華民國起初在台灣設置有中國台灣行政長官公署當成 中國台灣民政府 (19470601) 改制成為台灣省政府。還有中國台灣警備總部當成中國台灣軍政府，後來改制成為中華民國海巡署。這是中華民國依照戰爭法對台灣占領的單位變革。</p>
-    <p>一般而言，由佔領當局所設立之「當地地方政府」，可以是在地人民之「民政府」，或是征服國之「殖民政府」，並非佔領國憲法所能管轄，而是由軍事政府來管轄，其「地方政府」之行政長官是依照「指派」而非經「選舉」。佔領地如果是由「割讓取得」，則軍事政府移轉管轄權之對象有可能是「殖民政府」，或是在地人民之「民政府」。但是，如果由「非割讓取得」，則軍事政府移轉管轄權給在地人民之「民政府」，或「獨立政府」。下列戰爭後佔領地之軍事政府移轉情況：</p>
+<div class="tab-content clearfix editor">
+
+    @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
+    <div class="tabs slider">
+        <div class="swiper-container">
+            <ul class="swiper-wrapper list-inline">
+                <li class="swiper-slide">
+                    <a class="tab-nav current" href="#tab1-1">文章分頁1</a>
+                </li>
+                <li class="swiper-slide">
+                    <a class="tab-nav" href="#tab1-2">文章分頁2文章分頁2文章分頁2</a>
+                </li>
+                <li class="swiper-slide">
+                    <a class="tab-nav" href="#tab1-3">文章分頁3文章分頁3</a>
+                </li>
+            </ul>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    
+    @* 文章分頁，有資料才顯示，第一頁 class + current *@
+    <div class="tab current" id="tab1-1">
+        <h3>台灣民政府 中央參眾議院聯合審查會議修正 台灣基本法</h3>
+        <p>前言：</p>
+        <p>台灣：福爾摩沙周邊群島和澎湖列島(總稱台灣)是大日本帝國台灣人民必須守護的領域，為確保領域內人民與全世界人民能共同合作，取得進步繁榮成果,讓民主、自由、和平帶來福祉。台灣民政府管轄權力源自日本天皇陛下天賦不可放棄權利及義務和人民的期盼而信託，其權力應由人民所組成代表行使，其福祉由領域內人民分享，這是萬國公法與國際法的精神與目的，台灣基本法以此精神與目的為法源，台灣民政府以天皇陛下詔書、舊金山和平條約、戰爭法精神與目的而組織，並制定台灣基本法。</p>
+        <p>大日本帝國台灣人民期盼和平、自由、民主、穩定與繁榮已久，深知人類相互關係良好的源由，是堅信仁慈、公義、和平與自由的基本價值，是一心守護領域內人民安全與生存，是竭力守護賴以生存而進步的基本價值。</p>
+        <p>堅信任何國家都需要尊重基本價值，而且必須優先遵守萬國公法與國際法，這是經過歷史反覆教訓而實證的法則，也是人類追求維持國際和平、穩定與繁榮的法則。</p>
+        <p>台灣民政府領域內所有人民，誓以台灣基本法來守護人類賴以生存與進步的基本價值，是為了台灣人民的生存和進步。</p>
+    </div>
+
+    <div class="tab" id="tab1-2">
+        <p>文章分頁2</p>
+    </div>
+
+    <div class="tab" id="tab1-3">
+        <p>文章分頁3</p>
+    </div>
+
 </div>

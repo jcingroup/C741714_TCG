@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "各州活動";
+    ViewBag.Title = "台北州"; @* 分類名稱 *@
     ViewBag.BodyClass = "News Event";
 }
 
 @section breadcrumb {
     <li><a href="~/News">最新訊息</a></li>
     <li><a href="~/News/EventLatest">活動寫真</a></li>
-    <li>@ViewBag.Title</li>
+    <li>各州活動</li>
 }
 
 <h1 class="sr-only">活動寫真</h1>
@@ -17,4 +17,60 @@
     <li><a class="current" href="~/News/EventStatesCategory">各州活動</a></li>
 </ul>
 
+<p class="back">
+    <a href="~/News/EventStatesCategory"><i class="oi" data-glyph="caret-left"></i> 回上層</a>
+</p>
+
 <h2 class="title">@ViewBag.Title</h2>
+
+<h3 class="title2">直播影片</h3>
+
+<div class="row mb-24">
+    <div class="col-xs-6">
+        <div class="embed-responsive">
+            <iframe src="https://www.youtube.com/embed/JMBbJ_8nAHY" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<h3 class="title2">活動資訊</h3>
+
+@* 每頁5筆資料 *@
+<div class="articles">
+
+    <article class="article">
+        <div class="row">
+            <div class="col-xs-3">
+                <a href="~/News/EventStatesContent" class="thumbnail">
+                    @* 沒有圖檔的替代圖 *@
+                    <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
+                </a>
+            </div>
+            <div class="col-xs-9">
+                <small class="date">2018-01-20</small>
+                <h3><a href="~/News/EventStatesContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
+                @* 摘要 取前 145 個字，有資料的話才顯示 *@
+                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
+                <a href="~/News/EventStatesContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
+            </div>
+        </div>
+    </article>
+
+    <article class="article">
+        <div class="row">
+            <div class="col-xs-3">
+                <a href="~/News/EventStatesContent" class="thumbnail">
+                    <img src="http://api.ning.com/files/ymSmd4em4y3tD9NclSe*1XQevDWPd-1a*I2DF5kGhLCF11rLpSuIOsB0zctgpvX4sGlyJCd0EZjvBifYYqTbHFVodRmJ9iZe/2018118026.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-xs-9">
+                <small class="date">2018-01-20</small>
+                <h3><a href="~/News/EventStatesContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
+                @* 摘要 取前 145 個字，有資料的話才顯示 *@
+                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
+                <a href="~/News/EventStatesContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
+            </div>
+        </div>
+    </article>
+
+</div>
