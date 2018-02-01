@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="keywords" content="日屬美佔, 1945年4月1日, usmgtcg, 林志昇, 身分證, 台灣民政府官網, 台灣民政府, 日本天皇, USMG, 台灣身分證, 台灣政府, TCG, 何瑞元, 詔書, 台灣名政府, 台灣平民政府, 臺灣民政府, 台湾民政府, Taiwan, Government, 日本台灣, Civil, 台灣, 官網">
     <meta name="description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
     <title>@ViewBag.Title - 台灣民政府 Taiwan Civil Government</title>
@@ -19,7 +19,7 @@
     <meta property="og:description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
     <meta name="og:site_name" content="台灣民政府 Taiwan Civil Government">
     @RenderSection("OGMeta", false)
-
+    
     <link rel="stylesheet" href="~/Content/css/vendor/open-iconic.css">
     <link rel="stylesheet" href="~/Content/css/vendor/icomoon.css">
     <link rel="stylesheet" href="~/Content/css/grid.css">
@@ -41,22 +41,19 @@
                     <li class="lang"><a href="">English</a></li>
                     <li class="lang"><a href="">日本語</a></li>
                     <li class="search">
-                        <i class="search-trigger oi" data-glyph="magnifying-glass"></i>
                         @* 全文檢索: 找標題/內文 關鍵字 *@
                         <form class="search-form form-inline" action="">
                             <input type="text" class="form-element" placeholder="請在此輸入">
-                            <button class="btn sm">搜尋</button>
+                            <button class="oi" data-glyph="magnifying-glass"></button>
                         </form>
+                        <button class="search-trigger oi" data-glyph="magnifying-glass"></button>
                     </li>
                     <li class="share">
-                        <a href="#">
-                            <i class="oi" data-glyph="share"></i>
-                        </a>
+                        <div class="addthis_inline_share_toolbox"></div>
+                        <button class="share-trigger oi" data-glyph="share"></button>
                     </li>
                     <li class="menu">
-                        <a href="#">
-                            <i class="oi" data-glyph="menu"></i>
-                        </a>
+                        <button class="sitemap-trigger oi" data-glyph="menu"></button>
                     </li>
                 </ul>
 
@@ -153,10 +150,171 @@
 
     }
 
+    <nav id="sitemap">
+        <button class="sitemap-trigger oi" data-glyph="x"></button>
+        <ul class="list-unstyled row">
+            <li class="col-xs-4">
+                <h1>
+                    <a href="~/AboutUs">
+                        什麼是台灣民政府
+                    </a>
+                </h1>
+                <ul>
+                    <li>
+                        <h2>
+                            <a href="~/AboutUs/TCG">什麼是台灣民政府</a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <a href="~/AboutUs/Position">關於我們</a>
+                        </h2>
+                        <ul>
+                            <li>
+                                <h3><a href="~/AboutUs/Position">主張與立場</a></h3>
+                            </li>
+                            <li>
+                                <h3><a href="~/AboutUs/Statement">台灣地位的聲明</a></h3>
+                            </li>
+                            <li>
+                                <h3><a href="~/AboutUs/Law">法律依據</a></h3>
+                                <ul>
+                                    <li>
+                                        <h4><a href="~/AboutUs/Law">台灣基本法</a></h4>
+                                    </li>
+                                    <li>
+                                        <h4><a href="~/AboutUs/Law#tab2">台灣公民權利法</a></h4>
+                                    </li>
+                                    <li>
+                                        <h4><a href="~/AboutUs/Law#tab3">官方證明文件</a></h4>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>
+                            <a href="~/AboutUs/EducationCategory">教育專欄</a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <a href="~/AboutUs/Organization">行政區域圖&amp;組織架構</a>
+                        </h2>
+                        <ul>
+                            <li>
+                                <h3><a href="~/AboutUs/Organization">行政區域圖</a></h3>
+                            </li>
+                            <li>
+                                <h3><a href="~/AboutUs/Organization#tab2">組織架構</a></h3>
+                            </li>
+                            <li>
+                                <h3><a href="~/AboutUs/Organization#tab3">人事名單</a></h3>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="col-xs-4">
+                <h1>
+                    <a href="~/JoinUs">
+                        如何加入台灣民政府
+                    </a>
+                </h1>
+                <ul>
+                    <li>
+                        <h2><a href="~/JoinUs/Apply">申請民政府身分證</a></h2>
+                    </li>
+                    <li>
+                        <h2><a href="~/JoinUs/Consult">地方服務處諮詢</a></h2>
+                    </li>
+                    <li>
+                        <h2><a href="~/JoinUs/Live">參加台灣法理學院</a></h2>
+                        <ul>
+                            <li>
+                                <h3>
+                                    <a href="~/JoinUs/Live">課堂 LIVE 直播</a>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    <a href="~/JoinUs/Schedule">開課時間表</a>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    <a href="~/JoinUs/Gallery">歷屆合照</a>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">歷屆課程影片</a></h3>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="col-xs-4">
+                <h1>
+                    <a href="~/News">最新訊息</a>
+                </h1>
+                <ul>
+                    <li>
+                        <h2><a href="~/News/Latest">最新訊息</a></h2>
+                    </li>
+                    <li>
+                        <h2><a href="~/News/EventLatest">活動寫真</a></h2>
+                        <ul>
+                            <li>
+                                <h3><a href="~/News/EventLatest">最新活動</a></h3>
+                            </li>
+                            <li>
+                                <h3><a href="~/News/EventHistoryList">歷史活動</a></h3>
+                            </li>
+                            <li>
+                                <h3><a href="~/News/EventStatesCategory">各州活動</a></h3>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2><a href="~/News/AnnouncementLatest">新聞 公告 聲明</a></h2>
+                        <ul>
+                            <li>
+                                <h3><a href="~/News/AnnouncementLatest">最新消息</a></h3>
+                            </li>
+                            <li>
+                                <h3><a href="~/News/AnnouncementList">中央新聞</a></h3>
+                            </li>
+                            <li>
+                                <h3><a href="~/News/AnnouncementList">中央公告</a></h3>
+                            </li>
+                            <li>
+                                <h3><a href="~/News/AnnouncementList">中央聲明</a></h3>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2><a href="~/News/FocusCategory">焦點專欄</a></h2>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(".search-trigger").click(function(){
-            $(this).attr('data-glyph', $(this).attr('data-glyph') == 'magnifying-glass' ? 'x' : 'magnifying-glass')
+            var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'magnifying-glass' ? 'x' : 'magnifying-glass');
+            $(".search").toggleClass("active");
+        });
+
+        $(".share-trigger").click(function(){
+            var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'share' ? 'x' : 'share');
+            $(".share").toggleClass("active");
+        });
+
+        $(".sitemap-trigger").click(function(){
+            $("#sitemap").fadeToggle();
+            $("body").toggleClass("overlay");
         });
 
         // 點選後跳到 href 指向的位置
@@ -172,6 +330,7 @@
             return false;
         });
     </script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a72b8d4c87ca24b"></script>
 
     @RenderSection("scripts", required: false)
 
