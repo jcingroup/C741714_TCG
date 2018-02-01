@@ -237,11 +237,9 @@ namespace OutWeb.Service
         #endregion
 
         #region 圖片新增 Img_Insert
-        public string Img_Insert(string img_no = "", string img_file = "", string img_sty = "", string c_dbf = "")
+        public string Img_Insert(string img_no = "", string img_file = "", string img_sty = "", string img_kind = "")
         {
             string c_msg = "";
-            string dbf_name = "";
-            dbf_name = c_dbf + "_Img";
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
             {
@@ -253,8 +251,8 @@ namespace OutWeb.Service
 
             try
             {
-                csql = @"insert into " + dbf_name + "(img_no, img_file, img_sty) "
-                     + "values(@img_no ,@img_file ,@img_sty)";
+                csql = @"insert into img(img_no, img_file, img_sty,img_kind) "
+                     + "values(@img_no ,@img_file ,@img_sty,@img_kind)";
 
                 cmd.CommandText = csql;
 
@@ -262,6 +260,7 @@ namespace OutWeb.Service
                 cmd.Parameters.AddWithValue("@img_no", img_no);
                 cmd.Parameters.AddWithValue("@img_file", img_file);
                 cmd.Parameters.AddWithValue("@img_sty", img_sty);
+                cmd.Parameters.AddWithValue("@img_kind", img_kind);
 
                 cmd.ExecuteNonQuery();
             }
@@ -285,10 +284,9 @@ namespace OutWeb.Service
         #endregion
 
         #region 圖片刪除 Img_Delete
-        public string Img_Delete(string img_id = "", string c_dbf = "Activity")
+        public string Img_Delete(string img_id = "")
         {
             string c_msg = "";
-            string dbf_name = c_dbf + "_Img";
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
             {
@@ -300,7 +298,7 @@ namespace OutWeb.Service
 
             try
             {
-                csql = @"delete from " + dbf_name + " where img_id = @img_id ";
+                csql = @"delete from img where id = @img_id ";
 
                 cmd.CommandText = csql;
                 cmd.Parameters.Clear();
@@ -327,14 +325,12 @@ namespace OutWeb.Service
         #endregion
 
         #region 圖片更新 Img_Update
-        public string Img_Update(string img_id = "", string img_file = "", string img_desc = "", string is_index = "", string c_dbf = "Activity")
+        public string Img_Update(string img_id = "",string img_no = "", string img_file = "", string img_sty = "", string img_kind = "")
         {
             string c_msg = "";
-            string dbf_name = "";
+            
             string c_update = "";
-
-            dbf_name = c_dbf + "_Img";
-
+            
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
             {
@@ -356,30 +352,21 @@ namespace OutWeb.Service
                     c_update += " img_file = @img_file ";
                 }
 
-                if (img_desc.Trim().Length > 0)
+                if (img_sty.Trim().Length > 0)
                 {
                     if (c_update.Trim().Length > 0)
                     {
                         c_update += ",";
                     }
-                    c_update += " img_desc = @img_desc ";
-                }
-
-                if (is_index.Trim().Length > 0)
-                {
-                    if (c_update.Trim().Length > 0)
-                    {
-                        c_update += ",";
-                    }
-                    c_update += " is_index = @is_index ";
+                    c_update += " img_sty = @img_sty ";
                 }
 
                 csql = @"update "
-                     + "  " + dbf_name + " "
+                     + "  img "
                      + "set "
                      + c_update + " "
                      + "where "
-                     + "  img_id = @img_id ";
+                     + "  id = @img_id ";
 
                 cmd.CommandText = csql;
 
@@ -391,15 +378,11 @@ namespace OutWeb.Service
                     cmd.Parameters.AddWithValue("@img_file", img_file);
                 }
 
-                if (img_desc.Trim().Length > 0)
+                if (img_sty.Trim().Length > 0)
                 {
-                    cmd.Parameters.AddWithValue("@img_desc", img_desc);
+                    cmd.Parameters.AddWithValue("@img_sty", img_sty);
                 }
 
-                if (is_index.Trim().Length > 0)
-                {
-                    cmd.Parameters.AddWithValue("@is_index", is_index);
-                }
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -422,14 +405,15 @@ namespace OutWeb.Service
         #endregion
 
         #region 圖片陳列 Img_List
-        public DataTable Img_List(ref string err_msg, string img_no = "", string img_sty = "", string c_dbf = "")
+        public DataTable Img_List(ref string err_msg, string img_no = "", string img_sty = "", string img_kind = "",string img_id = "")
         {
             DataSet dt = new DataSet();
             DataTable d_t = new DataTable();
 
-            string dbf_name = "";
             string[] cimg_no;
+            string[] cimg_id;
             string str_img_no = "";
+            string str_img_id = "";
 
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
@@ -442,36 +426,50 @@ namespace OutWeb.Service
 
             try
             {
-                dbf_name = c_dbf + "_Img";
                 cimg_no = img_no.Split(',');
+                cimg_id = img_id.Split(',');
 
-                for (int i = 0; i < cimg_no.Length; i++)
+                csql = "select * from img where status = 'Y' ";
+
+                if (img_no.Trim().Length > 0)
                 {
-                    if (i > 0)
+                    csql = csql + " and img_no in (";
+                    for (int i = 0; i < cimg_no.Length; i++)
                     {
-                        str_img_no = str_img_no + ",";
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_img_no" + i.ToString();
                     }
-                    str_img_no = str_img_no + "'" + cimg_no[i] + "'";
+                    csql = csql + ") ";
                 }
 
-
-
-                csql = "select * from " + dbf_name + " where status = 'Y' and img_no in (";
-                for (int i = 0; i < cimg_no.Length; i++)
+                if (img_no.Trim().Length > 0)
                 {
-                    if (i > 0)
+                    csql = csql + " and id in (";
+                    for (int i = 0; i < cimg_id.Length; i++)
                     {
-                        csql = csql + ",";
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_img_id" + i.ToString();
                     }
-                    csql = csql + "@str_img_no" + i.ToString() + " ";
+                    csql = csql + ") ";
                 }
-                csql = csql + ") ";
+
                 if (img_sty.Trim().Length > 0)
                 {
                     csql = csql + "and img_sty= @img_sty ";
                 }
+
+                if(img_kind.Trim().Length >0)
+                {
+                    csql = csql + "and img_kind = @img_kind ";
+                }
                 csql = csql + "order by ";
-                csql = csql + "  img_id ";
+                csql = csql + "  id ";
 
                 cmd.CommandText = csql;
 
@@ -481,11 +479,26 @@ namespace OutWeb.Service
                     cmd.Parameters.AddWithValue("@img_sty", img_sty);
                 }
 
-                for (int i = 0; i < cimg_no.Length; i++)
+                if (img_sty.Trim().Length > 0)
                 {
-                    cmd.Parameters.AddWithValue("@str_img_no" + i.ToString(), cimg_no[i]);
+                    cmd.Parameters.AddWithValue("@img_kind", img_sty);
                 }
 
+                if (img_no.Trim().Length > 0)
+                {
+                    for (int i = 0; i < cimg_no.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_img_no" + i.ToString(), cimg_no[i]);
+                    }
+                }
+
+                if (img_id.Trim().Length > 0)
+                {
+                    for (int i = 0; i < cimg_id.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_img_od" + i.ToString(), cimg_id[i]);
+                    }
+                }
 
                 if (dt.Tables["img"] != null)
                 {
