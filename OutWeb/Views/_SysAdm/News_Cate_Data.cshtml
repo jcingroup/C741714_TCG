@@ -15,7 +15,7 @@
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_img = (DataTable)ViewData["d_img"];
     DataTable d_lang = (DataTable)ViewData["d_lang"];
-
+    
     string cate_id = "";
     string cate_name = "";
     string cate_desc = "";
@@ -196,7 +196,7 @@
         <button type="button" name="btn_ok" onclick="form_ok();" class="btn success oi" data-glyph="circle-check">
             確認儲存
         </button>
-        <button type="button" id="btn_back" name="btn_back" onclick="location.href='News_Cate_List'" class="btn warning oi" data-glyph="circle-x">
+        <button type="button" id="btn_back" name="btn_back" onclick="location.href='@Url.Content(SysPath + "News_Cate_List")'" class="btn warning oi" data-glyph="circle-x">
             回列表
         </button>
     </footer>

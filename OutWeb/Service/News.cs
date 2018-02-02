@@ -131,7 +131,7 @@ namespace OutWeb.Service
 
                 if (lang_id.Trim().Length > 0)
                 {
-                    cmd.Parameters.AddWithValue(@lang_id, lang_id);
+                    cmd.Parameters.AddWithValue("@lang_id", lang_id);
                 }
                 //--------------------------------------------------------------//
 
@@ -217,7 +217,7 @@ namespace OutWeb.Service
                 ////讓ADO.NET自行判斷型別轉換
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@cate_name", cate_name);
-                cmd.Parameters.AddWithValue("@cate_desc", cate_name);
+                cmd.Parameters.AddWithValue("@cate_desc", cate_desc);
                 cmd.Parameters.AddWithValue("@sort", sort);
                 cmd.Parameters.AddWithValue("@is_show", is_show);
                 cmd.Parameters.AddWithValue("@lang_id", lang_id);

@@ -150,7 +150,7 @@ namespace OutWeb.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("News_List");
                 }
 
             }
@@ -264,6 +264,157 @@ namespace OutWeb.Controllers
         }
         #endregion
 
+        #region 圖片上傳 Upload
+        public ActionResult Upload(string img_no, string img_sta, string img_cate, string img_sty = "", string img_id = "")
+        {
+            DataTable img_file;
+            DataTable chk_file;
+
+            HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
+            string imgPath = "";
+            string filename = "";
+            string file_name = "";
+            string file_path = "../Images/";
+            string str_return = "";
+            string[] files;
+            string chk_sty = "";
+            string pre_filename = "";
+            int files_count = 0;
+            //string cmsg = "";
+            string err_msg = "";
+
+
+            if (hfc.Count > 0)
+            {
+                file_name = hfc[0].FileName;
+                files = file_name.Split('\\');
+                files_count = files.Count();
+                filename = files[files_count - 1];
+
+                imgPath = file_path + img_no + "_" + img_sta + "_" + filename;
+                string PhysicalPath = Server.MapPath(imgPath);
+                hfc[0].SaveAs(PhysicalPath);
+            }
+
+            //抓取資料
+            chk_file = DB.Img_List(ref err_msg, img_no, img_sty, img_cate);
+
+            chk_sty = "add";
+            if (img_sta == "S")
+            {
+                if (chk_file.Rows.Count > 0)
+                {
+                    pre_filename = file_path + chk_file.Rows[0]["img_file"].ToString();
+
+                    chk_sty = "update";
+                }
+            }
+
+            switch (chk_sty)
+            {
+                case "add": //加入到資料庫
+                    DB.Img_Insert(img_no, img_no + "_" + img_sta + "_" + filename, img_sty, img_cate);
+                    
+                    break;
+                case "update":
+                    DB.Img_Update(img_id, img_no, img_no + "_" + img_sta + "_" + filename, img_sty, img_cate);
+                    
+                    //刪除原本檔案
+                    if (pre_filename == "")
+                    {
+                        string Pre_Path = Server.MapPath(pre_filename);
+
+                        // Delete a file by using File class static method...
+                        if (System.IO.File.Exists(Pre_Path))
+                        {
+                            // Use a try block to catch IOExceptions, to
+                            // handle the case of the file already being
+                            // opened by another process.
+                            try
+                            {
+                                System.IO.File.Delete(Pre_Path);
+                            }
+                            catch (System.IO.IOException e)
+                            {
+                                str_return = str_return + e.Message;
+                            }
+                        }
+                    }
+
+
+                    break;
+            }
+
+            //抓取資料
+            img_file = DB.Img_List(ref err_msg, img_no, img_sty, img_cate);
+
+            str_return = JsonConvert.SerializeObject(img_file, Newtonsoft.Json.Formatting.Indented);
+
+            return Content(str_return);
+
+
+        }
+        #endregion
+
+        #region 圖片刪除 Img_Del
+        public ActionResult Img_Del(string img_id, string img_sta, string img_no, string img_cate, string img_sty = "")
+        {
+            string str_return = "";
+            DataTable img_file;
+            DataTable chk_file;
+            string filename = "";
+            string file_path = "../Images/";
+            string imgPath = "";
+            string err_msg = "";
+
+            //抓取資料
+            chk_file = DB.Img_List(ref err_msg, img_no, img_sty, img_cate,img_id);
+
+            filename = "";
+
+            if (chk_file.Rows.Count > 0)
+            {
+                for (int i = 0; i < chk_file.Rows.Count; i++)
+                {
+                    if (img_id == chk_file.Rows[i]["id"].ToString())
+                    {
+                        filename = chk_file.Rows[i]["img_file"].ToString();
+                        break;
+                    }
+                }
+            }
+
+            imgPath = file_path + filename;
+
+            string PhysicalPath = Server.MapPath(imgPath);
+
+            // Delete a file by using File class static method...
+            if (System.IO.File.Exists(PhysicalPath))
+            {
+                // Use a try block to catch IOExceptions, to
+                // handle the case of the file already being
+                // opened by another process.
+                try
+                {
+                    System.IO.File.Delete(PhysicalPath);
+                }
+                catch (System.IO.IOException e)
+                {
+                    str_return = str_return + e.Message;
+                }
+            }
+
+            //刪除資料庫資料
+            DB.Img_Delete(img_id);
+
+            //抓取資料
+            img_file = DB.Img_List(ref err_msg, img_no, img_sty, img_cate);
+
+            str_return = JsonConvert.SerializeObject(img_file, Newtonsoft.Json.Formatting.Indented);
+            return Content(str_return);
+        }
+        #endregion
+
         #region 單一網頁編輯
         public ActionResult AboutUs()
         {
@@ -367,7 +518,7 @@ namespace OutWeb.Controllers
         #region 新聞公告聲明
 
         #region 新聞公告聲明類別
-        #region 新聞公告聲明類別_陳列 News_Cate_List()
+        #region 新聞公告聲明類別_陳列 News_Cate_List
         public ActionResult News_Cate_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_lang = "")
         {
             //定義變數
@@ -510,6 +661,20 @@ namespace OutWeb.Controllers
         #region 最新消息新增 News_Add
         public ActionResult News_Add()
         {
+            //定義變數
+            string err_msg = "";
+            DataTable d_cate;
+            DataTable d_lang;
+            DataTable d_img;
+            //抓取消息類別資料
+            
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            d_cate = CNews.News_Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
+            d_img = DB.Img_List(ref err_msg, "", "", "News", "");
+            //設定傳值
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["d_img"] = d_img;
             ViewData["action_sty"] = "add";
 
             return View("News_Data");
@@ -521,8 +686,21 @@ namespace OutWeb.Controllers
         public ActionResult News_Edit(string n_id = "")
         {
             string err_msg = "";
-            DataTable d_news = CNews.News_List(ref err_msg, n_id);
+            
+            DataTable d_cate;
+            DataTable d_lang;
+            DataTable d_news;
+            DataTable d_img;
+            //抓取消息類別資料
+            d_news = CNews.News_List(ref err_msg, n_id);
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            d_cate = CNews.News_Cate_List(ref err_msg, "", "sort", "Y", "", d_news.Rows[0]["lang_id"].ToString());
+            d_img = DB.Img_List(ref err_msg, n_id, "", "News", "");
+            //設定傳值
             ViewData["d_news"] = d_news;
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["d_img"] = d_img;
             ViewData["action_sty"] = "edit";
 
             return View("News_Data");
@@ -615,7 +793,7 @@ namespace OutWeb.Controllers
 
         #region ajax_get
 
-        #region 消息類別 new_Cate_get
+        #region 消息類別 News_Cate_get
         public ActionResult News_Cate_Get(string lang)
         {
             string str_return = "";
