@@ -316,6 +316,10 @@
             $("#sitemap").fadeToggle();
             $("body").toggleClass("overlay");
         });
+        $("#sitemap a").click(function(){
+            // 同一頁換tab需重載頁面
+            location.reload();
+        });
 
         // 點選後跳到 href 指向的位置
         $('.scroll').click(function () {
