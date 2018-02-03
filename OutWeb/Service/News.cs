@@ -473,9 +473,11 @@ namespace OutWeb.Service
                      + "("
                      + "select distinct "
                      + "  a1.id, a1.n_title, convert(nvarchar(10),a1.n_date,23) as n_date, a1.n_url, a1.n_desc, a1.n_memo "
-                     + ", a1.is_index, a1.sort, a1.status "
+                     + ", a1.is_index, a1.sort, a1.status,a1.lang_id,a2.lang_name,a1.cate_id, a3.cate_name "
                      + "from "
                      + "   news a1 "
+                     + "LEFT JOIN LANG a2 ON a1.LANG_ID = a2.LANG_ID "
+                     + "LEFT JOIN NEWS_CATE a3 ON a1.cate_id = a3.id "
                      + "where "
                      + "  a1.status <> 'D' ";
 
@@ -658,10 +660,10 @@ namespace OutWeb.Service
         #endregion
 
         #region 消息資料新增 News_Insert
-        public string News_Insert(string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "",string lang_id = "", string cate_id = "")
+        public string News_Insert(string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "",string lang_id = "", string cate_id = "", string img_no = "")
         {
             string c_msg = "";
-
+            string id = "";
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
             {
@@ -714,6 +716,69 @@ namespace OutWeb.Service
                 cmd.Parameters.AddWithValue("@cate_id", cate_id);
 
                 cmd.ExecuteNonQuery();
+
+                //抓取序號
+                csql = "select "
+                     + "  * "
+                     + "from "
+                     + "  News "
+                     + "where "
+                     + "    n_title = @n_title "
+                     + "and n_date = @n_date "
+                     + "and n_desc = @n_desc "
+                     + "and is_index = @is_index "
+                     + "and sort = @sort "
+                     + "and status = @is_show "
+                     + "and n_memo = @n_memo "
+                     + "and lang_id = @lang_id "
+                     + "and cate_id = @cate_id ";
+
+                cmd.CommandText = csql;
+
+                ////讓ADO.NET自行判斷型別轉換
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@n_title", n_title);
+                cmd.Parameters.AddWithValue("@n_date", n_date);
+                cmd.Parameters.AddWithValue("@n_desc", n_desc);
+                cmd.Parameters.AddWithValue("@is_index", is_index);
+                cmd.Parameters.AddWithValue("@sort", sort);
+                cmd.Parameters.AddWithValue("@is_show", is_show);
+                cmd.Parameters.AddWithValue("@n_memo", n_memo);
+                cmd.Parameters.AddWithValue("@lang_id", lang_id);
+                cmd.Parameters.AddWithValue("@cate_id", cate_id);
+
+                if (ds.Tables["chk_news"] != null)
+                {
+                    ds.Tables["chk_news"].Clear();
+                }
+
+                SqlDataAdapter chk_ada = new SqlDataAdapter();
+                chk_ada.SelectCommand = cmd;
+                chk_ada.Fill(ds, "chk_news");
+                chk_ada = null;
+
+                if (ds.Tables["chk_news"].Rows.Count > 0)
+                {
+                    id = ds.Tables["chk_news"].Rows[0]["id"].ToString();
+                    if(img_no.Trim().Length > 0)
+                    {
+                        csql = @"UPDATE "
+                             + " IMG "
+                             + "SET "
+                             + "  IMG_NO = @id "
+                             + "WHERE "
+                             + "    IMG_KIND = 'News' "
+                             + "AND IMG_NO = @img_no ";
+                        cmd.CommandText = csql;
+
+                        ////讓ADO.NET自行判斷型別轉換
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@img_no", img_no);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
 
             }
             catch (Exception ex)
@@ -820,6 +885,16 @@ namespace OutWeb.Service
 
             try
             {
+                //刪除圖片
+                csql = @"delete from IMG SET IMG_KIND='News' WHERE IMG_NO = @n_id ";
+                cmd.CommandText = csql;
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@n_id", n_id);
+
+                cmd.ExecuteNonQuery();
+
+                //刪除資料
                 csql = @"delete from "
                      + "  news "
                      + "where "

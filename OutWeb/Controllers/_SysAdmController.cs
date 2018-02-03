@@ -282,6 +282,7 @@ namespace OutWeb.Controllers
             int files_count = 0;
             //string cmsg = "";
             string err_msg = "";
+            string new_filename = "";
 
 
             if (hfc.Count > 0)
@@ -290,8 +291,8 @@ namespace OutWeb.Controllers
                 files = file_name.Split('\\');
                 files_count = files.Count();
                 filename = files[files_count - 1];
-
-                imgPath = file_path + img_no + "_" + img_sta + "_" + filename;
+                new_filename = img_cate + "_" + img_no + "_" + img_sta + "_" + filename;
+                imgPath = file_path + new_filename;
                 string PhysicalPath = Server.MapPath(imgPath);
                 hfc[0].SaveAs(PhysicalPath);
             }
@@ -313,11 +314,11 @@ namespace OutWeb.Controllers
             switch (chk_sty)
             {
                 case "add": //加入到資料庫
-                    DB.Img_Insert(img_no, img_no + "_" + img_sta + "_" + filename, img_sty, img_cate);
+                    DB.Img_Insert(img_no, new_filename, img_sty, img_cate);
                     
                     break;
                 case "update":
-                    DB.Img_Update(img_id, img_no, img_no + "_" + img_sta + "_" + filename, img_sty, img_cate);
+                    DB.Img_Update(img_id, img_no, new_filename, img_sty, img_cate);
                     
                     //刪除原本檔案
                     if (pre_filename == "")
@@ -670,7 +671,7 @@ namespace OutWeb.Controllers
             
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CNews.News_Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
-            d_img = DB.Img_List(ref err_msg, "", "", "News", "");
+            d_img = DB.Img_List(ref err_msg, "", "", "News");
             //設定傳值
             ViewData["d_lang"] = d_lang;
             ViewData["d_cate"] = d_cate;
@@ -695,7 +696,7 @@ namespace OutWeb.Controllers
             d_news = CNews.News_List(ref err_msg, n_id);
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CNews.News_Cate_List(ref err_msg, "", "sort", "Y", "", d_news.Rows[0]["lang_id"].ToString());
-            d_img = DB.Img_List(ref err_msg, n_id, "", "News", "");
+            d_img = DB.Img_List(ref err_msg, n_id, "", "News");
             //設定傳值
             ViewData["d_news"] = d_news;
             ViewData["d_lang"] = d_lang;
@@ -719,14 +720,14 @@ namespace OutWeb.Controllers
         #region 最新消息儲存 News_Save
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult News_Save(string action_sty, string n_id, string n_title, string n_date, string n_desc, string show, string hot, string sort, string n_memo,string lang_id, string cate_id)
+        public ActionResult News_Save(string action_sty, string n_id, string n_title, string n_date, string n_desc, string show, string hot, string sort,string lang_id, string cate_id, string img_no)
         {
             //OverlookDBService OverlookDB = new OverlookDBService();
-
+            string n_memo = "";
             switch (action_sty)
             {
                 case "add":
-                    CNews.News_Insert(n_title, n_date, n_desc, show, hot, sort, n_memo,lang_id,cate_id);
+                    CNews.News_Insert(n_title, n_date, n_desc, show, hot, sort, n_memo,lang_id,cate_id,img_no);
                     break;
                 case "edit":
                     CNews.News_Update(n_id, n_title, n_date, n_desc, show, hot, sort, n_memo,lang_id,cate_id);

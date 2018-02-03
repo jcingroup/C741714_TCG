@@ -431,7 +431,7 @@ namespace OutWeb.Service
 
                 csql = "select * from img where status = 'Y' ";
 
-                if (img_no.Trim().Length > 0)
+                if (img_no != "ALL" )
                 {
                     csql = csql + " and img_no in (";
                     for (int i = 0; i < cimg_no.Length; i++)
@@ -445,7 +445,7 @@ namespace OutWeb.Service
                     csql = csql + ") ";
                 }
 
-                if (img_no.Trim().Length > 0)
+                if (img_id.Trim().Length > 0)
                 {
                     csql = csql + " and id in (";
                     for (int i = 0; i < cimg_id.Length; i++)
@@ -474,29 +474,28 @@ namespace OutWeb.Service
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();
+
+                for (int i = 0; i < cimg_no.Length; i++)
+                {
+                    cmd.Parameters.AddWithValue("@str_img_no" + i.ToString(), cimg_no[i]);
+                }
+
                 if (img_sty.Trim().Length > 0)
                 {
                     cmd.Parameters.AddWithValue("@img_sty", img_sty);
                 }
 
-                if (img_sty.Trim().Length > 0)
+                if (img_kind.Trim().Length > 0)
                 {
-                    cmd.Parameters.AddWithValue("@img_kind", img_sty);
+                    cmd.Parameters.AddWithValue("@img_kind", img_kind);
                 }
 
-                if (img_no.Trim().Length > 0)
-                {
-                    for (int i = 0; i < cimg_no.Length; i++)
-                    {
-                        cmd.Parameters.AddWithValue("@str_img_no" + i.ToString(), cimg_no[i]);
-                    }
-                }
 
                 if (img_id.Trim().Length > 0)
                 {
                     for (int i = 0; i < cimg_id.Length; i++)
                     {
-                        cmd.Parameters.AddWithValue("@str_img_od" + i.ToString(), cimg_id[i]);
+                        cmd.Parameters.AddWithValue("@str_img_id" + i.ToString(), cimg_id[i]);
                     }
                 }
 

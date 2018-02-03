@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed">
     <link rel="stylesheet" href="~/Content/css/vendor/open-iconic.css">
     <link rel="stylesheet" href="~/Content/css/grid.css">
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <!--<script src="~/Scripts/jquery-1.10.2.min.js"></script>-->
 
     @if (ViewBag.IsFirstPage)
     {
@@ -25,6 +25,8 @@
     }
     @Scripts.Render("~/bundles/js")
 
+    @* 引用 jQuery *@
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
 
     @RenderSection("IncludeCSS", false)
 
@@ -131,9 +133,6 @@
             <small>本網站適用 Chrome, firefox, IE10.0+, 最佳瀏覽解析度為 1280*800 以上</small>
         </footer><!-- footer //-->
     }
-
-    @* 引用 jQuery *@
-    <script src="//code.jquery.com/jquery-latest.min.js"></script>
 
     @if (!ViewBag.IsFirstPage)
     {

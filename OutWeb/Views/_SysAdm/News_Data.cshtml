@@ -75,7 +75,7 @@
         //d_scenic_img_b = (DataTable)ViewData["d_scenic_img_b"];
         //d_scenic_img_s = (DataTable)ViewData["d_scenic_img_s"];
 
-        n_id = d_news.Rows[0]["n_id"].ToString();
+        n_id = d_news.Rows[0]["id"].ToString();
         n_title = d_news.Rows[0]["n_title"].ToString();
         n_desc = d_news.Rows[0]["n_desc"].ToString();
         n_memo = d_news.Rows[0]["n_memo"].ToString();
@@ -237,8 +237,8 @@
                 $.each($.parseJSON(data), function (idx, obj) {
                     i = i + 1;
                     c_html = c_html + "<li>";
-                    c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.img_id + "','" + c_sty + "');\" >&times;</button>";
-                    c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
+                    c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "');\" >&times;</button>";
+                    c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
                     c_html = c_html + "</li>";
                 });
 
@@ -258,6 +258,7 @@
 
     function upload(c_sty)
     {
+        
         if ($("#pic_" + c_sty).val().length > 0) {
             //ajaxFileUpload('pic_small','small_img');
             ajaxFileUpload(c_sty);
@@ -271,6 +272,8 @@
         var cimg_no = "";
         var c_img = "pic_" + c_sty;
         var c_cate = "News"
+        var cimg_sty = "";
+        var cimg_id = "";
 
         if ($("#n_id").val().length > 0) {
             cimg_no = $("#n_id").val();
@@ -278,6 +281,7 @@
             cimg_no = @img_no;
         }
 
+        //alert(c_img);
         var chtml = "";
         var i = 0;
         $.ajaxFileUpload
@@ -285,7 +289,7 @@
             {
                 url: 'Upload', //用于文件上传的服务器端请求地址
                 type: 'post',
-                data: { img_no: cimg_no, img_sta:c_sty,img_cate: c_cate}, //此参数非常严谨，写错一个引号都不行
+                data: { img_no: cimg_no, img_sta: c_sty, img_cate: c_cate }, //此参数非常严谨，写错一个引号都不行
                 secureuri: false, //一般设置为false
                 //fileElementId: 'file1', //文件上传空间的id属性  <input type="file" id="file" name="file" />
                 fileElementId: c_img, //文件上传空间的id属性  <input type="file" id="file" name="file" />
@@ -302,8 +306,8 @@
                     $.each($.parseJSON(data), function (idx, obj) {
                         i = i + 1;
                         c_html = c_html + "<li>";
-                        c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.img_id + "','" + c_sty + "');\" >&times;</button>";
-                        c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
+                        c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "');\" >&times;</button>";
+                        c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
                         c_html = c_html + "</li>";
                     });
 
@@ -321,6 +325,7 @@
 <form class="form-list" action="News_Save" name="form1" id="form1" method="post" enctype="multipart/form-data">
     <input type="hidden" name="action_sty" id="action_sty" value="@action_sty" />
     <input type="hidden" name="n_id" id="n_id" value="@n_id" />
+    <input type="hidden" name="img_no" id="img_no" value="@img_no" />
 
     <dl class="field">
         <dt class="col-1"><sup title="必填">*</sup> 語系</dt>
@@ -431,11 +436,11 @@
                 </button>
                 <br>
                 @* 照片縮圖(上傳圖片後顯示) *@
-                <ol class="upload-img list-inline" id="c_img_S" name="c_img_small">
+                <ol class="upload-img list-inline" id="c_img_S" name="c_img_S">
                     @for (int s = 0; s < d_img.Rows.Count; s++)
                     {
                         small_img = img_path + d_img.Rows[s]["img_file"].ToString();
-                        img_id = d_img.Rows[s]["img_id"].ToString();
+                        img_id = d_img.Rows[s]["id"].ToString();
                         <li>
                             <button class="close" id="btn_close_s_@s" name="btn_close_s_@s" onclick="del_img('@img_id','S');">&times;</button>
                             <img id="img_S_@s" name="img_S_@s" src="@small_img" alt="">
