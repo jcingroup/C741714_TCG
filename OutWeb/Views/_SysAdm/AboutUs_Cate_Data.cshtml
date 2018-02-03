@@ -1,23 +1,23 @@
 ﻿@using System.Data
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Crumb = "消息類別-管理";
-    ViewBag.subnav = "News";
-    ViewBag.subnav2 = "News_Cate";
+    ViewBag.Crumb = "關於我們_類別-管理";
+    ViewBag.subnav = "AboutUs";
+    ViewBag.subnav2 = "AboutUs_Cate";
 
     //變數設定
     string SysPath = "~/_SysAdm/";
-    string cFile = "News_Cate_Data";
-    string cFile_Add = "News_Cate_Add";
-    string cFile_Del = "News_Cate_Del";
-    string cFile_Edit = "News_Cate_Edit";
-    string cFile_Save = "News_Cate_Save";
-    string cFile_List = "News_Cate_List";
+    string cFile = "AboutUs_Cate_Data";
+    string cFile_Add = "AboutUs_Cate_Add";
+    string cFile_Del = "AboutUs_Cate_Del";
+    string cFile_Edit = "AboutUs_Cate_Edit";
+    string cFile_Save = "AboutUs_Cate_Save";
+    string cFile_List = "AboutUs_Cate_List";
 
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_img = (DataTable)ViewData["d_img"];
     DataTable d_lang = (DataTable)ViewData["d_lang"];
-    
+
     string cate_id = "";
     string cate_name = "";
     string cate_desc = "";

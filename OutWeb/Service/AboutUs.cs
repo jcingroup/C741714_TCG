@@ -8,29 +8,33 @@ using System.Web.Configuration;
 
 namespace OutWeb.Service
 {
-    public class News
+    //關於我們
+    public class AboutUs
     {
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
         string csql = "";
+        string cate_dbf_name = "ABOUTUS_CATE";
+        string dbf_name = "ABOUTUS";
+        string img_kind = "AboutUs";
 
         DataSet ds = new DataSet();
 
         //Log 記錄
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
-        #region 最新消息 News
+        #region 類別
 
-        #region 最新消息類別
-        #region 最新消息類別 News_Cate_List
-        public DataTable News_Cate_List(ref string err_msg, string cate_id = "", string sort = "", string status = "", string title_query = "",string lang_id = "")
+        #region 類別 Cate_List
+        public DataTable Cate_List(ref string err_msg, string cate_id = "", string sort = "", string status = "", string title_query = "", string lang_id = "")
         {
             DataTable dt = new DataTable();
             SqlConnection conn = new SqlConnection(conn_str);
             SqlCommand cmd = new SqlCommand();
-
+            
             string[] Array_cate_id;
             string[] Array_title_query;
 
+            
             try
             {
                 if (conn.State == ConnectionState.Closed)
@@ -51,7 +55,7 @@ namespace OutWeb.Service
                      + "  b1.ID, b1.CATE_NAME, b1.CATE_DESC "
                      + ", b1.SORT, b1.STATUS, b1.LANG_ID, b2.LANG_NAME "
                      + "from "
-                     + "   NEWS_CATE b1 "
+                     + "   " + cate_dbf_name + " b1 "
                      + "LEFT JOIN LANG b2 ON b1.LANG_ID = b2.LANG_ID "
                      + "where "
                      + "  b1.status <> 'D' ";
@@ -89,7 +93,7 @@ namespace OutWeb.Service
                     csql = csql + ") ";
                 }
 
-                if(lang_id.Trim().Length > 0)
+                if (lang_id.Trim().Length > 0)
                 {
                     csql = csql + " and b1.lang_id = @lang_id ";
                 }
@@ -135,17 +139,17 @@ namespace OutWeb.Service
                 }
                 //--------------------------------------------------------------//
 
-                if (ds.Tables["news_cate"] != null)
+                if (ds.Tables["cate"] != null)
                 {
-                    ds.Tables["news_cate"].Clear();
+                    ds.Tables["cate"].Clear();
                 }
 
-                SqlDataAdapter NEWS_cate_ada = new SqlDataAdapter();
-                NEWS_cate_ada.SelectCommand = cmd;
-                NEWS_cate_ada.Fill(ds, "news_cate");
-                NEWS_cate_ada = null;
+                SqlDataAdapter cate_ada = new SqlDataAdapter();
+                cate_ada.SelectCommand = cmd;
+                cate_ada.Fill(ds, "cate");
+                cate_ada = null;
 
-                dt = ds.Tables["news_cate"];
+                dt = ds.Tables["cate"];
             }
             catch (Exception ex)
             {
@@ -166,11 +170,11 @@ namespace OutWeb.Service
         }
         #endregion
 
-        #region 消息類別新增 News_Cate_Insert
-        public string News_Cate_Insert(string cate_name = "", string cate_desc = "", string is_show = "", string sort = "",string lang_id = "")
+        #region 類別新增 Cate_Insert
+        public string Cate_Insert(string cate_name = "", string cate_desc = "", string is_show = "", string sort = "", string lang_id = "")
         {
             string c_msg = "";
-
+            
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
             {
@@ -183,7 +187,7 @@ namespace OutWeb.Service
             try
             {
                 //========抓取sort==============================================================//
-                csql = "select (max(sort) + 1) as sort from News_Cate where lang_id = @lang_id";
+                csql = "select (max(sort) + 1) as sort from " + cate_dbf_name + " where lang_id = @lang_id";
                 cmd.CommandText = csql;
 
                 ////讓ADO.NET自行判斷型別轉換
@@ -209,7 +213,7 @@ namespace OutWeb.Service
                 }
                 //===============================================================================//
 
-                csql = @"insert into News_Cate(cate_name,cate_desc,sort,status,lang_id) "
+                csql = @"insert into " + cate_dbf_name + "(cate_name,cate_desc,sort,status,lang_id) "
                      + "values(@cate_name,@cate_desc,@sort,@is_show,@lang_id)";
 
                 cmd.CommandText = csql;
@@ -298,9 +302,9 @@ namespace OutWeb.Service
         }
         #endregion
 
-        #region 消息類別更新 News_Cate_Update
+        #region 類別更新 Cate_Update
         //更新內容
-        public string News_Cate_Update(string cate_id = "", string cate_name = "", string cate_desc = "", string is_show = "", string sort = "",string lang_id = "")
+        public string Cate_Update(string cate_id = "", string cate_name = "", string cate_desc = "", string is_show = "", string sort = "", string lang_id = "")
         {
             string c_msg = "";
             SqlConnection conn = new SqlConnection(conn_str);
@@ -315,7 +319,7 @@ namespace OutWeb.Service
             try
             {
                 csql = @"update "
-                     + "  News_Cate "
+                     + "  " + cate_dbf_name + " "
                      + "set "
                      + "  cate_name = @cate_name "
                      + ", cate_desc = @cate_desc "
@@ -359,8 +363,8 @@ namespace OutWeb.Service
         }
         #endregion
 
-        #region 消息類別刪除 News_Cate_Del
-        public string News_Cate_Del(string cate_id = "")
+        #region 類別刪除 Cate_Del
+        public string Cate_Del(string cate_id = "")
         {
             string c_msg = "";
 
@@ -379,7 +383,7 @@ namespace OutWeb.Service
                 csql = "delete from "
                      + "  IMG "
                      + "where "
-                     + "    img_item = 'NEWS' "
+                     + "    img_item = '" + img_kind + "' "
                      + "and img_no in ("
                      + "    select "
                      + "      Convert(nvarchar,a1.id) "
@@ -397,7 +401,7 @@ namespace OutWeb.Service
                 cmd.ExecuteNonQuery();
                 //刪除消息資料
                 csql = "delete from "
-                     + "  NEWS "
+                     + "  " + dbf_name + " "
                      + "where "
                      + "  cate_id = @cate_id ";
 
@@ -408,9 +412,9 @@ namespace OutWeb.Service
 
                 cmd.ExecuteNonQuery();
 
-                //刪除消息類別資料
+                //刪除類別資料
                 csql = @"delete from "
-                     + "  News_Cate "
+                     + "  " + cate_dbf_name + " "
                      + "where "
                      + "  id = @cate_id ";
 
@@ -439,10 +443,13 @@ namespace OutWeb.Service
             return c_msg;
         }
         #endregion
+
         #endregion
 
-        #region 消息資料抓取 News_List
-        public DataTable News_List(ref string err_msg, string news_id = "", string sort = "", string status = "", string title_query = "", string start_date = "", string end_date = "", string is_index = "",string cate_id = "",string lang_id = "")
+        #region 基本資料
+
+        #region 資料抓取 List
+        public DataTable List(ref string err_msg, string id = "", string sort = "", string status = "", string title_query = "", string cate_id = "", string lang_id = "")
         {
             DataTable dt = new DataTable();
 
@@ -455,14 +462,14 @@ namespace OutWeb.Service
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
 
-            string[] Array_news_id;
+            string[] Array_id;
             string[] Array_title_query;
             string[] Array_cate_id;
             string[] Array_lang_id;
 
             try
             {
-                Array_news_id = news_id.Split(',');
+                Array_id = id.Split(',');
                 Array_title_query = title_query.Split(',');
                 Array_lang_id = lang_id.Split(',');
                 Array_cate_id = cate_id.Split(',');
@@ -472,10 +479,10 @@ namespace OutWeb.Service
                      + "from "
                      + "("
                      + "select distinct "
-                     + "  a1.id, a1.n_title, convert(nvarchar(10),a1.n_date,23) as n_date, a1.n_url, a1.n_desc, a1.n_memo "
-                     + ", a1.is_index, a1.sort, a1.status,a1.lang_id,a2.lang_name,a1.cate_id, a3.cate_name "
+                     + "  a1.id, a1.c_title, a1.c_desc, a1.sort, a1.status "
+                     + ", a1.lang_id, a2.lang_name, a1.cate_id, a3.cate_name "
                      + "from "
-                     + "   news a1 "
+                     + "   " + dbf_name + " a1 "
                      + "LEFT JOIN LANG a2 ON a1.LANG_ID = a2.LANG_ID "
                      + "LEFT JOIN NEWS_CATE a3 ON a1.cate_id = a3.id "
                      + "where "
@@ -486,16 +493,16 @@ namespace OutWeb.Service
                     csql = csql + " and a1.status = @status ";
                 }
 
-                if (news_id.Trim().Length > 0)
+                if (id.Trim().Length > 0)
                 {
                     csql = csql + " and a1.id in (";
-                    for (int i = 0; i < Array_news_id.Length; i++)
+                    for (int i = 0; i < Array_id.Length; i++)
                     {
                         if (i > 0)
                         {
                             csql = csql + ",";
                         }
-                        csql = csql + "@str_news_id" + i.ToString();
+                        csql = csql + "@str_id" + i.ToString();
                     }
                     csql = csql + ") ";
                 }
@@ -509,28 +516,11 @@ namespace OutWeb.Service
                         {
                             csql = csql + " or ";
                         }
-                        csql = csql + " a1.n_title like @str_title_query" + i.ToString() + " ";
+                        csql = csql + " a1.c_title like @str_title_query" + i.ToString() + " ";
                     }
                     csql = csql + ") ";
                 }
-
-                if (start_date.Trim().Length > 0)
-                {
-
-                    csql = csql + "and a1.n_date >= @start_date ";
-                }
-
-                if (end_date.Trim().Length > 0)
-                {
-
-                    csql = csql + "and a1.n_date <= @end_date ";
-                }
-
-                if (is_index.Trim().Length > 0)
-                {
-                    csql = csql + "and a1.is_index = @is_index ";
-                }
-
+                
                 if (lang_id.Trim().Length > 0)
                 {
                     csql = csql + " and a1.lang_id in (";
@@ -567,7 +557,7 @@ namespace OutWeb.Service
                 }
                 else
                 {
-                    csql = csql + " order by a1.n_date desc ";
+                    csql = csql + " order by a1.cate_id, a1.sort desc ";
                 }
 
                 cmd.CommandText = csql;
@@ -579,21 +569,11 @@ namespace OutWeb.Service
                     cmd.Parameters.AddWithValue("@status", status);
                 }
 
-                if (start_date.Trim().Length > 0)
+                if (id.Trim().Length > 0)
                 {
-                    cmd.Parameters.AddWithValue("@start_date", start_date);
-                }
-
-                if (end_date.Trim().Length > 0)
-                {
-                    cmd.Parameters.AddWithValue("@end_date", end_date);
-                }
-
-                if (news_id.Trim().Length > 0)
-                {
-                    for (int i = 0; i < Array_news_id.Length; i++)
+                    for (int i = 0; i < Array_id.Length; i++)
                     {
-                        cmd.Parameters.AddWithValue("@str_news_id" + i.ToString(), Array_news_id[i]);
+                        cmd.Parameters.AddWithValue("@str_id" + i.ToString(), Array_id[i]);
                     }
                 }
 
@@ -603,11 +583,6 @@ namespace OutWeb.Service
                     {
                         cmd.Parameters.AddWithValue("@str_title_query" + i.ToString(), "%" + Array_title_query[i] + "%");
                     }
-                }
-
-                if (is_index.Trim().Length > 0)
-                {
-                    cmd.Parameters.AddWithValue("@is_index", is_index);
                 }
 
                 if (lang_id.Trim().Length > 0)
@@ -627,17 +602,17 @@ namespace OutWeb.Service
                 }
                 //--------------------------------------------------------------//
 
-                if (ds.Tables["news"] != null)
+                if (ds.Tables["list"] != null)
                 {
-                    ds.Tables["news"].Clear();
+                    ds.Tables["list"].Clear();
                 }
 
-                SqlDataAdapter news_ada = new SqlDataAdapter();
-                news_ada.SelectCommand = cmd;
-                news_ada.Fill(ds, "news");
-                news_ada = null;
+                SqlDataAdapter list_ada = new SqlDataAdapter();
+                list_ada.SelectCommand = cmd;
+                list_ada.Fill(ds, "list");
+                list_ada = null;
 
-                dt = ds.Tables["news"];
+                dt = ds.Tables["list"];
 
             }
             catch (Exception ex)
@@ -659,8 +634,8 @@ namespace OutWeb.Service
         }
         #endregion
 
-        #region 消息資料新增 News_Insert
-        public string News_Insert(string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "",string lang_id = "", string cate_id = "", string img_no = "")
+        #region 資料新增 Insert
+        public string Insert(string c_title = "", string c_desc = "", string is_show = "", string sort = "", string lang_id = "", string cate_id = "", string img_no = "")
         {
             string c_msg = "";
             string id = "";
@@ -676,7 +651,7 @@ namespace OutWeb.Service
             try
             {
                 //========抓取sort==============================================================//
-                csql = "select (max(sort) + 1) as sort from News";
+                csql = "select (max(sort) + 1) as sort from " + dbf_name;
                 cmd.CommandText = csql;
 
                 if (ds.Tables["chk_sort"] != null)
@@ -698,87 +673,80 @@ namespace OutWeb.Service
                 }
                 //===============================================================================//
 
-                csql = @"insert into News(n_title,n_date,n_desc,is_index,sort,status,n_memo,lang_id,cate_id) "
-                     + "values(@n_title,@n_date,@n_desc,@is_index,@sort,@is_show,@n_memo,@lang_id,@cate_id)";
+                csql = @"insert into " + dbf_name + "(c_title,c_desc,sort,status,lang_id,cate_id) "
+                     + "values(@c_title,@c_desc,@sort,@is_show,@lang_id,@cate_id)";
 
                 cmd.CommandText = csql;
 
                 ////讓ADO.NET自行判斷型別轉換
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@n_title", n_title);
-                cmd.Parameters.AddWithValue("@n_date", n_date);
-                cmd.Parameters.AddWithValue("@n_desc", n_desc);
-                cmd.Parameters.AddWithValue("@is_index", is_index);
+                cmd.Parameters.AddWithValue("@c_title", c_title);
+                cmd.Parameters.AddWithValue("@c_desc", c_desc);
                 cmd.Parameters.AddWithValue("@sort", sort);
                 cmd.Parameters.AddWithValue("@is_show", is_show);
-                cmd.Parameters.AddWithValue("@n_memo", n_memo);
                 cmd.Parameters.AddWithValue("@lang_id", lang_id);
                 cmd.Parameters.AddWithValue("@cate_id", cate_id);
 
                 cmd.ExecuteNonQuery();
 
-                //抓取序號
-                csql = "select "
-                     + "  * "
-                     + "from "
-                     + "  News "
-                     + "where "
-                     + "    n_title = @n_title "
-                     + "and n_date = @n_date "
-                     + "and n_desc = @n_desc "
-                     + "and is_index = @is_index "
-                     + "and sort = @sort "
-                     + "and status = @is_show "
-                     + "and n_memo = @n_memo "
-                     + "and lang_id = @lang_id "
-                     + "and cate_id = @cate_id ";
+                ////=============================================================================//
+                ////抓取序號
+                //csql = "select "
+                //     + "  * "
+                //     + "from "
+                //     + "  " + dbf_name + " "
+                //     + "where "
+                //     + "    c_title = @c_title "
+                //     + "and c_desc = @c_desc "
+                //     + "and sort = @sort "
+                //     + "and status = @is_show "
+                //     + "and lang_id = @lang_id "
+                //     + "and cate_id = @cate_id ";
 
-                cmd.CommandText = csql;
+                //cmd.CommandText = csql;
 
-                ////讓ADO.NET自行判斷型別轉換
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@n_title", n_title);
-                cmd.Parameters.AddWithValue("@n_date", n_date);
-                cmd.Parameters.AddWithValue("@n_desc", n_desc);
-                cmd.Parameters.AddWithValue("@is_index", is_index);
-                cmd.Parameters.AddWithValue("@sort", sort);
-                cmd.Parameters.AddWithValue("@is_show", is_show);
-                cmd.Parameters.AddWithValue("@n_memo", n_memo);
-                cmd.Parameters.AddWithValue("@lang_id", lang_id);
-                cmd.Parameters.AddWithValue("@cate_id", cate_id);
+                //////讓ADO.NET自行判斷型別轉換
+                //cmd.Parameters.Clear();
+                //cmd.Parameters.AddWithValue("@c_title", c_title);
+                //cmd.Parameters.AddWithValue("@c_desc", c_desc);
+                //cmd.Parameters.AddWithValue("@sort", sort);
+                //cmd.Parameters.AddWithValue("@is_show", is_show);
+                //cmd.Parameters.AddWithValue("@lang_id", lang_id);
+                //cmd.Parameters.AddWithValue("@cate_id", cate_id);
 
-                if (ds.Tables["chk_news"] != null)
-                {
-                    ds.Tables["chk_news"].Clear();
-                }
+                //if (ds.Tables["chk"] != null)
+                //{
+                //    ds.Tables["chk"].Clear();
+                //}
 
-                SqlDataAdapter chk_ada = new SqlDataAdapter();
-                chk_ada.SelectCommand = cmd;
-                chk_ada.Fill(ds, "chk_news");
-                chk_ada = null;
+                //SqlDataAdapter chk_ada = new SqlDataAdapter();
+                //chk_ada.SelectCommand = cmd;
+                //chk_ada.Fill(ds, "chk");
+                //chk_ada = null;
 
-                if (ds.Tables["chk_news"].Rows.Count > 0)
-                {
-                    id = ds.Tables["chk_news"].Rows[0]["id"].ToString();
-                    if(img_no.Trim().Length > 0)
-                    {
-                        csql = @"UPDATE "
-                             + " IMG "
-                             + "SET "
-                             + "  IMG_NO = @id "
-                             + "WHERE "
-                             + "    IMG_KIND = 'News' "
-                             + "AND IMG_NO = @img_no ";
-                        cmd.CommandText = csql;
+                //if (ds.Tables["chk"].Rows.Count > 0)
+                //{
+                //    id = ds.Tables["chk"].Rows[0]["id"].ToString();
+                //    if (img_no.Trim().Length > 0)
+                //    {
+                //        csql = @"UPDATE "
+                //             + " IMG "
+                //             + "SET "
+                //             + "  IMG_NO = @id "
+                //             + "WHERE "
+                //             + "    IMG_KIND = '" + img_kind + "' "
+                //             + "AND IMG_NO = @img_no ";
+                //        cmd.CommandText = csql;
 
-                        ////讓ADO.NET自行判斷型別轉換
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@img_no", img_no);
+                //        ////讓ADO.NET自行判斷型別轉換
+                //        cmd.Parameters.Clear();
+                //        cmd.Parameters.AddWithValue("@id", id);
+                //        cmd.Parameters.AddWithValue("@img_no", img_no);
 
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+                //        cmd.ExecuteNonQuery();
+                //    }
+                //}
+                ////===========================================================================//
 
             }
             catch (Exception ex)
@@ -800,9 +768,9 @@ namespace OutWeb.Service
         }
         #endregion
 
-        #region 消息資料更新 News_Update
+        #region 資料更新 Update
         //更新內容
-        public string News_Update(string n_id = "", string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "",string lang_id = "", string cate_id = "")
+        public string Update(string id = "", string c_title = "", string c_desc = "", string is_show = "", string sort = "", string lang_id = "", string cate_id = "")
         {
             string c_msg = "";
             SqlConnection conn = new SqlConnection(conn_str);
@@ -817,33 +785,27 @@ namespace OutWeb.Service
             try
             {
                 csql = @"update "
-                     + "  news "
+                     + "  " + dbf_name + " "
                      + "set "
-                     + "  n_title = @n_title "
-                     + ", n_date = @n_date "
-                     + ", n_desc = @n_desc "
+                     + "  c_title = @c_title "
+                     + ", c_desc = @c_desc "
                      + ", status = @is_show "
-                     + ", is_index = @is_index "
                      + ", sort = @sort "
-                     + ", n_memo = @n_memo "
                      + ", lang_id = @lang_id "
                      + ", cate_id = @cate_id "
                      + ", UPD_ID = 'System' "
                      + ", UPD_DT = getdate() "
                      + "where "
-                     + "  id = @n_id ";
+                     + "  id = @id ";
 
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@n_id", n_id);
-                cmd.Parameters.AddWithValue("@n_title", n_title);
-                cmd.Parameters.AddWithValue("@n_date", n_date);
-                cmd.Parameters.AddWithValue("@n_desc", n_desc);
-                cmd.Parameters.AddWithValue("@is_index", is_index);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@c_title", c_title);
+                cmd.Parameters.AddWithValue("@c_desc", c_desc);
                 cmd.Parameters.AddWithValue("@sort", sort);
                 cmd.Parameters.AddWithValue("@is_show", is_show);
-                cmd.Parameters.AddWithValue("@n_memo", n_memo);
                 cmd.Parameters.AddWithValue("@lang_id", lang_id);
                 cmd.Parameters.AddWithValue("@cate_id", cate_id);
 
@@ -869,8 +831,8 @@ namespace OutWeb.Service
         }
         #endregion
 
-        #region 消息資料刪除 News_Del
-        public string News_Del(string n_id = "")
+        #region 資料刪除 Del
+        public string Del(string id = "")
         {
             string c_msg = "";
 
@@ -885,27 +847,28 @@ namespace OutWeb.Service
 
             try
             {
-                //刪除圖片
-                csql = @"delete from IMG SET IMG_KIND='News' WHERE IMG_NO = @n_id ";
-                cmd.CommandText = csql;
+                ////======== 刪除圖片 ====================//
+                //csql = @"delete from IMG SET IMG_KIND='" + img_kind + "' WHERE IMG_NO = @id ";
+                //cmd.CommandText = csql;
 
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@n_id", n_id);
+                //cmd.Parameters.Clear();
+                //cmd.Parameters.AddWithValue("@id", id);
 
-                cmd.ExecuteNonQuery();
-
-                //刪除資料
+                //cmd.ExecuteNonQuery();
+                ////====================================//
+                //======== 刪除資料 ===================//
                 csql = @"delete from "
-                     + "  news "
+                     + "  " + dbf_name + " "
                      + "where "
-                     + "  id = @n_id ";
+                     + "  id = @id ";
 
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@n_id", n_id);
+                cmd.Parameters.AddWithValue("@id", id);
 
                 cmd.ExecuteNonQuery();
+                //===================================//
             }
             catch (Exception ex)
             {

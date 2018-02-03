@@ -85,16 +85,26 @@
 
                     <header class='collapse-toggle oi @(ViewBag.subnav == "AboutUs" ? "active" : "")' data-glyph="globe">什麼是台灣民政府</header>
                     <nav class='collapse-content @(ViewBag.subnav == "AboutUs" ? "in" : "")'>
-                        <a href="~/_SysAdm/AboutUs" class='@(ViewBag.subnav2 == "AboutUs" ? "active" : "")'>單一網頁內容編輯</a>
-                        <a href="~/_SysAdm/EduKindList" class='@(ViewBag.subnav2 == "EduKind" ? "active" : "")'>教育專欄 分類管理</a>
-                        <a href="~/_SysAdm/EduDataList" class='@(ViewBag.subnav2 == "EduData" ? "active" : "")'>教育專欄 文章管理</a>
+                        <a href="~/_SysAdm/AboutUs_Cate_List" class='@(ViewBag.subnav2 == "AboutUs_Cate" ? "active" : "")'>類別管理</a>
+                        <a href="~/_SysAdm/AboutUs_List" class='@(ViewBag.subnav2 == "AboutUs_List" ? "active" : "")'>內容管理</a>
+                    </nav>
+
+                    <header class='collapse-toggle oi @(ViewBag.subnav == "Edu" ? "active" : "")' data-glyph="globe">教育專欄</header>
+                    <nav class='collapse-content @(ViewBag.subnav == "Edu" ? "in" : "")'>
+                        <a href="~/_SysAdm/EduKindList" class='@(ViewBag.subnav2 == "EduKind" ? "active" : "")'>分類管理</a>
+                        <a href="~/_SysAdm/EduDataList" class='@(ViewBag.subnav2 == "EduData" ? "active" : "")'>文章管理</a>
                     </nav>
 
                     <header class='collapse-toggle oi @(ViewBag.subnav == "JoinUs" ? "active" : "")' data-glyph="person">加入台灣民政府</header>
                     <nav class='collapse-content @(ViewBag.subnav == "JoinUs" ? "in" : "")'>
-                        <a href="~/_SysAdm/JoinUs" class='@(ViewBag.subnav2 == "JoinUs" ? "active" : "")'>單一網頁內容編輯</a>
-                        <a href="~/_SysAdm/SchoolVideo" class='@(ViewBag.subnav2 == "SchoolVideo" ? "active" : "")'>法理學院 課堂直播</a>
-                        <a href="~/_SysAdm/SchoolDataList" class='@(ViewBag.subnav2 == "SchoolData" ? "active" : "")'>法理學院 歷屆合照</a>
+                        <a href="~/_SysAdm/JoinUs_Cate_List" class='@(ViewBag.subnav2 == "JoinUs_Cate" ? "active" : "")'>類別管理</a>
+                        <a href="~/_SysAdm/JoinUs_List" class='@(ViewBag.subnav2 == "JoinUs_List" ? "active" : "")'>內容管理</a>
+                    </nav>
+
+                    <header class='collapse-toggle oi @(ViewBag.subnav == "School" ? "active" : "")' data-glyph="person">法理學院</header>
+                    <nav class='collapse-content @(ViewBag.subnav == "School" ? "in" : "")'>
+                        <a href="~/_SysAdm/SchoolVideo" class='@(ViewBag.subnav2 == "SchoolVideo" ? "active" : "")'>課堂直播</a>
+                        <a href="~/_SysAdm/SchoolDataList" class='@(ViewBag.subnav2 == "SchoolData" ? "active" : "")'>歷屆合照</a>
                     </nav>
 
                     <header class='collapse-toggle oi @(ViewBag.subnav == "Event" ? "active" : "")' data-glyph="image">活動寫真</header>
