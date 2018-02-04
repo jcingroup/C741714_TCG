@@ -14,12 +14,9 @@
     DataTable d_lang = (DataTable)ViewData["d_lang"];
     DataTable d_cate = (DataTable)ViewData["d_cate"];
 
-    string n_id = "";
-    string n_title = "";
-    string n_desc = "";
-    string n_memo = "";
-    string n_date = "";
-    string n_url = "";
+    string id = "";
+    string c_title = "";
+    string c_desc = "";
     string sort = "";
     string action_sty = (string)ViewData["action_sty"];
     string action_name = "";
@@ -27,10 +24,6 @@
     string c_front_status = "";
     string c_front_status_Y = "";
     string c_front_status_N = "";
-    string is_index = "";
-    string c_index_status = "";
-    string c_index_status_Y = "";
-    string c_index_status_N = "";
 
     string img_no = "";
     string img_path = "../Images/";
@@ -49,12 +42,9 @@
     {
         action_name = "新增";
 
-        n_id = "";
-        n_title = "";
-        n_desc = "";
-        n_date = DateTime.Today.ToString("yyyy-MM-dd");
-        n_url = "";
-        n_memo = "";
+        id = "";
+        c_title = "";
+        c_desc = "";
         c_status = "N";
         c_front_status_N = "checked";
         c_front_status_Y = "";
@@ -177,10 +167,11 @@
         //  取得被選擇項目的值
         //$("#select").find(":selected").val();
         var c_lang = $("#lang_id").find(":selected").val();
+        var c_cate_kind = "AboutUs";
         //alert(c_lang);
         $.ajax({
-            url: 'News_Cate_Get',
-            data: { lang: c_lang }, //此参数非常严谨，写错一个引号都不行
+            url: 'Cate_Get',
+            data: { lang: c_lang, cate_kind: c_cate_kind }, //此参数非常严谨，写错一个引号都不行
             type: "POST",
             dataType: 'TEXT', //返回值类型 一般设置为json
             async: false,
@@ -211,13 +202,13 @@
         });
         return false;
     }
-
+ @*
     function del_img(img_id,c_sty)
     {
         var cimg_no = "";
-        var c_cate = "News"
-        if ($("#n_id").val().length > 0) {
-            cimg_no = $("#n_id").val();
+        var c_cate = "AboutUs"
+        if ($("#id").val().length > 0) {
+            cimg_no = $("#id").val();
         }else {
             cimg_no = @img_no;
         }
@@ -271,12 +262,12 @@
     function ajaxFileUpload(c_sty) {
         var cimg_no = "";
         var c_img = "pic_" + c_sty;
-        var c_cate = "News"
+        var c_cate = "AboutUs"
         var cimg_sty = "";
         var cimg_id = "";
 
-        if ($("#n_id").val().length > 0) {
-            cimg_no = $("#n_id").val();
+        if ($("#id").val().length > 0) {
+            cimg_no = $("#id").val();
         }else {
             cimg_no = @img_no;
         }
@@ -321,10 +312,11 @@
         )
         return false;
     }
+  *@
 </script>
 <form class="form-list" action="News_Save" name="form1" id="form1" method="post" enctype="multipart/form-data">
     <input type="hidden" name="action_sty" id="action_sty" value="@action_sty" />
-    <input type="hidden" name="n_id" id="n_id" value="@n_id" />
+    <input type="hidden" name="id" id="id" value="@id" />
     <input type="hidden" name="img_no" id="img_no" value="@img_no" />
 
     <dl class="field">

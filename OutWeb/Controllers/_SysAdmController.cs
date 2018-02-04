@@ -1021,14 +1021,28 @@ namespace OutWeb.Controllers
 
         #region ajax_get
 
-        #region 消息類別 News_Cate_get
-        public ActionResult News_Cate_Get(string lang)
+        #region 類別 Cate_get
+        public ActionResult Cate_Get(string lang, string cate_kind)
         {
             string str_return = "";
             string err_msg = "";
             DataTable dt;
-            dt = CNews.News_Cate_List(ref err_msg, "", "sort", "Y", "", lang);
-            str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+            switch (cate_kind)
+            {
+                case "News":
+                    dt = CNews.News_Cate_List(ref err_msg, "", "sort", "Y", "", lang);
+                    str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+                    break;
+                case "AboutUs":
+                    dt = CAboutUs.Cate_List(ref err_msg, "", "sort", "Y", "", lang);
+                    str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+                    break;
+                case "JoinUs":
+                    dt = CAboutUs.Cate_List(ref err_msg, "", "sort", "Y", "", lang);
+                    str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+                    break;
+            }
+            
 
             return Content(str_return);
         }

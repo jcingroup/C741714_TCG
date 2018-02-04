@@ -169,10 +169,11 @@
         //  取得被選擇項目的值
         //$("#select").find(":selected").val();
         var c_lang = $("#txt_lang").find(":selected").val();
+        var c_cate_kind = "News";
         //alert(c_lang);
         $.ajax({
-            url: 'News_Cate_Get',
-            data: { lang: c_lang }, //此参数非常严谨，写错一个引号都不行
+            url: 'Cate_Get',
+            data: { lang: c_lang, cate_kind: c_cate_kind }, //此参数非常严谨，写错一个引号都不行
             type: "POST",
             dataType: 'TEXT', //返回值类型 一般设置为json
             async: false,
