@@ -753,7 +753,6 @@
     <Content Include="Views\_SysAdm\NewsEdit.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
-    <Content Include="Views\_SysAdm\AboutUs.cshtml" />
     <Content Include="Views\_SysAdm\EduDataAdd.cshtml" />
     <Content Include="Views\_SysAdm\EduDataEdit.cshtml" />
     <Content Include="Views\_SysAdm\EduDataList.cshtml" />
@@ -768,7 +767,6 @@
     <Content Include="Views\_SysAdm\FocusDataEdit.cshtml" />
     <Content Include="Views\_SysAdm\FocusDataList.cshtml" />
     <Content Include="Views\_SysAdm\FocusKindList.cshtml" />
-    <Content Include="Views\_SysAdm\JoinUs.cshtml" />
     <Content Include="Views\_SysAdm\SchoolDataAdd.cshtml" />
     <Content Include="Views\_SysAdm\SchoolDataEdit.cshtml" />
     <Content Include="Views\_SysAdm\SchoolDataList.cshtml" />
@@ -804,6 +802,10 @@
     <Content Include="Views\_SysAdm\AboutUs_Cate_Data.cshtml" />
     <Content Include="Views\_SysAdm\AboutUs_List.cshtml" />
     <Content Include="Views\_SysAdm\AboutUs_Data.cshtml" />
+    <Content Include="Views\_SysAdm\JoinUs_Cate_List.cshtml" />
+    <Content Include="Views\_SysAdm\JoinUs_Cate_Data.cshtml" />
+    <Content Include="Views\_SysAdm\JoinUs_List.cshtml" />
+    <Content Include="Views\_SysAdm\JoinUs_Data.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

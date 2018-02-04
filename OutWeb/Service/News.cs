@@ -676,8 +676,20 @@ namespace OutWeb.Service
             try
             {
                 //========抓取sort==============================================================//
-                csql = "select (max(sort) + 1) as sort from News";
+                csql = "select "
+                     + "   (max(sort) + 1) as sort "
+                     + "from "
+                     + "   News "
+                     + "where "
+                     + "    cate_id = @cate_id "
+                     + "and lang_id = @lang_id ";
+
                 cmd.CommandText = csql;
+
+                ////讓ADO.NET自行判斷型別轉換
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@cate_id", cate_id);
+                cmd.Parameters.AddWithValue("@lang_id", lang_id);
 
                 if (ds.Tables["chk_sort"] != null)
                 {
