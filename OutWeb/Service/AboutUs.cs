@@ -484,7 +484,7 @@ namespace OutWeb.Service
                      + "from "
                      + "   " + dbf_name + " a1 "
                      + "LEFT JOIN LANG a2 ON a1.LANG_ID = a2.LANG_ID "
-                     + "LEFT JOIN NEWS_CATE a3 ON a1.cate_id = a3.id "
+                     + "LEFT JOIN " + cate_dbf_name + " a3 ON a1.cate_id = a3.id "
                      + "where "
                      + "  a1.status <> 'D' ";
 
