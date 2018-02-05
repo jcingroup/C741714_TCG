@@ -218,6 +218,7 @@
     <Compile Include="Repositories\PublicMethodRepository.cs" />
     <Compile Include="Service\AboutUs.cs" />
     <Compile Include="Service\DBService.cs" />
+    <Compile Include="Service\Edu.cs" />
     <Compile Include="Service\JoinUs.cs" />
     <Compile Include="Service\Language.cs" />
     <Compile Include="Service\ListFactoryService.cs" />
@@ -806,6 +807,10 @@
     <Content Include="Views\_SysAdm\JoinUs_Cate_Data.cshtml" />
     <Content Include="Views\_SysAdm\JoinUs_List.cshtml" />
     <Content Include="Views\_SysAdm\JoinUs_Data.cshtml" />
+    <Content Include="Views\_SysAdm\Edu_Cate_List.cshtml" />
+    <Content Include="Views\_SysAdm\Edu_Cate_Data.cshtml" />
+    <Content Include="Views\_SysAdm\Edu_Data.cshtml" />
+    <Content Include="Views\_SysAdm\Edu_List.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
