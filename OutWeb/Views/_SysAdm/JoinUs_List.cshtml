@@ -1,7 +1,7 @@
 ﻿@using System.Data
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Crumb = "內容管理";
+    ViewBag.Crumb = "加入台灣民政府 分頁管理";
     ViewBag.subnav = "JoinUs";
     ViewBag.subnav2 = "JoinUs_List";
 
@@ -225,7 +225,7 @@
         </select>
 
 
-        <label>分類</label>
+        <label>所屬主頁</label>
         <select class="form-element" id="txt_cate" name="txt_cate">
             <option value="">全部</option>
             @if (d_cate.Rows.Count > 0)
@@ -272,9 +272,9 @@
             <th class="item-edit">編輯</th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                <button class="text-xs-center th-sort-toggle @class_cate" name="btn_cate" id="btn_cate" onclick="sort('cate_id');">分類</button>
+                <button class="text-xs-center th-sort-toggle @class_cate" name="btn_cate" id="btn_cate" onclick="sort('cate_id');">所屬主頁</button>
             </th>
-            <th class="text-left">標題</th>
+            <th class="text-left">分頁標題</th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="text-xs-center th-sort-toggle @class_lang" name="btn_lang" id="btn_lang" onclick="sort('lang_id');">語系</button>

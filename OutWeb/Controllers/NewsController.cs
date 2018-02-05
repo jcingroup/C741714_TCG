@@ -27,14 +27,8 @@ namespace OutWeb.Controllers
         {
             return View();
         }
-
-        // 最新訊息 - 活動寫真 - 歷史活動列表
-        public ActionResult EventHistoryList()
-        {
-            return View();
-        }
-        // 最新訊息 - 活動寫真 - 歷史活動內容
-        public ActionResult EventHistoryContent()
+        // 最新訊息 - 活動寫真 - 最新活動內容
+        public ActionResult EventLatestContent()
         {
             return View();
         }

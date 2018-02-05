@@ -1,7 +1,7 @@
 ﻿@using System.Data
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Crumb = "內容管理";
+    ViewBag.Crumb = "加入台灣民政府 分頁管理";
     ViewBag.subnav = "JoinUs";
     ViewBag.subnav2 = "JoinUs_List";
 
@@ -210,7 +210,7 @@
     </dl>
 
     <dl class="field">
-        <dt class="col-1"><sup title="必填">*</sup> 分類</dt>
+        <dt class="col-1"><sup title="必填">*</sup> 所屬主頁</dt>
         <dd class="col-6">
             <select id="cate_id" name="cate_id" class="form-element" required>
                 @if (d_cate.Rows.Count > 0)
@@ -232,7 +232,7 @@
         </dd>
     </dl>
     <dl class="field">
-        <dt class="col-1"><sup title="必填">*</sup> 標題</dt>
+        <dt class="col-1"><sup title="必填">*</sup> 分頁標題</dt>
         <dd class="col-6">
             <input type="text" class="form-element" required id="c_title" name="c_title" value="@c_title">
         </dd>

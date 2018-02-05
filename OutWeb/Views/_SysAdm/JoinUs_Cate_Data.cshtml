@@ -1,7 +1,7 @@
 ﻿@using System.Data
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Crumb = "加入我們_類別-管理";
+    ViewBag.Crumb = "加入台灣民政府 主頁管理";
     ViewBag.subnav = "JoinUs";
     ViewBag.subnav2 = "JoinUs_Cate";
 
@@ -140,13 +140,13 @@
     }
 
     <dl class="field">
-        <dt class="col-1">*類別名稱</dt>
+        <dt class="col-1"><sup title="必填">*</sup> 主頁名稱</dt>
         <dd class="col-6">
             <input type="text" class="form-control form-control-sm" required id="cate_name" name="cate_name" value="@cate_name">
         </dd>
     </dl>
     <dl class="field">
-        <dt class="col-1">類別描述</dt>
+        <dt class="col-1">主頁描述</dt>
         <dd class="col-6">
             <input type="text" class="form-control form-control-sm" required id="cate_desc" name="cate_desc" value="@cate_desc">
         </dd>

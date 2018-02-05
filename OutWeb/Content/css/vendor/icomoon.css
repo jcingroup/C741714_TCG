@@ -24,6 +24,87 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-magnifying-glass:before {
+  content: "\e909";
+}
+.icon-search:before {
+  content: "\e909";
+}
+.icon-glass:before {
+  content: "\e909";
+}
+.icon-magnifier:before {
+  content: "\e909";
+}
+.icon-lookup:before {
+  content: "\e909";
+}
+.icon-paperplane:before {
+  content: "\e90a";
+}
+.icon-send:before {
+  content: "\e90a";
+}
+.icon-flight:before {
+  content: "\e90a";
+}
+.icon-email:before {
+  content: "\e90a";
+}
+.icon-camera:before {
+  content: "\e90b";
+}
+.icon-photo:before {
+  content: "\e90b";
+}
+.icon-picture:before {
+  content: "\e90b";
+}
+.icon-image:before {
+  content: "\e90b";
+}
+.icon-bullhorn:before {
+  content: "\e90c";
+}
+.icon-megaphone:before {
+  content: "\e90c";
+}
+.icon-announcement:before {
+  content: "\e90c";
+}
+.icon-advertisement:before {
+  content: "\e90c";
+}
+.icon-news:before {
+  content: "\e90c";
+}
+.icon-phone:before {
+  content: "\e90d";
+}
+.icon-contact:before {
+  content: "\e90d";
+}
+.icon-drivers-license-o:before {
+  content: "\e90e";
+}
+.icon-id-card-o:before {
+  content: "\e90e";
+}
+.icon-sitemap:before {
+  content: "\e90f";
+}
+.icon-graduation-cap:before {
+  content: "\e910";
+}
+.icon-mortar-board:before {
+  content: "\e910";
+}
+.icon-people:before {
+  content: "\e911";
+}
+.icon-taiwan:before {
+  content: "\e912";
+}
 .icon-state-hsinchu:before {
   content: "\e903";
 }
@@ -48,6 +129,6 @@
 .icon-join-us:before {
   content: "\e901";
 }
-.icon-news:before {
+.icon-news2:before {
   content: "\e902";
 }
