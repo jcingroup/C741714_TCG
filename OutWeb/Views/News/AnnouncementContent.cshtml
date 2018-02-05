@@ -6,7 +6,7 @@
 @section breadcrumb {
     <li><a href="~/News">最新訊息 活動公告</a></li>
     <li><a href="~/News/AnnouncementLatest">新聞 公告 聲明</a></li>
-    <li>@ViewBag.Title</li>
+    <li>中央聲明</li> @* 分類名稱 *@
 }
 
 @section css {
@@ -63,10 +63,11 @@
 <h1 class="sr-only">中央新聞</h1>
 
 <p class="back">
-    <a href="~/News/EventHistoryList"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+    <a href="~/News/AnnouncementList"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
 </p>
 
 <h2 class="title">
+    <span class="label label-danger">中央聲明</span> @* 分類名稱 *@
     <small class="date">2018-01-20</small>
     @ViewBag.Title
 </h2>
@@ -111,7 +112,7 @@
 
     <li class="prev">
         @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
-        <a href="~/News/EventHistoryContent">
+        <a href="~/News/AnnouncementContent">
             <i class="oi" data-glyph="chevron-left"></i>
             上一篇
         </a>
@@ -119,7 +120,7 @@
 
     <li class="next">
         @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
-        <a href="~/News/EventHistoryContent">
+        <a href="~/News/AnnouncementContent">
             下一篇
             <i class="oi" data-glyph="chevron-right"></i>
         </a>

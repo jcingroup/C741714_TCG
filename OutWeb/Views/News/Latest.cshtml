@@ -28,80 +28,95 @@
     </script>
 }
 
-<h1 class="sr-only">@ViewBag.Title</h1>
+<h1 class="title">@ViewBag.Title</h1>
 
-<!-- Slider main container -->
-<div class="featured swiper-container">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-        <!-- Slides -->
-        <div class="swiper-slide">
-            <article class="article">
-                <div class="row">
-                    <div class="col-xs-5">
-                        <a href="~/News/FocusContent" class="thumbnail">
-                            @* 沒有圖檔的替代圖 *@
-                            <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-7">
-                        @*
-                        活動寫真    class + label-warning
-                        <span class="label label-warning">歷史活動</span>
-                        新聞公告聲明 class + label-danger
-                        <span class="label label-danger">中央新聞</span>
-                        焦點專欄    class + label-info
-                        *@
-                        <span class="label label-info">焦點專欄</span>
-                        <small class="date">2018-01-20</small>
-                        <h3><a href="~/News/FocusContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
-                        @* 摘要 取前 255 個字，有資料的話才顯示 *@
-                        <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
-                        <a href="~/News/FocusContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
-                    </div>
-                </div>
-            </article>
+@* 每頁10筆資料 *@
+<div class="articles">
+
+    <article class="article">
+        <div class="row">
+            <div class="col-xs-3">
+                <a href="~/News/EventLatestContent" class="thumbnail">
+                    @* 沒有圖檔的替代圖 *@
+                    <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
+                </a>
+            </div>
+            <div class="col-xs-9">
+                @*
+                活動寫真     class + label-warning
+                新聞公告聲明 class + label-danger
+                焦點專欄     class + label-info
+                *@
+                <span class="label label-warning">最新活動</span>
+                <small class="date">2018-01-20</small>
+                <h3><a href="~/News/EventLatestContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
+                @* 摘要 取前 145 個字，有資料的話才顯示 *@
+                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
+                <a href="~/News/EventLatestContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
+            </div>
         </div>
-        <div class="swiper-slide">
-            <article class="article">
-                <div class="row">
-                    <div class="col-xs-5">
-                        <a href="~/News/EventHistoryContent" class="thumbnail">
-                            <img src="http://api.ning.com/files/ymSmd4em4y3tD9NclSe*1XQevDWPd-1a*I2DF5kGhLCF11rLpSuIOsB0zctgpvX4sGlyJCd0EZjvBifYYqTbHFVodRmJ9iZe/2018118026.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-7">
-                        <span class="label label-warning">歷史活動</span>
-                        <small class="date">2018-01-20</small>
-                        <h3><a href="~/News/EventHistoryContent">Slide 2</a></h3>
-                        @* 摘要 取前 255 個字，有資料的話才顯示 *@
-                        <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
-                        <a href="~/News/EventHistoryContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
-                    </div>
-                </div>
-            </article>
+    </article>
+
+    <article class="article">
+        <div class="row">
+            <div class="col-xs-3">
+                <a href="~/News/AnnouncementContent" class="thumbnail">
+                    <img src="http://api.ning.com/files/ymSmd4em4y3tD9NclSe*1XQevDWPd-1a*I2DF5kGhLCF11rLpSuIOsB0zctgpvX4sGlyJCd0EZjvBifYYqTbHFVodRmJ9iZe/2018118026.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-xs-9">
+                <span class="label label-danger">中央新聞</span>
+                <small class="date">2018-01-20</small>
+                <h3><a href="~/News/AnnouncementContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
+                @* 摘要 取前 145 個字，有資料的話才顯示 *@
+                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
+                <a href="~/News/AnnouncementyContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
+            </div>
         </div>
-        <div class="swiper-slide">
-            <article class="article">
-                <div class="row">
-                    <div class="col-xs-5">
-                        <a href="~/News/AnnouncementContent" class="thumbnail">
-                            <img src="http://api.ning.com/files/ymSmd4em4y3tD9NclSe*1XQevDWPd-1a*I2DF5kGhLCF11rLpSuIOsB0zctgpvX4sGlyJCd0EZjvBifYYqTbHFVodRmJ9iZe/2018118026.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-7">
-                        <span class="label label-danger">中央新聞</span>
-                        <small class="date">2018-01-20</small>
-                        <h3><a href="~/News/AnnouncementContent">Slide 3</a></h3>
-                        @* 摘要 取前 255 個字，有資料的話才顯示 *@
-                        <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
-                        <a href="~/News/AnnouncementContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
-                    </div>
-                </div>
-            </article>
+    </article>
+
+    <article class="article">
+        <div class="row">
+            <div class="col-xs-3">
+                <a href="~/News/FocusContent" class="thumbnail">
+                    <img src="http://api.ning.com/files/ymSmd4em4y3tD9NclSe*1XQevDWPd-1a*I2DF5kGhLCF11rLpSuIOsB0zctgpvX4sGlyJCd0EZjvBifYYqTbHFVodRmJ9iZe/2018118026.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-xs-9">
+                <span class="label label-info">焦點專欄</span>
+                <small class="date">2018-01-20</small>
+                <h3><a href="~/News/FocusContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
+                @* 摘要 取前 145 個字，有資料的話才顯示 *@
+                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
+                <a href="~/News/FocusContent" class="more"> Read More <i class="oi" data-glyph="caret-right"></i></a>
+            </div>
         </div>
-    </div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+    </article>
+
 </div>
+
+<ul class="pager list-inline text-center">
+    <li class="prev">
+        @* 有資料的話才顯示 *@
+        <a href="#">
+            <i class="oi" data-glyph="chevron-left"></i>
+            上一頁
+        </a>
+    </li>
+    <li>
+        <form action="" class="form-inline">
+            第
+            <select name="" id="" class="form-element">
+                <option value="1">1</option>
+            </select>
+            頁
+        </form>
+    </li>
+    <li class="next">
+        @* 有資料的話才顯示 *@
+        <a href="#">
+            下一頁
+            <i class="oi" data-glyph="chevron-right"></i>
+        </a>
+    </li>
+</ul>
