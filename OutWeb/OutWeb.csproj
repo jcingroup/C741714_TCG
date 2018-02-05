@@ -735,7 +735,6 @@
     <Content Include="Views\JoinUs\Gallery.cshtml" />
     <Content Include="Views\JoinUs\Live.cshtml" />
     <Content Include="Views\JoinUs\Schedule.cshtml" />
-    <Content Include="Views\Shared\page.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -799,7 +798,6 @@
     <Content Include="Views\News\FocusContent.cshtml" />
     <Content Include="Views\News\FocusList.cshtml" />
     <Content Include="Views\News\Latest.cshtml" />
-    <Content Include="Views\Shared\EventHistoryContent.cshtml" />
     <Content Include="Views\_SysAdm\AboutUs_Cate_List.cshtml" />
     <Content Include="Views\_SysAdm\AboutUs_Cate_Data.cshtml" />
     <Content Include="Views\_SysAdm\AboutUs_List.cshtml" />

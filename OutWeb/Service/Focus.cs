@@ -677,7 +677,7 @@ namespace OutWeb.Service
             DateTime cdate;
 
             //cdate = DateTime.ParseExact(c_date, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces);
-            cdate = Convert.ToDateTime(c_date);
+            //cdate = Convert.ToDateTime(c_date);
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
             {
@@ -732,7 +732,7 @@ namespace OutWeb.Service
                 ////讓ADO.NET自行判斷型別轉換
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@c_title", c_title);
-                cmd.Parameters.AddWithValue("@c_date", cdate);
+                cmd.Parameters.AddWithValue("@c_date", c_date);
                 cmd.Parameters.AddWithValue("@c_desc", c_desc);
                 cmd.Parameters.AddWithValue("@sort", sort);
                 cmd.Parameters.AddWithValue("@is_index", is_index);
@@ -754,15 +754,19 @@ namespace OutWeb.Service
                      + "and sort = @sort "
                      + "and status = @is_show "
                      + "and lang_id = @lang_id "
-                     + "and cate_id = @cate_id ";
+                     + "and cate_id = @cate_id "
+                     + "and c_date = @c_date "
+                     + "and is_index = @is_index ";
 
                 cmd.CommandText = csql;
 
                 ////讓ADO.NET自行判斷型別轉換
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@c_title", c_title);
+                cmd.Parameters.AddWithValue("@c_date", c_date);
                 cmd.Parameters.AddWithValue("@c_desc", c_desc);
                 cmd.Parameters.AddWithValue("@sort", sort);
+                cmd.Parameters.AddWithValue("@is_index", is_index);
                 cmd.Parameters.AddWithValue("@is_show", is_show);
                 cmd.Parameters.AddWithValue("@lang_id", lang_id);
                 cmd.Parameters.AddWithValue("@cate_id", cate_id);
