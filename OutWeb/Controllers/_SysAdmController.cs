@@ -24,6 +24,7 @@ namespace OutWeb.Controllers
         AboutUs CAboutUs = new AboutUs();
         JoinUs CJoinUs = new JoinUs();
         Edu CEdu = new Edu();
+        Focus CFocus = new Focus();
         //=== 變數設定  =========================================//
         String Img_Path = "~/Images";
         //=== Log 記錄 =========================================//
@@ -1101,30 +1102,234 @@ namespace OutWeb.Controllers
 
         #endregion 教育專欄 Edu
 
+        #region 焦點專欄 Focus
 
-        #region 教育專欄 分類
-        public ActionResult EduKindList()
+        #region 焦點專欄_類別
+
+        #region 焦點專欄_類別_陳列 Focus_Cate_List
+        public ActionResult Focus_Cate_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_lang = "")
         {
+            //定義變數
+            string c_sort = "";
+            string err_msg = "";
+            DataTable dt;
+            DataTable d_lang;
+
+            //排序設定
+            if (txt_sort.Trim().Length > 0)
+            {
+                c_sort = c_sort + "a1." + txt_sort;
+            }
+            if (txt_a_d.Trim().Length > 0)
+            {
+                c_sort = c_sort + " " + txt_a_d;
+            }
+
+            //抓取類別資料
+            dt = CFocus.Cate_List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_lang);
+
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            //設定傳值
+            ViewData["page"] = page;
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["txt_title_query"] = txt_title_query;
+            ViewData["txt_sort"] = txt_sort;
+            ViewData["txt_a_d"] = txt_a_d;
+            ViewData["txt_lang"] = txt_lang;
+
             return View();
         }
-        #endregion 教育專欄 分類
+        #endregion
 
-
-        #region 教育專欄
-        public ActionResult EduDataList()
+        #region 焦點專欄_類別_新增 Focus_Cate_Add
+        public ActionResult Focus_Cate_Add()
         {
+            string err_msg = "";
+            ViewData["action_sty"] = "add";
+            DataTable d_lang;
+            d_lang = Clang.Lang_List(ref err_msg, "");
+
+            ViewData["d_lang"] = d_lang;
+            return View("Focus_Cate_Data");
+        }
+        #endregion
+
+        #region 焦點專欄_類別_修改 Focus_Cate_Edit
+        public ActionResult Focus_Cate_Edit(string cate_id = "")
+        {
+            string err_msg = "";
+            DataTable dt;
+            DataTable d_lang;
+            dt = CFocus.Cate_List(ref err_msg, cate_id);
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["action_sty"] = "edit";
+
+            return View("Focus_Cate_Data");
+        }
+        #endregion
+
+        #region 焦點專欄_類別_刪除 Focus_Cate_Del
+        public ActionResult Focus_Cate_Del(string cate_id = "")
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            CJoinUs.Cate_Del(cate_id);
+            return RedirectToAction("Focus_Cate_List");
+        }
+        #endregion
+
+        #region 焦點專欄_類別_儲存 Focus_Cate_Save
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Focus_Cate_Save(string action_sty, string cate_id, string cate_name, string cate_desc, string show, string sort, string lang_id)
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+
+            switch (action_sty)
+            {
+                case "add":
+                    CFocus.Cate_Insert(cate_name, cate_desc, show, sort, lang_id);
+                    break;
+                case "edit":
+                    CFocus.Cate_Update(cate_id, cate_name, cate_desc, show, sort, lang_id);
+                    break;
+            }
+
+            return RedirectToAction("Focus_Cate_List");
+        }
+
+        #endregion
+
+        #endregion
+
+        #region 焦點專欄_基本資料
+
+        #region 焦點專欄_陳列 Focus_List
+        public ActionResult Focus_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_index = "", string txt_lang = "", string txt_cate = "")
+        {
+            //定義變數
+            string c_sort = "";
+            DataTable dt;
+            DataTable d_lang;
+            DataTable d_cate;
+            string err_msg = "";
+
+            //排序設定
+            if (txt_sort.Trim().Length > 0)
+            {
+                c_sort = c_sort + "a1." + txt_sort;
+            }
+            if (txt_a_d.Trim().Length > 0)
+            {
+                c_sort = c_sort + " " + txt_a_d;
+            }
+
+            //抓取資料
+            dt = CFocus.List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_start_date, txt_end_date, txt_index, txt_cate, txt_lang);
+            //語系
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            //類別
+            d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", txt_lang);
+            //設定傳值
+            ViewData["page"] = page;
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["txt_title_query"] = txt_title_query;
+            ViewData["txt_sort"] = txt_sort;
+            ViewData["txt_a_d"] = txt_a_d;
+            ViewData["txt_lang"] = txt_lang;
+            ViewData["txt_cate"] = txt_cate;
+            ViewData["txt_index"] = txt_index;
+
             return View();
         }
-        public ActionResult EduDataAdd()
-        {
-            return View();
-        }
-        public ActionResult EduDataEdit()
-        {
-            return View();
-        }
-        #endregion 教育專欄
+        #endregion
 
+        #region 焦點專欄_新增 Focus_Add
+        public ActionResult Focus_Add()
+        {
+            //定義變數
+            string err_msg = "";
+            DataTable d_cate;
+            DataTable d_lang;
+            DataTable d_img;
+            //抓取消息類別資料
+
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
+            d_img = DB.Img_List(ref err_msg, "", "", "Focus");
+            //設定傳值
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["d_img"] = d_img;
+            ViewData["action_sty"] = "add";
+
+            return View("Focus_Data");
+        }
+        #endregion
+
+        #region 焦點專欄_修改 Focus_Edit
+        public ActionResult Focus_Edit(string id = "")
+        {
+            string err_msg = "";
+
+            DataTable d_cate;
+            DataTable d_lang;
+            DataTable dt;
+            DataTable d_img;
+            //抓取類別資料
+            dt = CFocus.List(ref err_msg, id);
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
+            d_img = DB.Img_List(ref err_msg, id, "", "Focus");
+            //設定傳值
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["d_img"] = d_img;
+            ViewData["action_sty"] = "edit";
+
+            return View("Focus_Data");
+        }
+        #endregion
+
+        #region 焦點專欄_刪除 Focus_Del
+        public ActionResult Focus_Del(string id = "")
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            CEdu.Del(id);
+            return RedirectToAction("Focus_List");
+        }
+        #endregion
+
+        #region 焦點專欄_儲存 Focus_Save
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Focus_Save(string action_sty, string id, string c_title, string c_date, string c_desc, string show,string hot, string sort, string lang_id, string cate_id, string img_no)
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            switch (action_sty)
+            {
+                case "add":
+                    CFocus.Insert(c_title, c_date, c_desc, show, hot, sort, lang_id, cate_id, img_no);
+                    break;
+                case "edit":
+                    CFocus.Update(id, c_title, c_date, c_desc, show, hot, sort, lang_id, cate_id);
+                    break;
+            }
+
+            return RedirectToAction("Focus_List");
+        }
+
+        #endregion
+
+        #endregion 焦點專欄_基本資料
+
+        #endregion 焦點專欄 Focus
+        
 
         #region 法理學院 影片管理
         public ActionResult SchoolVideo()
@@ -1492,6 +1697,10 @@ namespace OutWeb.Controllers
                     break;
                 case "Edu":
                     dt = CEdu.Cate_List(ref err_msg, "", "sort", "Y", "", lang);
+                    str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+                    break;
+                case "Focus":
+                    dt = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", lang);
                     str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
                     break;
             }

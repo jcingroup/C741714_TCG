@@ -219,6 +219,7 @@
     <Compile Include="Service\AboutUs.cs" />
     <Compile Include="Service\DBService.cs" />
     <Compile Include="Service\Edu.cs" />
+    <Compile Include="Service\Focus.cs" />
     <Compile Include="Service\JoinUs.cs" />
     <Compile Include="Service\Language.cs" />
     <Compile Include="Service\ListFactoryService.cs" />
@@ -811,6 +812,10 @@
     <Content Include="Views\_SysAdm\Edu_Cate_Data.cshtml" />
     <Content Include="Views\_SysAdm\Edu_Data.cshtml" />
     <Content Include="Views\_SysAdm\Edu_List.cshtml" />
+    <Content Include="Views\_SysAdm\Focus_Cate_List.cshtml" />
+    <Content Include="Views\_SysAdm\Focus_Cate_Data.cshtml" />
+    <Content Include="Views\_SysAdm\Focus_List.cshtml" />
+    <Content Include="Views\_SysAdm\Focus_Data.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

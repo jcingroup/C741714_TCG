@@ -2,18 +2,18 @@
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
     ViewBag.Crumb = "內容管理";
-    ViewBag.subnav = "Edu";
-    ViewBag.subnav2 = "Edu_List";
+    ViewBag.subnav = "Focus";
+    ViewBag.subnav2 = "Focus_List";
 
     //變數設定
     string SysPath = "~/_SysAdm/";
 
-    string cFile = "Edu_Data";
-    string cFile_Add = "Edu_Add";
-    string cFile_Del = "Edu_Del";
-    string cFile_Edit = "Edu_Edit";
-    string cFile_Save = "Edu_Save";
-    string cFile_List = "Edu_List";
+    string cFile = "Focus_Data";
+    string cFile_Add = "Focus_Add";
+    string cFile_Del = "Focus_Del";
+    string cFile_Edit = "Focus_Edit";
+    string cFile_Save = "Focus_Save";
+    string cFile_List = "Focus_List";
 
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_img = (DataTable)ViewData["d_img"];
@@ -31,6 +31,10 @@
     string c_front_status = "";
     string c_front_status_Y = "";
     string c_front_status_N = "";
+    string is_index = "";
+    string c_index_status = "";
+    string c_index_status_Y = "";
+    string c_index_status_N = "";
 
     string img_no = "";
     string img_path = "../Images/";
@@ -56,6 +60,9 @@
         c_status = "N";
         c_front_status_N = "checked";
         c_front_status_Y = "";
+        is_index = "N";
+        c_index_status_N = "checked";
+        c_index_status_Y = "";
         lang = "";
         cate_id = "";
         sort = "0";
@@ -90,6 +97,18 @@
                 c_front_status_N = "checked";
                 break;
         }
+
+        switch (is_index)
+        {
+            case "Y":
+                c_index_status_Y = "checked";
+                c_index_status_N = "";
+                break;
+            case "N":
+                c_index_status_Y = "";
+                c_index_status_N = "checked";
+                break;
+        }
     }
 
 }
@@ -109,6 +128,8 @@
 }
 
 <h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+@* 引用 ajaxfileupload *@
+<script src="~/Scripts/ajaxfileupload.js"></script>
 @* 引用 ajax_lib *@
 <script src="~/Scripts/ajax_lib.js"></script>
 @*1.引用ckeditor.js*@
@@ -155,7 +176,7 @@
         //  取得被選擇項目的值
         //$("#select").find(":selected").val();
         var c_lang = $("#lang_id").find(":selected").val();
-        var c_cate_kind = "Edu";
+        var c_cate_kind = "Focus";
         //alert(c_lang);
         $.ajax({
             url: 'Cate_Get',
@@ -188,6 +209,116 @@
                 //alert('ajax complete');
             }
         });
+        return false;
+    }
+
+    function del_img(img_id,c_sty)
+    {
+        var cimg_no = "";
+        var c_cate = "Focus"
+        if ($("#id").val().length > 0) {
+            cimg_no = $("#id").val();
+        }else {
+            cimg_no = @img_no;
+        }
+
+        $.ajax({                
+            url: 'Img_Del',
+            data: { img_id: img_id, img_sta:c_sty, img_no: cimg_no,img_cate: c_cate  }, //此参数非常严谨，写错一个引号都不行
+            type:"POST",
+            dataType: 'TEXT', //返回值类型 一般设置为json
+            async: false,
+            success: function(JData){
+                //alert(JData);
+                data = handleAjaxVPNMsg(JData);
+                i = 0;
+                c_html = "";
+
+                $.each($.parseJSON(data), function (idx, obj) {
+                    i = i + 1;
+                    c_html = c_html + "<li>";
+                    c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "');\" >&times;</button>";
+                    c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                    c_html = c_html + "</li>";
+                });
+
+                $('#c_img_' + c_sty).html(c_html);
+            },
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError); 
+            },
+            complete: function () {
+                //alert(tbl_new_list);
+                //alert('ajax complete');
+            }
+        });
+        return false;
+    }
+
+    function upload(c_sty)
+    {
+
+        if ($("#pic_" + c_sty).val().length > 0) {
+            //ajaxFileUpload('pic_small','small_img');
+            ajaxFileUpload(c_sty);
+        }
+        else {
+            alert("請選擇圖片");
+        }
+    }
+
+    function ajaxFileUpload(c_sty) {
+        var cimg_no = "";
+        var c_img = "pic_" + c_sty;
+        var c_cate = "Focus"
+        var cimg_sty = "";
+        var cimg_id = "";
+
+        if ($("#id").val().length > 0) {
+            cimg_no = $("#id").val();
+        }else {
+            cimg_no = @img_no;
+        }
+
+        //alert(c_img);
+        var chtml = "";
+        var i = 0;
+        $.ajaxFileUpload
+        (
+            {
+                url: 'Upload', //用于文件上传的服务器端请求地址
+                type: 'post',
+                data: { img_no: cimg_no, img_sta: c_sty, img_cate: c_cate }, //此参数非常严谨，写错一个引号都不行
+                secureuri: false, //一般设置为false
+                //fileElementId: 'file1', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+                fileElementId: c_img, //文件上传空间的id属性  <input type="file" id="file" name="file" />
+                //dataType: 'HTML', //返回值类型 一般设置为json
+                dataType: 'JSON', //返回值类型 一般设置为json
+                success: function (JData, status)  //服务器成功响应处理函数
+                {
+                    //alert(JData);
+
+                    data = handleAjaxVPNMsg(JData);
+
+                    i = 0;
+                    c_html = "";
+                    $.each($.parseJSON(data), function (idx, obj) {
+                        i = i + 1;
+                        c_html = c_html + "<li>";
+                        c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "');\" >&times;</button>";
+                        c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                        c_html = c_html + "</li>";
+                    });
+
+                    $('#c_img_' + c_sty).html(c_html);
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    alert(e);
+                }
+            }
+        )
         return false;
     }
 </script>
@@ -267,6 +398,22 @@
             草稿
         </dd>
     </dl>
+
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 輪播</dt>
+        <dd class="col-3">
+            <input type="radio" class="radio" name="hot" id="hotY" value="Y" @c_index_status_Y>
+            <label for="hotY"></label>
+            是
+            <input type="radio" class="radio" name="hot" id="hotN" value="N" @c_index_status_N>
+            <label for="hotN"></label>
+            否
+        </dd>
+        <dd class="col-5">
+            <small class="text-secondary">如選「是」 ，本篇將顯示於最新資訊的輪播區塊</small>
+        </dd>
+    </dl>
+
     <dl class="field">
         <dt class="col-1"><sup title="必填">*</sup> 排序</dt>
         <dd class="col-3">
@@ -275,6 +422,34 @@
         </dd>
         <dd class="col-5">
             <small class="text-secondary">數字愈大愈前面</small>
+        </dd>
+    </dl>
+
+    <dl class="field">
+        <dt class="col-1">代表圖</dt>
+        <dd class="col-6">
+            <div class="input-file">
+                @* 瀏覽&上傳檔案 *@
+                <input type="file" name="pic_S" id="pic_S" accept="image/*" class="form-control form-control-sm">
+                <button type="button" name="btn_small_pic" onclick="upload('S');" class="btn btn-sm btn-success oi m-t-small" data-glyph="data-transfer-upload">
+                    上傳
+                </button>
+                <br>
+                @* 照片縮圖(上傳圖片後顯示) *@
+                <ol class="upload-img list-inline" id="c_img_S" name="c_img_S">
+                    @for (int s = 0; s < d_img.Rows.Count; s++)
+                    {
+                        small_img = img_path + d_img.Rows[s]["img_file"].ToString();
+                        img_id = d_img.Rows[s]["id"].ToString();
+                        <li>
+                            <button class="close" id="btn_close_s_@s" name="btn_close_s_@s" onclick="del_img('@img_id','S');">&times;</button>
+                            <img id="img_S_@s" name="img_S_@s" src="@small_img" alt="">
+                        </li>
+                    }
+
+                </ol>
+            </div>
+            <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*450px，建議檔案大小不超過 1000kb</small>
         </dd>
     </dl>
 

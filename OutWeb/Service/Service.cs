@@ -210,6 +210,23 @@ namespace OutWeb.Service
         }
         #endregion
 
-
+        #region Return Error_Msg
+        public string rtn_errmsg(string err_source, string err_message, string err_stacktrace)
+        {
+            string err_msg = "";
+            /*
+            err_msg = "======================================================================\r\n"
+                    + "    發生時間：" + DateTime.Now.ToString("yyyyMMdd HH:mm:ss") + "\r\n"
+                    + "    檔案名稱：" + sys_name + "\r\n"
+                    + "    錯誤位置：" + err_source + "\r\n"
+                    + "    錯誤內容：" + err_message + "\r\n"
+                    + "    錯誤資訊：" + err_stacktrace + "\r\n";
+            */
+            err_msg = "    錯誤位置：" + err_source + "\r\n"
+                    + "    錯誤內容：" + err_message + "\r\n"
+                    + "    錯誤資訊：" + err_stacktrace;
+            return err_msg;
+        }
+        #endregion Return Error_Msg
     }
 }
