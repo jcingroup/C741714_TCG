@@ -2,14 +2,14 @@
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
     ViewBag.Crumb = "內容管理";
-    ViewBag.subnav = "Edu";
-    ViewBag.subnav2 = "Edu_List";
+    ViewBag.subnav = "Focus";
+    ViewBag.subnav2 = "Focus_List";
 
     string SysPath = "~/_SysAdm/";
-    string cFile = "Edu_List";
-    string cFile_Add = "Edu_Add";
-    string cFile_Del = "Edu_Del";
-    string cFile_Edit = "Edu_Edit";
+    string cFile = "Focus_List";
+    string cFile_Add = "Focus_Add";
+    string cFile_Del = "Focus_Del";
+    string cFile_Edit = "Focus_Edit";
 
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_lang = (DataTable)ViewData["d_lang"];
@@ -30,8 +30,11 @@
     string c_title = "";
     string c_date = "";
     string c_sort = "";
+    string is_index = "";
     string show = "";
     string show_class = "";
+    string str_index = "";
+    string index_class = "";
     string lang_name = "";
     string cate_name = "";
     string txt_title_query = (string)ViewData["txt_title_query"];
@@ -41,7 +44,6 @@
     string txt_cate = (string)ViewData["txt_cate_id"];
     string txt_start_date = (string)ViewData["txt_start_date"];
     string txt_end_date = (string)ViewData["txt_end_date"];
-
 
     string c_selected = "";
 
@@ -62,6 +64,7 @@
     string class_lang = "";
     string class_cate = "";
     string class_date = "";
+    string class_index = "";
 
     switch (txt_sort)
     {
@@ -82,6 +85,9 @@
             break;
         case "c_date":
             class_date = a_d;
+            break;
+        case "is_index":
+            class_index = a_d;
             break;
     }
 
@@ -163,7 +169,7 @@
         //  取得被選擇項目的值
         //$("#select").find(":selected").val();
         var c_lang = $("#txt_lang").find(":selected").val();
-        var c_cate_kind = "Edu";
+        var c_cate_kind = "Focus";
         //alert(c_lang);
         $.ajax({
             url: 'Cate_Get',
@@ -264,16 +270,24 @@
             <option value="Y">發佈</option>
             <option value="N">草稿</option>
         </select>
+        <label>顯示於輪播區</label>
+        <select id="txt_index" name="txt_index">
+            <option value="">全部</option>
+            <option value="Y">是</option>
+            <option value="N">否</option>
+        </select>
         <button class="btn sm oi" data-glyph="magnifying-glass" id="btn_query" name="btn_query" onclick="form_ok();">搜尋</button>
     </header>
     <table class="table-list table-hover table-striped">
         <colgroup>
+
             <col style="width: 10%">
-            <col style="width: 15%">
-            <col style="width: 15%">
-            <col style="width: 30%">
+            <col style="width: 13%">
+            <col style="width: 10%">
+            <col style="width: 24%">
             <col style="width: 10%">
             <col style="width: 10%">
+            <col style="width: 13%">
             <col style="width: 10%">
         </colgroup>
         <tr>
@@ -304,6 +318,10 @@
             </th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                <button class="text-xs-center th-sort-toggle @class_index" name="btn_index" id="btn_index" onclick="sort('is_index');">顯示於輪播區</button>
+            </th>
+            <th>
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="text-xs-center th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
             </th>
         </tr>
@@ -322,6 +340,7 @@
                 c_sort = dt.Rows[i]["sort"].ToString();
                 lang_name = dt.Rows[i]["lang_name"].ToString();
                 cate_name = dt.Rows[i]["cate_name"].ToString();
+                is_index = dt.Rows[i]["is_index"].ToString();
                 if (dt.Rows[i]["status"].ToString() == "Y")
                 {
                     show = "發佈";
@@ -333,6 +352,16 @@
                     show_class = "";
                 }
 
+                if (dt.Rows[i]["is_index"].ToString() == "Y")
+                {
+                    str_index = "是";
+                    index_class = "label-success";
+                }
+                else
+                {
+                    str_index = "否";
+                    index_class = "";
+                }
 
                 <tr>
                     <td>
@@ -344,6 +373,7 @@
                     <td class="text-left">@c_title</td>
                     <td>@lang_name</td>
                     <td><span class="label @show_class">@show</span></td>
+                    <td><span class="label @index_class">@str_index</span></td>
                     <td>@c_sort</td>
                 </tr>
             }
