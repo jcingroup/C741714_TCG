@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會"; @* 文章標題 *@
+    ViewBag.BodyClass = "News Event";
+}
+
+@section breadcrumb {
+    <li><a href="~/News">最新訊息</a></li>
+    <li><a href="~/News/EventLatest">活動寫真</a></li>
+    <li>歷史活動</li>
+}
+
+@section css {
+    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
+}
+
+@section scripts {
+    <script src="~/Content/js/swiper.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 'auto',
+            spaceBetween: 0,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        $(".tabs .tab-nav").click(function(e){
+            $(this).parent().siblings().children(".tab-nav").removeClass("current");
+            $(this).addClass("current");
+
+            var target = $(this).attr("href");
+            $(target).siblings(".tab").hide().removeClass("current");
+            $(target).fadeIn().addClass("current");
+
+            // change url hash without reloading page
+            if(history.pushState) {
+                history.pushState(null, null, target);
+            }
+            else {
+                location.hash = target;
+            }
+
+            e.preventDefault();
+        });
+
+        var hash = window.location.hash;
+        if (hash) {
+            var hash_root = hash.split('-')[0];
+            $(".tabs .tab-nav").each(function(){
+                var target = $(this).attr("href");
+                if (target == hash || target == hash_root) {
+                    $(this).parent().siblings().children(".tab-nav").removeClass("current");
+                    $(this).addClass("current");
+                }
+            });
+            $(hash).add(hash_root).siblings(".tab").hide().removeClass("current");
+            $(hash).add(hash_root).fadeIn().addClass("current");
+        }
+    </script>
+}
+
+<h1 class="sr-only">活動寫真</h1>
+
+<p class="back">
+    <a href="~/News/EventHistoryList"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+</p>
+
+<h2 class="title">
+    <small class="date">2018-01-20</small>
+    @ViewBag.Title
+</h2>
+
+<div class="tab-content clearfix editor">
+
+    @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
+    <div class="tabs slider">
+        <div class="swiper-container">
+            <ul class="swiper-wrapper list-inline">
+                <li class="swiper-slide">
+                    <a class="tab-nav current" href="#tab1">文章分頁1</a>
+                </li>
+                <li class="swiper-slide">
+                    <a class="tab-nav" href="#tab2">文章分頁2文章分頁2文章分頁2</a>
+                </li>
+                <li class="swiper-slide">
+                    <a class="tab-nav" href="#tab3">文章分頁3文章分頁3</a>
+                </li>
+            </ul>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    
+    @* 文章分頁，有資料才顯示，第一頁 class + current *@
+    <div class="tab current" id="tab1">
+        @* 影片的呈現方式，有資料才顯示 *@
+        <ul class="prolist row list-unstyled">
+            <li class="col-xs-6">
+                <figure class="pro">
+                    <div class="embed-responsive">
+                        <iframe src="https://www.youtube.com/embed/2tctSxl1mmw" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </figure>
+            </li>
+            <li class="col-xs-6">
+                <figure class="pro">
+                    <div class="embed-responsive">
+                        <iframe src="https://www.youtube.com/embed/2tctSxl1mmw" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </figure>
+            </li>
+        </ul>
+        @* 照片的呈現方式，有資料才顯示 *@
+        <ul class="prolist row list-unstyled">
+            <li class="col-xs-3">
+                <figure class="pro">
+                    <a href="http://via.placeholder.com/800x600" class="thumbnail" target="new">
+                        <img src="http://via.placeholder.com/800x600" alt="">
+                    </a>
+                </figure>
+            </li>
+            <li class="col-xs-3">
+                <figure class="pro">
+                    <a href="http://via.placeholder.com/800x1200" class="thumbnail" target="new">
+                        <img src="http://via.placeholder.com/800x1200" alt="">
+                    </a>
+                </figure>
+            </li>
+            <li class="col-xs-3">
+                <figure class="pro">
+                    <a href="http://via.placeholder.com/800x510?text=No+Images" class="thumbnail" target="new">
+                        <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
+                    </a>
+                </figure>
+            </li>
+            <li class="col-xs-3">
+                <figure class="pro">
+                    <a href="http://via.placeholder.com/1000x400" class="thumbnail" target="new">
+                        <img src="http://via.placeholder.com/1000x400" alt="">
+                    </a>
+                </figure>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab" id="tab2">
+        <p>文章分頁2</p>
+    </div>
+
+    <div class="tab" id="tab3">
+        <p>文章分頁3</p>
+    </div>
+
+</div>
+
+<ul class="pager list-unstyled">
+
+    <li class="prev">
+        @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
+        <a href="~/News/EventHistoryContent">
+            <i class="oi" data-glyph="chevron-left"></i>
+            上一篇
+        </a>
+    </li>
+
+    <li class="next">
+        @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
+        <a href="~/News/EventHistoryContent">
+            下一篇
+            <i class="oi" data-glyph="chevron-right"></i>
+        </a>
+    </li>
+
+</ul>
