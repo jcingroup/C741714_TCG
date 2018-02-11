@@ -673,6 +673,8 @@
       <LastGenOutput>WBDB.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
+    <Content Include="favicon_apple.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\ajaxfileupload.js" />
     <Content Include="Scripts\ajax_lib.js" />
@@ -813,6 +815,7 @@
     <Content Include="Views\_SysAdm\Focus_Cate_Data.cshtml" />
     <Content Include="Views\_SysAdm\Focus_List.cshtml" />
     <Content Include="Views\_SysAdm\Focus_Data.cshtml" />
+    <Content Include="Views\News\EventLatestContent.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
