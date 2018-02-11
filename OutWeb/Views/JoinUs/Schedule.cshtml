@@ -1,6 +1,18 @@
-﻿@{
+﻿@using System.Data
+@{
     ViewBag.Title = "開課時間表";
     ViewBag.BodyClass = "JoinUs School";
+
+    DataTable dt = (DataTable)ViewData["dt"];
+    string c_title = "";
+    string c_desc = "";
+    string cate_id = "";
+    string lang_id = "";
+    string lang_name = "";
+    string cate_name = "";
+    string ci = "";
+    string c_tab = "";
+    string c_tab_nav = "";
 }
 
 @section breadcrumb {

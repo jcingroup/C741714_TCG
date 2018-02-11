@@ -1,6 +1,18 @@
-﻿@{
+﻿@using System.Data
+@{
     ViewBag.Title = "申請民政府身分證";
     ViewBag.BodyClass = "JoinUs Apply";
+
+    DataTable dt = (DataTable)ViewData["dt"];
+    string c_title = "";
+    string c_desc = "";
+    string cate_id = "";
+    string lang_id = "";
+    string lang_name = "";
+    string cate_name = "";
+    string ci = "";
+    string c_tab = "";
+    string c_tab_nav = "";
 }
 
 @section breadcrumb {
@@ -60,40 +72,60 @@
 <div class="tab-content clearfix editor">
 
     @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
-    <div class="tabs slider">
-        <div class="swiper-container">
-            <ul class="swiper-wrapper list-inline">
-                <li class="swiper-slide">
-                    <a class="tab-nav current" href="#tab1-1">文章分頁1</a>
-                </li>
-                <li class="swiper-slide">
-                    <a class="tab-nav" href="#tab1-2">文章分頁2文章分頁2文章分頁2</a>
-                </li>
-                <li class="swiper-slide">
-                    <a class="tab-nav" href="#tab1-3">文章分頁3文章分頁3</a>
-                </li>
-            </ul>
+    @if (dt.Rows.Count > 1)
+    {
+        <div class="tabs slider">
+            <div class="swiper-container">
+                <ul class="swiper-wrapper list-inline">
+                    @for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    c_title = dt.Rows[i]["c_title"].ToString();
+                    ci = i.ToString();
+
+                    if (i == 0)
+                    {
+                        c_tab_nav = "tab-nav current";
+                    }
+                    else
+                    {
+                        c_tab_nav = "tab-nav";
+                    }
+
+                    <li class="swiper-slide">
+                        <a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>
+                    </li>
+                    }
+                </ul>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-    </div>
-    
+    }
+
     @* 文章分頁，有資料才顯示，第一頁 class + current *@
-    <div class="tab current" id="tab1-1">
-        <h3>台灣民政府 中央參眾議院聯合審查會議修正 台灣基本法</h3>
-        <p>前言：</p>
-        <p>台灣：福爾摩沙周邊群島和澎湖列島(總稱台灣)是大日本帝國台灣人民必須守護的領域，為確保領域內人民與全世界人民能共同合作，取得進步繁榮成果,讓民主、自由、和平帶來福祉。台灣民政府管轄權力源自日本天皇陛下天賦不可放棄權利及義務和人民的期盼而信託，其權力應由人民所組成代表行使，其福祉由領域內人民分享，這是萬國公法與國際法的精神與目的，台灣基本法以此精神與目的為法源，台灣民政府以天皇陛下詔書、舊金山和平條約、戰爭法精神與目的而組織，並制定台灣基本法。</p>
-        <p>大日本帝國台灣人民期盼和平、自由、民主、穩定與繁榮已久，深知人類相互關係良好的源由，是堅信仁慈、公義、和平與自由的基本價值，是一心守護領域內人民安全與生存，是竭力守護賴以生存而進步的基本價值。</p>
-        <p>堅信任何國家都需要尊重基本價值，而且必須優先遵守萬國公法與國際法，這是經過歷史反覆教訓而實證的法則，也是人類追求維持國際和平、穩定與繁榮的法則。</p>
-        <p>台灣民政府領域內所有人民，誓以台灣基本法來守護人類賴以生存與進步的基本價值，是為了台灣人民的生存和進步。</p>
-    </div>
+    @if (dt.Rows.Count > 0)
+    {
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            ci = i.ToString();
 
-    <div class="tab" id="tab1-2">
-        <p>文章分頁2</p>
-    </div>
+            c_title = dt.Rows[i]["c_title"].ToString();
+            c_desc = dt.Rows[i]["c_desc"].ToString();
 
-    <div class="tab" id="tab1-3">
-        <p>文章分頁3</p>
-    </div>
+            if (i == 0)
+            {
+                c_tab = "tab current";
+            }
+            else
+            {
+                c_tab = "tab";
+            }
+
+            <div class="@c_tab" id="tab1-@ci">
+                <h3>@Html.Raw(c_title)</h3>
+                @Html.Raw(c_desc)
+            </div>
+        }
+    }
 
 </div>
