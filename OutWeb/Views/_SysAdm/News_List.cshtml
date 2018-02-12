@@ -1,7 +1,7 @@
 ﻿@using System.Data
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Crumb = "最新消息";
+    ViewBag.Crumb = "新聞公告聲明 文章管理";
     ViewBag.subnav = "News";
     ViewBag.subnav2 = "News_List";
 
@@ -279,7 +279,7 @@
     </header>
     <table class="table-list table-hover table-striped">
         <colgroup>
-            <col style="width: 10%">
+            <col style="width: 5%">
             <col style="width: 13%">
             <col style="width: 10%">
             <col style="width: 24%">
@@ -287,6 +287,7 @@
             <col style="width: 10%">
             <col style="width: 13%">
             <col style="width: 10%">
+            <col style="width: 5%">
         </colgroup>
         <tr>
             @* 點選排序功能 (點一下遞增, 點兩下遞減)
@@ -296,7 +297,7 @@
                 遞減 desc
                 <button class="th-sort-toggle desc"></button>
             *@
-            <th class="item-edit">編輯</th>
+            <th class="item-edit">修改</th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="text-xs-center th-sort-toggle @class_date" name="btn_date" id="btn_date" onclick="sort('n_date');">發佈日期</button>
@@ -316,12 +317,13 @@
             </th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                <button class="text-xs-center th-sort-toggle @class_index" name="btn_index" id="btn_index" onclick="sort('is_index');">顯示於輪播區</button>
+                <button class="text-xs-center th-sort-toggle @class_index" name="btn_index" id="btn_index" onclick="sort('is_index');">顯示於最新訊息區</button>
             </th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="text-xs-center th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
             </th>
+            <th class="item-edit">刪除</th>
         </tr>
         @*
             無資料
@@ -362,7 +364,6 @@
                 }
                     <tr>
                         <td>
-                            <button class="hover-danger oi delete-btn" title="刪除" type="button" data-glyph="trash" onclick="del('@Url.Content(SysPath + cFile_Del + "?n_id=" + n_id)');"></button>
                             <button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?n_id=" + n_id)';"></button>
                         </td>
                         <td class="text-left">@n_date</td>
@@ -372,6 +373,9 @@
                         <td><span class="label @show_class">@show</span></td>
                         <td><span class="label @index_class">@str_index</span></td>
                         <td>@n_sort</td>
+                        <td>
+                            <button class="hover-danger oi delete-btn" title="刪除" type="button" data-glyph="trash" onclick="del('@Url.Content(SysPath + cFile_Del + "?n_id=" + n_id)');"></button>
+                        </td>
                     </tr>
             }
         }

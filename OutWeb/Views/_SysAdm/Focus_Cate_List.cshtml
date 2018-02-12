@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Crumb = "類別管理";
+    ViewBag.Crumb = "焦點專欄 分類管理";
     ViewBag.subnav = "Focus";
     ViewBag.subnav2 = "Focus_Cate";
 
@@ -149,8 +149,8 @@
 </script>
 <h3 class="title">@ViewBag.Crumb </h3>
 
-<div class="alert-warning m-b-16">
-    <strong>前台排序：</strong> 依排序號碼。<br>
+<div class="alert-warning mb-16">
+    <strong>前台排序：</strong> 依排序編號，數字愈小愈前面。<br>
 </div>
 
 <div class="topBtn-bar btn-group">
@@ -195,10 +195,14 @@
     </header>
     <table class="table-list table-hover table-striped">
         <colgroup>
-            <col span="3">
-            <col style="width: 13.5%">
-            <col span="2" style="width: 11%">
-        </colgroup>
+                <col style="width: 5%">
+                <col style="width: 30%">
+                <col style="width: 30%">
+                <col style="width: 10%">
+                <col style="width: 10%">
+                <col style="width: 10%">
+                <col style="width: 5%">
+            </colgroup>
         <thead>
             <tr>
                 @* 點選排序功能 (點一下遞增, 點兩下遞減)
@@ -210,7 +214,6 @@
                 *@
                 @* 如不需要排序功能: 純文字即可 *@
 
-                <th class="item-edit">刪除</th>
                 <th class="item-edit">修改</th>
                 <th class="text-left">類別</th>
                 <th class="text-left">描述</th>
@@ -226,6 +229,7 @@
                     @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                     <button class="text-xs-center th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
                 </th>
+                <th class="item-edit">刪除</th>
             </tr>
         <thead>
         <tbody>
@@ -253,16 +257,16 @@
 
                     <tr>
                         <td>
-                            <button type="button" onclick="del('@Url.Content(SysPath + cFile_Del + "?cate_id=" + cate_id)');" class="btn btn-link text-danger oi" data-glyph="trash"></button>
-                        </td>
-                        <td>
-                            <button type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?cate_id=" + cate_id)';" class="btn btn-link oi" data-glyph="pencil"></button>
+                            <button type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?cate_id=" + cate_id)';" class="hover-primary oi" data-glyph="pencil"></button>
                         </td>
                         <td class="text-left">@cate_name</td>
                         <td class="text-left">@Html.Raw(cate_desc)</td>
                         <td class="text-left">@lang_name</td>
                         <td><span class="label @show_class">@show</span></td>
                         <td>@cate_sort</td>
+                        <td>
+                            <button type="button" onclick="del('@Url.Content(SysPath + cFile_Del + "?cate_id=" + cate_id)');" class="hover-danger oi" data-glyph="trash"></button>
+                        </td>
                     </tr>
                 }
             }

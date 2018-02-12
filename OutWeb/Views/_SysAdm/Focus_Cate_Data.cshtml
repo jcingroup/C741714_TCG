@@ -1,7 +1,7 @@
 ﻿@using System.Data
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Crumb = "焦點專欄_類別-管理";
+    ViewBag.Crumb = "焦點專欄 分類管理";
     ViewBag.subnav = "Focus";
     ViewBag.subnav2 = "Focus_Cate";
 
@@ -140,13 +140,13 @@
     }
 
     <dl class="field">
-        <dt class="col-1">*類別名稱</dt>
+        <dt class="col-1"><sup title="必填">*</sup> 分類名稱</dt>
         <dd class="col-6">
             <input type="text" class="form-control form-control-sm" required id="cate_name" name="cate_name" value="@cate_name">
         </dd>
     </dl>
     <dl class="field">
-        <dt class="col-1">類別描述</dt>
+        <dt class="col-1">分類描述</dt>
         <dd class="col-6">
             <input type="text" class="form-control form-control-sm" required id="cate_desc" name="cate_desc" value="@cate_desc">
         </dd>

@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Crumb = "最新消息類別管理";
+    ViewBag.Crumb = "新聞公告聲明 分類管理";
     ViewBag.subnav = "News";
     ViewBag.subnav2 = "News_Cate";
 
@@ -253,10 +253,10 @@
 
                     <tr>
                         <td>
-                            <button type="button" onclick="del('@Url.Content(SysPath + cFile_Del + "?cate_id=" + cate_id)');" class="btn btn-link text-danger oi" data-glyph="trash"></button>
+                            <button type="button" onclick="del('@Url.Content(SysPath + cFile_Del + "?cate_id=" + cate_id)');" class="hover-danger oi" data-glyph="trash"></button>
                         </td>
                         <td>
-                            <button type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?cate_id=" + cate_id)';" class="btn btn-link oi" data-glyph="pencil"></button>
+                            <button type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?cate_id=" + cate_id)';" class="hover-primary oi" data-glyph="pencil"></button>
                         </td>
                         <td class="text-left">@cate_name</td>
                         <td class="text-left">@Html.Raw(cate_desc)</td>

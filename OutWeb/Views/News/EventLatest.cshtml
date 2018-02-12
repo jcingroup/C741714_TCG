@@ -11,10 +11,10 @@
 
 <h1 class="sr-only">活動寫真</h1>
 
-<ul class="tabs list-inline text-center">
+<!-- <ul class="tabs list-inline text-center">
     <li><a class="current" href="~/News/EventLatest">最新活動</a></li>
     <li><a href="~/News/EventStatesCategory">各州活動</a></li>
-</ul>
+</ul> -->
 
 <h2 class="title">@ViewBag.Title</h2>
 
@@ -30,7 +30,11 @@
                 </a>
             </div>
             <div class="col-xs-9">
-                <span class="label label-warning">最新活動</span>
+                @*
+                最新活動     class + label-warning
+                各州活動     class + label-orange
+                *@
+                <span class="label label-warning"><a href="~/News/EventLatest">最新活動</a></span>
                 <small class="date">2018-01-20</small>
                 <h3><a href="~/News/EventLatestContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
                 @* 摘要 取前 145 個字，有資料的話才顯示 *@
@@ -48,7 +52,7 @@
                 </a>
             </div>
             <div class="col-xs-9">
-                <span class="label label-warning">各州活動</span>
+                <span class="label label-orange"><a href="~/News/EventStatesCategory">各州活動</a></span>
                 <small class="date">2018-01-20</small>
                 <h3><a href="~/News/EventStatesContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
                 @* 摘要 取前 145 個字，有資料的話才顯示 *@

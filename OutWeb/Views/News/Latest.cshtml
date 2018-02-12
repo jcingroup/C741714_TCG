@@ -1,36 +1,15 @@
 ﻿@{
-    ViewBag.Title = "最新訊息";
+    ViewBag.Title = "最新訊息 活動公告";
     ViewBag.BodyClass = "News Latest";
 }
 
 @section breadcrumb {
-    <li><a href="~/News">最新訊息 活動公告</a></li>
     <li>@ViewBag.Title</li>
-}
-
-@section css {
-    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
-}
-
-@section scripts {
-    <script src="~/Content/js/swiper.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    </script>
 }
 
 <h1 class="title">@ViewBag.Title</h1>
 
-@* 每頁10筆資料 *@
+@* 後台有設定要顯示在最新訊息的文章 (最多10筆，依日期最新到最舊) *@
 <div class="articles">
 
     <article class="article">
@@ -43,11 +22,14 @@
             </div>
             <div class="col-xs-9">
                 @*
-                活動寫真     class + label-warning
-                新聞公告聲明 class + label-danger
+                最新活動     class + label-warning
+                各州活動     class + label-orange
+                新聞         class + label-danger
+                公告         class + label-pink
+                聲明         class + label-purple
                 焦點專欄     class + label-info
                 *@
-                <span class="label label-warning">最新活動</span>
+                <span class="label label-warning"><a href="~/News/EventLatest">最新活動</a></span>
                 <small class="date">2018-01-20</small>
                 <h3><a href="~/News/EventLatestContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
                 @* 摘要 取前 145 個字，有資料的話才顯示 *@
@@ -65,7 +47,7 @@
                 </a>
             </div>
             <div class="col-xs-9">
-                <span class="label label-danger">中央新聞</span>
+                <span class="label label-danger"><a href="~/News/AnnouncementList">中央新聞</a></span>
                 <small class="date">2018-01-20</small>
                 <h3><a href="~/News/AnnouncementContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
                 @* 摘要 取前 145 個字，有資料的話才顯示 *@
@@ -83,7 +65,7 @@
                 </a>
             </div>
             <div class="col-xs-9">
-                <span class="label label-info">焦點專欄</span>
+                <span class="label label-info"><a href="~/News/FocusCategory">焦點專欄</a></span>
                 <small class="date">2018-01-20</small>
                 <h3><a href="~/News/FocusContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
                 @* 摘要 取前 145 個字，有資料的話才顯示 *@
@@ -94,29 +76,3 @@
     </article>
 
 </div>
-
-<ul class="pager list-inline text-center">
-    <li class="prev">
-        @* 有資料的話才顯示 *@
-        <a href="#">
-            <i class="oi" data-glyph="chevron-left"></i>
-            上一頁
-        </a>
-    </li>
-    <li>
-        <form action="" class="form-inline">
-            第
-            <select name="" id="" class="form-element">
-                <option value="1">1</option>
-            </select>
-            頁
-        </form>
-    </li>
-    <li class="next">
-        @* 有資料的話才顯示 *@
-        <a href="#">
-            下一頁
-            <i class="oi" data-glyph="chevron-right"></i>
-        </a>
-    </li>
-</ul>

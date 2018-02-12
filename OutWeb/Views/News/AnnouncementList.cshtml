@@ -11,13 +11,6 @@
 
 <h1 class="sr-only">新聞 公告 聲明</h1>
 
-<ul class="tabs list-inline text-center">
-    <li><a href="~/News/AnnouncementLatest">最新消息</a></li>
-    <li><a class="current" href="~/News/AnnouncementList">中央新聞</a></li>
-    <li><a href="~/News/AnnouncementList">中央公告</a></li>
-    <li><a href="~/News/AnnouncementList">中央聲明</a></li>
-</ul>
-
 <h2 class="title">@ViewBag.Title</h2>
 
 @* 每頁10筆資料 *@
@@ -32,6 +25,7 @@
                 </a>
             </div>
             <div class="col-xs-9">
+                <span class="label label-danger"><a href="~/News/AnnouncementList">中央新聞</a></span>
                 <small class="date">2018-01-20</small>
                 <h3><a href="~/News/AnnouncementContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
                 @* 摘要 取前 145 個字，有資料的話才顯示 *@
@@ -49,6 +43,7 @@
                 </a>
             </div>
             <div class="col-xs-9">
+                <span class="label label-danger"><a href="~/News/AnnouncementList">中央新聞</a></span>
                 <small class="date">2018-01-20</small>
                 <h3><a href="~/News/AnnouncementContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
                 @* 摘要 取前 145 個字，有資料的話才顯示 *@

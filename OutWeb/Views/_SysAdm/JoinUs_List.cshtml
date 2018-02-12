@@ -254,12 +254,13 @@
     </header>
     <table class="table-list table-hover table-striped">
         <colgroup>
-            <col style="width: 10%">
+            <col style="width: 5%">
             <col style="width: 17%">
             <col style="width: 43%">
             <col style="width: 10%">
             <col style="width: 10%">
             <col style="width: 10%">
+            <col style="width: 5%">
         </colgroup>
         <tr>
             @* 點選排序功能 (點一下遞增, 點兩下遞減)
@@ -269,7 +270,7 @@
                 遞減 desc
                 <button class="th-sort-toggle desc"></button>
             *@
-            <th class="item-edit">編輯</th>
+            <th class="item-edit">修改</th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="text-xs-center th-sort-toggle @class_cate" name="btn_cate" id="btn_cate" onclick="sort('cate_id');">所屬主頁</button>
@@ -287,6 +288,7 @@
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="text-xs-center th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
             </th>
+            <th class="item-edit">刪除</th>
         </tr>
         @*
             無資料
@@ -316,7 +318,6 @@
 
                 <tr>
                     <td>
-                        <button class="hover-danger oi delete-btn" title="刪除" type="button" data-glyph="trash" onclick="del('@Url.Content(SysPath + cFile_Del + "?id=" + id)');"></button>
                         <button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?id=" + id)';"></button>
                     </td>
                     <td>@cate_name</td>
@@ -324,6 +325,9 @@
                     <td>@lang_name</td>
                     <td><span class="label @show_class">@show</span></td>
                     <td>@c_sort</td>
+                    <td>
+                        <button class="hover-danger oi delete-btn" title="刪除" type="button" data-glyph="trash" onclick="del('@Url.Content(SysPath + cFile_Del + "?id=" + id)');"></button>
+                    </td>
                 </tr>
             }
         }
