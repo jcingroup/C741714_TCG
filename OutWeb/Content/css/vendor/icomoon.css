@@ -24,33 +24,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-magnifying-glass:before {
-  content: "\e909";
-}
-.icon-search:before {
-  content: "\e909";
-}
-.icon-glass:before {
-  content: "\e909";
-}
-.icon-magnifier:before {
-  content: "\e909";
-}
-.icon-lookup:before {
-  content: "\e909";
-}
-.icon-paperplane:before {
-  content: "\e90a";
-}
-.icon-send:before {
-  content: "\e90a";
-}
-.icon-flight:before {
-  content: "\e90a";
-}
-.icon-email:before {
-  content: "\e90a";
-}
 .icon-camera:before {
   content: "\e90b";
 }
@@ -102,8 +75,17 @@
 .icon-people:before {
   content: "\e911";
 }
+.icon-school:before {
+  content: "\e90a";
+}
+.icon-focus:before {
+  content: "\e909";
+}
 .icon-taiwan:before {
-  content: "\e912";
+  content: "\e91a";
+}
+.icon-tcg:before {
+  content: "\e913";
 }
 .icon-state-hsinchu:before {
   content: "\e903";

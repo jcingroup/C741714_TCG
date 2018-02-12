@@ -782,7 +782,6 @@
     <Content Include="Views\News\AnnouncementContent.cshtml" />
     <Content Include="Views\News\AnnouncementLatest.cshtml" />
     <Content Include="Views\News\AnnouncementList.cshtml" />
-    <Content Include="Views\News\EventHistoryList.cshtml" />
     <Content Include="Views\News\EventLatest.cshtml" />
     <Content Include="Views\News\EventStatesCategory.cshtml" />
     <Content Include="Views\News\EventStatesContent.cshtml" />
@@ -812,6 +811,7 @@
     <Content Include="Views\_SysAdm\School_List.cshtml" />
     <Content Include="Views\_SysAdm\School_Data.cshtml" />
     <Content Include="Views\_SysAdm\News_List.cshtml" />
+    <Content Include="Views\News\EventLatestContent.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
