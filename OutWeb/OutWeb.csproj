@@ -226,6 +226,7 @@
     <Compile Include="Service\ListModuleService.cs" />
     <Compile Include="Service\Mail.cs" />
     <Compile Include="Service\News.cs" />
+    <Compile Include="Service\School.cs" />
     <Compile Include="Service\Service.cs" />
     <Compile Include="Service\ValidateCode.cs" />
   </ItemGroup>
@@ -751,23 +752,14 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\_SysAdm\NewsEdit.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
-    <Content Include="Views\_SysAdm\EduDataAdd.cshtml" />
-    <Content Include="Views\_SysAdm\EduDataEdit.cshtml" />
-    <Content Include="Views\_SysAdm\EduDataList.cshtml" />
-    <Content Include="Views\_SysAdm\EduKindList.cshtml" />
     <Content Include="Views\_SysAdm\EventHistoryAdd.cshtml" />
     <Content Include="Views\_SysAdm\EventHistoryEdit.cshtml" />
     <Content Include="Views\_SysAdm\EventHistoryList.cshtml" />
     <Content Include="Views\_SysAdm\EventStatesAdd.cshtml" />
     <Content Include="Views\_SysAdm\EventStatesEdit.cshtml" />
     <Content Include="Views\_SysAdm\EventStatesList.cshtml" />
-    <Content Include="Views\_SysAdm\FocusDataAdd.cshtml" />
-    <Content Include="Views\_SysAdm\FocusDataEdit.cshtml" />
-    <Content Include="Views\_SysAdm\FocusDataList.cshtml" />
-    <Content Include="Views\_SysAdm\FocusKindList.cshtml" />
     <Content Include="Views\_SysAdm\SchoolDataAdd.cshtml" />
     <Content Include="Views\_SysAdm\SchoolDataEdit.cshtml" />
     <Content Include="Views\_SysAdm\SchoolDataList.cshtml" />
@@ -813,6 +805,11 @@
     <Content Include="Views\_SysAdm\Focus_Cate_Data.cshtml" />
     <Content Include="Views\_SysAdm\Focus_List.cshtml" />
     <Content Include="Views\_SysAdm\Focus_Data.cshtml" />
+    <Content Include="Views\_SysAdm\School_Video_List.cshtml" />
+    <Content Include="Views\_SysAdm\School_Video_Data.cshtml" />
+    <Content Include="Views\_SysAdm\School_List.cshtml" />
+    <Content Include="Views\_SysAdm\School_Data.cshtml" />
+    <Content Include="Views\_SysAdm\News_List.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -844,8 +841,6 @@
     <None Include="Properties\PublishProfiles\Server.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\_SysAdm\ChangePW.cshtml" />
-    <Content Include="Views\_SysAdm\NewsAdd.cshtml" />
-    <Content Include="Views\_SysAdm\News_List.cshtml" />
     <Content Include="Views\Shared\_MLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
