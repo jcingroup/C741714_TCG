@@ -57,16 +57,16 @@
                         @* 全文檢索: 找標題/內文 關鍵字 *@
                         <form class="search-form form-inline" action="">
                             <input type="text" class="form-element" placeholder="請在此輸入">
-                            <button class="oi" data-glyph="magnifying-glass"></button>
+                            <button class="icon-search"></button>
                         </form>
-                        <button class="search-trigger oi" data-glyph="magnifying-glass"></button>
+                        <button class="search-trigger icon-search"></button>
                     </li>
                     <li class="share">
                         <div class="addthis_inline_share_toolbox"></div>
                         <button class="share-trigger oi" data-glyph="share"></button>
                     </li>
                     <li class="menu">
-                        <button class="sitemap-trigger oi" data-glyph="menu"></button>
+                        <button class="sitemap-trigger icon-menu"></button>
                     </li>
                 </ul>
 
@@ -137,7 +137,7 @@
                                 教育專欄
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization">
-                                <i class="icon-sitemap"></i>
+                                <i class="icon-organization"></i>
                                 行政區域圖&amp;組織架構
                             </a>
                         </li>
@@ -355,7 +355,8 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(".search-trigger").click(function(){
-            var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'magnifying-glass' ? 'x' : 'magnifying-glass');
+            var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'x' ? '' : 'x');
+            $(this).toggleClass("icon-search oi");
             $(".search").toggleClass("active");
         });
 

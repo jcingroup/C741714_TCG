@@ -24,93 +24,99 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-camera:before {
-  content: "\e90b";
-}
-.icon-photo:before {
-  content: "\e90b";
-}
-.icon-picture:before {
-  content: "\e90b";
-}
-.icon-image:before {
-  content: "\e90b";
-}
 .icon-bullhorn:before {
-  content: "\e90c";
-}
-.icon-megaphone:before {
-  content: "\e90c";
-}
-.icon-announcement:before {
-  content: "\e90c";
-}
-.icon-advertisement:before {
-  content: "\e90c";
-}
-.icon-news:before {
-  content: "\e90c";
-}
-.icon-phone:before {
-  content: "\e90d";
-}
-.icon-contact:before {
-  content: "\e90d";
-}
-.icon-drivers-license-o:before {
-  content: "\e90e";
-}
-.icon-id-card-o:before {
-  content: "\e90e";
-}
-.icon-sitemap:before {
-  content: "\e90f";
-}
-.icon-graduation-cap:before {
-  content: "\e910";
-}
-.icon-mortar-board:before {
-  content: "\e910";
-}
-.icon-people:before {
-  content: "\e911";
-}
-.icon-school:before {
-  content: "\e90a";
-}
-.icon-focus:before {
-  content: "\e909";
-}
-.icon-taiwan:before {
-  content: "\e91a";
-}
-.icon-tcg:before {
-  content: "\e913";
-}
-.icon-state-hsinchu:before {
-  content: "\e903";
-}
-.icon-state-kaohsiung:before {
-  content: "\e904";
-}
-.icon-state-taichung:before {
-  content: "\e905";
-}
-.icon-state-tainan:before {
-  content: "\e906";
-}
-.icon-state-taipei:before {
-  content: "\e907";
-}
-.icon-state-yilan:before {
-  content: "\e908";
-}
-.icon-about:before {
   content: "\e900";
 }
-.icon-join-us:before {
+.icon-megaphone:before {
+  content: "\e900";
+}
+.icon-announcement:before {
+  content: "\e900";
+}
+.icon-advertisement:before {
+  content: "\e900";
+}
+.icon-news:before {
+  content: "\e900";
+}
+.icon-camera:before {
   content: "\e901";
 }
-.icon-news2:before {
+.icon-photo:before {
+  content: "\e901";
+}
+.icon-picture:before {
+  content: "\e901";
+}
+.icon-image:before {
+  content: "\e901";
+}
+.icon-phone:before {
   content: "\e902";
+}
+.icon-contact:before {
+  content: "\e902";
+}
+.icon-drivers-license-o:before {
+  content: "\e903";
+}
+.icon-id-card-o:before {
+  content: "\e903";
+}
+.icon-people:before {
+  content: "\e904";
+}
+.icon-about:before {
+  content: "\e905";
+}
+.icon-focus:before {
+  content: "\e906";
+}
+.icon-graduation-cap:before {
+  content: "\e907";
+}
+.icon-join-us:before {
+  content: "\e908";
+}
+.icon-menu:before {
+  content: "\e909";
+}
+.icon-news2:before {
+  content: "\e90a";
+}
+.icon-organization:before {
+  content: "\e90b";
+}
+.icon-school:before {
+  content: "\e90c";
+}
+.icon-search:before {
+  content: "\e90d";
+}
+.icon-share:before {
+  content: "\e90e";
+}
+.icon-state-hsinchu:before {
+  content: "\e90f";
+}
+.icon-state-kaohsiung:before {
+  content: "\e910";
+}
+.icon-state-taichung:before {
+  content: "\e911";
+}
+.icon-state-tainan:before {
+  content: "\e912";
+}
+.icon-state-taipei:before {
+  content: "\e913";
+}
+.icon-state-yilan:before {
+  content: "\e914";
+}
+.icon-taiwan:before {
+  content: "\e915";
+}
+.icon-tcg:before {
+  content: "\e916";
 }
