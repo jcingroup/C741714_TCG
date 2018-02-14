@@ -242,6 +242,7 @@ ModelManifest.xml
 .paket/paket.exe
 
 # FAKE - F# Make
+.DS_Store
 /OutWeb/Images
 /OutWeb/ckeditor
 /OutWeb/Content/Upload
