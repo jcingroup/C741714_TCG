@@ -1,10 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
+using OutWeb.Service;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Specialized;
+/*Json.NET相關的命名空間*/
+using Newtonsoft.Json;
 
 namespace OutWeb.Controllers
 {
     public class NewsController : Controller
     {
+        //== Class 建立 =========================================//
+        DBService DB = new DBService();
+        News CNews = new News();
+        Language Clang = new Language();
+        //AboutUs CAboutUs = new AboutUs();
+        //JoinUs CJoinUs = new JoinUs();
+        //Edu CEdu = new Edu();
+        //Focus CFocus = new Focus();
+        //=== 變數設定  =========================================//
+        String Img_Path = "~/Images";
+        //=== Log 記錄 =========================================//
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        //=====================================================//
 
         public NewsController()
         {
@@ -13,6 +38,7 @@ namespace OutWeb.Controllers
 
         public ActionResult Index()
         {
+
             return RedirectToAction("Latest");
         }
 

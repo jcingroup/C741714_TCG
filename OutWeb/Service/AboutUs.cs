@@ -388,7 +388,7 @@ namespace OutWeb.Service
                      + "    select "
                      + "      Convert(nvarchar,a1.id) "
                      + "    from "
-                     + "      NEWS a1 "
+                     + "      " + dbf_name + " a1 "
                      + "    where "
                      + "      a1.cate_id = @cate_id "
                      + "  ) ";
