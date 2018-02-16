@@ -57,16 +57,16 @@
                         @* 全文檢索: 找標題/內文 關鍵字 *@
                         <form class="search-form form-inline" action="">
                             <input type="text" class="form-element" placeholder="請在此輸入">
-                            <button class="oi" data-glyph="magnifying-glass"></button>
+                            <button class="icon-search"></button>
                         </form>
-                        <button class="search-trigger oi" data-glyph="magnifying-glass"></button>
+                        <button class="search-trigger icon-search"></button>
                     </li>
                     <li class="share">
                         <div class="addthis_inline_share_toolbox"></div>
                         <button class="share-trigger oi" data-glyph="share"></button>
                     </li>
                     <li class="menu">
-                        <button class="sitemap-trigger oi" data-glyph="menu"></button>
+                        <button class="sitemap-trigger icon-menu"></button>
                     </li>
                 </ul>
 
@@ -124,10 +124,10 @@
                     </ul>
                     <ul class="sub-nav list-unstyled">
                         <li class="@(ViewBag.BodyClass.Contains("AboutUs") ? "" : "hidden")">
-                            <a class="@(ViewBag.BodyClass.Contains("TCG") ? "current" : "")" href="~/AboutUs/TCG">
+                            <!-- <a class="@(ViewBag.BodyClass.Contains("TCG") ? "current" : "")" href="~/AboutUs/TCG">
                                 <i class="icon-taiwan"></i>
                                 台灣民政府由來
-                            </a>
+                            </a> -->
                             <a class="@(ViewBag.BodyClass.Contains("Profile") ? "current" : "")" href="~/AboutUs/Position">
                                 <i class="icon-people"></i>
                                 關於我們
@@ -137,7 +137,7 @@
                                 教育專欄
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization">
-                                <i class="icon-sitemap"></i>
+                                <i class="icon-organization"></i>
                                 行政區域圖&amp;組織架構
                             </a>
                         </li>
@@ -223,7 +223,7 @@
                         <h2><a href="~/News/EventLatest">活動寫真</a></h2>
                         <ul>
                             <li>
-                                <h3><a href="~/News/EventLatest">最新活動</a></h3>
+                                <h3><a href="~/News/EventLatest">中央活動</a></h3>
                             </li>
                             <li>
                                 <h3><a href="~/News/EventStatesCategory">各州活動</a></h3>
@@ -294,11 +294,11 @@
                     </a>
                 </h1>
                 <ul>
-                    <li>
+                    <!-- <li>
                         <h2>
-                            <a href="~/AboutUs/TCG">什麼是台灣民政府</a>
+                            <a href="~/AboutUs/TCG">台灣民政府由來</a>
                         </h2>
-                    </li>
+                    </li> -->
                     <li>
                         <h2>
                             <a href="~/AboutUs/Position">關於我們</a>
@@ -355,7 +355,8 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(".search-trigger").click(function(){
-            var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'magnifying-glass' ? 'x' : 'magnifying-glass');
+            var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'x' ? '' : 'x');
+            $(this).toggleClass("icon-search oi");
             $(".search").toggleClass("active");
         });
 

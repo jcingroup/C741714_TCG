@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "焦點專欄";
+    ViewBag.Title = "美國政府明白表示：「反對台灣獨立」?"; @* 文章標題 *@
     ViewBag.BodyClass = "News Focus";
 }
 
 @section breadcrumb {
     <li><a href="~/News">最新訊息 活動公告</a></li>
     <li><a href="~/News/FocusCategory">焦點專欄</a></li>
-    <li>@ViewBag.Title</li>
+    <li>所有美國官司案</li> @* 分類名稱 *@
 }
 
 @section css {
@@ -68,7 +68,7 @@
 
 <h2 class="title">
     <small class="date">2015-01-26</small>
-    美國政府明白表示：「反對台灣獨立」?
+    <span>@ViewBag.Title</span>
 </h2>
 
 <div class="tab-content clearfix editor">
