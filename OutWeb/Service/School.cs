@@ -639,7 +639,7 @@ namespace OutWeb.Service
                 //===============================================================================//
 
                 csql = @"insert into " + video_dbf_name + "(c_url,sort,status,lang_id) "
-                     + "values(@cate_name,@cate_desc,@sort,@is_show,@lang_id)";
+                     + "values(@c_url,@sort,@is_show,@lang_id)";
 
                 cmd.CommandText = csql;
 

@@ -25,11 +25,9 @@
     int max_row = 0;
     int total_page = 0;
 
-    string cate_id = "";
-    string cate_name = "";
-    string cate_desc = "";
-    string cate_pic = "";
-    string cate_sort = "";
+    string video_id = "";
+    string c_url = "";
+    string video_sort = "";
     string lang = "";
     string lang_name = "";
 
@@ -62,17 +60,11 @@
 
     switch (txt_sort)
     {
-        case "n_title":
+        case "c_url":
             class_title = a_d;
-            break;
-        case "n_date":
-            class_date = a_d;
             break;
         case "sort":
             class_sort = a_d;
-            break;
-        case "is_index":
-            class_index = a_d;
             break;
         case "status":
             class_status = a_d;
@@ -196,8 +188,7 @@
     <table class="table-list table-hover table-striped">
         <colgroup>
             <col style="width: 10%">
-            <col style="width: 30%">
-            <col style="width: 30%">
+            <col style="width: 60%">
             <col style="width: 10%">
             <col style="width: 10%">
             <col style="width: 10%">
@@ -214,8 +205,7 @@
                 @* 如不需要排序功能: 純文字即可 *@
 
                 <th class="item-edit">編輯</th>
-                <th class="text-left">主頁名稱</th>
-                <th class="text-left">描述</th>
+                <th class="text-left">直播網址</th>
                 <th>
                     @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                     <button class="text-xs-center th-sort-toggle @class_lang" name="btn_lang" id="btn_lang" onclick="sort('lang_id');">語系</button>
@@ -236,10 +226,9 @@
             {
                 for (int i = min_row - 1; i < max_row; i++)
                 {
-                    cate_id = dt.Rows[i]["id"].ToString();
-                    cate_name = dt.Rows[i]["cate_name"].ToString();
-                    cate_desc = dt.Rows[i]["cate_desc"].ToString();
-                    cate_sort = dt.Rows[i]["sort"].ToString();
+                    video_id = dt.Rows[i]["id"].ToString();
+                    c_url = dt.Rows[i]["c_url"].ToString();
+                    video_sort = dt.Rows[i]["sort"].ToString();
                     lang_name = dt.Rows[i]["lang_name"].ToString();
 
                     if (dt.Rows[i]["status"].ToString() == "Y")
@@ -255,21 +244,20 @@
 
                     <tr>
                         <td>
-                            <button type="button" onclick="del('@Url.Content(SysPath + cFile_Del + "?cate_id=" + cate_id)');" class="hover-danger oi" data-glyph="trash"></button>
-                            <button type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?cate_id=" + cate_id)';" class="hover-primary oi" data-glyph="pencil"></button>
+                            <button type="button" onclick="del('@Url.Content(SysPath + cFile_Del + "?video_id=" + video_id)');" class="hover-danger oi" data-glyph="trash"></button>
+                            <button type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?video_id=" + video_id)';" class="hover-primary oi" data-glyph="pencil"></button>
                         </td>
-                        <td class="text-left">@cate_name</td>
-                        <td class="text-left">@Html.Raw(cate_desc)</td>
+                        <td class="text-left">@c_url</td>
                         <td>@lang_name</td>
                         <td><span class="label @show_class">@show</span></td>
-                        <td>@cate_sort</td>
+                        <td>@video_sort</td>
                     </tr>
                 }
             }
             else
             {
                 <tr>
-                    <td class="text-left" colspan="7">
+                    <td class="text-left" colspan="5">
                         無資料
                     </td>
                 </tr>

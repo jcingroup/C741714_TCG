@@ -25,6 +25,7 @@ namespace OutWeb.Controllers
         JoinUs CJoinUs = new JoinUs();
         Edu CEdu = new Edu();
         Focus CFocus = new Focus();
+        School CSchool = new School();
         //=== 變數設定  =========================================//
         String Img_Path = "~/Images";
         //=== Log 記錄 =========================================//
@@ -948,7 +949,7 @@ namespace OutWeb.Controllers
         public ActionResult Edu_Cate_Del(string cate_id = "")
         {
             //OverlookDBService OverlookDB = new OverlookDBService();
-            CJoinUs.Cate_Del(cate_id);
+            CEdu.Cate_Del(cate_id);
             return RedirectToAction("Edu_Cate_List");
         }
         #endregion
@@ -1175,7 +1176,7 @@ namespace OutWeb.Controllers
         public ActionResult Focus_Cate_Del(string cate_id = "")
         {
             //OverlookDBService OverlookDB = new OverlookDBService();
-            CJoinUs.Cate_Del(cate_id);
+            CFocus.Cate_Del(cate_id);
             return RedirectToAction("Focus_Cate_List");
         }
         #endregion
@@ -1329,14 +1330,107 @@ namespace OutWeb.Controllers
         #endregion 焦點專欄_基本資料
 
         #endregion 焦點專欄 Focus
-        
 
-        #region 法理學院 影片管理
-        public ActionResult SchoolVideo()
+
+        #region 法理學院_直播
+
+        #region 直播_陳列 School_Video_List
+        public ActionResult School_Video_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_lang = "")
         {
+            //定義變數
+            string c_sort = "";
+            string err_msg = "";
+            DataTable dt;
+            DataTable d_lang;
+
+            //排序設定
+            if (txt_sort.Trim().Length > 0)
+            {
+                c_sort = c_sort + "a1." + txt_sort;
+            }
+            if (txt_a_d.Trim().Length > 0)
+            {
+                c_sort = c_sort + " " + txt_a_d;
+            }
+
+            //抓取直播資料
+            dt = CSchool.Video_List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_lang);
+
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            //設定傳值
+            ViewData["page"] = page;
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["txt_title_query"] = txt_title_query;
+            ViewData["txt_sort"] = txt_sort;
+            ViewData["txt_a_d"] = txt_a_d;
+            ViewData["txt_lang"] = txt_lang;
+
             return View();
         }
-        #endregion 法理學院
+        #endregion
+
+        #region 直播_新增 School_Video_Add
+        public ActionResult School_Video_Add()
+        {
+            string err_msg = "";
+            ViewData["action_sty"] = "add";
+            DataTable d_lang;
+            d_lang = Clang.Lang_List(ref err_msg, "");
+
+            ViewData["d_lang"] = d_lang;
+            return View("School_Video_Data");
+        }
+        #endregion
+
+        #region 直播_修改 School_Video_Edit
+        public ActionResult School_Video_Edit(string video_id = "")
+        {
+            string err_msg = "";
+            DataTable dt;
+            DataTable d_lang;
+            dt = CSchool.Video_List(ref err_msg, video_id);
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["action_sty"] = "edit";
+
+            return View("School_Video_Data");
+        }
+        #endregion
+
+        #region 直播_刪除 School_Video_Del
+        public ActionResult School_Video_Del(string video_id = "")
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            CSchool.Video_Del(video_id);
+            return RedirectToAction("School_Video_List");
+        }
+        #endregion
+
+        #region 直播_儲存 School_Video_Save
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult School_Video_Save(string action_sty, string video_id, string c_url, string show, string sort, string lang_id)
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+
+            switch (action_sty)
+            {
+                case "add":
+                    CSchool.Video_Insert(c_url, show, sort, lang_id);
+                    break;
+                case "edit":
+                    CSchool.Video_Update(video_id, c_url, show, sort, lang_id);
+                    break;
+            }
+
+            return RedirectToAction("School_Video_List");
+        }
+
+        #endregion
+
+        #endregion 法理學院_直播
 
 
         #region 法理學院 歷屆合照
