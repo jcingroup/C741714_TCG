@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="日屬美佔, 1945年4月1日, usmgtcg, 林志昇, 身分證, 台灣民政府官網, 台灣民政府, 日本天皇, USMG, 台灣身分證, 台灣政府, TCG, 何瑞元, 詔書, 台灣名政府, 台灣平民政府, 臺灣民政府, 台湾民政府, Taiwan, Government, 日本台灣, Civil, 台灣, 官網">
     <meta name="description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
     <title>@ViewBag.Title - 台灣民政府 Taiwan Civil Government</title>
@@ -30,7 +30,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-startup-image" href="~/favicon_apple.png">
-    <meta name="apple-mobile-web-app-title" content="TCG">
+    <meta name="apple-mobile-web-app-title" content="U.S.M.G.T.C.G.">
     <link rel="apple-touch-icon" sizes="256x256" href="~/favicon_apple.png">
 
     <link rel="stylesheet" href="~/Content/css/vendor/open-iconic.css">
@@ -355,12 +355,20 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(".search-trigger").click(function(){
+            if ( $(".share").hasClass("active") ) {
+                $(".share").removeClass("active");
+                $(".share-trigger").attr('data-glyph', $(this).attr('data-glyph') == 'share' ? 'x' : 'share');
+            }
             var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'x' ? '' : 'x');
             $(this).toggleClass("icon-search oi");
             $(".search").toggleClass("active");
         });
 
         $(".share-trigger").click(function(){
+            if ( $(".search").hasClass("active") ) {
+                $(".search").removeClass("active");
+                $(".search-trigger").toggleClass("icon-search oi").attr('data-glyph', $(this).attr('data-glyph') == '' ? 'x' : '');
+            }
             var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'share' ? 'x' : 'share');
             $(".share").toggleClass("active");
         });

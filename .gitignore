@@ -243,6 +243,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .DS_Store
+._*
 /OutWeb/Images
 /OutWeb/ckeditor
 /OutWeb/Content/Upload
