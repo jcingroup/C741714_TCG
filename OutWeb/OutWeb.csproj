@@ -762,10 +762,6 @@
     <Content Include="Views\_SysAdm\EventStatesAdd.cshtml" />
     <Content Include="Views\_SysAdm\EventStatesEdit.cshtml" />
     <Content Include="Views\_SysAdm\EventStatesList.cshtml" />
-    <Content Include="Views\_SysAdm\SchoolDataAdd.cshtml" />
-    <Content Include="Views\_SysAdm\SchoolDataEdit.cshtml" />
-    <Content Include="Views\_SysAdm\SchoolDataList.cshtml" />
-    <Content Include="Views\_SysAdm\SchoolVideo.cshtml" />
     <Content Include="Views\_SysAdm\StatesVideoList.cshtml" />
     <Content Include="Views\_SysAdm\Login.cshtml" />
     <Content Include="Views\_SysAdm\News_Cate_Data.cshtml" />
@@ -812,6 +808,8 @@
     <Content Include="Views\_SysAdm\School_Data.cshtml" />
     <Content Include="Views\_SysAdm\News_List.cshtml" />
     <Content Include="Views\News\EventLatestContent.cshtml" />
+    <Content Include="Views\_SysAdm\School_Cate_Data.cshtml" />
+    <Content Include="Views\_SysAdm\School_Cate_List.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

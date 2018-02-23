@@ -1,7 +1,430 @@
-﻿
+﻿@using System.Data
 @{
-    ViewBag.Title = "School_Data";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    ViewBag.Crumb = "法理學院歷屆合照 管理";
+    ViewBag.subnav = "School";
+    ViewBag.subnav2 = "School_List";
+
+    //變數設定
+    string SysPath = "~/_SysAdm/";
+
+    string cFile = "School_Data";
+    string cFile_Add = "School_Add";
+    string cFile_Del = "School_Del";
+    string cFile_Edit = "School_Edit";
+    string cFile_Save = "School_Save";
+    string cFile_List = "School_List";
+
+    DataTable dt = (DataTable)ViewData["dt"];
+    DataTable d_img = (DataTable)ViewData["d_img"];
+    DataTable d_lang = (DataTable)ViewData["d_lang"];
+    DataTable d_cate = (DataTable)ViewData["d_cate"];
+
+    string id = "";
+    string c_title = "";
+    string c_desc = "";
+    string c_date = "";
+    string sort = "";
+    string action_sty = (string)ViewData["action_sty"];
+    string action_name = "";
+    string c_status = "";
+    string c_front_status = "";
+    string c_front_status_Y = "";
+    string c_front_status_N = "";
+
+    string img_no = "";
+    string img_path = "../Images/";
+    string small_img = "";
+    string big_img = "";
+    string img_id = "";
+    string lang = "";
+    string lang_selected = "";
+
+    string cate_id = "";
+    string cate_selected = "";
+
+    img_no = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+    if (action_sty == "add")
+    {
+        action_name = "新增";
+
+        id = "";
+        c_title = "";
+        c_desc = "";
+        c_status = "N";
+        c_front_status_N = "checked";
+        c_front_status_Y = "";
+        lang = "";
+        cate_id = "";
+        sort = "0";
+        c_date = DateTime.Today.ToString("yyyy-MM-dd");
+
+    }
+    else if (action_sty == "edit")
+    {
+        action_name = "修改";
+
+        //d_news = (DataTable)ViewData["d_news"];
+
+        //d_scenic_img_b = (DataTable)ViewData["d_scenic_img_b"];
+        //d_scenic_img_s = (DataTable)ViewData["d_scenic_img_s"];
+
+        id = dt.Rows[0]["id"].ToString();
+        c_title = dt.Rows[0]["c_title"].ToString();
+        c_desc = dt.Rows[0]["c_desc"].ToString();
+        c_date = dt.Rows[0]["c_date"].ToString();
+        c_status = dt.Rows[0]["status"].ToString();
+        sort = dt.Rows[0]["sort"].ToString();
+        lang = dt.Rows[0]["lang_id"].ToString();
+        cate_id = dt.Rows[0]["cate_id"].ToString();
+
+        switch (c_status)
+        {
+            case "Y":
+                c_front_status_Y = "checked";
+                c_front_status_N = "";
+                break;
+            case "N":
+                c_front_status_Y = "";
+                c_front_status_N = "checked";
+                break;
+        }
+    }
+
 }
 
-<h2>School_Data</h2>
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
 
+@section IncludeScript {
+    <script>
+        $('.slide-trigger').click(function(){
+            $(this).parents('.pages').children('.pages-content').slideToggle();
+        });
+    </script>
+}
+
+<h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+@* 引用 ajaxfileupload *@
+<script src="~/Scripts/ajaxfileupload.js"></script>
+@* 引用 ajax_lib *@
+<script src="~/Scripts/ajax_lib.js"></script>
+@*1.引用ckeditor.js*@
+<script src="~/ckeditor/ckeditor.js"></script>
+<script>
+    function form_ok() {
+        var sshow = "";
+        var shot = "";
+        var cmsg = "";
+        var c_title = "";
+
+        c_title = $("#c_title").val();
+        c_date = $("#c_date").val();
+
+        if(c_title == "")
+        {
+            if (cmsg != "")
+            {
+                cmsg += "\n";
+            }
+            cmsg += "請輸入標題";
+        }
+
+        if (c_date == "") {
+            if (cmsg != "") {
+                cmsg += "\n";
+            }
+            cmsg += "請輸入日期";
+        }
+
+        if (cmsg != "")
+        {
+            alert(cmsg);
+        }
+        else
+        {
+            form1.submit();
+        }
+        //alert("show:" + $("#show").val() + ";hot:" + $("#hot").val());
+
+    }
+
+    function get_cate() {
+        //  取得被選擇項目的值
+        //$("#select").find(":selected").val();
+        var c_lang = $("#lang_id").find(":selected").val();
+        var c_cate_kind = "School";
+        //alert(c_lang);
+        $.ajax({
+            url: 'Cate_Get',
+            data: { lang: c_lang, cate_kind: c_cate_kind }, //此参数非常严谨，写错一个引号都不行
+            type: "POST",
+            dataType: 'TEXT', //返回值类型 一般设置为json
+            async: false,
+            success: function (JData) {
+                //alert(JData);
+                data = handleAjaxVPNMsg(JData);
+                i = 0;
+                c_html = "";
+
+                //  移除全部的項目
+                $("#cate_id option").remove();
+                //新增空白
+                //$("#cate_id").append($("<option></option>").attr("value", "").text("全部"));
+
+                $.each($.parseJSON(data), function (idx, obj) {
+                    //$("#select").append($("<option></option>").attr("value", "值").text("文字"));
+                    $("#cate_id").append($("<option></option>").attr("value", obj.ID).text(obj.CATE_NAME));
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            },
+            complete: function () {
+                //alert(tbl_new_list);
+                //alert('ajax complete');
+            }
+        });
+        return false;
+    }
+
+    function del_img(img_id,c_sty)
+    {
+        var cimg_no = "";
+        var c_cate = "School"
+        if ($("#id").val().length > 0) {
+            cimg_no = $("#id").val();
+        }else {
+            cimg_no = @img_no;
+        }
+
+        $.ajax({                
+            url: 'Img_Del',
+            data: { img_id: img_id, img_sta:c_sty, img_no: cimg_no,img_cate: c_cate  }, //此参数非常严谨，写错一个引号都不行
+            type:"POST",
+            dataType: 'TEXT', //返回值类型 一般设置为json
+            async: false,
+            success: function(JData){
+                //alert(JData);
+                data = handleAjaxVPNMsg(JData);
+                i = 0;
+                c_html = "";
+
+                $.each($.parseJSON(data), function (idx, obj) {
+                    i = i + 1;
+                    c_html = c_html + "<li>";
+                    c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "');\" >&times;</button>";
+                    c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                    c_html = c_html + "</li>";
+                });
+
+                $('#c_img_' + c_sty).html(c_html);
+            },
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError); 
+            },
+            complete: function () {
+                //alert(tbl_new_list);
+                //alert('ajax complete');
+            }
+        });
+        return false;
+    }
+
+    function upload(c_sty)
+    {
+
+        if ($("#pic_" + c_sty).val().length > 0) {
+            //ajaxFileUpload('pic_small','small_img');
+            ajaxFileUpload(c_sty);
+        }
+        else {
+            alert("請選擇圖片");
+        }
+    }
+
+    function ajaxFileUpload(c_sty) {
+        var cimg_no = "";
+        var c_img = "pic_" + c_sty;
+        var c_cate = "School"
+        var cimg_sty = "";
+        var cimg_id = "";
+
+        if ($("#id").val().length > 0) {
+            cimg_no = $("#id").val();
+        }else {
+            cimg_no = @img_no;
+        }
+
+        //alert(c_img);
+        var chtml = "";
+        var i = 0;
+        $.ajaxFileUpload
+        (
+            {
+                url: 'Upload', //用于文件上传的服务器端请求地址
+                type: 'post',
+                data: { img_no: cimg_no, img_sta: c_sty, img_cate: c_cate }, //此参数非常严谨，写错一个引号都不行
+                secureuri: false, //一般设置为false
+                //fileElementId: 'file1', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+                fileElementId: c_img, //文件上传空间的id属性  <input type="file" id="file" name="file" />
+                //dataType: 'HTML', //返回值类型 一般设置为json
+                dataType: 'JSON', //返回值类型 一般设置为json
+                success: function (JData, status)  //服务器成功响应处理函数
+                {
+                    //alert(JData);
+
+                    data = handleAjaxVPNMsg(JData);
+
+                    i = 0;
+                    c_html = "";
+                    $.each($.parseJSON(data), function (idx, obj) {
+                        i = i + 1;
+                        c_html = c_html + "<li>";
+                        c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "');\" >&times;</button>";
+                        c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                        c_html = c_html + "</li>";
+                    });
+
+                    $('#c_img_' + c_sty).html(c_html);
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    alert(e);
+                }
+            }
+        )
+        return false;
+    }
+</script>
+<form class="form-list" action="@Url.Content(cFile_Save)" name="form1" id="form1" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="action_sty" id="action_sty" value="@action_sty" />
+    <input type="hidden" name="id" id="id" value="@id" />
+    <input type="hidden" name="img_no" id="img_no" value="@img_no" />
+
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 語系</dt>
+        <dd class="col-6">
+            <select id="lang_id" name="lang_id" class="form-element" onchange="get_cate();" required>
+                @if (d_lang.Rows.Count > 0)
+            {
+                for (int i = 0; i < d_lang.Rows.Count; i++)
+                {
+                    if (d_lang.Rows[i]["lang_id"].ToString() == lang)
+                    {
+                        lang_selected = "selected";
+                    }
+                    else
+                    {
+                        lang_selected = "";
+                    }
+                    <option value="@d_lang.Rows[i]["lang_id"].ToString()" @lang_selected>@d_lang.Rows[i]["lang_name"].ToString()</option>
+                    }
+                }
+            </select>
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 日期</dt>
+        <dd class="col-6">
+            <input type="date" class="form-element" required id="c_date" name="c_date" value="@c_date">
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 班別</dt>
+        <dd class="col-6">
+            <select id="cate_id" name="cate_id" class="form-element" required>
+                @if (d_cate.Rows.Count > 0)
+            {
+                for (int i = 0; i < d_cate.Rows.Count; i++)
+                {
+                    if (d_cate.Rows[i]["id"].ToString() == cate_id)
+                    {
+                        cate_selected = "selected";
+                    }
+                    else
+                    {
+                        cate_selected = "";
+                    }
+                    <option value="@d_cate.Rows[i]["id"].ToString()" @cate_selected>@d_cate.Rows[i]["cate_name"].ToString()</option>
+                    }
+                }
+            </select>
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 期別</dt>
+        <dd class="col-6">
+            <input type="text" class="form-element" required id="c_title" name="c_title" value="@c_title">
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 網址</dt>
+        <dd class="col-6">
+            <input type="text" class="form-element" required id="c_title" name="c_desc" value="@c_desc">
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 狀態</dt>
+        <dd class="col-6">
+            <input type="radio" class="radio" name="show" id="showY" value="Y" @c_front_status_Y>
+            <label for="showY"></label>
+            發佈
+            <input type="radio" class="radio" name="show" id="showN" value="N" @c_front_status_N>
+            <label for="showN"></label>
+            草稿
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 排序</dt>
+        <dd class="col-3">
+            @*<input type="text" class="form-element" value="0" required>*@
+            <input type="number" min="0" class="form-element" id="sort" name="sort" value="@sort" required>
+        </dd>
+        <dd class="col-5">
+            <small class="text-secondary">數字愈大愈前面</small>
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1">圖片上傳</dt>
+        <dd class="col-6">
+            <div class="input-file">
+                @* 瀏覽&上傳檔案 *@
+                <input type="file" name="pic_S" id="pic_S" accept="image/*" class="form-control form-control-sm">
+                <button type="button" name="btn_small_pic" onclick="upload('S');" class="btn btn-sm btn-success oi m-t-small" data-glyph="data-transfer-upload">
+                    上傳
+                </button>
+                <br>
+                @* 照片縮圖(上傳圖片後顯示) *@
+                <ol class="upload-img list-inline" id="c_img_S" name="c_img_S">
+                    @for (int s = 0; s < d_img.Rows.Count; s++)
+                    {
+                        small_img = img_path + d_img.Rows[s]["img_file"].ToString();
+                        img_id = d_img.Rows[s]["id"].ToString();
+                        <li>
+                            <button class="close" id="btn_close_s_@s" name="btn_close_s_@s" onclick="del_img('@img_id','S');">&times;</button>
+                            <img id="img_S_@s" name="img_S_@s" src="@small_img" alt="">
+                        </li>
+                    }
+
+                </ol>
+            </div>
+            <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*450px，建議檔案大小不超過 1000kb</small>
+        </dd>
+    </dl>
+
+    <footer class="submit-bar clear mt-24">
+        <button type="button" class="btn success oi" data-glyph="circle-check" onclick="form_ok();" name="btn_ok" id="btn_ok">
+            確認儲存
+        </button>
+        <button type="button" class="btn warning oi" data-glyph="x" onclick="location.href='@Url.Content(SysPath + cFile_List)'" id="btn_back" name="btn_back">
+            取消，回列表
+        </button>
+    </footer>
+</form>

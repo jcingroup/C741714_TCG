@@ -1301,7 +1301,7 @@ namespace OutWeb.Controllers
         public ActionResult Focus_Del(string id = "")
         {
             //OverlookDBService OverlookDB = new OverlookDBService();
-            CEdu.Del(id);
+            CFocus.Del(id);
             return RedirectToAction("Focus_List");
         }
         #endregion
@@ -1432,7 +1432,232 @@ namespace OutWeb.Controllers
 
         #endregion 法理學院_直播
 
+        #region 法理學院_歷屆合照 School
+        
+        #region 法理學院_歷屆合照_類別 School_Cate
 
+        #region 法理學院_歷屆合照_類別_陳列 School_Cate_List
+        public ActionResult School_Cate_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_lang = "")
+        {
+            //定義變數
+            string c_sort = "";
+            string err_msg = "";
+            DataTable dt;
+            DataTable d_lang;
+
+            //排序設定
+            if (txt_sort.Trim().Length > 0)
+            {
+                c_sort = c_sort + "a1." + txt_sort;
+            }
+            if (txt_a_d.Trim().Length > 0)
+            {
+                c_sort = c_sort + " " + txt_a_d;
+            }
+
+            //抓取消息類別資料
+            dt = CSchool.Cate_List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_lang);
+
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            //設定傳值
+            ViewData["page"] = page;
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["txt_title_query"] = txt_title_query;
+            ViewData["txt_sort"] = txt_sort;
+            ViewData["txt_a_d"] = txt_a_d;
+            ViewData["txt_lang"] = txt_lang;
+
+            return View();
+        }
+        #endregion
+
+        #region 法理學院_歷屆合照_類別_新增 School_Cate_Add
+        public ActionResult School_Cate_Add()
+        {
+            string err_msg = "";
+            ViewData["action_sty"] = "add";
+            DataTable d_lang;
+            d_lang = Clang.Lang_List(ref err_msg, "");
+
+            ViewData["d_lang"] = d_lang;
+            return View("School_Cate_Data");
+        }
+        #endregion
+
+        #region 法理學院_歷屆合照_類別_修改 School_Cate_Edit
+        public ActionResult School_Cate_Edit(string cate_id = "")
+        {
+            string err_msg = "";
+            DataTable dt;
+            DataTable d_lang;
+            dt = CSchool.Cate_List(ref err_msg, cate_id);
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["action_sty"] = "edit";
+
+            return View("School_Cate_Data");
+        }
+        #endregion
+
+        #region 法理學院_歷屆合照_類別_刪除 School_Cate_Del
+        public ActionResult School_Cate_Del(string cate_id = "")
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            CSchool.Cate_Del(cate_id);
+            return RedirectToAction("School_Cate_List");
+        }
+        #endregion
+
+        #region 法理學院_歷屆合照_類別_儲存 School_Cate_Save
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult School_Cate_Save(string action_sty, string cate_id, string cate_name, string cate_desc, string show, string sort, string lang_id)
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+
+            switch (action_sty)
+            {
+                case "add":
+                    CSchool.Cate_Insert(cate_name, cate_desc, show, sort, lang_id);
+                    break;
+                case "edit":
+                    CSchool.Cate_Update(cate_id, cate_name, cate_desc, show, sort, lang_id);
+                    break;
+            }
+
+            return RedirectToAction("School_Cate_List");
+        }
+
+        #endregion
+
+        #endregion
+
+        #region 法理學院_歷屆合照_基本資料
+
+        #region 法理學院_歷屆合照_陳列 School_List
+        public ActionResult School_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_lang = "", string txt_cate = "")
+        {
+            //定義變數
+            string c_sort = "";
+            DataTable dt;
+            DataTable d_lang;
+            DataTable d_cate;
+            string err_msg = "";
+
+            //排序設定
+            if (txt_sort.Trim().Length > 0)
+            {
+                c_sort = c_sort + "a1." + txt_sort;
+            }
+            if (txt_a_d.Trim().Length > 0)
+            {
+                c_sort = c_sort + " " + txt_a_d;
+            }
+
+            //抓取資料
+            dt = CSchool.List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_start_date, txt_end_date, txt_cate, txt_lang);
+            //語系
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            //類別
+            d_cate = CSchool.Cate_List(ref err_msg, "", "sort", "Y", "", txt_lang);
+            //設定傳值
+            ViewData["page"] = page;
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["txt_title_query"] = txt_title_query;
+            ViewData["txt_sort"] = txt_sort;
+            ViewData["txt_a_d"] = txt_a_d;
+            ViewData["txt_lang"] = txt_lang;
+            ViewData["txt_cate"] = txt_cate;
+
+            return View();
+        }
+        #endregion
+
+        #region 法理學院_歷屆合照_新增 School_Add
+        public ActionResult School_Add()
+        {
+            //定義變數
+            string err_msg = "";
+            DataTable d_cate;
+            DataTable d_lang;
+            DataTable d_img;
+            //抓取消息類別資料
+
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            d_cate = CSchool.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
+            d_img = DB.Img_List(ref err_msg, "", "", "School");
+            //設定傳值
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["d_img"] = d_img;
+            ViewData["action_sty"] = "add";
+
+            return View("School_Data");
+        }
+        #endregion
+
+        #region 法理學院_歷屆合照_修改 School_Edit
+        public ActionResult School_Edit(string id = "")
+        {
+            string err_msg = "";
+
+            DataTable d_cate;
+            DataTable d_lang;
+            DataTable dt;
+            DataTable d_img;
+            //抓取類別資料
+            dt = CSchool.List(ref err_msg, id);
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            d_cate = CSchool.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
+            d_img = DB.Img_List(ref err_msg, id, "", "School");
+            //設定傳值
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["d_img"] = d_img;
+            ViewData["action_sty"] = "edit";
+
+            return View("School_Data");
+        }
+        #endregion
+
+        #region 法理學院_歷屆合照_刪除 School_Del
+        public ActionResult School_Del(string id = "")
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            CSchool.Del(id);
+            return RedirectToAction("School_List");
+        }
+        #endregion
+
+        #region 法理學院_歷屆合照_儲存 School_Save
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult School_Save(string action_sty, string id, string c_title, string c_date, string c_desc, string show, string sort, string lang_id, string cate_id, string img_no)
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            switch (action_sty)
+            {
+                case "add":
+                    CSchool.Insert(c_title, c_date, c_desc, show, sort, lang_id, cate_id, img_no);
+                    break;
+                case "edit":
+                    CSchool.Update(id, c_title, c_date, c_desc, show, sort, lang_id, cate_id);
+                    break;
+            }
+
+            return RedirectToAction("School_List");
+        }
+
+        #endregion
+
+        #endregion 法理學院_歷屆合照_基本資料
+
+        #endregion 法理學院_歷屆合照 School
         #region 法理學院 歷屆合照
         public ActionResult SchoolDataList()
         {
@@ -1716,31 +1941,6 @@ namespace OutWeb.Controllers
 
         #endregion 最新消息
 
-
-        #region 焦點專欄 分類
-        public ActionResult FocusKindList()
-        {
-            return View();
-        }
-        #endregion 焦點專欄 分類
-
-
-        #region 焦點專欄
-        public ActionResult FocusDataList()
-        {
-            return View();
-        }
-        public ActionResult FocusDataAdd()
-        {
-            return View();
-        }
-        public ActionResult FocusDataEdit()
-        {
-            return View();
-        }
-        #endregion 焦點專欄
-
-
         //#region 修改密碼
 
         ///// 管理員密碼變更
@@ -1795,6 +1995,10 @@ namespace OutWeb.Controllers
                     break;
                 case "Focus":
                     dt = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", lang);
+                    str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+                    break;
+                case "School":
+                    dt = CSchool.Cate_List(ref err_msg, "", "sort", "Y", "", lang);
                     str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
                     break;
             }
