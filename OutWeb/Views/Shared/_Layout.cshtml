@@ -378,6 +378,13 @@
             }, 750);
             return false;
         });
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.goTop').fadeIn();
+            } else {
+                $('.goTop').fadeOut();
+            }
+        });
         $('.goTop').click(function () {
             $('body, html').stop(true).animate({ scrollTop: 0 }, 800);
             return false;
