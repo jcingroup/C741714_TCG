@@ -63,7 +63,6 @@
                     </li>
                     <li class="share">
                         <div class="addthis_inline_share_toolbox"></div>
-                        <button class="share-trigger oi" data-glyph="share"></button>
                     </li>
                     <li class="menu">
                         <button class="sitemap-trigger icon-menu"></button>
@@ -103,19 +102,19 @@
                 <section id="banner"></section>
                 <nav id="menu" class="wrap">
                     <ul class="nav row no-gutters list-unstyled">
-                        <li class="col-xs-4">
+                        <li class="col-4">
                             <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs">
                                 <i class="icon-about"></i>
                                 什麼是台灣民政府
                             </a>
                         </li>
-                        <li class="col-xs-4">
+                        <li class="col-4">
                             <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs">
                                 <i class="icon-join-us"></i>
                                 如何加入台灣民政府
                             </a>
                         </li>
-                        <li class="col-xs-4">
+                        <li class="col-4">
                             <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/News">
                                 <i class="icon-news2"></i>
                                 最新訊息 活動公告
@@ -138,21 +137,21 @@
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization">
                                 <i class="icon-organization"></i>
-                                行政區域圖&amp;組織架構
+                                行政區域圖&amp;<br class="visible-xs">組織架構
                             </a>
                         </li>
                         <li class="@(ViewBag.BodyClass.Contains("JoinUs") ? "" : "hidden")">
                             <a class="@(ViewBag.BodyClass.Contains("Apply") ? "current" : "")" href="~/JoinUs/Apply">
                                 <i class="icon-drivers-license-o"></i>
-                                申請民政府身分證
+                                申請民政府<br class="visible-xs">身分證
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Consult") ? "current" : "")" href="~/JoinUs/Consult">
                                 <i class="icon-phone"></i>
-                                地方服務處諮詢
+                                地方服務處<br class="visible-xs">諮詢
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("School") ? "current" : "")" href="~/JoinUs/Live">
                                 <i class="icon-school"></i>
-                                參加台灣法理學院
+                                參加台灣<br class="visible-xs">法理學院
                             </a>
                         </li>
                         <li class="@(ViewBag.BodyClass.Contains("News") ? "" : "hidden")">
@@ -166,7 +165,7 @@
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Announcement") ? "current" : "")" href="~/News/AnnouncementLatest">
                                 <i class="icon-bullhorn"></i>
-                                新聞 公告 聲明
+                                新聞 <br class="visible-xs">公告 聲明
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Focus") ? "current" : "")" href="~/News/FocusCategory">
                                 <i class="icon-focus"></i>
@@ -200,10 +199,12 @@
         <footer id="footer">
             <div class="wrap">
                 <div class="copyright pull-left">
-                    <strong>台灣民政府 中央會館</strong> Taiwan Civil Government Central Headquarters &copy; 2017
+                    <i class="icon-tcg"></i>
+                    <strong>台灣民政府 中央會館</strong>
+                    <span class="hidden-xs">Taiwan Civil Government Central Headquarters</span> &copy; 2017
                 </div>
                 <nav class="foot-nav pull-right">
-                    <a href="https://goo.gl/maps/YnjYAMLxhwr" target="new">新竹州桃園郡33391龜山鄉員林坑路100-1號</a>
+                    <a href="https://goo.gl/maps/YnjYAMLxhwr" target="new">33391新竹州桃園郡龜山鄉員林坑路100-1號</a>
                     <span>(03) 355-6363</span>
                 </nav>
             </div>
@@ -214,7 +215,7 @@
     <nav id="sitemap">
         <button class="sitemap-trigger oi" data-glyph="x"></button>
         <ul class="list-unstyled row">
-            <li class="col-xs-12 col-md-4">
+            <li class="col-12 col-md-4">
                 <h1>
                     <a href="~/News">最新訊息</a>
                 </h1>
@@ -249,7 +250,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="col-xs-12 col-md-4">
+            <li class="col-12 col-md-4">
                 <h1>
                     <a href="~/JoinUs">
                         如何加入台灣民政府
@@ -287,7 +288,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="col-xs-12 col-md-4">
+            <li class="col-12 col-md-4">
                 <h1>
                     <a href="~/AboutUs">
                         什麼是台灣民政府
@@ -355,22 +356,9 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(".search-trigger").click(function(){
-            if ( $(".share").hasClass("active") ) {
-                $(".share").removeClass("active");
-                $(".share-trigger").attr('data-glyph', $(this).attr('data-glyph') == 'share' ? 'x' : 'share');
-            }
             var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'x' ? '' : 'x');
             $(this).toggleClass("icon-search oi");
             $(".search").toggleClass("active");
-        });
-
-        $(".share-trigger").click(function(){
-            if ( $(".search").hasClass("active") ) {
-                $(".search").removeClass("active");
-                $(".search-trigger").toggleClass("icon-search oi").attr('data-glyph', $(this).attr('data-glyph') == '' ? 'x' : '');
-            }
-            var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'share' ? 'x' : 'share');
-            $(".share").toggleClass("active");
         });
 
         $(".sitemap-trigger").click(function(){
