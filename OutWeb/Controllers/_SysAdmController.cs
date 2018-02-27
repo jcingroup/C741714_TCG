@@ -1873,7 +1873,7 @@ namespace OutWeb.Controllers
             DataTable dt;
             //DataTable d_img;
             //抓取類別資料
-            dt = CAboutUs.List(ref err_msg, id);
+            dt = CStates.Video_List(ref err_msg, id);
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CStates.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             //d_img = DB.Img_List(ref err_msg, id, "", "AboutUs");
@@ -1892,7 +1892,7 @@ namespace OutWeb.Controllers
         public ActionResult States_Video_Del(string id = "")
         {
             //OverlookDBService OverlookDB = new OverlookDBService();
-            CAboutUs.Del(id);
+            CStates.Video_Del(id);
             return RedirectToAction("States_Video_List");
         }
         #endregion
