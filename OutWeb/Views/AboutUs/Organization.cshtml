@@ -13,6 +13,7 @@
 }
 
 @section scripts {
+    <script src="~/Content/js/tabs.js"></script>
     <script src="~/Content/js/swiper.min.js"></script>
     <script>
         var swiper = new Swiper('.swiper-container', {
@@ -23,43 +24,10 @@
                 prevEl: '.swiper-button-prev',
             },
         });
-
-        $(".tabs .tab-nav").click(function(e){
-            $(this).parent().siblings().children(".tab-nav").removeClass("current");
-            $(this).addClass("current");
-
-            var target = $(this).attr("href");
-            $(target).siblings(".tab").hide().removeClass("current");
-            $(target).fadeIn().addClass("current");
-
-            // change url hash without reloading page
-            if(history.pushState) {
-                history.pushState(null, null, target);
-            }
-            else {
-                location.hash = target;
-            }
-
-            e.preventDefault();
-        });
-
-        var hash = window.location.hash;
-        if (hash) {
-            var hash_root = hash.split('-')[0];
-            $(".tabs .tab-nav").each(function(){
-                var target = $(this).attr("href");
-                if (target == hash || target == hash_root) {
-                    $(this).parent().siblings().children(".tab-nav").removeClass("current");
-                    $(this).addClass("current");
-                }
-            });
-            $(hash).add(hash_root).siblings(".tab").hide().removeClass("current");
-            $(hash).add(hash_root).fadeIn().addClass("current");
-        }
     </script>
 }
 
-<h1 class="sr-only">關於我們 - @ViewBag.Title</span></h1>
+<h1 class="sr-only">關於我們 - @ViewBag.Title</h1>
 
 <ul class="tabs list-inline text-center">
     <li><a class="tab-nav current" href="#tab1">行政區域圖</a></li>
@@ -71,7 +39,7 @@
 
     <!-- 行政區域圖 -->
     <div class="tab current" id="tab1">
-        <h2 class="title">行政區域圖</h2>
+        <h2 class="title"><span>行政區域圖</span></h2>
 
         <div class="tab-content clearfix editor">
 
@@ -118,7 +86,7 @@
 
     <!-- 組織架構 -->
     <div class="tab" id="tab2">
-        <h2 class="title">組織架構</h2>
+        <h2 class="title"><span>組織架構</span></h2>
 
         @*下面是編輯器內容，有資料的話才顯示*@
         <div class="clearfix editor">
@@ -134,7 +102,7 @@
 
     <!-- 人事名單 -->
     <div class="tab" id="tab3">
-        <h2 class="title">人事名單</h2>
+        <h2 class="title"><span>人事名單</span></h2>
 
         @*下面是編輯器內容，有資料的話才顯示*@
         <div class="clearfix editor">
