@@ -97,7 +97,10 @@
 
 
         <div class="@c_tab_nav" id="@str_tab">
-            <h2 class="title">@cate_name</h2>
+            <h2 class="title">
+                <div class="addthis_inline_share_toolbox"></div>
+                <span>@cate_name</span>
+            </h2>
             <div class="tab-content clearfix editor">
                 @*文章分頁 頁籤切換，只有一頁就不顯示頁籤*@
                 @if (dt1.Rows.Count > 1)

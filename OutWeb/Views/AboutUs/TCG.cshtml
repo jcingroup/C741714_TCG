@@ -20,12 +20,12 @@
 }
 
 @section css {
-    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
+    <!-- <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css"> -->
 }
 
 @section scripts {
     <script src="~/Content/js/tabs.js"></script>
-    <script src="~/Content/js/swiper.min.js"></script>
+    <!-- <script src="~/Content/js/swiper.min.js"></script>
     <script>
         var swiper = new Swiper('.swiper-container', {
             slidesPerView: 'auto',
@@ -35,10 +35,13 @@
                 prevEl: '.swiper-button-prev',
             },
         });
-    </script>
+    </script> -->
 }
 
-<h1 class="title"><span>@ViewBag.Title</span></h1>
+<h1 class="title">
+    <div class="addthis_inline_share_toolbox"></div>
+    <span>@ViewBag.Title</span>
+</h1>
 
 <div class="tab-content clearfix editor">
 

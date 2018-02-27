@@ -636,6 +636,7 @@
     <Content Include="Content\font\icomoon\icomoon.svg" />
     <Content Include="Content\font\open-iconic\open-iconic.svg" />
     <Content Include="Content\images\banner.jpg" />
+    <Content Include="Content\images\icon-tcg.svg" />
     <Content Include="Content\images\icon-view.png" />
     <Content Include="Content\images\icon-word.jpg" />
     <Content Include="Content\images\index\banner.jpg" />
@@ -645,7 +646,6 @@
     <Content Include="Content\images\JoinUs\caption-primary.gif" />
     <Content Include="Content\images\JoinUs\gallery-sp.jpg" />
     <Content Include="Content\images\logo.png" />
-    <Content Include="Content\images\logo_s.gif" />
     <Content Include="Content\images\logo_s.png" />
     <Content Include="Content\images\pic-temp.jpg" />
     <Content Include="Content\images\pic-temp2.jpg" />
@@ -655,6 +655,7 @@
     <Content Include="Content\js\jquery.waypoints.min.js" />
     <Content Include="Content\js\lightbox.min.js" />
     <Content Include="Content\js\swiper.min.js" />
+    <Content Include="Content\js\tabs.js" />
     <Content Include="Content\noIE\bg.gif" />
     <Content Include="Content\noIE\brow.gif" />
     <Content Include="Content\noIE\brow2.gif" />
@@ -754,10 +755,8 @@
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\_SysAdm\EventHistoryAdd.cshtml" />
     <Content Include="Views\_SysAdm\EventHistoryEdit.cshtml" />
     <Content Include="Views\_SysAdm\EventHistoryList.cshtml" />
