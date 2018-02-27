@@ -228,6 +228,7 @@
     <Compile Include="Service\News.cs" />
     <Compile Include="Service\School.cs" />
     <Compile Include="Service\Service.cs" />
+    <Compile Include="Service\States.cs" />
     <Compile Include="Service\ValidateCode.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -811,6 +812,10 @@
     <Content Include="Views\News\EventLatestContent.cshtml" />
     <Content Include="Views\_SysAdm\School_Cate_Data.cshtml" />
     <Content Include="Views\_SysAdm\School_Cate_List.cshtml" />
+    <Content Include="Views\_SysAdm\States_Cate_Data.cshtml" />
+    <Content Include="Views\_SysAdm\States_Cate_List.cshtml" />
+    <Content Include="Views\_SysAdm\States_Video_List.cshtml" />
+    <Content Include="Views\_SysAdm\States_Video_Data.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
