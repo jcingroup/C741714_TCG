@@ -16,7 +16,7 @@ $(document).ready(function () {
             location.hash = target;
         }
 
-        changeTitle();
+        // changeTitle();
 
         e.preventDefault();
     });
@@ -35,12 +35,14 @@ $(document).ready(function () {
         $(hash).add(hash_root).fadeIn().addClass("current");
     }
 
-    changeTitle();
+    // changeTitle();
 
     function changeTitle(){
         var title = $('title').text();
+        var metaTitle = $('#metaTitle').attr('content');
         var str = $('.tabs .tab-nav.current').text();
         $('title').html(str + " - " + title);
+        $('#metaTitle').attr('content', str + " - " + metaTitle);
     }
 
 });
