@@ -7,18 +7,18 @@
     <meta name="keywords" content="日屬美佔, 1945年4月1日, usmgtcg, 林志昇, 身分證, 台灣民政府官網, 台灣民政府, 日本天皇, USMG, 台灣身分證, 台灣政府, TCG, 何瑞元, 詔書, 台灣名政府, 台灣平民政府, 臺灣民政府, 台湾民政府, Taiwan, Government, 日本台灣, Civil, 台灣, 官網">
     <meta name="description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
     @if (ViewBag.IsFirstPage) {
-        <title>台灣民政府 Taiwan Civil Government</title>
+        <title id="title">台灣民政府 Taiwan Civil Government</title>
     } else {
-        <title>@ViewBag.Title - 台灣民政府 Taiwan Civil Government</title>
+        <title id="title">@ViewBag.Title | 台灣民政府 TCG</title>
     }
-
+    
     @if (ViewBag.IsFirstPage) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="台灣民政府 Taiwan Civil Government" />
     }
     else {
         <meta property="og:type" content="article" />
-        <meta id="mataTitle" property="og:title" content="@ViewBag.Title" />
+        <meta id="mataTitle" property="og:title" content="@ViewBag.Title | 台灣民政府 TCG" />
     }
     <meta property="og:description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
     <meta name="og:site_name" content="台灣民政府 Taiwan Civil Government">
@@ -58,11 +58,6 @@
                     <!-- <li class="lang"><a href="">English</a></li>
                     <li class="lang"><a href="">日本語</a></li> -->
                     <li class="search">
-                        @* 全文檢索: 找標題/內文 關鍵字 *@
-                        <form class="search-form form-inline" action="">
-                            <input type="text" class="form-element" placeholder="請在此輸入">
-                            <button class="icon-search"></button>
-                        </form>
                         <button class="search-trigger icon-search"></button>
                     </li>
                     <li class="share">
@@ -72,13 +67,12 @@
                         <button class="sitemap-trigger icon-menu"></button>
                     </li>
                 </ul>
-
-                <h1 class="logo">
-                    <a href="~/Home" title="回首頁">台灣民政府 Taiwan Civil Government</a>
-                </h1>
             </div>
 
             @if (ViewBag.IsFirstPage) {
+                <h1 class="logo">
+                    <a href="~/Home" title="回首頁">台灣民政府 Taiwan Civil Government</a>
+                </h1>
                 <nav id="menu">
                     <ul class="nav list-unstyled">
                         <li>
@@ -90,20 +84,28 @@
                         <li>
                             <a href="~/JoinUs">
                                 <i class="icon-join-us"></i>
-                                如何加入<br>台灣民政府
+                                如何加入
+                                <!-- <br>台灣民政府 -->
                             </a>
                         </li>
                         <li>
                             <a href="~/News">
                                 <i class="icon-news2"></i>
-                                最新訊息<br>活動公告
+                                <!-- 最新訊息<br> -->
+                                活動公告
                             </a>
                         </li>
                     </ul>
                 </nav>
             }
             else {
-                <section id="banner"></section>
+                <section id="banner">
+                    <div class="wrap">
+                        <h1 class="logo">
+                            <a href="~/Home" title="回首頁">台灣民政府 Taiwan Civil Government</a>
+                        </h1>
+                    </div>
+                </section>
                 <nav id="menu" class="wrap">
                     <ul class="nav row no-gutters list-unstyled">
                         <li class="col-4">
@@ -187,7 +189,7 @@
         else {
             <main id="main" class="wrap">
                 <ul class="breadcrumb">
-                    <li><a href="~/Index"><i class="oi" data-glyph="home"></i></a></li>
+                    <li><a href="~/Home"><i class="oi" data-glyph="home"></i></a></li>
                     @RenderSection("breadcrumb", false)
                 </ul>
                 @RenderBody()
@@ -216,7 +218,7 @@
 
     }
 
-    <nav id="sitemap">
+    <nav id="sitemap" class="popup">
         <button class="sitemap-trigger oi" data-glyph="x"></button>
         <ul class="list-unstyled row">
             <li class="col-12 col-md-4">
@@ -322,10 +324,10 @@
                                         <h4><a href="~/AboutUs/Law">台灣基本法</a></h4>
                                     </li>
                                     <li>
-                                        <h4><a href="~/AboutUs/Law#tab2">台灣公民權利法</a></h4>
+                                        <h4><a href="~/AboutUs/Law#tab5">台灣公民權利法</a></h4>
                                     </li>
                                     <li>
-                                        <h4><a href="~/AboutUs/Law#tab3">官方證明文件</a></h4>
+                                        <h4><a href="~/AboutUs/Law#tab6">官方證明文件</a></h4>
                                     </li>
                                 </ul>
                             </li>
@@ -357,12 +359,23 @@
         </ul>
     </nav>
 
+    <nav id="search" class="popup">
+        <button class="search-trigger oi" data-glyph="x"></button>
+        @* 全文檢索: 找標題/內文 關鍵字 *@
+        <form class="search-form form-inline" action="~/Home/Search">
+            <input type="text" class="form-element" placeholder="請在此輸入">
+            <button>
+                <i class="icon-search"></i> 搜尋
+            </button>
+        </form>
+    </nav>
+
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="~/Content/js/jquery.waypoints.min.js"></script>
     <script>
         $(".search-trigger").click(function(){
-            var icon = $(this).attr('data-glyph', $(this).attr('data-glyph') == 'x' ? '' : 'x');
-            $(this).toggleClass("icon-search oi");
-            $(".search").toggleClass("active");
+            $("#search").fadeToggle();
+            $("body").toggleClass("overlay");
         });
 
         $(".sitemap-trigger").click(function(){
@@ -374,23 +387,24 @@
             location.reload();
         });
 
+        // 卷軸卷動效果
+        $('body').waypoint(function(direction) {
+            if( direction === 'down' ) {
+                $('body').addClass('scrolled');
+                $('.goTop').fadeIn();
+            }
+            else if( direction === 'up' ){
+                $('body').removeClass('scrolled');
+                $('.goTop').fadeOut();
+            }
+        }, { offset: -1 } );
+
         // 點選後跳到 href 指向的位置
         $('.scroll').click(function () {
             var scrollToAnchor = $(this).attr('href');
             $('html, body').stop(true).animate({
                 scrollTop: $(scrollToAnchor).offset().top - 40
             }, 750);
-            return false;
-        });
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 100) {
-                $('.goTop').fadeIn();
-            } else {
-                $('.goTop').fadeOut();
-            }
-        });
-        $('.goTop').click(function () {
-            $('body, html').stop(true).animate({ scrollTop: 0 }, 800);
             return false;
         });
     </script>

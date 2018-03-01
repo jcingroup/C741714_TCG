@@ -21,14 +21,8 @@ namespace OutWeb.Controllers
             return View();
         }
 
-        // 公司簡介
-        public ActionResult AboutUs()
-        {
-            return View();
-        }
-
-        // 聯絡我們
-        public ActionResult ContactUs()
+        // 全文檢索
+        public ActionResult Search()
         {
             return View();
         }

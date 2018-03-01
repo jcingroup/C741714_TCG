@@ -647,11 +647,6 @@
     <Content Include="Content\images\JoinUs\gallery-sp.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logo_s.png" />
-    <Content Include="Content\images\pic-temp.jpg" />
-    <Content Include="Content\images\pic-temp2.jpg" />
-    <Content Include="Content\images\pic-temp3.jpg" />
-    <Content Include="Content\images\piclistBg.gif" />
-    <Content Include="Content\images\piclistBg2.gif" />
     <Content Include="Content\js\jquery.waypoints.min.js" />
     <Content Include="Content\js\lightbox.min.js" />
     <Content Include="Content\js\swiper.min.js" />
@@ -815,6 +810,7 @@
     <Content Include="Views\_SysAdm\States_Cate_List.cshtml" />
     <Content Include="Views\_SysAdm\States_Video_List.cshtml" />
     <Content Include="Views\_SysAdm\States_Video_Data.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
