@@ -24,23 +24,8 @@
     <li>@ViewBag.Title</li>
 }
 
-@section css {
-    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
-}
-
 @section scripts {
     <script src="~/Content/js/tabs.js"></script>
-    <script src="~/Content/js/swiper.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 'auto',
-            spaceBetween: 0,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    </script>
 }
 
 <h1 class="sr-only">關於我們 - @ViewBag.Title</span></h1>
@@ -98,38 +83,32 @@
 
         <div class="@c_tab_nav" id="@str_tab">
             <h2 class="title">
+                <span class="underline">@cate_name</span>
                 <div class="addthis_inline_share_toolbox"></div>
-                <span>@cate_name</span>
             </h2>
             <div class="tab-content clearfix editor">
                 @*文章分頁 頁籤切換，只有一頁就不顯示頁籤*@
                 @if (dt1.Rows.Count > 1)
                 {
-                    <div class="tabs slider">
-                        <div class="swiper-container">
-                            <ul class="swiper-wrapper list-inline">
-                                @for (int j = 0; j < dt1.Rows.Count; j++)
-                                {
-                                    c_title = dt1.Rows[j]["c_title"].ToString();
-                                    cj = j.ToString();
-                                    if (j == 0)
-                                    {
-                                        c_tab_nav = "tab-nav current";
-                                    }
-                                    else
-                                    {
-                                        c_tab_nav = "tab-nav";
-                                    }
+                    <ul class="tabs list-inline">
+                        @for (int j = 0; j < dt1.Rows.Count; j++)
+                        {
+                            c_title = dt1.Rows[j]["c_title"].ToString();
+                            cj = j.ToString();
+                            if (j == 0)
+                            {
+                                c_tab_nav = "tab-nav current";
+                            }
+                            else
+                            {
+                                c_tab_nav = "tab-nav";
+                            }
 
-                                    <li class="swiper-slide">
-                                        <a class="@c_tab_nav" href="#@str_tab-@cj">@Html.Raw(c_title)</a>
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                    </div>
+                            <li>
+                                <a class="@c_tab_nav" href="#@str_tab-@cj">@Html.Raw(c_title)</a>
+                            </li>
+                        }
+                    </ul>
                 }
                  
                 @if (dt1.Rows.Count > 0)

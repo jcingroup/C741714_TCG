@@ -19,28 +19,13 @@
     <li>@ViewBag.Title</li>
 }
 
-@section css {
-    <!-- <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css"> -->
-}
-
 @section scripts {
     <script src="~/Content/js/tabs.js"></script>
-    <!-- <script src="~/Content/js/swiper.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 'auto',
-            spaceBetween: 0,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    </script> -->
 }
 
 <h1 class="title">
+    <span class="underline">@ViewBag.Title</span>
     <div class="addthis_inline_share_toolbox"></div>
-    <span>@ViewBag.Title</span>
 </h1>
 
 <div class="tab-content clearfix editor">
@@ -48,33 +33,26 @@
     @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
     @if (dt.Rows.Count > 1)
     {
-        <div class="tabs slider">
-            <div class="swiper-container">
-                <ul class="swiper-wrapper list-inline">
-                    @for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        c_title = dt.Rows[i]["c_title"].ToString();
-                        ci = i.ToString();
+        <ul class="tabs list-inline">
+            @for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                c_title = dt.Rows[i]["c_title"].ToString();
+                ci = i.ToString();
 
-                        if (i == 0)
-                        {
-                            c_tab_nav = "tab-nav current";
-                        }
-                        else
-                        {
-                            c_tab_nav = "tab-nav";
-                        }
+                if (i == 0)
+                {
+                    c_tab_nav = "tab-nav current";
+                }
+                else
+                {
+                    c_tab_nav = "tab-nav";
+                }
 
-                        <li class="swiper-slide">
-                            <a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>
-                        </li>
-                    }
-                </ul>
-            </div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-
+                <li>
+                    <a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>
+                </li>
+            }
+        </ul>
     }
 
 

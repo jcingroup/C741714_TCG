@@ -15,12 +15,12 @@ $(document).ready(function () {
         else {
             location.hash = target;
         }
-
+        
         changeTitle();
-
+        
         e.preventDefault();
     });
-
+    
     var hash = window.location.hash;
     if (hash) {
         var hash_root = hash.split('-')[0];
@@ -38,9 +38,28 @@ $(document).ready(function () {
     changeTitle();
 
     function changeTitle(){
-        var title = $('title').text();
-        var str = $('.tabs .tab-nav.current').text();
-        $('title').html(str + " - " + title);
+        var siteName = $('#title').text().split('|')[1];
+        var title = $('.title .underline');
+        var subtitle = $('.editor .tabs .tab-nav.current');
+        var titleText = "";
+        var subtitleText = "";
+        title.each(function() {
+            if ($(this).is(":visible")) {
+                titleText = $(this).text();
+            }
+        });
+        subtitle.each(function() {
+            if ($(this).is(":visible")) {
+                subtitleText = $(this).text();
+            }
+        });
+        if (subtitleText == "") {
+            $('#title').html(titleText + " | " + siteName);
+            $('#metaTitle').attr('content', titleText + " | " + siteName);
+        } else {
+            $('#title').html(subtitleText + " - " + titleText + " | " + siteName);
+            $('#metaTitle').attr('content', subtitleText + " - " + titleText + " | " + siteName);
+        }
     }
 
 });

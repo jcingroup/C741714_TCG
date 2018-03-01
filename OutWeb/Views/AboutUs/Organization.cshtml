@@ -8,23 +8,8 @@
     <li>@ViewBag.Title</li>
 }
 
-@section css {
-    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
-}
-
 @section scripts {
     <script src="~/Content/js/tabs.js"></script>
-    <script src="~/Content/js/swiper.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 'auto',
-            spaceBetween: 0,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    </script>
 }
 
 <h1 class="sr-only">關於我們 - @ViewBag.Title</h1>
@@ -40,30 +25,24 @@
     <!-- 行政區域圖 -->
     <div class="tab current" id="tab1">
         <h2 class="title">
+            <span class="underline">行政區域圖</span>
             <div class="addthis_inline_share_toolbox"></div>
-            <span>行政區域圖</span>
         </h2>
 
         <div class="tab-content clearfix editor">
 
             @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
-            <div class="tabs slider">
-                <div class="swiper-container">
-                    <ul class="swiper-wrapper list-inline">
-                        <li class="swiper-slide">
-                            <a class="tab-nav current" href="#tab1-1">文章分頁1</a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a class="tab-nav" href="#tab1-2">文章分頁2文章分頁2文章分頁2</a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a class="tab-nav" href="#tab1-3">文章分頁3文章分頁3</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
+            <ul class="tabs list-inline">
+                <li>
+                    <a class="tab-nav current" href="#tab1-1">文章分頁1</a>
+                </li>
+                <li>
+                    <a class="tab-nav" href="#tab1-2">文章分頁2文章分頁2文章分頁2</a>
+                </li>
+                <li>
+                    <a class="tab-nav" href="#tab1-3">文章分頁3文章分頁3</a>
+                </li>
+            </ul>
             
             @* 文章分頁，有資料才顯示，第一頁 class + current *@
             <div class="tab current" id="tab1-1">
@@ -89,7 +68,10 @@
 
     <!-- 組織架構 -->
     <div class="tab" id="tab2">
-        <h2 class="title"><span>組織架構</span></h2>
+        <h2 class="title">
+            <span class="underline">組織架構</span>
+            <div class="addthis_inline_share_toolbox"></div>
+        </h2>
 
         @*下面是編輯器內容，有資料的話才顯示*@
         <div class="clearfix editor">
@@ -105,7 +87,10 @@
 
     <!-- 人事名單 -->
     <div class="tab" id="tab3">
-        <h2 class="title"><span>人事名單</span></h2>
+        <h2 class="title">
+            <span class="underline">人事名單</span>
+            <div class="addthis_inline_share_toolbox"></div>
+        </h2>
 
         @*下面是編輯器內容，有資料的話才顯示*@
         <div class="clearfix editor">
