@@ -217,6 +217,7 @@
     <Compile Include="Repositories\ImageRepository.cs" />
     <Compile Include="Repositories\PublicMethodRepository.cs" />
     <Compile Include="Service\AboutUs.cs" />
+    <Compile Include="Service\Activity.cs" />
     <Compile Include="Service\DBService.cs" />
     <Compile Include="Service\Edu.cs" />
     <Compile Include="Service\Focus.cs" />
@@ -815,6 +816,10 @@
     <Content Include="Views\_SysAdm\States_Cate_List.cshtml" />
     <Content Include="Views\_SysAdm\States_Video_List.cshtml" />
     <Content Include="Views\_SysAdm\States_Video_Data.cshtml" />
+    <Content Include="Views\_SysAdm\Activity_List.cshtml" />
+    <Content Include="Views\_SysAdm\Activity_Data.cshtml" />
+    <Content Include="Views\_SysAdm\States_List.cshtml" />
+    <Content Include="Views\_SysAdm\States_Data.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

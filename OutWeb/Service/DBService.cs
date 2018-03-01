@@ -236,8 +236,10 @@ namespace OutWeb.Service
         }
         #endregion
 
+        #region 圖片 IMG
+        
         #region 圖片新增 Img_Insert
-        public string Img_Insert(string img_no = "", string img_file = "", string img_sty = "", string img_kind = "")
+        public string Img_Insert(string img_no = "", string img_file = "", string img_sty = "", string img_kind = "", string img_desc = "", string is_index = "N")
         {
             string c_msg = "";
             SqlConnection conn = new SqlConnection(conn_str);
@@ -251,8 +253,8 @@ namespace OutWeb.Service
 
             try
             {
-                csql = @"insert into img(img_no, img_file, img_sty,img_kind) "
-                     + "values(@img_no ,@img_file ,@img_sty,@img_kind)";
+                csql = @"insert into img(img_no, img_file, img_sty,img_kind,img_desc,is_index) "
+                     + "values(@img_no ,@img_file ,@img_sty,@img_kind,@img_desc,@is_index)";
 
                 cmd.CommandText = csql;
 
@@ -261,7 +263,8 @@ namespace OutWeb.Service
                 cmd.Parameters.AddWithValue("@img_file", img_file);
                 cmd.Parameters.AddWithValue("@img_sty", img_sty);
                 cmd.Parameters.AddWithValue("@img_kind", img_kind);
-
+                cmd.Parameters.AddWithValue("@img_desc", img_desc);
+                cmd.Parameters.AddWithValue("@is_index", is_index);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -325,7 +328,7 @@ namespace OutWeb.Service
         #endregion
 
         #region 圖片更新 Img_Update
-        public string Img_Update(string img_id = "",string img_no = "", string img_file = "", string img_sty = "", string img_kind = "")
+        public string Img_Update(string img_id = "",string img_no = "", string img_file = "", string img_sty = "", string img_kind = "", string img_desc = "", string is_index = "")
         {
             string c_msg = "";
             
@@ -361,6 +364,24 @@ namespace OutWeb.Service
                     c_update += " img_sty = @img_sty ";
                 }
 
+                if (img_desc.Trim().Length > 0)
+                {
+                    if (c_update.Trim().Length > 0)
+                    {
+                        c_update += ",";
+                    }
+                    c_update += " img_desc = @img_desc ";
+                }
+
+                if (is_index.Trim().Length > 0)
+                {
+                    if (c_update.Trim().Length > 0)
+                    {
+                        c_update += ",";
+                    }
+                    c_update += " is_index = @is_index ";
+                }
+
                 csql = @"update "
                      + "  img "
                      + "set "
@@ -381,6 +402,16 @@ namespace OutWeb.Service
                 if (img_sty.Trim().Length > 0)
                 {
                     cmd.Parameters.AddWithValue("@img_sty", img_sty);
+                }
+
+                if (img_desc.Trim().Length > 0)
+                {
+                    cmd.Parameters.AddWithValue("@img_desc", img_desc);
+                }
+
+                if (is_index.Trim().Length > 0)
+                {
+                    cmd.Parameters.AddWithValue("@is_index", is_index);
                 }
 
                 cmd.ExecuteNonQuery();
@@ -530,6 +561,282 @@ namespace OutWeb.Service
             return d_t;
         }
         #endregion
+
+        #endregion 圖片 IMG
+
+        #region 超連結 URL
+
+        #region 超連結 新增 URL_Insert
+        public string URL_Insert(string img_no = "", string c_url = "", string url_kind = "")
+        {
+            string c_msg = "";
+            SqlConnection conn = new SqlConnection(conn_str);
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+
+            try
+            {
+                csql = @"insert into url(url_no, c_url,url_kind) "
+                     + "values(@url_no ,@c_url, @url_kind)";
+
+                cmd.CommandText = csql;
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@url_no", img_no);
+                cmd.Parameters.AddWithValue("@c_url", c_url);
+                cmd.Parameters.AddWithValue("@url_kind", url_kind);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                c_msg = ex.Message;
+                logger.Error(ex.Message);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                cmd = null;
+                conn = null;
+            }
+
+            return c_msg;
+        }
+        #endregion
+
+        #region 超連結刪除 URL_Delete
+        public string Url_Delete(string url_id = "")
+        {
+            string c_msg = "";
+            SqlConnection conn = new SqlConnection(conn_str);
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+
+            try
+            {
+                csql = @"delete from url where id = @url_id ";
+
+                cmd.CommandText = csql;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@url_id", url_id);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                c_msg = ex.Message;
+                logger.Error(ex.Message);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                cmd = null;
+                conn = null;
+            }
+
+            return c_msg;
+        }
+        #endregion
+
+        #region 超連結更新 URL_Update
+        public string URL_Update(string url_id = "", string url_no = "", string c_url = "", string url_kind = "")
+        {
+            string c_msg = "";
+
+            string c_update = "";
+
+            SqlConnection conn = new SqlConnection(conn_str);
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+
+
+            try
+            {
+                if (c_url.Trim().Length > 0)
+                {
+                    if (c_update.Trim().Length > 0)
+                    {
+                        c_update += ",";
+                    }
+                    c_update += " c_url = @c_url ";
+                }
+
+                csql = @"update "
+                     + "  url "
+                     + "set "
+                     + c_update + " "
+                     + "where "
+                     + "  id = @url_id ";
+
+                cmd.CommandText = csql;
+
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.AddWithValue("@url_id", url_id);
+                if (c_url.Trim().Length > 0)
+                {
+                    cmd.Parameters.AddWithValue("@c_url", c_url);
+                }
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                c_msg = ex.Message;
+                logger.Error(ex.Message);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                cmd = null;
+                conn = null;
+            }
+
+            return c_msg;
+        }
+        #endregion
+
+        #region 超連結陳列 URL_List
+        public DataTable URL_List(ref string err_msg, string url_no = "", string url_kind = "", string url_id = "")
+        {
+            DataSet dt = new DataSet();
+            DataTable d_t = new DataTable();
+
+            string[] curl_no;
+            string[] curl_id;
+            string str_url_no = "";
+            string str_url_id = "";
+
+            SqlConnection conn = new SqlConnection(conn_str);
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+
+            try
+            {
+                curl_no = url_no.Split(',');
+                curl_id = url_id.Split(',');
+
+                csql = "select * from url where status = 'Y' ";
+
+                if (url_no != "ALL")
+                {
+                    csql = csql + " and url_no in (";
+                    for (int i = 0; i < curl_no.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_url_no" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+                if (url_id.Trim().Length > 0)
+                {
+                    csql = csql + " and id in (";
+                    for (int i = 0; i < curl_id.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_url_id" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+                if (url_kind.Trim().Length > 0)
+                {
+                    csql = csql + "and url_kind = @url_kind ";
+                }
+                csql = csql + "order by ";
+                csql = csql + "  id ";
+
+                cmd.CommandText = csql;
+
+                cmd.Parameters.Clear();
+
+                for (int i = 0; i < curl_no.Length; i++)
+                {
+                    cmd.Parameters.AddWithValue("@str_url_no" + i.ToString(), curl_no[i]);
+                }
+
+                if (url_kind.Trim().Length > 0)
+                {
+                    cmd.Parameters.AddWithValue("@url_kind", url_kind);
+                }
+
+
+                if (url_id.Trim().Length > 0)
+                {
+                    for (int i = 0; i < curl_id.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_url_id" + i.ToString(), curl_id[i]);
+                    }
+                }
+
+                if (dt.Tables["img"] != null)
+                {
+                    dt.Tables["img"].Clear();
+                }
+
+                SqlDataAdapter img_ada = new SqlDataAdapter();
+                img_ada.SelectCommand = cmd;
+                img_ada.Fill(dt, "img");
+                img_ada = null;
+
+                d_t = dt.Tables["img"];
+            }
+            catch (Exception ex)
+            {
+                err_msg = ex.Message;
+                logger.Error(ex.Message);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                cmd = null;
+                conn = null;
+                dt = null;
+            }
+
+            return d_t;
+        }
+        #endregion
+
+        #endregion 超連結 URL
 
         #region 營運人員 User
         #region 使用者資訊 User_Info

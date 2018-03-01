@@ -27,6 +27,7 @@ namespace OutWeb.Controllers
         Focus CFocus = new Focus();
         School CSchool = new School();
         States CStates = new States();
+        Activity CActivity = new Activity();
         //=== 變數設定  =========================================//
         String Img_Path = "~/Images";
         //=== Log 記錄 =========================================//
@@ -1659,26 +1660,7 @@ namespace OutWeb.Controllers
         #endregion 法理學院_歷屆合照_基本資料
 
         #endregion 法理學院_歷屆合照 School
-        #region 法理學院 歷屆合照
-        public ActionResult SchoolDataList()
-        {
-            return View();
-        }
-        public ActionResult SchoolDataAdd()
-        {
-            return View();
-        }
-        public ActionResult SchoolDataEdit()
-        {
-            return View();
-        }
-        #endregion 法理學院 歷屆合照
-
-
         
-
-
-
         #region 活動寫真 歷史活動
         public ActionResult EventHistoryList()
         {
@@ -1694,8 +1676,376 @@ namespace OutWeb.Controllers
         }
         #endregion 活動寫真 歷史活動
 
+        #region 活動寫真 Activity
+
+        #region 活動寫真_基本資料
+
+        #region 活動寫真_陳列 Activity_List
+        public ActionResult Activity_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_index = "", string txt_lang = "")
+        {
+            //定義變數
+            string c_sort = "";
+            DataTable dt;
+            DataTable d_lang;
+            //DataTable d_cate;
+            string err_msg = "";
+
+            //排序設定
+            if (txt_sort.Trim().Length > 0)
+            {
+                c_sort = c_sort + "a1." + txt_sort;
+            }
+            if (txt_a_d.Trim().Length > 0)
+            {
+                c_sort = c_sort + " " + txt_a_d;
+            }
+
+            //抓取資料
+            dt = CActivity.List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_start_date, txt_end_date, txt_index, "", txt_lang);
+            //語系
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            //類別
+            //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", txt_lang);
+            //設定傳值
+            ViewData["page"] = page;
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            //ViewData["d_cate"] = d_cate;
+            ViewData["txt_title_query"] = txt_title_query;
+            ViewData["txt_sort"] = txt_sort;
+            ViewData["txt_a_d"] = txt_a_d;
+            ViewData["txt_lang"] = txt_lang;
+            //ViewData["txt_cate"] = txt_cate;
+            ViewData["txt_index"] = txt_index;
+
+            return View();
+        }
+        #endregion
+
+        #region 活動寫真_新增 Activity_Add
+        public ActionResult Activity_Add()
+        {
+            //定義變數
+            string err_msg = "";
+            //DataTable d_cate;
+            DataTable d_lang;
+            DataTable d_img;
+            DataTable d_url;
+            //抓取消息類別資料
+
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
+            d_img = DB.Img_List(ref err_msg, "", "", "Activity");
+            d_url = DB.URL_List(ref err_msg, "", "Activity");
+            //設定傳值
+            ViewData["d_lang"] = d_lang;
+            //ViewData["d_cate"] = d_cate;
+            ViewData["d_img"] = d_img;
+            ViewData["d_url"] = d_url;
+            ViewData["action_sty"] = "add";
+
+            return View("Activity_Data");
+        }
+        #endregion
+
+        #region 活動寫真_修改 Activity_Edit
+        public ActionResult Activity_Edit(string id = "")
+        {
+            string err_msg = "";
+
+            DataTable d_cate;
+            DataTable d_lang;
+            DataTable dt;
+            DataTable d_img;
+            DataTable d_url;
+            //抓取類別資料
+            dt = CActivity.List(ref err_msg, id);
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
+            d_img = DB.Img_List(ref err_msg, id, "", "Activity");
+            d_url = DB.URL_List(ref err_msg, id, "Activity");
+            //設定傳值
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            //ViewData["d_cate"] = d_cate;
+            ViewData["d_img"] = d_img;
+            ViewData["d_url"] = d_url;
+            ViewData["action_sty"] = "edit";
+
+            return View("Activity_Data");
+        }
+        #endregion
+
+        #region 活動寫真_刪除 Activity_Del
+        public ActionResult Activity_Del(string id = "")
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            CActivity.Del(id);
+            return RedirectToAction("Activity_List");
+        }
+        #endregion
+
+        #region 活動寫真_儲存 Activity_Save
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Activity_Save(string action_sty, string id, string c_title, string c_date, string c_desc, string show, string hot, string sort, string lang_id, string cate_id, string img_no, string[] img_id, string[] img_desc, string is_index, string img_count, string[] url_id, string[] curl)
+        {
+            int i_count = 0;
+            string str_img_desc = "";
+            string str_img_id = "";
+            string str_index = "";
+            string act_desc = "";
+            string str_url_id = "";
+            string str_curl = "";
+            i_count = Convert.ToInt32(img_count);
+
+            act_desc = img_no;
+
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            switch (action_sty)
+            {
+                case "add":
+                    //url add
+                    for (int i = 0; i < 10; i++)
+                    {
+                        str_curl = curl[i];
+                        DB.URL_Insert(img_no, str_curl, "Activity");
+                    }
+
+                    //Activity
+                    CActivity.Insert(c_title, c_date, "", show, hot, sort, lang_id, "", img_no);
+                    break;
+                case "edit":
+                    //URL Update
+                    str_url_id = "";
+                    str_curl = "";
+                    for (int i = 0; i < 10; i++)
+                    {
+                        str_url_id = url_id[i];
+                        str_curl = curl[i];
+
+                        DB.URL_Update(str_url_id, "", str_curl, "Activity");
+                    }
+
+                    CActivity.Update(id, c_title, c_date, "", show, hot, sort, lang_id, "");
+
+                    break;
+            }
+
+            //Img update
+            str_img_id = "";
+            str_img_desc = "";
+            str_index = "";
+
+            for (int i = 0; i < i_count; i++)
+            {
+                str_img_id = img_id[i];
+                str_img_desc = img_desc[i];
+                if (is_index == str_img_id)
+                {
+                    str_index = "Y";
+                }
+                else
+                {
+                    str_index = "N";
+                }
+
+                DB.Img_Update(str_img_id, "","","","Activity", str_img_desc,str_index);
+            }
+
+            return RedirectToAction("Activity_List");
+        }
+
+        #endregion
+
+        #endregion 活動寫真_基本資料
+
+        #endregion
+
 
         #region 活動寫真 各洲活動 Activity_States
+
+        #region 各洲活動_基本資料
+
+        #region 各洲活動_陳列 States_List
+        public ActionResult States_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_index = "", string txt_lang = "", string txt_cate = "")
+        {
+            //定義變數
+            string c_sort = "";
+            DataTable dt;
+            DataTable d_lang;
+            DataTable d_cate;
+            string err_msg = "";
+
+            //排序設定
+            if (txt_sort.Trim().Length > 0)
+            {
+                c_sort = c_sort + "a1." + txt_sort;
+            }
+            if (txt_a_d.Trim().Length > 0)
+            {
+                c_sort = c_sort + " " + txt_a_d;
+            }
+
+            //抓取資料
+            dt = CStates.List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_start_date, txt_end_date, txt_index, txt_cate, txt_lang);
+            //語系
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            //類別
+            d_cate = CStates.Cate_List(ref err_msg, "", "sort", "Y", "", txt_lang);
+            //設定傳值
+            ViewData["page"] = page;
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["txt_title_query"] = txt_title_query;
+            ViewData["txt_sort"] = txt_sort;
+            ViewData["txt_a_d"] = txt_a_d;
+            ViewData["txt_lang"] = txt_lang;
+            ViewData["txt_cate"] = txt_cate;
+            ViewData["txt_index"] = txt_index;
+
+            return View();
+        }
+        #endregion
+
+        #region 各州活動_新增 States_Add
+        public ActionResult States_Add()
+        {
+            //定義變數
+            string err_msg = "";
+            DataTable d_cate;
+            DataTable d_lang;
+            DataTable d_img;
+            DataTable d_url;
+            //抓取消息類別資料
+
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            d_cate = CStates.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
+            d_img = DB.Img_List(ref err_msg, "", "", "States");
+            d_url = DB.URL_List(ref err_msg, "", "States");
+            //設定傳值
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["d_img"] = d_img;
+            ViewData["d_url"] = d_url;
+            ViewData["action_sty"] = "add";
+
+            return View("States_Data");
+        }
+        #endregion
+
+        #region 各州活動_修改 States_Edit
+        public ActionResult States_Edit(string id = "")
+        {
+            string err_msg = "";
+
+            DataTable d_cate;
+            DataTable d_lang;
+            DataTable dt;
+            DataTable d_img;
+            DataTable d_url;
+            //抓取類別資料
+            dt = CStates.List(ref err_msg, id);
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            d_cate = CStates.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
+            d_img = DB.Img_List(ref err_msg, id, "", "States");
+            d_url = DB.URL_List(ref err_msg, id, "States");
+            //設定傳值
+            ViewData["dt"] = dt;
+            ViewData["d_lang"] = d_lang;
+            ViewData["d_cate"] = d_cate;
+            ViewData["d_img"] = d_img;
+            ViewData["d_url"] = d_url;
+            ViewData["action_sty"] = "edit";
+
+            return View("States_Data");
+        }
+        #endregion
+
+        #region 各州活動_刪除 States_Del
+        public ActionResult States_Del(string id = "")
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            CActivity.Del(id);
+            return RedirectToAction("States_List");
+        }
+        #endregion
+
+        #region 各州活動_儲存 States_Save
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult States_Save(string action_sty, string id, string c_title, string c_date, string c_desc, string show, string hot, string sort, string lang_id, string cate_id, string img_no, string[] img_id, string[] img_desc, string is_index, string img_count, string[] url_id, string[] curl)
+        {
+            int i_count = 0;
+            string str_img_desc = "";
+            string str_img_id = "";
+            string str_index = "";
+            string act_desc = "";
+            string str_url_id = "";
+            string str_curl = "";
+            i_count = Convert.ToInt32(img_count);
+
+            act_desc = img_no;
+
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            switch (action_sty)
+            {
+                case "add":
+                    //url add
+                    for (int i = 0; i < 10; i++)
+                    {
+                        str_curl = curl[i];
+                        DB.URL_Insert(img_no, str_curl, "States");
+                    }
+
+                    //States
+                    CStates.Insert(c_title, c_date, "", show, hot, sort, lang_id, cate_id, img_no);
+                    break;
+                case "edit":
+                    //URL Update
+                    str_url_id = "";
+                    str_curl = "";
+                    for (int i = 0; i < 10; i++)
+                    {
+                        str_url_id = url_id[i];
+                        str_curl = curl[i];
+
+                        DB.URL_Update(str_url_id, "", str_curl, "States");
+                    }
+
+                    CActivity.Update(id, c_title, c_date, "", show, hot, sort, lang_id, cate_id);
+
+                    break;
+            }
+
+            //Img update
+            str_img_id = "";
+            str_img_desc = "";
+            str_index = "";
+
+            for (int i = 0; i < i_count; i++)
+            {
+                str_img_id = img_id[i];
+                str_img_desc = img_desc[i];
+                if (is_index == str_img_id)
+                {
+                    str_index = "Y";
+                }
+                else
+                {
+                    str_index = "N";
+                }
+
+                DB.Img_Update(str_img_id, "", "", "", "States", str_img_desc, str_index);
+            }
+
+            return RedirectToAction("States_List");
+        }
+
+        #endregion
+
+        #endregion 活動寫真_基本資料
 
         #region 各洲活動_類別
 
@@ -1936,15 +2286,6 @@ namespace OutWeb.Controllers
             return View();
         }
         #endregion 活動寫真 各州活動
-
-
-        #region 活動寫真 各州影片
-        public ActionResult StatesVideoList()
-        {
-            return View();
-        }
-        #endregion 活動寫真 各州影片
-
 
         #region 最新消息
 
