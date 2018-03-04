@@ -1,6 +1,18 @@
-﻿@{
+﻿@using System.Data
+@{
     ViewBag.Title = "歷屆合照";
     ViewBag.BodyClass = "JoinUs School";
+
+    DataTable dt = (DataTable)ViewData["dt"];
+    string img_path = "~/Images/";
+    string id = "";
+    string cate_id = "";
+    string cate_name = "";
+    string lang_id = "";
+    string lang_name = "";
+    string c_title = "";
+    string c_desc = "";
+    string img_file = "";
 }
 
 @section breadcrumb {
@@ -25,16 +37,32 @@
 </h2>
 
 <ul class="gallery prolist row row-center list-unstyled">
-    <li class="col-md-6 col-12">
-        <figure class="pro text-center">
-            <a href="https://www.flickr.com/photos/usmgtcg/27466725216/in/album-72157647803685624/" target="_blank" class="thumbnail">
-                <img src="~/Content/images/JoinUs/gallery-sp.jpg" alt="">
-                @* 初級班 class + primary *@
-                <span class="caption primary">第<strong>E160603</strong>期 台灣法理學院 初級班</span>
-            </a>
-            <a href="https://www.youtube.com/playlist?list=PLfrjFU90kKyFEzd4ZZLFSYni-BiviYXYx" target="_blank" class="btn sm">上課影片</a>
-        </figure>
-    </li>
+    @if (dt.Rows.Count > 0)
+    {
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            id = dt.Rows[i]["id"].ToString();
+            cate_id = dt.Rows[i]["cate_id"].ToString();
+            cate_name = dt.Rows[i]["cate_name"].ToString();
+            lang_id = dt.Rows[i]["lang_id"].ToString();
+            lang_name = dt.Rows[i]["lang_name"].ToString();
+            c_title = dt.Rows[i]["c_title"].ToString();
+            c_desc = dt.Rows[i]["c_desc"].ToString();
+            img_file = dt.Rows[i]["img_file"].ToString();
+
+            <li class="col-md-6 col-12">
+                <figure class="pro text-center">
+                    <a href="@Url.Content(img_path + img_file)" target="_blank" class="thumbnail">
+                        <img src="@Url.Content(img_path + img_file)" alt="">
+                        @* 初級班 class + primary *@
+                        <span class="caption primary">第<strong>@c_title</strong>期 台灣法理學院 @cate_name</span>
+                    </a>
+                    <a href="@c_desc" target="_blank" class="btn sm">上課影片</a>
+                </figure>
+            </li>
+        }
+    }
+    <!--
     <li class="col-md-6 col-12">
         <figure class="pro text-center">
             <a href="https://www.flickr.com/photos/usmgtcg/27466725216/in/album-72157647803685624/" target="_blank" class="thumbnail">
@@ -99,4 +127,5 @@
             <a href="https://www.youtube.com/playlist?list=PLfrjFU90kKyFEzd4ZZLFSYni-BiviYXYx" target="_blank" class="btn sm">上課影片</a>
         </figure>
     </li>
+    -->
 </ul>

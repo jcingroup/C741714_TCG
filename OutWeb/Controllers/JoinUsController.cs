@@ -25,6 +25,7 @@ namespace OutWeb.Controllers
         JoinUs CJoinUs = new JoinUs();
         //Edu CEdu = new Edu();
         //Focus CFocus = new Focus();
+        School Cschool = new School();
         //=== 變數設定  =========================================//
         String Img_Path = "~/Images";
         //=== Log 記錄 =========================================//
@@ -74,6 +75,11 @@ namespace OutWeb.Controllers
         // 參加台灣法理學院 - 課堂 LIVE 直播
         public ActionResult Live()
         {
+            DataTable dt;
+            string err_msg = "";
+            string lang_id = "zh-tw";
+            dt = Cschool.Video_List(ref err_msg, "", "sort desc", "Y", "", lang_id);
+            ViewData["dt"] = dt;
             return View();
         }
 
@@ -94,6 +100,11 @@ namespace OutWeb.Controllers
         // 參加台灣法理學院 - 歷屆合照
         public ActionResult Gallery()
         {
+            DataTable dt;
+            string err_msg = "";
+            string lang_id = "zh-tw";
+            dt = Cschool.List(ref err_msg, "", "cate_id desc, sort desc", "Y", "", "", "", "", lang_id);
+            ViewData["dt"] = dt;
             return View();
         }
     }

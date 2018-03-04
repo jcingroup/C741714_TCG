@@ -149,6 +149,18 @@ namespace OutWeb.Controllers
         // 行政區域圖&組織架構
         public ActionResult Organization()
         {
+            //抓取資料
+            string cate_id = "7,8,9";
+            DataTable dt;
+            DataTable d_cate;
+            string err_msg = "";
+            string lang_id = "zh-tw";
+            d_cate = CAboutUs.Cate_List(ref err_msg, cate_id, "sort", "Y", "", lang_id);
+            dt = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+
+            ViewData["d_cate"] = d_cate;
+            ViewData["dt"] = dt;
+
             return View();
         }
     }

@@ -875,10 +875,12 @@ namespace OutWeb.Service
                      + "  a1.id, a1.c_title, a1.c_desc, a1.sort, a1.status "
                      + ", a1.lang_id, a2.lang_name, a1.cate_id, a3.cate_name "
                      + ", convert(nvarchar(10),a1.c_date,23) as c_date "
+                     + ", a4.img_file "
                      + "from "
                      + "   " + dbf_name + " a1 "
                      + "LEFT JOIN LANG a2 ON a1.LANG_ID = a2.LANG_ID "
                      + "LEFT JOIN " + cate_dbf_name + " a3 ON a1.cate_id = a3.id "
+                     + "LEFT JOIN IMG a4 ON Convert(nvarchar(50),a1.id) = a4.img_no and img_kind = '" + img_kind + "' "
                      + "where "
                      + "  a1.status <> 'D' ";
 
