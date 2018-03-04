@@ -23,7 +23,7 @@ namespace OutWeb.Controllers
         Language Clang = new Language();
         AboutUs CAboutUs = new AboutUs();
         //JoinUs CJoinUs = new JoinUs();
-        //Edu CEdu = new Edu();
+        Edu CEdu = new Edu();
         //Focus CFocus = new Focus();
         //=== 變數設定  =========================================//
         String Img_Path = "~/Images";
@@ -106,18 +106,43 @@ namespace OutWeb.Controllers
         // 教育專欄 - 分類
         public ActionResult EducationCategory()
         {
+            //抓取分類
+            DataTable dt;
+            string err_msg = "";
+            string lang_id = "zh-tw";
+            dt = CEdu.Cate_List(ref err_msg, "", "sort desc", "Y", "", lang_id);
+
+            ViewData["dt"] = dt;
+
             return View();
         }
 
         // 教育專欄 - 列表
-        public ActionResult EducationList()
+        public ActionResult EducationList(string cate_id = "",int page = 1)
         {
+            DataTable dt;
+            DataTable d_cate;
+            string err_msg = "";
+            string lang_id = "zh-tw";
+            
+            d_cate = CEdu.Cate_List(ref err_msg, cate_id, "sort desc", "Y", "", lang_id);
+            dt = CEdu.List(ref err_msg, "", "sort desc", "Y", "", "", "", cate_id, lang_id);
+
+            ViewData["dt"] = dt;
+            ViewData["d_cate"] = d_cate;
+            ViewData["page"] = page;
             return View();
         }
 
         // 教育專欄 - 內容
-        public ActionResult EducationContent()
+        public ActionResult EducationContent(string id="")
         {
+            DataTable dt;
+            string err_msg = "";
+            string lang_id = "zh-tw";
+            dt = CEdu.List(ref err_msg, id, "sort desc", "Y", "", "", "", "", lang_id);
+
+            ViewData["dt"] = dt;
             return View();
         }
 

@@ -1,12 +1,108 @@
-﻿@{
-    ViewBag.Title = "台灣戰爭史回顧"; @* 分類名稱 *@
+﻿@using System.Data
+@using System.Text.RegularExpressions
+@{
+    //分類名稱
+    ViewBag.Title = "台灣戰爭史回顧";
     ViewBag.BodyClass = "AboutUs Education";
+
+    DataTable dt = (DataTable)ViewData["dt"];
+    DataTable d_cate = (DataTable)ViewData["d_cate"];
+
+    string id = "";
+    string cate_id = "";
+    string c_title = "";
+    string c_desc = "";
+    string cate_name = "";
+    string lang_id = "";
+    string lang_name = "";
+    string c_date = "";
+
+
+    cate_id = d_cate.Rows[0]["id"].ToString();
+    cate_name = d_cate.Rows[0]["cate_name"].ToString();
+
+
+    //Page 參數設定
+    //------------------------------------
+    int row_count = 0;
+    int page_count = 10;
+    int page = (int)ViewData["page"];
+    int pre_page = 0;
+    int top_page = 0;
+    int next_page = 0;
+    int end_page = 0;
+    int min_row = 0;
+    int max_row = 0;
+    int total_page = 0;
+    int s_page = 0;
+    int e_page = 0;
+    int pp_count = 0;
+    string page_active = "";
+    //------------------------------------
+    //Page 計算
+    //-----------------------------------
+    row_count = dt.Rows.Count;
+    if (row_count % page_count > 0)
+    {
+        total_page = (row_count / page_count) + 1;
+    }
+    else
+    {
+        total_page = row_count / page_count;
+    }
+
+    if (page > total_page)
+    {
+        page = total_page;
+    }
+    else if (page < 1)
+    {
+        page = 1;
+    }
+
+    top_page = 1;
+
+    if (page > 1)
+    {
+        pre_page = page - 1;
+    }
+    else
+    {
+        pre_page = 1;
+    }
+
+    if (total_page > page)
+    {
+        next_page = page + 1;
+    }
+    else
+    {
+        next_page = total_page;
+    }
+
+    end_page = total_page;
+
+    min_row = 10 * (page - 1) + 1;
+    max_row = 10 * page;
+    if (max_row > row_count)
+    {
+        max_row = row_count;
+    }
+
+    pp_count = Convert.ToInt16(page / 10);
+    s_page = pp_count * 10 + 1;
+    e_page = (pp_count + 1) * 10;
+    if (e_page > total_page)
+    {
+        e_page = total_page;
+    }
+    //-----------------------------------
 }
 
 @section breadcrumb {
     <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
     <li><a href="~/AboutUs/EducationCategory">教育專欄</a></li>
-    <li>@ViewBag.Title</li>
+    <li>@cate_name</li>
 }
 
 <h1 class="sr-only">教育專欄</h1>
@@ -16,7 +112,7 @@
 </p>
 
 <h2 class="title">
-    <span class="underline">@ViewBag.Title</span>
+    <span class="underline">@cate_name</span>
     <div class="addthis_inline_share_toolbox"></div>
 </h2>
 
@@ -24,28 +120,46 @@
 @* 每頁10筆資料 *@
 <div class="articles">
 
-    <article class="article">
-        <small class="date">2015-01-26</small>
-        <h3><a href="~/AboutUs/EducationContent">美國政府明白表示：「反對台灣獨立」?</a></h3>
-        @* 編輯器內容 取前 145 個字，有資料的話才顯示 *@
-        <p>美國政府明白表示：「反對台灣獨立」。本土台灣人似乎不能了解：「為什麼？」，1952年4月28日，舊金山和平條約生效，美國依照條約第23條對，日本台灣實施主要佔領權佔領，依照第四b條規定，取得日本台灣領土之『處分與分配權』」。所以，美國與中國簽訂「上海公報」或「台灣關係法」，都是該條約所賦予的「權利」。</p>
-        <a href="~/AboutUs/EducationContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-    </article>
+    @if (dt.Rows.Count > 0)
+    {
+        for (int i = min_row - 1; i < max_row; i++)
+        {
+            id = dt.Rows[i]["id"].ToString();
+            c_title = dt.Rows[i]["c_title"].ToString();
+            c_desc = dt.Rows[i]["c_desc"].ToString();
+            c_date = dt.Rows[i]["c_date"].ToString();
+            //編輯器內容 取前 145 個字，有資料的話才顯示
+            if (c_desc.Length > 145)
+            {
+                c_desc = c_desc.Substring(0, 145) + "...";
+            }
 
-    <article class="article">
-        <small class="date">2015-01-26</small>
-        <h3><a href="~/AboutUs/EducationContent">美國政府明白表示：「反對台灣獨立」?</a></h3>
-        @* 編輯器內容 取前 145 個字，有資料的話才顯示 *@
-        <p>美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示美國政府明白表示</p>
-        <a href="~/AboutUs/EducationContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-    </article>
+            <article class="article">
+                <small class="date">@c_date</small>
+                <h3><a href="@Url.Content("~/AboutUs/EducationContent?id=" + id)">@c_title</a></h3>
+                @Html.Raw(c_desc)
+                <a href="@Url.Content("~/AboutUs/EducationContent?id=" + id)" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+            </article>
+
+        }
+    }
+
 
 </div>
 
+
 <ul class="pager list-inline text-center">
+  @* 有資料的話才顯示 *@
+  @if (dt.Rows.Count > 0)
+  {
     <li class="prev hidden">
-        @* 有資料的話才顯示 *@
-        <a href="#">
+        <a href="@Url.Content("~/AboutUs/EducationList?cate_id=" + cate_id + "&page=" + top_page.ToString())">
+            <i class="oi" data-glyph="chevron-left"></i>
+            <span class="hidden-xs">第一頁</span>
+        </a>
+    </li>
+    <li class="prev hidden">
+        <a href="@Url.Content("~/AboutUs/EducationList?cate_id=" + cate_id + "&page=" + pre_page.ToString())">
             <i class="oi" data-glyph="chevron-left"></i>
             <span class="hidden-xs">上一頁</span>
         </a>
@@ -53,17 +167,62 @@
     <li>
         <form action="" class="form-inline">
             第
-            <select name="" id="" class="form-element">
-                <option value="1">1</option>
+            <select name="page" id="page" class="form-element" onchange="page_link();">
+
+                @for (int i = s_page; i <= e_page; i++)
+                {
+                    if (i == page)
+                    {
+                        page_active = " selected ";
+                    }
+                    else
+                    {
+                        page_active = "";
+                    }
+                    <option value="@i" @page_active>@i</option>
+                }
             </select>
             頁
         </form>
-    </li>
-    <li class="next">
-        @* 有資料的話才顯示 *@
-        <a href="#">
+   </li>
+   <li class="next">
+        <a href="@Url.Content("~/AboutUs/EducationList?cate_id=" + cate_id + "&page=" + next_page.ToString())">
             <span class="hidden-xs">下一頁</span>
             <i class="oi" data-glyph="chevron-right"></i>
         </a>
     </li>
+
+    <li class="next">
+        <a href="@Url.Content("~/AboutUs/EducationList?cate_id=" + cate_id + "&page=" + end_page.ToString())">
+            <span class="hidden-xs">最後一頁</span>
+            <i class="oi" data-glyph="chevron-right"></i>
+        </a>
+    </li>
+  }
 </ul>
+
+<script>
+    function page_link()
+    {
+        var c_page = $("#page").find(":selected").val();
+        window.location(@Url.Content("~/AboutUs/EducationList?cate_id=" + cate_id) + "&page=" + c_page);
+    }
+</script>
+
+@functions
+{
+    /// <summary>
+    /// 移除html tag
+    /// </summary>
+    /// <param name="htmlSource"></param>
+    /// <returns></returns>
+    public static string RemoveHTMLTag(string htmlSource)
+    {
+        //移除  javascript code.
+        htmlSource = Regex.Replace(htmlSource, @"<script[\d\D]*?>[\d\D]*?</script>", String.Empty);
+
+        //移除html tag.
+        htmlSource = Regex.Replace(htmlSource, @"<[^>]*>", String.Empty);
+        return htmlSource;
+    }
+}

@@ -1,12 +1,53 @@
-﻿@{
-    ViewBag.Title = "美國政府明白表示：「反對台灣獨立」?"; @* 文章標題 *@
+﻿@using System.Data
+@{
+    ViewBag.Title = "美國政府明白表示：「反對台灣獨立」?";
     ViewBag.BodyClass = "News Focus";
+
+    DataTable dt = (DataTable)ViewData["dt"];
+
+    string id = "";
+    string cate_id = "";
+    string c_title = "";
+    string c_desc = "";
+    string cate_name = "";
+    string lang_id = "";
+    string lang_name = "";
+    string c_date = "";
+
+    string ci = "";
+    string cj = "";
+    string str_tab = "";
+    string c_tab = "";
+    string c_tab_nav = "";
+
+    if (dt.Rows.Count > 0)
+    {
+        id = dt.Rows[0]["id"].ToString();
+        c_title = dt.Rows[0]["c_title"].ToString();
+        c_desc = dt.Rows[0]["c_desc"].ToString();
+        c_date = dt.Rows[0]["c_date"].ToString();
+        cate_id = dt.Rows[0]["cate_id"].ToString();
+        cate_name = dt.Rows[0]["cate_name"].ToString();
+        lang_id = dt.Rows[0]["lang_id"].ToString();
+        lang_name = dt.Rows[0]["lang_name"].ToString();
+    }
+    else
+    {
+        id = "";
+        c_title = "";
+        c_desc = "";
+        c_date = "";
+        cate_id = "";
+        cate_name = "";
+        lang_id = "";
+        lang_name = "";
+    }
 }
 
 @section breadcrumb {
     <li><a href="~/News">最新訊息 活動公告</a></li>
     <li><a href="~/News/FocusCategory">焦點專欄</a></li>
-    <li>所有美國官司案</li> @* 分類名稱 *@
+    <li>@cate_name</li> @* 分類名稱 *@
 }
 
 @section scripts {
@@ -16,50 +57,67 @@
 <h1 class="sr-only">焦點專欄</h1>
 
 <p class="back">
-    <a href="~/News/FocusList"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+    <a href="@Url.Content("~/News/FocusList?cate_id=" + cate_id)"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
 </p>
 
 <h2 class="title">
-    <small class="date">2015-01-26</small>
-    <span class="underline">@ViewBag.Title</span>
+    <small class="date">@c_date</small>
+    <span class="underline">@c_title</span>
     <div class="addthis_inline_share_toolbox"></div>
 </h2>
 
 <div class="tab-content clearfix editor">
+    @*文章分頁 頁籤切換，只有一頁就不顯示頁籤*@
+    @if (dt.Rows.Count > 1)
+    {
+        <ul class="tabs list-inline">
+            @for (int j = 0; j < dt.Rows.Count; j++)
+            {
+                c_title = dt.Rows[j]["c_title"].ToString();
+                cj = j.ToString();
+                if (j == 0)
+                {
+                    c_tab_nav = "tab-nav current";
+                }
+                else
+                {
+                    c_tab_nav = "tab-nav";
+                }
 
-    @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
-    <ul class="tabs list-inline">
-        <li>
-            <a class="tab-nav current" href="#tab1">文章分頁1</a>
-        </li>
-        <li>
-            <a class="tab-nav" href="#tab2">文章分頁2文章分頁2文章分頁2</a>
-        </li>
-        <li>
-            <a class="tab-nav" href="#tab3">文章分頁3文章分頁3</a>
-        </li>
-    </ul>
-    
-    @* 文章分頁，有資料才顯示，第一頁 class + current *@
-    <div class="tab current" id="tab1">
-        <h3>台灣民政府 中央參眾議院聯合審查會議修正 台灣基本法</h3>
-        <p>前言：</p>
-        <p>台灣：福爾摩沙周邊群島和澎湖列島(總稱台灣)是大日本帝國台灣人民必須守護的領域，為確保領域內人民與全世界人民能共同合作，取得進步繁榮成果,讓民主、自由、和平帶來福祉。台灣民政府管轄權力源自日本天皇陛下天賦不可放棄權利及義務和人民的期盼而信託，其權力應由人民所組成代表行使，其福祉由領域內人民分享，這是萬國公法與國際法的精神與目的，台灣基本法以此精神與目的為法源，台灣民政府以天皇陛下詔書、舊金山和平條約、戰爭法精神與目的而組織，並制定台灣基本法。</p>
-        <p>大日本帝國台灣人民期盼和平、自由、民主、穩定與繁榮已久，深知人類相互關係良好的源由，是堅信仁慈、公義、和平與自由的基本價值，是一心守護領域內人民安全與生存，是竭力守護賴以生存而進步的基本價值。</p>
-        <p>堅信任何國家都需要尊重基本價值，而且必須優先遵守萬國公法與國際法，這是經過歷史反覆教訓而實證的法則，也是人類追求維持國際和平、穩定與繁榮的法則。</p>
-        <p>台灣民政府領域內所有人民，誓以台灣基本法來守護人類賴以生存與進步的基本價值，是為了台灣人民的生存和進步。</p>
-    </div>
+                <li>
+                    <a class="@c_tab_nav" href="#@str_tab-@cj">@Html.Raw(c_title)</a>
+                </li>
+            }
+        </ul>
+    }
 
-    <div class="tab" id="tab2">
-        <p>文章分頁2</p>
-    </div>
+    @if (dt.Rows.Count > 0)
+    {
+        for (int j = 0; j < dt.Rows.Count; j++)
+        {
+            cj = j.ToString();
 
-    <div class="tab" id="tab3">
-        <p>文章分頁3</p>
-    </div>
+            c_title = dt.Rows[j]["c_title"].ToString();
+            c_desc = dt.Rows[j]["c_desc"].ToString();
+
+            if (j == 0)
+            {
+                c_tab = "tab current";
+            }
+            else
+            {
+                c_tab = "tab";
+            }
+
+            <div class="@c_tab" id="@str_tab-@cj">
+                <!-- <h3>@Html.Raw(c_title)</h3> -->
+                @Html.Raw(c_desc)
+            </div>
+        }
+    }
 
 </div>
-
+<!--
 <ul class="pager list-unstyled">
 
     <li class="prev">
@@ -79,3 +137,4 @@
     </li>
 
 </ul>
+-->

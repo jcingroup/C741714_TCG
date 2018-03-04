@@ -24,7 +24,7 @@ namespace OutWeb.Controllers
         //AboutUs CAboutUs = new AboutUs();
         //JoinUs CJoinUs = new JoinUs();
         //Edu CEdu = new Edu();
-        //Focus CFocus = new Focus();
+        Focus CFocus = new Focus();
         //=== 變數設定  =========================================//
         String Img_Path = "~/Images";
         //=== Log 記錄 =========================================//
@@ -94,18 +94,45 @@ namespace OutWeb.Controllers
         // 焦點專欄 - 分類
         public ActionResult FocusCategory()
         {
+            //抓取分類
+            DataTable dt;
+            string err_msg = "";
+            string lang_id = "zh-tw";
+            dt = CFocus.Cate_List(ref err_msg, "", "sort desc", "Y", "", lang_id);
+
+            ViewData["dt"] = dt;
+
             return View();
         }
 
         // 焦點專欄 - 列表
-        public ActionResult FocusList()
+        public ActionResult FocusList(string cate_id = "", int page = 1)
         {
+            DataTable dt;
+            DataTable d_cate;
+            string err_msg = "";
+            string lang_id = "zh-tw";
+
+            d_cate = CFocus.Cate_List(ref err_msg, cate_id, "sort desc", "Y", "", lang_id);
+            dt = CFocus.List(ref err_msg, "", "sort desc", "Y", "", "", "", "", cate_id, lang_id);
+
+            ViewData["dt"] = dt;
+            ViewData["d_cate"] = d_cate;
+            ViewData["page"] = page;
+
             return View();
         }
 
         // 焦點專欄 - 內容
-        public ActionResult FocusContent()
+        public ActionResult FocusContent(string id = "")
         {
+            DataTable dt;
+            string err_msg = "";
+            string lang_id = "zh-tw";
+            dt = CFocus.List(ref err_msg, id, "sort desc", "Y", "", "", "", "", "", lang_id);
+
+            ViewData["dt"] = dt;
+
             return View();
         }
     }
