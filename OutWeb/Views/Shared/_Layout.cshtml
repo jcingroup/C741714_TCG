@@ -79,7 +79,7 @@
                         <li>
                             <a href="~/AboutUs">
                                 <i class="icon-about"></i>
-                                什麼是<br>台灣民政府
+                                認識民政府
                             </a>
                         </li>
                         <li>
@@ -112,7 +112,7 @@
                         <li class="col-4">
                             <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs">
                                 <i class="icon-about"></i>
-                                什麼是台灣民政府
+                                認識台灣民政府
                             </a>
                         </li>
                         <li class="col-4">
@@ -298,7 +298,7 @@
             <li>
                 <h1>
                     <a href="~/AboutUs">
-                        什麼是台灣民政府
+                        認識台灣民政府
                     </a>
                 </h1>
                 <ul>
@@ -408,6 +408,9 @@
             }, 750);
             return false;
         });
+
+        // table-rwd
+        $( ".editor table" ).wrap( "<div class='table-rwd'></div>" );
     </script>
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a72b8d4c87ca24b"></script>
 

@@ -143,6 +143,7 @@
         <dt class="col-1"><sup title="必填">*</sup> 分類名稱</dt>
         <dd class="col-6">
             <input type="text" class="form-control form-control-sm" required id="cate_name" name="cate_name" value="@cate_name">
+            <small class="text-secondary">要換行請加上&lt;br&gt;符號 (ex. 台灣戰爭史&lt;br&gt;回顧)。每行最多10個字，最多2行。</small>
         </dd>
     </dl>
     <dl class="field">
@@ -180,7 +181,7 @@
             <dt class="col-1">排序</dt>
             <dd class="col-6">
                 <input type="number" min="0" class="inline" id="sort" name="sort" value="@sort">
-                <small>數字愈小愈前面</small>
+                <small class="text-secondary">數字愈小愈前面</small>
             </dd>
         </dl>
     }

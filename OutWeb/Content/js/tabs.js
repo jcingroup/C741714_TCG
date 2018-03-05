@@ -16,7 +16,7 @@ $(document).ready(function () {
             location.hash = target;
         }
         
-        changeTitle();
+        // changeTitle();
         
         e.preventDefault();
     });
@@ -35,31 +35,31 @@ $(document).ready(function () {
         $(hash).add(hash_root).fadeIn().addClass("current");
     }
 
-    changeTitle();
+    // changeTitle();
 
-    function changeTitle(){
-        var siteName = $('#title').text().split('|')[1];
-        var title = $('.title .underline');
-        var subtitle = $('.editor .tabs .tab-nav.current');
-        var titleText = "";
-        var subtitleText = "";
-        title.each(function() {
-            if ($(this).is(":visible")) {
-                titleText = $(this).text();
-            }
-        });
-        subtitle.each(function() {
-            if ($(this).is(":visible")) {
-                subtitleText = $(this).text();
-            }
-        });
-        if (subtitleText == "") {
-            $('#title').html(titleText + " | " + siteName);
-            $('#metaTitle').attr('content', titleText + " | " + siteName);
-        } else {
-            $('#title').html(subtitleText + " - " + titleText + " | " + siteName);
-            $('#metaTitle').attr('content', subtitleText + " - " + titleText + " | " + siteName);
-        }
-    }
+    // function changeTitle(){
+    //     var siteName = $('#title').text().split('|')[1];
+    //     var title = $('.title .underline');
+    //     var subtitle = $('.editor .tabs .tab-nav.current');
+    //     var titleText = "";
+    //     var subtitleText = "";
+    //     title.each(function() {
+    //         if ($(this).is(":visible")) {
+    //             titleText = $(this).text();
+    //         }
+    //     });
+    //     subtitle.each(function() {
+    //         if ($(this).is(":visible")) {
+    //             subtitleText = $(this).text();
+    //         }
+    //     });
+    //     if (subtitleText == "") {
+    //         $('#title').html(titleText + " | " + siteName);
+    //         $('#metaTitle').attr('content', titleText + " | " + siteName);
+    //     } else {
+    //         $('#title').html(subtitleText + " - " + titleText + " | " + siteName);
+    //         $('#metaTitle').attr('content', subtitleText + " - " + titleText + " | " + siteName);
+    //     }
+    // }
 
 });
