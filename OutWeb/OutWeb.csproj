@@ -302,7 +302,6 @@
     <Content Include="ckeditor\plugins\about\dialogs\about.js" />
     <Content Include="ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
     <Content Include="ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
-    <Content Include="ckeditor\plugins\clipboard\dialogs\paste.js" />
     <Content Include="ckeditor\plugins\colordialog\dialogs\colordialog.js" />
     <Content Include="ckeditor\plugins\dialog\dialogDefinition.js" />
     <Content Include="ckeditor\plugins\div\dialogs\div.js" />
@@ -534,28 +533,7 @@
     <Content Include="ckeditor\plugins\wsc\dialogs\wsc.js" />
     <Content Include="ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
     <Content Include="ckeditor\plugins\youtube\images\icon.png" />
-    <Content Include="ckeditor\plugins\youtube\lang\ar.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\cs.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\de.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\el.js" />
     <Content Include="ckeditor\plugins\youtube\lang\en.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\es.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\et.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\fi.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\fr.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\he.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\hu.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\it.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\ja.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\nb.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\nl.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\nn.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\pl.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\pt.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\ru.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\sk.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\tr.js" />
-    <Content Include="ckeditor\plugins\youtube\lang\vi.js" />
     <Content Include="ckeditor\plugins\youtube\lang\zh.js" />
     <Content Include="ckeditor\plugins\youtube\plugin.js" />
     <Content Include="ckeditor\skins\bootstrapck\.temp\css\dialog.css" />
@@ -821,6 +799,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ckeditor\plugins\clipboard\" />
     <Folder Include="Images\" />
     <Folder Include="Models\" />
     <Folder Include="Modules\" />
