@@ -54,26 +54,28 @@
     <div id="wrapper">
 
         <header id="header">
-            <div class="wrap">
-                <ul class="topNav list-inline">
-                    <!-- <li class="lang"><a href="">English</a></li>
-                    <li class="lang"><a href="">日本語</a></li> -->
-                    <li class="search">
-                        <button class="search-trigger icon-search"></button>
-                    </li>
-                    <li class="share">
-                        <a href="https://www.facebook.com/TaiwanCivilGovernment/" target="new" class="icon-facebook"></a>
-                    </li>
-                    <li class="menu">
-                        <button class="sitemap-trigger icon-menu"></button>
-                    </li>
-                </ul>
-            </div>
+            <section id="pageBanner">
+                <div class="wrap">
+                    <ul class="topNav list-inline">
+                        <!-- <li class="lang"><a href="">English</a></li>
+                        <li class="lang"><a href="">日本語</a></li> -->
+                        <li class="search">
+                            <button class="search-trigger icon-search"></button>
+                        </li>
+                        <li class="share">
+                            <a href="https://www.facebook.com/TaiwanCivilGovernment/" target="new" class="icon-facebook"></a>
+                        </li>
+                        <li class="menu">
+                            <button class="sitemap-trigger icon-menu"></button>
+                        </li>
+                    </ul>
+                    <h1 class="logo">
+                        <a href="~/Home" title="回首頁">台灣民政府 Taiwan Civil Government</a>
+                    </h1>
+                </div>
+            </section>
 
             @if (ViewBag.IsFirstPage) {
-                <h1 class="logo">
-                    <a href="~/Home" title="回首頁">台灣民政府 Taiwan Civil Government</a>
-                </h1>
                 <nav id="menu">
                     <ul class="nav list-unstyled">
                         <li>
@@ -86,13 +88,11 @@
                             <a href="~/JoinUs">
                                 <i class="icon-join-us"></i>
                                 如何加入
-                                <!-- <br>台灣民政府 -->
                             </a>
                         </li>
                         <li>
                             <a href="~/News">
                                 <i class="icon-news2"></i>
-                                <!-- 最新訊息<br> -->
                                 活動公告
                             </a>
                         </li>
@@ -100,13 +100,6 @@
                 </nav>
             }
             else {
-                <section id="banner">
-                    <div class="wrap">
-                        <h1 class="logo">
-                            <a href="~/Home" title="回首頁">台灣民政府 Taiwan Civil Government</a>
-                        </h1>
-                    </div>
-                </section>
                 <nav id="menu" class="wrap">
                     <ul class="nav row no-gutters list-unstyled">
                         <li class="col-4">
@@ -229,7 +222,7 @@
                 <ul class="list-unstyled">
                     <li>
                         <h2><a href="~/News/EventLatest">活動寫真</a></h2>
-                        <ul>
+                        <ul class="list-unstyled">
                             <li>
                                 <h3><a href="~/News/EventLatest">中央活動</a></h3>
                             </li>
@@ -269,6 +262,38 @@
                     </li>
                     <li>
                         <h2><a href="~/JoinUs/Consult">地方服務處諮詢</a></h2>
+                        <ul class="list-unstyled">
+                            <li>
+                                <h3>
+                                    <a href="~/JoinUs/Consult#tab1-0">宜蘭州</a>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    <a href="~/JoinUs/Consult#tab1-1">台北州</a>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    <a href="~/JoinUs/Consult#tab1-2">新竹州</a>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    <a href="~/JoinUs/Consult#tab1-3">台中州</a>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    <a href="~/JoinUs/Consult#tab1-4">台南州</a>
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    <a href="~/JoinUs/Consult#tab1-5">高雄州</a>
+                                </h3>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <h2><a href="~/JoinUs/Live">參加台灣法理學院</a></h2>
@@ -292,7 +317,10 @@
                                 <h3><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">歷屆課程影片</a></h3>
                             </li>
                             <li>
-                                <h3><a href="https://www.facebook.com/TaiwanCivilGovernment/" target="new">Facebook 官方粉絲頁</a></h3>
+                                <h3><a href="https://www.facebook.com/TaiwanCivilGovernment/" target="new">FB 官方粉絲頁1</a></h3>
+                            </li>
+                            <li>
+                                <h3><a href="https://www.facebook.com/usmgtcgov.tw/" target="new">FB 官方粉絲頁2</a></h3>
                             </li>
                         </ul>
                     </li>
@@ -392,16 +420,16 @@
         });
 
         // 卷軸卷動效果
-        $('body').waypoint(function(direction) {
-            if( direction === 'down' ) {
+        $('#menu').waypoint(function(direction) {
+            if (direction === 'down') {
                 $('body').addClass('scrolled');
                 $('.goTop').fadeIn();
             }
-            else if( direction === 'up' ){
+            else if (direction === 'up') {
                 $('body').removeClass('scrolled');
                 $('.goTop').fadeOut();
             }
-        }, { offset: -1 } );
+        }, { offset: 48 });
 
         // 點選後跳到 href 指向的位置
         $('.scroll').click(function () {
