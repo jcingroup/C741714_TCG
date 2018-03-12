@@ -23,11 +23,12 @@
     {
         <link rel="stylesheet" href="~/Content/css/admin.css">
     }
-    @Scripts.Render("~/bundles/js")
+    @*@Scripts.Render("~/bundles/js")*@
 
     @* 引用 jQuery *@
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
-
+    @* 引用 BootStrap *@
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("IncludeCSS", false)
 
 

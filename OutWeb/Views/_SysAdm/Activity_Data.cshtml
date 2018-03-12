@@ -15,6 +15,12 @@
     string cFile_Save = "Activity_Save";
     string cFile_List = "Activity_List";
 
+    string cFile_Detail_Add = "Activity_Detail_Add";
+    string cFile_Detail_Del = "Activity_Detail_Del";
+    string cFile_Detail_Edit = "Activity_Detail_Edit";
+    string cFile_Detail_Save = "Activity_Detail_Save";
+
+
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_img = (DataTable)ViewData["d_img"];
     DataTable d_lang = (DataTable)ViewData["d_lang"];
@@ -129,14 +135,6 @@
     </ul>
 }
 
-@section IncludeScript {
-    <script>
-        $('.slide-trigger').click(function(){
-            $(this).parents('.pages').children('.pages-content').slideToggle();
-        });
-    </script>
-}
-
 <h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
 @* 引用 ajaxfileupload *@
 <script src="~/Scripts/ajaxfileupload.js"></script>
@@ -144,6 +142,7 @@
 <script src="~/Scripts/ajax_lib.js"></script>
 @*1.引用ckeditor.js*@
 <script src="~/ckeditor/ckeditor.js"></script>
+
 <script>
     function form_ok() {
         var sshow = "";
@@ -401,12 +400,76 @@
         )
         return false;
     }
+
+    //明細新增
+    function detail_add(c_sty,c_id)
+    {
+        //設定變數值
+        $('#detail_sty').val('add');
+
+        $('#detail_id').val(@img_no);
+        $('#c_detail_title').val('');
+        $('#c_detail_desc').val('');
+        $('#detail_sort').val('0');
+        $("#detail_showN").attr("checked",true);//打勾
+        $( "#detail_showN" ).prop( "checked", true ); //打勾
+        $( "#detail_showY" ).prop( "checked", false ); //不打勾
+
+        //開啟視窗
+        container_open('modalDetail');
+    }
+
+    //明細修改
+    function detail_edit(c_id)
+    {
+        $('#detail_sty').val('edit');
+
+        $('#detail_id').val(c_id);
+        //抓取資料
+    }
+
+    //明細刪除
+    function detail_del()
+    {
+
+    }
+
+    //明細儲存
+    function detail_save(c_sty)
+    {
+
+    }
+
+
+    function container_open(c_container)
+    {
+        $('#' + c_container).modal('toggle');
+    }
+
+    function container_close(c_container)
+    {
+        $('#' + c_container).modal('toggle');
+    }
 </script>
+
+@section IncludeScript {
+    <script>
+        //Enter Disable
+        $('form').bind("keypress", function(e) {
+            if (e.keyCode == 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+}
 <form class="form-list" action="@Url.Content(cFile_Save)" name="form1" id="form1" method="post" enctype="multipart/form-data">
     <input type="hidden" name="action_sty" id="action_sty" value="@action_sty" />
     <input type="hidden" name="id" id="id" value="@id" />
     <input type="hidden" name="img_no" id="img_no" value="@img_no" />
     <input type="hidden" name="img_count" id="img_count" value="@img_count" />
+    <input type="hidden" name="detail_id" id="detail_id" value="" />
+    <input type="hidden" name="detail_sty" id="detail_sty" value="" />
 
     <dl class="field">
         <dt class="col-1"><sup title="必填">*</sup> 語系</dt>
@@ -437,28 +500,28 @@
         </dd>
     </dl>
     @*
-    <dl class="field">
-        <dt class="col-1"><sup title="必填">*</sup> 類別</dt>
-        <dd class="col-6">
-            <select id="cate_id" name="cate_id" class="form-element" required>
-                @if (d_cate.Rows.Count > 0)
-            {
-                for (int i = 0; i < d_cate.Rows.Count; i++)
+        <dl class="field">
+            <dt class="col-1"><sup title="必填">*</sup> 類別</dt>
+            <dd class="col-6">
+                <select id="cate_id" name="cate_id" class="form-element" required>
+                    @if (d_cate.Rows.Count > 0)
                 {
-                    if (d_cate.Rows[i]["id"].ToString() == cate_id)
+                    for (int i = 0; i < d_cate.Rows.Count; i++)
                     {
-                        cate_selected = "selected";
+                        if (d_cate.Rows[i]["id"].ToString() == cate_id)
+                        {
+                            cate_selected = "selected";
+                        }
+                        else
+                        {
+                            cate_selected = "";
+                        }
+                        <option value="@d_cate.Rows[i]["id"].ToString()" @cate_selected>@d_cate.Rows[i]["cate_name"].ToString()</option>
+                        }
                     }
-                    else
-                    {
-                        cate_selected = "";
-                    }
-                    <option value="@d_cate.Rows[i]["id"].ToString()" @cate_selected>@d_cate.Rows[i]["cate_name"].ToString()</option>
-                    }
-                }
-            </select>
-        </dd>
-    </dl>
+                </select>
+            </dd>
+        </dl>
     *@
     <dl class="field">
         <dt class="col-1"><sup title="必填">*</sup> 標題</dt>
@@ -467,12 +530,12 @@
         </dd>
     </dl>
     @*
-    <dl class="field">
-        <dt class="col-1"><sup title="必填">*</sup> 描述</dt>
-        <dd class="col-6">
-            <input type="text" class="form-element" required id="c_desc" name="c_desc" value="@c_desc">
-        </dd>
-    </dl>
+        <dl class="field">
+            <dt class="col-1"><sup title="必填">*</sup> 描述</dt>
+            <dd class="col-6">
+                <input type="text" class="form-element" required id="c_desc" name="c_desc" value="@c_desc">
+            </dd>
+        </dl>
     *@
     <dl class="field">
         <dt class="col-1"><sup title="必填">*</sup> 狀態</dt>
@@ -509,14 +572,83 @@
             <small class="text-secondary">數字愈大愈前面</small>
         </dd>
     </dl>
+    <dl class="field">
+        <dt class="col-1">代表圖</dt>
+        <dd class="col-6">
+            <div class="input-file">
+                @* 瀏覽&上傳檔案 *@
+                <input type="file" name="pic_S" id="pic_S" accept="image/*" class="form-control form-control-sm">
+                <button type="button" name="btn_small_pic" onclick="upload('S');" class="btn btn-sm btn-success oi m-t-small" data-glyph="data-transfer-upload">
+                    上傳
+                </button>
+                <br>
+                @* 照片縮圖(上傳圖片後顯示) *@
+                <ol class="upload-img list-inline" id="c_img_S" name="c_img_S">
+                    @for (int s = 0; s < d_img.Rows.Count; s++)
+                    {
+                        small_img = img_path + d_img.Rows[s]["img_file"].ToString();
+                        img_id = d_img.Rows[s]["id"].ToString();
+                        <li>
+                            <button class="close" id="btn_close_s_@s" name="btn_close_s_@s" onclick="del_img('@img_id','S');">&times;</button>
+                            <img id="img_S_@s" name="img_S_@s" src="@small_img" alt="">
+                        </li>
+                    }
+
+                </ol>
+            </div>
+            <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*450px，建議檔案大小不超過 1000kb</small>
+        </dd>
+    </dl>
     <hr class="my-16">
+    <div class="mb-12 clearfix">
+        <h4 class="pull-left my-0">
+            分頁資訊
+        </h4>
+
+        <button class="btn info oi" onclick="detail('add','');" id="btn_detail_add" name="btn_detail_add">分頁新增</button>
+        <button class="btn info oi" onclick="container_open('modalImage');" id="btn_detail_Image" name="btn_detail_Image">圖片管理</button>
+        <button class="btn info oi" onclick="container_open('modalVideo');" id="btn_detail_Video" name="btn_detail_Video">影片網址</button>
+
+        <!--<button class="btn info oi" data-glyph="video" data-modal="#modalDetail" onclick="detail('add','');" id="btn_detail_add" name="btn_detail_add">分頁新增</button>-->
+        <!--<button class="btn info oi" data-glyph="image" data-modal="#modalImage">圖片管理</button>-->
+    </div>
+    <fieldset>
+        <div id="activity_detail" name="activity_detail">
+            <table class="table-list table-hover table-striped">
+                <colgroup>
+                    <col style="width: 5%">
+                    <col style="width: 39%">
+                    <col style="width: 7%">
+                    <col style="width: 7%">
+                    <col style="width: 7%">
+                    <col style="width: 7%">
+                    <col style="width: 5%">
+                </colgroup>
+                <tr>
+                    <th class="item-edit">修改</th>
+                    <th class="text-center">標題</th>
+                    <th class="text-center">狀態</th>
+                    <th class="text-center">排序</th>
+                    <th class="text-center">圖片</th>
+                    <th class="text-center">網址</th>
+                    <th class="item-edit">刪除</th>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        無分頁資料
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </fieldset>
+
     <dl class="field">
         <dt class="col-1">圖片上傳</dt>
         <dd class="col-6">
             <div class="input-file">
                 @* 瀏覽&上傳檔案 *@
                 <input type="file" name="pic_B" id="pic_B" accept="image/*" class="form-control form-control-sm">
-                <button type="button" name="btn_small_pic" onclick="upload('B');" class="btn btn-sm btn-success oi m-t-small" data-glyph="data-transfer-upload">
+                <button type="button" name="btn_big_pic" onclick="upload('B');" class="btn btn-sm btn-success oi m-t-small" data-glyph="data-transfer-upload">
                     上傳
                 </button>
             </div>
@@ -594,7 +726,7 @@
                     </li>
                 }
 
-                @for (int b = 0; b < 10- d_url.Rows.Count; b++)
+                @for (int b = 0; b < 10 - d_url.Rows.Count; b++)
                 {
                     url_id = "";
                     c_url = "";
@@ -615,4 +747,153 @@
             取消，回列表
         </button>
     </footer>
+
+
+
 </form>
+
+<!--//明細 新增 & 更新視窗 Start -->
+<div id="modalDetail" class="modal modal-sm">
+    <div class="modal-wrapper">
+        <div class="modal-header" style="width:100%;">
+            分頁資訊
+            <button class="modal-close" onclick="container_close('modalDetail');">
+                <i class="oi" data-glyph="x"></i>
+            </button>
+        </div>
+        <div class="modal-content">
+            <table>
+                <colgroup>
+                    <col style="width: 15%">
+                    <col>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td>
+                            <sup title="必填">*</sup> 標題
+                        </td>
+                        <td style="text-align:left;vertical-align:middle;">
+                            <input type="text" class="form-element" required id="c_detail_title" name="c_detail_title" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <sup title="必填">*</sup> 狀態
+                        </td>
+                        <td style="text-align:left;vertical-align:middle;">
+                            <input type="radio" class="radio" name="detail_show" id="detail_showY" value="Y">
+                            <label for="detail_showY"></label>
+                            發佈
+                            <input type="radio" class="radio" name="detail_show" id="detail_showN" value="N">
+                            <label for="detail_showN"></label>
+                            草稿
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <sup title="必填">*</sup> 排序
+                        </td>
+                        <td style="text-align:left;vertical-align:middle;">
+                            <input type="number" min="0" class="form-element" id="detail_sort" name="detail_sort" value="" required>
+                            <small class="text-secondary">數字愈大愈前面</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <sup title="必填">*</sup> 描述
+                        </td>
+                        <td style="text-align:left;vertical-align:middle;">
+                            @* 編輯器(含圖片上傳功能) *@
+                            <textarea class="ckeditor" rows="10" placeholder="請輸入最新消息內容" name="c_detail_desc" id="c_detail_desc"></textarea>
+                            @*加入圖片上傳頁籤，放在頁面底下，放在頁面head區的話，會抓不到myText DOM*@
+                            <script type="text/javascript">
+                                CKEDITOR.replace('c_detail_desc'
+                                , { filebrowserImageUploadUrl: '@Url.Content(SysPath + "UploadPicture")' }
+                                );
+                            </script>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer text-center">
+            <button class="btn success oi" onclick="detail_save('');">確定</button>
+            <button class="btn warning oi" onclick="container_close('modalDetail');">取消</button>
+        </div>
+    </div>
+</div>
+<!--//明細 新增 & 更新視窗 End -->
+
+<!--// 圖片管理 Start -->
+<div id="modalImage" class="modal modal-sm">
+    <div class="modal-wrapper">
+        <div class="modal-header">
+            圖片管理
+            <button class="modal-close" onclick="container_close('modalImage');">
+                <i class="oi" data-glyph="x"></i>
+            </button>
+        </div>
+        <div class="modal-content">
+            <section class="upload mb-24">
+                <h5 class="text-primary mt-0 mb-16">圖片上傳</h5>
+                <div class="form-inline">
+                    <input type="file" class="form-element">
+                    <button type="button" class="btn info sm oi m-t-8" data-glyph="data-transfer-upload">上傳</button>
+                </div>
+            </section>
+            <section class="uploaded-list">
+                <h5 class="text-primary mt-0 mb-16">已上傳圖片</h5>
+                <table class="uploader">
+                    <colgroup>
+                        <col style="width: 15%">
+                        <col span="3">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>圖片</th>
+                            <th class="text-left">圖說</th>
+                            <th class="item-edit">刪除</th>
+                        </tr>
+                        <tr class="bg-pale-red"><td colspan="3">查無資料!</td></tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div class="modal-footer text-center">
+            <button class="btn success oi" onclick="container_close('modalImage');">確定</button>
+            <button class="btn warning oi" onclick="container_close('modalImage');">取消</button>
+        </div>
+    </div>
+</div>
+<!--// 圖片管理 End -->
+<!--// 影片網址 Start -->
+<div id="modalVideo" class="modal modal-sm">
+    <div class="modal-wrapper">
+        <div class="modal-header">
+            輸入影片網址
+            <button class="modal-close" onclick="container_close('modalVideo');">
+                <i class="oi" data-glyph="x"></i>
+            </button>
+        </div>
+        <div class="modal-content">
+            <p class="mb-16">請輸入 Youtube 影片網址，最多可輸入10部影片網址</p>
+            <ol class="pl-24">
+                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+            </ol>
+        </div>
+        <div class="modal-footer text-center">
+            <button class="btn success oi" onclick="Video_Ok();">確定</button>
+            <button class="btn warning oi" onclick="container_close('modalVideo');">取消</button>
+        </div>
+    </div>
+</div>
+<!--// 影片網址 End -->

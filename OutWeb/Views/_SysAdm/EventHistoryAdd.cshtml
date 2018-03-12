@@ -3,6 +3,23 @@
     ViewBag.Crumb = "最新活動";
     ViewBag.subnav = "Event";
     ViewBag.subnav2 = "EventHistory";
+
+    //變數設定
+    string SysPath = "~/_SysAdm/";
+
+    string cFile = "Activity_Data";
+    string cFile_Add = "Activity_Add";
+    string cFile_Del = "Activity_Del";
+    string cFile_Edit = "Activity_Edit";
+    string cFile_Save = "Activity_Save";
+    string cFile_List = "Activity_List";
+
+    string cFile_Detail_Add = "Activity_Detail_Add";
+    string cFile_Detail_Del = "Activity_Detail_Del";
+    string cFile_Detail_Edit = "Activity_Detail_Edit";
+    string cFile_Detail_Save = "Activity_Detail_Save";
+
+    string img_no = "";
 }
 
 @section Breadcrumb {
@@ -11,7 +28,9 @@
         <li>@ViewBag.Crumb</li>
     </ul>
 }
-
+<script src="~/Scripts/ajaxfileupload.js"></script>
+<script src="~/Scripts/ajax_lib.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
 @section IncludeScript {
     <script>
         $('.slide-trigger').click(function(){
@@ -44,195 +63,452 @@
         });
     </script>
 }
+<script>
+    function form_ok() {
+        var sshow = "";
+        var shot = "";
+        var cmsg = "";
+        var c_title = "";
 
+        c_title = $("#c_title").val();
+        c_date = $("#c_date").val();
+
+        if(c_title == "")
+        {
+            if (cmsg != "")
+            {
+                cmsg += "\n";
+            }
+            cmsg += "請輸入標題";
+        }
+
+        if (c_date == "") {
+            if (cmsg != "") {
+                cmsg += "\n";
+            }
+            cmsg += "請輸入日期";
+        }
+
+        if (cmsg != "")
+        {
+            alert(cmsg);
+        }
+        else
+        {
+            form1.submit();
+        }
+        //alert("show:" + $("#show").val() + ";hot:" + $("#hot").val());
+
+    }
+
+    function get_cate() {
+        //  取得被選擇項目的值
+        //$("#select").find(":selected").val();
+        var c_lang = $("#lang_id").find(":selected").val();
+        var c_cate_kind = "Activity";
+        //alert(c_lang);
+        $.ajax({
+            url: 'Cate_Get',
+            data: { lang: c_lang, cate_kind: c_cate_kind }, //此参数非常严谨，写错一个引号都不行
+            type: "POST",
+            dataType: 'TEXT', //返回值类型 一般设置为json
+            async: false,
+            success: function (JData) {
+                //alert(JData);
+                data = handleAjaxVPNMsg(JData);
+                i = 0;
+                c_html = "";
+
+                //  移除全部的項目
+                $("#cate_id option").remove();
+                //新增空白
+                //$("#cate_id").append($("<option></option>").attr("value", "").text("全部"));
+
+                $.each($.parseJSON(data), function (idx, obj) {
+                    //$("#select").append($("<option></option>").attr("value", "值").text("文字"));
+                    $("#cate_id").append($("<option></option>").attr("value", obj.ID).text(obj.CATE_NAME));
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            },
+            complete: function () {
+                //alert(tbl_new_list);
+                //alert('ajax complete');
+            }
+        });
+        return false;
+    }
+
+    function del_img(img_id,c_sty)
+    {
+        var cimg_no = "";
+        var c_cate = "Activity"
+        if ($("#id").val().length > 0) {
+            cimg_no = $("#id").val();
+        }else {
+            cimg_no = @img_no;
+        }
+
+        $.ajax({                
+            url: 'Img_Del',
+            data: { img_id: img_id, img_sta:c_sty, img_no: cimg_no,img_cate: c_cate  }, //此参数非常严谨，写错一个引号都不行
+            type:"POST",
+            dataType: 'TEXT', //返回值类型 一般设置为json
+            async: false,
+            success: function(JData){
+                //alert(JData);
+                data = handleAjaxVPNMsg(JData);
+                //-------------------------------------------------------//
+                i = 0;
+                c_html = "";
+                c_html += "<table class=\"uploader m-t-32\">";
+                c_html += "  <colgroup>";
+                c_html += "    <col style=\"width: 15%\">";
+                c_html += "    <col span=\"3\">";
+                c_html += "</colgroup>";
+                c_html += "<tr>";
+                c_html += "    <th>圖片</th>";
+                c_html += "    <th>圖說</th>";
+                c_html += "    <th>封面圖</th>";
+                c_html += "    <th class=\"item-edit\">刪除</th>";
+                c_html += "</tr>";
+
+                $.each($.parseJSON(data), function (idx, obj) {
+                    i = i + 1;
+                    c_html = c_html + "<tr>";
+                    c_html = c_html + "    <td>";
+                    c_html = c_html + "        <input  type=\"hidden\" name=\"img_id[]\" id=\"img_id[]\" value=\"" + obj.ID + "\" />";
+                    c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                    c_html = c_html + "    </td>";
+                    c_html = c_html + "    <td>";
+                    c_html = c_html + "        <input type=\"text\" name=\"img_desc[]\" id=\"img_name[]\" class=\"form-element\" value=\"" + obj.IMG_DESC + "\">";
+                    c_html = c_html + "    </td>";
+                    c_html = c_html + "    <td>";
+
+                    c_html = c_html + "       <label class=\"switch\">";
+                    c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.ID + "\"";
+                    if(obj.is_index == "Y")
+                    {
+                        c_html = c_html + " checked ";
+                    }
+                    c_html = c_html + ">";
+                    c_html = c_html + "        <div class=\"slider round\"></div>";
+                    c_html = c_html + "       </label>";
+                    c_html = c_html + "    </td>";
+                    c_html = c_html + "    <td class=\"item-edit\">";
+                    c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.IMG_ID + "','');\"></button>";
+                    c_html = c_html + "    </td>";
+                    c_html = c_html + "</tr>";
+                });
+                c_html += "</table>";
+                $('#img_count').val(i);
+                $('#images_container').html(c_html);
+                //-------------------------------------------------------//
+            },
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError); 
+            },
+            complete: function () {
+                //alert(tbl_new_list);
+                //alert('ajax complete');
+            }
+        });
+        return false;
+    }
+
+    function upload(c_sty)
+    {
+
+        if ($("#pic_" + c_sty).val().length > 0) {
+            //ajaxFileUpload('pic_small','small_img');
+            ajaxFileUpload(c_sty);
+        }
+        else {
+            alert("請選擇圖片");
+        }
+    }
+
+    function ajaxFileUpload(c_sty) {
+        var cimg_no = "";
+        var c_img = "pic_" + c_sty;
+        var c_cate = "Activity"
+        var cimg_sty = "";
+        var cimg_id = "";
+
+        if ($("#id").val().length > 0) {
+            cimg_no = $("#id").val();
+        }else {
+            cimg_no = @img_no;
+        }
+
+        //alert(c_img);
+        var chtml = "";
+        var i = 0;
+        $.ajaxFileUpload
+        (
+            {
+                url: 'Upload', //用于文件上传的服务器端请求地址
+                type: 'post',
+                data: { img_no: cimg_no, img_sta: c_sty, img_cate: c_cate }, //此参数非常严谨，写错一个引号都不行
+                secureuri: false, //一般设置为false
+                //fileElementId: 'file1', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+                fileElementId: c_img, //文件上传空间的id属性  <input type="file" id="file" name="file" />
+                //dataType: 'HTML', //返回值类型 一般设置为json
+                dataType: 'JSON', //返回值类型 一般设置为json
+                success: function (JData, status)  //服务器成功响应处理函数
+                {
+                    //alert(JData);
+
+                    data = handleAjaxVPNMsg(JData);
+
+                    //-------------------------------------------------------//
+                    i = 0;
+                    c_html = "";
+                    c_html += "<table class=\"uploader m-t-32\">";
+                    c_html += "  <colgroup>";
+                    c_html += "    <col style=\"width: 15%\">";
+                    c_html += "    <col span=\"3\">";
+                    c_html += "</colgroup>";
+                    c_html += "<tr>";
+                    c_html += "    <th>圖片</th>";
+                    c_html += "    <th>圖說</th>";
+                    c_html += "    <th>封面圖</th>";
+                    c_html += "    <th class=\"item-edit\">刪除</th>";
+                    c_html += "</tr>";
+
+                    $.each($.parseJSON(data), function (idx, obj) {
+                        i = i + 1;
+                        c_html = c_html + "<tr>";
+                        c_html = c_html + "    <td>";
+                        c_html = c_html + "        <input  type=\"hidden\" name=\"img_id[]\" id=\"img_id[]\" value=\"" + obj.ID + "\" />";
+                        c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                        c_html = c_html + "    </td>";
+                        c_html = c_html + "    <td>";
+                        c_html = c_html + "        <input type=\"text\" name=\"img_desc[]\" id=\"img_name[]\" class=\"form-element\" value=\"" + obj.IMG_DESC + "\">";
+                        c_html = c_html + "    </td>";
+                        c_html = c_html + "    <td>";
+
+                        c_html = c_html + "       <label class=\"switch\">";
+                        c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.ID + "\"";
+                        if(obj.is_index == "Y")
+                        {
+                            c_html = c_html + " checked ";
+                        }
+                        c_html = c_html + ">";
+                        c_html = c_html + "        <div class=\"slider round\"></div>";
+                        c_html = c_html + "       </label>";
+                        c_html = c_html + "    </td>";
+                        c_html = c_html + "    <td class=\"item-edit\">";
+                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.ID + "','');\"></button>";
+                        c_html = c_html + "    </td>";
+                        c_html = c_html + "</tr>";
+                    });
+                    c_html += "</table>";
+                    $('#img_count').val(i);
+                    $('#images_container').html(c_html);
+                    //-------------------------------------------------------//
+
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    alert(e);
+                }
+            }
+        )
+        return false;
+    }
+</script>
 <h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+<form class="form-list" action="@Url.Content(cFile_Save)" name="form1" id="form1" method="post" enctype="multipart/form-data" onclick="form_ok();">
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 語系</dt>
+        <dd class="col-6">
+            <select name="" id="" class="form-element">
+                <option value="">繁體中文版</option>
+                <option value="">英文版</option>
+                <option value="">日文版</option>
+            </select>
+        </dd>
+    </dl>
 
-<dl class="field">
-    <dt class="col-1"><sup title="必填">*</sup> 語系</dt>
-    <dd class="col-6">
-        <select name="" id="" class="form-element">
-            <option value="">繁體中文版</option>
-            <option value="">英文版</option>
-            <option value="">日文版</option>
-        </select>
-    </dd>
-</dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 日期</dt>
+        <dd class="col-6">
+            <input type="date" class="form-element" required>
+        </dd>
+    </dl>
 
-<dl class="field">
-    <dt class="col-1"><sup title="必填">*</sup> 日期</dt>
-    <dd class="col-6">
-        <input type="date" class="form-element" required>
-    </dd>
-</dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 標題</dt>
+        <dd class="col-6">
+            <input type="text" class="form-element" required>
+        </dd>
+    </dl>
 
-<dl class="field">
-    <dt class="col-1"><sup title="必填">*</sup> 標題</dt>
-    <dd class="col-6">
-        <input type="text" class="form-element" required>
-    </dd>
-</dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 狀態</dt>
+        <dd class="col-6">
+            <input type="radio" class="radio" name="publish" id="public" checked>
+            <label for="public"></label>
+            發佈
+            <input type="radio" class="radio" name="publish" id="draft">
+            <label for="draft"></label>
+            草稿
+        </dd>
+    </dl>
 
-<dl class="field">
-    <dt class="col-1"><sup title="必填">*</sup> 狀態</dt>
-    <dd class="col-6">
-        <input type="radio" class="radio" name="publish" id="public" checked>
-        <label for="public"></label>
-        發佈
-        <input type="radio" class="radio" name="publish" id="draft">
-        <label for="draft"></label>
-        草稿
-    </dd>
-</dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 輪播</dt>
+        <dd class="col-3">
+            <input type="radio" class="radio" name="carousel" id="carouselY" checked>
+            <label for="carouselY"></label>
+            是
+            <input type="radio" class="radio" name="carousel" id="carouselN">
+            <label for="carouselN"></label>
+            否
+        </dd>
+        <dd class="col-5">
+            <small class="text-secondary">如選「是」 ，本篇將顯示於最新資訊的輪播區塊</small>
+        </dd>
+    </dl>
 
-<dl class="field">
-    <dt class="col-1"><sup title="必填">*</sup> 輪播</dt>
-    <dd class="col-3">
-        <input type="radio" class="radio" name="carousel" id="carouselY" checked>
-        <label for="carouselY"></label>
-        是
-        <input type="radio" class="radio" name="carousel" id="carouselN">
-        <label for="carouselN"></label>
-        否
-    </dd>
-    <dd class="col-5">
-        <small class="text-secondary">如選「是」 ，本篇將顯示於最新資訊的輪播區塊</small>
-    </dd>
-</dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 排序</dt>
+        <dd class="col-3">
+            <input type="text" class="form-element" value="0" required>
+        </dd>
+        <dd class="col-5">
+            <small class="text-secondary">數字愈大愈前面</small>
+        </dd>
+    </dl>
 
-<dl class="field">
-    <dt class="col-1"><sup title="必填">*</sup> 排序</dt>
-    <dd class="col-3">
-        <input type="text" class="form-element" value="0" required>
-    </dd>
-    <dd class="col-5">
-        <small class="text-secondary">數字愈大愈前面</small>
-    </dd>
-</dl>
+    <dl class="field">
+        <dt class="col-1">代表圖</dt>
+        <dd class="col-6">
+            <div class="input-file">
+                <input type="file">
+            </div>
+            <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*450px，建議檔案大小不超過 1000kb</small>
+            <div class="uploaded">
+                <button class="close" type="button">×</button>
+                <img src="" width="100">
+            </div>
+        </dd>
+    </dl>
 
-<dl class="field">
-    <dt class="col-1">代表圖</dt>
-    <dd class="col-6">
-        <div class="input-file">
-            <input type="file">
-        </div>
-        <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*450px，建議檔案大小不超過 1000kb</small>
-        <div class="uploaded">
-            <button class="close" type="button">×</button>
-            <img src="" width="100">
-        </div>
-    </dd>
-</dl>
+    <hr class="my-16">
 
-<hr class="my-16">
+    <div class="mb-12 clearfix">
+        <h4 class="pull-left my-0">
+            分頁
+            <small class="text-muted">(共1頁)</small>
+        </h4>
+        <button class="btn success sm oi ml-16" data-glyph="plus">新增</button>
+    </div>
 
-<div class="mb-12 clearfix">
-    <h4 class="pull-left my-0">
-        分頁
-        <small class="text-muted">(共1頁)</small>
-    </h4>
-    <button class="btn success sm oi ml-16" data-glyph="plus">新增</button>
-</div>
+    <div class="pages">
+        <header class="table-head form-inline">
+            <button class="slide-trigger btn primary pull-right">收合/展開</button>
+            <label for="" class="sr-only">標題</label>
+            <input type="text" placeholder="標題" style="width: 255px;" required>
+            <label for="" class="sr-only">狀態</label>
+            <select name="" id="" required>
+                <option value="" selected disabled>狀態</option>
+                <option value="">發佈</option>
+                <option value="">草稿</option>
+            </select>
+            <label for="" class="sr-only">排序</label>
+            <input type="text" placeholder="排序 (數字愈大愈前面)" required>
+            <button class="btn danger oi" data-glyph="trash">刪除</button>
 
-<div class="pages">
-    <header class="table-head form-inline">
-        <button class="slide-trigger btn primary pull-right">收合/展開</button>
-        <label for="" class="sr-only">標題</label>
-        <input type="text" placeholder="標題" style="width: 255px;" required>
-        <label for="" class="sr-only">狀態</label>
-        <select name="" id="" required>
-            <option value="" selected disabled>狀態</option>
-            <option value="">發佈</option>
-            <option value="">草稿</option>
-        </select>
-        <label for="" class="sr-only">排序</label>
-        <input type="text" placeholder="排序 (數字愈大愈前面)" required>
-        <button class="btn danger oi" data-glyph="trash">刪除</button>
-
-    </header>
-    <div class="pages-content">
-        <div class="btn-group">
-            <button class="btn info oi" data-glyph="image" data-modal="#modalImage">圖片管理</button>
-            <button class="btn info oi" data-glyph="video" data-modal="#modalVideo">影片管理</button>
+        </header>
+        <div class="pages-content">
+            <div class="btn-group">
+                <button class="btn info oi" data-glyph="image" data-modal="#modalImage">圖片管理</button>
+                <button class="btn info oi" data-glyph="video" data-modal="#modalVideo">影片管理</button>
+            </div>
         </div>
     </div>
-</div>
 
-<footer class="submit-bar clear mt-24">
-    <button type="submit" class="btn success oi" data-glyph="circle-check">
-        確認儲存
-    </button>
-    <button type="button" class="btn warning oi" data-glyph="x" onclick="location.href='EventHistoryList'">
-        取消，回列表
-    </button>
-</footer>
+    <footer class="submit-bar clear mt-24">
+        <button type="submit" class="btn success oi" data-glyph="circle-check">
+            確認儲存
+        </button>
+        <button type="button" class="btn warning oi" data-glyph="x" onclick="location.href='EventHistoryList'">
+            取消，回列表
+        </button>
+    </footer>
+</form>
+    <div id="modalImage" class="modal modal-sm">
+        <div class="modal-wrapper">
+            <div class="modal-header">
+                圖片管理
+                <button class="modal-close" data-close="modal">
+                    <i class="oi" data-glyph="x"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <section class="upload mb-24">
+                    <h5 class="text-primary mt-0 mb-16">圖片上傳</h5>
+                    <div class="form-inline">
+                        <input type="file" class="form-element">
+                        <button type="button" class="btn info sm oi m-t-8" data-glyph="data-transfer-upload">上傳</button>
+                    </div>
+                </section>
+                <section class="uploaded-list">
+                    <h5 class="text-primary mt-0 mb-16">已上傳圖片</h5>
+                    <table class="uploader">
+                        <colgroup>
+                            <col style="width: 15%">
+                            <col span="3">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>圖片</th>
+                                <th class="text-left">圖說</th>
+                                <th class="item-edit">刪除</th>
+                            </tr>
+                            <tr class="bg-pale-red"><td colspan="3">查無資料!</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+            <div class="modal-footer text-center">
+                <button class="btn success oi" data-glyph="circle-check">確定</button>
+                <button class="btn warning oi" data-glyph="x" data-close="modal">取消</button>
+            </div>
+        </div>
+    </div><!--// 圖片管理 -->
 
-<div id="modalImage" class="modal modal-sm">
-    <div class="modal-wrapper">
-        <div class="modal-header">
-            圖片管理
-            <button class="modal-close" data-close="modal">
-                <i class="oi" data-glyph="x"></i>
-            </button>
-        </div>
-        <div class="modal-content">
-            <section class="upload mb-24">
-                <h5 class="text-primary mt-0 mb-16">圖片上傳</h5>
-                <div class="form-inline">
-                    <input type="file" class="form-element">
-                    <button type="button" class="btn info sm oi m-t-8" data-glyph="data-transfer-upload">上傳</button>
-                </div>
-            </section>
-            <section class="uploaded-list">
-                <h5 class="text-primary mt-0 mb-16">已上傳圖片</h5>
-                <table class="uploader">
-                    <colgroup>
-                        <col style="width: 15%">
-                        <col span="3">
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <th>圖片</th>
-                            <th class="text-left">圖說</th>
-                            <th class="item-edit">刪除</th>
-                        </tr>
-                        <tr class="bg-pale-red"><td colspan="3">查無資料!</td></tr>
-                    </tbody>
-                </table>
-            </section>
-        </div>
-        <div class="modal-footer text-center">
-            <button class="btn success oi" data-glyph="circle-check">確定</button>
-            <button class="btn warning oi" data-glyph="x" data-close="modal">取消</button>
-        </div>
-    </div>
-</div><!--// 圖片管理 -->
-
-<div id="modalVideo" class="modal modal-sm">
-    <div class="modal-wrapper">
-        <div class="modal-header">
+    <div id="modalVideo" class="modal modal-sm">
+        <div class="modal-wrapper">
+            <div class="modal-header">
                 輸入影片網址
-            <button class="modal-close" data-close="modal">
-                <i class="oi" data-glyph="x"></i>
-            </button>
+                <button class="modal-close" data-close="modal">
+                    <i class="oi" data-glyph="x"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <p class="mb-16">請輸入 Youtube 影片網址，最多可輸入10部影片網址</p>
+                <ol class="pl-24">
+                    <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                    <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                    <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                    <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                    <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                    <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                    <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                    <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                    <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                    <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                </ol>
+            </div>
+            <div class="modal-footer text-center">
+                <button class="btn success oi" data-glyph="circle-check">確定</button>
+                <button class="btn warning oi" data-glyph="x" data-close="modal">取消</button>
+            </div>
         </div>
-        <div class="modal-content">
-            <p class="mb-16">請輸入 Youtube 影片網址，最多可輸入10部影片網址</p>
-            <ol class="pl-24">
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-            </ol>
-        </div>
-        <div class="modal-footer text-center">
-            <button class="btn success oi" data-glyph="circle-check">確定</button>
-            <button class="btn warning oi" data-glyph="x" data-close="modal">取消</button>
-        </div>
-    </div>
-</div><!--// 影片管理 -->
+    </div><!--// 影片管理 -->
