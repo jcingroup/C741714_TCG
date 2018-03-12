@@ -201,10 +201,10 @@
                 <div class="copyright pull-left">
                     <i class="logo-sm"></i>
                     <strong>台灣民政府 中央會館</strong>
-                    <span class="hidden-xs">Taiwan Civil Government Central Headquarters</span> &copy; 2017
+                    <span class="hidden-sm">Taiwan Civil Government Central Headquarters</span> &copy; 2018
                 </div>
                 <nav class="foot-nav pull-right">
-                    <a href="https://goo.gl/maps/YnjYAMLxhwr" target="new">33391新竹州桃園郡龜山鄉員林坑路100-1號</a>
+                    <span><a href="https://goo.gl/maps/YnjYAMLxhwr" target="new"><span class="hidden-sm">33391</span>新竹州桃園郡龜山鄉員林坑路100-1號</a></span>
                     <span>(03) 355-6363</span>
                 </nav>
             </div>
@@ -394,7 +394,7 @@
     <nav id="search" class="popup">
         <button class="search-trigger oi" data-glyph="x"></button>
         @* 全文檢索: 找標題/內文 關鍵字 *@
-        <form class="search-form form-inline" action="~/Home/Search">
+        <form class="search-form" action="~/Home/Search">
             <input type="text" class="form-element" placeholder="請在此輸入">
             <button>
                 <i class="icon-search"></i> 搜尋
@@ -417,6 +417,15 @@
         $("#sitemap a").click(function(){
             // 同一頁換tab需重載頁面
             location.reload();
+        });
+        
+        // 點 Popup 空白處可以關閉
+        $(".popup").click(function() {
+            $(this).fadeOut();
+            $("body").removeClass("overlay");
+        });
+        $(".popup > ul, .popup > form").click(function(e){
+            e.stopPropagation();
         });
 
         // 卷軸卷動效果
