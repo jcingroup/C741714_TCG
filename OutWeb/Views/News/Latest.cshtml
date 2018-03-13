@@ -10,7 +10,7 @@
 
 <h1 class="title">
     <span class="underline">@ViewBag.Title</span>
-    <div class="addthis_inline_share_toolbox"></div>
+    <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h1>
 
 @* 後台有設定要顯示在最新訊息的文章 (最多10筆，依日期最新到最舊) *@
@@ -33,7 +33,7 @@
                 聲明         class + label-purple
                 焦點專欄     class + label-info
                 *@
-                <span class="label label-warning"><a href="~/News/EventLatest">中央活動</a></span>
+                <a class="label label-warning" href="~/News/EventLatest">中央活動</a>
                 <small class="date">2018-01-20</small>
                 <h3><a href="~/News/EventLatestContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
                 @* 摘要 取前 145 個字，有資料的話才顯示 *@
@@ -51,7 +51,7 @@
                 </a>
             </div>
             <div class="col-lg-9 col-sm-8 col-12">
-                <span class="label label-danger"><a href="~/News/AnnouncementList">中央新聞</a></span>
+                <a class="label label-danger" href="~/News/AnnouncementList">中央新聞</a>
                 <small class="date">2018-01-20</small>
                 <h3><a href="~/News/AnnouncementContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
                 @* 摘要 取前 145 個字，有資料的話才顯示 *@
@@ -69,7 +69,7 @@
                 </a>
             </div>
             <div class="col-lg-9 col-sm-8 col-12">
-                <span class="label label-info"><a href="~/News/FocusCategory">焦點專欄</a></span>
+                <a class="label label-info" href="~/News/FocusCategory">焦點專欄</a>
                 <small class="date">2018-01-20</small>
                 <h3><a href="~/News/FocusContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
                 @* 摘要 取前 145 個字，有資料的話才顯示 *@

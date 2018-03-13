@@ -187,6 +187,7 @@
                     @RenderSection("breadcrumb", false)
                 </ul>
                 @RenderBody()
+                <div class="addthis_inline_share_toolbox"></div>
             </main>
         }
 
@@ -266,30 +267,18 @@
                             <li>
                                 <h3>
                                     <a href="~/JoinUs/Consult#tab1-0">宜蘭州</a>
-                                </h3>
-                            </li>
-                            <li>
-                                <h3>
                                     <a href="~/JoinUs/Consult#tab1-1">台北州</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
                                     <a href="~/JoinUs/Consult#tab1-2">新竹州</a>
-                                </h3>
-                            </li>
-                            <li>
-                                <h3>
                                     <a href="~/JoinUs/Consult#tab1-3">台中州</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
                                     <a href="~/JoinUs/Consult#tab1-4">台南州</a>
-                                </h3>
-                            </li>
-                            <li>
-                                <h3>
                                     <a href="~/JoinUs/Consult#tab1-5">高雄州</a>
                                 </h3>
                             </li>
@@ -387,6 +376,11 @@
                         </ul>
                     </li>
                 </ul>
+                <h1>
+                    <a href="http://usmgtcg.ning.com" target="new">
+                        舊官網
+                    </a>
+                </h1>
             </li>
         </ul>
     </nav>
@@ -424,7 +418,7 @@
             $(this).fadeOut();
             $("body").removeClass("overlay");
         });
-        $(".popup > ul, .popup > form").click(function(e){
+        $(".popup li a, .popup > form").click(function(e){
             e.stopPropagation();
         });
 
@@ -438,7 +432,7 @@
                 $('body').removeClass('scrolled');
                 $('.goTop').fadeOut();
             }
-        }, { offset: 48 });
+        }, { offset: -1 });
 
         // 點選後跳到 href 指向的位置
         $('.scroll').click(function () {
