@@ -241,7 +241,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(ex.Message);
+                //err_msg = CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -420,7 +421,7 @@ namespace OutWeb.Service
             {
                 c_msg = ex.Message;
                 string err_msg = CService.rtn_errmsg(ex.Message, ex.Source, ex.StackTrace);
-                logger.Error(err_msg);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -486,7 +487,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -520,7 +522,7 @@ namespace OutWeb.Service
             try
             {
                 //======== 刪除圖片 ====================//
-                csql = @"delete from IMG SET IMG_KIND='" + img_kind + "' WHERE IMG_NO = @id ";
+                csql = @"delete from IMG WHERE  IMG_NO = @id ";
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();
@@ -529,7 +531,7 @@ namespace OutWeb.Service
                 cmd.ExecuteNonQuery();
                 //====================================//
                 //======== 刪除URL ====================//
-                csql = @"delete from URL SET URL_KIND='" + img_kind + "' WHERE URL_NO = @id ";
+                csql = @"delete from URL WHERE URL_NO = @id ";
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();
@@ -537,11 +539,22 @@ namespace OutWeb.Service
 
                 cmd.ExecuteNonQuery();
                 //====================================//
+                //======== 刪除明細資料 =============//
+                //== 刪除圖片 ==//
+                csql = @"delete from IMG WHERE IMG_NO in (select Convert(nvarchar(50),id) from " + dbf_detail_name + " where cate_id = @id) ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                //== 刪除URL  ==//
+                csql = @"delete from URL WHERE URL_NO in (select Convert(nvarchar(50),id) from " + dbf_detail_name + " where cate_id = @id) ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                //== 刪除明細資料 ==//
+                csql = @"delete from " + dbf_detail_name + "' WHERE cate_id  = @id ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                //===================================//
                 //======== 刪除資料 ===================//
-                csql = @"delete from "
-                     + "  " + dbf_name + " "
-                     + "where "
-                     + "  id = @id ";
+                csql = @"delete from " + dbf_name + " where id = @id ";
 
                 cmd.CommandText = csql;
 
@@ -554,7 +567,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -574,7 +588,7 @@ namespace OutWeb.Service
         #region 分頁(明細)資料
         
         #region 明細資料抓取 Detail_List
-        public DataTable Detail_List(ref string err_msg, string id = "", string sort = "", string status = "", string title_query = "", string start_date = "", string end_date = "", string is_index = "", string cate_id = "", string lang_id = "")
+        public DataTable Detail_List(ref string err_msg, string id = "", string sort = "", string status = "", string title_query = "", string cate_id = "", string lang_id = "")
         {
             DataTable dt = new DataTable();
 
@@ -587,17 +601,18 @@ namespace OutWeb.Service
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
 
+            logger.Debug("id:" + id + ";sort:" + sort + ";status:" + status + ";title_query:" + title_query + ";cate_id:" + cate_id + ";lang_id:" + lang_id + ";");
             string[] Array_id;
             string[] Array_title_query;
             string[] Array_lang_id;
-            //string[] Array_cate_id;
+            string[] Array_cate_id;
 
             try
             {
                 Array_id = id.Split(',');
                 Array_title_query = title_query.Split(',');
                 Array_lang_id = lang_id.Split(',');
-                //Array_cate_id = cate_id.Split(',');
+                Array_cate_id = cate_id.Split(',');
 
                 csql = "select "
                      + "  a1.* "
@@ -605,25 +620,24 @@ namespace OutWeb.Service
                      + "("
                      + "select distinct "
                      + "  a1.id, a1.c_title, a1.c_desc, a1.sort, a1.status "
-                     + ", a1.lang_id, a2.lang_name "
+                     + ", a1.lang_id, isnull(a2.lang_name,'') as lang_name "
                      + ", a1.cate_id "
-                     + ", convert(nvarchar(10),a1.c_date,23) as c_date, a1.is_index "
-                     + ", a4.img_file, isnull(a5.img_count,0) as img_count "
+                     //+ ", a4.img_file, isnull(a5.img_count,0) as img_count "
                      + "from "
                      + "   " + dbf_detail_name + " a1 "
                      + "LEFT JOIN LANG a2 ON a1.LANG_ID = a2.LANG_ID "
                      + "LEFT JOIN " + dbf_name + " a3 ON a1.cate_id = a3.id "
-                     + "LEFT JOIN IMG a4 ON Convert(nvarchar(50),a1.id) = a4.img_no and a4.is_index = 'Y' and img_kind = '" + img_detail_kind + "' "
-                     + "LEFT JOIN ( "
-                     + " Select "
-                     + "    img_no, count(id) as img_count "
-                     + " From "
-                     + "    IMG "
-                     + " Where "
-                     + "    IMG_KIND = '" + img_detail_kind + "' "
-                     + " Group By "
-                     + "    img_no "
-                     + ") a5 ON Convert(nvarchar(50),a1.id) = a5.img_no "
+                     //+ "LEFT JOIN IMG a4 ON Convert(nvarchar(50),a1.id) = a4.img_no and a4.is_index = 'Y' and img_kind = '" + img_detail_kind + "' "
+                     //+ "LEFT JOIN ( "
+                     //+ " Select "
+                     //+ "    img_no, count(id) as img_count "
+                     //+ " From "
+                     //+ "    IMG "
+                     //+ " Where "
+                     //+ "    IMG_KIND = '" + img_detail_kind + "' "
+                     //+ " Group By "
+                     //+ "    img_no "
+                     //+ ") a5 ON Convert(nvarchar(50),a1.id) = a5.img_no "
                      + "where "
                      + "  a1.status <> 'D' ";
 
@@ -660,23 +674,7 @@ namespace OutWeb.Service
                     csql = csql + ") ";
                 }
 
-                if (start_date.Trim().Length > 0)
-                {
-
-                    csql = csql + "and a1.c_date >= @start_date ";
-                }
-
-                if (end_date.Trim().Length > 0)
-                {
-
-                    csql = csql + "and a1.c_date <= @end_date ";
-                }
-
-                if (is_index.Trim().Length > 0)
-                {
-                    csql = csql + "and a1.is_index = @is_index ";
-                }
-
+               
                 if (lang_id.Trim().Length > 0)
                 {
                     csql = csql + " and a1.lang_id in (";
@@ -691,19 +689,19 @@ namespace OutWeb.Service
                     csql = csql + ") ";
                 }
 
-                //if (cate_id.Trim().Length > 0)
-                //{
-                //    csql = csql + " and a1.cate_id in (";
-                //    for (int i = 0; i < Array_cate_id.Length; i++)
-                //    {
-                //        if (i > 0)
-                //        {
-                //            csql = csql + ",";
-                //        }
-                //        csql = csql + "@str_cate_id" + i.ToString();
-                //    }
-                //    csql = csql + ") ";
-                //}
+                if (cate_id.Trim().Length > 0)
+                {
+                    csql = csql + " and a1.cate_id in (";
+                    for (int i = 0; i < Array_cate_id.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_cate_id" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
 
                 csql = csql + ")a1 ";
 
@@ -718,22 +716,12 @@ namespace OutWeb.Service
                 }
 
                 cmd.CommandText = csql;
-
+                logger.Debug("csql:" + csql);
                 //---------------------------------------------------------------//
                 cmd.Parameters.Clear();
                 if (status.Trim().Length > 0)
                 {
                     cmd.Parameters.AddWithValue("@status", status);
-                }
-
-                if (start_date.Trim().Length > 0)
-                {
-                    cmd.Parameters.AddWithValue("@start_date", start_date);
-                }
-
-                if (end_date.Trim().Length > 0)
-                {
-                    cmd.Parameters.AddWithValue("@end_date", end_date);
                 }
 
                 if (id.Trim().Length > 0)
@@ -760,18 +748,14 @@ namespace OutWeb.Service
                     }
                 }
 
-                //if (cate_id.Trim().Length > 0)
-                //{
-                //    for (int i = 0; i < Array_cate_id.Length; i++)
-                //    {
-                //        cmd.Parameters.AddWithValue("@str_cate_id" + i.ToString(), Array_cate_id[i]);
-                //    }
-                //}
-
-                if (is_index.Trim().Length > 0)
+                if (cate_id.Trim().Length > 0)
                 {
-                    cmd.Parameters.AddWithValue("@is_index", is_index);
+                    for (int i = 0; i < Array_cate_id.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_cate_id" + i.ToString(), Array_cate_id[i]);
+                    }
                 }
+
                 //--------------------------------------------------------------//
 
                 if (ds.Tables["list"] != null)
@@ -790,7 +774,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -859,7 +844,7 @@ namespace OutWeb.Service
                 //===============================================================================//
 
                 csql = @"insert into " + dbf_detail_name + "(c_title,c_desc,sort,status,lang_id,cate_id) "
-                     + "values(@c_title,@c_desc,@sort,@is_show,@lang_id)";
+                     + "values(@c_title,@c_desc,@sort,@is_show,@lang_id,@cate_id)";
 
                 cmd.CommandText = csql;
 
@@ -879,7 +864,7 @@ namespace OutWeb.Service
             {
                 c_msg = ex.Message;
                 string err_msg = CService.rtn_errmsg(ex.Message, ex.Source, ex.StackTrace);
-                logger.Error(err_msg);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -941,7 +926,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -1009,7 +995,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {

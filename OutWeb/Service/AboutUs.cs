@@ -18,6 +18,7 @@ namespace OutWeb.Service
         string img_kind = "AboutUs";
 
         DataSet ds = new DataSet();
+        Service CService = new Service();
 
         //Log 記錄
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
@@ -154,7 +155,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -286,7 +288,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -346,7 +349,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -428,7 +432,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -618,7 +623,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -764,7 +770,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -826,7 +833,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -885,7 +893,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {

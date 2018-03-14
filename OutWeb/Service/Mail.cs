@@ -17,6 +17,7 @@ namespace OutWeb.Service
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
         string csql = "";
         DataSet ds = new DataSet();
+        Service CService = new Service();
         //Log 記錄
         private NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -95,6 +96,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {
@@ -197,6 +199,7 @@ namespace OutWeb.Service
             {
                 status = "N";
                 err_msg = ex.Message;
+                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
             }
             finally
             {

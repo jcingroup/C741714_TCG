@@ -323,11 +323,11 @@ namespace OutWeb.Controllers
             {
                 case "add": //加入到資料庫
                     DB.Img_Insert(img_no, new_filename, img_sty, img_cate);
-                    
+
                     break;
                 case "update":
                     DB.Img_Update(img_id, img_no, new_filename, img_sty, img_cate);
-                    
+
                     //刪除原本檔案
                     if (pre_filename == "")
                     {
@@ -377,7 +377,7 @@ namespace OutWeb.Controllers
             string err_msg = "";
 
             //抓取資料
-            chk_file = DB.Img_List(ref err_msg, img_no, img_sty, img_cate,img_id);
+            chk_file = DB.Img_List(ref err_msg, img_no, img_sty, img_cate, img_id);
 
             filename = "";
 
@@ -1311,7 +1311,7 @@ namespace OutWeb.Controllers
         #region 焦點專欄_儲存 Focus_Save
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Focus_Save(string action_sty, string id, string c_title, string c_date, string c_desc, string show,string hot, string sort, string lang_id, string cate_id, string img_no)
+        public ActionResult Focus_Save(string action_sty, string id, string c_title, string c_date, string c_desc, string show, string hot, string sort, string lang_id, string cate_id, string img_no)
         {
             //OverlookDBService OverlookDB = new OverlookDBService();
             switch (action_sty)
@@ -1435,7 +1435,7 @@ namespace OutWeb.Controllers
         #endregion 法理學院_直播
 
         #region 法理學院_歷屆合照 School
-        
+
         #region 法理學院_歷屆合照_類別 School_Cate
 
         #region 法理學院_歷屆合照_類別_陳列 School_Cate_List
@@ -1660,7 +1660,7 @@ namespace OutWeb.Controllers
         #endregion 法理學院_歷屆合照_基本資料
 
         #endregion 法理學院_歷屆合照 School
-        
+
         #region 活動寫真 歷史活動
         public ActionResult EventHistoryList()
         {
@@ -1730,18 +1730,21 @@ namespace OutWeb.Controllers
             //DataTable d_cate;
             DataTable d_lang;
             DataTable d_img;
-            DataTable d_url;
+            //DataTable d_url;
+            DataTable d_detail;
             //抓取消息類別資料
 
             d_lang = Clang.Lang_List(ref err_msg, "");
+            d_detail = CActivity.Detail_List(ref err_msg, "", "", "", "", "", "");
             //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, "", "", "Activity");
-            d_url = DB.URL_List(ref err_msg, "", "Activity");
+            //d_url = DB.URL_List(ref err_msg, "", "Activity");
             //設定傳值
             ViewData["d_lang"] = d_lang;
             //ViewData["d_cate"] = d_cate;
             ViewData["d_img"] = d_img;
-            ViewData["d_url"] = d_url;
+            //ViewData["d_url"] = d_url;
+            ViewData["d_detail"] = d_detail;
             ViewData["action_sty"] = "add";
 
             return View("Activity_Data");
@@ -1756,20 +1759,23 @@ namespace OutWeb.Controllers
             DataTable d_cate;
             DataTable d_lang;
             DataTable dt;
+            DataTable d_detail;
             DataTable d_img;
-            DataTable d_url;
+            //DataTable d_url;
             //抓取類別資料
             dt = CActivity.List(ref err_msg, id);
             d_lang = Clang.Lang_List(ref err_msg, "");
+            d_detail = CActivity.Detail_List(ref err_msg, "", "sort", "", "", id, "");
             //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, id, "", "Activity");
-            d_url = DB.URL_List(ref err_msg, id, "Activity");
+            //d_url = DB.URL_List(ref err_msg, id, "Activity");
             //設定傳值
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
+            ViewData["d_detail"] = d_detail;
             //ViewData["d_cate"] = d_cate;
             ViewData["d_img"] = d_img;
-            ViewData["d_url"] = d_url;
+            //ViewData["d_url"] = d_url;
             ViewData["action_sty"] = "edit";
 
             return View("Activity_Data");
@@ -1780,6 +1786,7 @@ namespace OutWeb.Controllers
         public ActionResult Activity_Del(string id = "")
         {
             //OverlookDBService OverlookDB = new OverlookDBService();
+            //
             CActivity.Del(id);
             return RedirectToAction("Activity_List");
         }
@@ -1850,7 +1857,7 @@ namespace OutWeb.Controllers
                     str_index = "N";
                 }
 
-                DB.Img_Update(str_img_id, "","","","Activity", str_img_desc,str_index);
+                DB.Img_Update(str_img_id, "", "", "", "Activity", str_img_desc, str_index);
             }
 
             return RedirectToAction("Activity_List");
@@ -1859,6 +1866,66 @@ namespace OutWeb.Controllers
         #endregion
 
         #endregion 活動寫真_基本資料
+
+
+        #region 活動寫真_明細
+
+        #region 活動寫真_明細_陳列 Activity_Detail_List
+        public ActionResult Activity_Detail_List(string cate_id, string id = "")
+        {
+            string str_return = "";
+            string err_msg = "";
+            DataTable dt;
+
+            dt = CActivity.Detail_List(ref err_msg, id, "sort", "", "", cate_id, "");
+            str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+            return Content(str_return);
+        }
+        #endregion
+
+        #region 活動寫真_明細 儲存 Activity_Detail_Save
+        [HttpPost]
+        public ActionResult Activity_Detail_Save(string c_sty, string c_title, string c_desc, string status, string sort, string cate_id, string id)
+        {
+            string str_return = "";
+            string err_msg = "";
+
+            DataTable dt;
+
+            switch (c_sty)
+            {
+                case "add":
+                    CActivity.Detail_Insert(c_title, c_desc, status, sort, "", cate_id);
+                    break;
+                case "edit":
+                    CActivity.Detail_Update(id, c_title, c_desc, status, "", cate_id);
+                    break;
+            }
+
+            dt = CActivity.Detail_List(ref err_msg, id, "sort", "", "", cate_id, "");
+            str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+            return Content(str_return);
+        }
+        #endregion 活動寫真_明細 儲存 Activity_Detail_Save 
+
+
+        #region 活動寫真_明細 刪除 Activity_Detail_Del
+        public ActionResult Activity_Detail_Del(string cate_id, string id)
+        {
+            string str_return = "";
+            string err_msg = "";
+
+            DataTable dt;
+
+            CActivity.Detail_Del(id);
+
+            dt = CActivity.Detail_List(ref err_msg, "", "sort", "", "", cate_id, "");
+            str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+            return Content(str_return);
+        }
+        #endregion  活動寫真_明細 刪除 Activity_Detail_Del
+
+        #endregion
 
         #endregion
 
@@ -2313,7 +2380,7 @@ namespace OutWeb.Controllers
             //抓取消息類別資料
             dt = CNews.News_Cate_List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_lang);
 
-            d_lang = Clang.Lang_List(ref err_msg,"");
+            d_lang = Clang.Lang_List(ref err_msg, "");
             //設定傳值
             ViewData["page"] = page;
             ViewData["dt"] = dt;
@@ -2368,7 +2435,7 @@ namespace OutWeb.Controllers
         #region 消息類別_儲存 News_Cate_Save
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult News_Cate_Save(string action_sty, string cate_id, string cate_name, string cate_desc, string show, string sort,string lang_id)
+        public ActionResult News_Cate_Save(string action_sty, string cate_id, string cate_name, string cate_desc, string show, string sort, string lang_id)
         {
             //OverlookDBService OverlookDB = new OverlookDBService();
 
@@ -2378,7 +2445,7 @@ namespace OutWeb.Controllers
                     CNews.News_Cate_Insert(cate_name, cate_desc, show, sort, lang_id);
                     break;
                 case "edit":
-                    CNews.News_Cate_Update(cate_id, cate_name, cate_desc, show, sort,lang_id);
+                    CNews.News_Cate_Update(cate_id, cate_name, cate_desc, show, sort, lang_id);
                     break;
             }
 
@@ -2386,11 +2453,11 @@ namespace OutWeb.Controllers
         }
 
         #endregion
-        
+
         #endregion
 
         #region 消息陳列 News_List
-        public ActionResult News_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_index = "",string txt_lang = "", string txt_cate = "")
+        public ActionResult News_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_index = "", string txt_lang = "", string txt_cate = "")
         {
             //定義變數
             string c_sort = "";
@@ -2410,11 +2477,11 @@ namespace OutWeb.Controllers
             }
 
             //抓取消息資料
-            dt = CNews.News_List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_start_date, txt_end_date, txt_index,txt_cate,txt_lang);
+            dt = CNews.News_List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_start_date, txt_end_date, txt_index, txt_cate, txt_lang);
             //語系
             d_lang = Clang.Lang_List(ref err_msg, "");
             //消息類別
-            d_cate = CNews.News_Cate_List(ref err_msg, "", "sort", "Y","",txt_lang);
+            d_cate = CNews.News_Cate_List(ref err_msg, "", "sort", "Y", "", txt_lang);
             //設定傳值
             ViewData["page"] = page;
             ViewData["dt"] = dt;
@@ -2441,7 +2508,7 @@ namespace OutWeb.Controllers
             DataTable d_lang;
             DataTable d_img;
             //抓取消息類別資料
-            
+
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CNews.News_Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, "", "", "News");
@@ -2460,7 +2527,7 @@ namespace OutWeb.Controllers
         public ActionResult News_Edit(string n_id = "")
         {
             string err_msg = "";
-            
+
             DataTable d_cate;
             DataTable d_lang;
             DataTable d_news;
@@ -2493,17 +2560,17 @@ namespace OutWeb.Controllers
         #region 最新消息儲存 News_Save
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult News_Save(string action_sty, string n_id, string n_title, string n_date, string n_desc, string show, string hot, string sort,string lang_id, string cate_id, string img_no)
+        public ActionResult News_Save(string action_sty, string n_id, string n_title, string n_date, string n_desc, string show, string hot, string sort, string lang_id, string cate_id, string img_no)
         {
             //OverlookDBService OverlookDB = new OverlookDBService();
             string n_memo = "";
             switch (action_sty)
             {
                 case "add":
-                    CNews.News_Insert(n_title, n_date, n_desc, show, hot, sort, n_memo,lang_id,cate_id,img_no);
+                    CNews.News_Insert(n_title, n_date, n_desc, show, hot, sort, n_memo, lang_id, cate_id, img_no);
                     break;
                 case "edit":
-                    CNews.News_Update(n_id, n_title, n_date, n_desc, show, hot, sort, n_memo,lang_id,cate_id);
+                    CNews.News_Update(n_id, n_title, n_date, n_desc, show, hot, sort, n_memo, lang_id, cate_id);
                     break;
             }
 
@@ -2514,6 +2581,29 @@ namespace OutWeb.Controllers
 
         #endregion 最新消息
 
+        #region 影音網址
+
+
+        #region 影音網址 Url_Update
+        public ActionResult Url_Del(string url_no, string[] c_url, string url_cate, string url_id = "")
+        {
+            DataTable Url_file;
+            string str_return = "";
+            //string cmsg = "";
+            string err_msg = "";
+
+            //抓取資料
+            Url_file = DB.URL_List(ref err_msg, url_no, url_cate);
+
+            str_return = JsonConvert.SerializeObject(Url_file, Newtonsoft.Json.Formatting.Indented);
+
+            return Content(str_return);
+        }
+        #endregion
+
+        #endregion 影音網址
+
+        //
         //#region 修改密碼
 
         ///// 管理員密碼變更
@@ -2579,11 +2669,43 @@ namespace OutWeb.Controllers
                     str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
                     break;
             }
-            
+
 
             return Content(str_return);
         }
         #endregion
+
+        #region 圖片 Img_Get
+        public ActionResult Img_Get(string img_no, string img_cate, string img_sty = "")
+        {
+            string str_return = "";
+            DataTable img_file;
+            string err_msg = "";
+
+            //抓取資料
+            img_file = DB.Img_List(ref err_msg, img_no, img_sty, img_cate);
+
+            str_return = JsonConvert.SerializeObject(img_file, Newtonsoft.Json.Formatting.Indented);
+            return Content(str_return);
+        }
+        #endregion 圖片 Img_Get
+
+        #region 影音網址 Url_Get
+        public ActionResult Url_Get(string url_no, string url_cate, string url_id = "")
+        {
+            DataTable Url_file;
+            string str_return = "";
+            //string cmsg = "";
+            string err_msg = "";
+
+            //抓取資料
+            Url_file = DB.URL_List(ref err_msg, url_no, url_cate);
+
+            str_return = JsonConvert.SerializeObject(Url_file, Newtonsoft.Json.Formatting.Indented);
+
+            return Content(str_return);
+        }
+        #endregion        
 
         #endregion
     }

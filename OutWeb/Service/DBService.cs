@@ -14,7 +14,7 @@ namespace OutWeb.Service
         string csql = "";
 
         DataSet ds = new DataSet();
-
+        Service CService = new Service();
         //Log 記錄
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         
