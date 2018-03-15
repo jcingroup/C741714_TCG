@@ -2687,7 +2687,7 @@ namespace OutWeb.Controllers
         #endregion
 
         #region 圖片 Img_Get
-        public ActionResult Img_Get(string img_no, string img_cate, string img_sty = "")
+        public ActionResult Img_Get(string img_no, string img_cate, string img_sty)
         {
             string str_return = "";
             DataTable img_file;
@@ -2725,7 +2725,7 @@ namespace OutWeb.Controllers
         #endregion 圖片更新 Img_Update
 
         #region 影音網址 Url_Get
-        public ActionResult Url_Get(string url_no, string url_cate, string url_id = "")
+        public ActionResult Url_Get(string url_no, string url_cate, string url_id)
         {
             DataTable Url_file;
             string str_return = "";
@@ -2751,7 +2751,14 @@ namespace OutWeb.Controllers
 
             if (url_id.Trim().Length > 0)
             {
-                DB.URL_Update(url_id, url_no, curl, url_cate);
+                if(curl.Trim().Length > 0)
+                {
+                    DB.URL_Update(url_id, url_no, curl, url_cate);
+                }
+                else
+                {
+                    DB.Url_Delete(url_id);
+                }
             }
             else
             {

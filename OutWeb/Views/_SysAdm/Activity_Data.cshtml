@@ -614,10 +614,10 @@
                     c_html += "          " + obj.sort;
                     c_html += "      </td>";
                     c_html += "      <td>";
-                    c_html += "           <button class=\"btn info oi\" onclick=\"img_list('" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
+                    c_html += "           <button class=\"btn info oi\" onclick=\"img_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
                     c_html += "      </td>";
                     c_html += "      <td>";
-                    c_html += "           <button class=\"btn info oi\" onclick=\"url_list('" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
+                    c_html += "           <button class=\"btn info oi\" onclick=\"url_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
                     c_html += "      </td>";
                     c_html += "      <td>";
                     c_html += "          <button class=\"hover-primary oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_del('" + obj.id + "');return false;\"></button>";
@@ -829,7 +829,7 @@
         $('#' + c_container).modal('toggle');
     }
 
-    function img_list(cate,cimg_no)
+    function img_list(c_cate,cimg_no)
     {
         //var cimg_no = "";
         var c_sty = "B";
@@ -841,17 +841,19 @@
         $('#detail_id').val(cimg_no);
 
         //alert(c_img);
-        var chtml = "";
+        var c_html = "";
         var i = 0;
         $.ajax({                
             url: 'Img_Get',
-            data: { img_no: cimg_no, img_sta: c_sty, img_cate: c_cate  }, //此参数非常严谨，写错一个引号都不行
+            data: { img_no: cimg_no, img_sty: c_sty, img_cate: c_cate  }, //此参数非常严谨，写错一个引号都不行
             type:"POST",
             dataType: 'TEXT', //返回值类型 一般设置为json
             async: false,
             success: function(JData){
                 //alert(JData);
                 data = handleAjaxVPNMsg(JData);
+                c_html = "";
+                i = 0;
                 //-------------------------------------------------------//
                 if(c_sty == "B")
                 {
@@ -871,11 +873,11 @@
                         i = i + 1;
                         c_html = c_html + "<tr>";
                         c_html = c_html + "    <td>";
-                        c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.ID + "\" />";
-                        c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                        c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
+                        c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
                         c_html = c_html + "    </td>";
                         c_html = c_html + "    <td>";
-                        c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_name_" + i + "\" class=\"form-element\" value=\"" + obj.IMG_DESC + "\">";
+                        c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_name_" + i + "\" class=\"form-element\" value=\"" + obj.img_desc + "\">";
                         c_html = c_html + "    </td>";
                         //c_html = c_html + "    <td>";
 
@@ -890,14 +892,14 @@
                         //c_html = c_html + "       </label>";
                         //c_html = c_html + "    </td>";
                         c_html = c_html + "    <td class=\"item-edit\">";
-                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.ID + "','');\"></button>";
+                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.id + "','');\"></button>";
                         c_html = c_html + "    </td>";
                         c_html = c_html + "</tr>";
                     });
                     c_html += "</table>";
                     $('#img_count').val(i);
                     $('#images_container').html(c_html);
-
+                    alert("123456");
                 }
                 //-------------------------------------------------------//
             },
@@ -910,7 +912,7 @@
                 //alert('ajax complete');
             }
         });
-
+        
         //開啟視窗
         container_open('modalImage');
         return false;
@@ -1002,8 +1004,8 @@
                         //-------------------------------------------------------//
                         $.each($.parseJSON(data), function (idx, obj) {
                             i = i + 1;
-                            $('#curl_' + i).val(obj.c_url);
-                            $('#url_id_' + i).val(obj.id);
+                            $('#curl_' + i).val(obj.C_URL);
+                            $('#url_id_' + i).val(obj.ID);
                         });
                         //-------------------------------------------------------//
                     },
@@ -1031,10 +1033,11 @@
 
         //alert(c_img);
         var chtml = "";
+        var url_id = "";
         var i = 0;
         $.ajax({                
             url: 'Url_Get',
-            data: { url_no: curl_no, url_cate: c_cate  }, //此参数非常严谨，写错一个引号都不行
+            data: { url_no: curl_no, url_cate: c_cate, url_id:url_id  }, //此参数非常严谨，写错一个引号都不行
             type:"POST",
             dataType: 'TEXT', //返回值类型 一般设置为json
             async: false,
@@ -1044,8 +1047,8 @@
                 //-------------------------------------------------------//
                 $.each($.parseJSON(data), function (idx, obj) {
                     i = i + 1;
-                    $('#curl_' + i).val(obj.c_url);
-                    $('#url_id_' + i).val(obj.id);
+                    $('#curl_' + i).val(obj.C_URL);
+                    $('#url_id_' + i).val(obj.ID);
                 });
                 //-------------------------------------------------------//
             },
