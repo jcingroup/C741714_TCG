@@ -292,7 +292,7 @@
                         //c_html = c_html + "       </label>";
                         //c_html = c_html + "    </td>";
                         c_html = c_html + "    <td class=\"item-edit\">";
-                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.IMG_ID + "','');\"></button>";
+                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.IMG_ID + "','" + c_sty + "','" + c_cate + "');\"></button>";
                         c_html = c_html + "    </td>";
                         c_html = c_html + "</tr>";
                     });
@@ -306,7 +306,7 @@
                     $.each($.parseJSON(data), function (idx, obj) {
                         i = i + 1;
                         c_html = c_html + "<li>";
-                        c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "');\" >&times;</button>";
+                        c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "','" + c_cate + "');\" >&times;</button>";
                         c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
                         c_html = c_html + "</li>";
                     });
@@ -382,7 +382,7 @@
                         $.each($.parseJSON(data), function (idx, obj) {
                             i = i + 1;
                             c_html = c_html + "<li>";
-                            c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "');\" >&times;</button>";
+                            c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "','" + c_cate + "');\" >&times;</button>";
                             c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
                             c_html = c_html + "</li>";
                         });
@@ -427,7 +427,7 @@
                             //c_html = c_html + "       </label>";
                             //c_html = c_html + "    </td>";
                             c_html = c_html + "    <td class=\"item-edit\">";
-                            c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.ID + "','');\"></button>";
+                            c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "','" + c_cate + "');\"></button>";
                             c_html = c_html + "    </td>";
                             c_html = c_html + "</tr>";
                         });
@@ -620,7 +620,7 @@
                     c_html += "           <button class=\"btn info oi\" onclick=\"url_list('" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
                     c_html += "      </td>";
                     c_html += "      <td>";
-                    c_html += "          <button class=\"hover-primary oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_detail('" + obj.id + "');return false;\"></button>";
+                    c_html += "          <button class=\"hover-primary oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_del('" + obj.id + "');return false;\"></button>";
                     c_html += "      </td>";
                     c_html += "   </tr>";
                 });
@@ -783,7 +783,7 @@
                         c_html += "           <button class=\"btn info oi\" onclick=\"url_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
                         c_html += "      </td>";
                         c_html += "      <td>";
-                        c_html += "          <button class=\"hover-primary oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_detail('" + obj.id + "');return false;\"></button>";
+                        c_html += "          <button class=\"hover-primary oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_del('" + obj.id + "');return false;\"></button>";
                         c_html += "      </td>";
                         c_html += "   </tr>";
                     });
@@ -1288,7 +1288,7 @@
                              <button class="btn info oi" onclick="url_list('@c_detail_cate','@c_detail_id');return false;" id="btn_detail_Url_@i" name="btn_detail_Url_@i">網址管理</button>
                          </td>
                          <td>
-                             <button class="hover-primary oi" title="刪除" data-glyph="trash" type="button" id="btn_detail_del_@i" name="btn_detail_del_@i" onclick="detail_detail('@c_detail_id');return false;"></button>
+                             <button class="hover-primary oi" title="刪除" data-glyph="trash" type="button" id="btn_detail_del_@i" name="btn_detail_del_@i" onclick="detail_del('@c_detail_id');return false;"></button>
                          </td>
                      </tr>
                  }
