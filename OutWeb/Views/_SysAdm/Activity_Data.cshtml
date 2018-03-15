@@ -20,6 +20,7 @@
     string cFile_Detail_Edit = "Activity_Detail_Edit";
     string cFile_Detail_Save = "Activity_Detail_Save";
 
+    string c_detail_cate = "Activity_Detail";
 
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_detail = (DataTable)ViewData["d_detail"];
@@ -776,10 +777,10 @@
                         c_html += "          " + obj.sort;
                         c_html += "      </td>";
                         c_html += "      <td>";
-                        c_html += "           <button class=\"btn info oi\" onclick=\"img_list('" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
+                        c_html += "           <button class=\"btn info oi\" onclick=\"img_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
                         c_html += "      </td>";
                         c_html += "      <td>";
-                        c_html += "           <button class=\"btn info oi\" onclick=\"url_list('" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
+                        c_html += "           <button class=\"btn info oi\" onclick=\"url_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
                         c_html += "      </td>";
                         c_html += "      <td>";
                         c_html += "          <button class=\"hover-primary oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_detail('" + obj.id + "');return false;\"></button>";
@@ -828,9 +829,10 @@
         $('#' + c_container).modal('toggle');
     }
 
-    function img_list(c_sty,c_cate,cimg_no)
+    function img_list(cate,cimg_no)
     {
         //var cimg_no = "";
+        var c_sty = "B";
         var c_img = "pic_" + c_sty;
         //var c_cate = "Activity"
         var cimg_sty = "";
@@ -966,40 +968,55 @@
         var c_sty = "";
         var c_cate = "Activity_Detail";
         curl_no = $('#detail_id').val();
-
+        var update_chk = "";
 
         for(i=1; i<11; i++)
         {
             url_id = $('#url_id_' + i).val();
             curl = $('#curl_' + i).val();
 
-            //更新資料
-            $.ajax({                
-                url: 'Img_Update',
-                data: { url_no: curl_no, url_cate: c_cate, url_id: url_id, curl: curl  }, //此参数非常严谨，写错一个引号都不行
-                type:"POST",
-                dataType: 'TEXT', //返回值类型 一般设置为json
-                async: false,
-                success: function(JData){
-                    //alert(JData);
-                    data = handleAjaxVPNMsg(JData);
-                    //-------------------------------------------------------//
-                    $.each($.parseJSON(data), function (idx, obj) {
-                        i = i + 1;
-                        $('#curl_' + i).val(obj.c_url);
-                        $('#url_id_' + i).val(obj.id);
-                    });
-                    //-------------------------------------------------------//
-                },
-                error:function(xhr, ajaxOptions, thrownError){ 
-                    alert(xhr.status); 
-                    alert(thrownError); 
-                },
-                complete: function () {
-                    //alert(tbl_new_list);
-                    //alert('ajax complete');
-                }
-            });
+            update_chk = "N";
+
+            if(curl != "")
+            {
+                update_chk = "Y";
+            }
+
+            if(url_id != "")
+            {
+                update_chk = "Y";
+            }
+
+            if(update_chk == "Y")
+            {
+                //更新資料
+                $.ajax({                
+                    url: 'Url_Update',
+                    data: { url_no: curl_no, url_cate: c_cate, url_id: url_id, curl: curl  }, //此参数非常严谨，写错一个引号都不行
+                    type:"POST",
+                    dataType: 'TEXT', //返回值类型 一般设置为json
+                    async: false,
+                    success: function(JData){
+                        //alert(JData);
+                        data = handleAjaxVPNMsg(JData);
+                        //-------------------------------------------------------//
+                        $.each($.parseJSON(data), function (idx, obj) {
+                            i = i + 1;
+                            $('#curl_' + i).val(obj.c_url);
+                            $('#url_id_' + i).val(obj.id);
+                        });
+                        //-------------------------------------------------------//
+                    },
+                    error:function(xhr, ajaxOptions, thrownError){ 
+                        alert(xhr.status); 
+                        alert(thrownError); 
+                    },
+                    complete: function () {
+                        //alert(tbl_new_list);
+                        //alert('ajax complete');
+                    }
+                });
+            }
         }
 
         //關閉視窗
@@ -1238,6 +1255,7 @@
                      c_detail_title = d_detail.Rows[i]["c_title"].ToString();
                      c_detail_sort = d_detail.Rows[i]["sort"].ToString();
                      c_detail_status = d_detail.Rows[i]["status"].ToString();
+                     
                      switch (c_detail_status)
                      {
                          case "Y":
@@ -1264,10 +1282,10 @@
                              @c_detail_sort
                          </td>
                          <td>
-                             <button class="btn info oi" onclick="img_list('@c_detail_id');return false;" id="btn_detail_Image_@i" name="btn_detail_Image_@i">圖片管理</button>
+                             <button class="btn info oi" onclick="img_list('@c_detail_cate','@c_detail_id');return false;" id="btn_detail_Image_@i" name="btn_detail_Image_@i">圖片管理</button>
                          </td>
                          <td>
-                             <button class="btn info oi" onclick="url_list('@c_detail_id');return false;" id="btn_detail_Url_@i" name="btn_detail_Url_@i">網址管理</button>
+                             <button class="btn info oi" onclick="url_list('@c_detail_cate','@c_detail_id');return false;" id="btn_detail_Url_@i" name="btn_detail_Url_@i">網址管理</button>
                          </td>
                          <td>
                              <button class="hover-primary oi" title="刪除" data-glyph="trash" type="button" id="btn_detail_del_@i" name="btn_detail_del_@i" onclick="detail_detail('@c_detail_id');return false;"></button>
@@ -1474,7 +1492,7 @@
             </ol>
         </div>
         <div class="modal-footer text-center">
-            <button class="btn success oi" onclick="Video_Ok();">確定</button>
+            <button class="btn success oi" onclick="url_update();">確定</button>
             <button class="btn warning oi" onclick="container_close('modalVideo');">取消</button>
         </div>
     </div>
