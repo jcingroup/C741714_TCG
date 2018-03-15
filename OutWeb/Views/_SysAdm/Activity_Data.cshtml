@@ -44,6 +44,16 @@
     string c_index_status_Y = "";
     string c_index_status_N = "";
 
+    string c_detail_status = "";
+    string c_detail_status_Y = "";
+    string c_detail_status_N = "";
+    string c_detail_id = "";
+    string c_detail_title = "";
+    string c_detail_sort = "";
+    string c_detail_show = "";
+    string c_detail_class = "";
+
+
     string img_no = "";
     string img_path = "../Images/";
     string small_img = "";
@@ -254,7 +264,7 @@
                     c_html += "<tr>";
                     c_html += "    <th>圖片</th>";
                     c_html += "    <th>圖說</th>";
-                    c_html += "    <th>封面圖</th>";
+                    //c_html += "    <th>封面圖</th>";
                     c_html += "    <th class=\"item-edit\">刪除</th>";
                     c_html += "</tr>";
 
@@ -262,24 +272,24 @@
                         i = i + 1;
                         c_html = c_html + "<tr>";
                         c_html = c_html + "    <td>";
-                        c_html = c_html + "        <input  type=\"hidden\" name=\"img_id[]\" id=\"img_id[]\" value=\"" + obj.ID + "\" />";
+                        c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.ID + "\" />";
                         c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
                         c_html = c_html + "    </td>";
                         c_html = c_html + "    <td>";
-                        c_html = c_html + "        <input type=\"text\" name=\"img_desc[]\" id=\"img_name[]\" class=\"form-element\" value=\"" + obj.IMG_DESC + "\">";
+                        c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" class=\"form-element\" value=\"" + obj.IMG_DESC + "\">";
                         c_html = c_html + "    </td>";
-                        c_html = c_html + "    <td>";
+                        //c_html = c_html + "    <td>";
 
-                        c_html = c_html + "       <label class=\"switch\">";
-                        c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.ID + "\"";
-                        if(obj.is_index == "Y")
-                        {
-                            c_html = c_html + " checked ";
-                        }
-                        c_html = c_html + ">";
-                        c_html = c_html + "        <div class=\"slider round\"></div>";
-                        c_html = c_html + "       </label>";
-                        c_html = c_html + "    </td>";
+                        //c_html = c_html + "       <label class=\"switch\">";
+                        //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.ID + "\"";
+                        //if(obj.is_index == "Y")
+                        //{
+                        //    c_html = c_html + " checked ";
+                        //}
+                        //c_html = c_html + ">";
+                        //c_html = c_html + "        <div class=\"slider round\"></div>";
+                        //c_html = c_html + "       </label>";
+                        //c_html = c_html + "    </td>";
                         c_html = c_html + "    <td class=\"item-edit\">";
                         c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.IMG_ID + "','');\"></button>";
                         c_html = c_html + "    </td>";
@@ -361,7 +371,7 @@
 
                     data = handleAjaxVPNMsg(JData);
 
-                    
+
                     i = 0;
                     c_html = "";
                     //-------------------------------------------------------//
@@ -389,7 +399,7 @@
                         c_html += "<tr>";
                         c_html += "    <th>圖片</th>";
                         c_html += "    <th>圖說</th>";
-                        c_html += "    <th>封面圖</th>";
+                        //c_html += "    <th>封面圖</th>";
                         c_html += "    <th class=\"item-edit\">刪除</th>";
                         c_html += "</tr>";
 
@@ -397,24 +407,24 @@
                             i = i + 1;
                             c_html = c_html + "<tr>";
                             c_html = c_html + "    <td>";
-                            c_html = c_html + "        <input  type=\"hidden\" name=\"img_id[]\" id=\"img_id[]\" value=\"" + obj.ID + "\" />";
+                            c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id" + i + "\" value=\"" + obj.ID + "\" />";
                             c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
                             c_html = c_html + "    </td>";
                             c_html = c_html + "    <td>";
-                            c_html = c_html + "        <input type=\"text\" name=\"img_desc[]\" id=\"img_name[]\" class=\"form-element\" value=\"" + obj.IMG_DESC + "\">";
+                            c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" class=\"form-element\" value=\"" + obj.IMG_DESC + "\">";
                             c_html = c_html + "    </td>";
-                            c_html = c_html + "    <td>";
+                            //c_html = c_html + "    <td>";
 
-                            c_html = c_html + "       <label class=\"switch\">";
-                            c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.ID + "\"";
-                            if(obj.is_index == "Y")
-                            {
-                                c_html = c_html + " checked ";
-                            }
-                            c_html = c_html + ">";
-                            c_html = c_html + "        <div class=\"slider round\"></div>";
-                            c_html = c_html + "       </label>";
-                            c_html = c_html + "    </td>";
+                            //c_html = c_html + "       <label class=\"switch\">";
+                            //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.ID + "\"";
+                            //if(obj.is_index == "Y")
+                            //{
+                            //    c_html = c_html + " checked ";
+                            //}
+                            //c_html = c_html + ">";
+                            //c_html = c_html + "        <div class=\"slider round\"></div>";
+                            //c_html = c_html + "       </label>";
+                            //c_html = c_html + "    </td>";
                             c_html = c_html + "    <td class=\"item-edit\">";
                             c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.ID + "','');\"></button>";
                             c_html = c_html + "    </td>";
@@ -423,8 +433,8 @@
                         c_html += "</table>";
                         $('#img_count').val(i);
                         $('#images_container').html(c_html);
-                        
-                    }                    
+
+                    }
                     //-------------------------------------------------------//
                 },
                 error: function (data, status, e)//服务器响应失败处理函数
@@ -480,7 +490,7 @@
             dataType: 'TEXT', //返回值类型 一般设置为json
             async: false,
             success: function(JData){
-                alert(JData);
+                //alert(JData);
                 data = handleAjaxVPNMsg(JData);
                 i = 0;
 
@@ -550,7 +560,7 @@
             dataType: 'TEXT', //返回值类型 一般设置为json
             async: false,
             success: function(JData){
-                alert(JData);
+                //alert(JData);
                 data = handleAjaxVPNMsg(JData);
                 //-------------------------------------------------------//
                 i = 0;
@@ -606,7 +616,7 @@
                     c_html += "           <button class=\"btn info oi\" onclick=\"img_list('" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
                     c_html += "      </td>";
                     c_html += "      <td>";
-                    c_html += "           <button class=\"btn info oi\" onclick=\"url_list('" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
+                    c_html += "           <button class=\"btn info oi\" onclick=\"url_list('" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
                     c_html += "      </td>";
                     c_html += "      <td>";
                     c_html += "          <button class=\"hover-primary oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_detail('" + obj.id + "');return false;\"></button>";
@@ -713,7 +723,7 @@
                 dataType: 'TEXT', //返回值类型 一般设置为json
                 async: false,
                 success: function(JData){
-                    alert(JData);
+                    //alert(JData);
                     data = handleAjaxVPNMsg(JData);
                     //-------------------------------------------------------//
                     i = 0;
@@ -769,7 +779,7 @@
                         c_html += "           <button class=\"btn info oi\" onclick=\"img_list('" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
                         c_html += "      </td>";
                         c_html += "      <td>";
-                        c_html += "           <button class=\"btn info oi\" onclick=\"url_list('" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
+                        c_html += "           <button class=\"btn info oi\" onclick=\"url_list('" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
                         c_html += "      </td>";
                         c_html += "      <td>";
                         c_html += "          <button class=\"hover-primary oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_detail('" + obj.id + "');return false;\"></button>";
@@ -816,6 +826,225 @@
     function container_close(c_container)
     {
         $('#' + c_container).modal('toggle');
+    }
+
+    function img_list(c_sty,c_cate,cimg_no)
+    {
+        //var cimg_no = "";
+        var c_img = "pic_" + c_sty;
+        //var c_cate = "Activity"
+        var cimg_sty = "";
+        var cimg_id = "";
+
+        $('#detail_id').val(cimg_no);
+
+        //alert(c_img);
+        var chtml = "";
+        var i = 0;
+        $.ajax({                
+            url: 'Img_Get',
+            data: { img_no: cimg_no, img_sta: c_sty, img_cate: c_cate  }, //此参数非常严谨，写错一个引号都不行
+            type:"POST",
+            dataType: 'TEXT', //返回值类型 一般设置为json
+            async: false,
+            success: function(JData){
+                //alert(JData);
+                data = handleAjaxVPNMsg(JData);
+                //-------------------------------------------------------//
+                if(c_sty == "B")
+                {
+                    c_html += "<table class=\"uploader m-t-32\">";
+                    c_html += "  <colgroup>";
+                    c_html += "    <col style=\"width: 15%\">";
+                    c_html += "    <col span=\"3\">";
+                    c_html += "</colgroup>";
+                    c_html += "<tr>";
+                    c_html += "    <th>圖片</th>";
+                    c_html += "    <th>圖說</th>";
+                    //c_html += "    <th>封面圖</th>";
+                    c_html += "    <th class=\"item-edit\">刪除</th>";
+                    c_html += "</tr>";
+
+                    $.each($.parseJSON(data), function (idx, obj) {
+                        i = i + 1;
+                        c_html = c_html + "<tr>";
+                        c_html = c_html + "    <td>";
+                        c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.ID + "\" />";
+                        c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                        c_html = c_html + "    </td>";
+                        c_html = c_html + "    <td>";
+                        c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_name_" + i + "\" class=\"form-element\" value=\"" + obj.IMG_DESC + "\">";
+                        c_html = c_html + "    </td>";
+                        //c_html = c_html + "    <td>";
+
+                        //c_html = c_html + "       <label class=\"switch\">";
+                        //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.ID + "\"";
+                        //if(obj.is_index == "Y")
+                        //{
+                        //    c_html = c_html + " checked ";
+                        //}
+                        //c_html = c_html + ">";
+                        //c_html = c_html + "        <div class=\"slider round\"></div>";
+                        //c_html = c_html + "       </label>";
+                        //c_html = c_html + "    </td>";
+                        c_html = c_html + "    <td class=\"item-edit\">";
+                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.ID + "','');\"></button>";
+                        c_html = c_html + "    </td>";
+                        c_html = c_html + "</tr>";
+                    });
+                    c_html += "</table>";
+                    $('#img_count').val(i);
+                    $('#images_container').html(c_html);
+
+                }
+                //-------------------------------------------------------//
+            },
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError); 
+            },
+            complete: function () {
+                //alert(tbl_new_list);
+                //alert('ajax complete');
+            }
+        });
+
+        //開啟視窗
+        container_open('modalImage');
+        return false;
+    }
+
+    function img_update()
+    {
+        var img_id = "";
+        var img_desc = "";
+        var img_count = 0;
+        var c_cate = "Activity_Detail";
+        var i = 0;
+
+        img_count = $('#img_count').val();
+        img_no = $('#detail_id').val();
+
+        for(i = 1; i <= img_count; i++)
+        {
+            img_id = $('#img_id_' + i).val();
+            img_desc = $('#img_desc_' + i).val();
+
+            //更新資料
+            $.ajax({                
+                url: 'Img_Update',
+                data: { img_no: img_no, img_cate: c_cate, img_id: img_id, img_desc: img_desc  }, //此参数非常严谨，写错一个引号都不行
+                type:"POST",
+                dataType: 'TEXT', //返回值类型 一般设置为json
+                async: false,
+                success: function(JData){
+                    //alert(JData);
+                    data = handleAjaxVPNMsg(JData);
+                },
+                error:function(xhr, ajaxOptions, thrownError){ 
+                    alert(xhr.status); 
+                    alert(thrownError); 
+                },
+                complete: function () {
+                    //alert(tbl_new_list);
+                    //alert('ajax complete');
+                }
+            });
+        }
+
+        //關閉視窗
+        container_close('modalImage');
+        return false;
+    }
+
+    function url_update()
+    {
+        var curl_no = "";
+        var i = 1;
+        var url_id = "";
+        var curl = "";
+        var c_sty = "";
+        var c_cate = "Activity_Detail";
+        curl_no = $('#detail_id').val();
+
+
+        for(i=1; i<11; i++)
+        {
+            url_id = $('#url_id_' + i).val();
+            curl = $('#curl_' + i).val();
+
+            //更新資料
+            $.ajax({                
+                url: 'Img_Update',
+                data: { url_no: curl_no, url_cate: c_cate, url_id: url_id, curl: curl  }, //此参数非常严谨，写错一个引号都不行
+                type:"POST",
+                dataType: 'TEXT', //返回值类型 一般设置为json
+                async: false,
+                success: function(JData){
+                    //alert(JData);
+                    data = handleAjaxVPNMsg(JData);
+                    //-------------------------------------------------------//
+                    $.each($.parseJSON(data), function (idx, obj) {
+                        i = i + 1;
+                        $('#curl_' + i).val(obj.c_url);
+                        $('#url_id_' + i).val(obj.id);
+                    });
+                    //-------------------------------------------------------//
+                },
+                error:function(xhr, ajaxOptions, thrownError){ 
+                    alert(xhr.status); 
+                    alert(thrownError); 
+                },
+                complete: function () {
+                    //alert(tbl_new_list);
+                    //alert('ajax complete');
+                }
+            });
+        }
+
+        //關閉視窗
+        container_close('modalVideo');
+
+    }
+
+    function url_list(c_cate,curl_no)
+    {
+
+        $('#detail_id').val(curl_no);
+
+        //alert(c_img);
+        var chtml = "";
+        var i = 0;
+        $.ajax({                
+            url: 'Url_Get',
+            data: { url_no: curl_no, url_cate: c_cate  }, //此参数非常严谨，写错一个引号都不行
+            type:"POST",
+            dataType: 'TEXT', //返回值类型 一般设置为json
+            async: false,
+            success: function(JData){
+                //alert(JData);
+                data = handleAjaxVPNMsg(JData);
+                //-------------------------------------------------------//
+                $.each($.parseJSON(data), function (idx, obj) {
+                    i = i + 1;
+                    $('#curl_' + i).val(obj.c_url);
+                    $('#url_id_' + i).val(obj.id);
+                });
+                //-------------------------------------------------------//
+            },
+            error:function(xhr, ajaxOptions, thrownError){ 
+                alert(xhr.status); 
+                alert(thrownError); 
+            },
+            complete: function () {
+                //alert(tbl_new_list);
+                //alert('ajax complete');
+            }
+        });
+
+        //開啟視窗
+        container_open('modalVideo');
+        return false;
     }
 </script>
 
@@ -1000,11 +1229,60 @@
                     <th class="text-center">網址</th>
                     <th class="item-edit">刪除</th>
                 </tr>
+             @if (d_detail.Rows.Count > 0)
+             {
+                 for(int i = 0; i< d_detail.Rows.Count; i++)
+                 {
+
+                     c_detail_id = d_detail.Rows[i]["id"].ToString();
+                     c_detail_title = d_detail.Rows[i]["c_title"].ToString();
+                     c_detail_sort = d_detail.Rows[i]["sort"].ToString();
+                     c_detail_status = d_detail.Rows[i]["status"].ToString();
+                     switch (c_detail_status)
+                     {
+                         case "Y":
+                             c_detail_show = "發佈";
+                             c_detail_class = "label-success";
+                             break;
+                         case "N":
+                             c_detail_show = "草稿";
+                             c_detail_class = "";
+                             break;
+                     }
+
+                     <tr>
+                         <td>
+                             <button class="hover-primary oi" id="btn_detail_edit_@i" name="btn_detail_edit_@i" title="修改" data-glyph="pencil" type="button" onclick="detail_edit('@c_detail_id');return false;"></button>
+                         </td>
+                         <td>
+                             @c_detail_title
+                         </td>
+                         <td>
+                             <span class="label @c_detail_class ">@c_detail_show</span>
+                         </td>
+                         <td>
+                             @c_detail_sort
+                         </td>
+                         <td>
+                             <button class="btn info oi" onclick="img_list('@c_detail_id');return false;" id="btn_detail_Image_@i" name="btn_detail_Image_@i">圖片管理</button>
+                         </td>
+                         <td>
+                             <button class="btn info oi" onclick="url_list('@c_detail_id');return false;" id="btn_detail_Url_@i" name="btn_detail_Url_@i">網址管理</button>
+                         </td>
+                         <td>
+                             <button class="hover-primary oi" title="刪除" data-glyph="trash" type="button" id="btn_detail_del_@i" name="btn_detail_del_@i" onclick="detail_detail('@c_detail_id');return false;"></button>
+                         </td>
+                     </tr>
+                 }
+             }
+             else
+             {
                 <tr>
                     <td colspan="7">
                         無分頁資料
                     </td>
                 </tr>
+             }
             </table>
         </div>
     </fieldset>
@@ -1120,8 +1398,10 @@
             <section class="upload mb-24">
                 <h5 class="text-primary mt-0 mb-16">圖片上傳</h5>
                 <div class="form-inline">
-                    <input type="file" class="form-element">
-                    <button type="button" class="btn info sm oi m-t-8" data-glyph="data-transfer-upload">上傳</button>
+                    <input type="file" name="pic_B" id="pic_B" accept="image/*" class="form-control form-control-sm">
+                    <button type="button" name="btn_big_pic" onclick="upload('B','Activity_Detail');" class="btn btn-sm btn-success oi m-t-small" data-glyph="data-transfer-upload">
+                        上傳
+                    </button>
                 </div>
             </section>
             <section class="uploaded-list">
@@ -1133,7 +1413,7 @@
             </section>
         </div>
         <div class="modal-footer text-center">
-            <button class="btn success oi" onclick="container_close('modalImage');">確定</button>
+            <button class="btn success oi" onclick="img_update();return false;">確定</button>
             <button class="btn warning oi" onclick="container_close('modalImage');">取消</button>
         </div>
     </div>
@@ -1151,16 +1431,46 @@
         <div class="modal-content">
             <p class="mb-16">請輸入 Youtube 影片網址，最多可輸入10部影片網址</p>
             <ol class="pl-24">
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
-                <li class="mb-12"><input type="text" class="form-element" placeholder="http://"></li>
+                <li class="mb-12">
+                    <input type="hidden" name="url_id_1" id="url_id_1" value="" />
+                    <input type="text" class="form-element" placeholder="http://" name="curl_1" id="curl_1" value="">
+                </li>
+                <li class="mb-12">
+                    <input type="hidden" name="url_id_2" id="url_id_2" value="" />
+                    <input type="text" class="form-element" placeholder="http://" name="curl_2" id="curl_2" value="">
+                </li>
+                <li class="mb-12">
+                    <input type="hidden" name="url_id_3" id="url_id_3" value="" />
+                    <input type="text" class="form-element" placeholder="http://" name="curl_3" id="curl_3" value="">
+                </li>
+                <li class="mb-12">
+                    <input type="hidden" name="url_id_4" id="url_id_4" value="" />
+                    <input type="text" class="form-element" placeholder="http://" name="curl_4" id="curl_4" value="">
+                </li>
+                <li class="mb-12">
+                    <input type="hidden" name="url_id_5" id="url_id_5" value="" />
+                    <input type="text" class="form-element" placeholder="http://" name="curl_5" id="curl_5" value="">
+                </li>
+                <li class="mb-12">
+                    <input type="hidden" name="url_id_6" id="url_id_6" value="" />
+                    <input type="text" class="form-element" placeholder="http://" name="curl_6" id="curl_6" value="">
+                </li>
+                <li class="mb-12">
+                    <input type="hidden" name="url_id_7" id="url_id_7" value="" />
+                    <input type="text" class="form-element" placeholder="http://" name="curl_7" id="curl_7" value="">
+                </li>
+                <li class="mb-12">
+                    <input type="hidden" name="url_id_8" id="url_id_8" value="" />
+                    <input type="text" class="form-element" placeholder="http://" name="curl_8" id="curl_8" value="">
+                </li>
+                <li class="mb-12">
+                    <input type="hidden" name="url_id_9" id="url_id_9" value="" />
+                    <input type="text" class="form-element" placeholder="http://" name="curl_9" id="curl_9" value="">
+                </li>
+                <li class="mb-12">
+                    <input type="hidden" name="url_id_10" id="url_id_10" value="" />
+                    <input type="text" class="form-element" placeholder="http://" name="curl_10" id="curl_10" value="">
+                </li>
             </ol>
         </div>
         <div class="modal-footer text-center">

@@ -1846,26 +1846,26 @@ namespace OutWeb.Controllers
                     break;
             }
 
-            //Img update
-            str_img_id = "";
-            str_img_desc = "";
-            str_index = "";
+            ////Img update
+            //str_img_id = "";
+            //str_img_desc = "";
+            //str_index = "";
 
-            for (int i = 0; i < i_count; i++)
-            {
-                str_img_id = img_id[i];
-                str_img_desc = img_desc[i];
-                if (is_index == str_img_id)
-                {
-                    str_index = "Y";
-                }
-                else
-                {
-                    str_index = "N";
-                }
+            //for (int i = 0; i < i_count; i++)
+            //{
+            //    str_img_id = img_id[i];
+            //    str_img_desc = img_desc[i];
+            //    if (is_index == str_img_id)
+            //    {
+            //        str_index = "Y";
+            //    }
+            //    else
+            //    {
+            //        str_index = "N";
+            //    }
 
-                DB.Img_Update(str_img_id, "", "", "", "Activity", str_img_desc, str_index);
-            }
+            //    DB.Img_Update(str_img_id, "", "", "", "Activity", str_img_desc, str_index);
+            //}
 
             return RedirectToAction("Activity_List");
         }
@@ -2610,22 +2610,7 @@ namespace OutWeb.Controllers
         #region 影音網址
 
 
-        #region 影音網址 Url_Update
-        public ActionResult Url_Del(string url_no, string[] c_url, string url_cate, string url_id = "")
-        {
-            DataTable Url_file;
-            string str_return = "";
-            //string cmsg = "";
-            string err_msg = "";
 
-            //抓取資料
-            Url_file = DB.URL_List(ref err_msg, url_no, url_cate);
-
-            str_return = JsonConvert.SerializeObject(Url_file, Newtonsoft.Json.Formatting.Indented);
-
-            return Content(str_return);
-        }
-        #endregion
 
         #endregion 影音網址
 
@@ -2716,6 +2701,29 @@ namespace OutWeb.Controllers
         }
         #endregion 圖片 Img_Get
 
+        #region 圖片更新 Img_Update
+        public ActionResult Img_Update(string img_no, string img_cate, string img_id, string img_desc)
+        {
+
+            DataTable Img_file;
+            string str_return = "";
+            //string cmsg = "";
+            string err_msg = "";
+
+            if (img_id.Trim().Length > 0)
+            {
+                DB.Img_Update(img_id,"","","",img_cate,img_desc,"");
+            }
+
+            //抓取資料
+            Img_file = DB.Img_List(ref err_msg, img_no, img_cate);
+
+            str_return = JsonConvert.SerializeObject(Img_file, Newtonsoft.Json.Formatting.Indented);
+
+            return Content(str_return);
+        }
+        #endregion 圖片更新 Img_Update
+
         #region 影音網址 Url_Get
         public ActionResult Url_Get(string url_no, string url_cate, string url_id = "")
         {
@@ -2732,6 +2740,32 @@ namespace OutWeb.Controllers
             return Content(str_return);
         }
         #endregion        
+
+        #region 影音網址 Url_Update
+        public ActionResult Url_Update(string url_no, string url_cate, string url_id, string curl)
+        {
+            DataTable Url_file;
+            string str_return = "";
+            //string cmsg = "";
+            string err_msg = "";
+
+            if (url_id.Trim().Length > 0)
+            {
+                DB.URL_Update(url_id, url_no, curl, url_cate);
+            }
+            else
+            {
+                DB.URL_Insert(url_no, curl, url_cate);
+            }
+
+            //抓取資料
+            Url_file = DB.URL_List(ref err_msg, url_no, url_cate);
+
+            str_return = JsonConvert.SerializeObject(Url_file, Newtonsoft.Json.Formatting.Indented);
+
+            return Content(str_return);
+        }
+        #endregion
 
         #endregion
     }

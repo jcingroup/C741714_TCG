@@ -399,6 +399,20 @@ namespace OutWeb.Service
 
                         cmd.ExecuteNonQuery();
 
+                        //明細 DETAIL
+                        csql = @"UPDATE "
+                             + " " + dbf_detail_name + " "
+                             + "SET "
+                             + "  CATE_ID = @id "
+                             + "WHERE "
+                             + "    CATE_ID = @img_no ";
+                        cmd.CommandText = csql;
+
+                        ////讓ADO.NET自行判斷型別轉換
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@img_no", img_no);
+
                         ////URL
                         //csql = @"UPDATE "
                         //     + " URL "

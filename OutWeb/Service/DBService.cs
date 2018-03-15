@@ -567,7 +567,7 @@ namespace OutWeb.Service
         #region 超連結 URL
 
         #region 超連結 新增 URL_Insert
-        public string URL_Insert(string img_no = "", string c_url = "", string url_kind = "")
+        public string URL_Insert(string url_no = "", string c_url = "", string url_kind = "")
         {
             string c_msg = "";
             SqlConnection conn = new SqlConnection(conn_str);
@@ -587,7 +587,7 @@ namespace OutWeb.Service
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@url_no", img_no);
+                cmd.Parameters.AddWithValue("@url_no", url_no);
                 cmd.Parameters.AddWithValue("@c_url", c_url);
                 cmd.Parameters.AddWithValue("@url_kind", url_kind);
 
