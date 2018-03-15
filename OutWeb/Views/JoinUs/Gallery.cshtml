@@ -21,6 +21,14 @@
     <li>@ViewBag.Title</li>
 }
 
+@section css {
+    <link href="~/Content/js/lightbox/css/lightbox.min.css" rel="stylesheet">
+}
+
+@section scripts {
+    <script src="~/Content/js/lightbox/js/lightbox.min.js"></script>
+}
+
 <h1 class="sr-only">如何加入台灣民政府</h1>
 
 <ul class="tabs list-inline text-center">
@@ -52,10 +60,18 @@
 
             <li class="col-md-6 col-12">
                 <figure class="pro text-center">
-                    <a href="@Url.Content(img_path + img_file)" target="_blank" class="thumbnail">
+                    <a href="@Url.Content(img_path + img_file)" class="thumbnail" data-lightbox="gallery" data-title="台灣政府 法理學院 @cate_name 第 @c_title 期 (<a href='@Url.Content(img_path + img_file)' target='_blank'>按此看放大圖</a>)">
                         <img src="@Url.Content(img_path + img_file)" alt="">
                         @* 初級班 class + primary *@
-                        <span class="caption primary">第<strong>@c_title</strong>期 台灣法理學院 @cate_name</span>
+                        <span class="caption primary">
+                            台灣政府 法理學院 @cate_name 第<strong>@c_title</strong>期
+                        </span>
+                        @*
+                        高級班 class + advanced
+                        <span class="caption advanced">
+                            台灣政府 法理學院 @cate_name 第<strong>@c_title</strong>期
+                        </span>
+                        *@
                     </a>
                     <a href="@c_desc" target="_blank" class="btn sm">上課影片</a>
                 </figure>
