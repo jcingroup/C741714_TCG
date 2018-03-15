@@ -9,6 +9,7 @@ using System.IO;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Configuration;
+using System.Text;
 
 namespace OutWeb.Service
 {
@@ -231,5 +232,22 @@ namespace OutWeb.Service
             return err_msg;
         }
         #endregion Return Error_Msg
+
+        #region Unescape
+        public string UnEscape(string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            int len = str.Length;
+            int i = 0;
+            while (i != len)
+            {
+                if (Uri.IsHexEncoding(str, i))
+                    sb.Append(Uri.HexUnescape(str, ref i));
+                else
+                    sb.Append(str[i++]);
+            }
+            return sb.ToString();
+        }
+        #endregion
     }
 }

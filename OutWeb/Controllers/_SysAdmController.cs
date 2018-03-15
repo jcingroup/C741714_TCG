@@ -28,6 +28,7 @@ namespace OutWeb.Controllers
         School CSchool = new School();
         States CStates = new States();
         Activity CActivity = new Activity();
+        OutWeb.Service.Service CService = new OutWeb.Service.Service();
         //=== 變數設定  =========================================//
         String Img_Path = "~/Images";
         //=== Log 記錄 =========================================//
@@ -1763,7 +1764,13 @@ namespace OutWeb.Controllers
             DataTable d_img;
             //DataTable d_url;
             //抓取類別資料
+            //--------------------------------------------------//
+            logger.Debug("抓取資料");
+            //--------------------------------------------------//
             dt = CActivity.List(ref err_msg, id);
+            //--------------------------------------------------//
+            logger.Debug("dt_count:" + dt.Rows.Count.ToString());
+            //--------------------------------------------------//
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_detail = CActivity.Detail_List(ref err_msg, "", "sort", "", "", id, "");
             //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
@@ -1812,27 +1819,27 @@ namespace OutWeb.Controllers
             switch (action_sty)
             {
                 case "add":
-                    //url add
-                    for (int i = 0; i < 10; i++)
-                    {
-                        str_curl = curl[i];
-                        DB.URL_Insert(img_no, str_curl, "Activity");
-                    }
+                    ////url add
+                    //for (int i = 0; i < 10; i++)
+                    //{
+                    //    str_curl = curl[i];
+                    //    DB.URL_Insert(img_no, str_curl, "Activity");
+                    //}
 
                     //Activity
                     CActivity.Insert(c_title, c_date, "", show, hot, sort, lang_id, "", img_no);
                     break;
                 case "edit":
-                    //URL Update
-                    str_url_id = "";
-                    str_curl = "";
-                    for (int i = 0; i < 10; i++)
-                    {
-                        str_url_id = url_id[i];
-                        str_curl = curl[i];
+                    ////URL Update
+                    //str_url_id = "";
+                    //str_curl = "";
+                    //for (int i = 0; i < 10; i++)
+                    //{
+                    //    str_url_id = url_id[i];
+                    //    str_curl = curl[i];
 
-                        DB.URL_Update(str_url_id, "", str_curl, "Activity");
-                    }
+                    //    DB.URL_Update(str_url_id, "", str_curl, "Activity");
+                    //}
 
                     CActivity.Update(id, c_title, c_date, "", show, hot, sort, lang_id, "");
 
@@ -1871,14 +1878,28 @@ namespace OutWeb.Controllers
         #region 活動寫真_明細
 
         #region 活動寫真_明細_陳列 Activity_Detail_List
-        public ActionResult Activity_Detail_List(string cate_id, string id = "")
+        public ActionResult Activity_Detail_List(string cate_id, string id)
         {
             string str_return = "";
             string err_msg = "";
+            string c_desc = "";
             DataTable dt;
 
             dt = CActivity.Detail_List(ref err_msg, id, "sort", "", "", cate_id, "");
+            //if(dt.Rows.Count > 0)
+            //{
+            //    for(int i=0; i < dt.Rows.Count; i++)
+            //    {
+            //        c_desc = Server.HtmlEncode(dt.Rows[i]["c_desc"].ToString());
+            //        DataRow Desc_Row = dt.Rows[i];
+            //        Desc_Row.BeginEdit();
+            //        Desc_Row["C_DESC"] = c_desc;
+            //        Desc_Row.EndEdit();
+            //        Desc_Row = null;
+            //    }
+            //}
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+            logger.Debug("str_return:" + str_return);
             return Content(str_return);
         }
         #endregion
@@ -1892,17 +1913,22 @@ namespace OutWeb.Controllers
 
             DataTable dt;
 
+            //c_desc = CService.UnEscape(c_desc);
+            //c_desc = System.Uri.UnescapeDataString(c_desc);
+           
+            c_desc = Server.HtmlDecode(c_desc);
+
             switch (c_sty)
             {
                 case "add":
                     CActivity.Detail_Insert(c_title, c_desc, status, sort, "", cate_id);
                     break;
                 case "edit":
-                    CActivity.Detail_Update(id, c_title, c_desc, status, "", cate_id);
+                    CActivity.Detail_Update(id, c_title, c_desc, status, sort, "", cate_id);
                     break;
             }
 
-            dt = CActivity.Detail_List(ref err_msg, id, "sort", "", "", cate_id, "");
+            dt = CActivity.Detail_List(ref err_msg, "", "sort", "", "", cate_id, "");
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
         }

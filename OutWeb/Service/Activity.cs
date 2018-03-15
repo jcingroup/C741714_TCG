@@ -168,6 +168,8 @@ namespace OutWeb.Service
                     csql = csql + " order by a1.sort desc ";
                 }
 
+                logger.Debug("csql:" + csql);
+
                 cmd.CommandText = csql;
 
                 //---------------------------------------------------------------//
@@ -236,6 +238,8 @@ namespace OutWeb.Service
                 list_ada = null;
 
                 dt = ds.Tables["list"];
+
+                logger.Debug("dt_Count:" + dt.Rows.Count.ToString());
 
             }
             catch (Exception ex)
@@ -395,22 +399,22 @@ namespace OutWeb.Service
 
                         cmd.ExecuteNonQuery();
 
-                        //URL
-                        csql = @"UPDATE "
-                             + " URL "
-                             + "SET "
-                             + "  URL_NO = @id "
-                             + "WHERE "
-                             + "    URL_KIND = '" + img_kind + "' "
-                             + "AND URL_NO = @img_no ";
-                        cmd.CommandText = csql;
+                        ////URL
+                        //csql = @"UPDATE "
+                        //     + " URL "
+                        //     + "SET "
+                        //     + "  URL_NO = @id "
+                        //     + "WHERE "
+                        //     + "    URL_KIND = '" + img_kind + "' "
+                        //     + "AND URL_NO = @img_no ";
+                        //cmd.CommandText = csql;
 
-                        ////讓ADO.NET自行判斷型別轉換
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@img_no", img_no);
+                        //////讓ADO.NET自行判斷型別轉換
+                        //cmd.Parameters.Clear();
+                        //cmd.Parameters.AddWithValue("@id", id);
+                        //cmd.Parameters.AddWithValue("@img_no", img_no);
 
-                        cmd.ExecuteNonQuery();
+                        //cmd.ExecuteNonQuery();
                     }
                 }
 
@@ -601,7 +605,13 @@ namespace OutWeb.Service
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
 
-            logger.Debug("id:" + id + ";sort:" + sort + ";status:" + status + ";title_query:" + title_query + ";cate_id:" + cate_id + ";lang_id:" + lang_id + ";");
+            string cc_msg = "";
+
+            cc_msg = "id:" + id + ";sort:" + sort + ";status:" + status + ";title_query:" + title_query + ";cate_id:" + cate_id + ";lang_id:" + lang_id + ";";
+            //--------------------------//
+            logger.Debug(cc_msg);
+            //--------------------------//
+
             string[] Array_id;
             string[] Array_title_query;
             string[] Array_lang_id;
@@ -716,6 +726,7 @@ namespace OutWeb.Service
                 }
 
                 cmd.CommandText = csql;
+                //---------------------------------------------------------------//
                 logger.Debug("csql:" + csql);
                 //---------------------------------------------------------------//
                 cmd.Parameters.Clear();
@@ -758,17 +769,17 @@ namespace OutWeb.Service
 
                 //--------------------------------------------------------------//
 
-                if (ds.Tables["list"] != null)
+                if (ds.Tables["list_detail"] != null)
                 {
-                    ds.Tables["list"].Clear();
+                    ds.Tables["list_detail"].Clear();
                 }
 
                 SqlDataAdapter list_ada = new SqlDataAdapter();
                 list_ada.SelectCommand = cmd;
-                list_ada.Fill(ds, "list");
+                list_ada.Fill(ds, "list_detail");
                 list_ada = null;
 
-                dt = ds.Tables["list"];
+                dt = ds.Tables["list_detail"];
 
             }
             catch (Exception ex)
@@ -885,6 +896,13 @@ namespace OutWeb.Service
         public string Detail_Update(string id = "", string c_title = "", string c_desc = "", string is_show = "", string sort = "", string lang_id = "", string cate_id = "")
         {
             string c_msg = "";
+            string cc_msg = "";
+
+            cc_msg = "id:" + id + ",c_title:" + c_title + ",c_desc:" + c_desc + ",is_show:" + is_show + ",sort:" + sort + ",lang_id:" + lang_id + ",cate_id:" + cate_id;
+            //--------------------------//
+            logger.Debug(cc_msg);
+            //--------------------------//
+
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
             {
@@ -897,7 +915,7 @@ namespace OutWeb.Service
             try
             {
                 csql = @"update "
-                     + "  " + dbf_name + " "
+                     + "  " + dbf_detail_name + " "
                      + "set "
                      + "  c_title = @c_title "
                      + ", c_desc = @c_desc "
@@ -909,7 +927,9 @@ namespace OutWeb.Service
                      + ", UPD_DT = getdate() "
                      + "where "
                      + "  id = @id ";
-
+                //--------------------------//
+                logger.Debug(csql);
+                //--------------------------//
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();
