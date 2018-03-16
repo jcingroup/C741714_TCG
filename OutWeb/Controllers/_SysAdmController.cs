@@ -274,7 +274,7 @@ namespace OutWeb.Controllers
         #endregion
 
         #region 圖片上傳 Upload
-        public ActionResult Upload(string img_no, string img_sta, string img_cate, string img_sty = "", string img_id = "")
+        public ActionResult Upload(string img_no, string img_cate, string img_sty = "", string img_id = "")
         {
             DataTable img_file;
             DataTable chk_file;
@@ -300,7 +300,7 @@ namespace OutWeb.Controllers
                 files = file_name.Split('\\');
                 files_count = files.Count();
                 filename = files[files_count - 1];
-                new_filename = img_cate + "_" + img_no + "_" + img_sta + "_" + filename;
+                new_filename = img_cate + "_" + img_no + "_" + img_sty + "_" + filename;
                 imgPath = file_path + new_filename;
                 string PhysicalPath = Server.MapPath(imgPath);
                 hfc[0].SaveAs(PhysicalPath);
@@ -310,7 +310,7 @@ namespace OutWeb.Controllers
             chk_file = DB.Img_List(ref err_msg, img_no, img_sty, img_cate);
 
             chk_sty = "add";
-            if (img_sta == "S")
+            if (img_sty == "S")
             {
                 if (chk_file.Rows.Count > 0)
                 {
@@ -2695,6 +2695,7 @@ namespace OutWeb.Controllers
 
             //抓取資料
             img_file = DB.Img_List(ref err_msg, img_no, img_sty, img_cate);
+            logger.Debug("Img_Get,img_no:" + img_no + ",img_cate:" + img_cate + ",img_sty:" + img_sty);
 
             str_return = JsonConvert.SerializeObject(img_file, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
@@ -2713,6 +2714,7 @@ namespace OutWeb.Controllers
             if (img_id.Trim().Length > 0)
             {
                 DB.Img_Update(img_id,"","","",img_cate,img_desc,"");
+                logger.Debug("update,img_id:" + img_id + ",img_no:" + img_no + ",img_desc:" + img_desc + ",img_cate:" + img_cate);
             }
 
             //抓取資料

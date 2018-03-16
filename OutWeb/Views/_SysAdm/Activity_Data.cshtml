@@ -351,10 +351,22 @@
         var cimg_sty = "";
         var cimg_id = "";
 
-        if ($("#id").val().length > 0) {
-            cimg_no = $("#id").val();
-        }else {
-            cimg_no = @img_no;
+        if(c_sty == "B")
+        {
+            if ($("#detail_id").val().length > 0) {
+                cimg_no = $("#detail_id").val();
+            }else {
+                cimg_no = @img_no;
+            }
+        }
+        
+        if(c_sty == "S")
+        {
+            if ($("#id").val().length > 0) {
+                cimg_no = $("#id").val();
+            }else {
+                cimg_no = @img_no;
+            }
         }
 
         //alert(c_img);
@@ -365,7 +377,7 @@
             {
                 url: 'Upload', //用于文件上传的服务器端请求地址
                 type: 'post',
-                data: { img_no: cimg_no, img_sta: c_sty, img_cate: c_cate }, //此参数非常严谨，写错一个引号都不行
+                data: { img_no: cimg_no, img_sty: c_sty, img_cate: c_cate }, //此参数非常严谨，写错一个引号都不行
                 secureuri: false, //一般设置为false
                 //fileElementId: 'file1', //文件上传空间的id属性  <input type="file" id="file" name="file" />
                 fileElementId: c_img, //文件上传空间的id属性  <input type="file" id="file" name="file" />
@@ -416,7 +428,7 @@
                             i = i + 1;
                             c_html = c_html + "<tr>";
                             c_html = c_html + "    <td>";
-                            c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id" + i + "\" value=\"" + obj.id + "\" />";
+                            c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
                             c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
                             c_html = c_html + "    </td>";
                             c_html = c_html + "    <td>";
@@ -1107,30 +1119,30 @@
         return false;
     }
 
-    ////使用如下方法可以將json的key值轉為小寫 
-    //function lowerJSONKey(jsonObj) {
-    //    var i = 0;
-    //    var c_key = "";
-    //    for(i = 0; i < jsonObj.length; i++)
-    //    {
-    //        for (var key in jsonObj[i]) {
-    //            c_key = key.toLowerCase();
-    //            //jsonObj[i]["\"" + key.toLowerCase() + "\""] = jsonObj[i][key];
-    //            if(key != c_key)
-    //            {
-    //                //抓值到新元素
-    //                jsonObj[i][key.toLowerCase()] = jsonObj[i][key];
-    //                //刪除原本元素
-    //                delete (jsonObj[i][key]);
-    //            }
-    //        }
-    //    }
-    //    //for (var key in jsonObj) {
-    //    //    jsonObj["\"" + key.toLowerCase() + "\""] = jsonObj[key];
-    //    //    delete (jsonObj[key]);
-    //    //}
-    //    return jsonObj;
-    //}
+    //使用如下方法可以將json的key值轉為小寫 
+    function lowerJSONKey(jsonObj) {
+        var i = 0;
+        var c_key = "";
+        for(i = 0; i < jsonObj.length; i++)
+        {
+            for (var key in jsonObj[i]) {
+                c_key = key.toLowerCase();
+                //jsonObj[i]["\"" + key.toLowerCase() + "\""] = jsonObj[i][key];
+                if(key != c_key)
+                {
+                    //抓值到新元素
+                    jsonObj[i][key.toLowerCase()] = jsonObj[i][key];
+                    //刪除原本元素
+                    delete (jsonObj[i][key]);
+                }
+            }
+        }
+        //for (var key in jsonObj) {
+        //    jsonObj["\"" + key.toLowerCase() + "\""] = jsonObj[key];
+        //    delete (jsonObj[key]);
+        //}
+        return jsonObj;
+    }
 </script>
 
 @section IncludeScript {
