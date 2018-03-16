@@ -97,7 +97,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(rtn_errmsg(ex));
             }
             finally
             {
@@ -200,7 +200,7 @@ namespace OutWeb.Service
             {
                 status = "N";
                 err_msg = ex.Message;
-                logger.Error(rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(rtn_errmsg(ex));
             }
             finally
             {
@@ -215,9 +215,16 @@ namespace OutWeb.Service
         #endregion
 
         #region Return Error_Msg
-        public string rtn_errmsg(string err_source, string err_message, string err_stacktrace)
+
+        //public string rtn_errmsg(string err_source, string err_message, string err_stacktrace)
+        public string rtn_errmsg(Exception ex)
         {
             string err_msg = "";
+            string LineNo = new System.Diagnostics.StackTrace(ex, true).GetFrame(0).GetFileLineNumber().ToString(); //錯誤行號
+            string currentName = new System.Diagnostics.StackTrace(ex, true).GetFrame(0).GetMethod().Name;  //Method
+            string callName = new System.Diagnostics.StackTrace(ex, true).GetFrame(1).GetMethod().Name;     //FileName
+            string err_message = ex.Message;
+            string err_stacktrace = ex.StackTrace;
             /*
             err_msg = "======================================================================\r\n"
                     + "    發生時間：" + DateTime.Now.ToString("yyyyMMdd HH:mm:ss") + "\r\n"
@@ -226,7 +233,9 @@ namespace OutWeb.Service
                     + "    錯誤內容：" + err_message + "\r\n"
                     + "    錯誤資訊：" + err_stacktrace + "\r\n";
             */
-            err_msg = "    錯誤位置：" + err_source + "\r\n"
+            err_msg = "\r\n"
+                    + "    錯誤位置：" + callName + "->" + currentName + "\r\n"
+                    + "    錯誤行數：" + LineNo + "\r\n"
                     + "    錯誤內容：" + err_message + "\r\n"
                     + "    錯誤資訊：" + err_stacktrace;
             return err_msg;

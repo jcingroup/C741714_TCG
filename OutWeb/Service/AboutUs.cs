@@ -156,7 +156,7 @@ namespace OutWeb.Service
             {
                 err_msg = ex.Message;
                 //logger.Error(ex.Message);
-                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(CService.rtn_errmsg(ex));
             }
             finally
             {
@@ -289,7 +289,7 @@ namespace OutWeb.Service
             {
                 c_msg = ex.Message;
                 //logger.Error(ex.Message);
-                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(CService.rtn_errmsg(ex));
             }
             finally
             {
@@ -350,7 +350,7 @@ namespace OutWeb.Service
             {
                 c_msg = ex.Message;
                 //logger.Error(ex.Message);
-                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(CService.rtn_errmsg(ex));
             }
             finally
             {
@@ -433,7 +433,7 @@ namespace OutWeb.Service
             {
                 c_msg = ex.Message;
                 //logger.Error(ex.Message);
-                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(CService.rtn_errmsg(ex));
             }
             finally
             {
@@ -624,7 +624,7 @@ namespace OutWeb.Service
             {
                 err_msg = ex.Message;
                 //logger.Error(ex.Message);
-                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(CService.rtn_errmsg(ex));
             }
             finally
             {
@@ -771,7 +771,7 @@ namespace OutWeb.Service
             {
                 c_msg = ex.Message;
                 //logger.Error(ex.Message);
-                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(CService.rtn_errmsg(ex));
             }
             finally
             {
@@ -834,7 +834,7 @@ namespace OutWeb.Service
             {
                 c_msg = ex.Message;
                 //logger.Error(ex.Message);
-                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(CService.rtn_errmsg(ex));
             }
             finally
             {
@@ -894,7 +894,7 @@ namespace OutWeb.Service
             {
                 c_msg = ex.Message;
                 //logger.Error(ex.Message);
-                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(CService.rtn_errmsg(ex));
             }
             finally
             {

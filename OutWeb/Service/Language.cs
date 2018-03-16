@@ -97,7 +97,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex.Source, ex.Message, ex.StackTrace));
+                logger.Error(CService.rtn_errmsg(ex));
             }
             finally
             {
