@@ -216,9 +216,11 @@
                 //新增空白
                 //$("#cate_id").append($("<option></option>").attr("value", "").text("全部"));
 
-                $.each($.parseJSON(data), function (idx, obj) {
+                var JsonObj = lowerJSONKey($.parseJSON(data));
+                //$.each($.parseJSON(data), function (idx, obj) {
+                $.each(JsonObj, function (idx, obj) {
                     //$("#select").append($("<option></option>").attr("value", "值").text("文字"));
-                    $("#cate_id").append($("<option></option>").attr("value", obj.ID).text(obj.CATE_NAME));
+                    $("#cate_id").append($("<option></option>").attr("value", obj.id).text(obj.cate_name));
                 });
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -268,21 +270,22 @@
                     //c_html += "    <th>封面圖</th>";
                     c_html += "    <th class=\"item-edit\">刪除</th>";
                     c_html += "</tr>";
-
-                    $.each($.parseJSON(data), function (idx, obj) {
+                    var JsonObj = lowerJSONKey($.parseJSON(data));
+                    //$.each($.parseJSON(data), function (idx, obj) {
+                    $.each(JsonObj, function (idx, obj) {
                         i = i + 1;
                         c_html = c_html + "<tr>";
                         c_html = c_html + "    <td>";
-                        c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.ID + "\" />";
-                        c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                        c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
+                        c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
                         c_html = c_html + "    </td>";
                         c_html = c_html + "    <td>";
-                        c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" class=\"form-element\" value=\"" + obj.IMG_DESC + "\">";
+                        c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" class=\"form-element\" value=\"" + obj.img_desc + "\">";
                         c_html = c_html + "    </td>";
                         //c_html = c_html + "    <td>";
 
                         //c_html = c_html + "       <label class=\"switch\">";
-                        //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.ID + "\"";
+                        //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.id + "\"";
                         //if(obj.is_index == "Y")
                         //{
                         //    c_html = c_html + " checked ";
@@ -292,7 +295,7 @@
                         //c_html = c_html + "       </label>";
                         //c_html = c_html + "    </td>";
                         c_html = c_html + "    <td class=\"item-edit\">";
-                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.IMG_ID + "','" + c_sty + "','" + c_cate + "');\"></button>";
+                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\"></button>";
                         c_html = c_html + "    </td>";
                         c_html = c_html + "</tr>";
                     });
@@ -303,11 +306,13 @@
                 //------------------------------//
                 if(c_sty == "S")
                 {
-                    $.each($.parseJSON(data), function (idx, obj) {
+                    var JsonObj = lowerJSONKey($.parseJSON(data));
+                    //$.each($.parseJSON(data), function (idx, obj) {
+                    $.each(JsonObj, function (idx, obj) {
                         i = i + 1;
                         c_html = c_html + "<li>";
-                        c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "','" + c_cate + "');\" >&times;</button>";
-                        c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                        c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\" >&times;</button>";
+                        c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
                         c_html = c_html + "</li>";
                     });
 
@@ -378,12 +383,13 @@
                     //-------------------------------------------------------//
                     if(c_sty == "S")
                     {
-
-                        $.each($.parseJSON(data), function (idx, obj) {
+                        var JsonObj = lowerJSONKey($.parseJSON(data));
+                        //$.each($.parseJSON(data), function (idx, obj) {
+                        $.each(JsonObj, function (idx, obj) {
                             i = i + 1;
                             c_html = c_html + "<li>";
-                            c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "','" + c_cate + "');\" >&times;</button>";
-                            c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                            c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\" >&times;</button>";
+                            c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
                             c_html = c_html + "</li>";
                         });
 
@@ -404,12 +410,14 @@
                         c_html += "    <th class=\"item-edit\">刪除</th>";
                         c_html += "</tr>";
 
-                        $.each($.parseJSON(data), function (idx, obj) {
+                        var JsonObj = lowerJSONKey($.parseJSON(data));
+                        //$.each($.parseJSON(data), function (idx, obj) {
+                        $.each(JsonObj, function (idx, obj) {
                             i = i + 1;
                             c_html = c_html + "<tr>";
                             c_html = c_html + "    <td>";
-                            c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id" + i + "\" value=\"" + obj.ID + "\" />";
-                            c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
+                            c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id" + i + "\" value=\"" + obj.id + "\" />";
+                            c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
                             c_html = c_html + "    </td>";
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" class=\"form-element\" value=\"" + obj.IMG_DESC + "\">";
@@ -417,7 +425,7 @@
                             //c_html = c_html + "    <td>";
 
                             //c_html = c_html + "       <label class=\"switch\">";
-                            //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.ID + "\"";
+                            //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.id + "\"";
                             //if(obj.is_index == "Y")
                             //{
                             //    c_html = c_html + " checked ";
@@ -427,7 +435,7 @@
                             //c_html = c_html + "       </label>";
                             //c_html = c_html + "    </td>";
                             c_html = c_html + "    <td class=\"item-edit\">";
-                            c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "','" + c_cate + "');\"></button>";
+                            c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\"></button>";
                             c_html = c_html + "    </td>";
                             c_html = c_html + "</tr>";
                         });
@@ -494,8 +502,9 @@
                 //alert(JData);
                 data = handleAjaxVPNMsg(JData);
                 i = 0;
-
-                $.each($.parseJSON(data), function (idx, obj) {
+                var JsonObj = lowerJSONKey($.parseJSON(data));
+                //$.each($.parseJSON(data), function (idx, obj) {
+                $.each(JsonObj, function (idx, obj) {
                     i = i + 1;
 
                     //給值
@@ -586,7 +595,9 @@
                 c_html += "      <th class=\"item-edit\">刪除</th>";
                 c_html += "   </tr>";
 
-                $.each($.parseJSON(data), function (idx, obj) {
+                var JsonObj = lowerJSONKey($.parseJSON(data));
+                //$.each($.parseJSON(data), function (idx, obj) {
+                $.each(JsonObj, function (idx, obj) {
                     i = i + 1;
                     c_html += "   <tr>";
                     c_html += "      <td>";
@@ -749,7 +760,9 @@
                     c_html += "      <th class=\"item-edit\">刪除</th>";
                     c_html += "   </tr>";
 
-                    $.each($.parseJSON(data), function (idx, obj) {
+                    var JsonObj = lowerJSONKey($.parseJSON(data));
+                    //$.each($.parseJSON(data), function (idx, obj) {
+                    $.each(JsonObj, function (idx, obj) {
                         i = i + 1;
                         c_html += "   <tr>";
                         c_html += "      <td>";
@@ -869,7 +882,9 @@
                     c_html += "    <th class=\"item-edit\">刪除</th>";
                     c_html += "</tr>";
 
-                    $.each($.parseJSON(data), function (idx, obj) {
+                    var JsonObj = lowerJSONKey($.parseJSON(data));
+                    //$.each($.parseJSON(data), function (idx, obj) {
+                    $.each(JsonObj, function (idx, obj) {
                         i = i + 1;
                         c_html = c_html + "<tr>";
                         c_html = c_html + "    <td>";
@@ -882,7 +897,7 @@
                         //c_html = c_html + "    <td>";
 
                         //c_html = c_html + "       <label class=\"switch\">";
-                        //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.ID + "\"";
+                        //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.id + "\"";
                         //if(obj.is_index == "Y")
                         //{
                         //    c_html = c_html + " checked ";
@@ -892,14 +907,13 @@
                         //c_html = c_html + "       </label>";
                         //c_html = c_html + "    </td>";
                         c_html = c_html + "    <td class=\"item-edit\">";
-                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.id + "','');\"></button>";
+                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\"></button>";
                         c_html = c_html + "    </td>";
                         c_html = c_html + "</tr>";
                     });
                     c_html += "</table>";
                     $('#img_count').val(i);
                     $('#images_container').html(c_html);
-                    alert("123456");
                 }
                 //-------------------------------------------------------//
             },
@@ -969,6 +983,8 @@
         var curl = "";
         var c_sty = "";
         var c_cate = "Activity_Detail";
+        var cc_id = "";
+        var cc_url = "";
         curl_no = $('#detail_id').val();
         var update_chk = "";
 
@@ -1001,13 +1017,15 @@
                     success: function(JData){
                         //alert(JData);
                         data = handleAjaxVPNMsg(JData);
-                        //-------------------------------------------------------//
-                        $.each($.parseJSON(data), function (idx, obj) {
-                            i = i + 1;
-                            $('#curl_' + i).val(obj.C_URL);
-                            $('#url_id_' + i).val(obj.ID);
-                        });
-                        //-------------------------------------------------------//
+                        ////-------------------------------------------------------//
+                        //var JsonObj = lowerJSONKey($.parseJSON(data));
+                        ////$.each($.parseJSON(data), function (idx, obj) {
+                        //$.each(JsonObj, function (idx, obj) {
+                        //    i = i + 1;
+                        //    $('#curl_' + i).val(obj.c_url);
+                        //    $('#url_id_' + i).val(obj.id);
+                        //});
+                        ////-------------------------------------------------------//
                     },
                     error:function(xhr, ajaxOptions, thrownError){ 
                         alert(xhr.status); 
@@ -1035,6 +1053,8 @@
         var chtml = "";
         var url_id = "";
         var i = 0;
+        var cid = "";
+        var curl = "";
         $.ajax({                
             url: 'Url_Get',
             data: { url_no: curl_no, url_cate: c_cate, url_id:url_id  }, //此参数非常严谨，写错一个引号都不行
@@ -1044,13 +1064,33 @@
             success: function(JData){
                 //alert(JData);
                 data = handleAjaxVPNMsg(JData);
+                
                 //-------------------------------------------------------//
-                $.each($.parseJSON(data), function (idx, obj) {
+                var JsonObj = lowerJSONKey($.parseJSON(data));
+                i = 0;
+
+                //for(j=0;j<JsonObj.length;j++)
+                //{
+                //    i = j + 1;
+                //    cid = JsonObj[j]["id"];
+                //    curl = JsonObj[j]["c_url"];
+                    
+                //    $('#curl_' + i).val(curl);
+                //    $('#url_id_' + i).val(cid);
+                //}
+
+                $.each(JsonObj, function (idx, obj) {
                     i = i + 1;
-                    $('#curl_' + i).val(obj.C_URL);
-                    $('#url_id_' + i).val(obj.ID);
+                    $('#curl_' + i).val(obj.c_url);
+                    $('#url_id_' + i).val(obj.id);
                 });
                 //-------------------------------------------------------//
+
+                for(j = i; j<11; j++)
+                {
+                    $('#curl_' + i).val('');
+                    $('#url_id_' + i).val('');
+                }
             },
             error:function(xhr, ajaxOptions, thrownError){ 
                 alert(xhr.status); 
@@ -1066,6 +1106,31 @@
         container_open('modalVideo');
         return false;
     }
+
+    ////使用如下方法可以將json的key值轉為小寫 
+    //function lowerJSONKey(jsonObj) {
+    //    var i = 0;
+    //    var c_key = "";
+    //    for(i = 0; i < jsonObj.length; i++)
+    //    {
+    //        for (var key in jsonObj[i]) {
+    //            c_key = key.toLowerCase();
+    //            //jsonObj[i]["\"" + key.toLowerCase() + "\""] = jsonObj[i][key];
+    //            if(key != c_key)
+    //            {
+    //                //抓值到新元素
+    //                jsonObj[i][key.toLowerCase()] = jsonObj[i][key];
+    //                //刪除原本元素
+    //                delete (jsonObj[i][key]);
+    //            }
+    //        }
+    //    }
+    //    //for (var key in jsonObj) {
+    //    //    jsonObj["\"" + key.toLowerCase() + "\""] = jsonObj[key];
+    //    //    delete (jsonObj[key]);
+    //    //}
+    //    return jsonObj;
+    //}
 </script>
 
 @section IncludeScript {

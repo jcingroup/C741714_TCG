@@ -2754,15 +2754,18 @@ namespace OutWeb.Controllers
                 if(curl.Trim().Length > 0)
                 {
                     DB.URL_Update(url_id, url_no, curl, url_cate);
+                    logger.Debug("update,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate);
                 }
                 else
                 {
                     DB.Url_Delete(url_id);
+                    logger.Debug("del,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate);
                 }
             }
             else
             {
                 DB.URL_Insert(url_no, curl, url_cate);
+                logger.Debug("insert,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate);
             }
 
             //抓取資料
