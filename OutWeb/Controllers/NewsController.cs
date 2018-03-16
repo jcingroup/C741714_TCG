@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Collections.Specialized;
 /*Json.NET相關的命名空間*/
 using Newtonsoft.Json;
+using OutWeb.Repositories;
+using OutWeb.Entities;
 
 namespace OutWeb.Controllers
 {
@@ -49,8 +51,17 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 活動寫真 - 最新活動
-        public ActionResult EventLatest()
+        public ActionResult EventLatest(int? page)
         {
+            page = page ?? 1;
+
+            ConnectionRepository conRepo = new ConnectionRepository();
+            var connectionStr = conRepo.GetEntityConnctionString();
+            using (var db = new TCGDB(connectionStr))
+            {
+                var source = db.USR.ToList();
+
+            }
             return View();
         }
         // 最新訊息 - 活動寫真 - 最新活動內容

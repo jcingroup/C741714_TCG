@@ -168,44 +168,110 @@
     <Compile Include="Controllers\WorksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\_SysAdmController.cs" />
+    <Compile Include="Entities\ABOUTUS.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ABOUTUS_CATE.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ACTIVITY.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ACTIVITY_DETAIL.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EDU.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EDU_CATE.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\FOCUS.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\FOCUS_CATE.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\IMG.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\JOINUS.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\JOINUS_CATE.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\LANG.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\NEWS.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\NEWS_CATE.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SCHOOL.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SCHOOL_CATE.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SCHOOL_VIDEO.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\STATES.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\STATES_CATE.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\STATES_VIDEO.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TCGDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TCGDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TCGDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TCGDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TCGDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\URL.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\USR.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\WBAGENT.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WBDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WBDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WBDB.edmx</DependentUpon>
+      <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\WBLOGERR.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
+      <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\WBNEWS.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
+      <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\WBPIC.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
+      <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\WBPRODUCT.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
+      <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\WBPRODUCTTYPE.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
+      <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\WBUSR.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
+      <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\WBWORKS.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
+      <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Enums\ManageEnums.cs" />
     <Compile Include="Enums\ModelInitProperty.cs" />
@@ -213,8 +279,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConnectionConfig.cs" />
+    <Compile Include="Models\FrontModels\News\EventLatestModels\EventLatestData.cs" />
+    <Compile Include="Models\FrontModels\News\EventLatestModels\EventLatestListFilter.cs" />
+    <Compile Include="Models\FrontModels\News\EventLatestModels\EventLatestResult.cs" />
+    <Compile Include="Models\FrontModels\News\EventLatestModels\EventLatestViewModel.cs" />
+    <Compile Include="Models\IPaginationModel.cs" />
+    <Compile Include="Models\PaginationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ConnectionRepository.cs" />
     <Compile Include="Repositories\ImageRepository.cs" />
+    <Compile Include="Repositories\NewEventLatestRepository.cs" />
     <Compile Include="Repositories\PublicMethodRepository.cs" />
     <Compile Include="Service\AboutUs.cs" />
     <Compile Include="Service\Activity.cs" />
@@ -618,15 +693,15 @@
     <Content Include="Content\noIE\line.gif" />
     <Content Include="Content\noIE\noIE.css" />
     <Content Include="Content\noIE\noIE.html" />
-    <Content Include="Entities\WBDB.Context.tt">
+    <Content Include="Entities\TCGDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WBDB.edmx</DependentUpon>
-      <LastGenOutput>WBDB.Context.cs</LastGenOutput>
+      <DependentUpon>TCGDB.edmx</DependentUpon>
+      <LastGenOutput>TCGDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Entities\WBDB.tt">
+    <Content Include="Entities\TCGDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WBDB.edmx</DependentUpon>
-      <LastGenOutput>WBDB.cs</LastGenOutput>
+      <DependentUpon>TCGDB.edmx</DependentUpon>
+      <LastGenOutput>TCGDB.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="favicon.png" />
@@ -672,6 +747,13 @@
     <Content Include="Content\font\icomoon\icomoon.eot" />
     <Content Include="Content\font\icomoon\icomoon.ttf" />
     <Content Include="Content\font\icomoon\icomoon.woff" />
+    <EntityDeploy Include="Entities\TCGDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TCGDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Entities\TCGDB.edmx.diagram">
+      <DependentUpon>TCGDB.edmx</DependentUpon>
+    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -778,7 +860,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="ckeditor\plugins\clipboard\" />
     <Folder Include="Images\" />
-    <Folder Include="Models\" />
     <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>
@@ -791,13 +872,6 @@
     <Content Include="Content\font\open-iconic\open-iconic.woff" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Entities\WBDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WBDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Entities\WBDB.edmx.diagram">
-      <DependentUpon>WBDB.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\Demo.pubxml" />
     <None Include="Properties\PublishProfiles\Server.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
