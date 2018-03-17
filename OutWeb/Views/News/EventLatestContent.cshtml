@@ -53,7 +53,7 @@ string img_path = "/Images/";
         bool dataSingle = Model.Data.PagingList.Count == 1 ? true : false;
 
         string currentClass = index == 0 ? "current" : "";
-        string tabID = dataSingle ? "" : "paging_" + paging;
+        string tabID = dataSingle ? "" : "paging_" + index;
 
 
         <div class="tab @currentClass" id="@tabID">
