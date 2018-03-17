@@ -1,18 +1,18 @@
 ﻿using OutWeb.Entities;
 using OutWeb.Models;
-using OutWeb.Models.FrontModels.News.EventLatestModels;
+using OutWeb.Models.FrontModels.News.AnnouncementLatest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OutWeb.Repositories
 {
-    public class NewEventLatestRepository
+    public class AnnouncementLatestRepository
     {
         private string _connectionString { get; set; }
         private ConnectionRepository conRepo = new ConnectionRepository();
 
-        public NewEventLatestRepository()
+        public AnnouncementLatestRepository()
         {
             _connectionString = conRepo.GetEntityConnctionString();
         }
@@ -51,77 +51,6 @@ namespace OutWeb.Repositories
         }
 
         /// <summary>
-        /// 取得分頁的圖片列表
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        private List<PagingImageInfo> GetPaginImgsListByID(int id)
-        {
-            List<PagingImageInfo> data = new List<PagingImageInfo>();
-
-            using (var db = new TCGDB(_connectionString))
-            {
-                data = db.IMG
-                                .Where(s => s.STATUS == "Y" && s.IMG_STY == "B" && s.IMG_KIND == "Activity_Detail" &&
-                                s.IMG_NO.Contains(id.ToString()))
-                                .OrderByDescending(s => s.SORT)
-                                .Select(s => new PagingImageInfo()
-                                {
-                                    ImgFileName = s.IMG_FILE,
-                                    ImgDescription = s.IMG_DESC
-                                })
-                                .ToList();
-            }
-            return data;
-        }
-
-        /// <summary>
-        /// 取得分頁
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-
-        private List<EvnentPaging> GetPagingListByID(int id)
-        {
-            List<EvnentPaging> data = new List<EvnentPaging>();
-
-            using (var db = new TCGDB(_connectionString))
-            {
-                data = db.ACTIVITY_DETAIL
-                    .AsEnumerable()
-                        .Where(o => o.CATE_ID == id.ToString())
-                        .OrderBy(o => o.SORT)
-                        .Select(s => new EvnentPaging()
-                        {
-                            Title = s.C_TITLE,
-                            Description = s.C_DESC,
-                            ImagesList = GetPaginImgsListByID(s.ID),
-                            InternetSiteList = GetPagingUrlListByID(s.ID)
-                        })
-                .ToList();
-                //語系join
-                //    data = db.ACTIVITY_DETAIL
-                //         .Join(db.LANG,
-                //     t1 => t1.LANG_ID,
-                //     t2 => t2.LANG_ID,
-                //(details, lang) => new { Details = details, Lang = lang })
-                //.AsEnumerable()
-                //.Where(o => o.Details.CATE_ID == id.ToString())
-                //.OrderBy(o => o.Details.SORT)
-                //.Select(s => new EnentPaging()
-                //{
-                //    Title = s.Details.C_TITLE,
-                //    Description = s.Details.C_DESC,
-                //    ImagesList = GetPagingImgOrUrlListByID(s.Details.ID, DetailsContentKind.img),
-                //    InternetSiteList = GetPagingImgOrUrlListByID(s.Details.ID, DetailsContentKind.url)
-                //})
-                //.ToList();
-            }
-
-            return data;
-        }
-
-        /// <summary>
         /// 文章代表圖
         /// </summary>
         /// <param name="id"></param>
@@ -132,7 +61,7 @@ namespace OutWeb.Repositories
             using (var db = new TCGDB(_connectionString))
             {
                 imgStr = db.IMG
-                .Where(s => s.STATUS == "Y" && s.IMG_KIND == "Activity" &&
+                .Where(s => s.STATUS == "Y" && s.IMG_KIND == "News" &&
                 s.IMG_NO == (id.ToString()))
                 .Select(s => s.IMG_FILE)
                 .FirstOrDefault();
@@ -140,50 +69,61 @@ namespace OutWeb.Repositories
             return imgStr;
         }
 
-        private string GetFirstPagingRemark(List<EvnentPaging> pagingList)
+        /// <summary>
+        /// 取分類
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="langCode"></param>
+        /// <returns></returns>
+        private Dictionary<int, string> GetNewsCateByID(int id, string langCode)
         {
-            if (pagingList.Count == 0)
-                return string.Empty;
-            if (string.IsNullOrEmpty(pagingList.First().Description))
-                return string.Empty;
+            Dictionary<int, string> cate = new Dictionary<int, string>();
+            using (var db = new TCGDB(_connectionString))
+            {
+                var source = db.NEWS_CATE
+                  .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                   s.ID == id && s.STATUS == "Y")
+                   .FirstOrDefault();
+                if (source == null)
+                    throw new Exception("無法取得新聞分類");
 
-            string remark = pagingList.First().Description.RemoveHtmlAllTags();
-
-            return remark;
+                cate.Add(source.ID, source.CATE_NAME);
+            }
+            return cate;
         }
 
         /// <summary>
         /// 內容
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="lagCode"></param>
+        /// <param name="langCode"></param>
         /// <returns></returns>
-        public EventContent GetContentByID(int id, string lagCode)
+        public AnnouncementLatestContent GetContentByID(int id, string langCode)
         {
-            EventContent result = new EventContent();
+            AnnouncementLatestContent result = new AnnouncementLatestContent();
             using (var db = new TCGDB(_connectionString))
             {
-                var sourceList = db.ACTIVITY
+                var sourceList = db.NEWS
                  .AsEnumerable()
-                 .Where(s => (string.IsNullOrEmpty(lagCode) ? true : s.LANG_ID == lagCode) &&
+                 .Where(s => string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode &&
                  s.STATUS != "D")
                  .OrderByDescending(o => o.SORT)
-                 .OrderByDescending(s => s.C_DATE)
+                 .OrderByDescending(s => s.N_DATE)
                  .ToList();
 
                 var source = sourceList.Where(s => s.ID == id).FirstOrDefault();
                 if (source == null)
-                    throw new Exception("無法取得活動內容,是否已被移除.");
+                    throw new Exception("無法取得新聞內容,是否已被移除.");
 
-                result.Data = new EventLatestData()
+                result.Data = new AnnouncementLatestData()
                 {
                     ID = source.ID,
-                    Title = source.C_TITLE,
+                    Title = source.N_TITLE,
                     Img = GetMainImg(source.ID),
-                    PagingList = GetPagingListByID(source.ID),
-                    PublishDateString = source.C_DATE.Value.ToString("yyyy-MM-dd"),
+                    PublishDateString = source.N_DATE.Value.ToString("yyyy-MM-dd"),
+                    CateIDInfo = GetNewsCateByID((int)source.CATE_ID, langCode),
+                    Content = source.N_DESC
                 };
-                result.Data.Remark = GetFirstPagingRemark(result.Data.PagingList);
                 int dataIndex = sourceList.IndexOf(source);
                 int lastDataIndex = sourceList.Count - 1;
                 result.PreviousIDStr = dataIndex == 0 ? "" : sourceList[(dataIndex - 1)].ID.ToString();
@@ -198,33 +138,33 @@ namespace OutWeb.Repositories
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public EventLatestResult GetList(EventLatestListFilter filter)
+        public AnnouncementLatestResult GetList(AnnouncementLatestFilter filter)
         {
-            EventLatestResult result = new EventLatestResult();
-            List<EventLatestData> data = new List<EventLatestData>();
+            AnnouncementLatestResult result = new AnnouncementLatestResult();
+            List<AnnouncementLatestData> data = new List<AnnouncementLatestData>();
             using (var db = new TCGDB(_connectionString))
             {
                 try
                 {
-                    var source = db.ACTIVITY
+                    var source = db.NEWS
                         .AsEnumerable()
-                        .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
+                        .Where(s => string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode &&
                         s.STATUS != "D")
                         .OrderByDescending(o => o.SORT)
-                        .OrderByDescending(s => s.C_DATE)
+                        .OrderByDescending(s => s.N_DATE)
                         .ToList();
 
                     foreach (var item in source)
                     {
-                        EventLatestData temp = new EventLatestData()
+                        AnnouncementLatestData temp = new AnnouncementLatestData()
                         {
                             ID = item.ID,
-                            Title = item.C_TITLE,
+                            Title = item.N_TITLE,
                             Img = GetMainImg(item.ID),
-                            PagingList = GetPagingListByID(item.ID),
-                            PublishDateString = item.C_DATE.Value.ToString("yyyy-MM-dd"),
+                            CateIDInfo = GetNewsCateByID((int)item.CATE_ID, filter.LangCode),
+                            PublishDateString = item.N_DATE.Value.ToString("yyyy-MM-dd"),
+                            Content = item.N_DESC.RemoveHtmlAllTags()
                         };
-                        temp.Remark = GetFirstPagingRemark(temp.PagingList);
                         data.Add(temp);
                     }
 
@@ -246,7 +186,7 @@ namespace OutWeb.Repositories
         /// <param name="data"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public EventLatestResult ListPagination(ref EventLatestResult model, int page, int pageSize)
+        public AnnouncementLatestResult ListPagination(ref AnnouncementLatestResult model, int page, int pageSize)
         {
             int startRow = 0;
             PaginationResult paginationResult = null;

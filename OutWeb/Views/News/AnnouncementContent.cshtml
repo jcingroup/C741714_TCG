@@ -1,12 +1,15 @@
-﻿@{
-    ViewBag.Title = "2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會"; @* 文章標題 *@
-    ViewBag.BodyClass = "News Announcement";
+﻿@using OutWeb.Models.FrontModels.News.AnnouncementLatest
+@model AnnouncementLatestContent
+
+@{
+    ViewBag.Title = Model.Data.Title; @* 文章標題 *@
+ViewBag.BodyClass = "News Announcement";
 }
 
 @section breadcrumb {
     <li><a href="~/News">最新訊息 活動公告</a></li>
     <li><a href="~/News/AnnouncementLatest">新聞 公告 聲明</a></li>
-    <li>中央聲明</li> @* 分類名稱 *@
+    <li>@Model.Data.CateIDInfo.Values.First()</li> @* 分類名稱 *@
 }
 
 @section scripts {
@@ -20,8 +23,8 @@
 </p>
 
 <h2 class="title">
-    <a class="label label-purple" href="~/News/AnnouncementList">中央聲明</a> @* 分類名稱 *@
-    <small class="date">2018-01-20</small>
+    <a class="label label-purple" href="~/News/AnnouncementList">@Model.Data.CateIDInfo.Values.First()</a> @* 分類名稱 *@
+    <small class="date">@Model.Data.PublishDateString</small>
     <span class="underline">@ViewBag.Title</span>
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h2>
@@ -40,38 +43,41 @@
             <a class="tab-nav" href="#tab3">文章分頁3文章分頁3</a>
         </li>
     </ul> -->
-    
     @* 文章分頁，有資料才顯示，第一頁 class + current *@
-    <div class="tab current" id="tab1">
-        <p>2015年3月12日  台灣民政府秘書長夫人林梓安女士在美國華盛頓特區，國家記者俱樂部舉行本土台灣人首次國際記者會，秘書長夫人林梓安發表英語演講，現場感動所有記者，對台灣人遭遇深表同情，演講影片已經在國際間廣達一億人次觀看過。</p>
+    <div class="tab current" id="">
+        @Html.Raw(Model.Data.Content)
     </div>
 
-    <div class="tab" id="tab2">
-        <p>文章分頁2</p>
-    </div>
+    @*<div class="tab" id="tab2">
+            <p>文章分頁2</p>
+        </div>
 
-    <div class="tab" id="tab3">
-        <p>文章分頁3</p>
-    </div>
-
+        <div class="tab" id="tab3">
+            <p>文章分頁3</p>
+        </div>*@
 </div>
 
 <ul class="pager list-unstyled">
+    @if (!string.IsNullOrEmpty(Model.PreviousIDStr))
+    {
+        <li class="prev">
+            @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
+            <a href="@Url.Action("AnnouncementContent", "News", new { ID = Model.PreviousIDStr })">
+                <i class="oi" data-glyph="chevron-left"></i>
+                上一篇
+            </a>
+        </li>
+    }
 
-    <li class="prev">
-        @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
-        <a href="~/News/AnnouncementContent">
-            <i class="oi" data-glyph="chevron-left"></i>
-            上一篇
-        </a>
-    </li>
+    @if (!string.IsNullOrEmpty(Model.NextIDStr))
+    {
 
-    <li class="next">
-        @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
-        <a href="~/News/AnnouncementContent">
-            下一篇
-            <i class="oi" data-glyph="chevron-right"></i>
-        </a>
-    </li>
-
+        <li class="next">
+            @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
+            <a href="@Url.Action("AnnouncementContent", "News", new { ID = Model.NextIDStr })">
+                下一篇
+                <i class="oi" data-glyph="chevron-right"></i>
+            </a>
+        </li>
+    }
 </ul>

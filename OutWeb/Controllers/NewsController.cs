@@ -1,4 +1,5 @@
-﻿using OutWeb.Models.FrontModels.News.EventLatestModels;
+﻿using OutWeb.Models.FrontModels.News.AnnouncementLatest;
+using OutWeb.Models.FrontModels.News.EventLatestModels;
 
 /*Json.NET相關的命名空間*/
 
@@ -62,11 +63,13 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 活動寫真 - 最新活動內容
-        public ActionResult EventLatestContent(int ID)
+        public ActionResult EventLatestContent(int? ID)
         {
+            if (!ID.HasValue)
+                return RedirectToAction("AnnouncementLatest");
             string langCd = string.Empty;
             NewEventLatestRepository repo = new NewEventLatestRepository();
-            EventContent mdoel = repo.GetContentByID(ID, langCd);
+            EventContent mdoel = repo.GetContentByID((int)ID, langCd);
             return View(mdoel);
         }
 
@@ -89,9 +92,17 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 新聞 公告 聲明 - 最新消息
-        public ActionResult AnnouncementLatest()
+        public ActionResult AnnouncementLatest(int? page)
         {
-            return View();
+            AnnouncementLatestFilter filter = new AnnouncementLatestFilter()
+            {
+                CurrentPage = page ?? 1,
+            };
+
+            AnnouncementLatestRepository repo = new AnnouncementLatestRepository();
+            AnnouncementLatestResult mdoel = repo.GetList(filter);
+
+            return View(mdoel);
         }
 
         // 最新訊息 - 新聞 公告 聲明 列表
@@ -101,9 +112,14 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 新聞 公告 聲明 內容
-        public ActionResult AnnouncementContent()
+        public ActionResult AnnouncementContent(int? ID)
         {
-            return View();
+            if (!ID.HasValue)
+                return RedirectToAction("AnnouncementLatest");
+            string langCd = string.Empty;
+            AnnouncementLatestRepository repo = new AnnouncementLatestRepository();
+            AnnouncementLatestContent mdoel = repo.GetContentByID((int)ID, langCd);
+            return View(mdoel);
         }
 
         // 焦點專欄 - 分類
