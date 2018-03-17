@@ -1,6 +1,10 @@
-﻿@{
+﻿@using OutWeb.Models.FrontModels.News.EventLatestModels
+@model EventLatestResult
+@{
     ViewBag.Title = "中央活動";
     ViewBag.BodyClass = "News Event";
+    string img_path = "../Images/";
+
 }
 
 @section breadcrumb {
@@ -23,73 +27,134 @@
 
 @* 每頁10筆資料 *@
 <div class="articles">
+    @foreach (var data in Model.Data)
+    {
+        string img = string.IsNullOrEmpty(data.Img) ? @"http://via.placeholder.com/800x510?text=No+Images" : img_path + data.Img;
+        string contentUrl = Url.Action("EventLatestContent", "News", new { ID = data.ID });
+        string remark = data.Remark.Length == 0 ? "" : @"<p>" + data.Remark + "</p>";
+        <article class="article">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-12">
+                    <a href="@contentUrl" class="thumbnail">
+                        @* 沒有圖檔的替代圖 *@
+                        <img src="@img" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-12">
+                    @*
+                        中央活動     class + label-warning
+                        各州活動     class + label-orange
+                    *@
+                    <span class="label label-warning"><a href="~/News/EventLatest">中央活動</a></span>
+                    <small class="date">@data.PublishDateString</small>
+                    <h3><a href="@contentUrl">@data.Title</a></h3>
+                    @* 摘要 取前 145 個字，有資料的話才顯示 *@
+                    @Html.Raw(remark)
+                    <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                </div>
+            </div>
+        </article>
+    }
 
-    <article class="article">
-        <div class="row">
-            <div class="col-lg-3 col-sm-4 col-12">
-                <a href="~/News/EventLatestContent" class="thumbnail">
-                    @* 沒有圖檔的替代圖 *@
-                    <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
-                </a>
+    @*
+        <article class="article">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-12">
+                    <a href="~/News/EventLatestContent" class="thumbnail">
+                        沒有圖檔的替代圖
+                        <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-12">
+                    <!-- <span class="label label-warning"><a href="~/News/EventLatest">中央活動</a></span> -->
+                    <small class="date">2018-01-20</small>
+                    <h3><a href="~/News/EventLatestContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
+                   摘要 取前 145 個字，有資料的話才顯示
+                    <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
+                    <a href="~/News/EventLatestContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                </div>
             </div>
-            <div class="col-lg-9 col-sm-8 col-12">
-                @*
-                中央活動     class + label-warning
-                各州活動     class + label-orange
-                *@
-                <!-- <span class="label label-warning"><a href="~/News/EventLatest">中央活動</a></span> -->
-                <small class="date">2018-01-20</small>
-                <h3><a href="~/News/EventLatestContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
-                @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
-                <a href="~/News/EventLatestContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-            </div>
-        </div>
-    </article>
-
-    <article class="article">
-        <div class="row">
-            <div class="col-lg-3 col-sm-4 col-12">
-                <a href="~/News/EventLatestContent" class="thumbnail">
-                    @* 沒有圖檔的替代圖 *@
-                    <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
-                </a>
-            </div>
-            <div class="col-lg-9 col-sm-8 col-12">
-                <!-- <span class="label label-warning"><a href="~/News/EventLatest">中央活動</a></span> -->
-                <small class="date">2018-01-20</small>
-                <h3><a href="~/News/EventLatestContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
-                @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
-                <a href="~/News/EventLatestContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-            </div>
-        </div>
-    </article>
-
+        </article>*@
 </div>
 
-<ul class="pager list-inline text-center">
-    <li class="prev">
-        @* 有資料的話才顯示 *@
-        <a href="#">
-            <i class="oi" data-glyph="chevron-left"></i>
-            <span class="hidden-xs">上一頁</span>
-        </a>
-    </li>
-    <li>
-        <form action="" class="form-inline">
-            第
-            <select name="" id="" class="form-element">
-                <option value="1">1</option>
-            </select>
-            頁
-        </form>
-    </li>
-    <li class="next">
-        @* 有資料的話才顯示 *@
-        <a href="#">
-            <span class="hidden-xs">下一頁</span>
-            <i class="oi" data-glyph="chevron-right"></i>
-        </a>
-    </li>
-</ul>
+@*<ul class="pager list-inline text-center">
+        <li class="prev">
+            有資料的話才顯示
+            <a href="#">
+                <i class="oi" data-glyph="chevron-left"></i>
+                <span class="hidden-xs">上一頁</span>
+            </a>
+        </li>
+        <li>
+            <form action="" class="form-inline">
+                第
+                <select name="" id="" class="form-element">
+                    <option value="1">1</option>
+                </select>
+                頁
+            </form>
+        </li>
+        <li class="next">
+             有資料的話才顯示
+            <a href="#">
+                <span class="hidden-xs">下一頁</span>
+                <i class="oi" data-glyph="chevron-right"></i>
+            </a>
+        </li>
+    </ul>*@
+
+@if (Model.Data.Count > 0)
+{
+    string disabledPre = Model.Pagination.CurrentPage == 1 ? "hidden" : "";
+    string disabledNext = Model.Pagination.CurrentPage == Model.Pagination.LastPage ? "hidden" : "";
+
+    <ul class="pager list-inline text-center">
+        <li class="prev">
+            @* 有資料的話才顯示 *@
+            <a @disabledPre href="javascript:;" onclick="paginationSubmit('@Model.Pagination.PrePage');">
+                <i class="oi" data-glyph="chevron-left"></i>
+                <span class="hidden-xs">上一頁</span>
+            </a>
+        </li>
+
+        <li>
+            <form action="/News/EventLatest" method="get" class="form-inline">
+                第
+                <select name="page" id="numPage" class="form-element">
+                    @for (int i = Model.Pagination.FirstPage; i <= Model.Pagination.LastPage; i++)
+                {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                頁
+            </form>
+        </li>
+
+        <li class="next">
+            @* 有資料的話才顯示 *@
+            <a @disabledNext href="javascript:;" onclick="paginationSubmit('@Model.Pagination.NextPage');">
+                <span class="hidden-xs">下一頁</span>
+                <i class="oi" data-glyph="chevron-right"></i>
+            </a>
+        </li>
+    </ul>
+
+}
+
+@section scripts {
+    <script>
+
+        $('#numPage').val('@Model.Pagination.CurrentPage');
+
+        function paginationSubmit(page) {
+            $('#numPage').val(page);
+            $('form')[0].submit();
+        }
+
+        $('.pager').find('select').on('change', function () {
+            var page = $(this).val();
+            paginationSubmit(page);
+
+        });
+    </script>
+}

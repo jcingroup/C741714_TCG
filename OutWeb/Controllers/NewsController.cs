@@ -1,36 +1,34 @@
-﻿using System.Linq;
-using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
-using OutWeb.Service;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Collections.Specialized;
+﻿using OutWeb.Models.FrontModels.News.EventLatestModels;
+
 /*Json.NET相關的命名空間*/
-using Newtonsoft.Json;
+
 using OutWeb.Repositories;
-using OutWeb.Entities;
+using OutWeb.Service;
+using System;
+using System.Data;
+using System.Web.Mvc;
 
 namespace OutWeb.Controllers
 {
     public class NewsController : Controller
     {
         //== Class 建立 =========================================//
-        DBService DB = new DBService();
-        News CNews = new News();
-        Language Clang = new Language();
+        private DBService DB = new DBService();
+
+        private News CNews = new News();
+        private Language Clang = new Language();
+
         //AboutUs CAboutUs = new AboutUs();
         //JoinUs CJoinUs = new JoinUs();
         //Edu CEdu = new Edu();
-        Focus CFocus = new Focus();
+        private Focus CFocus = new Focus();
+
         //=== 變數設定  =========================================//
-        String Img_Path = "~/Images";
+        private String Img_Path = "~/Images";
+
         //=== Log 記錄 =========================================//
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         //=====================================================//
 
         public NewsController()
@@ -40,7 +38,6 @@ namespace OutWeb.Controllers
 
         public ActionResult Index()
         {
-
             return RedirectToAction("Latest");
         }
 
@@ -53,21 +50,24 @@ namespace OutWeb.Controllers
         // 最新訊息 - 活動寫真 - 最新活動
         public ActionResult EventLatest(int? page)
         {
-            page = page ?? 1;
-
-            ConnectionRepository conRepo = new ConnectionRepository();
-            var connectionStr = conRepo.GetEntityConnctionString();
-            using (var db = new TCGDB(connectionStr))
+            EventLatestListFilter filter = new EventLatestListFilter()
             {
-                var source = db.USR.ToList();
+                CurrentPage = page ?? 1,
+            };
 
-            }
-            return View();
+            NewEventLatestRepository repo = new NewEventLatestRepository();
+            EventLatestResult mdoel = repo.GetList(filter);
+
+            return View(mdoel);
         }
+
         // 最新訊息 - 活動寫真 - 最新活動內容
-        public ActionResult EventLatestContent()
+        public ActionResult EventLatestContent(int ID)
         {
-            return View();
+            string langCd = string.Empty;
+            NewEventLatestRepository repo = new NewEventLatestRepository();
+            EventContent mdoel = repo.GetContentByID(ID, langCd);
+            return View(mdoel);
         }
 
         // 最新訊息 - 活動寫真 - 各州活動分類
@@ -75,11 +75,13 @@ namespace OutWeb.Controllers
         {
             return View();
         }
+
         // 最新訊息 - 活動寫真 - 各州活動列表
         public ActionResult EventStatesList()
         {
             return View();
         }
+
         // 最新訊息 - 活動寫真 - 各州活動內容
         public ActionResult EventStatesContent()
         {
@@ -91,11 +93,13 @@ namespace OutWeb.Controllers
         {
             return View();
         }
+
         // 最新訊息 - 新聞 公告 聲明 列表
         public ActionResult AnnouncementList()
         {
             return View();
         }
+
         // 最新訊息 - 新聞 公告 聲明 內容
         public ActionResult AnnouncementContent()
         {
