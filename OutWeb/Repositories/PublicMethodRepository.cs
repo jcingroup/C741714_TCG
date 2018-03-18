@@ -15,7 +15,11 @@ namespace OutWeb.Repositories
 
         private static Language m_language = Language.NotSet;
 
-
+        /// <summary>
+        /// 移除所有Htm Tag
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string RemoveHtmlAllTags(this string input)
         {
             return Regex.Replace(input, "<.*?>", String.Empty).Replace("&nbsp;","");

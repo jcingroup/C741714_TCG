@@ -17,16 +17,6 @@ namespace OutWeb.Repositories
             _connectionString = conRepo.GetEntityConnctionString();
         }
 
-        //dbContext.PTSignWorkflow
-        //     .Join(dbContext.PTSignWorkflowDetails,
-        //     t1 => t1.ID,
-        //     t2 => t2.MAP_SIGN_WKF_ID
-        //(main, details) => new { Main = main, Details = details })
-        //.AsEnumerable()
-        //.Where(o => o.Main.MAP_SIGN_ID == signID)
-        //.OrderBy(o => o.Details.SIGN_SORT)
-        //.Select(s => s.Details.SIGN_DEP_CD)
-        //.FirstOrDefault();
 
         /// <summary>
         /// 取得分頁的網址列表
