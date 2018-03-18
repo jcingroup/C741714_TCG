@@ -965,7 +965,7 @@ namespace OutWeb.Service
                 }
                 else
                 {
-                    csql = csql + " order by a1.cate_id, a1.sort desc ";
+                    csql = csql + " order by  a1.sort desc , a1.cate_id desc ";
                 }
 
                 cmd.CommandText = csql;
