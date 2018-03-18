@@ -1098,10 +1098,12 @@
                 });
                 //-------------------------------------------------------//
 
+                i = i + 1;
+
                 for(j = i; j<11; j++)
                 {
-                    $('#curl_' + i).val('');
-                    $('#url_id_' + i).val('');
+                    $('#curl_' + j).val('');
+                    $('#url_id_' + j).val('');
                 }
             },
             error:function(xhr, ajaxOptions, thrownError){ 

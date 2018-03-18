@@ -1735,16 +1735,21 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             //抓取消息類別資料
 
-            d_lang = Clang.Lang_List(ref err_msg, "");
-            d_detail = CActivity.Detail_List(ref err_msg, "", "", "", "", "", "");
             //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
-            d_img = DB.Img_List(ref err_msg, "", "", "Activity");
             //d_url = DB.URL_List(ref err_msg, "", "Activity");
+            d_lang = Clang.Lang_List(ref err_msg, "");
+            d_detail = CActivity.Detail_List(ref err_msg, "0", "", "", "", "", "");
+            d_img = DB.Img_List(ref err_msg, "", "", "Activity","0");
+            
+            //清除明細 & 圖片資料
+            d_detail.Clear();
+            d_img.Clear();
+
+
             //設定傳值
-            ViewData["d_lang"] = d_lang;
             //ViewData["d_cate"] = d_cate;
+            ViewData["d_lang"] = d_lang;
             ViewData["d_img"] = d_img;
-            //ViewData["d_url"] = d_url;
             ViewData["d_detail"] = d_detail;
             ViewData["action_sty"] = "add";
 
@@ -1771,18 +1776,18 @@ namespace OutWeb.Controllers
             //--------------------------------------------------//
             logger.Debug("dt_count:" + dt.Rows.Count.ToString());
             //--------------------------------------------------//
+            //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
+            //d_url = DB.URL_List(ref err_msg, id, "Activity");
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_detail = CActivity.Detail_List(ref err_msg, "", "sort", "", "", id, "");
-            //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, id, "", "Activity");
-            //d_url = DB.URL_List(ref err_msg, id, "Activity");
             //設定傳值
+            //ViewData["d_cate"] = d_cate;
+            //ViewData["d_url"] = d_url;
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
-            ViewData["d_detail"] = d_detail;
-            //ViewData["d_cate"] = d_cate;
+            ViewData["d_detail"] = d_detail;            
             ViewData["d_img"] = d_img;
-            //ViewData["d_url"] = d_url;
             ViewData["action_sty"] = "edit";
 
             return View("Activity_Data");
