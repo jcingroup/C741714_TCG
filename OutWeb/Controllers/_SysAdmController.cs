@@ -2015,18 +2015,23 @@ namespace OutWeb.Controllers
             DataTable d_cate;
             DataTable d_lang;
             DataTable d_img;
-            DataTable d_url;
+            DataTable d_detail;
             //抓取消息類別資料
 
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CStates.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
-            d_img = DB.Img_List(ref err_msg, "", "", "States");
-            d_url = DB.URL_List(ref err_msg, "", "States");
+            d_img = DB.Img_List(ref err_msg, "", "", "States","0");
+            d_detail = CStates.Detail_List(ref err_msg, "0", "", "", "", "", "");
+
+            //清除明細 & 圖片資料
+            d_detail.Clear();
+            d_img.Clear();
+
             //設定傳值
             ViewData["d_lang"] = d_lang;
             ViewData["d_cate"] = d_cate;
             ViewData["d_img"] = d_img;
-            ViewData["d_url"] = d_url;
+            ViewData["d_detail"] = d_detail;
             ViewData["action_sty"] = "add";
 
             return View("States_Data");
@@ -2042,19 +2047,19 @@ namespace OutWeb.Controllers
             DataTable d_lang;
             DataTable dt;
             DataTable d_img;
-            DataTable d_url;
+            DataTable d_detail;
             //抓取類別資料
             dt = CStates.List(ref err_msg, id);
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CStates.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, id, "", "States");
-            d_url = DB.URL_List(ref err_msg, id, "States");
+            d_detail = CStates.Detail_List(ref err_msg, "", "sort", "", "", id, "");
             //設定傳值
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
             ViewData["d_cate"] = d_cate;
             ViewData["d_img"] = d_img;
-            ViewData["d_url"] = d_url;
+            ViewData["d_detail"] = d_detail;
             ViewData["action_sty"] = "edit";
 
             return View("States_Data");
@@ -2367,6 +2372,84 @@ namespace OutWeb.Controllers
         #endregion
 
         #endregion 各洲活動_直播資料
+
+        #region 各洲活動_明細
+
+        #region 各洲活動_明細_陳列 States_Detail_List
+        public ActionResult States_Detail_List(string cate_id, string id)
+        {
+            string str_return = "";
+            string err_msg = "";
+            string c_desc = "";
+            DataTable dt;
+
+            dt = CStates.Detail_List(ref err_msg, id, "sort", "", "", cate_id, "");
+            //if(dt.Rows.Count > 0)
+            //{
+            //    for(int i=0; i < dt.Rows.Count; i++)
+            //    {
+            //        c_desc = Server.HtmlEncode(dt.Rows[i]["c_desc"].ToString());
+            //        DataRow Desc_Row = dt.Rows[i];
+            //        Desc_Row.BeginEdit();
+            //        Desc_Row["C_DESC"] = c_desc;
+            //        Desc_Row.EndEdit();
+            //        Desc_Row = null;
+            //    }
+            //}
+            str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+            logger.Debug("str_return:" + str_return);
+            return Content(str_return);
+        }
+        #endregion 各洲活動_明細_陳列 States_Detail_List
+
+        #region 各洲活動_明細 儲存 States_Detail_Save
+        [HttpPost]
+        public ActionResult States_Detail_Save(string c_sty, string c_title, string c_desc, string status, string sort, string cate_id, string id)
+        {
+            string str_return = "";
+            string err_msg = "";
+
+            DataTable dt;
+
+            //c_desc = CService.UnEscape(c_desc);
+            //c_desc = System.Uri.UnescapeDataString(c_desc);
+
+            c_desc = Server.HtmlDecode(c_desc);
+
+            switch (c_sty)
+            {
+                case "add":
+                    CStates.Detail_Insert(c_title, c_desc, status, sort, "", cate_id);
+                    break;
+                case "edit":
+                    CStates.Detail_Update(id, c_title, c_desc, status, sort, "", cate_id);
+                    break;
+            }
+
+            dt = CActivity.Detail_List(ref err_msg, "", "sort", "", "", cate_id, "");
+            str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+            return Content(str_return);
+        }
+        #endregion 各洲活動_明細 儲存 States_Detail_Save 
+
+
+        #region 各洲活動_明細 刪除 States_Detail_Del
+        public ActionResult States_Detail_Del(string cate_id, string id)
+        {
+            string str_return = "";
+            string err_msg = "";
+
+            DataTable dt;
+
+            CActivity.Detail_Del(id);
+
+            dt = CStates.Detail_List(ref err_msg, "", "sort", "", "", cate_id, "");
+            str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+            return Content(str_return);
+        }
+        #endregion  各洲活動_明細 刪除 States_Detail_Del
+
+        #endregion
 
         #endregion 各洲活動
 
