@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = Model.Data.Title; @* 文章標題 *@
 ViewBag.BodyClass = "News Announcement";
+string listLink = Url.Content("~/News/AnnouncementList?typeID=" + Model.Data.CateIDInfo.Keys.First());
 }
 
 @section breadcrumb {
@@ -19,11 +20,11 @@ ViewBag.BodyClass = "News Announcement";
 <h1 class="sr-only">中央新聞</h1>
 
 <p class="back">
-    <a href="~/News/AnnouncementList"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+    <a href="@listLink"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
 </p>
 
 <h2 class="title">
-    <a class="label label-purple" href="~/News/AnnouncementList">@Model.Data.CateIDInfo.Values.First()</a> @* 分類名稱 *@
+    <a class="label label-purple" href="@listLink">@Model.Data.CateIDInfo.Values.First()</a> @* 分類名稱 *@
     <small class="date">@Model.Data.PublishDateString</small>
     <span class="underline">@ViewBag.Title</span>
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
@@ -62,7 +63,7 @@ ViewBag.BodyClass = "News Announcement";
     {
         <li class="prev">
             @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
-            <a href="@Url.Action("AnnouncementContent", "News", new { ID = Model.PreviousIDStr })">
+            <a href="@Url.Content("~/News/AnnouncementContent?ID=" + Model.PreviousIDStr + "&typeID=" + Model.Data.CateIDInfo.Keys.First())">
                 <i class="oi" data-glyph="chevron-left"></i>
                 上一篇
             </a>
@@ -74,7 +75,7 @@ ViewBag.BodyClass = "News Announcement";
 
         <li class="next">
             @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
-            <a href="@Url.Action("AnnouncementContent", "News", new { ID = Model.NextIDStr })">
+            <a href="@Url.Content("~/News/AnnouncementContent?ID=" + Model.NextIDStr + "&typeID=" + Model.Data.CateIDInfo.Keys.First())">
                 下一篇
                 <i class="oi" data-glyph="chevron-right"></i>
             </a>

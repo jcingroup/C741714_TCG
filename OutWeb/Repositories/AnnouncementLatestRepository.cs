@@ -17,16 +17,6 @@ namespace OutWeb.Repositories
             _connectionString = conRepo.GetEntityConnctionString();
         }
 
-        //dbContext.PTSignWorkflow
-        //     .Join(dbContext.PTSignWorkflowDetails,
-        //     t1 => t1.ID,
-        //     t2 => t2.MAP_SIGN_WKF_ID
-        //(main, details) => new { Main = main, Details = details })
-        //.AsEnumerable()
-        //.Where(o => o.Main.MAP_SIGN_ID == signID)
-        //.OrderBy(o => o.Details.SIGN_SORT)
-        //.Select(s => s.Details.SIGN_DEP_CD)
-        //.FirstOrDefault();
 
         /// <summary>
         /// 取得分頁的網址列表
@@ -98,15 +88,15 @@ namespace OutWeb.Repositories
         /// <param name="id"></param>
         /// <param name="langCode"></param>
         /// <returns></returns>
-        public AnnouncementLatestContent GetContentByID(int id, string langCode)
+        public AnnouncementLatestContent GetContentByID(int id, int typeID, string langCode)
         {
             AnnouncementLatestContent result = new AnnouncementLatestContent();
             using (var db = new TCGDB(_connectionString))
             {
                 var sourceList = db.NEWS
                  .AsEnumerable()
-                 .Where(s => string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode &&
-                 s.STATUS != "D")
+                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                 s.STATUS != "D" && s.CATE_ID == typeID)
                  .OrderByDescending(o => o.SORT)
                  .OrderByDescending(s => s.N_DATE)
                  .ToList();
@@ -148,8 +138,8 @@ namespace OutWeb.Repositories
                 {
                     var source = db.NEWS
                         .AsEnumerable()
-                        .Where(s => string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode &&
-                        s.STATUS != "D")
+                        .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
+                        s.STATUS != "D" && (filter.TypeID == null ? true : s.CATE_ID == (int)filter.TypeID))
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.N_DATE)
                         .ToList();

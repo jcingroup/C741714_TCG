@@ -1,4 +1,4 @@
-﻿@using  OutWeb.Models.FrontModels.News.AnnouncementLatest
+﻿@using OutWeb.Models.FrontModels.News.AnnouncementLatest
 @model AnnouncementLatestResult
 
 @{
@@ -21,8 +21,9 @@
 <div class="articles">
     @foreach (var data in Model.Data)
     {
+        string listLink = Url.Content("~/News/AnnouncementList?typeID=" + data.CateIDInfo.Keys.First() + "&page=" + Model.Pagination.CurrentPage);
         string img = string.IsNullOrEmpty(data.Img) ? @"http://via.placeholder.com/800x510?text=No+Images" : img_path + data.Img;
-        string contentUrl = Url.Action("AnnouncementContent", "News", new { ID = data.ID });
+        string contentUrl = Url.Content("~/News/AnnouncementContent?ID=" + data.ID + "&typeID=" + data.CateIDInfo.Keys.First());
         string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : @"<p>" + data.Content + "</p>";
         string labelStyle = data.CateIDInfo.Keys.First() == 1 ? "label-danger" : data.CateIDInfo.Keys.First() == 2 ? "label-pink" : data.CateIDInfo.Keys.First() == 3 ? "label-purpl" : "";
         <article class="article">
@@ -39,8 +40,8 @@
                         公告         class + label-pink
                         聲明         class + label-purple
                     *@
-                    <a class="label @labelStyle" href="~/News/AnnouncementList">@data.CateIDInfo.Values.First()</a>
-                    <small class="date">2018-01-20</small>
+                    <a class="label @labelStyle" href="@listLink">@data.CateIDInfo.Values.First()</a>
+                    <small class="date">@data.PublishDateString</small>
                     <h3><a href="@contentUrl">@data.Title</a></h3>
                     @* 摘要 取前 145 個字，有資料的話才顯示 *@
                     @Html.Raw(remark)
@@ -132,7 +133,7 @@
                 第
                 <select name="page" id="numPage" class="form-element">
                     @for (int i = Model.Pagination.FirstPage; i <= Model.Pagination.LastPage; i++)
-                {
+                    {
                         <option value="@i">@i</option>
                     }
                 </select>

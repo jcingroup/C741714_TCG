@@ -1,5 +1,6 @@
 ﻿using OutWeb.Entities;
 using OutWeb.Models;
+using OutWeb.Models.FrontModels.News;
 using OutWeb.Models.FrontModels.News.EventLatestModels;
 using System;
 using System.Collections.Generic;
@@ -16,17 +17,6 @@ namespace OutWeb.Repositories
         {
             _connectionString = conRepo.GetEntityConnctionString();
         }
-
-        //dbContext.PTSignWorkflow
-        //     .Join(dbContext.PTSignWorkflowDetails,
-        //     t1 => t1.ID,
-        //     t2 => t2.MAP_SIGN_WKF_ID
-        //(main, details) => new { Main = main, Details = details })
-        //.AsEnumerable()
-        //.Where(o => o.Main.MAP_SIGN_ID == signID)
-        //.OrderBy(o => o.Details.SIGN_SORT)
-        //.Select(s => s.Details.SIGN_DEP_CD)
-        //.FirstOrDefault();
 
         /// <summary>
         /// 取得分頁的網址列表
@@ -139,7 +129,11 @@ namespace OutWeb.Repositories
             }
             return imgStr;
         }
-
+        /// <summary>
+        /// 取得第一個分頁的描述內容（去除Html Tag）
+        /// </summary>
+        /// <param name="pagingList"></param>
+        /// <returns></returns>
         private string GetFirstPagingRemark(List<EvnentPaging> pagingList)
         {
             if (pagingList.Count == 0)

@@ -103,7 +103,7 @@ namespace OutWeb.Controllers
             DataTable dt;
             string err_msg = "";
             string lang_id = "zh-tw";
-            dt = Cschool.List(ref err_msg, "", "cate_id desc, sort desc", "Y", "", "", "", "", lang_id);
+            dt = Cschool.List(ref err_msg, "", " sort desc , cate_id desc ", "Y", "", "", "", "", lang_id);
             ViewData["dt"] = dt;
             return View();
         }
