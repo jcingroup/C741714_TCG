@@ -98,15 +98,15 @@ namespace OutWeb.Repositories
         /// <param name="id"></param>
         /// <param name="langCode"></param>
         /// <returns></returns>
-        public AnnouncementLatestContent GetContentByID(int id, string langCode)
+        public AnnouncementLatestContent GetContentByID(int id, int typeID, string langCode)
         {
             AnnouncementLatestContent result = new AnnouncementLatestContent();
             using (var db = new TCGDB(_connectionString))
             {
                 var sourceList = db.NEWS
                  .AsEnumerable()
-                 .Where(s => string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode &&
-                 s.STATUS != "D")
+                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                 s.STATUS != "D" && s.CATE_ID == typeID)
                  .OrderByDescending(o => o.SORT)
                  .OrderByDescending(s => s.N_DATE)
                  .ToList();
@@ -148,8 +148,8 @@ namespace OutWeb.Repositories
                 {
                     var source = db.NEWS
                         .AsEnumerable()
-                        .Where(s => string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode &&
-                        s.STATUS != "D")
+                        .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
+                        s.STATUS != "D" && (filter.TypeID == null ? true : s.CATE_ID == (int)filter.TypeID))
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.N_DATE)
                         .ToList();

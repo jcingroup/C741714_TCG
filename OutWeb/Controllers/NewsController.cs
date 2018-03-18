@@ -106,19 +106,29 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 新聞 公告 聲明 列表
-        public ActionResult AnnouncementList()
+        public ActionResult AnnouncementList(int? typeID, int? page)
         {
-            return View();
+            if (!typeID.HasValue)
+                return RedirectToAction("AnnouncementLatest");
+            AnnouncementLatestFilter filter = new AnnouncementLatestFilter()
+            {
+                CurrentPage = page ?? 1,
+                TypeID = typeID
+            };
+            AnnouncementLatestRepository repo = new AnnouncementLatestRepository();
+            AnnouncementLatestResult mdoel = repo.GetList(filter);
+
+            return View(mdoel);
         }
 
         // 最新訊息 - 新聞 公告 聲明 內容
-        public ActionResult AnnouncementContent(int? ID)
+        public ActionResult AnnouncementContent(int? ID, int? typeID)
         {
-            if (!ID.HasValue)
+            if (!ID.HasValue || !typeID.HasValue)
                 return RedirectToAction("AnnouncementLatest");
             string langCd = string.Empty;
             AnnouncementLatestRepository repo = new AnnouncementLatestRepository();
-            AnnouncementLatestContent mdoel = repo.GetContentByID((int)ID, langCd);
+            AnnouncementLatestContent mdoel = repo.GetContentByID((int)ID, (int)typeID, langCd);
             return View(mdoel);
         }
 

@@ -12,6 +12,8 @@ namespace OutWeb.Models.FrontModels.News.AnnouncementLatest
         /// </summary>
         public int CurrentPage { get; set; }
 
+        public int? TypeID { get; set; }
+
         public string LangCode { get; set; }
     }
 }

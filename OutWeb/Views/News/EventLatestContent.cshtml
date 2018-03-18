@@ -55,7 +55,6 @@ string img_path = "/Images/";
         string currentClass = index == 0 ? "current" : "";
         string tabID = dataSingle ? "" : "paging_" + index;
 
-
         <div class="tab @currentClass" id="@tabID">
 
             @* 文章的呈現方式，有資料才顯示 *@
@@ -186,9 +185,7 @@ string img_path = "/Images/";
         <div class="tab" id="tab3">
             <p>文章分頁3</p>
         </div>*@
-
 </div>
-
 
 <ul class="pager list-unstyled">
     @if (!string.IsNullOrEmpty(Model.PreviousIDStr))
@@ -213,7 +210,4 @@ string img_path = "/Images/";
             </a>
         </li>
     }
-
-
-
 </ul>
