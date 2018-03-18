@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace OutWeb.Repositories
@@ -14,6 +15,11 @@ namespace OutWeb.Repositories
 
         private static Language m_language = Language.NotSet;
 
+
+        public static string RemoveHtmlAllTags(this string input)
+        {
+            return Regex.Replace(input, "<.*?>", String.Empty).Replace("&nbsp;","");
+        }
 
         /// <summary>
         /// 使用者自訂語系

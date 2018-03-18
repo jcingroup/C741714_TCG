@@ -11,5 +11,7 @@ namespace OutWeb.Models.FrontModels.News.EventLatestModels
         /// 選取頁面
         /// </summary>
         public int CurrentPage { get; set; }
+
+        public string LangCode { get; set; }
     }
 }

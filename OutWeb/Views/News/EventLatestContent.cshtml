@@ -1,6 +1,10 @@
-﻿@{
-    ViewBag.Title = "2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會"; @* 文章標題 *@
-    ViewBag.BodyClass = "News Event";
+﻿@using OutWeb.Models.FrontModels.News.EventLatestModels
+@model EventContent
+@{
+    ViewBag.Title = Model.Data.Title; @* 文章標題 *@
+ViewBag.BodyClass = "News Event";
+string img_path = "/Images/";
+
 }
 
 @section breadcrumb {
@@ -21,7 +25,7 @@
 
 <h2 class="title">
     <a class="label label-warning" href="~/News/EventLatest">中央活動</a>
-    <small class="date">2018-01-20</small>
+    <small class="date">@Model.Data.PublishDateString</small>
     <span class="underline">@ViewBag.Title</span>
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h2>
@@ -29,113 +33,187 @@
 <div class="tab-content clearfix editor">
 
     @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
-    <ul class="tabs list-inline">
-        <li>
-            <a class="tab-nav current" href="#tab1">文章分頁1</a>
-        </li>
-        <li>
-            <a class="tab-nav" href="#tab2">文章分頁2文章分頁2文章分頁2</a>
-        </li>
-        <li>
-            <a class="tab-nav" href="#tab3">文章分頁3文章分頁3</a>
-        </li>
-    </ul>
-    
-    @* 文章分頁，有資料才顯示，第一頁 class + current *@
-    <div class="tab current" id="tab1">
+    @if (Model.Data.PagingList.Count > 1)
+    {
+        <ul class="tabs list-inline">
+            @foreach (var paging in Model.Data.PagingList)
+            {
+                int index = Model.Data.PagingList.IndexOf(paging);
+                <li>
+                    <a class="tab-nav current" href="#paging_@index">@paging.Title</a>
+                </li>
+            }
+        </ul>
+    }
 
-        @* 文章的呈現方式，有資料才顯示 *@
-        <div class="mb-16 clearfix">
-            <h3>台灣民政府 中央參眾議院聯合審查會議修正 台灣基本法</h3>
-            <p>前言：</p>
-            <p>台灣：福爾摩沙周邊群島和澎湖列島(總稱台灣)是大日本帝國台灣人民必須守護的領域，為確保領域內人民與全世界人民能共同合作，取得進步繁榮成果,讓民主、自由、和平帶來福祉。台灣民政府管轄權力源自日本天皇陛下天賦不可放棄權利及義務和人民的期盼而信託，其權力應由人民所組成代表行使，其福祉由領域內人民分享，這是萬國公法與國際法的精神與目的，台灣基本法以此精神與目的為法源，台灣民政府以天皇陛下詔書、舊金山和平條約、戰爭法精神與目的而組織，並制定台灣基本法。</p>
-            <p>大日本帝國台灣人民期盼和平、自由、民主、穩定與繁榮已久，深知人類相互關係良好的源由，是堅信仁慈、公義、和平與自由的基本價值，是一心守護領域內人民安全與生存，是竭力守護賴以生存而進步的基本價值。</p>
-            <p>堅信任何國家都需要尊重基本價值，而且必須優先遵守萬國公法與國際法，這是經過歷史反覆教訓而實證的法則，也是人類追求維持國際和平、穩定與繁榮的法則。</p>
-            <p>台灣民政府領域內所有人民，誓以台灣基本法來守護人類賴以生存與進步的基本價值，是為了台灣人民的生存和進步。</p>
+    @* 文章分頁，有資料才顯示，第一頁 class + current *@
+    @foreach (var paging in Model.Data.PagingList)
+    {
+        int index = Model.Data.PagingList.IndexOf(paging);
+        bool dataSingle = Model.Data.PagingList.Count == 1 ? true : false;
+
+        string currentClass = index == 0 ? "current" : "";
+        string tabID = dataSingle ? "" : "paging_" + index;
+
+
+        <div class="tab @currentClass" id="@tabID">
+
+            @* 文章的呈現方式，有資料才顯示 *@
+            <div class="mb-16 clearfix">
+                @Html.Raw(paging.Description)
+            </div>
+
+            @* 影片的呈現方式，有資料才顯示 *@
+            @if (paging.InternetSiteList.Count > 0)
+            {
+                <ul class="prolist row row-center list-unstyled">
+
+                    @foreach (var siteUrl in paging.InternetSiteList)
+                    {
+                        var urlSplit = siteUrl.Split(new string[] { @"https://www.youtube.com/watch?v=" }, StringSplitOptions.RemoveEmptyEntries);
+                        string url = string.Empty;
+                        if (urlSplit.Count() > 0)
+                        {
+                            url = siteUrl.Replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/") + "/" + urlSplit[0];
+                        }
+
+                        <li class="col-md-6 col-12">
+                            <figure class="pro">
+                                <div class="embed-responsive">
+                                    @*<iframe src="@siteUrl" frameborder="0" allowfullscreen></iframe>*@
+                                    <iframe src="@url" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </figure>
+                        </li>
+                    }
+                </ul>
+            }
+
+            @* 照片的呈現方式，有資料才顯示 *@
+            @if (paging.ImagesList.Count > 0)
+            {
+                <ul class="prolist row row-center list-unstyled">
+
+                    @foreach (var img in paging.ImagesList)
+                    {
+                        string imgUrl = img_path + img.ImgFileName;
+                        string description = string.IsNullOrEmpty(img.ImgDescription) ? "" : @"<span class=""caption"">" + img.ImgDescription + "</span>";
+                        <li class="col-lg-3 col-md-4 col-sm-6 col-12">
+                            <figure class="pro">
+                                <a href="@imgUrl" class="thumbnail" target="new">
+                                    <img src="@imgUrl" alt="">
+                                    @* 圖說沒有資料則不顯示 *@
+                                    @Html.Raw(description)
+                                </a>
+                            </figure>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    }
+    @*<div class="tab current" id="tab1">
+
+            文章的呈現方式，有資料才顯示
+            <div class="mb-16 clearfix">
+                <h3>台灣民政府 中央參眾議院聯合審查會議修正 台灣基本法</h3>
+                <p>前言：</p>
+                <p>台灣：福爾摩沙周邊群島和澎湖列島(總稱台灣)是大日本帝國台灣人民必須守護的領域，為確保領域內人民與全世界人民能共同合作，取得進步繁榮成果,讓民主、自由、和平帶來福祉。台灣民政府管轄權力源自日本天皇陛下天賦不可放棄權利及義務和人民的期盼而信託，其權力應由人民所組成代表行使，其福祉由領域內人民分享，這是萬國公法與國際法的精神與目的，台灣基本法以此精神與目的為法源，台灣民政府以天皇陛下詔書、舊金山和平條約、戰爭法精神與目的而組織，並制定台灣基本法。</p>
+                <p>大日本帝國台灣人民期盼和平、自由、民主、穩定與繁榮已久，深知人類相互關係良好的源由，是堅信仁慈、公義、和平與自由的基本價值，是一心守護領域內人民安全與生存，是竭力守護賴以生存而進步的基本價值。</p>
+                <p>堅信任何國家都需要尊重基本價值，而且必須優先遵守萬國公法與國際法，這是經過歷史反覆教訓而實證的法則，也是人類追求維持國際和平、穩定與繁榮的法則。</p>
+                <p>台灣民政府領域內所有人民，誓以台灣基本法來守護人類賴以生存與進步的基本價值，是為了台灣人民的生存和進步。</p>
+            </div>
+
+            影片的呈現方式，有資料才顯示
+            <ul class="prolist row row-center list-unstyled">
+                <li class="col-md-6 col-12">
+                    <figure class="pro">
+                        <div class="embed-responsive">
+                            <iframe src="https://www.youtube.com/embed/2tctSxl1mmw" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </figure>
+                </li>
+                <li class="col-md-6 col-12">
+                    <figure class="pro">
+                        <div class="embed-responsive">
+                            <iframe src="https://www.youtube.com/embed/2tctSxl1mmw" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </figure>
+                </li>
+            </ul>
+
+            照片的呈現方式，有資料才顯示
+            <ul class="prolist row row-center list-unstyled">
+                <li class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <figure class="pro">
+                        <a href="http://via.placeholder.com/800x600" class="thumbnail" target="new">
+                            <img src="http://via.placeholder.com/800x600" alt="">
+                            圖說沒有資料則不顯示
+                            <span class="caption">這裡是圖說</span>
+                        </a>
+                    </figure>
+                </li>
+                <li class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <figure class="pro">
+                        <a href="http://via.placeholder.com/800x1200" class="thumbnail" target="new">
+                            <img src="http://via.placeholder.com/800x1200" alt="">
+                            <span class="caption">這裡是圖說</span>
+                        </a>
+                    </figure>
+                </li>
+                <li class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <figure class="pro">
+                        <a href="http://via.placeholder.com/800x510?text=No+Images" class="thumbnail" target="new">
+                            <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
+                        </a>
+                    </figure>
+                </li>
+                <li class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <figure class="pro">
+                        <a href="http://via.placeholder.com/1000x400" class="thumbnail" target="new">
+                            <img src="http://via.placeholder.com/1000x400" alt="">
+                            <span class="caption">這裡是圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說</span>
+                        </a>
+                    </figure>
+                </li>
+            </ul>
+        </div>*@
+
+    @*<div class="tab" id="tab2">
+            <p>文章分頁2</p>
         </div>
 
-        @* 影片的呈現方式，有資料才顯示 *@
-        <ul class="prolist row row-center list-unstyled">
-            <li class="col-md-6 col-12">
-                <figure class="pro">
-                    <div class="embed-responsive">
-                        <iframe src="https://www.youtube.com/embed/2tctSxl1mmw" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </figure>
-            </li>
-            <li class="col-md-6 col-12">
-                <figure class="pro">
-                    <div class="embed-responsive">
-                        <iframe src="https://www.youtube.com/embed/2tctSxl1mmw" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </figure>
-            </li>
-        </ul>
-
-        @* 照片的呈現方式，有資料才顯示 *@
-        <ul class="prolist row row-center list-unstyled">
-            <li class="col-lg-3 col-md-4 col-sm-6 col-12">
-                <figure class="pro">
-                    <a href="http://via.placeholder.com/800x600" class="thumbnail" target="new">
-                        <img src="http://via.placeholder.com/800x600" alt="">
-                        @* 圖說沒有資料則不顯示 *@
-                        <span class="caption">這裡是圖說</span>
-                    </a>
-                </figure>
-            </li>
-            <li class="col-lg-3 col-md-4 col-sm-6 col-12">
-                <figure class="pro">
-                    <a href="http://via.placeholder.com/800x1200" class="thumbnail" target="new">
-                        <img src="http://via.placeholder.com/800x1200" alt="">
-                        <span class="caption">這裡是圖說</span>
-                    </a>
-                </figure>
-            </li>
-            <li class="col-lg-3 col-md-4 col-sm-6 col-12">
-                <figure class="pro">
-                    <a href="http://via.placeholder.com/800x510?text=No+Images" class="thumbnail" target="new">
-                        <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
-                    </a>
-                </figure>
-            </li>
-            <li class="col-lg-3 col-md-4 col-sm-6 col-12">
-                <figure class="pro">
-                    <a href="http://via.placeholder.com/1000x400" class="thumbnail" target="new">
-                        <img src="http://via.placeholder.com/1000x400" alt="">
-                        <span class="caption">這裡是圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說圖說</span>
-                    </a>
-                </figure>
-            </li>
-        </ul>
-
-    </div>
-
-    <div class="tab" id="tab2">
-        <p>文章分頁2</p>
-    </div>
-
-    <div class="tab" id="tab3">
-        <p>文章分頁3</p>
-    </div>
+        <div class="tab" id="tab3">
+            <p>文章分頁3</p>
+        </div>*@
 
 </div>
 
+
 <ul class="pager list-unstyled">
+    @if (!string.IsNullOrEmpty(Model.PreviousIDStr))
+    {
+        <li class="prev">
+            @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
+            <a href="@Url.Action("EventLatestContent", "News", new { ID = Model.PreviousIDStr })">
+                <i class="oi" data-glyph="chevron-left"></i>
+                上一篇
+            </a>
+        </li>
+    }
 
-    <li class="prev">
-        @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
-        <a href="~/News/EventLatestContent">
-            <i class="oi" data-glyph="chevron-left"></i>
-            上一篇
-        </a>
-    </li>
+    @if (!string.IsNullOrEmpty(Model.NextIDStr))
+    {
 
-    <li class="next">
-        @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
-        <a href="~/News/EventLatestContent">
-            下一篇
-            <i class="oi" data-glyph="chevron-right"></i>
-        </a>
-    </li>
+        <li class="next">
+            @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
+            <a href="@Url.Action("EventLatestContent", "News", new { ID = Model.NextIDStr })">
+                下一篇
+                <i class="oi" data-glyph="chevron-right"></i>
+            </a>
+        </li>
+    }
+
+
 
 </ul>
