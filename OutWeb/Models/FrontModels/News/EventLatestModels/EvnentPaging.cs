@@ -20,9 +20,5 @@ namespace OutWeb.Models.FrontModels.News.EventLatestModels
         public List<string> InternetSiteList { get; set; }
     }
 
-    public class PagingImageInfo
-    {
-        public string ImgFileName { get; set; }
-        public string ImgDescription { get; set; }
-    }
+
 }

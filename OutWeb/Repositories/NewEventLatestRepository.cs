@@ -1,5 +1,6 @@
 ﻿using OutWeb.Entities;
 using OutWeb.Models;
+using OutWeb.Models.FrontModels.News;
 using OutWeb.Models.FrontModels.News.EventLatestModels;
 using System;
 using System.Collections.Generic;
