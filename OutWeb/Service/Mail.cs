@@ -15,6 +15,7 @@ namespace OutWeb.Service
     public class Mail
     {
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string csql = "";
         DataSet ds = new DataSet();
         Service CService = new Service();

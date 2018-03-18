@@ -11,6 +11,7 @@ namespace OutWeb.Service
     public class News
     {
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string csql = "";
 
         DataSet ds = new DataSet();

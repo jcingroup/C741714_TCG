@@ -12,6 +12,7 @@ namespace OutWeb.Service
     public class States
     {
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string csql = "";
         string cate_dbf_name = "STATES_CATE";
         string video_dbf_name = "STATES_VIDEO";
@@ -1276,14 +1277,13 @@ namespace OutWeb.Service
 
                         cmd.ExecuteNonQuery();
 
-                        //URL
+                        //明細 DETAIL
                         csql = @"UPDATE "
-                             + " URL "
+                             + " " + dbf_detail_name + " "
                              + "SET "
-                             + "  URL_NO = @id "
+                             + "  CATE_ID = @id "
                              + "WHERE "
-                             + "    URL_KIND = '" + img_kind + "' "
-                             + "AND URL_NO = @img_no ";
+                             + "    CATE_ID = @img_no ";
                         cmd.CommandText = csql;
 
                         ////讓ADO.NET自行判斷型別轉換
@@ -1291,7 +1291,6 @@ namespace OutWeb.Service
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@img_no", img_no);
 
-                        cmd.ExecuteNonQuery();
                     }
                 }
 
@@ -1473,7 +1472,12 @@ namespace OutWeb.Service
 
             cc_msg = "id:" + id + ";sort:" + sort + ";status:" + status + ";title_query:" + title_query + ";cate_id:" + cate_id + ";lang_id:" + lang_id + ";";
             //--------------------------//
-            logger.Debug(cc_msg);
+            //--------------------------------------//
+            if (IsDebug == "On")
+            {
+                logger.Debug(cc_msg);
+            }
+            //--------------------------------------//	
             //--------------------------//
 
             string[] Array_id;
@@ -1591,7 +1595,13 @@ namespace OutWeb.Service
 
                 cmd.CommandText = csql;
                 //---------------------------------------------------------------//
-                logger.Debug("csql:" + csql);
+                
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    logger.Debug("csql:" + csql);
+                }
+                //--------------------------------------//	
                 //---------------------------------------------------------------//
                 cmd.Parameters.Clear();
                 if (status.Trim().Length > 0)
@@ -1763,9 +1773,12 @@ namespace OutWeb.Service
             string cc_msg = "";
 
             cc_msg = "id:" + id + ",c_title:" + c_title + ",c_desc:" + c_desc + ",is_show:" + is_show + ",sort:" + sort + ",lang_id:" + lang_id + ",cate_id:" + cate_id;
-            //--------------------------//
-            logger.Debug(cc_msg);
-            //--------------------------//
+            //--------------------------------------//
+            if (IsDebug == "On")
+            {
+                logger.Debug(cc_msg);
+            }
+            //--------------------------------------//	
 
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
@@ -1791,9 +1804,13 @@ namespace OutWeb.Service
                      + ", UPD_DT = getdate() "
                      + "where "
                      + "  id = @id ";
-                //--------------------------//
-                logger.Debug(csql);
-                //--------------------------//
+
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    logger.Debug(csql);
+                }
+                //--------------------------------------//	
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();

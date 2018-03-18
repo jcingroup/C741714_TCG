@@ -1,7 +1,6 @@
 <%@ Control Language="C#" EnableViewState="false" AutoEventWireup="false" Inherits="CKFinder.Settings.ConfigFile" %>
 <%@ Import Namespace="CKFinder.Settings" %>
-<%@ Import Namespace="GTOverseas.Sso" %>
-<%@ Import Namespace="GTOverseas.Models.Manage" %>
+<%@ Import Namespace="OutWeb.Provider" %>
 
 <script runat="server">
 
@@ -20,10 +19,10 @@
         // ... where Session[ "IsAuthorized" ] is set to "true" as soon as the
         // user logs on your system.
 
-        //if (UserSso.Instance.User == null)
-        //{
-        //    return false;
-        //}
+        if (UserProvider.Instance.User == null)
+        {
+            return false;
+        }
         return true;
     }
 
@@ -40,12 +39,12 @@
         // The base URL used to reach files in CKFinder through the browser.
         //圖片超連結目錄路徑
         //string cusDir = UserSso.Instance.User.UserAccountName + "/";
-        BaseUrl = "~/Images/";
+        BaseUrl = "~/Content/Upload/";
 
         // The phisical directory in the server where the file will end up. If
         // blank, CKFinder attempts to resolve BaseUrl.
         //圖片儲存磁碟路徑
-        BaseDir = HttpContext.Current.Server.MapPath("~/Images/");
+        BaseDir = HttpContext.Current.Server.MapPath("~/Content/Upload/");
 
         // Optional: enable extra plugins (remember to copy .dll files first).
         Plugins = new string[] {
@@ -85,10 +84,10 @@
         /*
         縮圖限制：
         */
-        Images.MaxWidth = 1600;
-        Images.MaxHeight = 1200;
-        Images.Quality = 80;
-
+            Images.MaxWidth = 1600;
+            Images.MaxHeight = 1200;
+            Images.Quality = 80;
+        
         // Indicates that the file size (MaxSize) for images must be checked only
         // after scaling them. Otherwise, it is checked right after uploading.
         CheckSizeAfterScaling = true;
@@ -195,7 +194,7 @@
         type = ResourceType.Add("Images");
         type.Url = BaseUrl + "images/";
         type.Dir = BaseDir == "" ? "" : BaseDir + "images/";
-        type.MaxSize = 2097152; //byte
+        type.MaxSize = 1048576; //byte 1mb
         type.AllowedExtensions = new string[] { "bmp", "gif", "jpeg", "jpg", "png" };
         type.DeniedExtensions = new string[] { };
 

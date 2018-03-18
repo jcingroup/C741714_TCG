@@ -12,6 +12,7 @@ namespace OutWeb.Service
     public class JoinUs
     {
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string csql = "";
         string cate_dbf_name = "JOINUS_CATE";
         string dbf_name = "JOINUS";

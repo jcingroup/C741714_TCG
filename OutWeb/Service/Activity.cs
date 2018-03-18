@@ -11,6 +11,8 @@ namespace OutWeb.Service
     public class Activity
     {
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        //appSettings
+        string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string csql = "";
         string cate_dbf_name = "ACTIVITY_CATE";
         string dbf_name = "ACTIVITY";
@@ -168,7 +170,12 @@ namespace OutWeb.Service
                     csql = csql + " order by a1.sort desc ";
                 }
 
-                logger.Debug("csql:" + csql);
+                //--------------------------------------//
+                if(IsDebug == "On")
+                {
+                    logger.Debug("csql:" + csql);
+                }
+                //--------------------------------------//
 
                 cmd.CommandText = csql;
 
@@ -238,8 +245,13 @@ namespace OutWeb.Service
                 list_ada = null;
 
                 dt = ds.Tables["list"];
-
-                logger.Debug("dt_Count:" + dt.Rows.Count.ToString());
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    logger.Debug("dt_Count:" + dt.Rows.Count.ToString());
+                }
+                //--------------------------------------//	
+                
 
             }
             catch (Exception ex)
@@ -623,9 +635,12 @@ namespace OutWeb.Service
             string cc_msg = "";
 
             cc_msg = "id:" + id + ";sort:" + sort + ";status:" + status + ";title_query:" + title_query + ";cate_id:" + cate_id + ";lang_id:" + lang_id + ";";
-            //--------------------------//
-            logger.Debug(cc_msg);
-            //--------------------------//
+            //--------------------------------------//
+            if (IsDebug == "On")
+            {
+                logger.Debug(cc_msg);
+            }
+            //--------------------------------------//	
 
             string[] Array_id;
             string[] Array_title_query;
@@ -741,9 +756,12 @@ namespace OutWeb.Service
                 }
 
                 cmd.CommandText = csql;
-                //---------------------------------------------------------------//
-                logger.Debug("csql:" + csql);
-                //---------------------------------------------------------------//
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    logger.Debug("csql:" + csql);
+                }
+                //--------------------------------------//	
                 cmd.Parameters.Clear();
                 if (status.Trim().Length > 0)
                 {
@@ -914,9 +932,12 @@ namespace OutWeb.Service
             string cc_msg = "";
 
             cc_msg = "id:" + id + ",c_title:" + c_title + ",c_desc:" + c_desc + ",is_show:" + is_show + ",sort:" + sort + ",lang_id:" + lang_id + ",cate_id:" + cate_id;
-            //--------------------------//
-            logger.Debug(cc_msg);
-            //--------------------------//
+            //--------------------------------------//
+            if (IsDebug == "On")
+            {
+                logger.Debug(cc_msg);
+            }
+            //--------------------------------------//	
 
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
@@ -943,7 +964,13 @@ namespace OutWeb.Service
                      + "where "
                      + "  id = @id ";
                 //--------------------------//
-                logger.Debug(csql);
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    logger.Debug(csql);
+                }
+                //--------------------------------------//	
+
                 //--------------------------//
                 cmd.CommandText = csql;
 

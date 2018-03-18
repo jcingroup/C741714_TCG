@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Collections.Specialized;
 /*Json.NET相關的命名空間*/
 using Newtonsoft.Json;
+using System.Web.Configuration;
 
 namespace OutWeb.Controllers
 {
@@ -28,6 +29,7 @@ namespace OutWeb.Controllers
         School Cschool = new School();
         //=== 變數設定  =========================================//
         String Img_Path = "~/Images";
+        string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         //=== Log 記錄 =========================================//
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         //=====================================================//

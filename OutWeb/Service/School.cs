@@ -13,6 +13,7 @@ namespace OutWeb.Service
     public class School
     {
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string csql = "";
         string cate_dbf_name = "SCHOOL_CATE";
         string video_dbf_name = "SCHOOL_VIDEO";

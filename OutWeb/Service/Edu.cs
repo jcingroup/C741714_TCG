@@ -11,6 +11,7 @@ namespace OutWeb.Service
     public class Edu
     {
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string csql = "";
         string cate_dbf_name = "EDU_CATE";
         string dbf_name = "EDU";
@@ -733,64 +734,80 @@ namespace OutWeb.Service
 
                 cmd.ExecuteNonQuery();
 
-                ////=============================================================================//
-                ////抓取序號
-                //csql = "select "
-                //     + "  * "
-                //     + "from "
-                //     + "  " + dbf_name + " "
-                //     + "where "
-                //     + "    c_title = @c_title "
-                //     + "and c_desc = @c_desc "
-                //     + "and sort = @sort "
-                //     + "and status = @is_show "
-                //     + "and lang_id = @lang_id "
-                //     + "and cate_id = @cate_id ";
+                //=============================================================================//
+                //抓取序號
+                csql = "select "
+                     + "  * "
+                     + "from "
+                     + "  " + dbf_name + " "
+                     + "where "
+                     + "    c_title = @c_title "
+                     + "and c_desc = @c_desc "
+                     + "and sort = @sort "
+                     + "and status = @is_show "
+                     + "and lang_id = @lang_id "
+                     + "and cate_id = @cate_id ";
 
-                //cmd.CommandText = csql;
+                cmd.CommandText = csql;
 
-                //////讓ADO.NET自行判斷型別轉換
-                //cmd.Parameters.Clear();
-                //cmd.Parameters.AddWithValue("@c_title", c_title);
-                //cmd.Parameters.AddWithValue("@c_desc", c_desc);
-                //cmd.Parameters.AddWithValue("@sort", sort);
-                //cmd.Parameters.AddWithValue("@is_show", is_show);
-                //cmd.Parameters.AddWithValue("@lang_id", lang_id);
-                //cmd.Parameters.AddWithValue("@cate_id", cate_id);
+                ////讓ADO.NET自行判斷型別轉換
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@c_title", c_title);
+                cmd.Parameters.AddWithValue("@c_desc", c_desc);
+                cmd.Parameters.AddWithValue("@sort", sort);
+                cmd.Parameters.AddWithValue("@is_show", is_show);
+                cmd.Parameters.AddWithValue("@lang_id", lang_id);
+                cmd.Parameters.AddWithValue("@cate_id", cate_id);
 
-                //if (ds.Tables["chk"] != null)
-                //{
-                //    ds.Tables["chk"].Clear();
-                //}
+                if (ds.Tables["chk"] != null)
+                {
+                    ds.Tables["chk"].Clear();
+                }
 
-                //SqlDataAdapter chk_ada = new SqlDataAdapter();
-                //chk_ada.SelectCommand = cmd;
-                //chk_ada.Fill(ds, "chk");
-                //chk_ada = null;
+                SqlDataAdapter chk_ada = new SqlDataAdapter();
+                chk_ada.SelectCommand = cmd;
+                chk_ada.Fill(ds, "chk");
+                chk_ada = null;
 
-                //if (ds.Tables["chk"].Rows.Count > 0)
-                //{
-                //    id = ds.Tables["chk"].Rows[0]["id"].ToString();
-                //    if (img_no.Trim().Length > 0)
-                //    {
-                //        csql = @"UPDATE "
-                //             + " IMG "
-                //             + "SET "
-                //             + "  IMG_NO = @id "
-                //             + "WHERE "
-                //             + "    IMG_KIND = '" + img_kind + "' "
-                //             + "AND IMG_NO = @img_no ";
-                //        cmd.CommandText = csql;
+                if (ds.Tables["chk"].Rows.Count > 0)
+                {
+                    id = ds.Tables["chk"].Rows[0]["id"].ToString();
+                    if (img_no.Trim().Length > 0)
+                    {
+                        csql = @"UPDATE "
+                             + " IMG "
+                             + "SET "
+                             + "  IMG_NO = @id "
+                             + "WHERE "
+                             + "    IMG_KIND = '" + img_kind + "' "
+                             + "AND IMG_NO = @img_no ";
+                        cmd.CommandText = csql;
 
-                //        ////讓ADO.NET自行判斷型別轉換
-                //        cmd.Parameters.Clear();
-                //        cmd.Parameters.AddWithValue("@id", id);
-                //        cmd.Parameters.AddWithValue("@img_no", img_no);
+                        ////讓ADO.NET自行判斷型別轉換
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@img_no", img_no);
 
-                //        cmd.ExecuteNonQuery();
-                //    }
-                //}
-                ////===========================================================================//
+                        cmd.ExecuteNonQuery();
+
+                        //明細 DETAIL
+                        csql = @"UPDATE "
+                             + " " + dbf_detail_name + " "
+                             + "SET "
+                             + "  CATE_ID = @id "
+                             + "WHERE "
+                             + "    CATE_ID = @img_no ";
+                        cmd.CommandText = csql;
+
+                        ////讓ADO.NET自行判斷型別轉換
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@img_no", img_no);
+                    }
+
+
+                }
+                //===========================================================================//
 
             }
             catch (Exception ex)
@@ -959,9 +976,12 @@ namespace OutWeb.Service
             string cc_msg = "";
 
             cc_msg = "id:" + id + ";sort:" + sort + ";status:" + status + ";title_query:" + title_query + ";cate_id:" + cate_id + ";lang_id:" + lang_id + ";";
-            //--------------------------//
-            logger.Debug(cc_msg);
-            //--------------------------//
+            //--------------------------------------//
+            if (IsDebug == "On")
+            {
+                logger.Debug(cc_msg);
+            }
+            //--------------------------------------//	
 
             string[] Array_id;
             string[] Array_title_query;
@@ -1077,9 +1097,12 @@ namespace OutWeb.Service
                 }
 
                 cmd.CommandText = csql;
-                //---------------------------------------------------------------//
-                logger.Debug("csql:" + csql);
-                //---------------------------------------------------------------//
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    logger.Debug("csql:" + csql);
+                }
+                //--------------------------------------//	
                 cmd.Parameters.Clear();
                 if (status.Trim().Length > 0)
                 {
@@ -1250,9 +1273,12 @@ namespace OutWeb.Service
             string cc_msg = "";
 
             cc_msg = "id:" + id + ",c_title:" + c_title + ",c_desc:" + c_desc + ",is_show:" + is_show + ",sort:" + sort + ",lang_id:" + lang_id + ",cate_id:" + cate_id;
-            //--------------------------//
-            logger.Debug(cc_msg);
-            //--------------------------//
+            //--------------------------------------//
+            if (IsDebug == "On")
+            {
+                logger.Debug(cc_msg);
+            }
+            //--------------------------------------//	
 
             SqlConnection conn = new SqlConnection(conn_str);
             if (conn.State == ConnectionState.Closed)
@@ -1278,9 +1304,12 @@ namespace OutWeb.Service
                      + ", UPD_DT = getdate() "
                      + "where "
                      + "  id = @id ";
-                //--------------------------//
-                logger.Debug(csql);
-                //--------------------------//
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    logger.Debug(csql);
+                }
+                //--------------------------------------//	
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();
