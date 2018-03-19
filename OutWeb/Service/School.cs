@@ -1287,14 +1287,29 @@ namespace OutWeb.Service
 
             try
             {
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    logger.Debug("id:" + id);
+                }
+                //--------------------------------------//
                 //======== 刪除圖片 ====================//
-                csql = @"delete from IMG SET IMG_KIND='" + img_kind + "' WHERE IMG_NO = @id ";
+                csql = @"delete from IMG WHERE IMG_KIND='" + img_kind + "' AND IMG_NO = @id ";
                 cmd.CommandText = csql;
+
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    logger.Debug("csql:" + csql);
+                }
+                //--------------------------------------//	
 
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", id);
 
                 cmd.ExecuteNonQuery();
+
+
                 //====================================//
                 //======== 刪除資料 ===================//
                 csql = @"delete from "
@@ -1303,6 +1318,13 @@ namespace OutWeb.Service
                      + "  id = @id ";
 
                 cmd.CommandText = csql;
+
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    logger.Debug("csql:" + csql);
+                }
+                //--------------------------------------//	
 
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", id);

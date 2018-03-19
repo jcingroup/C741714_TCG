@@ -862,7 +862,7 @@ namespace OutWeb.Service
             try
             {
                 ////======== 刪除圖片 ====================//
-                //csql = @"delete from IMG SET IMG_KIND='" + img_kind + "' WHERE IMG_NO = @id ";
+                //csql = @"delete from IMG WHERE IMG_KIND='" + img_kind + "' AND IMG_NO = @id ";
                 //cmd.CommandText = csql;
 
                 //cmd.Parameters.Clear();
