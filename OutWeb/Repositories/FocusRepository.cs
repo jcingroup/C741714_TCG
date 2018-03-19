@@ -70,7 +70,7 @@ namespace OutWeb.Repositories
             {
                 data = db.URL
                     .Where(s => s.STATUS == "Y" && s.URL_KIND == "Focus_Detail" &&
-                    s.URL_NO.Contains(id.ToString()))
+                    s.URL_NO == id.ToString())
                     .OrderByDescending(s => s.SORT)
                     .Select(s => s.C_URL)
                     .ToList();
@@ -93,7 +93,7 @@ namespace OutWeb.Repositories
             {
                 data = db.IMG
                                 .Where(s => s.STATUS == "Y" && s.IMG_STY == "B" && s.IMG_KIND == "Focus_Detail" &&
-                                s.IMG_NO.Contains(id.ToString()))
+                                s.IMG_NO == id.ToString())
                                 .OrderByDescending(s => s.SORT)
                                 .Select(s => new PagingImageInfo()
                                 {
@@ -186,23 +186,6 @@ namespace OutWeb.Repositories
             return remark;
         }
 
-        /// <summary>
-        /// 取一個州別的直播列表
-        /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
-        public string GetStateVideo(int statesID)
-        {
-            string url = string.Empty;
-            using (var db = new TCGDB(_connectionString))
-            {
-                url = db.STATES_VIDEO
-                    .Where(s => s.STATUS != "D" && s.CATE_ID == statesID)
-                    .Select(s => s.C_URL)
-                    .FirstOrDefault();
-            }
-            return url;
-        }
 
 
         /// <summary>
@@ -216,7 +199,7 @@ namespace OutWeb.Repositories
             FocusNewsContent result = new FocusNewsContent();
             using (var db = new TCGDB(_connectionString))
             {
-                var sourceList = db.STATES
+                var sourceList = db.FOCUS
                  .AsEnumerable()
                  .Where(s => (string.IsNullOrEmpty(lagCode) ? true : s.LANG_ID == lagCode) &&
                  s.STATUS != "D" && s.CATE_ID == statesTypeID)
@@ -281,7 +264,6 @@ namespace OutWeb.Repositories
                         temp.Remark = GetFirstPagingRemark(temp.PagingList);
                         data.Add(temp);
                     }
-                    result.Url = GetStateVideo(focusTypeID);
 
                     result.Data = data;
                     result = this.ListPagination(ref result, filter.CurrentPage, Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));

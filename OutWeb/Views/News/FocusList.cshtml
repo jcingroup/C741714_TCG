@@ -30,8 +30,9 @@
         @foreach (var data in Model.Data)
         {
             string img = string.IsNullOrEmpty(data.Img) ? @"http://via.placeholder.com/800x510?text=No+Images" : img_path + data.Img;
-            string contentUrl = Url.Content("~/News/FocusNewsContent?focusTypeID=" + Model.FocusTypeInfo.Keys.First() + "&ID=" + data.ID);
-            string remark = data.Remark.Length == 0 ? "" : @"<p>" + data.Remark + "</p>";
+            string contentUrl = Url.Content("~/News/FocusContent?focusTypeID=" + Model.FocusTypeInfo.Keys.First() + "&ID=" + data.ID);
+            string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : data.Remark;
+
             //編輯器內容 取前 145 個字，有資料的話才顯示
             <article class="article">
                 <small class="date">@data.PublishDateString</small>

@@ -298,6 +298,7 @@
     <Compile Include="Models\FrontModels\News\AnnouncementLatest\AnnouncementLatestFilter.cs" />
     <Compile Include="Models\FrontModels\News\AnnouncementLatest\AnnouncementLatestResult.cs" />
     <Compile Include="Models\FrontModels\News\AnnouncementLatest\AnnouncementLatestViewModel.cs" />
+    <Compile Include="Models\FrontModels\News\EventStatesModels\EventStatesViewModel.cs" />
     <Compile Include="Models\FrontModels\News\FocusNewsModels\FocusNewsContent.cs" />
     <Compile Include="Models\FrontModels\News\FocusNewsModels\FocusNewsData.cs" />
     <Compile Include="Models\FrontModels\News\FocusNewsModels\FocusNewsListFilter.cs" />

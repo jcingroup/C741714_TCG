@@ -174,7 +174,7 @@ namespace OutWeb.Controllers
         //}
 
         //// 焦點專欄 - 列表
-        //public ActionResult FocusList2(string cate_id = "", int page = 1)
+        //public ActionResult FocusList(string cate_id = "", int page = 1)
         //{
         //    DataTable dt;
         //    DataTable d_cate;
@@ -204,7 +204,7 @@ namespace OutWeb.Controllers
         //    return View();
         //}
 
-        public ActionResult FocusNewsCategory()
+        public ActionResult FocusCategory()
         {
             string langCd = string.Empty;
             FocusRepository repo = new FocusRepository();
@@ -214,7 +214,7 @@ namespace OutWeb.Controllers
         }
 
         // 焦點專欄 - 列表
-        public ActionResult FocusNewsList(int? focusTypeID, int? page, string langCode)
+        public ActionResult FocusList(int? focusTypeID, int? page, string langCode)
         {
             if (!focusTypeID.HasValue)
                 return RedirectToAction("EventLatest");
@@ -233,10 +233,10 @@ namespace OutWeb.Controllers
         }
 
         // 焦點專欄 - 內容
-        public ActionResult FocusNewsContent(int? focusTypeID, int? ID)
+        public ActionResult FocusContent(int? focusTypeID, int? ID)
         {
             if (!focusTypeID.HasValue || !ID.HasValue)
-                return RedirectToAction("FocusNewsList");
+                return RedirectToAction("FocusList");
             string langCd = string.Empty;
             FocusRepository repo = new FocusRepository();
             FocusNewsContent mdoel = repo.GetContentByID((int)focusTypeID, (int)ID, langCd);
