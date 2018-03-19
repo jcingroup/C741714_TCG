@@ -46,16 +46,31 @@ namespace OutWeb.Controllers
         }
 
         // 台灣民政府由來
-        public ActionResult TCG()
+        public ActionResult TCG(string id = "")
         {
             //抓取資料
             string cate_id = "1";
             DataTable dt;
+            DataTable d_detail;
+            DataTable dt1;
             string err_msg = "";
             string lang_id = "zh-tw";
-            dt = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt = dt1.Copy();
+            if(dt1.Rows.Count > 0)
+            {
+                if(id == "")
+                {
+                    id = dt1.Rows[0]["id"].ToString();
+                }
+            }
+
+            dt1 = CAboutUs.List(ref err_msg, id, "sort desc", "Y", "", cate_id, lang_id);
+            d_detail = dt1.Copy();
 
             ViewData["dt"] = dt;
+            ViewData["d_detail"] = d_detail;
+            ViewData["id"] = id;
             return View();
         }
 
