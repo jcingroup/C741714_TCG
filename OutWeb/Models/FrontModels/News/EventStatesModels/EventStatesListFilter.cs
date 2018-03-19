@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace OutWeb.Models.FrontModels.News.EventStatesCategoryModels
+namespace OutWeb.Models.FrontModels.News.EventStatesModels
 {
-    public class EventStatesCategoryListFilter
+    public class EventStatesListFilter
     {
         /// <summary>
         /// 選取頁面

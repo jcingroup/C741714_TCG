@@ -1,6 +1,12 @@
-﻿@{
-    ViewBag.Title = "台北州"; @* 分類名稱 *@
-    ViewBag.BodyClass = "News Event";
+﻿@using OutWeb.Models.FrontModels.News.EventStatesModels
+@model EventStatesResult
+
+@{
+    Dictionary<int, string> stateInfo = TempData["StateInfo"] as Dictionary<int, string>;
+    ViewBag.Title = stateInfo.Values.First(); @* 分類名稱 *@
+ViewBag.BodyClass = "News Event";
+string img_path = "/Images/";
+
 }
 
 @section breadcrumb {
@@ -25,54 +31,71 @@
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h2>
 
-<h3 class="title2">直播影片</h3>
+@if (!string.IsNullOrEmpty(Model.Url))
+{
 
-<div class="row mb-24">
-    <div class="col-lg-6 col-md-8 col-sm-9 col-12">
-        <div class="embed-responsive">
-            <iframe src="https://www.youtube.com/embed/JMBbJ_8nAHY" frameborder="0" allowfullscreen></iframe>
+    var urlSplit = Model.Url.Split(new string[] { @"https://www.youtube.com/watch?v=" }, StringSplitOptions.RemoveEmptyEntries);
+    string url = string.Empty;
+    if (urlSplit.Count() > 0)
+    {
+        url = Model.Url.Replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/") + "/" + urlSplit[0];
+    }
+    <h3 class="title2">直播影片</h3>
+    <div class="row mb-24">
+        <div class="col-lg-6 col-md-8 col-sm-9 col-12">
+            <div class="embed-responsive">
+                <iframe src="@url" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
-</div>
+
+}
 
 <h3 class="title2">活動資訊</h3>
 
 @* 每頁5筆資料 *@
 <div class="articles">
 
-    <article class="article">
-        <div class="row">
-            <div class="col-lg-3 col-sm-4 col-12">
-                <a href="~/News/EventStatesContent" class="thumbnail">
-                    @* 沒有圖檔的替代圖 *@
-                    <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
-                </a>
-            </div>
-            <div class="col-lg-9 col-sm-8 col-12">
-                <small class="date">2018-01-20</small>
-                <h3><a href="~/News/EventStatesContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
-                @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
-                <a href="~/News/EventStatesContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-            </div>
-        </div>
-    </article>
+    @foreach (var data in Model.Data.Take(5))
+    {
+        string img = string.IsNullOrEmpty(data.Img) ? @"http://via.placeholder.com/800x510?text=No+Images" : img_path + data.Img;
+        string contentUrl = Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesTypeID + "&ID=" + data.ID);
+        string remark = data.Remark.Length == 0 ? "" : @"<p>" + data.Remark + "</p>";
 
-    <article class="article">
-        <div class="row">
-            <div class="col-lg-3 col-sm-4 col-12">
-                <a href="~/News/EventStatesContent" class="thumbnail">
-                    <img src="http://api.ning.com/files/ymSmd4em4y3tD9NclSe*1XQevDWPd-1a*I2DF5kGhLCF11rLpSuIOsB0zctgpvX4sGlyJCd0EZjvBifYYqTbHFVodRmJ9iZe/2018118026.jpg" alt="">
-                </a>
+        <article class="article">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-12">
+                    <a href="@contentUrl" class="thumbnail">
+                        @* 沒有圖檔的替代圖 *@
+                        <img src="@img" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-12">
+                    <small class="date">2018-01-20</small>
+                    <h3><a href="@contentUrl">@data.Title</a></h3>
+                    @* 摘要 取前 145 個字，有資料的話才顯示 *@
+                    @Html.Raw(remark)
+                    <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                </div>
             </div>
-            <div class="col-lg-9 col-sm-8 col-12">
-                <small class="date">2018-01-20</small>
-                <h3><a href="~/News/EventStatesContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
-                @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
-                <a href="~/News/EventStatesContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-            </div>
-        </div>
-    </article>
+        </article>
+    }
 
+    @*<article class="article">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-12">
+                    <a href="~/News/EventStatesContent" class="thumbnail">
+                        沒有圖檔的替代圖
+                        <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-12">
+                    <small class="date">2018-01-20</small>
+                    <h3><a href="~/News/EventStatesContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
+                    摘要 取前 145 個字，有資料的話才顯示
+                    <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
+                    <a href="~/News/EventStatesContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                </div>
+            </div>
+        </article>*@
 </div>

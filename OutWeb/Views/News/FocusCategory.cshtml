@@ -1,13 +1,7 @@
-﻿@using System.Data
+﻿@model Dictionary<int, string>
 @{
     ViewBag.Title = "焦點專欄";
     ViewBag.BodyClass = "News Focus";
-
-    //參數值設定
-    DataTable dt = (DataTable)ViewData["dt"];
-    string cate_id = "";
-    string cate_name = "";
-    string cate_desc = "";
 }
 
 @section breadcrumb {
@@ -21,15 +15,11 @@
 </h1>
 
 <ul class="list-category list-unstyled row row-center">
-    @for (int i = 0; i < dt.Rows.Count; i++)
-    {
-        cate_id = dt.Rows[i]["id"].ToString();
-        cate_name = dt.Rows[i]["cate_name"].ToString();
-        cate_desc = dt.Rows[i]["cate_desc"].ToString();
-
+@foreach (var focus in Model)
+{
         <li class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <a href="@Url.Content("~/News/FocusList?cate_id=" + cate_id)">
-                <span>@Html.Raw(cate_name)</span>
+            <a href="@Url.Content("~/News/FocusList?focusTypeID=" + @focus.Key)">
+                <span>@focus.Value</span>
             </a>
         </li>
     }

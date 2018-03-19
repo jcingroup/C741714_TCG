@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="C741714_TCGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="C741714_TCGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABOUTUS">
           <Key>
             <PropertyRef Name="ID" />
@@ -63,7 +63,7 @@
           <Property Name="BD_DT" Type="datetime" />
           <Property Name="UPD_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="UPD_DT" Type="datetime" />
-          <Property Name="C_TITLE" Type="nvarchar" MaxLength="50" />
+          <Property Name="C_TITLE" Type="nvarchar" MaxLength="500" />
           <Property Name="C_DESC" Type="nvarchar(max)" />
           <Property Name="CATE_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="LANG_ID" Type="nvarchar" MaxLength="10" />
@@ -103,6 +103,22 @@
           <Property Name="SORT" Type="int" />
           <Property Name="STATUS" Type="nvarchar" MaxLength="1" />
         </EntityType>
+        <EntityType Name="EDU_DETAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BD_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BD_DT" Type="datetime" />
+          <Property Name="UPD_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPD_DT" Type="datetime" />
+          <Property Name="C_TITLE" Type="nvarchar" MaxLength="500" />
+          <Property Name="C_DESC" Type="nvarchar(max)" />
+          <Property Name="CATE_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="LANG_ID" Type="nvarchar" MaxLength="10" />
+          <Property Name="SORT" Type="int" />
+          <Property Name="STATUS" Type="nvarchar" MaxLength="1" />
+        </EntityType>
         <EntityType Name="FOCUS">
           <Key>
             <PropertyRef Name="ID" />
@@ -133,6 +149,22 @@
           <Property Name="CATE_NAME" Type="nvarchar" MaxLength="500" />
           <Property Name="CATE_DESC" Type="nvarchar(max)" />
           <Property Name="PIC" Type="nvarchar" MaxLength="200" />
+          <Property Name="LANG_ID" Type="nvarchar" MaxLength="10" />
+          <Property Name="SORT" Type="int" />
+          <Property Name="STATUS" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="FOCUS_DETAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BD_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BD_DT" Type="datetime" />
+          <Property Name="UPD_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPD_DT" Type="datetime" />
+          <Property Name="C_TITLE" Type="nvarchar" MaxLength="500" />
+          <Property Name="C_DESC" Type="nvarchar(max)" />
+          <Property Name="CATE_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="LANG_ID" Type="nvarchar" MaxLength="10" />
           <Property Name="SORT" Type="int" />
           <Property Name="STATUS" Type="nvarchar" MaxLength="1" />
@@ -320,6 +352,22 @@
           <Property Name="SORT" Type="int" />
           <Property Name="STATUS" Type="nvarchar" MaxLength="1" />
         </EntityType>
+        <EntityType Name="STATES_DETAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BD_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BD_DT" Type="datetime" />
+          <Property Name="UPD_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPD_DT" Type="datetime" />
+          <Property Name="C_TITLE" Type="nvarchar" MaxLength="500" />
+          <Property Name="C_DESC" Type="nvarchar(max)" />
+          <Property Name="CATE_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="LANG_ID" Type="nvarchar" MaxLength="10" />
+          <Property Name="SORT" Type="int" />
+          <Property Name="STATUS" Type="nvarchar" MaxLength="1" />
+        </EntityType>
         <EntityType Name="STATES_VIDEO">
           <Key>
             <PropertyRef Name="ID" />
@@ -498,8 +546,10 @@
           <EntitySet Name="ACTIVITY_DETAIL" EntityType="Self.ACTIVITY_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EDU" EntityType="Self.EDU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EDU_CATE" EntityType="Self.EDU_CATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EDU_DETAIL" EntityType="Self.EDU_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FOCUS" EntityType="Self.FOCUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FOCUS_CATE" EntityType="Self.FOCUS_CATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FOCUS_DETAIL" EntityType="Self.FOCUS_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMG" EntityType="Self.IMG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JOINUS" EntityType="Self.JOINUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JOINUS_CATE" EntityType="Self.JOINUS_CATE" Schema="dbo" store:Type="Tables" />
@@ -510,6 +560,7 @@
           <EntitySet Name="SCHOOL_VIDEO" EntityType="Self.SCHOOL_VIDEO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATES" EntityType="Self.STATES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATES_CATE" EntityType="Self.STATES_CATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATES_DETAIL" EntityType="Self.STATES_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATES_VIDEO" EntityType="Self.STATES_VIDEO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="URL" EntityType="Self.URL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USR" EntityType="Self.USR" Schema="dbo" store:Type="Tables" />
@@ -538,11 +589,45 @@
     FROM [dbo].[SCHOOL] AS [SCHOOL]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="C741714_TCGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TCGDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ABOUTUS" EntityType="C741714_TCGModel.ABOUTUS" />
+          <EntitySet Name="ABOUTUS_CATE" EntityType="C741714_TCGModel.ABOUTUS_CATE" />
+          <EntitySet Name="ACTIVITY" EntityType="C741714_TCGModel.ACTIVITY" />
+          <EntitySet Name="ACTIVITY_DETAIL" EntityType="C741714_TCGModel.ACTIVITY_DETAIL" />
+          <EntitySet Name="EDU" EntityType="C741714_TCGModel.EDU" />
+          <EntitySet Name="EDU_CATE" EntityType="C741714_TCGModel.EDU_CATE" />
+          <EntitySet Name="EDU_DETAIL" EntityType="C741714_TCGModel.EDU_DETAIL" />
+          <EntitySet Name="FOCUS" EntityType="C741714_TCGModel.FOCUS" />
+          <EntitySet Name="FOCUS_CATE" EntityType="C741714_TCGModel.FOCUS_CATE" />
+          <EntitySet Name="FOCUS_DETAIL" EntityType="C741714_TCGModel.FOCUS_DETAIL" />
+          <EntitySet Name="IMG" EntityType="C741714_TCGModel.IMG" />
+          <EntitySet Name="JOINUS" EntityType="C741714_TCGModel.JOINUS" />
+          <EntitySet Name="JOINUS_CATE" EntityType="C741714_TCGModel.JOINUS_CATE" />
+          <EntitySet Name="LANG" EntityType="C741714_TCGModel.LANG" />
+          <EntitySet Name="NEWS" EntityType="C741714_TCGModel.NEWS" />
+          <EntitySet Name="NEWS_CATE" EntityType="C741714_TCGModel.NEWS_CATE" />
+          <EntitySet Name="SCHOOL_CATE" EntityType="C741714_TCGModel.SCHOOL_CATE" />
+          <EntitySet Name="SCHOOL_VIDEO" EntityType="C741714_TCGModel.SCHOOL_VIDEO" />
+          <EntitySet Name="STATES" EntityType="C741714_TCGModel.STATES" />
+          <EntitySet Name="STATES_CATE" EntityType="C741714_TCGModel.STATES_CATE" />
+          <EntitySet Name="STATES_DETAIL" EntityType="C741714_TCGModel.STATES_DETAIL" />
+          <EntitySet Name="STATES_VIDEO" EntityType="C741714_TCGModel.STATES_VIDEO" />
+          <EntitySet Name="URL" EntityType="C741714_TCGModel.URL" />
+          <EntitySet Name="USR" EntityType="C741714_TCGModel.USR" />
+          <EntitySet Name="WBAGENT" EntityType="C741714_TCGModel.WBAGENT" />
+          <EntitySet Name="WBLOGERR" EntityType="C741714_TCGModel.WBLOGERR" />
+          <EntitySet Name="WBNEWS" EntityType="C741714_TCGModel.WBNEWS" />
+          <EntitySet Name="WBPIC" EntityType="C741714_TCGModel.WBPIC" />
+          <EntitySet Name="WBPRODUCT" EntityType="C741714_TCGModel.WBPRODUCT" />
+          <EntitySet Name="WBPRODUCTTYPE" EntityType="C741714_TCGModel.WBPRODUCTTYPE" />
+          <EntitySet Name="WBUSR" EntityType="C741714_TCGModel.WBUSR" />
+          <EntitySet Name="WBWORKS" EntityType="C741714_TCGModel.WBWORKS" />
+          <EntitySet Name="SCHOOL" EntityType="C741714_TCGModel.SCHOOL" />
+        </EntityContainer>
         <EntityType Name="ABOUTUS">
           <Key>
             <PropertyRef Name="ID" />
@@ -601,7 +686,7 @@
           <Property Name="BD_DT" Type="DateTime" Precision="3" />
           <Property Name="UPD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UPD_DT" Type="DateTime" Precision="3" />
-          <Property Name="C_TITLE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_TITLE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="C_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CATE_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LANG_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -641,6 +726,22 @@
           <Property Name="SORT" Type="Int32" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="EDU_DETAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BD_DT" Type="DateTime" Precision="3" />
+          <Property Name="UPD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPD_DT" Type="DateTime" Precision="3" />
+          <Property Name="C_TITLE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="C_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CATE_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LANG_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SORT" Type="Int32" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="FOCUS">
           <Key>
             <PropertyRef Name="ID" />
@@ -671,6 +772,22 @@
           <Property Name="CATE_NAME" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CATE_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PIC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LANG_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SORT" Type="Int32" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FOCUS_DETAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BD_DT" Type="DateTime" Precision="3" />
+          <Property Name="UPD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPD_DT" Type="DateTime" Precision="3" />
+          <Property Name="C_TITLE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="C_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CATE_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LANG_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="SORT" Type="Int32" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
@@ -839,6 +956,22 @@
           <Property Name="SORT" Type="Int32" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="STATES_DETAIL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BD_DT" Type="DateTime" Precision="3" />
+          <Property Name="UPD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPD_DT" Type="DateTime" Precision="3" />
+          <Property Name="C_TITLE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="C_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CATE_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LANG_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SORT" Type="Int32" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="STATES_VIDEO">
           <Key>
             <PropertyRef Name="ID" />
@@ -903,9 +1036,9 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ERR_GID" Type="Int32" Nullable="false" />
-          <Property Name="ERR_SMRY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ERR_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ERR_SRC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ERR_SMRY" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ERR_DESC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ERR_SRC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LOG_DTM" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="WBNEWS">
@@ -930,14 +1063,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MAP_AC_NM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IMG_NM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IMG_URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IMG_LINK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FILE_PATH" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MAP_AC_NM" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IMG_NM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMG_URL" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IMG_LINK" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FILE_PATH" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UP_DT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UP_USR_ID" Type="Int32" Nullable="false" />
-          <Property Name="UP_MODE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="UP_MODE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="SR_SQ" Type="Int32" Nullable="false" />
           <Property Name="MAP_NEWS_ID" Type="Int32" Nullable="false" />
           <Property Name="MAP_PRODUCT_ID" Type="Int32" Nullable="false" />
@@ -953,9 +1086,9 @@
           <Property Name="BUD_DT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UPD_USRID" Type="Int32" Nullable="false" />
           <Property Name="UPD_DT" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PRD_NM" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PRD_CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LANG_CD" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRD_NM" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PRD_CONTENT" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LANG_CD" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="DIS_FRONT_ST" Type="Boolean" Nullable="false" />
           <Property Name="SR_SQ" Type="Int32" Nullable="false" />
           <Property Name="PRD_TP" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -968,10 +1101,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LANG_CD" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PRD_TP_NM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LANG_CD" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PRD_TP_NM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SR_SQ" Type="Int32" Nullable="false" />
-          <Property Name="PRD_TP_ST" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PRD_TP_ST" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="BUD_ID" Type="Int32" Nullable="false" />
           <Property Name="BUD_DT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UPD_USR_ID" Type="Int32" />
@@ -982,12 +1115,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SIGNIN_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SIGNIN_PWD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="USR_NM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SIGNIN_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SIGNIN_PWD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USR_NM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="USR_ENM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="USR_EML" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="USR_GUID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="USR_GUID" Type="String" Nullable="false" MaxLength="36" FixedLength="true" Unicode="false" />
           <Property Name="SIGNIN_DTM" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="BUD_USRID" Type="Int32" Nullable="false" />
           <Property Name="BUD_DTM" Type="DateTime" Nullable="false" Precision="3" />
@@ -1003,9 +1136,9 @@
           <Property Name="BUD_DT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UPD_USRID" Type="Int32" Nullable="false" />
           <Property Name="UPD_DT" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="WKS_TITLE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="WKS_CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LANG_CD" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WKS_TITLE" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="WKS_CONTENT" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LANG_CD" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="DIS_FRONT_ST" Type="Boolean" Nullable="false" />
           <Property Name="SR_SQ" Type="Int32" Nullable="false" />
           <Property Name="PUB_DT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -1027,38 +1160,6 @@
           <Property Name="SORT" Type="Int32" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="TCGDB" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ABOUTUS" EntityType="Self.ABOUTUS" />
-          <EntitySet Name="ABOUTUS_CATE" EntityType="Self.ABOUTUS_CATE" />
-          <EntitySet Name="ACTIVITY" EntityType="Self.ACTIVITY" />
-          <EntitySet Name="ACTIVITY_DETAIL" EntityType="Self.ACTIVITY_DETAIL" />
-          <EntitySet Name="EDU" EntityType="Self.EDU" />
-          <EntitySet Name="EDU_CATE" EntityType="Self.EDU_CATE" />
-          <EntitySet Name="FOCUS" EntityType="Self.FOCUS" />
-          <EntitySet Name="FOCUS_CATE" EntityType="Self.FOCUS_CATE" />
-          <EntitySet Name="IMG" EntityType="Self.IMG" />
-          <EntitySet Name="JOINUS" EntityType="Self.JOINUS" />
-          <EntitySet Name="JOINUS_CATE" EntityType="Self.JOINUS_CATE" />
-          <EntitySet Name="LANG" EntityType="Self.LANG" />
-          <EntitySet Name="NEWS" EntityType="Self.NEWS" />
-          <EntitySet Name="NEWS_CATE" EntityType="Self.NEWS_CATE" />
-          <EntitySet Name="SCHOOL_CATE" EntityType="Self.SCHOOL_CATE" />
-          <EntitySet Name="SCHOOL_VIDEO" EntityType="Self.SCHOOL_VIDEO" />
-          <EntitySet Name="STATES" EntityType="Self.STATES" />
-          <EntitySet Name="STATES_CATE" EntityType="Self.STATES_CATE" />
-          <EntitySet Name="STATES_VIDEO" EntityType="Self.STATES_VIDEO" />
-          <EntitySet Name="URL" EntityType="Self.URL" />
-          <EntitySet Name="USR" EntityType="Self.USR" />
-          <EntitySet Name="WBAGENT" EntityType="Self.WBAGENT" />
-          <EntitySet Name="WBLOGERR" EntityType="Self.WBLOGERR" />
-          <EntitySet Name="WBNEWS" EntityType="Self.WBNEWS" />
-          <EntitySet Name="WBPIC" EntityType="Self.WBPIC" />
-          <EntitySet Name="WBPRODUCT" EntityType="Self.WBPRODUCT" />
-          <EntitySet Name="WBPRODUCTTYPE" EntityType="Self.WBPRODUCTTYPE" />
-          <EntitySet Name="WBUSR" EntityType="Self.WBUSR" />
-          <EntitySet Name="WBWORKS" EntityType="Self.WBWORKS" />
-          <EntitySet Name="SCHOOL" EntityType="Self.SCHOOL" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1068,514 +1169,565 @@
           <EntitySetMapping Name="ABOUTUS">
             <EntityTypeMapping TypeName="C741714_TCGModel.ABOUTUS">
               <MappingFragment StoreEntitySet="ABOUTUS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
-                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
-                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ABOUTUS_CATE">
             <EntityTypeMapping TypeName="C741714_TCGModel.ABOUTUS_CATE">
               <MappingFragment StoreEntitySet="ABOUTUS_CATE">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
-                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
-                <ScalarProperty Name="PIC" ColumnName="PIC" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="PIC" ColumnName="PIC" />
+                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
+                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ACTIVITY">
             <EntityTypeMapping TypeName="C741714_TCGModel.ACTIVITY">
               <MappingFragment StoreEntitySet="ACTIVITY">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
-                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
-                <ScalarProperty Name="IS_INDEX" ColumnName="IS_INDEX" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="IS_INDEX" ColumnName="IS_INDEX" />
+                <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ACTIVITY_DETAIL">
             <EntityTypeMapping TypeName="C741714_TCGModel.ACTIVITY_DETAIL">
               <MappingFragment StoreEntitySet="ACTIVITY_DETAIL">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
-                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
-                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EDU">
             <EntityTypeMapping TypeName="C741714_TCGModel.EDU">
               <MappingFragment StoreEntitySet="EDU">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
-                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
-                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
-                <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EDU_CATE">
             <EntityTypeMapping TypeName="C741714_TCGModel.EDU_CATE">
               <MappingFragment StoreEntitySet="EDU_CATE">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
-                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
-                <ScalarProperty Name="PIC" ColumnName="PIC" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="PIC" ColumnName="PIC" />
+                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
+                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EDU_DETAIL">
+            <EntityTypeMapping TypeName="C741714_TCGModel.EDU_DETAIL">
+              <MappingFragment StoreEntitySet="EDU_DETAIL">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FOCUS">
             <EntityTypeMapping TypeName="C741714_TCGModel.FOCUS">
               <MappingFragment StoreEntitySet="FOCUS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
-                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
-                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
-                <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
-                <ScalarProperty Name="IS_INDEX" ColumnName="IS_INDEX" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="IS_INDEX" ColumnName="IS_INDEX" />
+                <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FOCUS_CATE">
             <EntityTypeMapping TypeName="C741714_TCGModel.FOCUS_CATE">
               <MappingFragment StoreEntitySet="FOCUS_CATE">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
-                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
-                <ScalarProperty Name="PIC" ColumnName="PIC" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="PIC" ColumnName="PIC" />
+                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
+                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FOCUS_DETAIL">
+            <EntityTypeMapping TypeName="C741714_TCGModel.FOCUS_DETAIL">
+              <MappingFragment StoreEntitySet="FOCUS_DETAIL">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="IMG">
             <EntityTypeMapping TypeName="C741714_TCGModel.IMG">
               <MappingFragment StoreEntitySet="IMG">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="IMG_NO" ColumnName="IMG_NO" />
-                <ScalarProperty Name="IMG_FILE" ColumnName="IMG_FILE" />
-                <ScalarProperty Name="IMG_DESC" ColumnName="IMG_DESC" />
-                <ScalarProperty Name="IMG_KIND" ColumnName="IMG_KIND" />
-                <ScalarProperty Name="IMG_STY" ColumnName="IMG_STY" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="IS_INDEX" ColumnName="IS_INDEX" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="IMG_STY" ColumnName="IMG_STY" />
+                <ScalarProperty Name="IMG_KIND" ColumnName="IMG_KIND" />
+                <ScalarProperty Name="IMG_DESC" ColumnName="IMG_DESC" />
+                <ScalarProperty Name="IMG_FILE" ColumnName="IMG_FILE" />
+                <ScalarProperty Name="IMG_NO" ColumnName="IMG_NO" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="JOINUS">
             <EntityTypeMapping TypeName="C741714_TCGModel.JOINUS">
               <MappingFragment StoreEntitySet="JOINUS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
-                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
-                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="JOINUS_CATE">
             <EntityTypeMapping TypeName="C741714_TCGModel.JOINUS_CATE">
               <MappingFragment StoreEntitySet="JOINUS_CATE">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
-                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
-                <ScalarProperty Name="PIC" ColumnName="PIC" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="PIC" ColumnName="PIC" />
+                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
+                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LANG">
             <EntityTypeMapping TypeName="C741714_TCGModel.LANG">
               <MappingFragment StoreEntitySet="LANG">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="LANG_NAME" ColumnName="LANG_NAME" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="LANG_NAME" ColumnName="LANG_NAME" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NEWS">
             <EntityTypeMapping TypeName="C741714_TCGModel.NEWS">
               <MappingFragment StoreEntitySet="NEWS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="N_TITLE" ColumnName="N_TITLE" />
-                <ScalarProperty Name="N_DATE" ColumnName="N_DATE" />
-                <ScalarProperty Name="N_URL" ColumnName="N_URL" />
-                <ScalarProperty Name="N_DESC" ColumnName="N_DESC" />
-                <ScalarProperty Name="N_MEMO" ColumnName="N_MEMO" />
-                <ScalarProperty Name="IS_INDEX" ColumnName="IS_INDEX" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="IS_INDEX" ColumnName="IS_INDEX" />
+                <ScalarProperty Name="N_MEMO" ColumnName="N_MEMO" />
+                <ScalarProperty Name="N_DESC" ColumnName="N_DESC" />
+                <ScalarProperty Name="N_URL" ColumnName="N_URL" />
+                <ScalarProperty Name="N_DATE" ColumnName="N_DATE" />
+                <ScalarProperty Name="N_TITLE" ColumnName="N_TITLE" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NEWS_CATE">
             <EntityTypeMapping TypeName="C741714_TCGModel.NEWS_CATE">
               <MappingFragment StoreEntitySet="NEWS_CATE">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
-                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
-                <ScalarProperty Name="PIC" ColumnName="PIC" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="PIC" ColumnName="PIC" />
+                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
+                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SCHOOL_CATE">
             <EntityTypeMapping TypeName="C741714_TCGModel.SCHOOL_CATE">
               <MappingFragment StoreEntitySet="SCHOOL_CATE">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
-                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
-                <ScalarProperty Name="PIC" ColumnName="PIC" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="PIC" ColumnName="PIC" />
+                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
+                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SCHOOL_VIDEO">
             <EntityTypeMapping TypeName="C741714_TCGModel.SCHOOL_VIDEO">
               <MappingFragment StoreEntitySet="SCHOOL_VIDEO">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="C_URL" ColumnName="C_URL" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="C_URL" ColumnName="C_URL" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="STATES">
             <EntityTypeMapping TypeName="C741714_TCGModel.STATES">
               <MappingFragment StoreEntitySet="STATES">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
-                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
-                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
-                <ScalarProperty Name="IS_INDEX" ColumnName="IS_INDEX" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="IS_INDEX" ColumnName="IS_INDEX" />
+                <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="STATES_CATE">
             <EntityTypeMapping TypeName="C741714_TCGModel.STATES_CATE">
               <MappingFragment StoreEntitySet="STATES_CATE">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
-                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
-                <ScalarProperty Name="PIC" ColumnName="PIC" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="PIC" ColumnName="PIC" />
+                <ScalarProperty Name="CATE_DESC" ColumnName="CATE_DESC" />
+                <ScalarProperty Name="CATE_NAME" ColumnName="CATE_NAME" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATES_DETAIL">
+            <EntityTypeMapping TypeName="C741714_TCGModel.STATES_DETAIL">
+              <MappingFragment StoreEntitySet="STATES_DETAIL">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="STATES_VIDEO">
             <EntityTypeMapping TypeName="C741714_TCGModel.STATES_VIDEO">
               <MappingFragment StoreEntitySet="STATES_VIDEO">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="C_URL" ColumnName="C_URL" />
-                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
-                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_URL" ColumnName="C_URL" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="URL">
             <EntityTypeMapping TypeName="C741714_TCGModel.URL">
               <MappingFragment StoreEntitySet="URL">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="URL_NO" ColumnName="URL_NO" />
-                <ScalarProperty Name="C_URL" ColumnName="C_URL" />
-                <ScalarProperty Name="URL_DESC" ColumnName="URL_DESC" />
-                <ScalarProperty Name="URL_KIND" ColumnName="URL_KIND" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="URL_KIND" ColumnName="URL_KIND" />
+                <ScalarProperty Name="URL_DESC" ColumnName="URL_DESC" />
+                <ScalarProperty Name="C_URL" ColumnName="C_URL" />
+                <ScalarProperty Name="URL_NO" ColumnName="URL_NO" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USR">
             <EntityTypeMapping TypeName="C741714_TCGModel.USR">
               <MappingFragment StoreEntitySet="USR">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="SIGNIN_ID" ColumnName="SIGNIN_ID" />
-                <ScalarProperty Name="SIGNIN_PWD" ColumnName="SIGNIN_PWD" />
-                <ScalarProperty Name="USR_NAME" ColumnName="USR_NAME" />
-                <ScalarProperty Name="USR_ENAME" ColumnName="USR_ENAME" />
-                <ScalarProperty Name="USR_EML" ColumnName="USR_EML" />
-                <ScalarProperty Name="USR_RANK" ColumnName="USR_RANK" />
-                <ScalarProperty Name="USR_DESC" ColumnName="USR_DESC" />
-                <ScalarProperty Name="SIGNIN_DT" ColumnName="SIGNIN_DT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SIGNIN_DT" ColumnName="SIGNIN_DT" />
+                <ScalarProperty Name="USR_DESC" ColumnName="USR_DESC" />
+                <ScalarProperty Name="USR_RANK" ColumnName="USR_RANK" />
+                <ScalarProperty Name="USR_EML" ColumnName="USR_EML" />
+                <ScalarProperty Name="USR_ENAME" ColumnName="USR_ENAME" />
+                <ScalarProperty Name="USR_NAME" ColumnName="USR_NAME" />
+                <ScalarProperty Name="SIGNIN_PWD" ColumnName="SIGNIN_PWD" />
+                <ScalarProperty Name="SIGNIN_ID" ColumnName="SIGNIN_ID" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WBAGENT">
             <EntityTypeMapping TypeName="C741714_TCGModel.WBAGENT">
               <MappingFragment StoreEntitySet="WBAGENT">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="AGENT_CONTENT" ColumnName="AGENT_CONTENT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WBLOGERR">
             <EntityTypeMapping TypeName="C741714_TCGModel.WBLOGERR">
               <MappingFragment StoreEntitySet="WBLOGERR">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ERR_GID" ColumnName="ERR_GID" />
-                <ScalarProperty Name="ERR_SMRY" ColumnName="ERR_SMRY" />
-                <ScalarProperty Name="ERR_DESC" ColumnName="ERR_DESC" />
-                <ScalarProperty Name="ERR_SRC" ColumnName="ERR_SRC" />
                 <ScalarProperty Name="LOG_DTM" ColumnName="LOG_DTM" />
+                <ScalarProperty Name="ERR_SRC" ColumnName="ERR_SRC" />
+                <ScalarProperty Name="ERR_DESC" ColumnName="ERR_DESC" />
+                <ScalarProperty Name="ERR_SMRY" ColumnName="ERR_SMRY" />
+                <ScalarProperty Name="ERR_GID" ColumnName="ERR_GID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WBNEWS">
             <EntityTypeMapping TypeName="C741714_TCGModel.WBNEWS">
               <MappingFragment StoreEntitySet="WBNEWS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BUD_ID" ColumnName="BUD_ID" />
-                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="NEWS_TITLE" ColumnName="NEWS_TITLE" />
-                <ScalarProperty Name="PUB_DT" ColumnName="PUB_DT" />
-                <ScalarProperty Name="NEWS_CONTENT" ColumnName="NEWS_CONTENT" />
-                <ScalarProperty Name="LANG_CD" ColumnName="LANG_CD" />
-                <ScalarProperty Name="SR_SQ" ColumnName="SR_SQ" />
-                <ScalarProperty Name="DIS_FRONT_ST" ColumnName="DIS_FRONT_ST" />
                 <ScalarProperty Name="DIS_HOME_ST" ColumnName="DIS_HOME_ST" />
+                <ScalarProperty Name="DIS_FRONT_ST" ColumnName="DIS_FRONT_ST" />
+                <ScalarProperty Name="SR_SQ" ColumnName="SR_SQ" />
+                <ScalarProperty Name="LANG_CD" ColumnName="LANG_CD" />
+                <ScalarProperty Name="NEWS_CONTENT" ColumnName="NEWS_CONTENT" />
+                <ScalarProperty Name="PUB_DT" ColumnName="PUB_DT" />
+                <ScalarProperty Name="NEWS_TITLE" ColumnName="NEWS_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
+                <ScalarProperty Name="BUD_ID" ColumnName="BUD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WBPIC">
             <EntityTypeMapping TypeName="C741714_TCGModel.WBPIC">
               <MappingFragment StoreEntitySet="WBPIC">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="MAP_AC_NM" ColumnName="MAP_AC_NM" />
-                <ScalarProperty Name="IMG_NM" ColumnName="IMG_NM" />
-                <ScalarProperty Name="IMG_URL" ColumnName="IMG_URL" />
-                <ScalarProperty Name="IMG_LINK" ColumnName="IMG_LINK" />
-                <ScalarProperty Name="FILE_PATH" ColumnName="FILE_PATH" />
-                <ScalarProperty Name="UP_DT" ColumnName="UP_DT" />
-                <ScalarProperty Name="UP_USR_ID" ColumnName="UP_USR_ID" />
-                <ScalarProperty Name="UP_MODE" ColumnName="UP_MODE" />
-                <ScalarProperty Name="SR_SQ" ColumnName="SR_SQ" />
-                <ScalarProperty Name="MAP_NEWS_ID" ColumnName="MAP_NEWS_ID" />
-                <ScalarProperty Name="MAP_PRODUCT_ID" ColumnName="MAP_PRODUCT_ID" />
                 <ScalarProperty Name="MAP_WORKS_ID" ColumnName="MAP_WORKS_ID" />
+                <ScalarProperty Name="MAP_PRODUCT_ID" ColumnName="MAP_PRODUCT_ID" />
+                <ScalarProperty Name="MAP_NEWS_ID" ColumnName="MAP_NEWS_ID" />
+                <ScalarProperty Name="SR_SQ" ColumnName="SR_SQ" />
+                <ScalarProperty Name="UP_MODE" ColumnName="UP_MODE" />
+                <ScalarProperty Name="UP_USR_ID" ColumnName="UP_USR_ID" />
+                <ScalarProperty Name="UP_DT" ColumnName="UP_DT" />
+                <ScalarProperty Name="FILE_PATH" ColumnName="FILE_PATH" />
+                <ScalarProperty Name="IMG_LINK" ColumnName="IMG_LINK" />
+                <ScalarProperty Name="IMG_URL" ColumnName="IMG_URL" />
+                <ScalarProperty Name="IMG_NM" ColumnName="IMG_NM" />
+                <ScalarProperty Name="MAP_AC_NM" ColumnName="MAP_AC_NM" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WBPRODUCT">
             <EntityTypeMapping TypeName="C741714_TCGModel.WBPRODUCT">
               <MappingFragment StoreEntitySet="WBPRODUCT">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="MAP_PRODUCT_TP_ID" ColumnName="MAP_PRODUCT_TP_ID" />
-                <ScalarProperty Name="BUD_USRID" ColumnName="BUD_USRID" />
-                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
-                <ScalarProperty Name="UPD_USRID" ColumnName="UPD_USRID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="PRD_NM" ColumnName="PRD_NM" />
-                <ScalarProperty Name="PRD_CONTENT" ColumnName="PRD_CONTENT" />
-                <ScalarProperty Name="LANG_CD" ColumnName="LANG_CD" />
-                <ScalarProperty Name="DIS_FRONT_ST" ColumnName="DIS_FRONT_ST" />
-                <ScalarProperty Name="SR_SQ" ColumnName="SR_SQ" />
-                <ScalarProperty Name="PRD_TP" ColumnName="PRD_TP" />
-                <ScalarProperty Name="PRD_SPE" ColumnName="PRD_SPE" />
-                <ScalarProperty Name="PRD_MT" ColumnName="PRD_MT" />
                 <ScalarProperty Name="PRD_FEAT" ColumnName="PRD_FEAT" />
+                <ScalarProperty Name="PRD_MT" ColumnName="PRD_MT" />
+                <ScalarProperty Name="PRD_SPE" ColumnName="PRD_SPE" />
+                <ScalarProperty Name="PRD_TP" ColumnName="PRD_TP" />
+                <ScalarProperty Name="SR_SQ" ColumnName="SR_SQ" />
+                <ScalarProperty Name="DIS_FRONT_ST" ColumnName="DIS_FRONT_ST" />
+                <ScalarProperty Name="LANG_CD" ColumnName="LANG_CD" />
+                <ScalarProperty Name="PRD_CONTENT" ColumnName="PRD_CONTENT" />
+                <ScalarProperty Name="PRD_NM" ColumnName="PRD_NM" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_USRID" ColumnName="UPD_USRID" />
+                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
+                <ScalarProperty Name="BUD_USRID" ColumnName="BUD_USRID" />
+                <ScalarProperty Name="MAP_PRODUCT_TP_ID" ColumnName="MAP_PRODUCT_TP_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WBPRODUCTTYPE">
             <EntityTypeMapping TypeName="C741714_TCGModel.WBPRODUCTTYPE">
               <MappingFragment StoreEntitySet="WBPRODUCTTYPE">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="LANG_CD" ColumnName="LANG_CD" />
-                <ScalarProperty Name="PRD_TP_NM" ColumnName="PRD_TP_NM" />
-                <ScalarProperty Name="SR_SQ" ColumnName="SR_SQ" />
-                <ScalarProperty Name="PRD_TP_ST" ColumnName="PRD_TP_ST" />
-                <ScalarProperty Name="BUD_ID" ColumnName="BUD_ID" />
-                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
-                <ScalarProperty Name="UPD_USR_ID" ColumnName="UPD_USR_ID" />
                 <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_USR_ID" ColumnName="UPD_USR_ID" />
+                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
+                <ScalarProperty Name="BUD_ID" ColumnName="BUD_ID" />
+                <ScalarProperty Name="PRD_TP_ST" ColumnName="PRD_TP_ST" />
+                <ScalarProperty Name="SR_SQ" ColumnName="SR_SQ" />
+                <ScalarProperty Name="PRD_TP_NM" ColumnName="PRD_TP_NM" />
+                <ScalarProperty Name="LANG_CD" ColumnName="LANG_CD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WBUSR">
             <EntityTypeMapping TypeName="C741714_TCGModel.WBUSR">
               <MappingFragment StoreEntitySet="WBUSR">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SIGNIN_ID" ColumnName="SIGNIN_ID" />
-                <ScalarProperty Name="SIGNIN_PWD" ColumnName="SIGNIN_PWD" />
-                <ScalarProperty Name="USR_NM" ColumnName="USR_NM" />
-                <ScalarProperty Name="USR_ENM" ColumnName="USR_ENM" />
-                <ScalarProperty Name="USR_EML" ColumnName="USR_EML" />
-                <ScalarProperty Name="USR_GUID" ColumnName="USR_GUID" />
-                <ScalarProperty Name="SIGNIN_DTM" ColumnName="SIGNIN_DTM" />
-                <ScalarProperty Name="BUD_USRID" ColumnName="BUD_USRID" />
-                <ScalarProperty Name="BUD_DTM" ColumnName="BUD_DTM" />
-                <ScalarProperty Name="UPD_USRID" ColumnName="UPD_USRID" />
                 <ScalarProperty Name="UPD_DTM" ColumnName="UPD_DTM" />
+                <ScalarProperty Name="UPD_USRID" ColumnName="UPD_USRID" />
+                <ScalarProperty Name="BUD_DTM" ColumnName="BUD_DTM" />
+                <ScalarProperty Name="BUD_USRID" ColumnName="BUD_USRID" />
+                <ScalarProperty Name="SIGNIN_DTM" ColumnName="SIGNIN_DTM" />
+                <ScalarProperty Name="USR_GUID" ColumnName="USR_GUID" />
+                <ScalarProperty Name="USR_EML" ColumnName="USR_EML" />
+                <ScalarProperty Name="USR_ENM" ColumnName="USR_ENM" />
+                <ScalarProperty Name="USR_NM" ColumnName="USR_NM" />
+                <ScalarProperty Name="SIGNIN_PWD" ColumnName="SIGNIN_PWD" />
+                <ScalarProperty Name="SIGNIN_ID" ColumnName="SIGNIN_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WBWORKS">
             <EntityTypeMapping TypeName="C741714_TCGModel.WBWORKS">
               <MappingFragment StoreEntitySet="WBWORKS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BUD_USRID" ColumnName="BUD_USRID" />
-                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
-                <ScalarProperty Name="UPD_USRID" ColumnName="UPD_USRID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="WKS_TITLE" ColumnName="WKS_TITLE" />
-                <ScalarProperty Name="WKS_CONTENT" ColumnName="WKS_CONTENT" />
-                <ScalarProperty Name="LANG_CD" ColumnName="LANG_CD" />
-                <ScalarProperty Name="DIS_FRONT_ST" ColumnName="DIS_FRONT_ST" />
-                <ScalarProperty Name="SR_SQ" ColumnName="SR_SQ" />
                 <ScalarProperty Name="PUB_DT" ColumnName="PUB_DT" />
+                <ScalarProperty Name="SR_SQ" ColumnName="SR_SQ" />
+                <ScalarProperty Name="DIS_FRONT_ST" ColumnName="DIS_FRONT_ST" />
+                <ScalarProperty Name="LANG_CD" ColumnName="LANG_CD" />
+                <ScalarProperty Name="WKS_CONTENT" ColumnName="WKS_CONTENT" />
+                <ScalarProperty Name="WKS_TITLE" ColumnName="WKS_TITLE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_USRID" ColumnName="UPD_USRID" />
+                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
+                <ScalarProperty Name="BUD_USRID" ColumnName="BUD_USRID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SCHOOL">
             <EntityTypeMapping TypeName="C741714_TCGModel.SCHOOL">
               <MappingFragment StoreEntitySet="SCHOOL">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
-                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
-                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
-                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
-                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="C_DESC" ColumnName="C_DESC" />
+                <ScalarProperty Name="C_TITLE" ColumnName="C_TITLE" />
+                <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
+                <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

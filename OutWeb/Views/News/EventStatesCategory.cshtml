@@ -1,61 +1,95 @@
-﻿@{
-    ViewBag.Title = "各州活動";
-    ViewBag.BodyClass = "News Event";
-}
+﻿@model Dictionary<int, string>
 
-@section breadcrumb {
-    <li><a href="~/News">最新訊息 活動公告</a></li>
-    <li><a href="~/News/EventLatest">活動寫真</a></li>
-    <li>@ViewBag.Title</li>
-}
+    @{
+        ViewBag.Title = "各州活動";
+        ViewBag.BodyClass = "News Event";
+    }
 
-<h1 class="sr-only">活動寫真</h1>
+    @section breadcrumb {
+        <li><a href="~/News">最新訊息 活動公告</a></li>
+        <li><a href="~/News/EventLatest">活動寫真</a></li>
+        <li>@ViewBag.Title</li>
+    }
 
-<ul class="tabs list-inline text-center">
-    <li><a href="~/News/EventLatest">最新活動</a></li>
-    <li><a class="current" href="~/News/EventStatesCategory">各州活動</a></li>
-</ul>
+    <h1 class="sr-only">活動寫真</h1>
 
-<h2 class="title">
-    <span class="underline">@ViewBag.Title</span>
-    <!-- <div class="addthis_inline_share_toolbox"></div> -->
-</h2>
+    <ul class="tabs list-inline text-center">
+        <li><a href="~/News/EventLatest">最新活動</a></li>
+        <li><a class="current" href="~/News/EventStatesCategory">各州活動</a></li>
+    </ul>
 
-<ul class="list-category states list-unstyled row">
-    <li class="col-md-4 col-sm-6 col-12">
-        <a class="yilan" href="~/News/EventStatesList">
-            <i class="icon-state-yilan"></i>
-            <span>宜蘭州</span>
-        </a>
-    </li>
-    <li class="col-md-4 col-sm-6 col-12">
-        <a class="taipei" href="~/News/EventStatesList">
-            <i class="icon-state-taipei"></i>
-            <span>台北州</span>
-        </a>
-    </li>
-    <li class="col-md-4 col-sm-6 col-12">
-        <a class="hsinchu" href="~/News/EventStatesList">
-            <i class="icon-state-hsinchu"></i>
-            <span>新竹州</span>
-        </a>
-    </li>
-    <li class="col-md-4 col-sm-6 col-12">
-        <a class="taichung" href="~/News/EventStatesList">
-            <i class="icon-state-taichung"></i>
-            <span>台中州</span>
-        </a>
-    </li>
-    <li class="col-md-4 col-sm-6 col-12">
-        <a class="tainan" href="~/News/EventStatesList">
-            <i class="icon-state-tainan"></i>
-            <span>台南州</span>
-        </a>
-    </li>
-    <li class="col-md-4 col-sm-6 col-12">
-        <a class="kaohsiung" href="~/News/EventStatesList">
-            <i class="icon-state-kaohsiung"></i>
-            <span>高雄州</span>
-        </a>
-    </li>
-</ul>
+    <h2 class="title">
+        <span class="underline">@ViewBag.Title</span>
+        <!-- <div class="addthis_inline_share_toolbox"></div> -->
+    </h2>
+
+    <ul class="list-category states list-unstyled row">
+        @foreach (var state in Model)
+        {
+            string stateStyle = string.Empty;
+            switch (state.Key)
+            {
+                case 1:
+                    stateStyle = "taipei";
+                    break;
+                case 2:
+                    stateStyle = "yilan";
+                    break;
+                case 3:
+                    stateStyle = "hsinchu";
+                    break;
+                case 4:
+                    stateStyle = "taichung";
+                    break;
+                case 5:
+                    stateStyle = "tainan";
+                    break;
+                case 6:
+                    stateStyle = "kaohsiung";
+                    break;
+                default:
+                    break;
+            }
+            string stateStyleList = string.Concat("icon-state-",stateStyle);
+
+            string stateListUrl = Url.Content("~/News/EventStatesList?statesTypeID=" + state.Key);
+            <li class="col-md-4 col-sm-6 col-12">
+                <a class="@stateStyle" href="@stateListUrl">
+                    <i class="@stateStyleList"></i>
+                    <span>@state.Value</span>
+                </a>
+            </li>
+        }
+
+      
+        @*<li class="col-md-4 col-sm-6 col-12">
+            <a class="taipei" href="~/News/EventStatesList">
+                <i class="icon-state-taipei"></i>
+                <span>台北州</span>
+            </a>
+        </li>
+        <li class="col-md-4 col-sm-6 col-12">
+            <a class="hsinchu" href="~/News/EventStatesList">
+                <i class="icon-state-hsinchu"></i>
+                <span>新竹州</span>
+            </a>
+        </li>
+        <li class="col-md-4 col-sm-6 col-12">
+            <a class="taichung" href="~/News/EventStatesList">
+                <i class="icon-state-taichung"></i>
+                <span>台中州</span>
+            </a>
+        </li>
+        <li class="col-md-4 col-sm-6 col-12">
+            <a class="tainan" href="~/News/EventStatesList">
+                <i class="icon-state-tainan"></i>
+                <span>台南州</span>
+            </a>
+        </li>
+        <li class="col-md-4 col-sm-6 col-12">
+            <a class="kaohsiung" href="~/News/EventStatesList">
+                <i class="icon-state-kaohsiung"></i>
+                <span>高雄州</span>
+            </a>
+        </li>*@
+    </ul>

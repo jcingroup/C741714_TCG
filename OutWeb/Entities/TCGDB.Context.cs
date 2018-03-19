@@ -19,8 +19,7 @@ namespace OutWeb.Entities
             : base(connectionString)
         {
         }
-
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -32,8 +31,10 @@ namespace OutWeb.Entities
         public virtual DbSet<ACTIVITY_DETAIL> ACTIVITY_DETAIL { get; set; }
         public virtual DbSet<EDU> EDU { get; set; }
         public virtual DbSet<EDU_CATE> EDU_CATE { get; set; }
+        public virtual DbSet<EDU_DETAIL> EDU_DETAIL { get; set; }
         public virtual DbSet<FOCUS> FOCUS { get; set; }
         public virtual DbSet<FOCUS_CATE> FOCUS_CATE { get; set; }
+        public virtual DbSet<FOCUS_DETAIL> FOCUS_DETAIL { get; set; }
         public virtual DbSet<IMG> IMG { get; set; }
         public virtual DbSet<JOINUS> JOINUS { get; set; }
         public virtual DbSet<JOINUS_CATE> JOINUS_CATE { get; set; }
@@ -44,6 +45,7 @@ namespace OutWeb.Entities
         public virtual DbSet<SCHOOL_VIDEO> SCHOOL_VIDEO { get; set; }
         public virtual DbSet<STATES> STATES { get; set; }
         public virtual DbSet<STATES_CATE> STATES_CATE { get; set; }
+        public virtual DbSet<STATES_DETAIL> STATES_DETAIL { get; set; }
         public virtual DbSet<STATES_VIDEO> STATES_VIDEO { get; set; }
         public virtual DbSet<URL> URL { get; set; }
         public virtual DbSet<USR> USR { get; set; }

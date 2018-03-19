@@ -1,14 +1,16 @@
-﻿using System;
+﻿using OutWeb.Models.FrontModels.News.EventLatestModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace OutWeb.Models.FrontModels.News.EventStatesCategoryModels
+namespace OutWeb.Models.FrontModels.News.EventStatesModels
 {
-    public class EventStatesCategoryData
+    public class EventStatesData
     {
         public int ID { get; set; }
         public string Title { get; set; }
+        public string Img { get; set; }
         public string PublishDateString { get; set; }
         public string Remark { get; set; }
         public int RemarkLength
@@ -26,8 +28,7 @@ namespace OutWeb.Models.FrontModels.News.EventStatesCategoryModels
             }
         }
 
-
-        public List<PagingImageInfo> ImagesList { get; set; }
-        public List<string> InternetSiteList { get; set; }
+        private List<EvnentPaging> m_paging = new List<EvnentPaging>();
+        public List<EvnentPaging> PagingList { get { return m_paging; } set { m_paging = value; } }
     }
 }
