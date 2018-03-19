@@ -31,7 +31,8 @@
     {
         string img = string.IsNullOrEmpty(data.Img) ? @"http://via.placeholder.com/800x510?text=No+Images" : img_path + data.Img;
         string contentUrl = Url.Action("EventLatestContent", "News", new { ID = data.ID });
-        string remark = data.Remark.Length == 0 ? "" : @"<p>" + data.Remark + "</p>";
+                string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : data.Remark;
+
         <article class="article">
             <div class="row">
                 <div class="col-lg-3 col-sm-4 col-12">

@@ -6,10 +6,6 @@ namespace OutWeb.Models.FrontModels.News.FocusNewsModels
     {
         public Dictionary<int,string> FocusTypeInfo { get; set; }
 
-        /// <summary>
-        /// 直播網址
-        /// </summary>
-        public string Url { get; set; }
         private List<FocusNewsData> m_data = new List<FocusNewsData>();
         public List<FocusNewsData> Data { get { return m_data; } set { m_data = value; } }
 
