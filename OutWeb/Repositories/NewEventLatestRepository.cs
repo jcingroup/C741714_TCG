@@ -192,7 +192,7 @@ namespace OutWeb.Repositories
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public EventLatestResult GetList(EventLatestListFilter filter)
+        public EventLatestResult GetList(EventLatestListFilter filter, int? customPageSize = null,string isIndex =null)
         {
             EventLatestResult result = new EventLatestResult();
             List<EventLatestData> data = new List<EventLatestData>();
@@ -203,7 +203,8 @@ namespace OutWeb.Repositories
                     var source = db.ACTIVITY
                         .AsEnumerable()
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
-                        s.STATUS != "D")
+                        s.STATUS != "D" &&
+                        (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.C_DATE)
                         .ToList();
@@ -223,7 +224,7 @@ namespace OutWeb.Repositories
                     }
 
                     result.Data = data;
-                    result = this.ListPagination(ref result, filter.CurrentPage, Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
+                    result = this.ListPagination(ref result, filter.CurrentPage, customPageSize ?? Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
                 }
                 catch (Exception ex)
                 {

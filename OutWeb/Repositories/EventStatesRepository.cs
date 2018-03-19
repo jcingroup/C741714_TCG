@@ -252,7 +252,7 @@ namespace OutWeb.Repositories
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public EventStatesResult GetList(int statesTypeID, EventStatesListFilter filter)
+        public EventStatesResult GetList(int statesTypeID, EventStatesListFilter filter, int? costomPageSize = null, string isIndex = null)
         {
             EventStatesResult result = new EventStatesResult();
             List<EventStatesData> data = new List<EventStatesData>();
@@ -263,7 +263,8 @@ namespace OutWeb.Repositories
                     var source = db.STATES
                         .AsEnumerable()
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
-                        s.STATUS != "D" && s.CATE_ID == statesTypeID)
+                        s.STATUS != "D" && s.CATE_ID == statesTypeID &&
+                        (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.C_DATE)
                         .ToList();
@@ -281,10 +282,11 @@ namespace OutWeb.Repositories
                         temp.Remark = GetFirstPagingRemark(temp.PagingList);
                         data.Add(temp);
                     }
+                    result.StatesTypeID = statesTypeID;
                     result.Url = GetStateVideo(statesTypeID);
 
                     result.Data = data;
-                    result = this.ListPagination(ref result, filter.CurrentPage, Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
+                    result = this.ListPagination(ref result, filter.CurrentPage, costomPageSize ?? Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
                 }
                 catch (Exception ex)
                 {

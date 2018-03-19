@@ -2,10 +2,19 @@
 @model AnnouncementLatestResult
 
 @{
-    ViewBag.Title = Model.Data.Count > 0 ? Model.Data.First().CateIDInfo.Values.First() : ""; @* 分類名稱 *@
+ViewBag.Title = Model.Data.Count > 0 ? Model.Data.First().CateIDInfo.Values.First() : ""; @* 分類名稱 *@
 ViewBag.BodyClass = "News Announcement";
 string img_path = "/Images/";
 
+string tabCurrentStyle = string.Empty;
+switch (Model.TypeID)
+{
+    case 1:
+
+        break;
+    default:
+        break;
+}
 }
 
 @section breadcrumb {
@@ -24,9 +33,29 @@ string img_path = "/Images/";
 <ul class="tabs list-inline text-center">
     <li><a href="~/News/AnnouncementLatest">最新訊息</a></li>
     @* 目前分類的 <a> + class="current" *@
-    <li><a href="~/News/AnnouncementtList?typeID=1">中央新聞</a></li>
-    <li><a href="~/News/AnnouncementtList?typeID=2">中央公告</a></li>
-    <li><a href="~/News/AnnouncementtList?typeID=3">中央聲明</a></li>
+    @switch (Model.TypeID)
+    {
+        case 1:
+            <li><a href="~/News/AnnouncementList?typeID=1" class="current">中央新聞</a></li>
+            <li><a href="~/News/AnnouncementList?typeID=2">中央公告</a></li>
+            <li><a href="~/News/AnnouncementList?typeID=4">中央聲明</a></li>
+            break;
+        case 2:
+            <li><a href="~/News/AnnouncementList?typeID=1">中央新聞</a></li>
+            <li><a href="~/News/AnnouncementList?typeID=2" class="current">中央公告</a></li>
+            <li><a href="~/News/AnnouncementList?typeID=4">中央聲明</a></li>
+            break;
+        case 4:
+            <li><a href="~/News/AnnouncementList?typeID=1">中央新聞</a></li>
+            <li><a href="~/News/AnnouncementList?typeID=2">中央公告</a></li>
+            <li><a href="~/News/AnnouncementList?typeID=4" class="current">中央聲明</a></li>
+            break;
+        default:
+            <li><a href="~/News/AnnouncementList?typeID=1" class="current">中央新聞</a></li>
+            <li><a href="~/News/AnnouncementList?typeID=2">中央公告</a></li>
+            <li><a href="~/News/AnnouncementList?typeID=4">中央聲明</a></li>
+            break;
+    }
 </ul>
 
 @* 每頁10筆資料 *@

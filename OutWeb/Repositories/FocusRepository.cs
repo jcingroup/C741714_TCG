@@ -235,7 +235,7 @@ namespace OutWeb.Repositories
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public FocusNewsResult GetList(int focusTypeID, FocusNewsListFilter filter)
+        public FocusNewsResult GetList(int focusTypeID, FocusNewsListFilter filter, int? coustomPageSize = null,string isIndex =null)
         {
             FocusNewsResult result = new FocusNewsResult();
             List<FocusNewsData> data = new List<FocusNewsData>();
@@ -246,7 +246,8 @@ namespace OutWeb.Repositories
                     var source = db.FOCUS
                         .AsEnumerable()
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
-                        s.STATUS != "D" && s.CATE_ID == focusTypeID)
+                        s.STATUS != "D" && s.CATE_ID == focusTypeID &&
+                        (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.C_DATE)
                         .ToList();
@@ -266,7 +267,7 @@ namespace OutWeb.Repositories
                     }
 
                     result.Data = data;
-                    result = this.ListPagination(ref result, filter.CurrentPage, Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
+                    result = this.ListPagination(ref result, filter.CurrentPage, coustomPageSize ?? Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
                 }
                 catch (Exception ex)
                 {

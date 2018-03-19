@@ -314,11 +314,13 @@
     <Compile Include="Models\FrontModels\News\EventLatestModels\EventLatestListFilter.cs" />
     <Compile Include="Models\FrontModels\News\EventLatestModels\EventLatestResult.cs" />
     <Compile Include="Models\FrontModels\News\EventLatestModels\EventLatestViewModel.cs" />
+    <Compile Include="Models\FrontModels\News\LatestModels\LatestData.cs" />
     <Compile Include="Models\FrontModels\News\PagingImageInfo.cs" />
     <Compile Include="Models\IPaginationModel.cs" />
     <Compile Include="Models\PaginationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ConnectionRepository.cs" />
+    <Compile Include="Repositories\LatestRepository.cs" />
     <Compile Include="Repositories\FocusRepository.cs" />
     <Compile Include="Repositories\ImageRepository.cs" />
     <Compile Include="Repositories\AnnouncementLatestRepository.cs" />

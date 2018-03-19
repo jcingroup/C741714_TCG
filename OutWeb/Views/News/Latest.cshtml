@@ -1,7 +1,12 @@
-﻿@using System.Data
+﻿@using OutWeb.Models.FrontModels.News.LatestModels
+@using OutWeb.Repositories
+
+@model List<LatestData>
+
 @{
     ViewBag.Title = "最新訊息 活動公告";
     ViewBag.BodyClass = "News Latest";
+    string img_path = "/Images/";
 }
 
 @section breadcrumb {
@@ -14,69 +19,97 @@
 </h1>
 
 @* 後台有設定要顯示在最新訊息的文章 (最多10筆，依日期最新到最舊) *@
-<div class="articles">
+@if (Model.Count > 0)
+{
 
-    <article class="article">
-        <div class="row">
-            <div class="col-lg-3 col-sm-4 col-12">
-                <a href="~/News/EventLatestContent" class="thumbnail">
-                    @* 沒有圖檔的替代圖 *@
-                    <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
-                </a>
-            </div>
-            <div class="col-lg-9 col-sm-8 col-12">
-                @*
-                中央活動     class + label-warning
-                各州活動     class + label-orange
-                新聞         class + label-danger
-                公告         class + label-pink
-                聲明         class + label-purple
-                焦點專欄     class + label-info
-                *@
-                <a class="label label-warning" href="~/News/EventLatest">中央活動</a>
-                <small class="date">2018-01-20</small>
-                <h3><a href="~/News/EventLatestContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
-                @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
-                <a href="~/News/EventLatestContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-            </div>
-        </div>
-    </article>
+    <div class="articles">
 
-    <article class="article">
-        <div class="row">
-            <div class="col-lg-3 col-sm-4 col-12">
-                <a href="~/News/AnnouncementContent" class="thumbnail">
-                    <img src="http://api.ning.com/files/ymSmd4em4y3tD9NclSe*1XQevDWPd-1a*I2DF5kGhLCF11rLpSuIOsB0zctgpvX4sGlyJCd0EZjvBifYYqTbHFVodRmJ9iZe/2018118026.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-lg-9 col-sm-8 col-12">
-                <a class="label label-danger" href="~/News/AnnouncementList">中央新聞</a>
-                <small class="date">2018-01-20</small>
-                <h3><a href="~/News/AnnouncementContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
-                @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
-                <a href="~/News/AnnouncementyContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-            </div>
-        </div>
-    </article>
+        @foreach (var data in Model)
+        {
+            string img = string.IsNullOrEmpty(data.Img) ? @"http://via.placeholder.com/800x510?text=No+Images" : img_path + data.Img;
+            string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : data.Remark;
+            string listStyleFirst = string.Empty;
+            string listStyle = string.Empty;
+            switch (data.DataType)
+            {
+                case OutWeb.Repositories.ListKind.中央活動:
+                    listStyle = "warning";
+                    break;
+                case OutWeb.Repositories.ListKind.各州活動:
+                    listStyle = "orange";
+                    break;
+                case OutWeb.Repositories.ListKind.中央新聞:
+                    listStyle = "danger";
+                    break;
+                case OutWeb.Repositories.ListKind.中央公告:
+                    listStyle = "pink";
+                    break;
+                case OutWeb.Repositories.ListKind.中央聲明:
+                    listStyle = "purple";
+                    break;
+                case OutWeb.Repositories.ListKind.焦點專欄:
+                    listStyle = "info";
+                    break;
+                default:
+                    break;
+            }
+            listStyleFirst = "label-" + listStyle;
 
-    <article class="article">
-        <div class="row">
-            <div class="col-lg-3 col-sm-4 col-12">
-                <a href="~/News/FocusContent" class="thumbnail">
-                    <img src="http://api.ning.com/files/ymSmd4em4y3tD9NclSe*1XQevDWPd-1a*I2DF5kGhLCF11rLpSuIOsB0zctgpvX4sGlyJCd0EZjvBifYYqTbHFVodRmJ9iZe/2018118026.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-lg-9 col-sm-8 col-12">
-                <a class="label label-info" href="~/News/FocusCategory">焦點專欄</a>
-                <small class="date">2018-01-20</small>
-                <h3><a href="~/News/FocusContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
-                @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
-                <a href="~/News/FocusContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-            </div>
-        </div>
-    </article>
+            <article class="article">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-4 col-12">
+                        <a href="@data.ContentUrl" class="thumbnail">
+                            @* 沒有圖檔的替代圖 *@
+                            <img src="@img" alt="">
+                        </a>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-12">
+                        @*
+                            中央活動     class + label-warning
+                            各州活動     class + label-orange
+                            新聞         class + label-danger
+                            公告         class + label-pink
+                            聲明         class + label-purple
+                            焦點專欄     class + label-info
+                        *@
+                        <a class="label @listStyleFirst" href="@data.ListTitleUrl">@data.DataType.ToString()</a>
+                        <small class="date">@data.PublishDateString</small>
+                        <h3><a href="@data.ContentUrl">@data.Title</a></h3>
+                        @* 摘要 取前 145 個字，有資料的話才顯示 *@
+                        @Html.Raw(remark)
+                        <a href="@data.ContentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                    </div>
+                </div>
+            </article>
+        }
 
-</div>
+        @*  <article class="article">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-12">
+                    <a href="~/News/EventLatestContent" class="thumbnail">
+                        沒有圖檔的替代圖
+                        <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-12">
+
+                        中央活動     class + label-warning
+                        各州活動     class + label-orange
+                        新聞         class + label-danger
+                        公告         class + label-pink
+                        聲明         class + label-purple
+                        焦點專欄     class + label-info
+
+                            <a class="label label-warning" href="~/News/EventLatest">中央活動</a>
+                            <small class="date">2018-01-20</small>
+                            <h3><a href="~/News/EventLatestContent">2018 台灣民政府受國際邀約 代表台灣參加全球人才高峰會</a></h3>
+                             摘要 取前 145 個字，有資料的話才顯示
+                            <p>台灣民政府代表與蘇黎世美國商會CEO喜相逢，2018 世界網絡論壇 台灣民政府 代表台灣參加 成果豐碩！台灣民政府 打破國際困境，領台灣人第一次參加世界網絡論壇。</p>
+                            <a href="~/News/EventLatestContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                        </div>
+                    </div>
+                </article>  *@
+
+    </div>
+
+}

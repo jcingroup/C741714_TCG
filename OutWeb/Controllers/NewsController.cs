@@ -46,7 +46,10 @@ namespace OutWeb.Controllers
         // 最新訊息
         public ActionResult Latest()
         {
-            return View();
+            string langCode = string.Empty;
+            LatestRepository repo = new LatestRepository();
+            var model = repo.GetLatestList(langCode);
+            return View(model);
         }
 
         // 最新訊息 - 活動寫真 - 最新（中央）活動
@@ -68,7 +71,7 @@ namespace OutWeb.Controllers
         public ActionResult EventLatestContent(int? ID)
         {
             if (!ID.HasValue)
-                return RedirectToAction("AnnouncementLatest");
+                return RedirectToAction("EventLatest");
             string langCd = string.Empty;
             NewEventLatestRepository repo = new NewEventLatestRepository();
             EventContent mdoel = repo.GetContentByID((int)ID, langCd);
@@ -144,7 +147,7 @@ namespace OutWeb.Controllers
             };
             AnnouncementLatestRepository repo = new AnnouncementLatestRepository();
             AnnouncementLatestResult mdoel = repo.GetList(filter);
-
+            mdoel.TypeID = (int)filter.TypeID;
             return View(mdoel);
         }
 

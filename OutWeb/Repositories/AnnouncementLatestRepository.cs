@@ -65,7 +65,7 @@ namespace OutWeb.Repositories
         /// <param name="id"></param>
         /// <param name="langCode"></param>
         /// <returns></returns>
-        private Dictionary<int, string> GetNewsCateByID(int id, string langCode)
+        public Dictionary<int, string> GetNewsCateByID(int id, string langCode)
         {
             Dictionary<int, string> cate = new Dictionary<int, string>();
             using (var db = new TCGDB(_connectionString))
@@ -128,7 +128,7 @@ namespace OutWeb.Repositories
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public AnnouncementLatestResult GetList(AnnouncementLatestFilter filter)
+        public AnnouncementLatestResult GetList(AnnouncementLatestFilter filter, int? costomPageSize = null, string isIndex = null)
         {
             AnnouncementLatestResult result = new AnnouncementLatestResult();
             List<AnnouncementLatestData> data = new List<AnnouncementLatestData>();
@@ -139,7 +139,8 @@ namespace OutWeb.Repositories
                     var source = db.NEWS
                         .AsEnumerable()
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
-                        s.STATUS != "D" && (filter.TypeID == null ? true : s.CATE_ID == (int)filter.TypeID))
+                        s.STATUS != "D" && (filter.TypeID == null ? true : s.CATE_ID == (int)filter.TypeID) &&
+                         (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.N_DATE)
                         .ToList();
@@ -159,7 +160,7 @@ namespace OutWeb.Repositories
                     }
 
                     result.Data = data;
-                    result = this.ListPagination(ref result, filter.CurrentPage, Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
+                    result = this.ListPagination(ref result, filter.CurrentPage, costomPageSize ?? Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
                 }
                 catch (Exception ex)
                 {
