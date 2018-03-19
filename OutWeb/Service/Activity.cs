@@ -426,6 +426,8 @@ namespace OutWeb.Service
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@img_no", img_no);
 
+                        cmd.ExecuteNonQuery();
+
                         ////URL
                         //csql = @"UPDATE "
                         //     + " URL "

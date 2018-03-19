@@ -307,7 +307,6 @@
     <Compile Include="Models\FrontModels\News\EventStatesModels\EventStatesData.cs" />
     <Compile Include="Models\FrontModels\News\EventStatesModels\EventStatesListFilter.cs" />
     <Compile Include="Models\FrontModels\News\EventStatesModels\EventStatesResult.cs" />
-    <Compile Include="Models\FrontModels\News\EventStatesModels\EventStatesViewModel.cs" />
     <Compile Include="Models\FrontModels\News\EventLatestModels\EvnentPaging.cs" />
     <Compile Include="Models\FrontModels\News\EventLatestModels\EventContent.cs" />
     <Compile Include="Models\FrontModels\News\EventLatestModels\EventLatestData.cs" />

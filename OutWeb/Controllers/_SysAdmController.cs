@@ -1095,6 +1095,7 @@ namespace OutWeb.Controllers
         public ActionResult Edu_Save(string action_sty, string id, string c_title, string c_date, string c_desc, string show, string sort, string lang_id, string cate_id, string img_no)
         {
             //OverlookDBService OverlookDB = new OverlookDBService();
+            c_desc = "";
             switch (action_sty)
             {
                 case "add":
@@ -1412,6 +1413,7 @@ namespace OutWeb.Controllers
         [ValidateInput(false)]
         public ActionResult Focus_Save(string action_sty, string id, string c_title, string c_date, string c_desc, string show, string hot, string sort, string lang_id, string cate_id, string img_no)
         {
+            c_desc = "";
             //OverlookDBService OverlookDB = new OverlookDBService();
             switch (action_sty)
             {

@@ -681,6 +681,13 @@ namespace OutWeb.Service
             string id = "";
             DateTime cdate;
 
+            //--------------------------------------//
+            if (IsDebug == "On")
+            {
+                logger.Debug("c_title:" + c_title + ";c_date:" + c_date + ";c_desc:" + c_desc + ";is_show:" + is_show + ";is_index:" + is_index + ";sort:" + sort + ";lang_id:" + lang_id + ";cate_id:" + cate_id + ";img_no:" + img_no + ";");
+            }
+            //--------------------------------------//
+
             //cdate = DateTime.ParseExact(c_date, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.AllowWhiteSpaces);
             //cdate = Convert.ToDateTime(c_date);
             SqlConnection conn = new SqlConnection(conn_str);
@@ -789,6 +796,13 @@ namespace OutWeb.Service
                 if (ds.Tables["chk"].Rows.Count > 0)
                 {
                     id = ds.Tables["chk"].Rows[0]["id"].ToString();
+                    //--------------------------------------//
+                    if (IsDebug == "On")
+                    {
+                        logger.Debug("id:" + id);
+                    }
+                    //--------------------------------------//	
+
                     if (img_no.Trim().Length > 0)
                     {
                         csql = @"UPDATE "
@@ -820,6 +834,8 @@ namespace OutWeb.Service
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@img_no", img_no);
+
+                        cmd.ExecuteNonQuery();
                     }
                 }
                 //===========================================================================//
