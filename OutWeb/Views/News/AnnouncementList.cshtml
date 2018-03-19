@@ -21,6 +21,14 @@ string img_path = "/Images/";
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h2>
 
+<ul class="tabs list-inline text-center">
+    <li><a href="~/News/AnnouncementLatest">最新訊息</a></li>
+    @* 目前分類的 <a> + class="current" *@
+    <li><a href="~/News/AnnouncementtList?typeID=1">中央新聞</a></li>
+    <li><a href="~/News/AnnouncementtList?typeID=2">中央公告</a></li>
+    <li><a href="~/News/AnnouncementtList?typeID=3">中央聲明</a></li>
+</ul>
+
 @* 每頁10筆資料 *@
 <div class="articles">
     @foreach (var data in Model.Data)
@@ -29,7 +37,7 @@ string img_path = "/Images/";
         string img = string.IsNullOrEmpty(data.Img) ? @"http://via.placeholder.com/800x510?text=No+Images" : img_path + data.Img;
         string contentUrl = Url.Content("~/News/AnnouncementContent?ID=" + data.ID + "&typeID=" + data.CateIDInfo.Keys.First());
         string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : @"<p>" + data.Content + "</p>";
-        string labelStyle = data.CateIDInfo.Keys.First() == 1 ? "label-danger" : data.CateIDInfo.Keys.First() == 2 ? "label-pink" : data.CateIDInfo.Keys.First() == 3 ? "label-purpl" : "";
+        string labelStyle = data.CateIDInfo.Keys.First() == 1 ? "label-danger" : data.CateIDInfo.Keys.First() == 2 ? "label-pink" : data.CateIDInfo.Keys.First() == 3 ? "label-purple" : "";
 
         <article class="article">
             <div class="row">

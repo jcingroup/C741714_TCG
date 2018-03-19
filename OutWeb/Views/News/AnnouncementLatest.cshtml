@@ -17,6 +17,13 @@
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h1>
 
+<ul class="tabs list-inline text-center">
+    <li><a class="current" href="~/News/AnnouncementLatest">最新訊息</a></li>
+    <li><a href="~/News/AnnouncementtList?typeID=1">中央新聞</a></li>
+    <li><a href="~/News/AnnouncementtList?typeID=2">中央公告</a></li>
+    <li><a href="~/News/AnnouncementtList?typeID=3">中央聲明</a></li>
+</ul>
+
 @* 每頁10筆資料，列出新聞公告聲明的所有文章，依日期最新到最舊 *@
 <div class="articles">
     @foreach (var data in Model.Data)
