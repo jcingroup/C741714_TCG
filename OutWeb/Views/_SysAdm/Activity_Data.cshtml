@@ -1,7 +1,7 @@
 ﻿@using System.Data
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Crumb = "最新活動 文章管理";
+    ViewBag.Crumb = "中央活動 文章管理";
     ViewBag.subnav = "Event";
     ViewBag.subnav2 = "Activity_List";
 
@@ -1225,8 +1225,6 @@
         </dd>
     </dl>
 
-
-
     @*
         <dl class="field">
             <dt class="col-1"><sup title="必填">*</sup> 描述</dt>
@@ -1247,7 +1245,7 @@
         </dd>
     </dl>
     <dl class="field">
-        <dt class="col-1"><sup title="必填">*</sup> 輪播</dt>
+        <dt class="col-1"><sup title="必填">*</sup> 最新訊息</dt>
         <dd class="col-3">
             <input type="radio" class="radio" name="hot" id="hotY" value="Y" @c_index_status_Y>
             <label for="hotY"></label>
@@ -1257,7 +1255,7 @@
             否
         </dd>
         <dd class="col-5">
-            <small class="text-secondary">如選「是」 ，本篇將顯示於最新資訊的輪播區塊</small>
+            <small class="text-secondary">如選「是」 ，本篇將顯示於最新訊息區</small>
         </dd>
     </dl>
     <dl class="field">
@@ -1279,31 +1277,28 @@
                 <button type="button" name="btn_small_pic" onclick="upload('S','Activity');" class="btn btn-sm btn-success oi m-t-small" data-glyph="data-transfer-upload">
                     上傳
                 </button>
-                <br>
-                @* 照片縮圖(上傳圖片後顯示) *@
-                <ol class="upload-img list-inline" id="c_img_S" name="c_img_S">
-                    @for (int s = 0; s < d_img.Rows.Count; s++)
-                    {
-                        small_img = img_path + d_img.Rows[s]["img_file"].ToString();
-                        img_id = d_img.Rows[s]["id"].ToString();
-                        <li>
-                            <button class="close" id="btn_close_s_@s" name="btn_close_s_@s" onclick="del_img('@img_id','S','Activity');">&times;</button>
-                            <img id="img_S_@s" name="img_S_@s" src="@small_img" alt="">
-                        </li>
-                    }
-
-                </ol>
             </div>
-            <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*450px，建議檔案大小不超過 1000kb</small>
+            <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*510px，建議檔案大小不超過 1000kb</small>
+            @* 照片縮圖(上傳圖片後顯示) *@
+            <div id="c_img_S" name="c_img_S">
+                @for (int s = 0; s < d_img.Rows.Count; s++)
+                {
+                    small_img = img_path + d_img.Rows[s]["img_file"].ToString();
+                    img_id = d_img.Rows[s]["id"].ToString();
+                    <div class="uploaded">
+                        <button class="close" id="btn_close_s_@s" name="btn_close_s_@s" onclick="del_img('@img_id','S','Activity');">&times;</button>
+                        <img id="img_S_@s" name="img_S_@s" src="@small_img" alt="">
+                    </div>
+                }
+            </div>
         </dd>
     </dl>
     <hr class="my-16">
     <div class="mb-12 clearfix">
         <h4 class="pull-left my-0">
-            分頁資訊
+            分頁管理
+            <button class="btn info oi" data-glyph="plus" type="button" onclick="detail_add();return false;" id="btn_detail_add" name="btn_detail_add">新增分頁</button>
         </h4>
-
-        <button class="btn info oi" type="button"  onclick="detail_add();return false;" id="btn_detail_add" name="btn_detail_add">分頁新增</button>
         <!--<button class="btn info oi" onclick="container_open('modalImage');" id="btn_detail_Image" name="btn_detail_Image">圖片管理</button>-->
         <!--<button class="btn info oi" onclick="container_open('modalVideo');" id="btn_detail_Video" name="btn_detail_Video">影片網址</button>-->
 
@@ -1315,20 +1310,20 @@
             <table class="table-list table-hover table-striped">
                 <colgroup>
                     <col style="width: 5%">
-                    <col style="width: 39%">
                     <col style="width: 7%">
+                    <col style="width: 39%">
                     <col style="width: 7%">
                     <col style="width: 7%">
                     <col style="width: 7%">
                     <col style="width: 5%">
                 </colgroup>
                 <tr>
-                    <th class="item-edit">修改</th>
+                    <th class="item-edit">編輯</th>
+                    <th class="text-center">排序</th>
                     <th class="text-center">標題</th>
                     <th class="text-center">狀態</th>
-                    <th class="text-center">排序</th>
                     <th class="text-center">圖片</th>
-                    <th class="text-center">網址</th>
+                    <th class="text-center">影片</th>
                     <th class="item-edit">刪除</th>
                 </tr>
              @if (d_detail.Rows.Count > 0)
@@ -1358,22 +1353,22 @@
                              <button class="hover-primary oi" id="btn_detail_edit_@i" name="btn_detail_edit_@i" title="修改" data-glyph="pencil" type="button" onclick="detail_edit('@c_detail_id');return false;"></button>
                          </td>
                          <td>
+                             @c_detail_sort
+                         </td>
+                         <td>
                              @c_detail_title
                          </td>
                          <td>
                              <span class="label @c_detail_class ">@c_detail_show</span>
                          </td>
                          <td>
-                             @c_detail_sort
-                         </td>
-                         <td>
                              <button class="btn info oi" onclick="img_list('@c_detail_cate','@c_detail_id');return false;" id="btn_detail_Image_@i" name="btn_detail_Image_@i">圖片管理</button>
                          </td>
                          <td>
-                             <button class="btn info oi" onclick="url_list('@c_detail_cate','@c_detail_id');return false;" id="btn_detail_Url_@i" name="btn_detail_Url_@i">網址管理</button>
+                             <button class="btn info oi" onclick="url_list('@c_detail_cate','@c_detail_id');return false;" id="btn_detail_Url_@i" name="btn_detail_Url_@i">影片管理</button>
                          </td>
                          <td>
-                             <button class="hover-primary oi" title="刪除" data-glyph="trash" type="button" id="btn_detail_del_@i" name="btn_detail_del_@i" onclick="detail_del('@c_detail_id');return false;"></button>
+                             <button class="hover-danger oi" title="刪除" data-glyph="trash" type="button" id="btn_detail_del_@i" name="btn_detail_del_@i" onclick="detail_del('@c_detail_id');return false;"></button>
                          </td>
                      </tr>
                  }
@@ -1401,88 +1396,80 @@
 </form>
 
 <!--//明細 新增 & 更新視窗 Start -->
-<div id="modalDetail" class="modal modal-sm">
+<div id="modalDetail" class="modal">
     <div class="modal-wrapper">
         <div class="modal-header" style="width:100%;">
-            分頁資訊
+            <h5 class="my-0">分頁資訊 編輯</h5>
             <button class="modal-close" onclick="container_close('modalDetail');">
                 <i class="oi" data-glyph="x"></i>
             </button>
         </div>
         <div class="modal-content">
-            <table>
-                <colgroup>
-                    <col style="width: 15%">
-                    <col>
-                </colgroup>
-                <tbody>
-                    <tr>
-                        <td>
-                            <sup title="必填">*</sup> 標題
-                        </td>
-                        <td style="text-align:left;vertical-align:middle;">
-                            <input type="text" class="form-element" required id="c_detail_title" name="c_detail_title" value="">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <sup title="必填">*</sup> 狀態
-                        </td>
-                        <td style="text-align:left;vertical-align:middle;">
-                            <input type="radio" class="radio" name="detail_show" id="detail_showY" value="Y">
-                            <label for="detail_showY"></label>
-                            發佈
-                            <input type="radio" class="radio" name="detail_show" id="detail_showN" value="N">
-                            <label for="detail_showN"></label>
-                            草稿
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <sup title="必填">*</sup> 排序
-                        </td>
-                        <td style="text-align:left;vertical-align:middle;">
-                            <input type="number" min="0" class="form-element" id="detail_sort" name="detail_sort" value="" required>
-                            <small class="text-secondary">數字愈大愈前面</small>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <sup title="必填">*</sup> 描述
-                        </td>
-                        <td style="text-align:left;vertical-align:middle;">
-                            @* 編輯器(含圖片上傳功能) *@
-                            <textarea class="ckeditor" rows="5" cols="5" placeholder="請輸入最新消息內容" name="c_detail_desc" id="c_detail_desc"></textarea>
-                            @*加入圖片上傳頁籤，放在頁面底下，放在頁面head區的話，會抓不到myText DOM*@
-                            <script type="text/javascript">
-                            CKEDITOR.replace('c_detail_desc'
-                            , { filebrowserImageUploadUrl: '@Url.Content(SysPath + "UploadPicture")'
-                            , on: {
-                                instanceReady: function( ev ) {
-                                    this.dataProcessor.writer.setRules( 'p', {
-                                        indent: false,
-                                        breakBeforeOpen: false,   //<p>之前不加换行
-                                        breakAfterOpen: false,    //<p>之后不加换行
-                                        breakBeforeClose: false,  //</p>之前不加换行
-                                        breakAfterClose: false    //</p>之后不加换行7
-                                    });
-                                }
-                                }
+            <div class="form-list">
+                <dl class="field">
+                    <dt class="col-1"><sup title="必填">*</sup> 標題</dt>
+                    <dd class="col-6">
+                        <input type="text" class="form-element" required id="c_detail_title" name="c_detail_title" value="">
+                    </dd>
+                </dl>
+                <dl class="field">
+                    <dt class="col-1"><sup title="必填">*</sup> 狀態</dt>
+                    <dd class="col-6">
+                        <input type="radio" class="radio" name="detail_show" id="detail_showY" value="Y">
+                        <label for="detail_showY"></label>
+                        發佈
+                        <input type="radio" class="radio" name="detail_show" id="detail_showN" value="N">
+                        <label for="detail_showN"></label>
+                        草稿
+                    </dd>
+                </dl>
+                <dl class="field">
+                    <dt class="col-1"><sup title="必填">*</sup> 排序</dt>
+                    <dd class="col-6">
+                        <input type="number" min="0" class="form-element" id="detail_sort" name="detail_sort" value="" required>
+                    </dd>
+                    <dd class="col-5">
+                        <small class="text-secondary">數字愈大愈前面</small>
+                    </dd>
+                </dl>
+                <hr class="my-16">
+                <fieldset class="m-t-24">
+                    <legend class="underline">[ 內容 ]</legend>
+                    <div class="alert-warning mb-16">
+                        <strong>編輯器注意事項:</strong><br>
+                        從 WORD 複製文字時，請使用下方的 <img src="~/Content/images/icon-word.jpg" /> 圖示來貼上 WORD 文字，避免跑版<br />
+                        編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除) ，以免行動裝置顯示時會跑版。<br />
+                        檔案尺寸寬度超過 1600 或 高度超過1200 的圖片會被壓縮(PNG透明背景會變成不透明)
+                    </div>
+                    @* 編輯器(含圖片上傳功能) *@
+                    <textarea class="ckeditor" rows="5" cols="5" placeholder="請輸入最新消息內容" name="c_detail_desc" id="c_detail_desc"></textarea>
+                    @*加入圖片上傳頁籤，放在頁面底下，放在頁面head區的話，會抓不到myText DOM*@
+                    <script type="text/javascript">
+                    CKEDITOR.replace('c_detail_desc'
+                    , { filebrowserImageUploadUrl: '@Url.Content(SysPath + "UploadPicture")'
+                    , on: {
+                        instanceReady: function( ev ) {
+                            this.dataProcessor.writer.setRules( 'p', {
+                                indent: false,
+                                breakBeforeOpen: false,   //<p>之前不加换行
+                                breakAfterOpen: false,    //<p>之后不加换行
+                                breakBeforeClose: false,  //</p>之前不加换行
+                                breakAfterClose: false    //</p>之后不加换行7
                             });
+                        }
+                        }
+                    });
 
-                            function getContenet(){
-                                return CKEDITOR.instances.c_detail_desc.getData();    //获取textarea的值
-                            }
-
-                            </script>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    function getContenet(){
+                        return CKEDITOR.instances.c_detail_desc.getData();    //获取textarea的值
+                    }
+                    </script>
+                </fieldset>
+            </div>
         </div>
         <div class="modal-footer text-center">
-            <button class="btn success oi" onclick="detail_save();">確定</button>
-            <button class="btn warning oi" onclick="container_close('modalDetail');">取消</button>
+            <button class="btn success oi" data-glyph="check" onclick="detail_save();">確定</button>
+            <button class="btn warning oi" data-glyph="x" onclick="container_close('modalDetail');">取消</button>
         </div>
     </div>
 </div>
@@ -1492,7 +1479,7 @@
 <div id="modalImage" class="modal modal-sm">
     <div class="modal-wrapper">
         <div class="modal-header">
-            圖片管理
+            <h5 class="my-0">圖片管理</h5>
             <button class="modal-close" onclick="container_close('modalImage');">
                 <i class="oi" data-glyph="x"></i>
             </button>
@@ -1516,8 +1503,8 @@
             </section>
         </div>
         <div class="modal-footer text-center">
-            <button class="btn success oi" onclick="img_update();return false;">確定</button>
-            <button class="btn warning oi" onclick="container_close('modalImage');">取消</button>
+            <button class="btn success oi" data-glyph="check" onclick="img_update();return false;">確定</button>
+            <button class="btn warning oi" data-glyph="x" onclick="container_close('modalImage');">取消</button>
         </div>
     </div>
 </div>
@@ -1526,7 +1513,7 @@
 <div id="modalVideo" class="modal modal-sm">
     <div class="modal-wrapper">
         <div class="modal-header">
-            輸入影片網址
+            <h5 class="my-0">影片網址管理</h5>
             <button class="modal-close" onclick="container_close('modalVideo');">
                 <i class="oi" data-glyph="x"></i>
             </button>
@@ -1577,8 +1564,8 @@
             </ol>
         </div>
         <div class="modal-footer text-center">
-            <button class="btn success oi" onclick="url_update();">確定</button>
-            <button class="btn warning oi" onclick="container_close('modalVideo');">取消</button>
+            <button class="btn success oi" data-glyph="check" onclick="url_update();">確定</button>
+            <button class="btn warning oi" data-glyph="check" onclick="container_close('modalVideo');">取消</button>
         </div>
     </div>
 </div>
