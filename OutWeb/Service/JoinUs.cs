@@ -11,7 +11,7 @@ namespace OutWeb.Service
     //加入我們
     public class JoinUs
     {
-        string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        //string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
         string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string csql = "";
         string cate_dbf_name = "JOINUS_CATE";
@@ -30,7 +30,7 @@ namespace OutWeb.Service
         public DataTable Cate_List(ref string err_msg, string cate_id = "", string sort = "", string status = "", string title_query = "", string lang_id = "")
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
 
             string[] Array_cate_id;
@@ -177,7 +177,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -309,7 +309,7 @@ namespace OutWeb.Service
         public string Cate_Update(string cate_id = "", string cate_name = "", string cate_desc = "", string is_show = "", string sort = "", string lang_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -370,7 +370,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -455,7 +455,7 @@ namespace OutWeb.Service
         {
             DataTable dt = new DataTable();
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -641,7 +641,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
             string id = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -787,7 +787,7 @@ namespace OutWeb.Service
         public string Update(string id = "", string c_title = "", string c_desc = "", string is_show = "", string sort = "", string lang_id = "", string cate_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -850,7 +850,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();

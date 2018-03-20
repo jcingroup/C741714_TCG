@@ -11,18 +11,23 @@ namespace OutWeb.Service
     public class DBService
     {
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        string local_conn_str = WebConfigurationManager.ConnectionStrings["local_conn_string"].ConnectionString.ToString();
         string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
+        string IsLocal = WebConfigurationManager.AppSettings["Local"].ToString();
         string csql = "";
 
         DataSet ds = new DataSet();
         Service CService = new Service();
         //Log 記錄
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         
+
         #region 首頁影片資料 Video_List
         public DataTable Video_List()
         {
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -66,7 +71,8 @@ namespace OutWeb.Service
         public string Video_Update(string mv)
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -116,7 +122,8 @@ namespace OutWeb.Service
         public DataTable Com_List(ref string err_msg, string category = "", string lang = "")
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -178,7 +185,9 @@ namespace OutWeb.Service
         {
             string c_msg = "";
             string err_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -243,7 +252,9 @@ namespace OutWeb.Service
         public string Img_Insert(string img_no = "", string img_file = "", string img_sty = "", string img_kind = "", string img_desc = "", string is_index = "N")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -291,7 +302,9 @@ namespace OutWeb.Service
         public string Img_Delete(string img_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -334,8 +347,10 @@ namespace OutWeb.Service
             string c_msg = "";
             
             string c_update = "";
+
             
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -447,7 +462,9 @@ namespace OutWeb.Service
             string str_img_no = "";
             string str_img_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -571,7 +588,9 @@ namespace OutWeb.Service
         public string URL_Insert(string url_no = "", string c_url = "", string url_kind = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -617,7 +636,9 @@ namespace OutWeb.Service
         public string Url_Delete(string url_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -661,7 +682,9 @@ namespace OutWeb.Service
 
             string c_update = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -731,7 +754,9 @@ namespace OutWeb.Service
             string str_url_no = "";
             string str_url_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -846,7 +871,9 @@ namespace OutWeb.Service
             DataSet dt = new DataSet();
             DataTable d_t = new DataTable();
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
 
@@ -912,7 +939,7 @@ namespace OutWeb.Service
         public string User_Update(string id = "", string signin_pwd = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -966,7 +993,7 @@ namespace OutWeb.Service
         public string User_Signin(string id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1030,7 +1057,9 @@ namespace OutWeb.Service
             //    imgno_count = 0;
             //}
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1125,7 +1154,9 @@ namespace OutWeb.Service
         public string Ad_Img_Insert(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1170,7 +1201,9 @@ namespace OutWeb.Service
         public string Ad_Img_Delete(string img_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1211,7 +1244,7 @@ namespace OutWeb.Service
         public string Ad_Img_Update(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1260,7 +1293,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
             string c_sql = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1343,7 +1376,7 @@ namespace OutWeb.Service
         {
             DataTable dt = new DataTable();
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1536,7 +1569,7 @@ namespace OutWeb.Service
             string c_msg = "";
             string prod_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1672,7 +1705,7 @@ namespace OutWeb.Service
         public string Prod_Update(string prod_id = "", string cateb_id = "", string cates_id = "", string prod_name = "", string prod_desc = "", string show = "", string sort = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1735,7 +1768,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1800,7 +1833,7 @@ namespace OutWeb.Service
         {
             DataSet dt = new DataSet();
             DataTable d_t = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1886,7 +1919,7 @@ namespace OutWeb.Service
         public string Prod_Img_Delete(string img_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1927,7 +1960,7 @@ namespace OutWeb.Service
         public string Prod_Img_Update(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -1975,7 +2008,7 @@ namespace OutWeb.Service
         public string Prod_Img_Insert(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -2023,7 +2056,7 @@ namespace OutWeb.Service
         public DataTable Prod_CateB_List(ref string err_msg, string prod_cate_id = "", string sort = "", string status = "", string title_query = "")
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -2162,7 +2195,7 @@ namespace OutWeb.Service
             string c_msg = "";
             string cate_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -2289,7 +2322,7 @@ namespace OutWeb.Service
         public string Prod_CateB_Update(string cate_id = "", string cate_name = "", string cate_desc = "", string is_show = "", string sort = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -2348,7 +2381,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -2485,7 +2518,7 @@ namespace OutWeb.Service
         {
             DataTable dt = new DataTable();
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -2649,7 +2682,7 @@ namespace OutWeb.Service
             string c_msg = "";
             string cate_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -2781,7 +2814,7 @@ namespace OutWeb.Service
         public string Prod_CateS_Update(string cate_id = "", string cate_name = "", string cate_desc = "", string is_show = "", string sort = "", string cateb_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -2842,7 +2875,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -2949,7 +2982,7 @@ namespace OutWeb.Service
         {
             DataSet dt = new DataSet();
             DataTable d_t = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
             string[] cimg_no;
             string str_img_no = "";
@@ -3045,7 +3078,7 @@ namespace OutWeb.Service
         public string Prod_Cate_Img_Delete(string img_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -3086,7 +3119,7 @@ namespace OutWeb.Service
         public string Prod_Cate_Img_Update(string img_no = "", string img_file = "", string img_sty = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -3143,7 +3176,7 @@ namespace OutWeb.Service
         public string Prod_Cate_Img_Insert(string img_no = "", string img_file = "", string img_sty = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -3192,7 +3225,7 @@ namespace OutWeb.Service
         public DataTable Proj_List(ref string err_msg, string cproj_id = "", string sort = "", string status = "", string title_query = "", string start_date = "", string end_date = "", string is_index = "")
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
             string[] Array_proj_id;
             string[] Array_title_query;
@@ -3358,7 +3391,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -3436,7 +3469,7 @@ namespace OutWeb.Service
         public string Proj_Update(string proj_id = "", string proj_title = "", string proj_date = "", string proj_desc = "", string is_show = "", string is_index = "", string sort = "", string proj_memo = "", string proj_url = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -3502,7 +3535,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -3552,7 +3585,7 @@ namespace OutWeb.Service
         public DataTable His_List(ref string err_msg, string his_id = "", string sort = "", string status = "", string title_query = "")
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
 
             try
@@ -3695,7 +3728,7 @@ namespace OutWeb.Service
             string c_msg = "";
             string his_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -3825,7 +3858,7 @@ namespace OutWeb.Service
         public string His_Update(string his_id = "", string his_ym = "", string his_title = "", string his_desc = "", string show = "", string sort = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -3886,7 +3919,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -3947,7 +3980,7 @@ namespace OutWeb.Service
         {
             DataSet dt = new DataSet();
             DataTable d_t = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
             string[] cimg_no;
             string str_img_no = "";
@@ -4032,7 +4065,7 @@ namespace OutWeb.Service
         public string His_Img_Delete(string img_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -4073,7 +4106,7 @@ namespace OutWeb.Service
         public string His_Img_Update(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -4121,7 +4154,7 @@ namespace OutWeb.Service
         public string His_Img_Insert(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -4170,7 +4203,7 @@ namespace OutWeb.Service
         {
             DataTable dt = new DataTable();
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
 
             try
@@ -4310,7 +4343,7 @@ namespace OutWeb.Service
             string c_msg = "";
             string cate_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -4414,7 +4447,7 @@ namespace OutWeb.Service
         public string ADS_Cate_Update(string cate_id = "", string cate_name = "", string cate_desc = "", string is_show = "", string sort = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -4473,7 +4506,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -4523,7 +4556,7 @@ namespace OutWeb.Service
         {
             DataSet dt = new DataSet();
             DataTable d_t = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
 
             string[] cimg_no;
@@ -4609,7 +4642,7 @@ namespace OutWeb.Service
         public string ADS_Cate_Img_Delete(string img_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -4650,7 +4683,7 @@ namespace OutWeb.Service
         public string ADS_Cate_Img_Update(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -4698,7 +4731,7 @@ namespace OutWeb.Service
         public string ADS_Cate_Img_Insert(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -4748,7 +4781,7 @@ namespace OutWeb.Service
         {
             DataTable dt = new DataTable();
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
 
             string[] Array_ad_id;
@@ -4918,7 +4951,7 @@ namespace OutWeb.Service
             string c_msg = "";
             string ad_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5025,7 +5058,7 @@ namespace OutWeb.Service
         public string ADS_Update(string ad_id = "", string cate_id = "", string ad_title = "", string ad_url = "", string show = "", string sort = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5086,7 +5119,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5137,7 +5170,7 @@ namespace OutWeb.Service
         {
             DataSet dt = new DataSet();
             DataTable d_t = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
             string[] cimg_no;
             string str_img_no = "";
@@ -5223,7 +5256,7 @@ namespace OutWeb.Service
         public string ADS_Img_Delete(string img_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5264,7 +5297,7 @@ namespace OutWeb.Service
         public string ADS_Img_Update(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5312,7 +5345,7 @@ namespace OutWeb.Service
         public string ADS_Img_Insert(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5361,7 +5394,7 @@ namespace OutWeb.Service
         public DataTable Faq_List(ref string err_msg, string faq_id = "", string sort = "", string status = "", string title_query = "")
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
 
             string[] Array_faq_id;
@@ -5500,7 +5533,7 @@ namespace OutWeb.Service
             string c_msg = "";
             //string faq_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5573,7 +5606,7 @@ namespace OutWeb.Service
         public string Faq_Update(string faq_id = "", string faq_title = "", string faq_desc = "", string show = "", string sort = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5632,7 +5665,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5682,7 +5715,7 @@ namespace OutWeb.Service
         public DataTable Staff_List(ref string err_msg, string s_id = "", string sort = "", string status = "", string title_query = "")
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
 
             string[] Array_s_id;
@@ -5822,7 +5855,7 @@ namespace OutWeb.Service
             string c_msg = "";
             //string s_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5895,7 +5928,7 @@ namespace OutWeb.Service
         public string Staff_Update(string s_id = "", string s_title = "", string s_desc = "", string show = "", string sort = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -5954,7 +5987,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -6003,7 +6036,7 @@ namespace OutWeb.Service
         public DataTable Partner_Cate_List(ref string err_msg, string cate_id = "", string sort = "", string status = "", string title_query = "")
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
 
             string[] Array_cate_id;
@@ -6142,7 +6175,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -6269,7 +6302,7 @@ namespace OutWeb.Service
         public string Partner_Cate_Update(string cate_id = "", string cate_name = "", string cate_desc = "", string is_show = "", string sort = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -6328,7 +6361,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -6411,7 +6444,7 @@ namespace OutWeb.Service
         public DataTable Partner_List(ref string err_msg, string part_id = "", string sort = "", string status = "", string title_query = "", string cate_id = "")
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
 
             string[] Array_part_id;
@@ -6580,7 +6613,7 @@ namespace OutWeb.Service
             string c_msg = "";
             string part_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -6712,7 +6745,7 @@ namespace OutWeb.Service
         public string Partner_Update(string part_id = "", string cate_id = "", string part_title = "", string part_url = "", string show = "", string sort = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -6773,7 +6806,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -6838,7 +6871,7 @@ namespace OutWeb.Service
         {
             DataSet dt = new DataSet();
             DataTable d_t = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
 
             string[] cimg_no;
@@ -6926,7 +6959,7 @@ namespace OutWeb.Service
         public string Partner_Img_Delete(string img_id = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -6967,7 +7000,7 @@ namespace OutWeb.Service
         public string Partner_Img_Update(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -7015,7 +7048,7 @@ namespace OutWeb.Service
         public string Partner_Img_Insert(string img_no = "", string img_file = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -7064,7 +7097,7 @@ namespace OutWeb.Service
         public DataTable Foot_List(ref string err_msg, string foot_id = "", string sort = "", string status = "", string title_query = "")
         {
             DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             SqlCommand cmd = new SqlCommand();
             string[] Array_foot_id;
             string[] Array_title_query;
@@ -7200,7 +7233,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -7271,7 +7304,7 @@ namespace OutWeb.Service
         public string Foot_Update(string foot_id = "", string foot_title = "", string foot_url = "", string show = "", string sort = "", string is_blank = "")
         {
             string c_msg = "";
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -7332,7 +7365,7 @@ namespace OutWeb.Service
         {
             string c_msg = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();

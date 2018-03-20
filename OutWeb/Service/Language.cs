@@ -10,7 +10,7 @@ namespace OutWeb.Service
 {
     public class Language
     {
-        string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        //string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
         string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string csql = "";
 
@@ -27,7 +27,7 @@ namespace OutWeb.Service
             string[] clang_id;
             string str_lang_id = "";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();

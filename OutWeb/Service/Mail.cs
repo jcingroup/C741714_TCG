@@ -14,7 +14,7 @@ namespace OutWeb.Service
 {
     public class Mail
     {
-        string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        //string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
         string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string csql = "";
         DataSet ds = new DataSet();
@@ -49,7 +49,7 @@ namespace OutWeb.Service
 
             status = "N";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(CService.conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();

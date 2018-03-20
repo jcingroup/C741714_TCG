@@ -16,7 +16,9 @@ namespace OutWeb.Service
     public class Service
     {
         string conn_str = WebConfigurationManager.ConnectionStrings["conn_string"].ConnectionString.ToString();
+        string local_conn_str = WebConfigurationManager.ConnectionStrings["local_conn_string"].ConnectionString.ToString();
         string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
+        string IsLocal = WebConfigurationManager.AppSettings["Local"].ToString();
         string csql = "";
         DataSet ds = new DataSet();
         //Service CService = new Service();
@@ -50,7 +52,7 @@ namespace OutWeb.Service
 
             status = "N";
 
-            SqlConnection conn = new SqlConnection(conn_str);
+            SqlConnection conn = new SqlConnection(conn_string());
             if (conn.State == ConnectionState.Closed)
             {
                 conn.Open();
@@ -259,5 +261,22 @@ namespace OutWeb.Service
             return sb.ToString();
         }
         #endregion
+
+        #region 連結字串取得 conn_string
+        //連結字串取得
+        public string conn_string()
+        {
+            string connstr = "";
+            if (IsLocal == "On")
+            {
+                connstr = local_conn_str;
+            }
+            else
+            {
+                connstr = conn_str;
+            }
+            return connstr;
+        }
+        #endregion 連結字串取得 conn_string
     }
 }
