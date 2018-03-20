@@ -28,7 +28,7 @@
 <div class="articles">
     @foreach (var data in Model.Data)
     {
-        string listLink = Url.Content("~/News/AnnouncementList?typeID=" + data.CateIDInfo.Keys.First() + "&page=" + Model.Pagination.CurrentPage);
+        string listLink = Url.Content("~/News/AnnouncementList?typeID=" + data.CateIDInfo.Keys.First());
         string img = string.IsNullOrEmpty(data.Img) ? @"http://via.placeholder.com/800x510?text=No+Images" : img_path + data.Img;
         string contentUrl = Url.Content("~/News/AnnouncementContent?ID=" + data.ID + "&typeID=" + data.CateIDInfo.Keys.First());
         string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : data.Content.Length > 145 ? @"<p>" + data.Content.Substring(0, 145) + "...</p>" : data.Content;

@@ -7,6 +7,7 @@ namespace OutWeb.Models.FrontModels.News.EventLatestModels
 {
     public class EventContent
     {
+        public int? PagingID { get; set; }
         public string PreviousIDStr { get; set; }
         public string NextIDStr { get; set; }
 

@@ -6,6 +6,7 @@ using OutWeb.Models.FrontModels.News.FocusNewsModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace OutWeb.Repositories
 {
@@ -125,8 +126,8 @@ namespace OutWeb.Repositories
                         {
                             Title = s.C_TITLE,
                             Description = s.C_DESC,
-                            ImagesList = GetPaginImgsListByID(s.ID),
-                            InternetSiteList = GetPagingUrlListByID(s.ID)
+                            //ImagesList = GetPaginImgsListByID(s.ID),
+                            //InternetSiteList = GetPagingUrlListByID(s.ID)
                         })
                 .ToList();
                 //語系join
@@ -148,6 +149,7 @@ namespace OutWeb.Repositories
                 //.ToList();
             }
 
+      
             return data;
         }
 
