@@ -117,7 +117,7 @@ namespace OutWeb.Repositories
 
             using (var db = new TCGDB(_connectionString))
             {
-                data = db.STATES_DETAIL
+                data = db.FOCUS_DETAIL
                     .AsEnumerable()
                         .Where(o => o.CATE_ID == id.ToString())
                         .OrderBy(o => o.SORT)
@@ -235,7 +235,7 @@ namespace OutWeb.Repositories
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public FocusNewsResult GetList(int focusTypeID, FocusNewsListFilter filter, int? coustomPageSize = null,string isIndex =null)
+        public FocusNewsResult GetList(int focusTypeID, FocusNewsListFilter filter, int? coustomPageSize = null, string isIndex = null)
         {
             FocusNewsResult result = new FocusNewsResult();
             List<FocusNewsData> data = new List<FocusNewsData>();

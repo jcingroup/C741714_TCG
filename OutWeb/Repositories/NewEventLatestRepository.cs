@@ -176,8 +176,9 @@ namespace OutWeb.Repositories
                     Img = GetMainImg(source.ID),
                     PagingList = GetPagingListByID(source.ID),
                     PublishDateString = source.C_DATE.Value.ToString("yyyy-MM-dd"),
+                    Remark = source.C_DESC
                 };
-                result.Data.Remark = GetFirstPagingRemark(result.Data.PagingList);
+                //result.Data.Remark = GetFirstPagingRemark(result.Data.PagingList);
                 int dataIndex = sourceList.IndexOf(source);
                 int lastDataIndex = sourceList.Count - 1;
                 result.PreviousIDStr = dataIndex == 0 ? "" : sourceList[(dataIndex - 1)].ID.ToString();

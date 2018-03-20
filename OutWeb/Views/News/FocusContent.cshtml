@@ -63,32 +63,32 @@
 
 
 
-  @* if (dt.Rows.Count > 0)
-    {
-        for (int j = 0; j < dt.Rows.Count; j++)
+    @* if (dt.Rows.Count > 0)
         {
-            cj = j.ToString();
-
-            c_title = dt.Rows[j]["c_title"].ToString();
-            c_desc = dt.Rows[j]["c_desc"].ToString();
-
-            if (j == 0)
+            for (int j = 0; j < dt.Rows.Count; j++)
             {
-                c_tab = "tab current";
-            }
-            else
-            {
-                c_tab = "tab";
-            }
+                cj = j.ToString();
 
-            <div class="@c_tab" id="@str_tab-@cj">
-                <!-- <h3>@Html.Raw(c_title)</h3> -->
-                @Html.Raw(c_desc)
-            </div>
-        }
-    }*@
+                c_title = dt.Rows[j]["c_title"].ToString();
+                c_desc = dt.Rows[j]["c_desc"].ToString();
 
- 
+                if (j == 0)
+                {
+                    c_tab = "tab current";
+                }
+                else
+                {
+                    c_tab = "tab";
+                }
+
+                <div class="@c_tab" id="@str_tab-@cj">
+                    <!-- <h3>@Html.Raw(c_title)</h3> -->
+                    @Html.Raw(c_desc)
+                </div>
+            }
+        }*@
+
+
 
 </div>
 <!--

@@ -1473,7 +1473,6 @@ namespace OutWeb.Controllers
         {
             string str_return = "";
             string err_msg = "";
-
             DataTable dt;
 
             //c_desc = CService.UnEscape(c_desc);

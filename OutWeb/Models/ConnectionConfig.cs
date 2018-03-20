@@ -12,7 +12,7 @@ namespace OutWeb.Models
 
         public ConnectionConfig()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conn_string"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["local_conn_string"].ConnectionString;
 
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectionString);
 
