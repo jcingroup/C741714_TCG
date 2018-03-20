@@ -842,7 +842,6 @@
     <Content Include="Views\AboutUs\EducationCategory.cshtml" />
     <Content Include="Views\AboutUs\EducationContent.cshtml" />
     <Content Include="Views\AboutUs\EducationList.cshtml" />
-    <Content Include="Views\AboutUs\Law.cshtml" />
     <Content Include="Views\AboutUs\Position.cshtml" />
     <Content Include="Views\AboutUs\Statement.cshtml" />
     <Content Include="Views\AboutUs\TCG.cshtml" />
@@ -891,6 +890,7 @@
     <Content Include="Views\_SysAdm\Activity_Data.cshtml" />
     <Content Include="Views\_SysAdm\States_List.cshtml" />
     <Content Include="Views\_SysAdm\States_Data.cshtml" />
+    <Content Include="Views\AboutUs\Law.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
