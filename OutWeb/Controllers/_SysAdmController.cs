@@ -2103,6 +2103,7 @@ namespace OutWeb.Controllers
 
         #region 活動寫真_明細 儲存 Activity_Detail_Save
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Activity_Detail_Save(string c_sty, string c_title, string c_desc, string status, string sort, string cate_id, string id)
         {
             string str_return = "";
@@ -2565,6 +2566,7 @@ namespace OutWeb.Controllers
 
         #region 各洲活動_明細 儲存 States_Detail_Save
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult States_Detail_Save(string c_sty, string c_title, string c_desc, string status, string sort, string cate_id, string id)
         {
             string str_return = "";
