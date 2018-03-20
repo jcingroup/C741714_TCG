@@ -1219,7 +1219,7 @@
         </dd>
     </dl>
 
-    <dl class="field">
+    <!-- <dl class="field">
         <dt class="col-1">代表圖</dt>
         <dd class="col-6">
             <div class="input-file">
@@ -1245,14 +1245,13 @@
             </div>
             <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*450px，建議檔案大小不超過 1000kb</small>
         </dd>
-    </dl>
+    </dl> -->
     <hr class="my-16">
     <div class="mb-12 clearfix">
         <h4 class="pull-left my-0">
-            分頁資訊
+            分頁管理
+            <button class="btn info oi" data-glyph="plus" type="button" onclick="detail_add();return false;" id="btn_detail_add" name="btn_detail_add">分頁新增</button>
         </h4>
-
-        <button class="btn info oi" type="button" onclick="detail_add();return false;" id="btn_detail_add" name="btn_detail_add">分頁新增</button>
         <!--<button class="btn info oi" onclick="container_open('modalImage');" id="btn_detail_Image" name="btn_detail_Image">圖片管理</button>-->
         <!--<button class="btn info oi" onclick="container_open('modalVideo');" id="btn_detail_Video" name="btn_detail_Video">影片網址</button>-->
         <!--<button class="btn info oi" data-glyph="video" data-modal="#modalDetail" onclick="detail('add','');" id="btn_detail_add" name="btn_detail_add">分頁新增</button>-->
@@ -1266,17 +1265,18 @@
                     <col style="width: 39%">
                     <col style="width: 7%">
                     <col style="width: 7%">
-                    <col style="width: 7%">
-                    <col style="width: 7%">
+                    <!-- <col style="width: 7%">
+                    <col style="width: 7%"> -->
                     <col style="width: 5%">
                 </colgroup>
                 <tr>
-                    <th class="item-edit">修改</th>
+                    <th class="item-edit">編輯</th>
+                    <th class="text-center">排序</th>
                     <th class="text-center">標題</th>
                     <th class="text-center">狀態</th>
-                    <th class="text-center">排序</th>
-                    <th class="text-center">圖片</th>
-                    <th class="text-center">網址</th>
+                    
+                    <!-- <th class="text-center">圖片</th>
+                    <th class="text-center">網址</th> -->
                     <th class="item-edit">刪除</th>
                 </tr>
                 @if (d_detail.Rows.Count > 0)
@@ -1306,20 +1306,20 @@
                                 <button class="hover-primary oi" id="btn_detail_edit_@i" name="btn_detail_edit_@i" title="修改" data-glyph="pencil" type="button" onclick="detail_edit('@c_detail_id');return false;"></button>
                             </td>
                             <td>
+                                @c_detail_sort
+                            </td>
+                            <td>
                                 @c_detail_title
                             </td>
                             <td>
                                 <span class="label @c_detail_class ">@c_detail_show</span>
                             </td>
-                            <td>
-                                @c_detail_sort
-                            </td>
-                            <td>
+                            <!-- <td>
                                 <button class="btn info oi" onclick="img_list('@c_detail_cate','@c_detail_id');return false;" id="btn_detail_Image_@i" name="btn_detail_Image_@i">圖片管理</button>
                             </td>
                             <td>
                                 <button class="btn info oi" onclick="url_list('@c_detail_cate','@c_detail_id');return false;" id="btn_detail_Url_@i" name="btn_detail_Url_@i">網址管理</button>
-                            </td>
+                            </td> -->
                             <td>
                                 <button class="hover-primary oi" title="刪除" data-glyph="trash" type="button" id="btn_detail_del_@i" name="btn_detail_del_@i" onclick="detail_del('@c_detail_id');return false;"></button>
                             </td>
@@ -1329,7 +1329,7 @@
                 else
                 {
                     <tr>
-                        <td colspan="7">
+                        <td colspan="5">
                             無分頁資料
                         </td>
                     </tr>
@@ -1348,7 +1348,7 @@
     </footer>
 </form>
 <!--//明細 新增 & 更新視窗 Start -->
-<div id="modalDetail" class="modal modal-sm">
+<div id="modalDetail" class="modal">
     <div class="modal-wrapper">
         <div class="modal-header" style="width:100%;">
             分頁資訊
@@ -1428,8 +1428,8 @@
             </table>
         </div>
         <div class="modal-footer text-center">
-            <button class="btn success oi" onclick="detail_save();">確定</button>
-            <button class="btn warning oi" onclick="container_close('modalDetail');">取消</button>
+            <button class="btn success oi" data-glyph="check" onclick="detail_save();">確定</button>
+            <button class="btn warning oi" data-glyph="x" onclick="container_close('modalDetail');">取消</button>
         </div>
     </div>
 </div>
