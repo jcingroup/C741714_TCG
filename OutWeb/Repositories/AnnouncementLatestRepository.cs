@@ -17,7 +17,6 @@ namespace OutWeb.Repositories
             _connectionString = conRepo.GetEntityConnctionString();
         }
 
-
         /// <summary>
         /// 取得分頁的網址列表
         /// </summary>
@@ -62,24 +61,41 @@ namespace OutWeb.Repositories
         /// <summary>
         /// 取分類
         /// </summary>
+        /// <param name="langCode"></param>
+        /// <returns></returns>
+        public Dictionary<int, string> GetNewsCate(string langCode)
+        {
+            Dictionary<int, string> cate = new Dictionary<int, string>();
+            using (var db = new TCGDB(_connectionString))
+            {
+                cate = db.NEWS_CATE
+                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                   s.STATUS == "Y")
+                  .ToDictionary(d => d.ID, d => d.CATE_NAME);
+                if (cate.Count == 0)
+                    throw new Exception("無法取得新聞分類");
+            }
+            return cate;
+        }
+
+        /// <summary>
+        /// 取分類 根據ID
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="langCode"></param>
         /// <returns></returns>
         public Dictionary<int, string> GetNewsCateByID(int id, string langCode)
         {
-            Dictionary<int, string> cate = new Dictionary<int, string>();
+            Dictionary<int, string> source = new Dictionary<int, string>();
             using (var db = new TCGDB(_connectionString))
             {
-                var source = db.NEWS_CATE
-                  .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
-                   s.ID == id && s.STATUS == "Y")
-                   .FirstOrDefault();
-                if (source == null)
+                source = GetNewsCate(langCode)
+                 .Where(s => s.Key == id)
+                 .ToDictionary(d => d.Key, d => d.Value);
+                if (source.Count == 0)
                     throw new Exception("無法取得新聞分類");
-
-                cate.Add(source.ID, source.CATE_NAME);
             }
-            return cate;
+            return source;
         }
 
         /// <summary>

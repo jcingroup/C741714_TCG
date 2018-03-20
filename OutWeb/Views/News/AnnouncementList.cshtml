@@ -2,19 +2,11 @@
 @model AnnouncementLatestResult
 
 @{
-ViewBag.Title = Model.Data.Count > 0 ? Model.Data.First().CateIDInfo.Values.First() : ""; @* 分類名稱 *@
+    ViewBag.Title = Model.Data.Count > 0 ? Model.Data.First().CateIDInfo.Values.First() : ""; @* 分類名稱 *@
 ViewBag.BodyClass = "News Announcement";
 string img_path = "/Images/";
 
-string tabCurrentStyle = string.Empty;
-switch (Model.TypeID)
-{
-    case 1:
-
-        break;
-    default:
-        break;
-}
+Dictionary<int, string> cateInfo = (TempData["CateInfo"] as Dictionary<int, string>);
 }
 
 @section breadcrumb {
@@ -33,30 +25,13 @@ switch (Model.TypeID)
 <ul class="tabs list-inline text-center">
     <li><a href="~/News/AnnouncementLatest">最新訊息</a></li>
     @* 目前分類的 <a> + class="current" *@
-    @switch (Model.TypeID)
+    @foreach (var cate in cateInfo)
     {
-        case 1:
-            <li><a href="~/News/AnnouncementList?typeID=1" class="current">中央新聞</a></li>
-            <li><a href="~/News/AnnouncementList?typeID=2">中央公告</a></li>
-            <li><a href="~/News/AnnouncementList?typeID=4">中央聲明</a></li>
-            break;
-        case 2:
-            <li><a href="~/News/AnnouncementList?typeID=1">中央新聞</a></li>
-            <li><a href="~/News/AnnouncementList?typeID=2" class="current">中央公告</a></li>
-            <li><a href="~/News/AnnouncementList?typeID=4">中央聲明</a></li>
-            break;
-        case 4:
-            <li><a href="~/News/AnnouncementList?typeID=1">中央新聞</a></li>
-            <li><a href="~/News/AnnouncementList?typeID=2">中央公告</a></li>
-            <li><a href="~/News/AnnouncementList?typeID=4" class="current">中央聲明</a></li>
-            break;
-        default:
-            <li><a href="~/News/AnnouncementList?typeID=1" class="current">中央新聞</a></li>
-            <li><a href="~/News/AnnouncementList?typeID=2">中央公告</a></li>
-            <li><a href="~/News/AnnouncementList?typeID=4">中央聲明</a></li>
-            break;
+        string url = @"/News/AnnouncementList?typeID=" + cate.Key;
+        <li><a href="@url" class="cate-list" key="@cate.Key">@cate.Value</a></li>
     }
 </ul>
+
 
 @* 每頁10筆資料 *@
 <div class="articles">
@@ -148,6 +123,17 @@ switch (Model.TypeID)
 
 @section scripts {
     <script>
+        var currentCateID = '@Model.TypeID';
+        console.log(currentCateID);
+        $('.cate-list').each(function () {
+            var key = $(this).attr('key');
+            if (key == currentCateID) {
+                console.log(key);
+                $('.cate.list').removeClass('current');
+                $(this).addClass('current');
+                return false;
+            }
+        })
 
         $('#numPage').val('@Model.Pagination.CurrentPage');
 

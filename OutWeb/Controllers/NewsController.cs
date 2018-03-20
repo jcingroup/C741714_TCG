@@ -135,7 +135,7 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 新聞 公告 聲明 列表
-        public ActionResult AnnouncementList(int? typeID, int? page, string langCode)
+        public ActionResult AnnouncementList(int? typeID, int? page, string langCode= "zh-tw")
         {
             if (!typeID.HasValue)
                 return RedirectToAction("AnnouncementLatest");
@@ -148,6 +148,8 @@ namespace OutWeb.Controllers
             AnnouncementLatestRepository repo = new AnnouncementLatestRepository();
             AnnouncementLatestResult mdoel = repo.GetList(filter);
             mdoel.TypeID = (int)filter.TypeID;
+
+            TempData["CateInfo"] = repo.GetNewsCate(langCode);
             return View(mdoel);
         }
 
