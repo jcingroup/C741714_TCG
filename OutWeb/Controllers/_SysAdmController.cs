@@ -1469,6 +1469,7 @@ namespace OutWeb.Controllers
 
         #region 焦點專欄_明細 儲存 Focus_Detail_Save
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Focus_Detail_Save(string c_sty, string c_title, string c_desc, string status, string sort, string cate_id, string id)
         {
             string str_return = "";
