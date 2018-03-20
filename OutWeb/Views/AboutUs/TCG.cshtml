@@ -7,6 +7,7 @@
     DataTable d_detail = (DataTable)ViewData["d_detail"];
     string id = (string)ViewData["id"];
     string c_id = "";
+    string cFile = "TCG";
     string c_title = "";
     string c_desc = "";
     string cate_id = "";
@@ -16,7 +17,7 @@
     string ci = "";
     string c_tab = "";
     string c_tab_nav = "";
-    string cFile = "TCG";
+
 
 }
 
@@ -44,15 +45,6 @@
                 c_title = dt.Rows[i]["c_title"].ToString();
                 c_id = dt.Rows[i]["id"].ToString();
                 ci = i.ToString();
-
-                //if (i == 0)
-                //{
-                //    c_tab_nav = "tab-nav current";
-                //}
-                //else
-                //{
-                //    c_tab_nav = "tab-nav";
-                //}
 
                 if (id == c_id)
                 {

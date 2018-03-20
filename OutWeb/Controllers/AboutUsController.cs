@@ -75,47 +75,101 @@ namespace OutWeb.Controllers
         }
 
         // 關於我們 - 主張與立場
-        public ActionResult Position()
+        public ActionResult Position(string id = "")
         {
             //抓取資料
             string cate_id = "2";
             DataTable dt;
+            DataTable dt1;
+            DataTable d_detail;
             string err_msg = "";
             string lang_id = "zh-tw";
-            dt = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt = dt1.Copy();
+            if (dt1.Rows.Count > 0)
+            {
+                if (id == "")
+                {
+                    id = dt1.Rows[0]["id"].ToString();
+                }
+            }
+            dt1 = CAboutUs.List(ref err_msg, id, "sort desc", "Y", "", cate_id, lang_id);
+            d_detail = dt1.Copy();
 
             ViewData["dt"] = dt;
+            ViewData["d_detail"] = d_detail;
+            ViewData["id"] = id;
             return View();
         }
 
         // 關於我們 - 台灣地位的聲明
-        public ActionResult Statement()
+        public ActionResult Statement(string id = "")
         {
             //抓取資料
             string cate_id = "3";
             DataTable dt;
+            DataTable dt1;
+            DataTable d_detail;
             string err_msg = "";
             string lang_id = "zh-tw";
-            dt = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt = dt1.Copy();
+            if (dt1.Rows.Count > 0)
+            {
+                if (id == "")
+                {
+                    id = dt1.Rows[0]["id"].ToString();
+                }
+            }
+            dt1 = CAboutUs.List(ref err_msg, id, "sort desc", "Y", "", cate_id, lang_id);
+            d_detail = dt1.Copy();
 
             ViewData["dt"] = dt;
+            ViewData["d_detail"] = d_detail;
+            ViewData["id"] = id;
             return View();
         }
 
         // 關於我們 - 法律依據
-        public ActionResult Law()
+        public ActionResult Law(string cate_id = "",string id = "")
         {
             //抓取資料
-            string cate_id = "4,5,6";
+            string scate_id = "4,5,6";
             DataTable dt;
             DataTable d_cate;
+            DataTable dt1;
+            DataTable d_detail;
             string err_msg = "";
             string lang_id = "zh-tw";
-            d_cate = CAboutUs.Cate_List(ref err_msg, cate_id, "sort", "Y", "", lang_id);
-            dt = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            d_cate = CAboutUs.Cate_List(ref err_msg, scate_id, "sort", "Y", "", lang_id);
+            if(d_cate.Rows.Count > 0)
+            {
+                if (cate_id == "")
+                {
+                    cate_id = "4";
+                }
+            }
+
+            dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt = dt1.Copy();
+
+            if(dt1.Rows.Count > 0)
+            {
+                if(id == "")
+                {
+                    id = dt1.Rows[0]["id"].ToString();
+                }
+            }
+
+            dt1 = CAboutUs.List(ref err_msg, id, "sort desc", "Y", "", cate_id, lang_id);
+            d_detail = dt1.Copy();
+
 
             ViewData["d_cate"] = d_cate;
             ViewData["dt"] = dt;
+            ViewData["d_detail"] = d_detail;
+            ViewData["id"] = id;
+            ViewData["cate_id"] = cate_id;
 
             return View();
         }
@@ -164,19 +218,45 @@ namespace OutWeb.Controllers
         }
 
         // 行政區域圖&組織架構
-        public ActionResult Organization()
+        public ActionResult Organization(string cate_id = "", string id = "")
         {
             //抓取資料
-            string cate_id = "7,8,9";
+            string scate_id = "7,8,9";
             DataTable dt;
             DataTable d_cate;
+            DataTable dt1;
+            DataTable d_detail;
             string err_msg = "";
             string lang_id = "zh-tw";
-            d_cate = CAboutUs.Cate_List(ref err_msg, cate_id, "sort", "Y", "", lang_id);
-            dt = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            d_cate = CAboutUs.Cate_List(ref err_msg, scate_id, "sort", "Y", "", lang_id);
+            if (d_cate.Rows.Count > 0)
+            {
+                if (cate_id == "")
+                {
+                    cate_id = "4";
+                }
+            }
+
+            dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt = dt1.Copy();
+
+            if (dt1.Rows.Count > 0)
+            {
+                if (id == "")
+                {
+                    id = dt1.Rows[0]["id"].ToString();
+                }
+            }
+
+            dt1 = CAboutUs.List(ref err_msg, id, "sort desc", "Y", "", cate_id, lang_id);
+            d_detail = dt1.Copy();
+
 
             ViewData["d_cate"] = d_cate;
             ViewData["dt"] = dt;
+            ViewData["d_detail"] = d_detail;
+            ViewData["id"] = id;
+            ViewData["cate_id"] = cate_id;
 
             return View();
         }

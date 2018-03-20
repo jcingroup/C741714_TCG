@@ -4,6 +4,10 @@
     ViewBag.BodyClass = "JoinUs Apply";
 
     DataTable dt = (DataTable)ViewData["dt"];
+    DataTable d_detail = (DataTable)ViewData["d_detail"];
+    string id = (string)ViewData["id"];
+    string c_id = "";
+    string cFile = "Apply";
     string c_title = "";
     string c_desc = "";
     string cate_id = "";
@@ -38,48 +42,33 @@
             @for (int i = 0; i < dt.Rows.Count; i++)
             {
                 c_title = dt.Rows[i]["c_title"].ToString();
+                c_id = dt.Rows[i]["id"].ToString();
                 ci = i.ToString();
 
-                if (i == 0)
+                if (id == c_id)
                 {
-                    c_tab_nav = "tab-nav current";
+                    c_tab_nav = " current";
                 }
                 else
                 {
-                    c_tab_nav = "tab-nav";
+                    c_tab_nav = "";
                 }
 
                 <li>
-                    <a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>
+                    @*<a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>*@
+                    <a class="@c_tab_nav" href="@Url.Content(cFile + "?id=" + c_id)">@c_title</a>
                 </li>
             }
         </ul>
     }
 
-    @* 文章分頁，有資料才顯示，第一頁 class + current *@
-    @if (dt.Rows.Count > 0)
+    @if (d_detail.Rows.Count > 0)
     {
-        for (int i = 0; i < dt.Rows.Count; i++)
-        {
-            ci = i.ToString();
+        c_desc = d_detail.Rows[0]["c_desc"].ToString();
 
-            c_title = dt.Rows[i]["c_title"].ToString();
-            c_desc = dt.Rows[i]["c_desc"].ToString();
-
-            if (i == 0)
-            {
-                c_tab = "tab current";
-            }
-            else
-            {
-                c_tab = "tab";
-            }
-
-            <div class="@c_tab" id="tab1-@ci">
-                <!-- <h3>@Html.Raw(c_title)</h3> -->
-                @Html.Raw(c_desc)
-            </div>
-        }
+        <div>
+            @Html.Raw(c_desc)
+        </div>
     }
 
 </div>

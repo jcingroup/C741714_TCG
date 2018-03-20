@@ -5,9 +5,13 @@
 
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_cate = (DataTable)ViewData["d_cate"];
+    DataTable d_detail = (DataTable)ViewData["d_detail"];
+    string id = (string)ViewData["id"];
+    string cate_id = (string)ViewData["cate_id"];
+    string c_id = "";
+    string c_cate_id = "";
     string c_title = "";
     string c_desc = "";
-    string cate_id = "";
     string lang_id = "";
     string lang_name = "";
     string cate_name = "";
@@ -16,6 +20,7 @@
     string str_tab = "";
     string c_tab = "";
     string c_tab_nav = "";
+    string cFile = "Organization";
 }
 
 @section breadcrumb {
@@ -31,115 +36,63 @@
 
 <ul class="tabs list-inline text-center">
     <li class="back"><a href="~/AboutUs"><i class="oi" data-glyph="caret-left"></i> 回上層</a></li>
+
     @for (int i = 0; i < d_cate.Rows.Count; i++)
     {
         ci = d_cate.Rows[i]["id"].ToString();
         str_tab = "tab" + ci;
+        c_cate_id = d_cate.Rows[i]["id"].ToString();
         cate_name = d_cate.Rows[i]["cate_name"].ToString();
-        if (i == 0)
+        if (cate_id == c_cate_id)
         {
-            c_tab_nav = "tab-nav current";
+            c_tab_nav = " current";
         }
         else
         {
-            c_tab_nav = "tab-nav";
+            c_tab_nav = "";
         }
-        <li><a class="@c_tab_nav" href="#@str_tab">@cate_name</a></li>
+        <li><a class="@c_tab_nav" href="@Url.Content(cFile + "?cate_id=" + c_cate_id)">@cate_name</a></li>
     }
 </ul>
 
 <div class="tab-content">
-    @for (int i = 0; i < d_cate.Rows.Count; i++)
-    {
-        ci = d_cate.Rows[i]["id"].ToString();
-        str_tab = "tab" + ci;
-        cate_name = d_cate.Rows[i]["cate_name"].ToString();
-        if (i == 0)
-        {
-            c_tab_nav = "tab current";
-        }
-        else
-        {
-            c_tab_nav = "tab";
-        }
+    <div class="tab-content clearfix editor">
 
-        //--Temp檔--建立---------//
-        DataTable dt1;
-        //----------------------------------------------------------------------//
-        //DataRow[] sale_calc_Rows = dk.Tables["user_info"].Select("status='N'");
-        DataRow[] dt1_Rows = dt.Select("cate_id='" + ci + "'");
-        //----------------------------------------------------------------------//
-        if (dt1_Rows.Any())
+        @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
+        @if (dt.Rows.Count > 1)
         {
-            dt1 = dt1_Rows.CopyToDataTable();
-        }
-        else
-        {
-            dt1 = dt.Clone();
-            dt1.Clear();
-        }
-
-
-        <div class="@c_tab_nav" id="@str_tab">
-            <h2 class="title">
-                <span class="underline">@cate_name</span>
-                <!-- <div class="addthis_inline_share_toolbox"></div> -->
-            </h2>
-            <div class="tab-content clearfix editor">
-                @*文章分頁 頁籤切換，只有一頁就不顯示頁籤*@
-                @if (dt1.Rows.Count > 1)
+            <ul class="tabs list-inline">
+                @for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    <ul class="tabs list-inline">
-                        @for (int j = 0; j < dt1.Rows.Count; j++)
-                        {
-                            c_title = dt1.Rows[j]["c_title"].ToString();
-                            cj = j.ToString();
-                            if (j == 0)
-                            {
-                                c_tab_nav = "tab-nav current";
-                            }
-                            else
-                            {
-                                c_tab_nav = "tab-nav";
-                            }
+                    c_title = dt.Rows[i]["c_title"].ToString();
+                    c_id = dt.Rows[i]["id"].ToString();
+                    ci = i.ToString();
 
-                            <li>
-                                <a class="@c_tab_nav" href="#@str_tab-@cj">@Html.Raw(c_title)</a>
-                            </li>
-                        }
-                    </ul>
-                }
-
-                @if (dt1.Rows.Count > 0)
-                {
-                    for (int j = 0; j < dt1.Rows.Count; j++)
+                    if (id == c_id)
                     {
-                        cj = j.ToString();
-
-                        c_title = dt1.Rows[j]["c_title"].ToString();
-                        c_desc = dt1.Rows[j]["c_desc"].ToString();
-
-                        if (j == 0)
-                        {
-                            c_tab = "tab current";
-                        }
-                        else
-                        {
-                            c_tab = "tab";
-                        }
-
-                        <div class="@c_tab" id="@str_tab-@cj">
-                            <!-- <h3>@Html.Raw(c_title)</h3> -->
-                            @Html.Raw(c_desc)
-                        </div>
+                        c_tab_nav = " current";
                     }
-                }
-            </div>
-        </div>
+                    else
+                    {
+                        c_tab_nav = "";
+                    }
 
-        //--Temp檔--釋放---------//
-        dt1.Dispose();
-        dt1 = null;
-        //-----------------------------//
-    }
+                    <li>
+                        @*<a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>*@
+                        <a class="@c_tab_nav" href="@Url.Content(cFile + "?cate_id=" + cate_id + "&id=" + c_id)">@c_title</a>
+                    </li>
+                }
+            </ul>
+        }
+
+        @if (d_detail.Rows.Count > 0)
+        {
+            c_desc = d_detail.Rows[0]["c_desc"].ToString();
+
+            <div>
+                @Html.Raw(c_desc)
+            </div>
+        }
+
+    </div>
 </div>

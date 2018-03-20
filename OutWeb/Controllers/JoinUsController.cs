@@ -47,30 +47,60 @@ namespace OutWeb.Controllers
         }
 
         // 申請民政府身分證
-        public ActionResult Apply()
+        public ActionResult Apply(string id = "")
         {
             //抓取資料
             string cate_id = "1";
             DataTable dt;
+            DataTable d_detail;
+            DataTable dt1;
             string err_msg = "";
             string lang_id = "zh-tw";
-            dt = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt1 = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt = dt1.Copy();
+            if (dt1.Rows.Count > 0)
+            {
+                if (id == "")
+                {
+                    id = dt1.Rows[0]["id"].ToString();
+                }
+            }
+
+            dt1 = CJoinUs.List(ref err_msg, id, "sort desc", "Y", "", cate_id, lang_id);
+            d_detail = dt1.Copy();
 
             ViewData["dt"] = dt;
+            ViewData["d_detail"] = d_detail;
+            ViewData["id"] = id;
             return View();
         }
 
         // 地方服務處諮詢
-        public ActionResult Consult()
+        public ActionResult Consult(string id="")
         {
             //抓取資料
             string cate_id = "2";
             DataTable dt;
+            DataTable d_detail;
+            DataTable dt1;
             string err_msg = "";
             string lang_id = "zh-tw";
-            dt = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt1 = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            dt = dt1.Copy();
+            if (dt1.Rows.Count > 0)
+            {
+                if (id == "")
+                {
+                    id = dt1.Rows[0]["id"].ToString();
+                }
+            }
+
+            dt1 = CJoinUs.List(ref err_msg, id, "sort desc", "Y", "", cate_id, lang_id);
+            d_detail = dt1.Copy();
 
             ViewData["dt"] = dt;
+            ViewData["d_detail"] = d_detail;
+            ViewData["id"] = id;
             return View();
         }
 
