@@ -58,55 +58,6 @@
             <div class="mb-16 clearfix">
                 @Html.Raw(paging.Description)
             </div>
-
-            @* 影片的呈現方式，有資料才顯示 *@
-            @if (paging.InternetSiteList.Count > 0)
-            {
-                <ul class="prolist row row-center list-unstyled">
-
-                    @foreach (var siteUrl in paging.InternetSiteList)
-                    {
-                        var urlSplit = siteUrl.Split(new string[] { @"https://www.youtube.com/watch?v=" }, StringSplitOptions.RemoveEmptyEntries);
-                        string url = string.Empty;
-                        if (urlSplit.Count() > 0)
-                        {
-                            url = siteUrl.Replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/") + "/" + urlSplit[0];
-                        }
-
-                        <li class="col-md-6 col-12">
-                            <figure class="pro">
-                                <div class="embed-responsive">
-                                    @*<iframe src="@siteUrl" frameborder="0" allowfullscreen></iframe>*@
-                                    <iframe src="@url" frameborder="0" allowfullscreen></iframe>
-                                </div>
-                            </figure>
-                        </li>
-                    }
-                </ul>
-            }
-
-            @* 照片的呈現方式，有資料才顯示 *@
-            @if (paging.ImagesList.Count > 0)
-            {
-
-                <ul class="prolist row row-center list-unstyled">
-
-                    @foreach (var img in paging.ImagesList)
-                    {
-                        string imgUrl = img_path + img.ImgFileName;
-                        string description = string.IsNullOrEmpty(img.ImgDescription) ? "" : @"<span class=""caption"">" + img.ImgDescription + "</span>";
-                        <li class="col-lg-3 col-md-4 col-sm-6 col-12">
-                            <figure class="pro">
-                                <a href="@imgUrl" class="thumbnail" target="new">
-                                    <img src="@imgUrl" alt="">
-                                    @* 圖說沒有資料則不顯示 *@
-                                    @Html.Raw(description)
-                                </a>
-                            </figure>
-                        </li>
-                    }
-                </ul>
-            }
         </div>
     }
 

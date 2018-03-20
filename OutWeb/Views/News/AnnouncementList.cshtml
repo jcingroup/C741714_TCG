@@ -17,11 +17,6 @@ Dictionary<int, string> cateInfo = (TempData["CateInfo"] as Dictionary<int, stri
 
 <h1 class="sr-only">新聞 公告 聲明</h1>
 
-<h2 class="title">
-    <span class="underline">@ViewBag.Title</span>
-    <!-- <div class="addthis_inline_share_toolbox"></div> -->
-</h2>
-
 <ul class="tabs list-inline text-center">
     <li><a href="~/News/AnnouncementLatest">最新訊息</a></li>
     @* 目前分類的 <a> + class="current" *@
@@ -32,6 +27,10 @@ Dictionary<int, string> cateInfo = (TempData["CateInfo"] as Dictionary<int, stri
     }
 </ul>
 
+<h2 class="title">
+    <span class="underline">@ViewBag.Title</span>
+    <!-- <div class="addthis_inline_share_toolbox"></div> -->
+</h2>
 
 @* 每頁10筆資料 *@
 <div class="articles">
@@ -56,7 +55,7 @@ Dictionary<int, string> cateInfo = (TempData["CateInfo"] as Dictionary<int, stri
                     <small class="date">@data.PublishDateString</small>
                     <h3><a href="@contentUrl">@data.Title</a></h3>
                     @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                    @Html.Raw(remark)
+                    <p>@Html.Raw(remark)</p>
                     <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
                 </div>
             </div>

@@ -37,7 +37,7 @@
             <article class="article">
                 <small class="date">@data.PublishDateString</small>
                 <h3><a href="@contentUrl">@data.Title</a></h3>
-                @Html.Raw(remark)
+                <p>@Html.Raw(remark)</p>
                 <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
             </article>
 

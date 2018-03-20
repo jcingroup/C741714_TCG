@@ -12,17 +12,17 @@
     <li>@ViewBag.Title</li>
 }
 
-<h1 class="title">
-    <span class="underline">@ViewBag.Title</span>
-    <!-- <div class="addthis_inline_share_toolbox"></div> -->
-</h1>
-
 <ul class="tabs list-inline text-center">
     <li><a class="current" href="~/News/AnnouncementLatest">最新訊息</a></li>
     <li><a href="~/News/AnnouncementList?typeID=1">中央新聞</a></li>
     <li><a href="~/News/AnnouncementList?typeID=2">中央公告</a></li>
     <li><a href="~/News/AnnouncementList?typeID=4">中央聲明</a></li>
 </ul>
+
+<h1 class="title">
+    <span class="underline">@ViewBag.Title</span>
+    <!-- <div class="addthis_inline_share_toolbox"></div> -->
+</h1>
 
 @* 每頁10筆資料，列出新聞公告聲明的所有文章，依日期最新到最舊 *@
 <div class="articles">
@@ -51,7 +51,7 @@
                     <small class="date">@data.PublishDateString</small>
                     <h3><a href="@contentUrl">@data.Title</a></h3>
                     @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                    @Html.Raw(remark)
+                    <p>@Html.Raw(remark)</p>
                     <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
                 </div>
             </div>

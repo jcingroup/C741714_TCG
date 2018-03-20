@@ -50,7 +50,7 @@
                     <small class="date">@data.PublishDateString</small>
                     <h3><a href="@contentUrl">@data.Title</a></h3>
                     @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                    @Html.Raw(remark)
+                    <p>@Html.Raw(remark)</p>
                     <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
                 </div>
             </div>

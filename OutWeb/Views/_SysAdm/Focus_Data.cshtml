@@ -1304,8 +1304,8 @@
                     <col style="width: 39%">
                     <col style="width: 7%">
                     <col style="width: 7%">
-                    <col style="width: 7%">
-                    <col style="width: 7%">
+                    <!-- <col style="width: 7%">
+                    <col style="width: 7%"> -->
                     <col style="width: 5%">
                 </colgroup>
                 <tr>
@@ -1313,8 +1313,8 @@
                     <th class="text-center">標題</th>
                     <th class="text-center">狀態</th>
                     <th class="text-center">排序</th>
-                    <th class="text-center">圖片</th>
-                    <th class="text-center">網址</th>
+                    <!-- <th class="text-center">圖片</th>
+                    <th class="text-center">網址</th> -->
                     <th class="item-edit">刪除</th>
                 </tr>
                 @if (d_detail.Rows.Count > 0)
@@ -1352,12 +1352,12 @@
                             <td>
                                 @c_detail_sort
                             </td>
-                            <td>
+                            <!-- <td>
                                 <button class="btn info oi" onclick="img_list('@c_detail_cate','@c_detail_id');return false;" id="btn_detail_Image_@i" name="btn_detail_Image_@i">圖片管理</button>
                             </td>
                             <td>
                                 <button class="btn info oi" onclick="url_list('@c_detail_cate','@c_detail_id');return false;" id="btn_detail_Url_@i" name="btn_detail_Url_@i">網址管理</button>
-                            </td>
+                            </td> -->
                             <td>
                                 <button class="hover-primary oi" title="刪除" data-glyph="trash" type="button" id="btn_detail_del_@i" name="btn_detail_del_@i" onclick="detail_del('@c_detail_id');return false;"></button>
                             </td>

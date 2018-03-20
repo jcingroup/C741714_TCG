@@ -71,16 +71,11 @@
         </ul>
     }
 
-
-    @* 文章分頁，有資料才顯示，第一頁 class + current *@
     @if (d_detail.Rows.Count > 0)
     {
-        c_tab = "tab current";
-        c_id = d_detail.Rows[0]["id"].ToString();
-        c_title = d_detail.Rows[0]["c_title"].ToString();
         c_desc = d_detail.Rows[0]["c_desc"].ToString();
 
-        <div class="@c_tab" id="tab1-@ci">
+        <div>
             @Html.Raw(c_desc)
         </div>
     }
