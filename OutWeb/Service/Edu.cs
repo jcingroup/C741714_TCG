@@ -913,23 +913,50 @@ namespace OutWeb.Service
 
             try
             {
-                ////======== 刪除圖片 ====================//
-                //csql = @"delete from IMG WHERE IMG_KIND='" + img_kind + "' AND IMG_NO = @id ";
-                //cmd.CommandText = csql;
-
-                //cmd.Parameters.Clear();
-                //cmd.Parameters.AddWithValue("@id", id);
-
-                //cmd.ExecuteNonQuery();
-                ////====================================//
-                //======== 刪除資料 ===================//
-                csql = @"delete from "
-                     + "  " + dbf_name + " "
-                     + "where "
-                     + "  id = @id ";
-
+                //======== 刪除圖片 ====================//
+                csql = @"delete from IMG WHERE IMG_NO = @id AND IMG_KIND=@img_kind ";
                 cmd.CommandText = csql;
 
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@img_kind", img_kind);
+
+                cmd.ExecuteNonQuery();
+                //====================================//
+                //======== 刪除URL ====================//
+                csql = @"delete from URL WHERE URL_NO = @id AND URL_KIND=@img_kind ";
+                cmd.CommandText = csql;
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@img_kind", img_kind);
+                cmd.ExecuteNonQuery();
+                //====================================//
+                //======== 刪除明細資料 =============//
+                //== 刪除圖片 ==//
+                csql = @"delete from IMG WHERE IMG_NO in (select Convert(nvarchar(50),id) from " + dbf_detail_name + " where cate_id = @id) AND IMG_KIND=@img_kind ";
+                cmd.CommandText = csql;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@img_kind", img_detail_kind);
+                cmd.ExecuteNonQuery();
+                //== 刪除URL  ==//
+                csql = @"delete from URL WHERE URL_NO in (select Convert(nvarchar(50),id) from " + dbf_detail_name + " where cate_id = @id) AND URL_KIND=@img_kind  ";
+                cmd.CommandText = csql;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@img_kind", img_detail_kind);
+                cmd.ExecuteNonQuery();
+                //== 刪除明細資料 ==//
+                csql = @"delete from " + dbf_detail_name + " WHERE cate_id  = @id ";
+                cmd.CommandText = csql;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+                //===================================//
+                //======== 刪除資料 ===================//
+                csql = @"delete from " + dbf_name + " where id = @id ";
+                cmd.CommandText = csql;
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", id);
 

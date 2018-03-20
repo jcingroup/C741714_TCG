@@ -206,14 +206,33 @@ namespace OutWeb.Controllers
         }
 
         // 教育專欄 - 內容
-        public ActionResult EducationContent(string id="")
+        public ActionResult EducationContent(string id = "", string detail_id = "")
         {
             DataTable dt;
+            DataTable dt1;
+            DataTable d_detail;
+            DataTable dd_detail;
             string err_msg = "";
             string lang_id = "zh-tw";
             dt = CEdu.List(ref err_msg, id, "sort desc", "Y", "", "", "", "", lang_id);
+            dt1 = CEdu.Detail_List(ref err_msg, "", "sort", "Y", "", id, lang_id);
+            d_detail = dt1.Copy();
+            if (dt1.Rows.Count > 0)
+            {
+                if (detail_id == "")
+                {
+                    detail_id = dt1.Rows[0]["id"].ToString();
+                }
+            }
+
+            dt1 = CEdu.Detail_List(ref err_msg, detail_id, "sort", "Y", "", id, lang_id);
+            dd_detail = dt1.Copy();
 
             ViewData["dt"] = dt;
+            ViewData["d_detail"] = dd_detail;
+            ViewData["d_detail"] = dd_detail;
+            ViewData["id"] = id;
+            ViewData["detail_id"] = detail_id;
             return View();
         }
 

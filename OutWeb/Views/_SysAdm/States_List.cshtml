@@ -157,7 +157,7 @@
 <script src="~/Scripts/ajax_lib.js"></script>
 <script>
     function del(url, img_count) {
-        if (img_count > 0) {
+        @*if (img_count > 0) {
             alert("此活動花絮還有照片，請全數刪除之後再行刪除。謝謝~~");
             return false;
         }
@@ -171,6 +171,10 @@
             }
             //alert("act_id:" + act_id);
             //location.href = '@Url.Content("~/Manage/Activity_Del")?act_id=' + act_id;
+        }*@
+        if (confirm("確定刪除??")) {
+            location.href = url;
+            //alert("你按下確定");
         }
     }
 

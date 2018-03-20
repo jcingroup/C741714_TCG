@@ -243,97 +243,103 @@
     function del_img(img_id,c_sty,c_cate)
     {
         var cimg_no = "";
-        //var c_cate = "Focus"
-        if ($("#id").val().length > 0) {
-            cimg_no = $("#id").val();
-        }else {
-            cimg_no = @img_no;
+
+        if (confirm("確定刪除??")) {
+
+            //var c_cate = "Focus"
+            if ($("#id").val().length > 0) {
+                cimg_no = $("#id").val();
+            }else {
+                cimg_no = @img_no;
+            }
+
+            $.ajax({                
+                url: 'Img_Del',
+                data: { img_id: img_id, img_sta:c_sty, img_no: cimg_no,img_cate: c_cate  }, //此参数非常严谨，写错一个引号都不行
+                type:"POST",
+                dataType: 'TEXT', //返回值类型 一般设置为json
+                async: false,
+                success: function(JData){
+                    //alert(JData);
+                    data = handleAjaxVPNMsg(JData);
+                    i = 0;
+                    c_html = "";
+                    //-------------------------------//
+                    if(c_sty == "B")
+                    {
+                        c_html += "<table class=\"uploader m-t-32\">";
+                        c_html += "  <colgroup>";
+                        c_html += "    <col style=\"width: 15%\">";
+                        c_html += "    <col span=\"3\">";
+                        c_html += "</colgroup>";
+                        c_html += "<tr>";
+                        c_html += "    <th>圖片</th>";
+                        c_html += "    <th>圖說</th>";
+                        //c_html += "    <th>封面圖</th>";
+                        c_html += "    <th class=\"item-edit\">刪除</th>";
+                        c_html += "</tr>";
+                        var JsonObj = lowerJSONKey($.parseJSON(data));
+                        //$.each($.parseJSON(data), function (idx, obj) {
+                        $.each(JsonObj, function (idx, obj) {
+                            i = i + 1;
+                            c_html = c_html + "<tr>";
+                            c_html = c_html + "    <td>";
+                            c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
+                            c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
+                            c_html = c_html + "    </td>";
+                            c_html = c_html + "    <td>";
+                            c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" class=\"form-element\" value=\"" + obj.img_desc + "\">";
+                            c_html = c_html + "    </td>";
+                            //c_html = c_html + "    <td>";
+
+                            //c_html = c_html + "       <label class=\"switch\">";
+                            //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.id + "\"";
+                            //if(obj.is_index == "Y")
+                            //{
+                            //    c_html = c_html + " checked ";
+                            //}
+                            //c_html = c_html + ">";
+                            //c_html = c_html + "        <div class=\"slider round\"></div>";
+                            //c_html = c_html + "       </label>";
+                            //c_html = c_html + "    </td>";
+                            c_html = c_html + "    <td class=\"item-edit\">";
+                            c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\"></button>";
+                            c_html = c_html + "    </td>";
+                            c_html = c_html + "</tr>";
+                        });
+                        c_html += "</table>";
+                        $('#img_count').val(i);
+                        $('#images_container').html(c_html);
+                    }
+                    //------------------------------//
+                    if(c_sty == "S")
+                    {
+                        var JsonObj = lowerJSONKey($.parseJSON(data));
+                        //$.each($.parseJSON(data), function (idx, obj) {
+                        $.each(JsonObj, function (idx, obj) {
+                            i = i + 1;
+                            c_html = c_html + "<li>";
+                            c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\" >&times;</button>";
+                            c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
+                            c_html = c_html + "</li>";
+                        });
+
+                        $('#c_img_' + c_sty).html(c_html);
+                    }
+                    //-------------------------------------------------------//
+                },
+                error:function(xhr, ajaxOptions, thrownError){ 
+                    alert(xhr.status); 
+                    alert(thrownError); 
+                },
+                complete: function () {
+                    //alert(tbl_new_list);
+                    //alert('ajax complete');
+                }
+            });		
         }
 
-        $.ajax({                
-            url: 'Img_Del',
-            data: { img_id: img_id, img_sta:c_sty, img_no: cimg_no,img_cate: c_cate  }, //此参数非常严谨，写错一个引号都不行
-            type:"POST",
-            dataType: 'TEXT', //返回值类型 一般设置为json
-            async: false,
-            success: function(JData){
-                //alert(JData);
-                data = handleAjaxVPNMsg(JData);
-                i = 0;
-                c_html = "";
-                //-------------------------------//
-                if(c_sty == "B")
-                {
-                    c_html += "<table class=\"uploader m-t-32\">";
-                    c_html += "  <colgroup>";
-                    c_html += "    <col style=\"width: 15%\">";
-                    c_html += "    <col span=\"3\">";
-                    c_html += "</colgroup>";
-                    c_html += "<tr>";
-                    c_html += "    <th>圖片</th>";
-                    c_html += "    <th>圖說</th>";
-                    //c_html += "    <th>封面圖</th>";
-                    c_html += "    <th class=\"item-edit\">刪除</th>";
-                    c_html += "</tr>";
-                    var JsonObj = lowerJSONKey($.parseJSON(data));
-                    //$.each($.parseJSON(data), function (idx, obj) {
-                    $.each(JsonObj, function (idx, obj) {
-                        i = i + 1;
-                        c_html = c_html + "<tr>";
-                        c_html = c_html + "    <td>";
-                        c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
-                        c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
-                        c_html = c_html + "    </td>";
-                        c_html = c_html + "    <td>";
-                        c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" class=\"form-element\" value=\"" + obj.img_desc + "\">";
-                        c_html = c_html + "    </td>";
-                        //c_html = c_html + "    <td>";
 
-                        //c_html = c_html + "       <label class=\"switch\">";
-                        //c_html = c_html + "           <input type=\"radio\" name=\"is_index\" id=\"is_index\" value=\"" + obj.id + "\"";
-                        //if(obj.is_index == "Y")
-                        //{
-                        //    c_html = c_html + " checked ";
-                        //}
-                        //c_html = c_html + ">";
-                        //c_html = c_html + "        <div class=\"slider round\"></div>";
-                        //c_html = c_html + "       </label>";
-                        //c_html = c_html + "    </td>";
-                        c_html = c_html + "    <td class=\"item-edit\">";
-                        c_html = c_html + "        <button class=\"btn-link text-danger hover-text-danger oi\" id=\"btn_close_B_" + i + "\" name=\"btn_close_B_" + i + "\" title=\"刪除\" data-glyph=\"trash\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\"></button>";
-                        c_html = c_html + "    </td>";
-                        c_html = c_html + "</tr>";
-                    });
-                    c_html += "</table>";
-                    $('#img_count').val(i);
-                    $('#images_container').html(c_html);
-                }
-                //------------------------------//
-                if(c_sty == "S")
-                {
-                    var JsonObj = lowerJSONKey($.parseJSON(data));
-                    //$.each($.parseJSON(data), function (idx, obj) {
-                    $.each(JsonObj, function (idx, obj) {
-                        i = i + 1;
-                        c_html = c_html + "<li>";
-                        c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\" >&times;</button>";
-                        c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
-                        c_html = c_html + "</li>";
-                    });
-
-                    $('#c_img_' + c_sty).html(c_html);
-                }
-                //-------------------------------------------------------//
-            },
-            error:function(xhr, ajaxOptions, thrownError){ 
-                alert(xhr.status); 
-                alert(thrownError); 
-            },
-            complete: function () {
-                //alert(tbl_new_list);
-                //alert('ajax complete');
-            }
-        });
         return false;
     }
 
@@ -572,111 +578,113 @@
         var cate_id = "";
         var i = 0;
 
-        if ($("#id").val().length > 0) {
-            cate_id = $("#id").val();
-        }else {
-            cate_id = @img_no;
-        }
-
-
-        //抓取資料
-        $.ajax({                
-            url: 'Focus_Detail_Del',
-            data: { cate_id: cate_id, id:c_id  }, //此参数非常严谨，写错一个引号都不行
-            type:"POST",
-            dataType: 'TEXT', //返回值类型 一般设置为json
-            async: false,
-            success: function(JData){
-                //alert(JData);
-                data = handleAjaxVPNMsg(JData);
-                //-------------------------------------------------------//
-                i = 0;
-                c_html = "";
-                c_html += "<table class=\"table-list table-hover table-striped\">";
-                c_html += "   <colgroup>";
-                c_html += "      <col style=\"width: 5%\">";
-                c_html += "      <col style=\"width: 39%\">";
-                c_html += "      <col style=\"width: 7%\">";
-                c_html += "      <col style=\"width: 7%\">";
-                c_html += "      <col style=\"width: 7%\">";
-                c_html += "      <col style=\"width: 7%\">";
-                c_html += "      <col style=\"width: 5%\">";
-                c_html += "   </colgroup>";
-                c_html += "   <tr>";
-                c_html += "      <th class=\"item-edit\">修改</th>";
-                c_html += "      <th class=\"text-center\">標題</th>";
-                c_html += "      <th class=\"text-center\">狀態</th>";
-                c_html += "      <th class=\"text-center\">排序</th>";
-                c_html += "      <th class=\"text-center\">圖片</th>";
-                c_html += "      <th class=\"text-center\">網址</th>";
-                c_html += "      <th class=\"item-edit\">刪除</th>";
-                c_html += "   </tr>";
-
-                var JsonObj = lowerJSONKey($.parseJSON(data));
-                //$.each($.parseJSON(data), function (idx, obj) {
-                $.each(JsonObj, function (idx, obj) {
-                    i = i + 1;
-                    c_html += "   <tr>";
-                    c_html += "      <td>";
-                    c_html += "          <button class=\"hover-primary oi\" title=\"修改\" data-glyph=\"pencil\" type=\"button\" onclick=\"detail_edit('" + obj.id + "');return false;\"></button>";
-                    c_html += "      </td>";
-                    c_html += "      <td class=\"text-left\">";
-                    c_html += "          " + obj.c_title;
-                    c_html += "      </td>";
-                    c_html += "      <td>";
-
-                    if(obj.status == "Y")
-                    {
-                        show = "發佈";
-                        show_class = "label-success";
-                    }
-                    else if(obj.status == "N")
-                    {
-                        show = "草稿";
-                        show_class = "";
-                    }
-
-                    c_html += "          <span class=\"label " + show_class + "\">" + show + "</span>";
-                    c_html += "      </td>";
-                    c_html += "      <td>";
-                    c_html += "          " + obj.sort;
-                    c_html += "      </td>";
-                    c_html += "      <td>";
-                    c_html += "           <button class=\"btn info oi\" onclick=\"img_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
-                    c_html += "      </td>";
-                    c_html += "      <td>";
-                    c_html += "           <button class=\"btn info oi\" onclick=\"url_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
-                    c_html += "      </td>";
-                    c_html += "      <td>";
-                    c_html += "          <button class=\"hover-danger oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_del('" + obj.id + "');return false;\"></button>";
-                    c_html += "      </td>";
-                    c_html += "   </tr>";
-                });
-
-                if(i==0)
-                {
-                    c_html += "   <tr>";
-                    c_html += "      <td colspan=\"7\">";
-                    c_html += "         無分頁資料";
-                    c_html += "      </td>";
-                    c_html += "   </tr>";
-                }
-                c_html += "</table>";
-
-                $('#focus_detail').html(c_html);
-                //-------------------------------------------------------//
-            },
-            error:function(xhr, ajaxOptions, thrownError){ 
-                alert(xhr.status); 
-                alert(thrownError); 
-            },
-            complete: function () {
-                //alert(tbl_new_list);
-                //alert('ajax complete');
+        if (confirm("確定刪除??")) {
+            if ($("#id").val().length > 0) {
+                cate_id = $("#id").val();
+            }else {
+                cate_id = @img_no;
             }
-        });
 
-        container_close('modalDetail');
+
+            //抓取資料
+            $.ajax({                
+                url: 'Focus_Detail_Del',
+                data: { cate_id: cate_id, id:c_id  }, //此参数非常严谨，写错一个引号都不行
+                type:"POST",
+                dataType: 'TEXT', //返回值类型 一般设置为json
+                async: false,
+                success: function(JData){
+                    //alert(JData);
+                    data = handleAjaxVPNMsg(JData);
+                    //-------------------------------------------------------//
+                    i = 0;
+                    c_html = "";
+                    c_html += "<table class=\"table-list table-hover table-striped\">";
+                    c_html += "   <colgroup>";
+                    c_html += "      <col style=\"width: 5%\">";
+                    c_html += "      <col style=\"width: 39%\">";
+                    c_html += "      <col style=\"width: 7%\">";
+                    c_html += "      <col style=\"width: 7%\">";
+                    c_html += "      <col style=\"width: 7%\">";
+                    c_html += "      <col style=\"width: 7%\">";
+                    c_html += "      <col style=\"width: 5%\">";
+                    c_html += "   </colgroup>";
+                    c_html += "   <tr>";
+                    c_html += "      <th class=\"item-edit\">修改</th>";
+                    c_html += "      <th class=\"text-center\">標題</th>";
+                    c_html += "      <th class=\"text-center\">狀態</th>";
+                    c_html += "      <th class=\"text-center\">排序</th>";
+                    c_html += "      <th class=\"text-center\">圖片</th>";
+                    c_html += "      <th class=\"text-center\">網址</th>";
+                    c_html += "      <th class=\"item-edit\">刪除</th>";
+                    c_html += "   </tr>";
+
+                    var JsonObj = lowerJSONKey($.parseJSON(data));
+                    //$.each($.parseJSON(data), function (idx, obj) {
+                    $.each(JsonObj, function (idx, obj) {
+                        i = i + 1;
+                        c_html += "   <tr>";
+                        c_html += "      <td>";
+                        c_html += "          <button class=\"hover-primary oi\" title=\"修改\" data-glyph=\"pencil\" type=\"button\" onclick=\"detail_edit('" + obj.id + "');return false;\"></button>";
+                        c_html += "      </td>";
+                        c_html += "      <td class=\"text-left\">";
+                        c_html += "          " + obj.c_title;
+                        c_html += "      </td>";
+                        c_html += "      <td>";
+
+                        if(obj.status == "Y")
+                        {
+                            show = "發佈";
+                            show_class = "label-success";
+                        }
+                        else if(obj.status == "N")
+                        {
+                            show = "草稿";
+                            show_class = "";
+                        }
+
+                        c_html += "          <span class=\"label " + show_class + "\">" + show + "</span>";
+                        c_html += "      </td>";
+                        c_html += "      <td>";
+                        c_html += "          " + obj.sort;
+                        c_html += "      </td>";
+                        c_html += "      <td>";
+                        c_html += "           <button class=\"btn info oi\" onclick=\"img_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
+                        c_html += "      </td>";
+                        c_html += "      <td>";
+                        c_html += "           <button class=\"btn info oi\" onclick=\"url_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
+                        c_html += "      </td>";
+                        c_html += "      <td>";
+                        c_html += "          <button class=\"hover-danger oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_del('" + obj.id + "');return false;\"></button>";
+                        c_html += "      </td>";
+                        c_html += "   </tr>";
+                    });
+
+                    if(i==0)
+                    {
+                        c_html += "   <tr>";
+                        c_html += "      <td colspan=\"7\">";
+                        c_html += "         無分頁資料";
+                        c_html += "      </td>";
+                        c_html += "   </tr>";
+                    }
+                    c_html += "</table>";
+
+                    $('#focus_detail').html(c_html);
+                    //-------------------------------------------------------//
+                },
+                error:function(xhr, ajaxOptions, thrownError){ 
+                    alert(xhr.status); 
+                    alert(thrownError); 
+                },
+                complete: function () {
+                    //alert(tbl_new_list);
+                    //alert('ajax complete');
+                }
+            });
+
+            container_close('modalDetail');
+        }
 
         return false;
     }
