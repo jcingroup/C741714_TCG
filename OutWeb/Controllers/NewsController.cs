@@ -9,7 +9,7 @@ using OutWeb.Repositories;
 using OutWeb.Service;
 using System;
 using System.Web.Mvc;
-
+using System.Linq;
 namespace OutWeb.Controllers
 {
     public class NewsController : Controller
@@ -68,14 +68,24 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 活動寫真 - 最新活動內容
-        public ActionResult EventLatestContent(int? ID)
+        public ActionResult EventLatestContent(int? ID, int? pagingID)
         {
             if (!ID.HasValue)
                 return RedirectToAction("EventLatest");
             string langCd = string.Empty;
             NewEventLatestRepository repo = new NewEventLatestRepository();
-            EventContent mdoel = repo.GetContentByID((int)ID, langCd);
-            return View(mdoel);
+            EventContent model = repo.GetContentByID((int)ID, langCd);
+            if (pagingID != null)
+            {
+                model.PagingID = (int)pagingID;
+                model.Data.PagingList.Where(s => s.ID == (int)pagingID).First().Current = "current";
+            }
+            else
+            {
+                if (model.Data.PagingList.Count > 0)
+                    model.Data.PagingList.First().Current = "current";
+            }
+            return View(model);
         }
 
         // 最新訊息 - 活動寫真 - 各州活動分類
@@ -135,7 +145,7 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 新聞 公告 聲明 列表
-        public ActionResult AnnouncementList(int? typeID, int? page, string langCode= "zh-tw")
+        public ActionResult AnnouncementList(int? typeID, int? page, string langCode = "zh-tw")
         {
             if (!typeID.HasValue)
                 return RedirectToAction("AnnouncementLatest");

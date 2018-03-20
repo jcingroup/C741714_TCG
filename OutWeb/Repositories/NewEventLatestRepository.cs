@@ -83,6 +83,7 @@ namespace OutWeb.Repositories
                         .OrderBy(o => o.SORT)
                         .Select(s => new EvnentPaging()
                         {
+                            ID = s.ID,
                             Title = s.C_TITLE,
                             Description = s.C_DESC,
                             ImagesList = GetPaginImgsListByID(s.ID),

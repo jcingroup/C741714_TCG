@@ -7,6 +7,9 @@ namespace OutWeb.Models.FrontModels.News.EventLatestModels
 {
     public class EvnentPaging
     {
+        public int ID { get; set; }
+        public string Current { get; set; }
+
         /// <summary>
         /// 標題
         /// </summary>
