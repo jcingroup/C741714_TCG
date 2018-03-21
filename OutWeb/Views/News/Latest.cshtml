@@ -55,32 +55,46 @@
             }
             listStyleFirst = "label-" + listStyle;
 
-            <article class="article">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-4 col-12">
-                        <a href="@data.ContentUrl" class="thumbnail">
-                            @* 沒有圖檔的替代圖 *@
-                            <img src="@img" alt="">
-                        </a>
+            if (data.DataType == ListKind.焦點專欄)
+            {
+                //編輯器內容 取前 145 個字，有資料的話才顯示
+                <article class="article">
+                    <small class="date">@data.PublishDateString</small>
+                    <h3><a href="@data.ContentUrl">@data.Title</a></h3>
+                    <p>@Html.Raw(remark)</p>
+                    <a href="@data.ContentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                </article>
+            }
+            else
+            {
+                <article class="article">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-4 col-12">
+                            <a href="@data.ContentUrl" class="thumbnail">
+                                @* 沒有圖檔的替代圖 *@
+                                <img src="@img" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-9 col-sm-8 col-12">
+                            @*
+                                中央活動     class + label-warning
+                                各州活動     class + label-orange
+                                新聞         class + label-danger
+                                公告         class + label-pink
+                                聲明         class + label-purple
+                                焦點專欄     class + label-info
+                            *@
+                            <a class="label @listStyleFirst" href="@data.ListTitleUrl">@data.DataType.ToString()</a>
+                            <small class="date">@data.PublishDateString</small>
+                            <h3><a href="@data.ContentUrl">@data.Title</a></h3>
+                            @* 摘要 取前 145 個字，有資料的話才顯示 *@
+                            <p>@Html.Raw(remark)</p>
+                            <a href="@data.ContentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                        </div>
                     </div>
-                    <div class="col-lg-9 col-sm-8 col-12">
-                        @*
-                            中央活動     class + label-warning
-                            各州活動     class + label-orange
-                            新聞         class + label-danger
-                            公告         class + label-pink
-                            聲明         class + label-purple
-                            焦點專欄     class + label-info
-                        *@
-                        <a class="label @listStyleFirst" href="@data.ListTitleUrl">@data.DataType.ToString()</a>
-                        <small class="date">@data.PublishDateString</small>
-                        <h3><a href="@data.ContentUrl">@data.Title</a></h3>
-                        @* 摘要 取前 145 個字，有資料的話才顯示 *@
-                        <p>@Html.Raw(remark)</p>
-                        <a href="@data.ContentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-                    </div>
-                </div>
-            </article>
+                </article>
+            }
+
         }
 
         @*  <article class="article">

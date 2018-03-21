@@ -7,6 +7,7 @@ namespace OutWeb.Models.FrontModels.News.FocusNewsModels
 {
     public class FocusNewsContent
     {
+        public int? PagingID { get; set; }
         public Dictionary<int, string> FocusCateInfo { get; set; }
 
         public string PreviousIDStr { get; set; }

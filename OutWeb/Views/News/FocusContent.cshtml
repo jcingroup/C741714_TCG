@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = Model.Data.Title;
     ViewBag.BodyClass = "News Focus";
-    string listTitleUrl = Url.Content("~/News/FocusList?statesTypeID=" + Model.FocusCateInfo.Keys.First());
+    string listTitleUrl = Url.Content("~/News/FocusList?focusTypeID=" + Model.FocusCateInfo.Keys.First());
     string img_path = "/Images/";
 }
 
@@ -37,58 +37,26 @@
             @foreach (var paging in Model.Data.PagingList)
             {
                 int index = Model.Data.PagingList.IndexOf(paging);
+                string currentStyle = string.IsNullOrEmpty(paging.Current) ? "" : "current";
+                string pagingUrl = Url.Content("~/News/FocusContent?focusTypeID=" + Model.FocusCateInfo.Keys.First() + "&ID=" + Model.Data.ID + "&pagingID=" + paging.ID);
                 <li>
-                    <a class="tab-nav current" href="#paging_@index">@paging.Title</a>
+                    <a class="tab-nav @currentStyle" href="@pagingUrl">@paging.Title</a>
                 </li>
             }
         </ul>
     }
 
+    @{ var pageInfo = Model.Data.PagingList.Where(s => !string.IsNullOrEmpty(s.Current)).First();}
 
-    @foreach (var paging in Model.Data.PagingList)
-    {
-        int index = Model.Data.PagingList.IndexOf(paging);
-        bool dataSingle = Model.Data.PagingList.Count == 1 ? true : false;
 
-        string currentClass = index == 0 ? "current" : "";
-        string tabID = dataSingle ? "" : "paging_" + index;
-
+     
         @* 文章分頁，有資料才顯示，第一頁 class + current *@
-        <div class="tab @currentClass" id="@tabID">
+        <div class="tab current">
             <div class="mb-16 clearfix">
-                @Html.Raw(paging.Description.ToString())
+                @Html.Raw(pageInfo.Description.ToString())
             </div>
         </div>
-    }
-
-
-
-    @* if (dt.Rows.Count > 0)
-        {
-            for (int j = 0; j < dt.Rows.Count; j++)
-            {
-                cj = j.ToString();
-
-                c_title = dt.Rows[j]["c_title"].ToString();
-                c_desc = dt.Rows[j]["c_desc"].ToString();
-
-                if (j == 0)
-                {
-                    c_tab = "tab current";
-                }
-                else
-                {
-                    c_tab = "tab";
-                }
-
-                <div class="@c_tab" id="@str_tab-@cj">
-                    <!-- <h3>@Html.Raw(c_title)</h3> -->
-                    @Html.Raw(c_desc)
-                </div>
-            }
-        }*@
-
-
+  
 
 </div>
 <!--

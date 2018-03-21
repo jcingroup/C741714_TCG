@@ -1,9 +1,11 @@
 ﻿using OutWeb.Enums;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -22,7 +24,7 @@ namespace OutWeb.Repositories
         /// <returns></returns>
         public static string RemoveHtmlAllTags(this string input)
         {
-            return Regex.Replace(input, "<.*?>", String.Empty).Replace("&nbsp;","");
+            return Regex.Replace(input, "<.*?>", String.Empty).Replace("&nbsp;", "");
         }
 
         /// <summary>
@@ -109,6 +111,39 @@ namespace OutWeb.Repositories
         {
             return GetEnumDescription<Language>(lang);
         }
+
+        public static void FilterXss<T>(T obj)
+        {
+            // Get type.
+            Type type = typeof(T);
+            if (typeof(IEnumerable).IsAssignableFrom(type))
+            {
+                foreach (var str in obj as List<string>)
+                    HttpUtility.HtmlEncode(str);
+            }
+            if (typeof(string).IsAssignableFrom(type))
+            {
+                HttpUtility.HtmlEncode(obj.ToString());
+            }
+            else
+            {
+                // Loop over properties.
+                foreach (PropertyInfo propertyInfo in type.GetProperties())
+                {
+                    string name = propertyInfo.Name;
+                    object value = propertyInfo.GetValue(obj, null);
+                    if (value is string)
+                    {
+                        if (!propertyInfo.CanWrite)
+                            continue;
+                        //value = Sanitizer.GetSafeHtmlFragment(value.ToString());
+                        value = HttpUtility.HtmlEncode(value.ToString());
+                        propertyInfo.SetValue(obj, value);
+                    }
+                }
+            }
+        }
+
 
         /// <summary>
         ///將DateTime轉換為10碼字串 (ex. 2017-05-05)

@@ -64,11 +64,11 @@ string img_path = "/Images/";
 
                 @foreach (var siteUrl in pageInfo.InternetSiteList)
                 {
-                    var urlSplit = siteUrl.Split(new string[] { @"https://www.youtube.com/watch?v=" }, StringSplitOptions.RemoveEmptyEntries);
+                    var urlSplit = siteUrl.Split(new string[] { @"https://youtu.be/" }, StringSplitOptions.RemoveEmptyEntries);
                     string url = string.Empty;
                     if (urlSplit.Count() > 0)
                     {
-                        url = siteUrl.Replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/") + "/" + urlSplit[0];
+                        url = siteUrl.Replace("https://youtu.be/", "https://www.youtube.com/embed/") + "/" + urlSplit[0];
                     }
 
                     <li class="col-md-6 col-12">
