@@ -229,8 +229,8 @@ namespace OutWeb.Controllers
             dd_detail = dt1.Copy();
 
             ViewData["dt"] = dt;
-            ViewData["d_detail"] = dd_detail;
-            ViewData["d_detail"] = dd_detail;
+            ViewData["d_detail"] = d_detail;
+            ViewData["dd_detail"] = dd_detail;
             ViewData["id"] = id;
             ViewData["detail_id"] = detail_id;
             return View();
