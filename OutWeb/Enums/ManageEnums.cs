@@ -140,6 +140,9 @@ namespace OutWeb.Enums
         /// 列表資料預設筆數10
         /// </summary>
         SIZE10 = 10,
+
+        SIZE30 = 30,
+
     }
 
     /// <summary>

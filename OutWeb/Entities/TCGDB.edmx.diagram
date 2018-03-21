@@ -19,25 +19,26 @@
         <EntityTypeShape EntityType="C741714_TCGModel.JOINUS" Width="1.5" PointX="8.75" PointY="4.75" />
         <EntityTypeShape EntityType="C741714_TCGModel.JOINUS_CATE" Width="1.5" PointX="8.75" PointY="8.75" />
         <EntityTypeShape EntityType="C741714_TCGModel.LANG" Width="1.5" PointX="4.75" PointY="9.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.NEWS" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.NEWS_CATE" Width="1.5" PointX="10.75" PointY="5.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.SCHOOL_CATE" Width="1.5" PointX="10.75" PointY="9.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.SCHOOL_VIDEO" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.STATES" Width="1.5" PointX="12.75" PointY="4.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.STATES_CATE" Width="1.5" PointX="6.75" PointY="12.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.STATES_DETAIL" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.MSG" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.NEWS" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.NEWS_CATE" Width="1.5" PointX="10.75" PointY="9.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.SCHOOL_CATE" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.SCHOOL_VIDEO" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.STATES" Width="1.5" PointX="6.75" PointY="12.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.STATES_CATE" Width="1.5" PointX="12.75" PointY="8.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.STATES_DETAIL" Width="1.5" PointX="12.75" PointY="12.75" />
         <EntityTypeShape EntityType="C741714_TCGModel.STATES_VIDEO" Width="1.5" PointX="0.75" PointY="13.75" />
         <EntityTypeShape EntityType="C741714_TCGModel.URL" Width="1.5" PointX="2.75" PointY="13.75" />
         <EntityTypeShape EntityType="C741714_TCGModel.USR" Width="1.5" PointX="8.75" PointY="13.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.WBAGENT" Width="1.5" PointX="10.75" PointY="13.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.WBLOGERR" Width="1.5" PointX="12.75" PointY="13.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.WBNEWS" Width="1.5" PointX="14.75" PointY="0.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.WBPIC" Width="1.5" PointX="14.75" PointY="4.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.WBPRODUCT" Width="1.5" PointX="14.75" PointY="9.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.WBPRODUCTTYPE" Width="1.5" PointX="14.75" PointY="14.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.WBUSR" Width="1.5" PointX="16.75" PointY="0.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.WBWORKS" Width="1.5" PointX="16.75" PointY="4.75" />
-        <EntityTypeShape EntityType="C741714_TCGModel.SCHOOL" Width="1.5" PointX="4.75" PointY="16.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.WBAGENT" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.WBLOGERR" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.WBNEWS" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.WBPIC" Width="1.5" PointX="14.75" PointY="10.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.WBPRODUCT" Width="1.5" PointX="14.75" PointY="15.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.WBPRODUCTTYPE" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.WBUSR" Width="1.5" PointX="16.75" PointY="4.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.WBWORKS" Width="1.5" PointX="16.75" PointY="8.75" />
+        <EntityTypeShape EntityType="C741714_TCGModel.SCHOOL" Width="1.5" PointX="10.75" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

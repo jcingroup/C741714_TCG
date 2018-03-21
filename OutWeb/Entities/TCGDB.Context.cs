@@ -15,8 +15,8 @@ namespace OutWeb.Entities
     
     public partial class TCGDB : DbContext
     {
-        public TCGDB(string connectionString)
-            : base(connectionString)
+        public TCGDB(string conectionString)
+            : base(conectionString)
         {
         }
     
@@ -39,6 +39,7 @@ namespace OutWeb.Entities
         public virtual DbSet<JOINUS> JOINUS { get; set; }
         public virtual DbSet<JOINUS_CATE> JOINUS_CATE { get; set; }
         public virtual DbSet<LANG> LANG { get; set; }
+        public virtual DbSet<MSG> MSG { get; set; }
         public virtual DbSet<NEWS> NEWS { get; set; }
         public virtual DbSet<NEWS_CATE> NEWS_CATE { get; set; }
         public virtual DbSet<SCHOOL_CATE> SCHOOL_CATE { get; set; }

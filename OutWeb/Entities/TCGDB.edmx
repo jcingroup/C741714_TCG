@@ -233,6 +233,20 @@
           <Property Name="STATUS" Type="nvarchar" MaxLength="1" />
           <Property Name="SORT" Type="int" />
         </EntityType>
+        <EntityType Name="MSG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BD_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BD_DT" Type="datetime" />
+          <Property Name="UPD_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPD_DT" Type="datetime" />
+          <Property Name="MSG_CONTENT" Type="nvarchar(max)" />
+          <Property Name="MSG_DESC" Type="nvarchar(max)" />
+          <Property Name="MSG_LOCA" Type="nvarchar" MaxLength="500" />
+          <Property Name="MSG_KIND" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="NEWS">
           <Key>
             <PropertyRef Name="ID" />
@@ -554,6 +568,7 @@
           <EntitySet Name="JOINUS" EntityType="Self.JOINUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JOINUS_CATE" EntityType="Self.JOINUS_CATE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LANG" EntityType="Self.LANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MSG" EntityType="Self.MSG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NEWS" EntityType="Self.NEWS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NEWS_CATE" EntityType="Self.NEWS_CATE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SCHOOL_CATE" EntityType="Self.SCHOOL_CATE" Schema="dbo" store:Type="Tables" />
@@ -608,6 +623,7 @@
           <EntitySet Name="JOINUS" EntityType="C741714_TCGModel.JOINUS" />
           <EntitySet Name="JOINUS_CATE" EntityType="C741714_TCGModel.JOINUS_CATE" />
           <EntitySet Name="LANG" EntityType="C741714_TCGModel.LANG" />
+          <EntitySet Name="MSG" EntityType="C741714_TCGModel.MSG" />
           <EntitySet Name="NEWS" EntityType="C741714_TCGModel.NEWS" />
           <EntitySet Name="NEWS_CATE" EntityType="C741714_TCGModel.NEWS_CATE" />
           <EntitySet Name="SCHOOL_CATE" EntityType="C741714_TCGModel.SCHOOL_CATE" />
@@ -855,6 +871,20 @@
           <Property Name="LANG_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="SORT" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MSG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BD_DT" Type="DateTime" Precision="3" />
+          <Property Name="UPD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPD_DT" Type="DateTime" Precision="3" />
+          <Property Name="MSG_CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MSG_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MSG_LOCA" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MSG_KIND" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NEWS">
           <Key>
@@ -1160,7 +1190,7 @@
           <Property Name="SORT" Type="Int32" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1400,6 +1430,21 @@
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="LANG_NAME" ColumnName="LANG_NAME" />
                 <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MSG">
+            <EntityTypeMapping TypeName="C741714_TCGModel.MSG">
+              <MappingFragment StoreEntitySet="MSG">
+                <ScalarProperty Name="MSG_KIND" ColumnName="MSG_KIND" />
+                <ScalarProperty Name="MSG_LOCA" ColumnName="MSG_LOCA" />
+                <ScalarProperty Name="MSG_DESC" ColumnName="MSG_DESC" />
+                <ScalarProperty Name="MSG_CONTENT" ColumnName="MSG_CONTENT" />
                 <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
                 <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
                 <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />

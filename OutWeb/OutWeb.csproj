@@ -214,6 +214,9 @@
     <Compile Include="Entities\LANG.cs">
       <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\MSG.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\NEWS.cs">
       <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
