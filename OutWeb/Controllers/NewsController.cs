@@ -78,7 +78,10 @@ namespace OutWeb.Controllers
             if (pagingID != null)
             {
                 model.PagingID = (int)pagingID;
-                model.Data.PagingList.Where(s => s.ID == (int)pagingID).First().Current = "current";
+                var pagFirst = model.Data.PagingList.Where(s => s.ID == (int)pagingID).FirstOrDefault();
+                if (pagFirst == null)
+                    return RedirectToAction("EventLatest");
+                pagFirst.Current = "current";
             }
             else
             {
@@ -119,14 +122,27 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 活動寫真 - 各州活動內容
-        public ActionResult EventStatesContent(int? statesTypeID, int? ID)
+        public ActionResult EventStatesContent(int? statesTypeID, int? ID, int? pagingID)
         {
             if (!statesTypeID.HasValue || !ID.HasValue)
                 return RedirectToAction("EventStatesList");
             string langCd = string.Empty;
             EventStatesRepository repo = new EventStatesRepository();
-            EventStatesContent mdoel = repo.GetContentByID((int)statesTypeID, (int)ID, langCd);
-            return View(mdoel);
+            EventStatesContent model = repo.GetContentByID((int)statesTypeID, (int)ID, langCd);
+            if (pagingID != null)
+            {
+                model.PagingID = (int)pagingID;
+                var pagFirst = model.Data.PagingList.Where(s => s.ID == (int)pagingID).FirstOrDefault();
+                if (pagFirst == null)
+                    return RedirectToAction("EventLatest");
+                pagFirst.Current = "current";
+            }
+            else
+            {
+                if (model.Data.PagingList.Count > 0)
+                    model.Data.PagingList.First().Current = "current";
+            }
+            return View(model);
         }
 
         // 最新訊息 - 新聞 公告 聲明 - 最新消息
@@ -248,14 +264,27 @@ namespace OutWeb.Controllers
         }
 
         // 焦點專欄 - 內容
-        public ActionResult FocusContent(int? focusTypeID, int? ID)
+        public ActionResult FocusContent(int? focusTypeID, int? ID, int? pagingID)
         {
             if (!focusTypeID.HasValue || !ID.HasValue)
-                return RedirectToAction("FocusList");
+                return RedirectToAction("EventLatest");
             string langCd = string.Empty;
             FocusRepository repo = new FocusRepository();
-            FocusNewsContent mdoel = repo.GetContentByID((int)focusTypeID, (int)ID, langCd);
-            return View(mdoel);
+            FocusNewsContent model = repo.GetContentByID((int)focusTypeID, (int)ID, langCd);
+            if (pagingID != null)
+            {
+                model.PagingID = (int)pagingID;
+                var pagFirst = model.Data.PagingList.Where(s => s.ID == (int)pagingID).FirstOrDefault();
+                if (pagFirst == null)
+                    return RedirectToAction("FocusList", new { focusTypeID });
+                pagFirst.Current = "current";
+            }
+            else
+            {
+                if (model.Data.PagingList.Count > 0)
+                    model.Data.PagingList.First().Current = "current";
+            }
+            return View(model);
         }
     }
 }

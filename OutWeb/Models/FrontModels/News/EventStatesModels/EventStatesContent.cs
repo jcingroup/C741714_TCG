@@ -7,6 +7,7 @@ namespace OutWeb.Models.FrontModels.News.EventStatesModels
 {
     public class EventStatesContent
     {
+        public int? PagingID { get; set; }
         public Dictionary<int, string> StatesCateInfo { get; set; }
 
         public string PreviousIDStr { get; set; }
