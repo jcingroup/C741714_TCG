@@ -1140,7 +1140,8 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("str_return:" + str_return);
+                string cc_msg = "str_return:" + str_return;
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
             
@@ -1458,7 +1459,8 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("str_return:" + str_return);
+                string cc_msg = "str_return:" + str_return;
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
             
@@ -1957,8 +1959,8 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("抓取資料");
-                logger.Debug("dt_count:" + dt.Rows.Count.ToString());
+                string cc_msg = "抓取資料，dt_count:" + dt.Rows.Count.ToString();
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
             //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
@@ -2092,7 +2094,8 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("str_return:" + str_return);
+                string cc_msg = "str_return:" + str_return;
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
             return Content(str_return);
@@ -2554,7 +2557,8 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("str_return:" + str_return);
+                string cc_msg = "str_return:" + str_return;
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
             
@@ -2947,7 +2951,8 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("Img_Get,img_no:" + img_no + ",img_cate:" + img_cate + ",img_sty:" + img_sty);
+                string cc_msg = "Img_Get,img_no:" + img_no + ",img_cate:" + img_cate + ",img_sty:" + img_sty;
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
             str_return = JsonConvert.SerializeObject(img_file, Newtonsoft.Json.Formatting.Indented);
@@ -2970,7 +2975,8 @@ namespace OutWeb.Controllers
                 //--------------------------------------//
                 if (IsDebug == "On")
                 {
-                    logger.Debug("update,img_id:" + img_id + ",img_no:" + img_no + ",img_desc:" + img_desc + ",img_cate:" + img_cate);
+                    string cc_msg = "update,img_id:" + img_id + ",img_no:" + img_no + ",img_desc:" + img_desc + ",img_cate:" + img_cate;
+                    CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                 }
                 //--------------------------------------//	
                 
@@ -3018,7 +3024,8 @@ namespace OutWeb.Controllers
                     //--------------------------------------//
                     if (IsDebug == "On")
                     {
-                        logger.Debug("update,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate);
+                        string cc_msg = "update,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate;
+                        CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                     }
                     //--------------------------------------//	
 
@@ -3029,7 +3036,8 @@ namespace OutWeb.Controllers
                     //--------------------------------------//
                     if (IsDebug == "On")
                     {
-                        logger.Debug("del,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate);
+                        string cc_msg = "del,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate;
+                        CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                     }
                     //--------------------------------------//	
 
@@ -3041,7 +3049,8 @@ namespace OutWeb.Controllers
                 //--------------------------------------//
                 if (IsDebug == "On")
                 {
-                    logger.Debug("insert,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate);
+                    string cc_msg = "insert,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate;
+                    CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                 }
                 //--------------------------------------//	
 

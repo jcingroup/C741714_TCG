@@ -158,7 +158,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -290,7 +290,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -350,7 +350,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -432,7 +432,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -582,7 +582,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -713,7 +713,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -771,7 +771,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -822,7 +822,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -1037,7 +1037,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -1190,7 +1190,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -1254,7 +1254,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -1290,7 +1290,8 @@ namespace OutWeb.Service
                 //--------------------------------------//
                 if (IsDebug == "On")
                 {
-                    logger.Debug("id:" + id);
+                    string cc_msg = "id:" + id;
+                    CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                 }
                 //--------------------------------------//
                 //======== 刪除圖片 ====================//
@@ -1300,7 +1301,8 @@ namespace OutWeb.Service
                 //--------------------------------------//
                 if (IsDebug == "On")
                 {
-                    logger.Debug("csql:" + csql);
+                    string cc_msg = "csql:" + csql;
+                    CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                 }
                 //--------------------------------------//	
 
@@ -1322,7 +1324,8 @@ namespace OutWeb.Service
                 //--------------------------------------//
                 if (IsDebug == "On")
                 {
-                    logger.Debug("csql:" + csql);
+                    string cc_msg = "csql:" + csql;
+                    CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                 }
                 //--------------------------------------//	
 
@@ -1335,7 +1338,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
