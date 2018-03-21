@@ -24,7 +24,7 @@ namespace OutWeb.Service
 
         #region 最新消息類別
         #region 最新消息類別 News_Cate_List
-        public DataTable News_Cate_List(ref string err_msg, string cate_id = "", string sort = "", string status = "", string title_query = "",string lang_id = "")
+        public DataTable News_Cate_List(ref string err_msg, string cate_id = "", string sort = "", string status = "", string title_query = "", string lang_id = "")
         {
             DataTable dt = new DataTable();
             SqlConnection conn = new SqlConnection(CService.conn_string());
@@ -91,7 +91,7 @@ namespace OutWeb.Service
                     csql = csql + ") ";
                 }
 
-                if(lang_id.Trim().Length > 0)
+                if (lang_id.Trim().Length > 0)
                 {
                     csql = csql + " and b1.lang_id = @lang_id ";
                 }
@@ -152,7 +152,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -169,7 +169,7 @@ namespace OutWeb.Service
         #endregion
 
         #region 消息類別新增 News_Cate_Insert
-        public string News_Cate_Insert(string cate_name = "", string cate_desc = "", string is_show = "", string sort = "",string lang_id = "")
+        public string News_Cate_Insert(string cate_name = "", string cate_desc = "", string is_show = "", string sort = "", string lang_id = "")
         {
             string c_msg = "";
 
@@ -284,7 +284,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -302,7 +302,7 @@ namespace OutWeb.Service
 
         #region 消息類別更新 News_Cate_Update
         //更新內容
-        public string News_Cate_Update(string cate_id = "", string cate_name = "", string cate_desc = "", string is_show = "", string sort = "",string lang_id = "")
+        public string News_Cate_Update(string cate_id = "", string cate_name = "", string cate_desc = "", string is_show = "", string sort = "", string lang_id = "")
         {
             string c_msg = "";
             SqlConnection conn = new SqlConnection(CService.conn_string());
@@ -344,7 +344,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -426,7 +426,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -444,7 +444,7 @@ namespace OutWeb.Service
         #endregion
 
         #region 消息資料抓取 News_List
-        public DataTable News_List(ref string err_msg, string news_id = "", string sort = "", string status = "", string title_query = "", string start_date = "", string end_date = "", string is_index = "",string cate_id = "",string lang_id = "")
+        public DataTable News_List(ref string err_msg, string news_id = "", string sort = "", string status = "", string title_query = "", string start_date = "", string end_date = "", string is_index = "", string cate_id = "", string lang_id = "")
         {
             DataTable dt = new DataTable();
 
@@ -645,7 +645,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -662,7 +662,7 @@ namespace OutWeb.Service
         #endregion
 
         #region 消息資料新增 News_Insert
-        public string News_Insert(string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "",string lang_id = "", string cate_id = "", string img_no = "")
+        public string News_Insert(string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "", string lang_id = "", string cate_id = "", string img_no = "")
         {
             string c_msg = "";
             string id = "";
@@ -774,7 +774,7 @@ namespace OutWeb.Service
                 if (ds.Tables["chk_news"].Rows.Count > 0)
                 {
                     id = ds.Tables["chk_news"].Rows[0]["id"].ToString();
-                    if(img_no.Trim().Length > 0)
+                    if (img_no.Trim().Length > 0)
                     {
                         csql = @"UPDATE "
                              + " IMG "
@@ -798,7 +798,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -816,7 +816,7 @@ namespace OutWeb.Service
 
         #region 消息資料更新 News_Update
         //更新內容
-        public string News_Update(string n_id = "", string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "",string lang_id = "", string cate_id = "")
+        public string News_Update(string n_id = "", string n_title = "", string n_date = "", string n_desc = "", string is_show = "", string is_index = "", string sort = "", string n_memo = "", string lang_id = "", string cate_id = "")
         {
             string c_msg = "";
             SqlConnection conn = new SqlConnection(CService.conn_string());
@@ -866,7 +866,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -924,7 +924,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 c_msg = ex.Message;
-                logger.Error(CService.rtn_errmsg(ex));
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {

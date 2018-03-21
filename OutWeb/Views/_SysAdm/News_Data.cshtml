@@ -237,10 +237,10 @@
 
                 $.each($.parseJSON(data), function (idx, obj) {
                     i = i + 1;
-                    c_html = c_html + "<li>";
+                    c_html = c_html + "<div class=\"uploaded\">";
                     c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "');\" >&times;</button>";
                     c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
-                    c_html = c_html + "</li>";
+                    c_html = c_html + "</div>";
                 });
 
                 $('#c_img_' + c_sty).html(c_html);
@@ -306,10 +306,10 @@
                     c_html = "";
                     $.each($.parseJSON(data), function (idx, obj) {
                         i = i + 1;
-                        c_html = c_html + "<li>";
+                        c_html = c_html + "<div class=\"uploaded\">";
                         c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.ID + "','" + c_sty + "');\" >&times;</button>";
                         c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.IMG_FILE + "\" alt=\"\">";
-                        c_html = c_html + "</li>";
+                        c_html = c_html + "</div>";
                     });
 
                     $('#c_img_' + c_sty).html(c_html);

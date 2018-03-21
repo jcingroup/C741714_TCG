@@ -294,12 +294,12 @@
     <table class="table-list table-hover table-striped">
         <colgroup>
             <col style="width: 5%">
+            <col style="width: 12%">
             <col style="width: 13%">
-            @*<col style="width: 10%">*@
+            <col style="width: 14%">
             <col style="width: 24%">
             <col style="width: 10%">
-            <col style="width: 10%">
-            <col style="width: 13%">
+            <col style="width: 7%">
             <col style="width: 10%">
             <col style="width: 5%">
         </colgroup>
@@ -316,6 +316,9 @@
                 <button class="text-xs-center th-sort-toggle @class_date" name="btn_date" id="btn_date" onclick="sort('c_date');">日期</button>
             </th>
             <th>
+                <button class="text-xs-center th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
+            </th>
+            <th>
                 <button class="text-xs-center th-sort-toggle @class_cate" name="btn_cate" id="btn_cate" onclick="sort('cate_id');">分類</button>
             </th>
             <th class="text-left">標題</th>
@@ -327,9 +330,6 @@
             </th>
             <th>
                 <button class="text-xs-center th-sort-toggle @class_index" name="btn_index" id="btn_index" onclick="sort('is_index');">顯示於最新訊息</button>
-            </th>
-            <th>
-                <button class="text-xs-center th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
             </th>
             <th class="item-edit">刪除</th>
         </tr>
@@ -378,12 +378,12 @@
                         <button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?id=" + id)';"></button>
                     </td>
                     <td>@c_date</td>
+                    <td>@c_sort</td>
                     <td>@cate_name</td>
                     <td class="text-left">@c_title</td>
                     <td>@lang_name</td>
                     <td><span class="label @show_class">@show</span></td>
                     <td><span class="label @index_class">@str_index</span></td>
-                    <td>@c_sort</td>
                     <td>
                         <button class="hover-danger oi delete-btn" title="刪除" type="button" data-glyph="trash" onclick="del('@Url.Content(SysPath + cFile_Del + "?id=" + id)',@img_count);"></button>
                     </td>
@@ -392,9 +392,9 @@
         }
         else
         {
-            <tr>
-                <td class="text-left" colspan="6">
-                    無資料
+            <tr class="bg-pale-red">
+                <td colspan="9">
+                    尚無資料
                 </td>
             </tr>
         }

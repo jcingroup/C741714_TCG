@@ -29,7 +29,7 @@
 <div class="articles">
     @foreach (var data in Model.Data)
     {
-        string img = string.IsNullOrEmpty(data.Img) ? @"http://via.placeholder.com/800x510?text=No+Images" : img_path + data.Img;
+        string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
         string contentUrl = Url.Action("EventLatestContent", "News", new { ID = data.ID });
                 string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : data.Remark;
 
@@ -63,7 +63,7 @@
                 <div class="col-lg-3 col-sm-4 col-12">
                     <a href="~/News/EventLatestContent" class="thumbnail">
                         沒有圖檔的替代圖
-                        <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
+                        <img src="~/Content/Images/NoImages.jpg" alt="">
                     </a>
                 </div>
                 <div class="col-lg-9 col-sm-8 col-12">

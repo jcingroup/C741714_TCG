@@ -196,9 +196,9 @@
     <table class="table-list table-hover table-striped">
             <colgroup>
                 <col style="width: 5%">
-                <col style="width: 30%">
-                <col style="width: 30%">
                 <col style="width: 10%">
+                <col style="width: 35%">
+                <col style="width: 25%">
                 <col style="width: 10%">
                 <col style="width: 10%">
                 <col style="width: 5%">
@@ -214,19 +214,19 @@
                 *@
                 @* 如不需要排序功能: 純文字即可 *@
                 <th class="item-edit">修改</th>
+                <th>
+                    @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                    <button class="th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
+                </th>
                 <th class="text-left">分類名稱</th>
                 <th class="text-left">描述</th>
                 <th>
                     @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                    <button class="text-xs-center th-sort-toggle @class_lang" name="btn_lang" id="btn_lang" onclick="sort('lang_id');">語系</button>
+                    <button class="th-sort-toggle @class_lang" name="btn_lang" id="btn_lang" onclick="sort('lang_id');">語系</button>
                 </th>
                 <th>
                     @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                    <button class="text-xs-center th-sort-toggle @class_status" name="btn_status" id="btn_status" onclick="sort('status');">顯示</button>
-                </th>
-                <th>
-                    @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                    <button class="text-xs-center th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
+                    <button class="th-sort-toggle @class_status" name="btn_status" id="btn_status" onclick="sort('status');">顯示</button>
                 </th>
                 <th class="item-edit">刪除</th>
             </tr>
@@ -258,11 +258,11 @@
                         <td>
                             <button type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?cate_id=" + cate_id)';" class="hover-primary oi" data-glyph="pencil"></button>
                         </td>
+                        <td>@cate_sort</td>
                         <td class="text-left">@cate_name</td>
                         <td class="text-left">@Html.Raw(cate_desc)</td>
-                        <td class="text-left">@lang_name</td>
+                        <td>@lang_name</td>
                         <td><span class="label @show_class">@show</span></td>
-                        <td>@cate_sort</td>
                         <td>
                             <button type="button" onclick="del('@Url.Content(SysPath + cFile_Del + "?cate_id=" + cate_id)');" class="hover-danger oi" data-glyph="trash"></button>
                         </td>
@@ -271,9 +271,9 @@
             }
             else
             {
-                <tr>
-                    <td class="text-left" colspan="7">
-                        無資料
+                <tr class="bg-pale-red">
+                    <td colspan="7">
+                        尚無資料
                     </td>
                 </tr>
             }
@@ -281,9 +281,6 @@
     </table>
 
     <footer class="table-foot">
-
-
-
         <small class="float-r">第 @min_row - @max_row 筆，共 @row_count 筆</small>
         <nav class="pager">
             <a href="@Url.Content(SysPath + cFile + "?page=" + top_page.ToString())" class="oi" data-glyph="media-step-backward" title="到最前頁"></a>
