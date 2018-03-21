@@ -891,6 +891,7 @@
     <Content Include="Views\_SysAdm\States_List.cshtml" />
     <Content Include="Views\_SysAdm\States_Data.cshtml" />
     <Content Include="Views\AboutUs\Law.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
