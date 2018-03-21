@@ -261,9 +261,9 @@
     <table class="table-list table-hover table-striped">
         <colgroup>
             <col style="width: 5%">
-            <col style="width: 17%">
+            <col style="width: 13%">
+            <col style="width: 14%">
             <col style="width: 43%">
-            <col style="width: 10%">
             <col style="width: 10%">
             <col style="width: 10%">
             <col style="width: 5%">
@@ -279,26 +279,26 @@
             <th class="item-edit">修改</th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                <button class="text-xs-center th-sort-toggle @class_cate" name="btn_cate" id="btn_cate" onclick="sort('cate_id');">班別</button>
+                <button class="th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
+            </th>
+            <th>
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                <button class="th-sort-toggle @class_cate" name="btn_cate" id="btn_cate" onclick="sort('cate_id');">班別</button>
             </th>
             <th class="text-left">期別</th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                <button class="text-xs-center th-sort-toggle @class_lang" name="btn_lang" id="btn_lang" onclick="sort('lang_id');">語系</button>
+                <button class="th-sort-toggle @class_lang" name="btn_lang" id="btn_lang" onclick="sort('lang_id');">語系</button>
             </th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                <button class="text-xs-center th-sort-toggle @class_status" name="btn_status" id="btn_status" onclick="sort('status');">狀態</button>
-            </th>
-            <th>
-                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                <button class="text-xs-center th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
+                <button class="th-sort-toggle @class_status" name="btn_status" id="btn_status" onclick="sort('status');">狀態</button>
             </th>
             <th class="item-edit">刪除</th>
         </tr>
         @*
             無資料
-            <tr class="bg-pale-red"><td colspan="8">查無資料!</td></tr>
+            <tr class="bg-pale-red"><td colspan="8">尚無資料</td></tr>
         *@
         @* 建議: 1頁10筆資料 *@
         @if (dt.Rows.Count > 0)
@@ -327,11 +327,11 @@
                     <td>
                         <button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?id=" + id)';"></button>
                     </td>
+                    <td>@c_sort</td>
                     <td>@cate_name</td>
                     <td class="text-left">@c_title</td>
                     <td>@lang_name</td>
                     <td><span class="label @show_class">@show</span></td>
-                    <td>@c_sort</td>
                     <td>
                         <button class="hover-danger oi delete-btn" title="刪除" type="button" data-glyph="trash" onclick="del('@Url.Content(SysPath + cFile_Del + "?id=" + id)');"></button>
                     </td>
@@ -340,9 +340,9 @@
         }
         else
         {
-            <tr>
-                <td class="text-left" colspan="6">
-                    無資料
+            <tr class="bg-pale-red">
+                <td colspan="7">
+                    尚無資料
                 </td>
             </tr>
         }

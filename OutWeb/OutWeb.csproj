@@ -715,6 +715,7 @@
     <Content Include="Content\images\JoinUs\gallery-sp.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logo_s.png" />
+    <Content Include="Content\images\NoImages.jpg" />
     <Content Include="Content\js\jquery.waypoints.min.js" />
     <Content Include="Content\js\lightbox.min.js" />
     <Content Include="Content\js\swiper.min.js" />

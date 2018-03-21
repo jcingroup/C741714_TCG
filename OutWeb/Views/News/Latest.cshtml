@@ -26,7 +26,7 @@
 
         @foreach (var data in Model)
         {
-            string img = string.IsNullOrEmpty(data.Img) ? @"http://via.placeholder.com/800x510?text=No+Images" : img_path + data.Img;
+            string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
             string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : data.Remark;
             string listStyleFirst = string.Empty;
             string listStyle = string.Empty;
@@ -55,10 +55,77 @@
             }
             listStyleFirst = "label-" + listStyle;
 
+            @* 暫時先維持原狀 *@
+            <article class="article">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-4 col-12">
+                        <a href="@data.ContentUrl" class="thumbnail">
+                            <img src="@img" alt="">
+                        </a>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-12">
+                            <!-- 中央活動     class + label-warning
+                            各州活動     class + label-orange
+                            新聞         class + label-danger
+                            公告         class + label-pink
+                            聲明         class + label-purple
+                            焦點專欄     class + label-info -->
+                        <a class="label @listStyleFirst" href="@data.ListTitleUrl">@data.DataType.ToString()</a>
+                        <small class="date">@data.PublishDateString</small>
+                        <h3><a href="@data.ContentUrl">@data.Title</a></h3>
+                        <!-- 摘要 取前 145 個字，有資料的話才顯示 -->
+                        <p>@Html.Raw(remark)</p>
+                        <a href="@data.ContentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                    </div>
+                </div>
+            </article>
+
+            @* 如果有代表圖才會顯示圖片區塊，沒有就文字滿版 *@
+            @*
+            if (data.Img == null) {
+                //編輯器內容 取前 145 個字，有資料的話才顯示
+                <article class="article">
+                    <a class="label @listStyleFirst" href="@data.ListTitleUrl">@data.DataType.ToString()</a>
+                    <small class="date">@data.PublishDateString</small>
+                    <h3><a href="@data.ContentUrl">@data.Title</a></h3>
+                    <p>@Html.Raw(remark)</p>
+                    <a href="@data.ContentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                </article>
+            }
+            else {
+                <article class="article">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-4 col-12">
+                            <a href="@data.ContentUrl" class="thumbnail">
+                                <img src="@img" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-9 col-sm-8 col-12">
+                                <!-- 中央活動     class + label-warning
+                                各州活動     class + label-orange
+                                新聞         class + label-danger
+                                公告         class + label-pink
+                                聲明         class + label-purple
+                                焦點專欄     class + label-info -->
+                            <a class="label @listStyleFirst" href="@data.ListTitleUrl">@data.DataType.ToString()</a>
+                            <small class="date">@data.PublishDateString</small>
+                            <h3><a href="@data.ContentUrl">@data.Title</a></h3>
+                            <!-- 摘要 取前 145 個字，有資料的話才顯示 -->
+                            <p>@Html.Raw(remark)</p>
+                            <a href="@data.ContentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+            }
+            *@
+
+            @* 如果是焦點專欄就文字滿版 *@
+            @*
             if (data.DataType == ListKind.焦點專欄)
             {
                 //編輯器內容 取前 145 個字，有資料的話才顯示
                 <article class="article">
+                    <a class="label @listStyleFirst" href="@data.ListTitleUrl">@data.DataType.ToString()</a>
                     <small class="date">@data.PublishDateString</small>
                     <h3><a href="@data.ContentUrl">@data.Title</a></h3>
                     <p>@Html.Raw(remark)</p>
@@ -69,31 +136,24 @@
             {
                 <article class="article">
                     <div class="row">
-                        <div class="col-lg-3 col-sm-4 col-12">
-                            <a href="@data.ContentUrl" class="thumbnail">
-                                @* 沒有圖檔的替代圖 *@
-                                <img src="@img" alt="">
-                            </a>
-                        </div>
+                        @if (data.Img != null) {
+                            <div class="col-lg-3 col-sm-4 col-12">
+                                <a href="@data.ContentUrl" class="thumbnail">
+                                    <img src="@img" alt="">
+                                </a>
+                            </div>
+                        }
                         <div class="col-lg-9 col-sm-8 col-12">
-                            @*
-                                中央活動     class + label-warning
-                                各州活動     class + label-orange
-                                新聞         class + label-danger
-                                公告         class + label-pink
-                                聲明         class + label-purple
-                                焦點專欄     class + label-info
-                            *@
                             <a class="label @listStyleFirst" href="@data.ListTitleUrl">@data.DataType.ToString()</a>
                             <small class="date">@data.PublishDateString</small>
                             <h3><a href="@data.ContentUrl">@data.Title</a></h3>
-                            @* 摘要 取前 145 個字，有資料的話才顯示 *@
                             <p>@Html.Raw(remark)</p>
                             <a href="@data.ContentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
                         </div>
                     </div>
                 </article>
             }
+            *@
 
         }
 
@@ -102,7 +162,7 @@
                 <div class="col-lg-3 col-sm-4 col-12">
                     <a href="~/News/EventLatestContent" class="thumbnail">
                         沒有圖檔的替代圖
-                        <img src="http://via.placeholder.com/800x510?text=No+Images" alt="">
+                        <img src="~/Content/Images/NoImages.jpg" alt="">
                     </a>
                 </div>
                 <div class="col-lg-9 col-sm-8 col-12">

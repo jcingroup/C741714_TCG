@@ -141,10 +141,6 @@
 </script>
 <h3 class="title">@ViewBag.Crumb </h3>
 
-<div class="alert-warning mb-16">
-    <strong>前台排序：</strong> 依排序號碼。<br>
-</div>
-
 <div class="topBtn-bar btn-group">
     <button type="button" onclick="location.href='@Url.Content(SysPath + cFile_Add)';" class="btn success oi" data-glyph="plus">
         新增
@@ -188,8 +184,8 @@
     <table class="table-list table-hover table-striped">
         <colgroup>
             <col style="width: 5%">
-            <col style="width: 60%">
             <col style="width: 10%">
+            <col style="width: 60%">
             <col style="width: 10%">
             <col style="width: 10%">
             <col style="width: 5%">
@@ -206,7 +202,11 @@
                 @* 如不需要排序功能: 純文字即可 *@
 
                 <th class="item-edit">修改</th>
-                <th class="text-left">直播網址</th>
+                <th>
+                    @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                    <button class="text-xs-center th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
+                </th>
+                <th class="text-left">影片網址</th>
                 <th>
                     @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                     <button class="text-xs-center th-sort-toggle @class_lang" name="btn_lang" id="btn_lang" onclick="sort('lang_id');">語系</button>
@@ -214,10 +214,6 @@
                 <th>
                     @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                     <button class="text-xs-center th-sort-toggle @class_status" name="btn_status" id="btn_status" onclick="sort('status');">顯示</button>
-                </th>
-                <th>
-                    @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                    <button class="text-xs-center th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
                 </th>
                 <th class="item-edit">刪除</th>
             </tr>
@@ -248,10 +244,10 @@
                         <td>
                             <button type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?video_id=" + video_id)';" class="hover-primary oi" data-glyph="pencil"></button>
                         </td>
+                        <td>@video_sort</td>
                         <td class="text-left">@c_url</td>
                         <td>@lang_name</td>
                         <td><span class="label @show_class">@show</span></td>
-                        <td>@video_sort</td>
                         <td>
                             <button type="button" onclick="del('@Url.Content(SysPath + cFile_Del + "?video_id=" + video_id)');" class="hover-danger oi" data-glyph="trash"></button>
                         </td>
@@ -260,9 +256,9 @@
             }
             else
             {
-                <tr>
-                    <td class="text-left" colspan="5">
-                        無資料
+                <tr class="bg-pale-red">
+                    <td colspan="6">
+                        尚無資料
                     </td>
                 </tr>
             }

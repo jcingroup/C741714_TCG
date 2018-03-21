@@ -310,10 +310,10 @@
                     //$.each($.parseJSON(data), function (idx, obj) {
                     $.each(JsonObj, function (idx, obj) {
                         i = i + 1;
-                        c_html = c_html + "<li>";
+                        c_html = c_html + "<div class=\"uploaded\">";
                         c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\" >&times;</button>";
                         c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
-                        c_html = c_html + "</li>";
+                        c_html = c_html + "</div>";
                     });
 
                     $('#c_img_' + c_sty).html(c_html);
@@ -399,10 +399,10 @@
                         //$.each($.parseJSON(data), function (idx, obj) {
                         $.each(JsonObj, function (idx, obj) {
                             i = i + 1;
-                            c_html = c_html + "<li>";
+                            c_html = c_html + "<div class=\"uploaded\">";
                             c_html = c_html + "    <button class=\"close\" id=\"btn_close_" + c_sty + "_" + i + "\" name=\"btn_close_" + c_sty + "_" + i + "\" onclick=\"del_img('" + obj.id + "','" + c_sty + "','" + c_cate + "');\" >&times;</button>";
                             c_html = c_html + "    <img id=\"img_" + c_sty + "_" + i + "\" name=\"img_" + c_sty + "_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
-                            c_html = c_html + "</li>";
+                            c_html = c_html + "</div>";
                         });
 
                         $('#c_img_' + c_sty).html(c_html);
@@ -1527,7 +1527,10 @@
             </button>
         </div>
         <div class="modal-content">
-            <p class="mb-16">請輸入 Youtube 影片網址，最多可輸入10部影片網址</p>
+            <p class="mb-16">
+                請輸入 Youtube 影片網址，最多可輸入10部影片網址 <br>
+                <small class="text-secondary">Youtube 點選 [分享] > 複製 https://youtu.be/ 開頭的完整網址</small>
+            </p>
             <ol class="pl-24">
                 <li class="mb-12">
                     <input type="hidden" name="url_id_1" id="url_id_1" value="" />
