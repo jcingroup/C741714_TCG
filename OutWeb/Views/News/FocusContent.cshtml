@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = Model.Data.Title;
     ViewBag.BodyClass = "News Focus";
-    string listTitleUrl = Url.Content("~/News/FocusList?statesTypeID=" + Model.FocusCateInfo.Keys.First());
+    string listTitleUrl = Url.Content("~/News/FocusList?focusTypeID=" + Model.FocusCateInfo.Keys.First());
     string img_path = "/Images/";
 }
 
