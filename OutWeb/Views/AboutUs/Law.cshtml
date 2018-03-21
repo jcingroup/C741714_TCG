@@ -56,46 +56,44 @@
     }
 </ul>
 
-<div class="tab-content">
-    <div class="tab-content clearfix editor">
+<div class="tab-content clearfix editor">
 
-        @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
-        @if (dt.Rows.Count > 1)
-        {
-            <ul class="tabs list-inline">
-                @for (int i = 0; i < dt.Rows.Count; i++)
+    @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
+    @if (dt.Rows.Count > 1)
+    {
+        <ul class="tabs list-inline">
+            @for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                c_title = dt.Rows[i]["c_title"].ToString();
+                c_id = dt.Rows[i]["id"].ToString();
+                ci = i.ToString();
+
+                if (id == c_id)
                 {
-                    c_title = dt.Rows[i]["c_title"].ToString();
-                    c_id = dt.Rows[i]["id"].ToString();
-                    ci = i.ToString();
-
-                    if (id == c_id)
-                    {
-                        c_tab_nav = " current";
-                    }
-                    else
-                    {
-                        c_tab_nav = "";
-                    }
-
-                    <li>
-                        @*<a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>*@
-                        <a class="@c_tab_nav" href="@Url.Content(cFile + "?cate_id=" + cate_id + "&id=" + c_id)">@c_title</a>
-                    </li>
+                    c_tab_nav = " current";
                 }
-            </ul>
-        }
+                else
+                {
+                    c_tab_nav = "";
+                }
 
-        @if (d_detail.Rows.Count > 0)
-        {
-            c_desc = d_detail.Rows[0]["c_desc"].ToString();
+                <li>
+                    @*<a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>*@
+                    <a class="@c_tab_nav" href="@Url.Content(cFile + "?cate_id=" + cate_id + "&id=" + c_id)">@c_title</a>
+                </li>
+            }
+        </ul>
+    }
 
-            <div>
-                @Html.Raw(c_desc)
-            </div>
-        }
+    @if (d_detail.Rows.Count > 0)
+    {
+        c_desc = d_detail.Rows[0]["c_desc"].ToString();
 
-    </div>
+        <div>
+            @Html.Raw(c_desc)
+        </div>
+    }
+
 </div>
 
 
