@@ -1140,10 +1140,11 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("str_return:" + str_return);
+                string cc_msg = "str_return:" + str_return;
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
-            
+
             return Content(str_return);
         }
         #endregion 教育專欄_明細_陳列 Edu_Detail_List
@@ -1357,7 +1358,7 @@ namespace OutWeb.Controllers
 
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
-            d_img = DB.Img_List(ref err_msg, "", "", "Focus","0");
+            d_img = DB.Img_List(ref err_msg, "", "", "Focus", "0");
             d_detail = CFocus.Detail_List(ref err_msg, "0", "", "", "", "", "");
             //設定傳值
             ViewData["d_lang"] = d_lang;
@@ -1458,10 +1459,11 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("str_return:" + str_return);
+                string cc_msg = "str_return:" + str_return;
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
-            
+
             return Content(str_return);
         }
         #endregion 焦點專欄_明細_陳列 Focus_Detail_List
@@ -1922,8 +1924,8 @@ namespace OutWeb.Controllers
             //d_url = DB.URL_List(ref err_msg, "", "Activity");
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_detail = CActivity.Detail_List(ref err_msg, "0", "", "", "", "", "");
-            d_img = DB.Img_List(ref err_msg, "", "", "Activity","0");
-            
+            d_img = DB.Img_List(ref err_msg, "", "", "Activity", "0");
+
             //清除明細 & 圖片資料
             d_detail.Clear();
             d_img.Clear();
@@ -1957,8 +1959,8 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("抓取資料");
-                logger.Debug("dt_count:" + dt.Rows.Count.ToString());
+                string cc_msg = "抓取資料，dt_count:" + dt.Rows.Count.ToString();
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
             //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
@@ -1971,7 +1973,7 @@ namespace OutWeb.Controllers
             //ViewData["d_url"] = d_url;
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
-            ViewData["d_detail"] = d_detail;            
+            ViewData["d_detail"] = d_detail;
             ViewData["d_img"] = d_img;
             ViewData["action_sty"] = "edit";
 
@@ -2092,7 +2094,8 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("str_return:" + str_return);
+                string cc_msg = "str_return:" + str_return;
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
             return Content(str_return);
@@ -2111,7 +2114,7 @@ namespace OutWeb.Controllers
 
             //c_desc = CService.UnEscape(c_desc);
             //c_desc = System.Uri.UnescapeDataString(c_desc);
-           
+
             //c_desc = Server.HtmlDecode(c_desc);
 
             switch (c_sty)
@@ -2211,7 +2214,7 @@ namespace OutWeb.Controllers
 
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CStates.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
-            d_img = DB.Img_List(ref err_msg, "", "", "States","0");
+            d_img = DB.Img_List(ref err_msg, "", "", "States", "0");
             d_detail = CStates.Detail_List(ref err_msg, "0", "", "", "", "", "");
 
             //清除明細 & 圖片資料
@@ -2554,10 +2557,11 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("str_return:" + str_return);
+                string cc_msg = "str_return:" + str_return;
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
-            
+
             return Content(str_return);
         }
         #endregion 各洲活動_明細_陳列 States_Detail_List
@@ -2947,7 +2951,8 @@ namespace OutWeb.Controllers
             //--------------------------------------//
             if (IsDebug == "On")
             {
-                logger.Debug("Img_Get,img_no:" + img_no + ",img_cate:" + img_cate + ",img_sty:" + img_sty);
+                string cc_msg = "Img_Get,img_no:" + img_no + ",img_cate:" + img_cate + ",img_sty:" + img_sty;
+                CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             //--------------------------------------//	
             str_return = JsonConvert.SerializeObject(img_file, Newtonsoft.Json.Formatting.Indented);
@@ -2966,14 +2971,15 @@ namespace OutWeb.Controllers
 
             if (img_id.Trim().Length > 0)
             {
-                DB.Img_Update(img_id,"","","",img_cate,img_desc,"");
+                DB.Img_Update(img_id, "", "", "", img_cate, img_desc, "");
                 //--------------------------------------//
                 if (IsDebug == "On")
                 {
-                    logger.Debug("update,img_id:" + img_id + ",img_no:" + img_no + ",img_desc:" + img_desc + ",img_cate:" + img_cate);
+                    string cc_msg = "update,img_id:" + img_id + ",img_no:" + img_no + ",img_desc:" + img_desc + ",img_cate:" + img_cate;
+                    CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                 }
                 //--------------------------------------//	
-                
+
             }
 
             //抓取資料
@@ -3012,13 +3018,14 @@ namespace OutWeb.Controllers
 
             if (url_id.Trim().Length > 0)
             {
-                if(curl.Trim().Length > 0)
+                if (curl.Trim().Length > 0)
                 {
                     DB.URL_Update(url_id, url_no, curl, url_cate);
                     //--------------------------------------//
                     if (IsDebug == "On")
                     {
-                        logger.Debug("update,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate);
+                        string cc_msg = "update,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate;
+                        CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                     }
                     //--------------------------------------//	
 
@@ -3029,7 +3036,8 @@ namespace OutWeb.Controllers
                     //--------------------------------------//
                     if (IsDebug == "On")
                     {
-                        logger.Debug("del,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate);
+                        string cc_msg = "del,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate;
+                        CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                     }
                     //--------------------------------------//	
 
@@ -3041,7 +3049,8 @@ namespace OutWeb.Controllers
                 //--------------------------------------//
                 if (IsDebug == "On")
                 {
-                    logger.Debug("insert,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate);
+                    string cc_msg = "insert,url_id:" + url_id + ",url_no:" + url_no + ",curl:" + curl + ",url_cate:" + url_cate;
+                    CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                 }
                 //--------------------------------------//	
 
