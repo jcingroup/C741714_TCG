@@ -112,7 +112,7 @@ namespace OutWeb.Repositories
                 var sourceList = db.NEWS
                  .AsEnumerable()
                  .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
-                 s.STATUS != "D" && s.CATE_ID == typeID)
+                 s.STATUS == "Y" && s.CATE_ID == typeID)
                  .OrderByDescending(o => o.SORT)
                  .OrderByDescending(s => s.N_DATE)
                  .ToList();
@@ -155,7 +155,7 @@ namespace OutWeb.Repositories
                     var source = db.NEWS
                         .AsEnumerable()
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
-                        s.STATUS != "D" && (filter.TypeID == null ? true : s.CATE_ID == (int)filter.TypeID) &&
+                        s.STATUS == "Y" && (filter.TypeID == null ? true : s.CATE_ID == (int)filter.TypeID) &&
                          (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.N_DATE)

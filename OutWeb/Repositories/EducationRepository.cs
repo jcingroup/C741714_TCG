@@ -5,65 +5,60 @@ using OutWeb.Models.FrontModels.News.EventLatestModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using OutWeb.Models.FrontModels.AboutModels.EducationModels;
 
 namespace OutWeb.Repositories
 {
-    public class NewEventLatestRepository
+    public class EducationRepository
     {
         private string _connectionString { get; set; }
         private ConnectionRepository conRepo = new ConnectionRepository();
 
-        public NewEventLatestRepository()
+        public EducationRepository()
         {
             _connectionString = conRepo.GetEntityConnctionString();
         }
 
         /// <summary>
-        /// 取得分頁的網址列表
+        /// 全德各州所有分類
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="langCode"></param>
         /// <returns></returns>
-        private List<string> GetPagingUrlListByID(int id)
+        public Dictionary<int, string> GetEducationCate(string langCode)
         {
-            List<string> data = new List<string>();
+            Dictionary<int, string> cate = new Dictionary<int, string>();
 
             using (var db = new TCGDB(_connectionString))
             {
-                data = db.URL
-                    .Where(s => s.STATUS == "Y" && s.URL_KIND == "Activity_Detail" &&
-                    s.URL_NO.Contains(id.ToString()))
-                    .OrderByDescending(s => s.SORT)
-                    .Select(s => s.C_URL)
-                    .ToList();
+                cate = db.EDU_CATE
+                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                 s.STATUS == "Y")
+                  .ToDictionary(d => d.ID, d => d.CATE_NAME);
+                if (cate.Count == 0)
+                    throw new Exception("無法取得教育分類");
             }
-
-            return data;
+            return cate;
         }
 
         /// <summary>
-        /// 取得分頁的圖片列表
+        /// 取得洲別分類
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="langCode"></param>
         /// <returns></returns>
-        private List<PagingImageInfo> GetPaginImgsListByID(int id)
+        public Dictionary<int, string> GetEduCateByID(int id, string langCode)
         {
-            List<PagingImageInfo> data = new List<PagingImageInfo>();
+            Dictionary<int, string> cate = GetEducationCate(langCode)
+                .Where(s => s.Key == id)
+                .ToDictionary(d => d.Key, d => d.Value);
 
-            using (var db = new TCGDB(_connectionString))
-            {
-                data = db.IMG
-                                .Where(s => s.STATUS == "Y" && s.IMG_STY == "B" && s.IMG_KIND == "Activity_Detail" &&
-                                s.IMG_NO.Contains(id.ToString()))
-                                .OrderByDescending(s => s.SORT)
-                                .Select(s => new PagingImageInfo()
-                                {
-                                    ImgFileName = s.IMG_FILE,
-                                    ImgDescription = s.IMG_DESC
-                                })
-                                .ToList();
-            }
-            return data;
+            if (cate.Count == 0)
+                throw new Exception("無法取得教育分類");
+
+            return cate;
         }
+
 
         /// <summary>
         /// 取得分頁
@@ -77,17 +72,17 @@ namespace OutWeb.Repositories
 
             using (var db = new TCGDB(_connectionString))
             {
-                data = db.ACTIVITY_DETAIL
+                data = db.EDU_DETAIL
                     .AsEnumerable()
-                        .Where(o => o.CATE_ID == id.ToString())
-                        .OrderBy(o => o.SORT)
+                        .Where(o => o.CATE_ID == id.ToString() && o.STATUS == "Y")
+                        .OrderByDescending(o => o.SORT)
                         .Select(s => new EvnentPaging()
                         {
                             ID = s.ID,
                             Title = s.C_TITLE,
                             Description = s.C_DESC,
-                            ImagesList = GetPaginImgsListByID(s.ID),
-                            InternetSiteList = GetPagingUrlListByID(s.ID)
+                            //ImagesList = GetPaginImgsListByID(s.ID),
+                            //InternetSiteList = GetPagingUrlListByID(s.ID)
                         })
                 .ToList();
                 //語系join
@@ -109,27 +104,10 @@ namespace OutWeb.Repositories
                 //.ToList();
             }
 
+
             return data;
         }
 
-        /// <summary>
-        /// 文章代表圖
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        private string GetMainImg(int id)
-        {
-            string imgStr = string.Empty;
-            using (var db = new TCGDB(_connectionString))
-            {
-                imgStr = db.IMG
-                .Where(s => s.STATUS == "Y" && s.IMG_KIND == "Activity" &&
-                s.IMG_NO == (id.ToString()))
-                .Select(s => s.IMG_FILE)
-                .FirstOrDefault();
-            }
-            return imgStr;
-        }
         /// <summary>
         /// 取得第一個分頁的描述內容（去除Html Tag）
         /// </summary>
@@ -147,21 +125,23 @@ namespace OutWeb.Repositories
             return remark;
         }
 
+
+
         /// <summary>
         /// 內容
         /// </summary>
         /// <param name="id"></param>
         /// <param name="lagCode"></param>
         /// <returns></returns>
-        public EventContent GetContentByID(int id, string lagCode)
+        public EducationContent GetContentByID(int statesTypeID, int id, string lagCode)
         {
-            EventContent result = new EventContent();
+            EducationContent result = new EducationContent();
             using (var db = new TCGDB(_connectionString))
             {
-                var sourceList = db.ACTIVITY
+                var sourceList = db.EDU
                  .AsEnumerable()
                  .Where(s => (string.IsNullOrEmpty(lagCode) ? true : s.LANG_ID == lagCode) &&
-                 s.STATUS != "D")
+                 s.STATUS == "Y" && s.CATE_ID == statesTypeID)
                  .OrderByDescending(o => o.SORT)
                  .OrderByDescending(s => s.C_DATE)
                  .ToList();
@@ -170,22 +150,21 @@ namespace OutWeb.Repositories
                 if (source == null)
                     throw new Exception("無法取得活動內容,是否已被移除.");
 
-                result.Data = new EventLatestData()
+
+                result.Data = new EducationData()
                 {
                     ID = source.ID,
                     Title = source.C_TITLE,
-                    Img = GetMainImg(source.ID),
                     PagingList = GetPagingListByID(source.ID),
                     PublishDateString = source.C_DATE.Value.ToString("yyyy-MM-dd"),
-                    Remark = source.C_DESC
                 };
-                //result.Data.Remark = GetFirstPagingRemark(result.Data.PagingList);
+                result.Data.Remark = GetFirstPagingRemark(result.Data.PagingList);
                 int dataIndex = sourceList.IndexOf(source);
                 int lastDataIndex = sourceList.Count - 1;
                 result.PreviousIDStr = dataIndex == 0 ? "" : sourceList[(dataIndex - 1)].ID.ToString();
                 result.NextIDStr = dataIndex == lastDataIndex ? "" : sourceList[(dataIndex + 1)].ID.ToString();
             }
-
+            result.EduCateInfo = GetEduCateByID(statesTypeID, lagCode);
             return result;
         }
 
@@ -194,30 +173,28 @@ namespace OutWeb.Repositories
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public EventLatestResult GetList(EventLatestListFilter filter, int? customPageSize = null,string isIndex =null)
+        public EducationResult GetList(int eduTypeID, EducationListFilter filter, int? coustomPageSize = null, string isIndex = null)
         {
-            EventLatestResult result = new EventLatestResult();
-            List<EventLatestData> data = new List<EventLatestData>();
+            EducationResult result = new EducationResult();
+            List<EducationData> data = new List<EducationData>();
             using (var db = new TCGDB(_connectionString))
             {
                 try
                 {
-                    var source = db.ACTIVITY
+                    var source = db.EDU
                         .AsEnumerable()
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
-                        s.STATUS != "D" &&
-                        (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
+                        s.STATUS == "Y" && s.CATE_ID == eduTypeID)
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.C_DATE)
                         .ToList();
 
                     foreach (var item in source)
                     {
-                        EventLatestData temp = new EventLatestData()
+                        EducationData temp = new EducationData()
                         {
                             ID = item.ID,
                             Title = item.C_TITLE,
-                            Img = GetMainImg(item.ID),
                             PagingList = GetPagingListByID(item.ID),
                             PublishDateString = item.C_DATE.Value.ToString("yyyy-MM-dd"),
                         };
@@ -226,14 +203,14 @@ namespace OutWeb.Repositories
                     }
 
                     result.Data = data;
-                    result = this.ListPagination(ref result, filter.CurrentPage, customPageSize ?? Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
+                    result = this.ListPagination(ref result, filter.CurrentPage, coustomPageSize ?? Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
             }
-
+            result.EduTypeInfo = GetEduCateByID(eduTypeID, filter.LangCode);
             return result;
         }
 
@@ -243,7 +220,7 @@ namespace OutWeb.Repositories
         /// <param name="data"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public EventLatestResult ListPagination(ref EventLatestResult model, int page, int pageSize)
+        public EducationResult ListPagination(ref EducationResult model, int page, int pageSize)
         {
             int startRow = 0;
             PaginationResult paginationResult = null;

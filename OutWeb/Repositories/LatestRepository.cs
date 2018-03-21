@@ -113,7 +113,7 @@ namespace OutWeb.Repositories
                     LatestData temp = new LatestData()
                     {
                         ID = d.ID,
-                        Img = d.Img,
+                        //Img = d.Img,
                         PublishDateString = d.PublishDateString,
                         Remark = d.Remark,
                         Title = d.Title,
@@ -128,7 +128,7 @@ namespace OutWeb.Repositories
             }
 
             //中央活動
-            NewEventLatestRepository eventRepo = new NewEventLatestRepository();
+            EventLatestRepository eventRepo = new EventLatestRepository();
             var eventData = eventRepo.GetList(new EventLatestListFilter(), 10000, isIndex);
             foreach (var ev in eventData.Data)
             {

@@ -296,6 +296,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ConnectionConfig.cs" />
+    <Compile Include="Models\FrontModels\AboutModels\EducationModels\EducationContent.cs" />
+    <Compile Include="Models\FrontModels\AboutModels\EducationModels\EducationData.cs" />
+    <Compile Include="Models\FrontModels\AboutModels\EducationModels\EducationListFilter.cs" />
+    <Compile Include="Models\FrontModels\AboutModels\EducationModels\EducationResult.cs" />
+    <Compile Include="Models\FrontModels\AboutModels\EducationModels\EducationViewModel.cs" />
     <Compile Include="Models\FrontModels\News\AnnouncementLatest\AnnouncementLatestContent.cs" />
     <Compile Include="Models\FrontModels\News\AnnouncementLatest\AnnouncementLatestData.cs" />
     <Compile Include="Models\FrontModels\News\AnnouncementLatest\AnnouncementLatestFilter.cs" />
@@ -327,12 +332,13 @@
     <Compile Include="Models\PaginationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ConnectionRepository.cs" />
+    <Compile Include="Repositories\EducationRepository.cs" />
     <Compile Include="Repositories\LatestRepository.cs" />
     <Compile Include="Repositories\FocusRepository.cs" />
     <Compile Include="Repositories\ImageRepository.cs" />
     <Compile Include="Repositories\AnnouncementLatestRepository.cs" />
     <Compile Include="Repositories\EventStatesRepository.cs" />
-    <Compile Include="Repositories\NewEventLatestRepository.cs" />
+    <Compile Include="Repositories\EventLatestRepository.cs" />
     <Compile Include="Repositories\PublicMethodRepository.cs" />
     <Compile Include="Repositories\SearchRepository.cs" />
     <Compile Include="Service\AboutUs.cs" />

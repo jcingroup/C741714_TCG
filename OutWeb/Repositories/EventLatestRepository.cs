@@ -2,62 +2,22 @@
 using OutWeb.Models;
 using OutWeb.Models.FrontModels.News;
 using OutWeb.Models.FrontModels.News.EventLatestModels;
-using OutWeb.Models.FrontModels.News.FocusNewsModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 
 namespace OutWeb.Repositories
 {
-    public class FocusRepository
+    public class EventLatestRepository
     {
         private string _connectionString { get; set; }
         private ConnectionRepository conRepo = new ConnectionRepository();
 
-        public FocusRepository()
+        public EventLatestRepository()
         {
             _connectionString = conRepo.GetEntityConnctionString();
         }
 
-        /// <summary>
-        /// 全德各州所有分類
-        /// </summary>
-        /// <param name="langCode"></param>
-        /// <returns></returns>
-        public Dictionary<int, string> GetFocusCate(string langCode)
-        {
-            Dictionary<int, string> cate = new Dictionary<int, string>();
-
-            using (var db = new TCGDB(_connectionString))
-            {
-                cate = db.FOCUS_CATE
-                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
-                 s.STATUS == "Y")
-                  .ToDictionary(d => d.ID, d => d.CATE_NAME);
-                if (cate.Count == 0)
-                    throw new Exception("無法取得焦點分類");
-            }
-            return cate;
-        }
-
-        /// <summary>
-        /// 取得洲別分類
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="langCode"></param>
-        /// <returns></returns>
-        public Dictionary<int, string> GetFocusCateByID(int id, string langCode)
-        {
-            Dictionary<int, string> cate = GetFocusCate(langCode)
-                .Where(s => s.Key == id)
-                .ToDictionary(d => d.Key, d => d.Value);
-
-            if (cate.Count == 0)
-                throw new Exception("無法取得焦點分類");
-
-            return cate;
-        }
         /// <summary>
         /// 取得分頁的網址列表
         /// </summary>
@@ -70,8 +30,8 @@ namespace OutWeb.Repositories
             using (var db = new TCGDB(_connectionString))
             {
                 data = db.URL
-                    .Where(s => s.STATUS == "Y" && s.URL_KIND == "Focus_Detail" &&
-                    s.URL_NO == id.ToString())
+                    .Where(s => s.STATUS == "Y" && s.URL_KIND == "Activity_Detail" &&
+                    s.URL_NO.Contains(id.ToString()))
                     .OrderByDescending(s => s.SORT)
                     .Select(s => s.C_URL)
                     .ToList();
@@ -79,7 +39,6 @@ namespace OutWeb.Repositories
 
             return data;
         }
-
 
         /// <summary>
         /// 取得分頁的圖片列表
@@ -93,8 +52,8 @@ namespace OutWeb.Repositories
             using (var db = new TCGDB(_connectionString))
             {
                 data = db.IMG
-                                .Where(s => s.STATUS == "Y" && s.IMG_STY == "B" && s.IMG_KIND == "Focus_Detail" &&
-                                s.IMG_NO == id.ToString())
+                                .Where(s => s.STATUS == "Y" && s.IMG_STY == "B" && s.IMG_KIND == "Activity_Detail" &&
+                                s.IMG_NO.Contains(id.ToString()))
                                 .OrderByDescending(s => s.SORT)
                                 .Select(s => new PagingImageInfo()
                                 {
@@ -118,7 +77,7 @@ namespace OutWeb.Repositories
 
             using (var db = new TCGDB(_connectionString))
             {
-                data = db.FOCUS_DETAIL
+                data = db.ACTIVITY_DETAIL
                     .AsEnumerable()
                         .Where(o => o.CATE_ID == id.ToString() && o.STATUS == "Y")
                         .OrderByDescending(o => o.SORT)
@@ -127,8 +86,8 @@ namespace OutWeb.Repositories
                             ID = s.ID,
                             Title = s.C_TITLE,
                             Description = s.C_DESC,
-                            //ImagesList = GetPaginImgsListByID(s.ID),
-                            //InternetSiteList = GetPagingUrlListByID(s.ID)
+                            ImagesList = GetPaginImgsListByID(s.ID),
+                            InternetSiteList = GetPagingUrlListByID(s.ID)
                         })
                 .ToList();
                 //語系join
@@ -150,7 +109,6 @@ namespace OutWeb.Repositories
                 //.ToList();
             }
 
-
             return data;
         }
 
@@ -165,7 +123,7 @@ namespace OutWeb.Repositories
             using (var db = new TCGDB(_connectionString))
             {
                 imgStr = db.IMG
-                .Where(s => s.STATUS == "Y" && s.IMG_KIND == "Focus" &&
+                .Where(s => s.STATUS == "Y" && s.IMG_KIND == "Activity" &&
                 s.IMG_NO == (id.ToString()))
                 .Select(s => s.IMG_FILE)
                 .FirstOrDefault();
@@ -189,23 +147,21 @@ namespace OutWeb.Repositories
             return remark;
         }
 
-
-
         /// <summary>
         /// 內容
         /// </summary>
         /// <param name="id"></param>
         /// <param name="lagCode"></param>
         /// <returns></returns>
-        public FocusNewsContent GetContentByID(int statesTypeID, int id, string lagCode)
+        public EventContent GetContentByID(int id, string lagCode)
         {
-            FocusNewsContent result = new FocusNewsContent();
+            EventContent result = new EventContent();
             using (var db = new TCGDB(_connectionString))
             {
-                var sourceList = db.FOCUS
+                var sourceList = db.ACTIVITY
                  .AsEnumerable()
                  .Where(s => (string.IsNullOrEmpty(lagCode) ? true : s.LANG_ID == lagCode) &&
-                 s.STATUS == "Y" && s.CATE_ID == statesTypeID)
+                 s.STATUS != "D")
                  .OrderByDescending(o => o.SORT)
                  .OrderByDescending(s => s.C_DATE)
                  .ToList();
@@ -214,22 +170,22 @@ namespace OutWeb.Repositories
                 if (source == null)
                     throw new Exception("無法取得活動內容,是否已被移除.");
 
-
-                result.Data = new FocusNewsData()
+                result.Data = new EventLatestData()
                 {
                     ID = source.ID,
                     Title = source.C_TITLE,
-                    //Img = GetMainImg(source.ID),
+                    Img = GetMainImg(source.ID),
                     PagingList = GetPagingListByID(source.ID),
                     PublishDateString = source.C_DATE.Value.ToString("yyyy-MM-dd"),
+                    Remark = source.C_DESC
                 };
-                result.Data.Remark = GetFirstPagingRemark(result.Data.PagingList);
+                //result.Data.Remark = GetFirstPagingRemark(result.Data.PagingList);
                 int dataIndex = sourceList.IndexOf(source);
                 int lastDataIndex = sourceList.Count - 1;
                 result.PreviousIDStr = dataIndex == 0 ? "" : sourceList[(dataIndex - 1)].ID.ToString();
                 result.NextIDStr = dataIndex == lastDataIndex ? "" : sourceList[(dataIndex + 1)].ID.ToString();
             }
-            result.FocusCateInfo = GetFocusCateByID(statesTypeID, lagCode);
+
             return result;
         }
 
@@ -238,18 +194,18 @@ namespace OutWeb.Repositories
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public FocusNewsResult GetList(int focusTypeID, FocusNewsListFilter filter, int? coustomPageSize = null, string isIndex = null)
+        public EventLatestResult GetList(EventLatestListFilter filter, int? customPageSize = null, string isIndex = null)
         {
-            FocusNewsResult result = new FocusNewsResult();
-            List<FocusNewsData> data = new List<FocusNewsData>();
+            EventLatestResult result = new EventLatestResult();
+            List<EventLatestData> data = new List<EventLatestData>();
             using (var db = new TCGDB(_connectionString))
             {
                 try
                 {
-                    var source = db.FOCUS
+                    var source = db.ACTIVITY
                         .AsEnumerable()
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
-                        s.STATUS == "Y" && s.CATE_ID == focusTypeID &&
+                        s.STATUS == "Y" &&
                         (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.C_DATE)
@@ -257,11 +213,11 @@ namespace OutWeb.Repositories
 
                     foreach (var item in source)
                     {
-                        FocusNewsData temp = new FocusNewsData()
+                        EventLatestData temp = new EventLatestData()
                         {
                             ID = item.ID,
                             Title = item.C_TITLE,
-                            //Img = GetMainImg(item.ID),
+                            Img = GetMainImg(item.ID),
                             PagingList = GetPagingListByID(item.ID),
                             PublishDateString = item.C_DATE.Value.ToString("yyyy-MM-dd"),
                         };
@@ -270,14 +226,14 @@ namespace OutWeb.Repositories
                     }
 
                     result.Data = data;
-                    result = this.ListPagination(ref result, filter.CurrentPage, coustomPageSize ?? Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
+                    result = this.ListPagination(ref result, filter.CurrentPage, customPageSize ?? Convert.ToInt32(PublicMethodRepository.GetConfigAppSetting("DefaultPageSize")));
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
             }
-            result.FocusTypeInfo = GetFocusCateByID(focusTypeID, filter.LangCode);
+
             return result;
         }
 
@@ -287,7 +243,7 @@ namespace OutWeb.Repositories
         /// <param name="data"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public FocusNewsResult ListPagination(ref FocusNewsResult model, int page, int pageSize)
+        public EventLatestResult ListPagination(ref EventLatestResult model, int page, int pageSize)
         {
             int startRow = 0;
             PaginationResult paginationResult = null;

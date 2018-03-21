@@ -119,8 +119,8 @@ namespace OutWeb.Repositories
             {
                 data = db.STATES_DETAIL
                     .AsEnumerable()
-                        .Where(o => o.CATE_ID == id.ToString())
-                        .OrderBy(o => o.SORT)
+                        .Where(o => o.CATE_ID == id.ToString() && o.STATUS == "Y")
+                        .OrderByDescending(o => o.SORT)
                         .Select(s => new EvnentPaging()
                         {
                             ID = s.ID,
@@ -198,7 +198,7 @@ namespace OutWeb.Repositories
             using (var db = new TCGDB(_connectionString))
             {
                 url = db.STATES_VIDEO
-                    .Where(s => s.STATUS != "D" && s.CATE_ID == statesID)
+                    .Where(s => s.STATUS == "Y"&& s.CATE_ID == statesID)
                     .Select(s => s.C_URL)
                     .FirstOrDefault();
             }
@@ -220,7 +220,7 @@ namespace OutWeb.Repositories
                 var sourceList = db.STATES
                  .AsEnumerable()
                  .Where(s => (string.IsNullOrEmpty(lagCode) ? true : s.LANG_ID == lagCode) &&
-                 s.STATUS != "D" && s.CATE_ID == statesTypeID)
+                 s.STATUS == "Y"&& s.CATE_ID == statesTypeID)
                  .OrderByDescending(o => o.SORT)
                  .OrderByDescending(s => s.C_DATE)
                  .ToList();
@@ -264,7 +264,7 @@ namespace OutWeb.Repositories
                     var source = db.STATES
                         .AsEnumerable()
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
-                        s.STATUS != "D" && s.CATE_ID == statesTypeID &&
+                        s.STATUS == "Y"&& s.CATE_ID == statesTypeID &&
                         (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.C_DATE)

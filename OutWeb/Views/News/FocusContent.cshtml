@@ -4,7 +4,6 @@
     ViewBag.Title = Model.Data.Title;
     ViewBag.BodyClass = "News Focus";
     string listTitleUrl = Url.Content("~/News/FocusList?focusTypeID=" + Model.FocusCateInfo.Keys.First());
-    string img_path = "/Images/";
 }
 
 @section breadcrumb {
@@ -46,17 +45,16 @@
         </ul>
     }
 
-    @{ var pageInfo = Model.Data.PagingList.Where(s => !string.IsNullOrEmpty(s.Current)).First();}
-
-
-     
+    @{ var pageInfo = Model.Data.PagingList.Where(s => !string.IsNullOrEmpty(s.Current)).FirstOrDefault();}
+    @if (pageInfo != null)
+    {
         @* 文章分頁，有資料才顯示，第一頁 class + current *@
         <div class="tab current">
             <div class="mb-16 clearfix">
                 @Html.Raw(pageInfo.Description.ToString())
             </div>
         </div>
-  
+    }
 
 </div>
 <!--

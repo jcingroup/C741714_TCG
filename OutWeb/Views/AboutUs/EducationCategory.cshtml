@@ -1,13 +1,7 @@
-﻿@using System.Data
+﻿@model Dictionary<int, string>
 @{
     ViewBag.Title = "教育專欄";
     ViewBag.BodyClass = "AboutUs Education";
-
-    //參數值設定
-    DataTable dt = (DataTable)ViewData["dt"];
-    string cate_id = "";
-    string cate_name = "";
-    string cate_desc = "";
 }
 
 @section breadcrumb {
@@ -21,18 +15,14 @@
 </h1>
 
 <ul class="list-category list-unstyled row row-center">
-    @for (int i = 0; i < dt.Rows.Count; i++)
-    {
-        cate_id = dt.Rows[i]["id"].ToString();
-        cate_name = dt.Rows[i]["cate_name"].ToString();
-        cate_desc = dt.Rows[i]["cate_desc"].ToString();
-
-        <li class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <a href="@Url.Content("~/AboutUs/EducationList?cate_id=" + cate_id)">
-                <span>@Html.Raw(cate_name)</span>
-            </a>
-        </li>
-    }
+@foreach (var edu in Model)
+{
+    <li class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <a href="@Url.Content("~/AboutUs/EducationList?eduTypeID=" + edu.Key)">
+            <span>@edu.Value</span>
+        </a>
+    </li>
+}
     @*
     <li class="col-lg-3 col-md-4 col-sm-6 col-12">
         <a href="~/AboutUs/EducationList">

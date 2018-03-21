@@ -61,7 +61,7 @@ namespace OutWeb.Controllers
                 LangCode = langCode
             };
 
-            NewEventLatestRepository repo = new NewEventLatestRepository();
+            EventLatestRepository repo = new EventLatestRepository();
             EventLatestResult mdoel = repo.GetList(filter);
 
             return View(mdoel);
@@ -73,7 +73,7 @@ namespace OutWeb.Controllers
             if (!ID.HasValue)
                 return RedirectToAction("EventLatest");
             string langCd = string.Empty;
-            NewEventLatestRepository repo = new NewEventLatestRepository();
+            EventLatestRepository repo = new EventLatestRepository();
             EventContent model = repo.GetContentByID((int)ID, langCd);
             if (pagingID != null)
             {
@@ -259,7 +259,6 @@ namespace OutWeb.Controllers
 
             FocusRepository repo = new FocusRepository();
             FocusNewsResult mdoel = repo.GetList((int)focusTypeID, filter);
-            TempData["FocusInfo"] = repo.GetFocusCateByID((int)focusTypeID, langCode);
             return View(mdoel);
         }
 

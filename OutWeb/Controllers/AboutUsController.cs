@@ -13,6 +13,8 @@ using System.Collections.Specialized;
 /*Json.NET相關的命名空間*/
 using Newtonsoft.Json;
 using System.Web.Configuration;
+using OutWeb.Repositories;
+using OutWeb.Models.FrontModels.AboutModels.EducationModels;
 
 namespace OutWeb.Controllers
 {
@@ -57,9 +59,9 @@ namespace OutWeb.Controllers
             string lang_id = "zh-tw";
             dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
-            if(dt1.Rows.Count > 0)
+            if (dt1.Rows.Count > 0)
             {
-                if(id == "")
+                if (id == "")
                 {
                     id = dt1.Rows[0]["id"].ToString();
                 }
@@ -131,7 +133,7 @@ namespace OutWeb.Controllers
         }
 
         // 關於我們 - 法律依據
-        public ActionResult Law(string cate_id = "",string id = "")
+        public ActionResult Law(string cate_id = "", string id = "")
         {
             //抓取資料
             string scate_id = "4,5,6";
@@ -142,7 +144,7 @@ namespace OutWeb.Controllers
             string err_msg = "";
             string lang_id = "zh-tw";
             d_cate = CAboutUs.Cate_List(ref err_msg, scate_id, "sort", "Y", "", lang_id);
-            if(d_cate.Rows.Count > 0)
+            if (d_cate.Rows.Count > 0)
             {
                 if (cate_id == "")
                 {
@@ -153,9 +155,9 @@ namespace OutWeb.Controllers
             dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
 
-            if(dt1.Rows.Count > 0)
+            if (dt1.Rows.Count > 0)
             {
-                if(id == "")
+                if (id == "")
                 {
                     id = dt1.Rows[0]["id"].ToString();
                 }
@@ -174,67 +176,118 @@ namespace OutWeb.Controllers
             return View();
         }
 
-        // 教育專欄 - 分類
         public ActionResult EducationCategory()
         {
-            //抓取分類
-            DataTable dt;
-            string err_msg = "";
-            string lang_id = "zh-tw";
-            dt = CEdu.Cate_List(ref err_msg, "", "sort desc", "Y", "", lang_id);
+            string langCd = string.Empty;
+            EducationRepository repo = new EducationRepository();
+            var mdoel = repo.GetEducationCate(langCd);
 
-            ViewData["dt"] = dt;
-
-            return View();
+            return View(mdoel);
         }
 
-        // 教育專欄 - 列表
-        public ActionResult EducationList(string cate_id = "",int page = 1)
+        // 焦點專欄 - 列表
+        public ActionResult EducationList(int? eduTypeID, int? page, string langCode)
         {
-            DataTable dt;
-            DataTable d_cate;
-            string err_msg = "";
-            string lang_id = "zh-tw";
-            
-            d_cate = CEdu.Cate_List(ref err_msg, cate_id, "sort desc", "Y", "", lang_id);
-            dt = CEdu.List(ref err_msg, "", "sort desc", "Y", "", "", "", cate_id, lang_id);
-
-            ViewData["dt"] = dt;
-            ViewData["d_cate"] = d_cate;
-            ViewData["page"] = page;
-            return View();
-        }
-
-        // 教育專欄 - 內容
-        public ActionResult EducationContent(string id = "", string detail_id = "")
-        {
-            DataTable dt;
-            DataTable dt1;
-            DataTable d_detail;
-            DataTable dd_detail;
-            string err_msg = "";
-            string lang_id = "zh-tw";
-            dt = CEdu.List(ref err_msg, id, "sort desc", "Y", "", "", "", "", lang_id);
-            dt1 = CEdu.Detail_List(ref err_msg, "", "sort", "Y", "", id, lang_id);
-            d_detail = dt1.Copy();
-            if (dt1.Rows.Count > 0)
+            if (!eduTypeID.HasValue)
+                return View();
+            EducationListFilter filter = new EducationListFilter()
             {
-                if (detail_id == "")
-                {
-                    detail_id = dt1.Rows[0]["id"].ToString();
-                }
-            }
+                CurrentPage = page ?? 1,
+                LangCode = langCode
+            };
 
-            dt1 = CEdu.Detail_List(ref err_msg, detail_id, "sort", "Y", "", id, lang_id);
-            dd_detail = dt1.Copy();
+            eduTypeID = eduTypeID ?? 1;
 
-            ViewData["dt"] = dt;
-            ViewData["d_detail"] = d_detail;
-            ViewData["dd_detail"] = dd_detail;
-            ViewData["id"] = id;
-            ViewData["detail_id"] = detail_id;
-            return View();
+            EducationRepository repo = new EducationRepository();
+            EducationResult mdoel = repo.GetList((int)eduTypeID, filter);
+            return View(mdoel);
         }
+
+        // 焦點專欄 - 內容
+        public ActionResult EducationContent(int? eduTypeID, int? ID, int? pagingID)
+        {
+            if (!eduTypeID.HasValue || !ID.HasValue)
+                return RedirectToAction("EducationList");
+            string langCd = string.Empty;
+            EducationRepository repo = new EducationRepository();
+            EducationContent model = repo.GetContentByID((int)eduTypeID, (int)ID, langCd);
+            if (pagingID != null)
+            {
+                model.PagingID = (int)pagingID;
+                var pagFirst = model.Data.PagingList.Where(s => s.ID == (int)pagingID).FirstOrDefault();
+                if (pagFirst == null)
+                    return RedirectToAction("FocusList", new { eduTypeID });
+                pagFirst.Current = "current";
+            }
+            else
+            {
+                if (model.Data.PagingList.Count > 0)
+                    model.Data.PagingList.First().Current = "current";
+            }
+            return View(model);
+        }
+
+        //// 教育專欄 - 分類
+        //public ActionResult EducationCategory()
+        //{
+        //    //抓取分類
+        //    DataTable dt;
+        //    string err_msg = "";
+        //    string lang_id = "zh-tw";
+        //    dt = CEdu.Cate_List(ref err_msg, "", "sort desc", "Y", "", lang_id);
+
+        //    ViewData["dt"] = dt;
+
+        //    return View();
+        //}
+
+        //// 教育專欄 - 列表
+        //public ActionResult EducationList(string cate_id = "",int page = 1)
+        //{
+        //    DataTable dt;
+        //    DataTable d_cate;
+        //    string err_msg = "";
+        //    string lang_id = "zh-tw";
+
+        //    d_cate = CEdu.Cate_List(ref err_msg, cate_id, "sort desc", "Y", "", lang_id);
+        //    dt = CEdu.List(ref err_msg, "", "sort desc", "Y", "", "", "", cate_id, lang_id);
+
+        //    ViewData["dt"] = dt;
+        //    ViewData["d_cate"] = d_cate;
+        //    ViewData["page"] = page;
+        //    return View();
+        //}
+
+        //// 教育專欄 - 內容
+        //public ActionResult EducationContent(string id = "", string detail_id = "")
+        //{
+        //    DataTable dt;
+        //    DataTable dt1;
+        //    DataTable d_detail;
+        //    DataTable dd_detail;
+        //    string err_msg = "";
+        //    string lang_id = "zh-tw";
+        //    dt = CEdu.List(ref err_msg, id, "sort desc", "Y", "", "", "", "", lang_id);
+        //    dt1 = CEdu.Detail_List(ref err_msg, "", "sort", "Y", "", id, lang_id);
+        //    d_detail = dt1.Copy();
+        //    if (dt1.Rows.Count > 0)
+        //    {
+        //        if (detail_id == "")
+        //        {
+        //            detail_id = dt1.Rows[0]["id"].ToString();
+        //        }
+        //    }
+
+        //    dt1 = CEdu.Detail_List(ref err_msg, detail_id, "sort", "Y", "", id, lang_id);
+        //    dd_detail = dt1.Copy();
+
+        //    ViewData["dt"] = dt;
+        //    ViewData["d_detail"] = d_detail;
+        //    ViewData["dd_detail"] = dd_detail;
+        //    ViewData["id"] = id;
+        //    ViewData["detail_id"] = detail_id;
+        //    return View();
+        //}
 
         // 行政區域圖&組織架構
         public ActionResult Organization(string cate_id = "", string id = "")

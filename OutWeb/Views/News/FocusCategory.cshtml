@@ -18,7 +18,7 @@
 @foreach (var focus in Model)
 {
         <li class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <a href="@Url.Content("~/News/FocusList?focusTypeID=" + @focus.Key)">
+            <a href="@Url.Content("~/News/FocusList?focusTypeID=" + focus.Key)">
                 <span>@focus.Value</span>
             </a>
         </li>

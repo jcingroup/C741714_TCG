@@ -1,63 +1,15 @@
-﻿@using System.Data
+﻿@using OutWeb.Models.FrontModels.AboutModels.EducationModels
+@model EducationContent
 @{
     ViewBag.Title = "美國政府明白表示：「反對台灣獨立」?";
     ViewBag.BodyClass = "AboutUs Education";
-
-    DataTable dt = (DataTable)ViewData["dt"];
-
-    DataTable d_detail = (DataTable)ViewData["d_detail"];
-    DataTable dd_detail = (DataTable)ViewData["dd_detail"];
-    string id = (string)ViewData["id"];
-    string detail_id = (string)ViewData["detail_id"];
-    string cFile = "EducationContent";
-    string c_d_title = "";
-    string c_d_id = "";
-    string c_d_desc = "";
-
-    string c_id = "";
-    string cate_id = "";
-    string c_title = "";
-    string c_desc = "";
-    string cate_name = "";
-    string lang_id = "";
-    string lang_name = "";
-    string c_date = "";
-
-    string ci = "";
-    string cj = "";
-    string str_tab = "";
-    string c_tab = "";
-    string c_tab_nav = "";
-
-    if (dt.Rows.Count > 0)
-    {
-        id = dt.Rows[0]["id"].ToString();
-        c_title = dt.Rows[0]["c_title"].ToString();
-        c_desc = dt.Rows[0]["c_desc"].ToString();
-        c_date = dt.Rows[0]["c_date"].ToString();
-        cate_id = dt.Rows[0]["cate_id"].ToString();
-        cate_name = dt.Rows[0]["cate_name"].ToString();
-        lang_id = dt.Rows[0]["lang_id"].ToString();
-        lang_name = dt.Rows[0]["lang_name"].ToString();
-    }
-    else
-    {
-        id = "";
-        c_title = "";
-        c_desc = "";
-        c_date = "";
-        cate_id = "";
-        cate_name = "";
-        lang_id = "";
-        lang_name = "";
-    }
-
+    string listTitleUrl = Url.Content("~/AboutUs/EducationList?educationTypeID=" + Model.EduCateInfo.Keys.First());
 }
 
 @section breadcrumb {
     <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
     <li><a href="~/AboutUs/EducationCategory">教育專欄</a></li>
-    <li>@cate_name</li> @* 分類名稱 *@
+    <li>@Model.EduCateInfo.Values.First()</li> @* 分類名稱 *@
 }
 
 @section scripts {
@@ -67,49 +19,40 @@
 <h1 class="sr-only">教育專欄</h1>
 
 <p class="back">
-    <a href="@Url.Content("~/AboutUs/EducationList?cate_id=" + cate_id)"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+    <a href="@listTitleUrl"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
 </p>
 
 <h2 class="title">
-    <small class="date">@c_date</small>
-    <span class="underline">@c_title</span>
+    <small class="date">@Model.Data.PublishDateString</small>
+    <span class="underline">@Model.Data.Title</span>
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h2>
-    
+
 <div class="tab-content clearfix editor">
     @* 文章分頁 頁籤切換，只有一頁就不顯示頁籤 *@
-    @if (d_detail.Rows.Count > 1)
+    @if (Model.Data.PagingList.Count > 1)
     {
         <ul class="tabs list-inline">
-            @for (int i = 0; i < d_detail.Rows.Count; i++)
+            @foreach (var paging in Model.Data.PagingList)
             {
-                c_d_title = dt.Rows[i]["c_title"].ToString();
-                c_d_id = dt.Rows[i]["id"].ToString();
-                ci = i.ToString();
-
-                if (detail_id == c_d_id)
-                {
-                    c_tab_nav = " current";
-                }
-                else
-                {
-                    c_tab_nav = "";
-                }
-
+                int index = Model.Data.PagingList.IndexOf(paging);
+                string currentStyle = string.IsNullOrEmpty(paging.Current) ? "" : "current";
+                string pagingUrl = Url.Content("~/AboutUs/EducationContent?eduTypeID=" + Model.EduCateInfo.Keys.First() + "&ID=" + Model.Data.ID + "&pagingID=" + paging.ID);
                 <li>
-                    @*<a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>*@
-                    <a class="@c_tab_nav" href="@Url.Content(cFile + "?id=" + id + "&detail_id=" + c_d_id)">@c_title</a>
+                    <a class="tab-nav @currentStyle" href="@pagingUrl">@paging.Title</a>
                 </li>
             }
         </ul>
     }
 
-    @if (dd_detail.Rows.Count > 0)
+    @{ var pageInfo = Model.Data.PagingList.Where(s => !string.IsNullOrEmpty(s.Current)).FirstOrDefault();}
+    @if (pageInfo != null)
     {
-        c_d_desc = dd_detail.Rows[0]["c_desc"].ToString();
-
-        <div>
-            @Html.Raw(c_d_desc)
+        @* 文章分頁，有資料才顯示，第一頁 class + current *@
+        <div class="tab current">
+            <div class="mb-16 clearfix">
+                @Html.Raw(pageInfo.Description.ToString())
+            </div>
         </div>
     }
 </div>
@@ -132,6 +75,5 @@
             <i class="oi" data-glyph="chevron-right"></i>
         </a>
     </li>
-
 </ul>
 -->

@@ -4,20 +4,6 @@
     ViewBag.BodyClass = "JoinUs School";
 
     DataTable dt = (DataTable)ViewData["dt"];
-    string c_url = "";
-    string id = "";
-
-    if(dt.Rows.Count > 0)
-    {
-        c_url = dt.Rows[0]["C_URL"].ToString();
-        id = dt.Rows[0]["ID"].ToString();
-    }
-    else
-    {
-        c_url = "";
-        id = "";
-    }
-
 }
 
 @section breadcrumb {
@@ -43,7 +29,18 @@
 
 <div class="clearfix editor">
     @* 課堂Live直播網址來源: 後台 > 加入台灣民政府 > 參加台灣法理學院 > 課堂Live直播 *@
-    <div class="liveVideo embed-responsive">
-        <iframe src="@c_url" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    </div>
+    @if (dt.Rows.Count > 0)
+    {
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            string c_url = dt.Rows[i]["C_URL"].ToString();
+            string id = dt.Rows[i]["ID"].ToString();
+            var urlSplit = c_url.Split(new string[] { @"https://youtu.be/" }, StringSplitOptions.RemoveEmptyEntries);
+            string url = string.Empty;
+            url = c_url.Replace("https://youtu.be/", "https://www.youtube.com/embed/") + "/" + urlSplit[0];
+            <div class="liveVideo embed-responsive">
+                <iframe src="@url" frameborder="0" allowfullscreen></iframe>
+            </div>
+        }
+    }
 </div>
