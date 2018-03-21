@@ -19,6 +19,8 @@ namespace OutWeb.Service
         string local_conn_str = WebConfigurationManager.ConnectionStrings["local_conn_string"].ConnectionString.ToString();
         string IsDebug = WebConfigurationManager.AppSettings["Debug"].ToString();
         string IsLocal = WebConfigurationManager.AppSettings["Local"].ToString();
+        string LogToFile = WebConfigurationManager.AppSettings["LogToFile"].ToString();
+        string LogToDB = WebConfigurationManager.AppSettings["LogToDB"].ToString();
         string csql = "";
         DataSet ds = new DataSet();
         //Service CService = new Service();
@@ -100,7 +102,8 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                logger.Error(rtn_errmsg(ex));
+                //logger.Error(rtn_errmsg(ex));
+                msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name + "," + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -203,7 +206,8 @@ namespace OutWeb.Service
             {
                 status = "N";
                 err_msg = ex.Message;
-                logger.Error(rtn_errmsg(ex));
+                //logger.Error(rtn_errmsg(ex));
+                msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name + "," + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
             finally
             {
@@ -219,15 +223,35 @@ namespace OutWeb.Service
 
         #region Return Error_Msg
 
-        //public string rtn_errmsg(string err_source, string err_message, string err_stacktrace)
-        public string rtn_errmsg(Exception ex)
+        public string rtn_errmsg(string err_source, string err_message, string err_stacktrace)
+        //public string rtn_errmsg(Exception ex)
         {
             string err_msg = "";
-            string LineNo = new System.Diagnostics.StackTrace(ex, true).GetFrame(0).GetFileLineNumber().ToString(); //錯誤行號
-            string currentName = new System.Diagnostics.StackTrace(ex, true).GetFrame(0).GetMethod().Name;  //Method
-            string callName = new System.Diagnostics.StackTrace(ex, true).GetFrame(1).GetMethod().Name;     //FileName
-            string err_message = ex.Message;
-            string err_stacktrace = ex.StackTrace;
+            //string LineNo = ""; //錯誤行號
+            ////string LineNo = new System.Diagnostics.StackTrace(ex, true).GetFrame(0).GetFileLineNumber().ToString(); //錯誤行號
+            //System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(1, true);
+            //string currentName = new System.Diagnostics.StackTrace(ex, true).GetFrame(0).GetMethod().Name;  //Method
+            //string callName = new System.Diagnostics.StackTrace(ex, true).GetFrame(1).GetMethod().Name;     //FileName
+
+            //string err_message = ex.Message;
+            //string err_stacktrace = ex.StackTrace;
+            //string err_hashcode = ex.GetType().GetHashCode().ToString();
+            //string err_fullname = ex.GetType().Name;
+            //string err_target_site = ex.TargetSite.ToString();
+            //string err_source = ex.Source.ToString();
+            //string space_name = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Namespace;
+            //string space_fullname = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName;
+            //string now_name = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name; //當前類名
+            //string now_method = System.Reflection.MethodBase.GetCurrentMethod().Name; //當前方法名
+            //string[] err_code;
+            //string Loca = "";
+            //string cMethod = "";
+
+            //err_code = err_stacktrace.Split('於');
+            //cMethod = err_code[err_code.Length - 2];
+            //Loca = err_code[err_code.Length - 1];
+            //LineNo = ex.StackTrace.Substring(Loca.IndexOf("行") + 1, Loca.Length-(Loca.IndexOf("行") + 1));
+
             /*
             err_msg = "======================================================================\r\n"
                     + "    發生時間：" + DateTime.Now.ToString("yyyyMMdd HH:mm:ss") + "\r\n"
@@ -237,8 +261,10 @@ namespace OutWeb.Service
                     + "    錯誤資訊：" + err_stacktrace + "\r\n";
             */
             err_msg = "\r\n"
-                    + "    錯誤位置：" + callName + "->" + currentName + "\r\n"
-                    + "    錯誤行數：" + LineNo + "\r\n"
+                    + "    錯誤位置：" + err_source + "\r\n"
+                    //+ "    錯誤行數：" + LineNo + "\r\n"
+                    //+ "    HashCode：" + err_hashcode + "\r\n"
+                    //+ "    Target：" + err_target_site + "\r\n"
                     + "    錯誤內容：" + err_message + "\r\n"
                     + "    錯誤資訊：" + err_stacktrace;
             return err_msg;
@@ -278,5 +304,74 @@ namespace OutWeb.Service
             return connstr;
         }
         #endregion 連結字串取得 conn_string
+
+        public void msg_write(string msg_kind = "", string msg_content = "", string msg_desc = "", string msg_loca_a = "", string msg_loca_b = "")
+        {
+            SqlConnection conn = new SqlConnection(conn_string());
+            SqlCommand cmd = new SqlCommand();
+            string userid = "";
+            string msg_loca = "";
+
+            msg_loca = msg_loca_a + "," + msg_loca_b;
+
+            //寫入檔案
+            if (LogToFile == "Y")
+            {
+                switch (msg_kind)
+                {
+                    case "Error":
+                        logger.Error(rtn_errmsg(msg_loca, msg_content, msg_desc));
+                        break;
+                    case "Debug":
+                        logger.Debug(msg_content);
+                        break;
+                }
+            }
+
+
+            //寫入資料庫
+            if (LogToDB == "Y")
+            {
+                try
+                {
+                    if (conn.State == ConnectionState.Closed)
+                    {
+                        conn.Open();
+                    }
+
+                    cmd.Connection = conn;
+
+                    //===============================================================================//
+                    //BD_ID, BD_DT, UPD_ID, UPD_DT, MSG_CONTENT, MSG_DESC, MSG_LOCA
+                    csql = @"insert into MSG(MSG_CONTENT, MSG_DESC, MSG_LOCA, MSG_KIND) "
+                         + "values(@msg_content,@msg_desc,@msg_loca,@msg_kind)";
+
+                    cmd.CommandText = csql;
+
+                    ////讓ADO.NET自行判斷型別轉換
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@msg_content", msg_content);
+                    cmd.Parameters.AddWithValue("@msg_desc", msg_desc);
+                    cmd.Parameters.AddWithValue("@msg_loca", msg_loca);
+                    cmd.Parameters.AddWithValue("@msg_kind", msg_kind);
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    string errmsg = "";
+                    logger.Error(rtn_errmsg(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName + "," + System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message, ex.StackTrace));
+                }
+                finally
+                {
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                    cmd = null;
+                    conn = null;
+                }
+            }
+        }
     }
 }
