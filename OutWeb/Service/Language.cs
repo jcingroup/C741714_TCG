@@ -98,7 +98,7 @@ namespace OutWeb.Service
             catch (Exception ex)
             {
                 err_msg = ex.Message;
-                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName,System.Reflection.MethodBase.GetCurrentMethod().Name);
+                logger.Error(CService.rtn_errmsg(ex));
             }
             finally
             {
