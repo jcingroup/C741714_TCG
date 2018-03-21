@@ -615,6 +615,9 @@
                     c_html += "      <td>";
                     c_html += "          <button class=\"hover-primary oi\" title=\"修改\" data-glyph=\"pencil\" type=\"button\" onclick=\"detail_edit('" + obj.id + "');return false;\"></button>";
                     c_html += "      </td>";
+                    c_html += "      <td>";
+                    c_html += "          " + obj.sort;
+                    c_html += "      </td>";
                     c_html += "      <td class=\"text-left\">";
                     c_html += "          " + obj.c_title;
                     c_html += "      </td>";
@@ -634,13 +637,10 @@
                     c_html += "          <span class=\"label " + show_class + "\">" + show + "</span>";
                     c_html += "      </td>";
                     c_html += "      <td>";
-                    c_html += "          " + obj.sort;
-                    c_html += "      </td>";
-                    c_html += "      <td>";
                     c_html += "           <button class=\"btn info oi\" onclick=\"img_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
                     c_html += "      </td>";
                     c_html += "      <td>";
-                    c_html += "           <button class=\"btn info oi\" onclick=\"url_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
+                    c_html += "           <button class=\"btn info oi\" onclick=\"url_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">影片管理</button>";
                     c_html += "      </td>";
                     c_html += "      <td>";
                     c_html += "          <button class=\"hover-danger oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_del('" + obj.id + "');return false;\"></button>";
@@ -755,8 +755,8 @@
                     c_html += "<table class=\"table-list table-hover table-striped\">";
                     c_html += "   <colgroup>";
                     c_html += "      <col style=\"width: 5%\">";
-                    c_html += "      <col style=\"width: 39%\">";
                     c_html += "      <col style=\"width: 7%\">";
+                    c_html += "      <col style=\"width: 39%\">";
                     c_html += "      <col style=\"width: 7%\">";
                     c_html += "      <col style=\"width: 7%\">";
                     c_html += "      <col style=\"width: 7%\">";
@@ -764,11 +764,11 @@
                     c_html += "   </colgroup>";
                     c_html += "   <tr>";
                     c_html += "      <th class=\"item-edit\">修改</th>";
+                    c_html += "      <th class=\"text-center\">排序</th>";
                     c_html += "      <th class=\"text-center\">標題</th>";
                     c_html += "      <th class=\"text-center\">狀態</th>";
-                    c_html += "      <th class=\"text-center\">排序</th>";
                     c_html += "      <th class=\"text-center\">圖片</th>";
-                    c_html += "      <th class=\"text-center\">網址</th>";
+                    c_html += "      <th class=\"text-center\">影片</th>";
                     c_html += "      <th class=\"item-edit\">刪除</th>";
                     c_html += "   </tr>";
 
@@ -779,6 +779,9 @@
                         c_html += "   <tr>";
                         c_html += "      <td>";
                         c_html += "          <button class=\"hover-primary oi\" title=\"修改\" data-glyph=\"pencil\" type=\"button\" onclick=\"detail_edit('" + obj.id + "');return false;\"></button>";
+                        c_html += "      </td>";
+                        c_html += "      <td>";
+                        c_html += "          " + obj.sort;
                         c_html += "      </td>";
                         c_html += "      <td class=\"text-left\">";
                         c_html += "          " + obj.c_title;
@@ -799,13 +802,10 @@
                         c_html += "          <span class=\"label " + show_class + "\">" + show + "</span>";
                         c_html += "      </td>";
                         c_html += "      <td>";
-                        c_html += "          " + obj.sort;
-                        c_html += "      </td>";
-                        c_html += "      <td>";
                         c_html += "           <button class=\"btn info oi\" onclick=\"img_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
                         c_html += "      </td>";
                         c_html += "      <td>";
-                        c_html += "           <button class=\"btn info oi\" onclick=\"url_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">網址管理</button>";
+                        c_html += "           <button class=\"btn info oi\" onclick=\"url_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Url\" name=\"btn_detail_Url\">影片管理</button>";
                         c_html += "      </td>";
                         c_html += "      <td>";
                         c_html += "          <button class=\"hover-danger oi\" title=\"刪除\" data-glyph=\"trash\" type=\"button\" onclick=\"detail_del('" + obj.id + "');return false;\"></button>";
@@ -1355,7 +1355,7 @@
                          <td>
                              @c_detail_sort
                          </td>
-                         <td>
+                         <td class="text-left">
                              @c_detail_title
                          </td>
                          <td>
