@@ -331,6 +331,7 @@
     <Compile Include="Repositories\EventStatesRepository.cs" />
     <Compile Include="Repositories\NewEventLatestRepository.cs" />
     <Compile Include="Repositories\PublicMethodRepository.cs" />
+    <Compile Include="Repositories\SearchRepository.cs" />
     <Compile Include="Service\AboutUs.cs" />
     <Compile Include="Service\Activity.cs" />
     <Compile Include="Service\DBService.cs" />
