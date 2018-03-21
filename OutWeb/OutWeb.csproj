@@ -316,6 +316,10 @@
     <Compile Include="Models\FrontModels\News\EventLatestModels\EventLatestViewModel.cs" />
     <Compile Include="Models\FrontModels\News\LatestModels\LatestData.cs" />
     <Compile Include="Models\FrontModels\News\PagingImageInfo.cs" />
+    <Compile Include="Models\FrontModels\SearchSiteModels\SearchListDataModel.cs" />
+    <Compile Include="Models\FrontModels\SearchSiteModels\SearchListFilterModel.cs" />
+    <Compile Include="Models\FrontModels\SearchSiteModels\SearchListResultModel.cs" />
+    <Compile Include="Models\FrontModels\SearchSiteModels\SearchListViewModel.cs" />
     <Compile Include="Models\IPaginationModel.cs" />
     <Compile Include="Models\PaginationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -327,6 +331,7 @@
     <Compile Include="Repositories\EventStatesRepository.cs" />
     <Compile Include="Repositories\NewEventLatestRepository.cs" />
     <Compile Include="Repositories\PublicMethodRepository.cs" />
+    <Compile Include="Repositories\SearchRepository.cs" />
     <Compile Include="Service\AboutUs.cs" />
     <Compile Include="Service\Activity.cs" />
     <Compile Include="Service\DBService.cs" />
