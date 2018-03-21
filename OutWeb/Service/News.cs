@@ -900,7 +900,7 @@ namespace OutWeb.Service
             try
             {
                 //刪除圖片
-                csql = @"delete from IMG SET IMG_KIND='News' WHERE IMG_NO = @n_id ";
+                csql = @"delete from IMG WHERE IMG_NO = @n_id AND IMG_KIND='News' ";
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();
