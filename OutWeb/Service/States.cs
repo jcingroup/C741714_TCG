@@ -1888,7 +1888,7 @@ namespace OutWeb.Service
                 cmd.ExecuteNonQuery();
                 //====================================//
                 //======== 刪除URL ====================//
-                csql = @"delete from URL SET URL_KIND='" + img_detail_kind + "' WHERE URL_NO = @id ";
+                csql = @"delete from URL WHERE URL_NO = @id AND URL_KIND='" + img_detail_kind + "' ";
                 cmd.CommandText = csql;
 
                 cmd.Parameters.Clear();

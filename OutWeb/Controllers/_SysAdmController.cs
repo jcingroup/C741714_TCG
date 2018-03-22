@@ -1123,7 +1123,7 @@ namespace OutWeb.Controllers
             string c_desc = "";
             DataTable dt;
 
-            dt = CEdu.Detail_List(ref err_msg, id, "sort", "", "", cate_id, "");
+            dt = CEdu.Detail_List(ref err_msg, id, "sort desc", "", "", cate_id, "");
             //if(dt.Rows.Count > 0)
             //{
             //    for(int i=0; i < dt.Rows.Count; i++)
@@ -1509,7 +1509,7 @@ namespace OutWeb.Controllers
 
             CFocus.Detail_Del(id);
 
-            dt = CFocus.Detail_List(ref err_msg, "", "sort", "", "", cate_id, "");
+            dt = CFocus.Detail_List(ref err_msg, "", "sort desc", "", "", cate_id, "");
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
         }
@@ -2078,7 +2078,7 @@ namespace OutWeb.Controllers
             string c_desc = "";
             DataTable dt;
 
-            dt = CActivity.Detail_List(ref err_msg, id, "sort", "", "", cate_id, "");
+            dt = CActivity.Detail_List(ref err_msg, id, "sort desc", "", "", cate_id, "");
             //if(dt.Rows.Count > 0)
             //{
             //    for(int i=0; i < dt.Rows.Count; i++)
@@ -2541,7 +2541,7 @@ namespace OutWeb.Controllers
             string c_desc = "";
             DataTable dt;
 
-            dt = CStates.Detail_List(ref err_msg, id, "sort", "", "", cate_id, "");
+            dt = CStates.Detail_List(ref err_msg, id, "sort desc", "", "", cate_id, "");
             //if(dt.Rows.Count > 0)
             //{
             //    for(int i=0; i < dt.Rows.Count; i++)
