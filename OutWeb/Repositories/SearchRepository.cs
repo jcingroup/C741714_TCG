@@ -6,7 +6,6 @@ using OutWeb.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 
 namespace OutWeb.Modules.FrontEnd
 {
@@ -15,37 +14,349 @@ namespace OutWeb.Modules.FrontEnd
         private string _connectionString { get; set; }
         private ConnectionRepository conRepo = new ConnectionRepository();
 
+        public SearchRepository()
+        {
+            _connectionString = conRepo.GetEntityConnctionString();
+        }
 
-        private void SearchAbout(string qry, string langCode)
+        /// <summary>
+        /// 關於我們
+        /// </summary>
+        /// <param name="qry"></param>
+        /// <param name="langCode"></param>
+        /// <param name="model"></param>
+        private void SearchAbout(string qry, string langCode, ref List<SearchListDataModel> model)
         {
             using (var db = new TCGDB(_connectionString))
             {
-                var source = db.ABOUTUS_CATE
-                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
-                 s.STATUS != "D")
-                 .ToList();
+                Dictionary<int, List<int>> cateGroup = new Dictionary<int, List<int>>();
+                cateGroup.Add(0, new List<int>() { 1, 10, 11 });
+                cateGroup.Add(1, new List<int>() { 2, 12, 13 });
+                cateGroup.Add(2, new List<int>() { 3, 14, 15 });
+                cateGroup.Add(3, new List<int>() { 4, 16, 17 });
+                cateGroup.Add(4, new List<int>() { 5, 18, 19 });
+                cateGroup.Add(5, new List<int>() { 6, 20, 21 });
+                cateGroup.Add(6, new List<int>() { 7, 22, 23 });
+                cateGroup.Add(7, new List<int>() { 8, 24, 25 });
+                cateGroup.Add(8, new List<int>() { 9, 26, 27 });
 
+                var source = db.ABOUTUS
+                  .AsEnumerable()
+                        .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                   s.STATUS != "Y" &&
+                    s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
+                   s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry))
+                   .ToList();
 
-                foreach (var cate in source)
+                foreach (var about in source)
                 {
-                    //var data = db.ABOUTUS
-                    //    .Where(s => s.STATUS == "Y" && s.CATE_ID == cate.ID)
-                    //    .AsEnumerable()
-                    //    .Where(s => s.C_TITLE.Contains(qry) || s.C_DESC.Contains(qry.RemoveHtmlAllTags()))
-                    //    .Select(o => new SearchListDataModel()
-                    //    {
-                    //        ID = o.ID,
-                    //        Content = o.C_DESC,
-                    //        Title = o.C_TITLE,
-                    //        LinkAddr = string.Format("/News/Content?ID={0}&type={1}", o.主索引, o.分類代碼),
-                    //        UpDateTime = o.修改日期,
-                    //        Type = o.分類代碼
-                    //    }).ToList();
-                }
+                    var cate = cateGroup.Where(s => s.Value.Contains((int)about.CATE_ID)).ToDictionary(d => d.Key, d => d.Value.ToList());
+                    if (cate.Count == 0)
+                        throw new Exception("無法取得對應ABOUTAS的分類,請聯絡系統管理員");
+                    SearchListDataModel temp = new SearchListDataModel();
+                    temp.Title = about.C_TITLE;
+                    temp.Content = about.C_DESC.RemoveHtmlAllTags();
+                    temp.UpDateTime = (DateTime)about.UPD_DT;
+                    switch (cate.Keys.First())
+                    {
+                        case 0:
+                            temp.LinkAddr = string.Format("/AboutUs/TCG?id={0}", about.ID);
+                            break;
 
+                        case 1:
+                            temp.LinkAddr = string.Format("/AboutUs/Position?id={0}", about.ID);
+                            break;
+
+                        case 2:
+                            temp.LinkAddr = string.Format("/AboutUs/Statement?id={0}", about.ID);
+                            break;
+
+                        case 3:
+                            temp.LinkAddr = string.Format("/AboutUs/Law?cate_id={0}&id={1}", about.CATE_ID, about.ID);
+                            break;
+
+                        case 4:
+                            temp.LinkAddr = string.Format("/AboutUs/Law?cate_id={0}&id={1}", about.CATE_ID, about.ID);
+                            break;
+
+                        case 5:
+                            temp.LinkAddr = string.Format("/AboutUs/Law?cate_id={0}&id={1}", about.CATE_ID, about.ID);
+                            break;
+
+                        case 6:
+                            temp.LinkAddr = string.Format("/AboutUs/Organization?cate_id={0}&id={1}", about.CATE_ID, about.ID);
+                            break;
+
+                        case 7:
+                            temp.LinkAddr = string.Format("/AboutUs/Organization?cate_id={0}&id={1}", about.CATE_ID, about.ID);
+                            break;
+
+                        case 8:
+                            temp.LinkAddr = string.Format("/AboutUs/Organization?cate_id={0}&id={1}", about.CATE_ID, about.ID);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    model.Add(temp);
+                }
             }
         }
 
+        /// <summary>
+        /// 教育專欄
+        /// </summary>
+        /// <param name="qry"></param>
+        /// <param name="langCode"></param>
+        /// <param name="model"></param>
+        private void SearchEducation(string qry, string langCode, ref List<SearchListDataModel> model)
+        {
+            using (var db = new TCGDB(_connectionString))
+            {
+                var query = db.EDU
+                .Join(db.EDU_DETAIL,
+                m => m.ID.ToString(),
+                d => d.CATE_ID,
+                (main, details) => new { Main = main, Details = details })
+                .AsEnumerable()
+                .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
+                s.Main.STATUS != "Y" &&
+
+                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
+
+                s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry))
+                .Where(w=>w.Details.STATUS =="Y")
+                .OrderByDescending(d => d.Details.UPD_DT)
+                .GroupBy(g => g.Main.C_TITLE)
+                .ToList()
+                .Select(o => new SearchListDataModel()
+                {
+                    ID = o.First().Details.ID,
+                    Title = o.First().Main.C_TITLE,
+                    Type = o.First().Main.ID,
+                    Content = o.First().Details.C_DESC,
+                    UpDateTime = (DateTime)o.First().Details.UPD_DT,
+                    LinkAddr = string.Format("/AboutUs/EducationContent?eduTypeID={0}&ID={1}&pagingID={2}", o.First().Main.CATE_ID, o.First().Details.CATE_ID, o.First().Details.ID)
+                })
+                .ToList();
+
+                if (query.Count > 0)
+                    model.AddRange(query);
+            }
+        }
+
+        /// <summary>
+        /// 加入台灣民政府
+        /// </summary>
+        /// <param name="qry"></param>
+        /// <param name="langCode"></param>
+        /// <param name="model"></param>
+        private void SearchJoinUs(string qry, string langCode, ref List<SearchListDataModel> model)
+        {
+            using (var db = new TCGDB(_connectionString))
+            {
+                Dictionary<int, List<int>> cateGroup = new Dictionary<int, List<int>>();
+                cateGroup.Add(0, new List<int>() { 1, 4, 5 });
+                cateGroup.Add(1, new List<int>() { 2, 6, 7 });
+
+                var source = db.JOINUS
+                  .AsEnumerable()
+                        .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                   s.STATUS != "Y" &&
+                    s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
+                   s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry))
+                   .ToList();
+
+                foreach (var join in source)
+                {
+                    var cate = cateGroup.Where(s => s.Value.Contains((int)join.CATE_ID)).ToDictionary(d => d.Key, d => d.Value.ToList());
+                    if (cate.Count == 0)
+                        throw new Exception("無法取得對應的JOINUS分類,請聯絡系統管理員");
+                    SearchListDataModel temp = new SearchListDataModel();
+                    temp.Title = join.C_TITLE;
+                    temp.Content = join.C_DESC.RemoveHtmlAllTags();
+                    temp.UpDateTime = (DateTime)join.UPD_DT;
+                    switch (cate.Keys.First())
+                    {
+                        case 0:
+                            temp.LinkAddr = string.Format("/JoinUs/Apply");
+                            break;
+
+                        case 1:
+                            temp.LinkAddr = string.Format("/JoinUs/Consult?id={0}", join.ID);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    model.Add(temp);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 中央活動
+        /// </summary>
+        /// <param name="qry"></param>
+        /// <param name="langCode"></param>
+        /// <param name="model"></param>
+        private void SearchEventLatest(string qry, string langCode, ref List<SearchListDataModel> model)
+        {
+            using (var db = new TCGDB(_connectionString))
+            {
+                var query = db.ACTIVITY
+               .Join(db.ACTIVITY_DETAIL,
+               m => m.ID.ToString(),
+               d => d.CATE_ID,
+               (main, details) => new { Main = main, Details = details })
+               .AsEnumerable()
+               .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
+                s.Main.STATUS != "Y" &&
+
+                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
+
+                s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry))
+                .Where(w => w.Details.STATUS == "Y")
+                .OrderByDescending(d => d.Details.UPD_DT)
+                .GroupBy(g => g.Main.C_TITLE)
+                .ToList()
+               .Select(o => new SearchListDataModel()
+               {
+                   ID = o.First().Details.ID,
+                   Title = o.First().Main.C_TITLE,
+                   Type = o.First().Main.ID,
+                   Content = o.First().Details.C_DESC,
+                   UpDateTime = (DateTime)o.First().Details.UPD_DT,
+                   LinkAddr = string.Format("/News/EventLatestContent?ID={0}&pagingID={1}", o.First().Details.CATE_ID, o.First().Details.ID)
+               })
+               .ToList();
+
+                if (query.Count > 0)
+                    model.AddRange(query);
+            }
+        }
+
+        /// <summary>
+        /// 各州活動
+        /// </summary>
+        /// <param name="qry"></param>
+        /// <param name="langCode"></param>
+        /// <param name="model"></param>
+        private void SearchStates(string qry, string langCode, ref List<SearchListDataModel> model)
+        {
+            using (var db = new TCGDB(_connectionString))
+            {
+                var query = db.STATES
+                .Join(db.STATES_DETAIL,
+                m => m.ID.ToString(),
+                d => d.CATE_ID,
+                (main, details) => new { Main = main, Details = details })
+                .AsEnumerable()
+                .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
+                s.Main.STATUS != "Y" &&
+
+                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
+
+                s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry))
+                .Where(w => w.Details.STATUS == "Y")
+                .OrderByDescending(d => d.Details.UPD_DT)
+                .GroupBy(g => g.Main.C_TITLE)
+                .ToList()
+                .Select(o => new SearchListDataModel()
+                {
+                    ID = o.First().Details.ID,
+                    Title = o.First().Main.C_TITLE,
+                    Type = o.First().Main.ID,
+                    Content = o.First().Details.C_DESC,
+                    UpDateTime = (DateTime)o.First().Details.UPD_DT,
+                    LinkAddr = string.Format("/News/EventStatesContent?statesTypeID={0}&ID=1&pagingID={1}", o.First().Details.CATE_ID, o.First().Details.ID)
+                })
+                .ToList();
+
+                if (query.Count > 0)
+                    model.AddRange(query);
+            }
+        }
+
+        /// <summary>
+        /// 新聞公告 聲明
+        /// </summary>
+        /// <param name="qry"></param>
+        /// <param name="langCode"></param>
+        /// <param name="model"></param>
+        private void SearchAnnouncement(string qry, string langCode, ref List<SearchListDataModel> model)
+        {
+            using (var db = new TCGDB(_connectionString))
+            {
+                var source = db.NEWS
+                  .AsEnumerable()
+                        .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                   s.STATUS != "Y" &&
+                    s.N_TITLE == qry || s.N_DESC.RemoveHtmlAllTags() == qry ||
+                   s.N_TITLE.Contains(qry) || s.N_DESC.RemoveHtmlAllTags().Contains(qry))
+                   .ToList();
+
+                foreach (var news in source)
+                {
+                    SearchListDataModel temp = new SearchListDataModel();
+                    temp.Title = news.N_TITLE;
+                    temp.Content = news.N_DESC.RemoveHtmlAllTags();
+                    temp.UpDateTime = (DateTime)news.UPD_DT;
+                    temp.LinkAddr = string.Format("/News/AnnouncementContent?ID={0}&typeID={1}", news.ID, news.CATE_ID);
+                    model.Add(temp);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 焦點專欄
+        /// </summary>
+        /// <param name="qry"></param>
+        /// <param name="langCode"></param>
+        /// <param name="model"></param>
+        private void SearchFocus(string qry, string langCode, ref List<SearchListDataModel> model)
+        {
+            using (var db = new TCGDB(_connectionString))
+            {
+                var query = db.FOCUS
+                .Join(db.FOCUS_DETAIL,
+                m => m.ID.ToString(),
+                d => d.CATE_ID,
+                (main, details) => new { Main = main, Details = details })
+                .AsEnumerable()
+                .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
+                s.Main.STATUS != "Y" &&
+
+                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
+
+                s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry))
+                .Where(w => w.Details.STATUS == "Y")
+                .OrderByDescending(d => d.Details.UPD_DT)
+                .GroupBy(g => g.Main.C_TITLE)
+                .ToList()
+                .Select(o => new SearchListDataModel()
+                {
+                    ID = o.First().Details.ID,
+                    Title = o.First().Main.C_TITLE,
+                    Type = o.First().Main.ID,
+                    Content = o.First().Details.C_DESC,
+                    UpDateTime = (DateTime)o.First().Details.UPD_DT,
+                    LinkAddr = string.Format("/News/FocusContent?focusTypeID={0}&ID={1}&pagingID={2}", o.First().Main.CATE_ID, o.First().Details.CATE_ID, o.First().Details.ID)
+                })
+                .ToList();
+
+                if (query.Count > 0)
+                    model.AddRange(query);
+            }
+        }
 
         public SearchListResultModel SearchSite(SearchListFilterModel filter)
         {
@@ -55,108 +366,17 @@ namespace OutWeb.Modules.FrontEnd
             SearchListResultModel result = new SearchListResultModel();
             List<SearchListDataModel> data = new List<SearchListDataModel>();
 
-            var requestContext = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
-
-            //using (var db = new TCGDB(_connectionString))
-            //{
-            //    data.AddRange(db.ABOUTUS
-            //  .Where(o => o.標題.Contains(str) ||
-            //  o.內容.Contains(str))
-            //  .Where(a => a.顯示狀態 == true)
-            //  .ToList()
-            //  .Select(o => new SearchListDataModel()
-            //  {
-            //      ID = o.主索引,
-            //      Content = o.內容,
-            //      Title = o.標題,
-            //      LinkAddr = string.Format("/News/Content?ID={0}&type={1}", o.主索引, o.分類代碼),
-            //      UpDateTime = o.修改日期,
-            //      Type = o.分類代碼
-            //  })
-            //  .ToList());
-
-            //    data.AddRange(DB.課程
-            //    .Where(o => o.標題.Contains(str) ||
-            //    o.內容.Contains(str))
-            //    .Where(a => a.顯示狀態 == true)
-            //    .ToList()
-            //    .Select(o => new SearchListDataModel()
-            //    {
-            //        ID = o.主索引,
-            //        Content = o.內容,
-            //        Title = o.標題,
-            //        LinkAddr = requestContext.Action("Content", "Course", new { ID = o.主索引 }).ToString(),
-            //        UpDateTime = o.修改日期
-            //    })
-            //    .ToList());
-
-            //    data.AddRange(DB.問卷主檔
-            //    .Where(o => o.問卷標題.Contains(str) ||
-            //    o.問卷描述.Contains(str))
-            //    .Where(a => a.是否上架 == true)
-            //    .ToList()
-            //    .Select(o => new SearchListDataModel()
-            //    {
-            //        ID = o.主索引,
-            //        Content = o.問卷描述,
-            //        Title = o.問卷標題,
-            //        LinkAddr = requestContext.Action("Content", "Question", new { ID = o.主索引 }).ToString(),
-            //        UpDateTime = o.更新日期
-            //    })
-            //    .ToList());
-
-            //    data.AddRange(DB.能源案例
-            //    .Where(o => o.案例標題.Contains(str) ||
-            //    o.內容.Contains(str))
-            //    .Where(a => a.顯示狀態 == true)
-            //    .ToList()
-            //    .Select(o => new SearchListDataModel()
-            //    {
-            //        ID = o.主索引,
-            //        Content = o.內容,
-            //        Title = o.案例標題,
-            //        LinkAddr = requestContext.Action("Content", "Case", new { ID = o.主索引 }).ToString(),
-            //        UpDateTime = o.更新日期
-            //    })
-            //    .ToList());
-
-            //    data.AddRange(DB.研討會主檔
-            //    .Join(
-            //        this.DB.研討會明細檔,
-            //        main => main.主索引,
-            //        details => details.對應研討會主索引,
-            //        (main, details) => new { Main = main, Details = details })
-            //        .Where(w => w.Main.研討會名稱.Contains(str) || w.Details.活動內容.Contains(str))
-            //    .Where(a => a.Details.顯示狀態 == true)
-            //    .ToList()
-            //    .Select(o => new SearchListDataModel()
-            //    {
-            //        ID = o.Main.主索引,
-            //        Content = o.Details.活動內容,
-            //        Title = o.Main.研討會名稱,
-            //        LinkAddr = requestContext.Action("Content", "Train", new { trainID = o.Main.主索引 }).ToString(),
-            //        UpDateTime = o.Main.更新日期
-            //    })
-            //    .ToList());
-
-            //    data.AddRange(DB.出版品主檔
-            //      .Where(o => o.名稱.Contains(str))
-            //    .Where(a => a.顯示狀態 == true)
-            //      .ToList()
-            //      .Select(o => new SearchListDataModel()
-            //      {
-            //          ID = o.主索引,
-            //          Content = o.摘要,
-            //          Title = o.名稱,
-            //          LinkAddr = requestContext.Action("Content", "Book", new { ID = o.主索引 }).ToString(),
-            //          UpDateTime = o.更新時間
-            //      })
-            //      .ToList());
-            //}
+            SearchAbout(filter.QueryString, filter.LangCode, ref data);
+            SearchEducation(filter.QueryString, filter.LangCode, ref data);
+            SearchJoinUs(filter.QueryString, filter.LangCode, ref data);
+            SearchEventLatest(filter.QueryString, filter.LangCode, ref data);
+            SearchStates(filter.QueryString, filter.LangCode, ref data);
+            SearchAnnouncement(filter.QueryString, filter.LangCode, ref data);
+            SearchFocus(filter.QueryString, filter.LangCode, ref data);
 
             result.Data = data.OrderByDescending(o => o.UpDateTime).ToList();
 
-            result = ListPagination(result, (int)filter.CurrentPage, (int)PageSizeConfig.SIZE30);
+            result = ListPagination(result, (int)filter.CurrentPage, (int)PageSizeConfig.SIZE10);
 
             return result;
         }
@@ -188,7 +408,5 @@ namespace OutWeb.Modules.FrontEnd
             model.Pagination = paginationResult;
             return model;
         }
-
-
     }
 }

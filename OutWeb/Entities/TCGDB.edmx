@@ -430,7 +430,23 @@
           <Property Name="USR_EML" Type="nvarchar" MaxLength="50" />
           <Property Name="USR_RANK" Type="int" />
           <Property Name="USR_DESC" Type="nvarchar(max)" />
+          <Property Name="USR_GRP" Type="nvarchar" MaxLength="50" />
+          <Property Name="USR_STATES" Type="nvarchar" MaxLength="50" />
           <Property Name="SIGNIN_DT" Type="datetime" />
+          <Property Name="STATUS" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="USR_GROUP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BD_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BD_DT" Type="datetime" />
+          <Property Name="UPD_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPD_DT" Type="datetime" />
+          <Property Name="GRP_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="GRP_DESC" Type="nvarchar" MaxLength="500" />
+          <Property Name="GRP_AUTH" Type="nvarchar" MaxLength="500" />
           <Property Name="STATUS" Type="nvarchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="WBAGENT">
@@ -579,6 +595,7 @@
           <EntitySet Name="STATES_VIDEO" EntityType="Self.STATES_VIDEO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="URL" EntityType="Self.URL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USR" EntityType="Self.USR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USR_GROUP" EntityType="Self.USR_GROUP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WBAGENT" EntityType="Self.WBAGENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WBLOGERR" EntityType="Self.WBLOGERR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WBNEWS" EntityType="Self.WBNEWS" Schema="dbo" store:Type="Tables" />
@@ -633,7 +650,6 @@
           <EntitySet Name="STATES_DETAIL" EntityType="C741714_TCGModel.STATES_DETAIL" />
           <EntitySet Name="STATES_VIDEO" EntityType="C741714_TCGModel.STATES_VIDEO" />
           <EntitySet Name="URL" EntityType="C741714_TCGModel.URL" />
-          <EntitySet Name="USR" EntityType="C741714_TCGModel.USR" />
           <EntitySet Name="WBAGENT" EntityType="C741714_TCGModel.WBAGENT" />
           <EntitySet Name="WBLOGERR" EntityType="C741714_TCGModel.WBLOGERR" />
           <EntitySet Name="WBNEWS" EntityType="C741714_TCGModel.WBNEWS" />
@@ -643,6 +659,8 @@
           <EntitySet Name="WBUSR" EntityType="C741714_TCGModel.WBUSR" />
           <EntitySet Name="WBWORKS" EntityType="C741714_TCGModel.WBWORKS" />
           <EntitySet Name="SCHOOL" EntityType="C741714_TCGModel.SCHOOL" />
+          <EntitySet Name="USR" EntityType="C741714_TCGModel.USR" />
+          <EntitySet Name="USR_GROUP" EntityType="C741714_TCGModel.USR_GROUP" />
         </EntityContainer>
         <EntityType Name="ABOUTUS">
           <Key>
@@ -1034,25 +1052,6 @@
           <Property Name="SORT" Type="Int32" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="USR">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BD_DT" Type="DateTime" Precision="3" />
-          <Property Name="UPD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UPD_DT" Type="DateTime" Precision="3" />
-          <Property Name="SIGNIN_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SIGNIN_PWD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="USR_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="USR_ENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="USR_EML" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="USR_RANK" Type="Int32" />
-          <Property Name="USR_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SIGNIN_DT" Type="DateTime" Precision="3" />
-          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="WBAGENT">
           <Key>
             <PropertyRef Name="ID" />
@@ -1188,6 +1187,41 @@
           <Property Name="C_TITLE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="C_DESC" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="SORT" Type="Int32" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="USR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BD_DT" Type="DateTime" Precision="3" />
+          <Property Name="UPD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPD_DT" Type="DateTime" Precision="3" />
+          <Property Name="SIGNIN_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SIGNIN_PWD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USR_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USR_ENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USR_EML" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USR_RANK" Type="Int32" />
+          <Property Name="USR_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="USR_GRP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USR_STATES" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SIGNIN_DT" Type="DateTime" Precision="3" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="USR_GROUP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BD_DT" Type="DateTime" Precision="3" />
+          <Property Name="UPD_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPD_DT" Type="DateTime" Precision="3" />
+          <Property Name="GRP_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GRP_DESC" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GRP_AUTH" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
@@ -1610,26 +1644,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="USR">
-            <EntityTypeMapping TypeName="C741714_TCGModel.USR">
-              <MappingFragment StoreEntitySet="USR">
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="SIGNIN_DT" ColumnName="SIGNIN_DT" />
-                <ScalarProperty Name="USR_DESC" ColumnName="USR_DESC" />
-                <ScalarProperty Name="USR_RANK" ColumnName="USR_RANK" />
-                <ScalarProperty Name="USR_EML" ColumnName="USR_EML" />
-                <ScalarProperty Name="USR_ENAME" ColumnName="USR_ENAME" />
-                <ScalarProperty Name="USR_NAME" ColumnName="USR_NAME" />
-                <ScalarProperty Name="SIGNIN_PWD" ColumnName="SIGNIN_PWD" />
-                <ScalarProperty Name="SIGNIN_ID" ColumnName="SIGNIN_ID" />
-                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
-                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
-                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
-                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WBAGENT">
             <EntityTypeMapping TypeName="C741714_TCGModel.WBAGENT">
               <MappingFragment StoreEntitySet="WBAGENT">
@@ -1768,6 +1782,43 @@
                 <ScalarProperty Name="CATE_ID" ColumnName="CATE_ID" />
                 <ScalarProperty Name="LANG_ID" ColumnName="LANG_ID" />
                 <ScalarProperty Name="C_DATE" ColumnName="C_DATE" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USR">
+            <EntityTypeMapping TypeName="C741714_TCGModel.USR">
+              <MappingFragment StoreEntitySet="USR">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SIGNIN_DT" ColumnName="SIGNIN_DT" />
+                <ScalarProperty Name="USR_STATES" ColumnName="USR_STATES" />
+                <ScalarProperty Name="USR_GRP" ColumnName="USR_GRP" />
+                <ScalarProperty Name="USR_DESC" ColumnName="USR_DESC" />
+                <ScalarProperty Name="USR_RANK" ColumnName="USR_RANK" />
+                <ScalarProperty Name="USR_EML" ColumnName="USR_EML" />
+                <ScalarProperty Name="USR_ENAME" ColumnName="USR_ENAME" />
+                <ScalarProperty Name="USR_NAME" ColumnName="USR_NAME" />
+                <ScalarProperty Name="SIGNIN_PWD" ColumnName="SIGNIN_PWD" />
+                <ScalarProperty Name="SIGNIN_ID" ColumnName="SIGNIN_ID" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />
+                <ScalarProperty Name="BD_ID" ColumnName="BD_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USR_GROUP">
+            <EntityTypeMapping TypeName="C741714_TCGModel.USR_GROUP">
+              <MappingFragment StoreEntitySet="USR_GROUP">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="GRP_AUTH" ColumnName="GRP_AUTH" />
+                <ScalarProperty Name="GRP_DESC" ColumnName="GRP_DESC" />
+                <ScalarProperty Name="GRP_NAME" ColumnName="GRP_NAME" />
                 <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
                 <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
                 <ScalarProperty Name="BD_DT" ColumnName="BD_DT" />

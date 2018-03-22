@@ -12,19 +12,19 @@ namespace OutWeb.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class TCGDB : DbContext
     {
-        public TCGDB(string conectionString)
-            : base(conectionString)
+        public TCGDB(string connectionString)
+            : base(connectionString)
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<ABOUTUS> ABOUTUS { get; set; }
         public virtual DbSet<ABOUTUS_CATE> ABOUTUS_CATE { get; set; }
         public virtual DbSet<ACTIVITY> ACTIVITY { get; set; }
@@ -49,7 +49,6 @@ namespace OutWeb.Entities
         public virtual DbSet<STATES_DETAIL> STATES_DETAIL { get; set; }
         public virtual DbSet<STATES_VIDEO> STATES_VIDEO { get; set; }
         public virtual DbSet<URL> URL { get; set; }
-        public virtual DbSet<USR> USR { get; set; }
         public virtual DbSet<WBAGENT> WBAGENT { get; set; }
         public virtual DbSet<WBLOGERR> WBLOGERR { get; set; }
         public virtual DbSet<WBNEWS> WBNEWS { get; set; }
@@ -59,5 +58,7 @@ namespace OutWeb.Entities
         public virtual DbSet<WBUSR> WBUSR { get; set; }
         public virtual DbSet<WBWORKS> WBWORKS { get; set; }
         public virtual DbSet<SCHOOL> SCHOOL { get; set; }
+        public virtual DbSet<USR> USR { get; set; }
+        public virtual DbSet<USR_GROUP> USR_GROUP { get; set; }
     }
 }
