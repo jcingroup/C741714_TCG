@@ -90,13 +90,13 @@ string img_path = "/Images/";
         @* 照片的呈現方式，有資料才顯示 *@
         @if (pageInfo.ImagesList.Count > 0)
             {
-            <ul class="prolist row row-center list-unstyled">
+            <ul class="prolist list-inline">
 
                 @foreach (var img in pageInfo.ImagesList)
                 {
                     string imgUrl = img_path + img.ImgFileName;
                     string description = string.IsNullOrEmpty(img.ImgDescription) ? "" : @"<span class=""caption"">" + img.ImgDescription + "</span>";
-                    <li class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <li>
                         <figure class="pro">
                             <a href="@imgUrl" class="thumbnail" target="new">
                                 <img src="@imgUrl" alt="">
