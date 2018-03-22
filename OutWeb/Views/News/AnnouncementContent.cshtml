@@ -10,7 +10,7 @@ string listLink = Url.Content("~/News/AnnouncementList?typeID=" + Model.Data.Cat
 @section breadcrumb {
     <li><a href="~/News">最新訊息 活動公告</a></li>
     <li><a href="~/News/AnnouncementLatest">新聞 公告 聲明</a></li>
-    <li>@Model.Data.CateIDInfo.Values.First()</li> @* 分類名稱 *@
+    <li><a href="@listLink">@Model.Data.CateIDInfo.Values.First()</a></li> @* 分類名稱 *@
 }
 
 @section scripts {
@@ -24,7 +24,7 @@ string listLink = Url.Content("~/News/AnnouncementList?typeID=" + Model.Data.Cat
 </p>
 
 <h2 class="title">
-    <a class="label label-purple" href="@listLink">@Model.Data.CateIDInfo.Values.First()</a> @* 分類名稱 *@
+    <a class="label label-danger" href="@listLink">@Model.Data.CateIDInfo.Values.First()</a> @* 分類名稱 *@
     <small class="date">@Model.Data.PublishDateString</small>
     <span class="underline">@ViewBag.Title</span>
     <!-- <div class="addthis_inline_share_toolbox"></div> -->

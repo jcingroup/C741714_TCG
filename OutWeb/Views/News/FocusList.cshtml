@@ -8,7 +8,7 @@
 @section breadcrumb {
     <li><a href="~/News">最新訊息 活動公告</a></li>
     <li><a href="~/News/FocusCategory">焦點專欄</a></li>
-    <li>@Model.FocusTypeInfo.Values.First()</li>
+    <li>@ViewBag.Title</li>
 }
 
 <h1 class="sr-only">焦點專欄</h1>
@@ -18,7 +18,7 @@
 </p>
 
 <h2 class="title">
-    <span class="underline">@Model.FocusTypeInfo.Values.First()</span>
+    <span class="underline">@ViewBag.Title</span>
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h2>
 
@@ -34,12 +34,22 @@
 
             //編輯器內容 取前 145 個字，有資料的話才顯示
             <article class="article">
-                <small class="date">@data.PublishDateString</small>
-                <h3><a href="@contentUrl">@data.Title</a></h3>
-                <p>@Html.Raw(remark)</p>
-                <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-4 col-12">
+                        <a href="@contentUrl" class="thumbnail">
+                            @* 沒有圖檔的替代圖 *@
+                            <img src="@img" alt="">
+                        </a>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-12">
+                        <small class="date">@data.PublishDateString</small>
+                        <h3><a href="@contentUrl">@data.Title</a></h3>
+                        @* 摘要 取前 145 個字，有資料的話才顯示 *@
+                        <p>@Html.Raw(remark)</p>
+                        <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                    </div>
+                </div>
             </article>
-
         }
     </div>
 }
