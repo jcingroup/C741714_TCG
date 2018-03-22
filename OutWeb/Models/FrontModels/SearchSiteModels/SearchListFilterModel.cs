@@ -11,5 +11,6 @@
         /// 查詢關鍵字
         /// </summary>
         public string QueryString { get; set; }
+        public string LangCode { get; set; }
     }
 }

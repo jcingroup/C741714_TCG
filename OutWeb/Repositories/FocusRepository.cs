@@ -6,7 +6,6 @@ using OutWeb.Models.FrontModels.News.FocusNewsModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 
 namespace OutWeb.Repositories
 {
@@ -34,6 +33,7 @@ namespace OutWeb.Repositories
                 cate = db.FOCUS_CATE
                  .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
                  s.STATUS == "Y")
+                 .OrderByDescending(s => s.SORT)
                   .ToDictionary(d => d.ID, d => d.CATE_NAME);
                 if (cate.Count == 0)
                     throw new Exception("無法取得焦點分類");
@@ -58,6 +58,7 @@ namespace OutWeb.Repositories
 
             return cate;
         }
+
         /// <summary>
         /// 取得分頁的網址列表
         /// </summary>
@@ -79,7 +80,6 @@ namespace OutWeb.Repositories
 
             return data;
         }
-
 
         /// <summary>
         /// 取得分頁的圖片列表
@@ -118,7 +118,8 @@ namespace OutWeb.Repositories
 
             using (var db = new TCGDB(_connectionString))
             {
-                data = db.FOCUS_DETAIL
+                data = db
+                    .FOCUS_DETAIL
                     .AsEnumerable()
                         .Where(o => o.CATE_ID == id.ToString() && o.STATUS == "Y")
                         .OrderByDescending(o => o.SORT)
@@ -150,7 +151,6 @@ namespace OutWeb.Repositories
                 //.ToList();
             }
 
-
             return data;
         }
 
@@ -172,6 +172,7 @@ namespace OutWeb.Repositories
             }
             return imgStr;
         }
+
         /// <summary>
         /// 取得第一個分頁的描述內容（去除Html Tag）
         /// </summary>
@@ -189,15 +190,13 @@ namespace OutWeb.Repositories
             return remark;
         }
 
-
-
         /// <summary>
         /// 內容
         /// </summary>
         /// <param name="id"></param>
         /// <param name="lagCode"></param>
         /// <returns></returns>
-        public FocusNewsContent GetContentByID(int statesTypeID, int id, string lagCode)
+        public FocusNewsContent GetContentByID(int focusTypeID, int id, string lagCode)
         {
             FocusNewsContent result = new FocusNewsContent();
             using (var db = new TCGDB(_connectionString))
@@ -205,7 +204,7 @@ namespace OutWeb.Repositories
                 var sourceList = db.FOCUS
                  .AsEnumerable()
                  .Where(s => (string.IsNullOrEmpty(lagCode) ? true : s.LANG_ID == lagCode) &&
-                 s.STATUS == "Y" && s.CATE_ID == statesTypeID)
+                 s.STATUS == "Y" && s.CATE_ID == focusTypeID)
                  .OrderByDescending(o => o.SORT)
                  .OrderByDescending(s => s.C_DATE)
                  .ToList();
@@ -213,7 +212,6 @@ namespace OutWeb.Repositories
                 var source = sourceList.Where(s => s.ID == id).FirstOrDefault();
                 if (source == null)
                     throw new Exception("無法取得活動內容,是否已被移除.");
-
 
                 result.Data = new FocusNewsData()
                 {
@@ -229,7 +227,7 @@ namespace OutWeb.Repositories
                 result.PreviousIDStr = dataIndex == 0 ? "" : sourceList[(dataIndex - 1)].ID.ToString();
                 result.NextIDStr = dataIndex == lastDataIndex ? "" : sourceList[(dataIndex + 1)].ID.ToString();
             }
-            result.FocusCateInfo = GetFocusCateByID(statesTypeID, lagCode);
+            result.FocusCateInfo = GetFocusCateByID(focusTypeID, lagCode);
             return result;
         }
 
