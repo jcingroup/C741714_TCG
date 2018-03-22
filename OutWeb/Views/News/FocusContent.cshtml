@@ -9,12 +9,12 @@
 @section breadcrumb {
     <li><a href="~/News">最新訊息 活動公告</a></li>
     <li><a href="~/News/FocusCategory">焦點專欄</a></li>
-    <li>@Model.FocusCateInfo.Values.First()</li> @* 分類名稱 *@
+    <li><a href="@listTitleUrl">@Model.FocusCateInfo.Values.First()</a></li> @* 分類名稱 *@
 }
 
-@section scripts {
+<!-- @section scripts {
     <script src="~/Content/js/tabs.js"></script>
-}
+} -->
 
 <h1 class="sr-only">焦點專欄</h1>
 
@@ -24,7 +24,7 @@
 
 <h2 class="title">
     <small class="date">@Model.Data.PublishDateString</small>
-    <span class="underline">@Model.Data.Title</span>
+    <span class="underline">@ViewBag.Title</span>
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h2>
 

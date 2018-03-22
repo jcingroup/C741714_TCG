@@ -12,7 +12,8 @@ string img_path = "/Images/";
 @section breadcrumb {
     <li><a href="~/News">最新訊息 活動公告</a></li>
     <li><a href="~/News/EventLatest">活動寫真</a></li>
-    <li>各州活動</li>
+    <li><a href="~/News/EventStatesCategory">各州活動</a></li>
+    <li>@ViewBag.Title</li>
 }
 
 <h1 class="sr-only">活動寫真</h1>
@@ -72,7 +73,7 @@ string img_path = "/Images/";
                     </a>
                 </div>
                 <div class="col-lg-9 col-sm-8 col-12">
-                    <small class="date">2018-01-20</small>
+                    <small class="date">@data.PublishDateString</small>
                     <h3><a href="@contentUrl">@data.Title</a></h3>
                     @* 摘要 取前 145 個字，有資料的話才顯示 *@
                     <p>@Html.Raw(remark)</p>

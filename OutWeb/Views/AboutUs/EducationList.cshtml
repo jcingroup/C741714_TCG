@@ -8,7 +8,7 @@
 @section breadcrumb {
     <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
     <li><a href="~/AboutUs/EducationCategory">教育專欄</a></li>
-<li>@Model.EduTypeInfo.Values.First()</li>
+    <li>@ViewBag.Title</li>
 }
 
 <h1 class="sr-only">教育專欄</h1>
@@ -18,7 +18,7 @@
 </p>
 
 <h2 class="title">
-    <span class="underline">@Model.EduTypeInfo.Values.First()</span>
+    <span class="underline">@ViewBag.Title</span>
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h2>
 @* 每頁10筆資料 *@

@@ -17,7 +17,7 @@ Dictionary<int, string> cateInfo = (TempData["CateInfo"] as Dictionary<int, stri
 
 <h1 class="sr-only">新聞 公告 聲明</h1>
 
-<ul class="tabs list-inline text-center">
+<!-- <ul class="tabs list-inline text-center">
     <li><a href="~/News/AnnouncementLatest">最新訊息</a></li>
     @* 目前分類的 <a> + class="current" *@
     @foreach (var cate in cateInfo)
@@ -25,7 +25,7 @@ Dictionary<int, string> cateInfo = (TempData["CateInfo"] as Dictionary<int, stri
         string url = @"/News/AnnouncementList?typeID=" + cate.Key;
         <li><a href="@url" class="cate-list" key="@cate.Key">@cate.Value</a></li>
     }
-</ul>
+</ul> -->
 
 <h2 class="title">
     <span class="underline">@ViewBag.Title</span>
