@@ -2,6 +2,9 @@
     ViewBag.mainName = "TCG 台灣民政府 管理系統";
     string ManagePath = "~/_SysAdm";
     string HomePath = "~/Home";
+    string usr_info = "";
+
+    usr_info = Convert.ToString(Session["Account"]) + "(" + Convert.ToString(Session["usr_name"]) + ")";
 }
 
 <!DOCTYPE html>
@@ -54,7 +57,7 @@
                     </h1>
 
                     <nav class="navbar">
-                        <span class="nav-link">登入身份: @Convert.ToString(Session["Account"])</span>
+                        <span class="nav-link">登入身份: @usr_info</span>
 
                         <a href="@Url.Content(HomePath)" class="nav-link oi home" data-glyph="home">
                             回首頁
