@@ -33,6 +33,7 @@ namespace OutWeb.Repositories
                 cate = db.STATES_CATE
                  .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
                  s.STATUS == "Y")
+                 .OrderByDescending(s => s.SORT)
                   .ToDictionary(d => d.ID, d => d.CATE_NAME);
                 if (cate.Count == 0)
                     throw new Exception("無法取得洲別分類");
@@ -198,7 +199,7 @@ namespace OutWeb.Repositories
             using (var db = new TCGDB(_connectionString))
             {
                 url = db.STATES_VIDEO
-                    .Where(s => s.STATUS == "Y"&& s.CATE_ID == statesID)
+                    .Where(s => s.STATUS == "Y" && s.CATE_ID == statesID)
                     .Select(s => s.C_URL)
                     .FirstOrDefault();
             }
@@ -220,7 +221,7 @@ namespace OutWeb.Repositories
                 var sourceList = db.STATES
                  .AsEnumerable()
                  .Where(s => (string.IsNullOrEmpty(lagCode) ? true : s.LANG_ID == lagCode) &&
-                 s.STATUS == "Y"&& s.CATE_ID == statesTypeID)
+                 s.STATUS == "Y" && s.CATE_ID == statesTypeID)
                  .OrderByDescending(o => o.SORT)
                  .OrderByDescending(s => s.C_DATE)
                  .ToList();
@@ -264,7 +265,7 @@ namespace OutWeb.Repositories
                     var source = db.STATES
                         .AsEnumerable()
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
-                        s.STATUS == "Y"&& s.CATE_ID == statesTypeID &&
+                        s.STATUS == "Y" && s.CATE_ID == statesTypeID &&
                         (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
                         .OrderByDescending(o => o.SORT)
                         .OrderByDescending(s => s.C_DATE)

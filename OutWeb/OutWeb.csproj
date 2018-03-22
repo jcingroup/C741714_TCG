@@ -265,6 +265,9 @@
     <Compile Include="Entities\USR.cs">
       <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\USR_GROUP.cs">
+      <DependentUpon>TCGDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\WBAGENT.cs">
       <DependentUpon>TCGDB.tt</DependentUpon>
     </Compile>

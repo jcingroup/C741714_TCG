@@ -12,23 +12,16 @@ namespace OutWeb.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class USR
+    public partial class USR_GROUP
     {
         public int ID { get; set; }
         public string BD_ID { get; set; }
         public Nullable<System.DateTime> BD_DT { get; set; }
         public string UPD_ID { get; set; }
         public Nullable<System.DateTime> UPD_DT { get; set; }
-        public string SIGNIN_ID { get; set; }
-        public string SIGNIN_PWD { get; set; }
-        public string USR_NAME { get; set; }
-        public string USR_ENAME { get; set; }
-        public string USR_EML { get; set; }
-        public Nullable<int> USR_RANK { get; set; }
-        public string USR_DESC { get; set; }
-        public string USR_GRP { get; set; }
-        public string USR_STATES { get; set; }
-        public Nullable<System.DateTime> SIGNIN_DT { get; set; }
+        public string GRP_NAME { get; set; }
+        public string GRP_DESC { get; set; }
+        public string GRP_AUTH { get; set; }
         public string STATUS { get; set; }
     }
 }

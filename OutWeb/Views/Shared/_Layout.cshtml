@@ -217,6 +217,25 @@
         <button class="sitemap-trigger oi" data-glyph="x"></button>
         <ul class="list-unstyled row">
             <li>
+                <h1 class="sr-only">
+                    相關連結
+                </h1>
+                <ul class="list-unstyled">
+                    <li class="mt-0">
+                        <h2><a href="http://usmgtcg.ning.com/" target="new">舊官網</a></h2>
+                    </li>
+                    <li>
+                        <h2><a href="https://www.facebook.com/TaiwanCivilGovernment/" target="new">FB 官方粉絲頁1</a></h2>
+                    </li>
+                    <li>
+                        <h2><a href="https://www.facebook.com/usmgtcgov.tw/" target="new">FB 官方粉絲頁2</a></h2>
+                    </li>
+                    <li>
+                        <h2 class="text">台灣民政府 中央發言人<br>溫晟志 0987-577-175</h2>
+                    </li>
+                </ul>
+            </li>
+            <li>
                 <h1>
                     <a href="~/News">最新訊息</a>
                 </h1>
@@ -302,15 +321,6 @@
                                     <a href="~/JoinUs/Gallery">歷屆合照</a>
                                 </h3>
                             </li>
-                            <li>
-                                <h3><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">歷屆課程影片</a></h3>
-                            </li>
-                            <li>
-                                <h3><a href="https://www.facebook.com/TaiwanCivilGovernment/" target="new">FB 官方粉絲頁1</a></h3>
-                            </li>
-                            <li>
-                                <h3><a href="https://www.facebook.com/usmgtcgov.tw/" target="new">FB 官方粉絲頁2</a></h3>
-                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -376,11 +386,6 @@
                         </ul>
                     </li>
                 </ul>
-                <h1>
-                    <a href="http://usmgtcg.ning.com" target="new">
-                        舊官網
-                    </a>
-                </h1>
             </li>
         </ul>
     </nav>
@@ -389,7 +394,7 @@
         <button class="search-trigger oi" data-glyph="x"></button>
         @* 全文檢索: 找標題/內文 關鍵字 *@
         <form class="search-form" action="~/Home/Search">
-            <input type="text" class="form-element" placeholder="請在此輸入">
+            <input type="text" class="form-element" name="str" placeholder="請在此輸入">
             <button>
                 <i class="icon-search"></i> 搜尋
             </button>
@@ -397,21 +402,24 @@
     </nav>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="~/Content/js/jquery.waypoints.min.js"></script>
+    
     <script>
+
+        // search
         $(".search-trigger").click(function(){
             $("#search").fadeToggle();
             $("body").toggleClass("overlay");
         });
 
+        // sitemap
         $(".sitemap-trigger").click(function(){
             $("#sitemap").fadeToggle();
             $("body").toggleClass("overlay");
         });
-        $("#sitemap a").click(function(){
-            // 同一頁換tab需重載頁面
-            location.reload();
-        });
+        // $("#sitemap a").click(function(){
+        //     // 同一頁換tab需重載頁面
+        //     location.reload();
+        // });
         
         // 點 Popup 空白處可以關閉
         $(".popup").click(function() {
@@ -421,33 +429,41 @@
         $(".popup li a, .popup > form").click(function(e){
             e.stopPropagation();
         });
-
-        // 卷軸卷動效果
-        $('#menu').waypoint(function(direction) {
-            if (direction === 'down') {
-                $('body').addClass('scrolled');
-                $('.goTop').fadeIn();
-            }
-            else if (direction === 'up') {
-                $('body').removeClass('scrolled');
-                $('.goTop').fadeOut();
-            }
-        }, { offset: -1 });
-
-        // 點選後跳到 href 指向的位置
-        $('.scroll').click(function () {
-            var scrollToAnchor = $(this).attr('href');
-            $('html, body').stop(true).animate({
-                scrollTop: $(scrollToAnchor).offset().top - 40
-            }, 750);
-            return false;
-        });
-
-        // table-rwd
-        $( ".editor table" ).wrap( "<div class='table-rwd'></div>" );
     </script>
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a72b8d4c87ca24b"></script>
 
+    @if (!ViewBag.IsFirstPage) {
+        <!-- waypoints scrolling detector -->
+        <script src="~/Content/js/jquery.waypoints.min.js"></script>
+        <script>
+            // 卷軸卷動效果
+            $('#menu').waypoint(function(direction) {
+                if (direction === 'down') {
+                    $('body').addClass('scrolled');
+                    $('.goTop').fadeIn();
+                }
+                else if (direction === 'up') {
+                    $('body').removeClass('scrolled');
+                    $('.goTop').fadeOut();
+                }
+            }, { offset: -1 });
+
+            // 點選後跳到 href 指向的位置
+            $('.scroll').click(function () {
+                var scrollToAnchor = $(this).attr('href');
+                $('html, body').stop(true).animate({
+                    scrollTop: $(scrollToAnchor).offset().top - 40
+                }, 750);
+                return false;
+            });
+
+            // table-rwd
+            $( ".editor table" ).wrap( "<div class='table-rwd'></div>" );
+        </script>
+
+        <!-- addThis share btn -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a72b8d4c87ca24b"></script>
+    }
+    
     @RenderSection("scripts", required: false)
 
 </body>
