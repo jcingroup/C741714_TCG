@@ -206,26 +206,43 @@ namespace OutWeb.Controllers
             DataTable user_info;
             //抓取資料
             user_info = DB.User_Info(ref err_msg, Account);
-            //檢查登入密碼是否正確
-            if (now_pwd == user_info.Rows[0]["pwd"].ToString())
+            try
             {
-                DB.User_Update(id, new_pwd);
-            }
-            else
-            {
-                if (cmsg.Trim().Length > 0)
+                //檢查登入密碼是否正確
+                if (now_pwd == user_info.Rows[0]["SIGNIN_PWD"].ToString())
                 {
-                    cmsg = cmsg + "\n";
+                    DB.User_Update(id, new_pwd);
+                    if (cmsg.Trim().Length == 0)
+                    {
+                        cmsg = "success";
+                    }
                 }
-                cmsg = cmsg + "密碼錯誤，請重新輸入。";
+                else
+                {
+                    if (cmsg.Trim().Length > 0)
+                    {
+                        cmsg = cmsg + "\n";
+                    }
+                    cmsg = cmsg + "原密碼錯誤，請重新輸入。";
+                }
             }
-
-            if (cmsg.Trim().Length == 0)
+            catch(Exception ex)
             {
-                cmsg = "密碼變更成功，下次登入請輸入新密碼!!!";
+                //logger.Error(ex.Message);
+                cmsg = "Update Error !!!";
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                if(cmsg == "")
+                {
+                    cmsg = "success";
+                }
+
+                TempData["message"] = cmsg;
+
             }
 
-            TempData["message"] = cmsg;
             return View();
 
         }

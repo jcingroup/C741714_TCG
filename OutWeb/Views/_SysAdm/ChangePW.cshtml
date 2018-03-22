@@ -1,9 +1,9 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_MLayout.cshtml";
     ViewBag.Crumb = "變更密碼";
     ViewBag.subnav = "Cog";
     ViewBag.subnav2 = "ChangPW";
+    string ManagePath = "~/_SysAdm";
 }
 
 @section Breadcrumb {
@@ -12,48 +12,73 @@
         <li>&#10095; @ViewBag.Crumb</li>
     </ul>
 }
-@section IncludeScript{
-    <script>
-        $(function () {
-            if ('@ViewBag.Message' != '') {
-                if ('@ViewBag.Message' == 'success') {
-                    alert('更改密碼成功，請使用新密碼重新登入.');
-                    window.location.href = '/_SysAdm/LogOut';
-                }
-                else {
-                    alert('@ViewBag.Message');
-                }
-            }
-        })
-    </script>
-}
+
+<script>
+    function form_ok()
+    {
+        var cmsg = "";
+        var chk_new_pwd = "";
+        var new_pwd = "";
+        new_pwd = $('#new_pwd').val();
+        chk_new_pwd = $('#chk_new_pwd').val();
+
+        if(new_pwd == chk_new_pwd)
+        {
+            form1.submit();
+        }
+        else
+        {
+            alert("【確認密碼】與【新密碼】不符，請重新輸入")
+        }
+
+    }
+</script>
+
 <h3 class="title">@ViewBag.Crumb</h3>
 
-@using (Html.BeginForm("ChangePW", "_SysAdm", FormMethod.Post, new { id = "formManageChangePW", @class = "form-list" }))
-{
+<form class="form-list" method="post" name="form1" id="form1" action="">
     <dl class="field">
-        <dt class="col-2">目前密碼</dt>
-        <dd class="col-5">
-            <input type="password" name="oldPw" required>
+        <dt class="col-1">目前密碼</dt>
+        <dd class="col-6">
+            <input type="password" class="form-element" id="now_pwd" name="now_pwd" required>
         </dd>
     </dl>
     <dl class="field">
-        <dt class="col-2">新密碼</dt>
-        <dd class="col-5">
-            <input type="password" name="newPw" required>
+        <dt class="col-1">新密碼</dt>
+        <dd class="col-6">
+            <input type="password" class="form-element" id="new_pwd" name="new_pwd">
         </dd>
         @* 有限制密碼規則時才顯示
             <dd class="col-4 text-danger">*密碼規則</dd> *@
     </dl>
     <dl class="field">
-        <dt class="col-2">確認密碼</dt>
-        <dd class="col-5">
-            <input type="password" name="rePw" required>
+        <dt class="col-1">確認密碼</dt>
+        <dd class="col-6">
+            <input type="password" class="form-element" id="chk_new_pwd" name="chk_new_pwd">
         </dd>
     </dl>
-    <footer class="submit-bar clear mt-24">
-        <button type="submit" class="btn success oi" data-glyph="circle-check">
+    <footer class="submit-bar clear m-t-24">
+        <button type="button" class="btn success oi" data-glyph="circle-check" onclick="form_ok();">
             確認儲存
         </button>
     </footer>
+</form>
+
+@if (TempData["message"] != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            var message = @Html.Raw(Json.Encode(TempData["message"]));
+
+            if (message != '') {
+                if (message == 'success') {
+                    alert('更改密碼成功，請使用新密碼重新登入.');
+                    window.location.href = '@Url.Content(ManagePath + "/Logout")';
+                }
+                else {
+                    alert(message);
+                }
+            }
+        })
+    </script>
 }
