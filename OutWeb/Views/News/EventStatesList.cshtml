@@ -52,7 +52,10 @@ string img_path = "/Images/";
 
 }
 
+@if (Model.Data.Count > 0)
+{
 <h3 class="title2">活動資訊</h3>
+}
 
 @* 每頁5筆資料 *@
 <div class="articles">
@@ -101,3 +104,59 @@ string img_path = "/Images/";
             </div>
         </article>*@
 </div>
+
+@if (Model.Data.Count > 0)
+{
+    string disabledPre = Model.Pagination.CurrentPage == 1 ? "hidden" : "";
+    string disabledNext = Model.Pagination.CurrentPage == Model.Pagination.LastPage ? "hidden" : "";
+
+    <ul class="pager list-inline text-center">
+        <li class="prev">
+            @* 有資料的話才顯示 *@
+            <a @disabledPre href="javascript:;" onclick="paginationSubmit('@Model.Pagination.PrePage');">
+                <i class="oi" data-glyph="chevron-left"></i>
+                <span class="hidden-xs">上一頁</span>
+            </a>
+        </li>
+
+        <li>
+            <form action="/News/EventLatest" method="get" class="form-inline">
+                第
+                <select name="page" id="numPage" class="form-element">
+                    @for (int i = Model.Pagination.FirstPage; i <= Model.Pagination.LastPage; i++)
+                {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                頁
+            </form>
+        </li>
+
+        <li class="next">
+            @* 有資料的話才顯示 *@
+            <a @disabledNext href="javascript:;" onclick="paginationSubmit('@Model.Pagination.NextPage');">
+                <span class="hidden-xs">下一頁</span>
+                <i class="oi" data-glyph="chevron-right"></i>
+            </a>
+        </li>
+    </ul>
+
+}
+
+@section scripts {
+    <script>
+
+        $('#numPage').val('@Model.Pagination.CurrentPage');
+
+        function paginationSubmit(page) {
+            $('#numPage').val(page);
+            $('form')[0].submit();
+        }
+
+        $('.pager').find('select').on('change', function () {
+            var page = $(this).val();
+            paginationSubmit(page);
+
+        });
+    </script>
+}
