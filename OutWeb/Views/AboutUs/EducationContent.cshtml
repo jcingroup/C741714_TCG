@@ -1,9 +1,9 @@
 ﻿@using OutWeb.Models.FrontModels.AboutModels.EducationModels
 @model EducationContent
 @{
-    ViewBag.Title = "美國政府明白表示：「反對台灣獨立」?";
+    ViewBag.Title = Model.Data.Title;
     ViewBag.BodyClass = "AboutUs Education";
-    string listTitleUrl = Url.Content("~/AboutUs/EducationList?educationTypeID=" + Model.EduCateInfo.Keys.First());
+    string listTitleUrl = Url.Content("~/AboutUs/EducationList?eduTypeID=" + Model.EduCateInfo.Keys.First());
 }
 
 @section breadcrumb {
