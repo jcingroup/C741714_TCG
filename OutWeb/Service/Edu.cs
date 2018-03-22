@@ -390,7 +390,7 @@ namespace OutWeb.Service
                 csql = "delete from "
                      + "  IMG "
                      + "where "
-                     + "    img_item = '" + img_kind + "' "
+                     + "    img_kind = '" + img_kind + "' "
                      + "and img_no in ("
                      + "    select "
                      + "      Convert(nvarchar,a1.id) "

@@ -1,0 +1,203 @@
+﻿@using System.Data
+@{
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    ViewBag.Crumb = "使用者管理";
+    ViewBag.subnav = "Setting";
+    ViewBag.subnav2 = "User_List";
+
+    //變數設定
+    string SysPath = "~/_SysAdm/";
+
+    string cFile = "User_Data";
+    string cFile_Add = "User_Add";
+    string cFile_Del = "User_Del";
+    string cFile_Edit = "User_Edit";
+    string cFile_Save = "User_Save";
+    string cFile_List = "User_List";
+
+    DataTable dt = (DataTable)ViewData["dt"];
+    DataTable d_cate = (DataTable)ViewData["d_cate"];
+
+    string id = "";
+
+
+    string sort = "";
+    string action_sty = (string)ViewData["action_sty"];
+    string action_name = "";
+    string c_status = "";
+    string c_front_status = "";
+    string c_front_status_Y = "";
+    string c_front_status_N = "";
+    string signin_id = "";
+    string usr_desc = "";
+    string usr_name = "";
+    string signin_pwd = "";
+
+    string img_no = "";
+    string img_path = "../Images/";
+    string small_img = "";
+    string big_img = "";
+    string img_id = "";
+    string lang = "";
+    string lang_selected = "";
+
+    string cate_id = "";
+    string cate_selected = "";
+
+    img_no = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+    if (action_sty == "add")
+    {
+        action_name = "新增";
+
+        id = "";
+        usr_desc = "";
+        usr_name = "";
+        signin_id = "";
+        signin_pwd = "";
+        c_status = "N";
+        c_front_status_N = "checked";
+        c_front_status_Y = "";
+        cate_id = "";
+        sort = "0";
+
+    }
+    else if (action_sty == "edit")
+    {
+        action_name = "修改";
+
+        //d_news = (DataTable)ViewData["d_news"];
+
+        //d_scenic_img_b = (DataTable)ViewData["d_scenic_img_b"];
+        //d_scenic_img_s = (DataTable)ViewData["d_scenic_img_s"];
+
+        id = dt.Rows[0]["id"].ToString();
+        signin_id = dt.Rows[0]["signin_id"].ToString();
+        signin_pwd = dt.Rows[0]["signin_pwd"].ToString();
+        usr_name = dt.Rows[0]["usr_name"].ToString();
+        c_status = dt.Rows[0]["status"].ToString();
+        sort = dt.Rows[0]["sort"].ToString();
+        cate_id = dt.Rows[0]["usr_grp"].ToString();
+
+        switch (c_status)
+        {
+            case "Y":
+                c_front_status_Y = "checked";
+                c_front_status_N = "";
+                break;
+            case "N":
+                c_front_status_Y = "";
+                c_front_status_N = "checked";
+                break;
+        }
+    }
+
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+
+<script>
+    function form_ok() {
+        var sshow = "";
+        var shot = "";
+        var cmsg = "";
+        var c_signin_pwd = "";
+
+        //c_signin_pwd = $("#signin_pwd").val();
+
+
+        //if (c_signin_pwd == "")
+        //{
+        //    if (cmsg != "")
+        //    {
+        //        cmsg += "\n";
+        //    }
+        //    cmsg += "請輸入標題";
+        //}
+
+        if (cmsg != "")
+        {
+            alert(cmsg);
+        }
+        else
+        {
+            form1.submit();
+        }
+        //alert("show:" + $("#show").val() + ";hot:" + $("#hot").val());
+
+    }
+
+</script>
+<form class="form-list" action="@Url.Content(cFile_Save)" name="form1" id="form1" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="action_sty" id="action_sty" value="@action_sty" />
+    <input type="hidden" name="id" id="id" value="@id" />
+    <input type="hidden" name="img_no" id="img_no" value="@img_no" />
+    <input type="hidden" name="sort" id="sort" value="@sort" />
+    <input type="hidden" name="signin_id" id="signin_id" value="@signin_id" />
+
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup>群組</dt>
+        <dd class="col-6">
+            <select id="cate_id" name="cate_id" class="form-element" required>
+                @if (d_cate.Rows.Count > 0)
+            {
+                for (int i = 0; i < d_cate.Rows.Count; i++)
+                {
+                    if (d_cate.Rows[i]["id"].ToString() == cate_id)
+                    {
+                        cate_selected = "selected";
+                    }
+                    else
+                    {
+                        cate_selected = "";
+                    }
+                    <option value="@d_cate.Rows[i]["id"].ToString()" @cate_selected>@d_cate.Rows[i]["grp_name"].ToString()</option>
+                    }
+                }
+            </select>
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 帳號</dt>
+        <dd class="col-6">
+            @signin_id
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 密碼</dt>
+        <dd class="col-6">
+            <input type="password" class="form-element" id="signin_pwd" name="signin_pwd" value="@signin_pwd" >
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 名稱</dt>
+        <dd class="col-6">
+            <input type="text" class="form-element" id="usr_name" name="usr_name" value="@usr_name" >
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-1"><sup title="必填">*</sup> 狀態</dt>
+        <dd class="col-6">
+            <input type="radio" class="radio" name="show" id="showY" value="Y" @c_front_status_Y>
+            <label for="showY"></label>
+            啟用
+            <input type="radio" class="radio" name="show" id="showN" value="N" @c_front_status_N>
+            <label for="showN"></label>
+            停用
+        </dd>
+    </dl>
+    <footer class="submit-bar clear mt-24">
+        <button type="button" class="btn success oi" data-glyph="circle-check" onclick="form_ok();" name="btn_ok" id="btn_ok">
+            確認儲存
+        </button>
+        <button type="button" class="btn warning oi" data-glyph="x" onclick="location.href='@Url.Content(SysPath + cFile_List)'" id="btn_back" name="btn_back">
+            取消，回列表
+        </button>
+    </footer>
+</form>

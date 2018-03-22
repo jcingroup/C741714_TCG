@@ -29,6 +29,7 @@ namespace OutWeb.Controllers
         School CSchool = new School();
         States CStates = new States();
         Activity CActivity = new Activity();
+        User Cuser = new User();
         OutWeb.Service.Service CService = new OutWeb.Service.Service();
         //=== 變數設定  =========================================//
         String Img_Path = "~/Images";
@@ -2911,6 +2912,122 @@ namespace OutWeb.Controllers
         //    return View();
         //}
         //#endregion
+
+        #region 使用者管理 User
+
+        #region 使用者_基本資料
+
+        #region 使用者_陳列 User_List
+        public ActionResult User_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_cate = "")
+        {
+            //定義變數
+            string c_sort = "";
+            DataTable dt;
+            DataTable d_cate;
+            string err_msg = "";
+
+            //排序設定
+            if (txt_sort.Trim().Length > 0)
+            {
+                c_sort = c_sort + "a1." + txt_sort;
+            }
+            if (txt_a_d.Trim().Length > 0)
+            {
+                c_sort = c_sort + " " + txt_a_d;
+            }
+
+            //抓取資料
+            dt = Cuser.List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_cate);
+            //類別
+            d_cate = Cuser.Group_List(ref err_msg, "", "sort", "Y", "");
+            //設定傳值
+            ViewData["page"] = page;
+            ViewData["dt"] = dt;
+            ViewData["d_cate"] = d_cate;
+            ViewData["txt_title_query"] = txt_title_query;
+            ViewData["txt_sort"] = txt_sort;
+            ViewData["txt_a_d"] = txt_a_d;
+            ViewData["txt_cate"] = txt_cate;
+
+            return View();
+        }
+        #endregion
+
+        #region 使用者_新增 User_Add
+        public ActionResult User_Add()
+        {
+            //定義變數
+            string err_msg = "";
+            DataTable dt;
+            DataTable d_cate;
+            DataTable d_lang;
+            //DataTable d_img;
+
+            dt = Cuser.List(ref err_msg, "0");
+            d_cate = Cuser.Group_List(ref err_msg, "", "sort", "Y", "");
+            
+            //設定傳值
+            ViewData["d_cate"] = d_cate;
+            ViewData["action_sty"] = "add";
+
+            return View("User_Data");
+        }
+        #endregion
+
+        #region 使用者_修改 User_Edit
+        public ActionResult User_Edit(string id = "")
+        {
+            string err_msg = "";
+
+            DataTable d_cate;
+            DataTable dt;
+            
+            //抓取類別資料
+            dt = Cuser.List(ref err_msg, id);
+            d_cate = Cuser.Group_List(ref err_msg, "", "sort", "Y", "");
+            
+            //設定傳值
+            ViewData["dt"] = dt;
+            ViewData["d_cate"] = d_cate;
+            ViewData["action_sty"] = "edit";
+
+            return View("User_Data");
+        }
+        #endregion
+
+        #region 使用者_刪除 User_Del
+        public ActionResult User_Del(string id = "")
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            Cuser.Del(id);
+            return RedirectToAction("User_List");
+        }
+        #endregion
+
+        #region 使用者_儲存 User_Save
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult User_Save(string action_sty, string id, string usr_name, string usr_desc, string show, string sort, string signin_id, string cate_id, string signin_pwd)
+        {
+            //OverlookDBService OverlookDB = new OverlookDBService();
+            string op_user = Convert.ToString(Session["Account"]);
+            switch (action_sty)
+            {
+                case "add":
+                    Cuser.Insert(signin_id,signin_pwd,usr_name,signin_id,"","2",usr_name,cate_id, "" ,show,op_user);
+                    break;
+                case "edit":
+                    Cuser.Update(id, signin_id, signin_pwd, usr_name, signin_id, "", "", usr_name, cate_id,"", show,op_user);
+                    break;
+            }
+
+            return RedirectToAction("User_List");
+        }
+
+        #endregion
+
+        #endregion 加入我們_基本資料
+        #endregion 使用者管理 User
 
         #region ajax_get
 

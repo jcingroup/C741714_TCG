@@ -355,6 +355,7 @@
     <Compile Include="Service\School.cs" />
     <Compile Include="Service\Service.cs" />
     <Compile Include="Service\States.cs" />
+    <Compile Include="Service\User.cs" />
     <Compile Include="Service\ValidateCode.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -907,6 +908,8 @@
     <Content Include="Views\_SysAdm\States_Data.cshtml" />
     <Content Include="Views\AboutUs\Law.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\_SysAdm\User_List.cshtml" />
+    <Content Include="Views\_SysAdm\User_Data.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
