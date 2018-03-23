@@ -194,6 +194,14 @@ namespace OutWeb.Controllers
         }
         #endregion
 
+        #region 登入歡迎頁 Dashboard
+        // 登入歡迎頁
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+        #endregion
+
         #region 修改密碼 ChangePW
         // 修改密碼
         public ActionResult ChangePW()

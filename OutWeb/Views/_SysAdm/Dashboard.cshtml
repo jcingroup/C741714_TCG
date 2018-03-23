@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    ViewBag.Crumb = "管理系統首頁";
+    ViewBag.subnav = "Home";
+    ViewBag.subnav2 = "Dashboard";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="title">@ViewBag.Crumb</h3>
+
+<p>您好，歡迎使用本系統！請點選左方的功能選單進行操作，謝謝。</p>

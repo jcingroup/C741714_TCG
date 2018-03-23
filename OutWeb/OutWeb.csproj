@@ -913,6 +913,7 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\_SysAdm\User_List.cshtml" />
     <Content Include="Views\_SysAdm\User_Data.cshtml" />
+    <Content Include="Views\_SysAdm\Dashboard.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
