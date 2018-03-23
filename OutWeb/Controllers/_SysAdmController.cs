@@ -48,13 +48,16 @@ namespace OutWeb.Controllers
         {
             if (Convert.ToString(Session["IsLogined"]) == "Y")
             {
-                return RedirectToAction("News_List");
+                //return RedirectToAction("News_List");
+                return View("Dashboard");
             }
             else
             {
                 return View("Login");
             }
         }
+
+
 
         #region 登入 Login
         // 登入頁
@@ -164,7 +167,8 @@ namespace OutWeb.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("News_List");
+                    //return RedirectToAction("Index");
+                    return View("Dashboard");
                 }
 
             }
