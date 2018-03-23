@@ -127,7 +127,7 @@ namespace OutWeb.Modules.FrontEnd
 
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry))
-                .Where(w=>w.Details.STATUS =="Y")
+                .Where(w => w.Details.STATUS == "Y")
                 .OrderByDescending(d => d.Details.UPD_DT)
                 .GroupBy(g => g.Main.C_TITLE)
                 .ToList()
@@ -136,7 +136,7 @@ namespace OutWeb.Modules.FrontEnd
                     ID = o.First().Details.ID,
                     Title = o.First().Main.C_TITLE,
                     Type = o.First().Main.ID,
-                    Content = o.First().Details.C_DESC,
+                    Content = o.First().Details.C_DESC.RemoveHtmlAllTags(),
                     UpDateTime = (DateTime)o.First().Details.UPD_DT,
                     LinkAddr = string.Format("/AboutUs/EducationContent?eduTypeID={0}&ID={1}&pagingID={2}", o.First().Main.CATE_ID, o.First().Details.CATE_ID, o.First().Details.ID)
                 })
@@ -229,7 +229,7 @@ namespace OutWeb.Modules.FrontEnd
                    ID = o.First().Details.ID,
                    Title = o.First().Main.C_TITLE,
                    Type = o.First().Main.ID,
-                   Content = o.First().Details.C_DESC,
+                   Content = o.First().Details.C_DESC.RemoveHtmlAllTags(),
                    UpDateTime = (DateTime)o.First().Details.UPD_DT,
                    LinkAddr = string.Format("/News/EventLatestContent?ID={0}&pagingID={1}", o.First().Details.CATE_ID, o.First().Details.ID)
                })
@@ -273,7 +273,7 @@ namespace OutWeb.Modules.FrontEnd
                     ID = o.First().Details.ID,
                     Title = o.First().Main.C_TITLE,
                     Type = o.First().Main.ID,
-                    Content = o.First().Details.C_DESC,
+                    Content = o.First().Details.C_DESC.RemoveHtmlAllTags(),
                     UpDateTime = (DateTime)o.First().Details.UPD_DT,
                     LinkAddr = string.Format("/News/EventStatesContent?statesTypeID={0}&ID=1&pagingID={1}", o.First().Details.CATE_ID, o.First().Details.ID)
                 })
@@ -347,7 +347,7 @@ namespace OutWeb.Modules.FrontEnd
                     ID = o.First().Details.ID,
                     Title = o.First().Main.C_TITLE,
                     Type = o.First().Main.ID,
-                    Content = o.First().Details.C_DESC,
+                    Content = o.First().Details.C_DESC.RemoveHtmlAllTags(),
                     UpDateTime = (DateTime)o.First().Details.UPD_DT,
                     LinkAddr = string.Format("/News/FocusContent?focusTypeID={0}&ID={1}&pagingID={2}", o.First().Main.CATE_ID, o.First().Details.CATE_ID, o.First().Details.ID)
                 })

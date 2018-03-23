@@ -10,6 +10,7 @@ namespace OutWeb.Models.FrontModels.News.FocusNewsModels
     {
         public int ID { get; set; }
         public string Title { get; set; }
+        public string Img { get; set; }
         public string PublishDateString { get; set; }
         public string Remark { get; set; }
         public int RemarkLength

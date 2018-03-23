@@ -113,7 +113,7 @@ namespace OutWeb.Repositories
                     LatestData temp = new LatestData()
                     {
                         ID = d.ID,
-                        //Img = d.Img,
+                        Img = d.Img,
                         PublishDateString = d.PublishDateString,
                         Remark = d.Remark,
                         Title = d.Title,

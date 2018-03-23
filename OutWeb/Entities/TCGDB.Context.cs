@@ -49,6 +49,8 @@ namespace OutWeb.Entities
         public virtual DbSet<STATES_DETAIL> STATES_DETAIL { get; set; }
         public virtual DbSet<STATES_VIDEO> STATES_VIDEO { get; set; }
         public virtual DbSet<URL> URL { get; set; }
+        public virtual DbSet<USR> USR { get; set; }
+        public virtual DbSet<USR_GROUP> USR_GROUP { get; set; }
         public virtual DbSet<WBAGENT> WBAGENT { get; set; }
         public virtual DbSet<WBLOGERR> WBLOGERR { get; set; }
         public virtual DbSet<WBNEWS> WBNEWS { get; set; }
@@ -58,7 +60,5 @@ namespace OutWeb.Entities
         public virtual DbSet<WBUSR> WBUSR { get; set; }
         public virtual DbSet<WBWORKS> WBWORKS { get; set; }
         public virtual DbSet<SCHOOL> SCHOOL { get; set; }
-        public virtual DbSet<USR> USR { get; set; }
-        public virtual DbSet<USR_GROUP> USR_GROUP { get; set; }
     }
 }

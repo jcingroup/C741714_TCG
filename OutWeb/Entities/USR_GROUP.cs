@@ -23,5 +23,6 @@ namespace OutWeb.Entities
         public string GRP_DESC { get; set; }
         public string GRP_AUTH { get; set; }
         public string STATUS { get; set; }
+        public Nullable<int> SORT { get; set; }
     }
 }

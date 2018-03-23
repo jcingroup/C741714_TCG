@@ -30,5 +30,6 @@ namespace OutWeb.Entities
         public string USR_STATES { get; set; }
         public Nullable<System.DateTime> SIGNIN_DT { get; set; }
         public string STATUS { get; set; }
+        public Nullable<int> SORT { get; set; }
     }
 }

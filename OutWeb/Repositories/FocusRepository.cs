@@ -217,7 +217,7 @@ namespace OutWeb.Repositories
                 {
                     ID = source.ID,
                     Title = source.C_TITLE,
-                    //Img = GetMainImg(source.ID),
+                    Img = GetMainImg(source.ID),
                     PagingList = GetPagingListByID(source.ID),
                     PublishDateString = source.C_DATE.Value.ToString("yyyy-MM-dd"),
                 };
@@ -259,7 +259,7 @@ namespace OutWeb.Repositories
                         {
                             ID = item.ID,
                             Title = item.C_TITLE,
-                            //Img = GetMainImg(item.ID),
+                            Img = GetMainImg(item.ID),
                             PagingList = GetPagingListByID(item.ID),
                             PublishDateString = item.C_DATE.Value.ToString("yyyy-MM-dd"),
                         };

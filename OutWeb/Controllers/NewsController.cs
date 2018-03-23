@@ -189,51 +189,7 @@ namespace OutWeb.Controllers
             AnnouncementLatestContent mdoel = repo.GetContentByID((int)ID, (int)typeID, langCd);
             return View(mdoel);
         }
-
-        // 焦點專欄 - 分類
-        //public ActionResult FocusCategory()
-        //{
-        //    //抓取分類
-        //    DataTable dt;
-        //    string err_msg = "";
-        //    string lang_id = "zh-tw";
-        //    dt = CFocus.Cate_List(ref err_msg, "", "sort desc", "Y", "", lang_id);
-
-        //    ViewData["dt"] = dt;
-
-        //    return View();
-        //}
-
-        //// 焦點專欄 - 列表
-        //public ActionResult FocusList(string cate_id = "", int page = 1)
-        //{
-        //    DataTable dt;
-        //    DataTable d_cate;
-        //    string err_msg = "";
-        //    string lang_id = "zh-tw";
-
-        //    d_cate = CFocus.Cate_List(ref err_msg, cate_id, "sort desc", "Y", "", lang_id);
-        //    dt = CFocus.List(ref err_msg, "", "sort desc", "Y", "", "", "", "", cate_id, lang_id);
-
-        //    ViewData["dt"] = dt;
-        //    ViewData["d_cate"] = d_cate;
-        //    ViewData["page"] = page;
-
-        //    return View();
-        //}
-
-        //// 焦點專欄 - 內容
-        //public ActionResult FocusContent(string id = "")
-        //{
-        //    DataTable dt;
-        //    string err_msg = "";
-        //    string lang_id = "zh-tw";
-        //    dt = CFocus.List(ref err_msg, id, "sort desc", "Y", "", "", "", "", "", lang_id);
-
-        //    ViewData["dt"] = dt;
-
-        //    return View();
-        //}
+        
 
         public ActionResult FocusCategory()
         {
