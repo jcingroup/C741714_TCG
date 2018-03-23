@@ -2393,7 +2393,7 @@ namespace OutWeb.Controllers
             ViewData["d_lang"] = d_lang;
             ViewData["action_sty"] = "edit";
 
-            return View("AboutUs_Cate_Data");
+            return View("States_Cate_Data");
         }
         #endregion
 
