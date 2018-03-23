@@ -119,7 +119,7 @@ namespace OutWeb.Repositories
                         Title = d.Title,
                         TypeInfo = statesRepo.GetStatesCateByID(focus.FocusTypeInfo.Keys.First(), langCode),
                         DataType = ListKind.焦點專欄,
-                        ListTitleUrl = @"/News/FocusList?statesTypeID=" + focus.FocusTypeInfo.Keys.First(),
+                        ListTitleUrl = @"/News/FocusList?focusTypeID=" + focus.FocusTypeInfo.Keys.First(),
                         ContentUrl = @"/News/FocusContent?focusTypeID=" + focus.FocusTypeInfo.Keys.First() + "&ID=" + d.ID
                     };
 

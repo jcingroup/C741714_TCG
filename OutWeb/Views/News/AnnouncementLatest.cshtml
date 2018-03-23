@@ -31,7 +31,7 @@
         string listLink = Url.Content("~/News/AnnouncementList?typeID=" + data.CateIDInfo.Keys.First());
         string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
         string contentUrl = Url.Content("~/News/AnnouncementContent?ID=" + data.ID + "&typeID=" + data.CateIDInfo.Keys.First());
-        string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : data.Content.Length > 145 ? @"<p>" + data.Content.Substring(0, 145) + "...</p>" : data.Content;
+        string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : data.Content.Length > 145 ? @"<p>" + data.Content.Substring(0, 145) + "...</p>" : "<p>" + data.Content + "</p>";
         string labelStyle = data.CateIDInfo.Keys.First() == 1 ? "label-danger" : data.CateIDInfo.Keys.First() == 2 ? "label-pink" : data.CateIDInfo.Keys.First() == 3 ? "label-purpl" : "";
         <article class="article">
             <div class="row">

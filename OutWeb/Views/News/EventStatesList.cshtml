@@ -64,7 +64,7 @@ string img_path = "/Images/";
     {
         string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
         string contentUrl = Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesTypeID + "&ID=" + data.ID);
-        string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : data.Remark;
+        string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : "<p>" + data.Remark + "</p>";
 
 
         <article class="article">

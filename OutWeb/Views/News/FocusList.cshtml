@@ -31,7 +31,7 @@
         {
             string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
             string contentUrl = Url.Content("~/News/FocusContent?focusTypeID=" + Model.FocusTypeInfo.Keys.First() + "&ID=" + data.ID);
-            string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : data.Remark;
+            string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : "<p>" + data.Remark + "</p>";
 
             //編輯器內容 取前 145 個字，有資料的話才顯示
             <article class="article">

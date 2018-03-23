@@ -24,7 +24,7 @@
         <div class="articles">
             @foreach (var data in Model.Result.Data)
             {
-                string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : data.Content.Length > 145 ? @"<p>" + data.Content.Substring(0, 145) + "...</p>" : data.Content;
+                string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : data.Content.Length > 145 ? @"<p>" + data.Content.Substring(0, 145) + "...</p>" : "<p>"+  data.Content+ "</p>";
                 <article class="article">
                     <h3><a href="@data.LinkAddr">@data.Title</a></h3>
                     @* 編輯器內容 取前 145 個字，有資料的話才顯示 *@
