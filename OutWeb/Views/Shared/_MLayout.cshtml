@@ -3,8 +3,63 @@
     string ManagePath = "~/_SysAdm";
     string HomePath = "~/Home";
     string usr_info = "";
+    string usr_auth = "";
+    string show1 = "";
+    string show2 = "";
+    string show3 = "";
+    string show4 = "";
+    string show5 = "";
+    string show6 = "";
+    string show7 = "";
+    string show8 = "";
+    string show9 = "";
+    string show10 = "";
+    string show11 = "";
+    string show12 = "";
+    string show13 = "";
+    string show14 = "";
+    string show15 = "";
+    string show16 = "";
+    string show17 = "";
+    string show18 = "";
+    string show19 = "";
+    string show20 = "";
+    string show21 = "";
+    string show22 = "";
+    //string show23 = "";
+    if (Convert.ToString(Session["IsLogined"]) == "Y")
+    {
+        usr_info = Convert.ToString(Session["Account"]) + "(" + Convert.ToString(Session["usr_name"]) + ")";
+        usr_auth = Convert.ToString(Session["grp_auth"]);
 
-    usr_info = Convert.ToString(Session["Account"]) + "(" + Convert.ToString(Session["usr_name"]) + ")";
+        if(usr_auth.Length > 0)
+        {
+            show1 = usr_auth.Substring(0, 1) == "0" ? "0" : usr_auth.Substring(0, 1);
+            show2 = usr_auth.Substring(1, 1) == "0" ? "0" : usr_auth.Substring(1, 1);
+            show3 = usr_auth.Substring(2, 1) == "0" ? "0" : usr_auth.Substring(2, 1);
+            show4 = usr_auth.Substring(3, 1) == "0" ? "0" : usr_auth.Substring(3, 1);
+            show5 = usr_auth.Substring(4, 1) == "0" ? "0" : usr_auth.Substring(4, 1);
+            show6 = usr_auth.Substring(5, 1) == "0" ? "0" : usr_auth.Substring(5, 1);
+            show7 = usr_auth.Substring(6, 1) == "0" ? "0" : usr_auth.Substring(6, 1);
+            show8 = usr_auth.Substring(7, 1) == "0" ? "0" : usr_auth.Substring(7, 1);
+            show9 = usr_auth.Substring(8, 1) == "0" ? "0" : usr_auth.Substring(8, 1);
+            show10 = usr_auth.Substring(9, 1) == "0" ? "0" : usr_auth.Substring(9, 1);
+            show11 = usr_auth.Substring(10, 1) == "0" ? "0" : usr_auth.Substring(10, 1);
+            show12 = usr_auth.Substring(11, 1) == "0" ? "0" : usr_auth.Substring(11, 1);
+            show13 = usr_auth.Substring(12, 1) == "0" ? "0" : usr_auth.Substring(12, 1);
+            show14 = usr_auth.Substring(13, 1) == "0" ? "0" : usr_auth.Substring(13, 1);
+            show15 = usr_auth.Substring(14, 1) == "0" ? "0" : usr_auth.Substring(14, 1);
+            show16 = usr_auth.Substring(15, 1) == "0" ? "0" : usr_auth.Substring(15, 1);
+            show17 = usr_auth.Substring(16, 1) == "0" ? "0" : usr_auth.Substring(16, 1);
+            show18 = usr_auth.Substring(17, 1) == "0" ? "0" : usr_auth.Substring(17, 1);
+            show19 = usr_auth.Substring(18, 1) == "0" ? "0" : usr_auth.Substring(18, 1);
+            show20 = usr_auth.Substring(19, 1) == "0" ? "0" : usr_auth.Substring(19, 1);
+            show21 = usr_auth.Substring(20, 1) == "0" ? "0" : usr_auth.Substring(20, 1);
+            show22 = usr_auth.Substring(21, 1) == "0" ? "0" : usr_auth.Substring(21, 1);
+        }
+
+    }
+
 }
 
 <!DOCTYPE html>
@@ -86,58 +141,133 @@
 
                 <aside id="sidebar">
                     <h6 class="oi" data-glyph="menu">功能選單 MENU</h6>
+                    @if (show1 != "0")
+                    {
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "AboutUs" ? "active" : "")' data-glyph="globe">認識台灣民政府</header>
+                        <nav class='collapse-content @(ViewBag.subnav == "AboutUs" ? "in" : "")'>
+                            <!-- <a href="~/_SysAdm/AboutUs_Cate_List" class='@(ViewBag.subnav2 == "AboutUs_Cate" ? "active" : "")'>主頁管理</a> -->
+                            @if (show2 != "0")
+                            {
+                                <a href="~/_SysAdm/AboutUs_List" class='@(ViewBag.subnav2 == "AboutUs_List" ? "active" : "")' >分頁管理</a>
+                            }                            
+                        </nav>
+                    }
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "AboutUs" ? "active" : "")' data-glyph="globe">認識台灣民政府</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "AboutUs" ? "in" : "")'>
-                        <!-- <a href="~/_SysAdm/AboutUs_Cate_List" class='@(ViewBag.subnav2 == "AboutUs_Cate" ? "active" : "")'>主頁管理</a> -->
-                        <a href="~/_SysAdm/AboutUs_List" class='@(ViewBag.subnav2 == "AboutUs_List" ? "active" : "")'>分頁管理</a>
-                    </nav>
+                    @if (show3 != "0")
+                    {
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "Edu" ? "active" : "")' data-glyph="book" >教育專欄</header>
+                        <nav class='collapse-content @(ViewBag.subnav == "Edu" ? "in" : "")'>
+                            @if (show4 != "0")
+                            {
+                                <a href="~/_SysAdm/Edu_Cate_List" class='@(ViewBag.subnav2 == "Edu_Cate" ? "active" : "")' >分類管理</a>
+                            }
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "Edu" ? "active" : "")' data-glyph="book">教育專欄</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "Edu" ? "in" : "")'>
-                        <a href="~/_SysAdm/Edu_Cate_List" class='@(ViewBag.subnav2 == "Edu_Cate" ? "active" : "")'>分類管理</a>
-                        <a href="~/_SysAdm/Edu_List" class='@(ViewBag.subnav2 == "Edu_List" ? "active" : "")'>文章管理</a>
-                    </nav>
+                            @if (show5 != "0")
+                            {
+                                <a href="~/_SysAdm/Edu_List" class='@(ViewBag.subnav2 == "Edu_List" ? "active" : "")' >文章管理</a>
+                            }
+                            
+                        </nav>
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "JoinUs" ? "active" : "")' data-glyph="people">加入台灣民政府</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "JoinUs" ? "in" : "")'>
-                        <!-- <a href="~/_SysAdm/JoinUs_Cate_List" class='@(ViewBag.subnav2 == "JoinUs_Cate" ? "active" : "")'>主頁管理</a> -->
-                        <a href="~/_SysAdm/JoinUs_List" class='@(ViewBag.subnav2 == "JoinUs_List" ? "active" : "")'>分頁管理</a>
-                    </nav>
+                    }
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "School" ? "active" : "")' data-glyph="home">法理學院</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "School" ? "in" : "")'>
-                        <a href="~/_SysAdm/School_Video_List" class='@(ViewBag.subnav2 == "School_Video" ? "active" : "")'>課堂直播</a>
-                        <!-- <a href="~/_SysAdm/School_Cate_List" class='@(ViewBag.subnav2 == "School_Cate_List" ? "active" : "")'>班級管理</a> -->
-                        <a href="~/_SysAdm/School_List" class='@(ViewBag.subnav2 == "School_List" ? "active" : "")'>歷屆合照</a>
-                    </nav>
+                    @if (show6 != "0")
+                    {
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "JoinUs" ? "active" : "")' data-glyph="people" >加入台灣民政府</header>
+                        <nav class='collapse-content @(ViewBag.subnav == "JoinUs" ? "in" : "")'>
+                            <!-- <a href="~/_SysAdm/JoinUs_Cate_List" class='@(ViewBag.subnav2 == "JoinUs_Cate" ? "active" : "")'>主頁管理</a> -->
+                            @if (show7 != "0")
+                            {
+                                <a href="~/_SysAdm/JoinUs_List" class='@(ViewBag.subnav2 == "JoinUs_List" ? "active" : "")' >分頁管理</a>
+                            }                            
+                        </nav>
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "Event" ? "active" : "")' data-glyph="image">活動寫真</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "Event" ? "in" : "")'>
-                        <a href="~/_SysAdm/Activity_List" class='@(ViewBag.subnav2 == "Activity_List" ? "active" : "")'>中央活動</a>
-                        <a href="~/_SysAdm/States_List" class='@(ViewBag.subnav2 == "States_List" ? "active" : "")'>各州活動</a>
-                        <!-- <a href="~/_SysAdm/States_Cate_List" class='@(ViewBag.subnav2 == "States_Cate_List" ? "active" : "")'>各州資料</a> -->
-                        <a href="~/_SysAdm/States_Video_List" class='@(ViewBag.subnav2 == "States_Video_List" ? "active" : "")'>各州直播網址</a>
-                        <!--<a href="~/_SysAdm/StatesVideoList" class='@(ViewBag.subnav2 == "StatesVideo" ? "active" : "")'>各州直播網址</a>-->
-                    </nav>
+                    }
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "News" ? "active" : "")' data-glyph="bell">新聞公告聲明</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "News" ? "in" : "")'>
-                        <!-- <a href="~/_SysAdm/News_Cate_List" class='@(ViewBag.subnav2 == "News_Cate" ? "active" : "")'>分類管理</a> -->
-                        <a href="~/_SysAdm/News_List" class='@(ViewBag.subnav2 == "News_List" ? "active" : "")'>文章管理</a>
-                    </nav>
+                    @if (show8 != "0")
+                    {
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "School" ? "active" : "")' data-glyph="home" >法理學院</header>
+                        <nav class='collapse-content @(ViewBag.subnav == "School" ? "in" : "")'>
+                            @if (show9 != "0")
+                            {
+                                <a href="~/_SysAdm/School_Video_List" class='@(ViewBag.subnav2 == "School_Video" ? "active" : "")' >課堂直播</a>
+                            }
+                            
+                            <!-- <a href="~/_SysAdm/School_Cate_List" class='@(ViewBag.subnav2 == "School_Cate_List" ? "active" : "")'>班級管理</a> -->
+                            @if (show10 != "0")
+                            {
+                                <a href="~/_SysAdm/School_List" class='@(ViewBag.subnav2 == "School_List" ? "active" : "")'>歷屆合照</a>
+                            }                            
+                        </nav>
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "Focus" ? "active" : "")' data-glyph="eye">焦點專欄</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "Focus" ? "in" : "")'>
-                        <a href="~/_SysAdm/Focus_Cate_List" class='@(ViewBag.subnav2 == "Focus_Cate" ? "active" : "")'>分類管理</a>
-                        <a href="~/_SysAdm/Focus_List" class='@(ViewBag.subnav2 == "Focus_List" ? "active" : "")'>文章管理</a>
-                    </nav>
+                    }
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "Setting" ? "active" : "")' data-glyph="cog">系統設定</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "Setting" ? "in" : "")'>
-                        <a href="~/_SysAdm/User_List" class='@(ViewBag.subnav2 == "User_List" ? "active" : "")'>使用者管理</a>
-                        <a href="~/_SysAdm/ChangePW" class='@(ViewBag.subnav2 == "ChangPW" ? "active" : "")'>變更密碼</a>
-                    </nav>
+                    @if (show11 != "0")
+                    {
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "Event" ? "active" : "")' data-glyph="image" >活動寫真</header>
+                        <nav class='collapse-content @(ViewBag.subnav == "Event" ? "in" : "")'>
+                            @if (show12 != "0")
+                            {
+                                <a href="~/_SysAdm/Activity_List" class='@(ViewBag.subnav2 == "Activity_List" ? "active" : "")' style="visibility:@show12;">中央活動</a>
+                            }
+
+                            @if (show13 != "0")
+                            {
+                                <a href="~/_SysAdm/States_List" class='@(ViewBag.subnav2 == "States_List" ? "active" : "")' >各州活動</a>
+                            }
+                            <!-- <a href="~/_SysAdm/States_Cate_List" class='@(ViewBag.subnav2 == "States_Cate_List" ? "active" : "")'>各州資料</a> -->
+                            @if (show14 != "0")
+                            {
+                                <a href="~/_SysAdm/States_Video_List" class='@(ViewBag.subnav2 == "States_Video_List" ? "active" : "")' >各州直播網址</a>
+                            }
+                            <!--<a href="~/_SysAdm/StatesVideoList" class='@(ViewBag.subnav2 == "StatesVideo" ? "active" : "")'>各州直播網址</a>-->
+                        </nav>
+                    }
+
+                    @if (show15 != "0")
+                    {
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "News" ? "active" : "")' data-glyph="bell" >新聞公告聲明</header>
+                        <nav class='collapse-content @(ViewBag.subnav == "News" ? "in" : "")'>
+                            <!-- <a href="~/_SysAdm/News_Cate_List" class='@(ViewBag.subnav2 == "News_Cate" ? "active" : "")'>分類管理</a> -->
+                            @if (show16 != "0")
+                            {
+                                <a href="~/_SysAdm/News_List" class='@(ViewBag.subnav2 == "News_List" ? "active" : "")' >文章管理</a>
+                            }
+                        </nav>
+                    }
+
+                    @if (show17 != "0")
+                    {
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "Focus" ? "active" : "")' data-glyph="eye" >焦點專欄</header>
+                        <nav class='collapse-content @(ViewBag.subnav == "Focus" ? "in" : "")'>
+                            @if (show18 != "0")
+                            {
+                                <a href="~/_SysAdm/Focus_Cate_List" class='@(ViewBag.subnav2 == "Focus_Cate" ? "active" : "")'>分類管理</a>
+                            }
+
+                            @if(show19 != "0")
+                            {
+                                <a href="~/_SysAdm/Focus_List" class='@(ViewBag.subnav2 == "Focus_List" ? "active" : "")' >文章管理</a>
+                            }
+                        </nav>
+                    }
+
+                    @if (show20 != "0")
+                    {
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "Setting" ? "active" : "")' data-glyph="cog" >系統設定</header>
+                        <nav class='collapse-content @(ViewBag.subnav == "Setting" ? "in" : "")'>
+                            @if (show21 != "0")
+                            {
+                                <a href="~/_SysAdm/User_List" class='@(ViewBag.subnav2 == "User_List" ? "active" : "")' >使用者管理</a>
+                            }
+
+                            @if (show22 != "0")
+                            {
+                                <a href="~/_SysAdm/ChangePW" class='@(ViewBag.subnav2 == "ChangPW" ? "active" : "")' >變更密碼</a>
+                            }                            
+                        </nav>
+                    }
+
                 </aside><!-- sidebar //-->
             }
 

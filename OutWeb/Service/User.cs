@@ -363,7 +363,7 @@ namespace OutWeb.Service
         #region 基本資料
 
         #region 資料抓取 List
-        public DataTable List(ref string err_msg, string id = "", string sort = "", string status = "", string title_query = "", string grp_id = "")
+        public DataTable List(ref string err_msg, string id = "", string sort = "", string status = "", string title_query = "", string grp_id = "", string signin_id = "")
         {
             DataTable dt = new DataTable();
 
@@ -379,12 +379,14 @@ namespace OutWeb.Service
             string[] Array_id;
             string[] Array_title_query;
             string[] Array_grp_id;
+            string[] Array_signin_id;
 
             try
             {
                 Array_id = id.Split(',');
                 Array_title_query = title_query.Split(',');
                 Array_grp_id = grp_id.Split(',');
+                Array_signin_id = signin_id.Split(',');
 
                 csql = "select "
                      + "  a1.* "
@@ -449,6 +451,20 @@ namespace OutWeb.Service
                     csql = csql + ") ";
                 }
 
+                if (signin_id.Trim().Length > 0)
+                {
+                    csql = csql + " and a1.signin_id in (";
+                    for (int i = 0; i < Array_signin_id.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_signin_id" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
                 csql = csql + ")a1 ";
 
                 if (sort.Trim().Length > 0)
@@ -490,6 +506,14 @@ namespace OutWeb.Service
                     for (int i = 0; i < Array_grp_id.Length; i++)
                     {
                         cmd.Parameters.AddWithValue("@str_grp_id" + i.ToString(), Array_grp_id[i]);
+                    }
+                }
+
+                if (signin_id.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_signin_id.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_signin_id" + i.ToString(), Array_signin_id[i]);
                     }
                 }
                 //--------------------------------------------------------------//

@@ -107,7 +107,8 @@ namespace OutWeb.Controllers
                     else
                     {
                         //抓取user資料
-                        user_info = DB.User_Info(ref err_msg, account);
+                        //user_info = DB.User_Info(ref err_msg, account);
+                        user_info = Cuser.List(ref err_msg, "", "", "", "", "", account);
                         //驗證使用者有無資料
                         if (user_info.Rows.Count == 0)
                         {
@@ -138,6 +139,7 @@ namespace OutWeb.Controllers
                                     Session["usr_name"] = user_info.Rows[0]["usr_name"].ToString();
                                     Session["usr_ename"] = user_info.Rows[0]["usr_ename"].ToString();
                                     Session["usr_rank"] = user_info.Rows[0]["usr_rank"].ToString();
+                                    Session["grp_auth"] = user_info.Rows[0]["grp_auth"].ToString();
 
                                     //輸入登入時間
                                     DB.User_Signin(user_info.Rows[0]["id"].ToString());
@@ -168,7 +170,9 @@ namespace OutWeb.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error(ex.Message);
+                //logger.Error(ex.Message);
+                //c_msg = ex.Message;
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                 return View("Login");
             }
         }
