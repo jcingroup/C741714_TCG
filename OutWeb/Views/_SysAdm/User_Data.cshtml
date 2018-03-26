@@ -32,6 +32,7 @@
     string usr_desc = "";
     string usr_name = "";
     string signin_pwd = "";
+    string grp_name = "";
 
     string img_no = "";
     string img_path = "../Images/";
@@ -60,6 +61,8 @@
         c_front_status_Y = "";
         cate_id = "";
         sort = "0";
+        grp_name = "";
+        cate_id = "";
 
     }
     else if (action_sty == "edit")
@@ -78,6 +81,7 @@
         c_status = dt.Rows[0]["status"].ToString();
         sort = dt.Rows[0]["sort"].ToString();
         cate_id = dt.Rows[0]["usr_grp"].ToString();
+        grp_name = dt.Rows[0]["grp_name"].ToString();
 
         switch (c_status)
         {
@@ -140,10 +144,12 @@
     <input type="hidden" name="img_no" id="img_no" value="@img_no" />
     <input type="hidden" name="sort" id="sort" value="@sort" />
     <input type="hidden" name="signin_id" id="signin_id" value="@signin_id" />
+    <input type="hidden" name="cate_id" id="cate_id" value="@cate_id" />
 
     <dl class="field">
         <dt class="col-1"><sup title="必填">*</sup>群組</dt>
         <dd class="col-6">
+          @*
             <select id="cate_id" name="cate_id" class="form-element" required>
                 @if (d_cate.Rows.Count > 0)
             {
@@ -161,6 +167,8 @@
                     }
                 }
             </select>
+          *@
+          @grp_name
         </dd>
     </dl>
     <dl class="field">
