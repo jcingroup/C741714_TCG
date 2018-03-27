@@ -33,6 +33,8 @@
     string show_class = "";
     string usr_name = "";
     string grp_name = "";
+    string adm_chk = "";
+    string usr_grp = "";
     string txt_title_query = (string)ViewData["txt_title_query"];
     string txt_sort = (string)ViewData["txt_sort"];
     string txt_a_d = (string)ViewData["txt_a_d"];
@@ -55,6 +57,7 @@
     string class_sort = "";
     string class_status = "";
     string class_grp = "";
+
 
     switch (txt_sort)
     {
@@ -231,6 +234,8 @@
                 c_sort = dt.Rows[i]["sort"].ToString();
                 usr_name = dt.Rows[i]["USR_NAME"].ToString();
                 grp_name = dt.Rows[i]["GRP_NAME"].ToString();
+                usr_grp = dt.Rows[i]["USR_GRP"].ToString();
+
                 if (dt.Rows[i]["status"].ToString() == "Y")
                 {
                     show = "啟用";
@@ -242,10 +247,25 @@
                     show_class = "";
                 }
 
+                if(Convert.ToString(Session["usr_grp"]) == "3")
+                {
+                    if(usr_grp == "1")
+                    {
+                        adm_chk = " disabled ";
+                    }
+                    else
+                    {
+                        adm_chk = "";
+                    }
+                }
+                else
+                {
+                    adm_chk = "";
+                }
 
                 <tr>
                     <td>
-                        <button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?id=" + id)';"></button>
+                        <button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?id=" + id)';" @adm_chk></button>
                     </td>
                     <td>@grp_name</td>
                     <td class="text-left">@signin_id</td>
