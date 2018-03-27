@@ -2472,6 +2472,12 @@ namespace OutWeb.Controllers
             DataTable d_cate;
             string err_msg = "";
 
+            string c_cate = "";
+            if (Convert.ToString(Session["usr_grp"]) == "4")
+            {
+                c_cate = Convert.ToString(Session["usr_states"]);
+            }
+
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
@@ -2487,7 +2493,7 @@ namespace OutWeb.Controllers
             //語系
             d_lang = Clang.Lang_List(ref err_msg, "");
             //類別
-            d_cate = CStates.Cate_List(ref err_msg, "", "sort", "Y", "", txt_lang);
+            d_cate = CStates.Cate_List(ref err_msg, c_cate, "sort", "Y", "", txt_lang);
             //設定傳值
             ViewData["page"] = page;
             ViewData["dt"] = dt;
@@ -2513,8 +2519,14 @@ namespace OutWeb.Controllers
             //DataTable d_img;
             //抓取消息類別資料
 
+            string c_cate = "";
+            if (Convert.ToString(Session["usr_grp"]) == "4")
+            {
+                c_cate = Convert.ToString(Session["usr_states"]);
+            }
+
             d_lang = Clang.Lang_List(ref err_msg, "");
-            d_cate = CStates.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
+            d_cate = CStates.Cate_List(ref err_msg, c_cate, "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
             //d_img = DB.Img_List(ref err_msg, "", "", "AboutUs");
             //設定傳值
             ViewData["d_lang"] = d_lang;
@@ -2535,10 +2547,16 @@ namespace OutWeb.Controllers
             DataTable d_lang;
             DataTable dt;
             //DataTable d_img;
+            string c_cate = "";
+            if (Convert.ToString(Session["usr_grp"]) == "4")
+            {
+                c_cate = Convert.ToString(Session["usr_states"]);
+            }
+
             //抓取類別資料
             dt = CStates.Video_List(ref err_msg, id);
             d_lang = Clang.Lang_List(ref err_msg, "");
-            d_cate = CStates.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
+            d_cate = CStates.Cate_List(ref err_msg, c_cate, "sort", "Y", "", "");
             //d_img = DB.Img_List(ref err_msg, id, "", "AboutUs");
             //設定傳值
             ViewData["dt"] = dt;

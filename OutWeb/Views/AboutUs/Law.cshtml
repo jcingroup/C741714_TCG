@@ -22,6 +22,16 @@
     string c_tab = "";
     string c_tab_nav = "";
     string cFile = "Law";
+
+    for(int i=0;i < d_cate.Rows.Count; i++)
+    {
+        c_cate_id = d_cate.Rows[i]["id"].ToString();
+        cate_name = d_cate.Rows[i]["cate_name"].ToString();
+        if (cate_id == c_cate_id)
+        {
+            ViewBag.Title += "-" + cate_name;
+        }
+    }
 }
 
 @section breadcrumb {
