@@ -186,29 +186,32 @@ namespace OutWeb.Service
 
             try
             {
-                //========抓取sort==============================================================//
-                csql = "select (max(sort) + 1) as sort from " + cate_dbf_name + " ";
-                cmd.CommandText = csql;
+                ////========抓取sort==============================================================//
+                //csql = "select (max(sort) + 1) as sort from " + cate_dbf_name + " ";
+                //cmd.CommandText = csql;
 
-                if (ds.Tables["chk_sort"] != null)
-                {
-                    ds.Tables["chk_sort"].Clear();
-                }
+                //if (ds.Tables["chk_sort"] != null)
+                //{
+                //    ds.Tables["chk_sort"].Clear();
+                //}
 
-                SqlDataAdapter chk_sort_ada = new SqlDataAdapter();
-                chk_sort_ada.SelectCommand = cmd;
-                chk_sort_ada.Fill(ds, "chk_sort");
-                chk_sort_ada = null;
-                if (ds.Tables["chk_sort"].Rows.Count > 0)
-                {
-                    sort = ds.Tables["chk_sort"].Rows[0]["sort"].ToString();
-                }
-                else
+                //SqlDataAdapter chk_sort_ada = new SqlDataAdapter();
+                //chk_sort_ada.SelectCommand = cmd;
+                //chk_sort_ada.Fill(ds, "chk_sort");
+                //chk_sort_ada = null;
+                //if (ds.Tables["chk_sort"].Rows.Count > 0)
+                //{
+                //    sort = ds.Tables["chk_sort"].Rows[0]["sort"].ToString();
+                //}
+                //else
+                //{
+                //    sort = "0";
+                //}
+                ////===============================================================================//
+                if (sort.Trim().Length == 0)
                 {
                     sort = "0";
                 }
-                //===============================================================================//
-
                 csql = @"insert into " + cate_dbf_name + "(grp_name,grp_desc,sort,status) "
                      + "values(@grp_name,@grp_desc,@sort,@is_show)";
 

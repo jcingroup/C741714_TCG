@@ -193,33 +193,36 @@ namespace OutWeb.Service
 
             try
             {
-                //========抓取sort==============================================================//
-                csql = "select isnull((max(sort) + 1),0) as sort from " + cate_dbf_name + " where lang_id = @lang_id";
-                cmd.CommandText = csql;
+                ////========抓取sort==============================================================//
+                //csql = "select isnull((max(sort) + 1),0) as sort from " + cate_dbf_name + " where lang_id = @lang_id";
+                //cmd.CommandText = csql;
 
-                ////讓ADO.NET自行判斷型別轉換
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@lang_id", lang_id);
+                //////讓ADO.NET自行判斷型別轉換
+                //cmd.Parameters.Clear();
+                //cmd.Parameters.AddWithValue("@lang_id", lang_id);
 
-                if (ds.Tables["chk_sort"] != null)
-                {
-                    ds.Tables["chk_sort"].Clear();
-                }
+                //if (ds.Tables["chk_sort"] != null)
+                //{
+                //    ds.Tables["chk_sort"].Clear();
+                //}
 
-                SqlDataAdapter chk_sort_ada = new SqlDataAdapter();
-                chk_sort_ada.SelectCommand = cmd;
-                chk_sort_ada.Fill(ds, "chk_sort");
-                chk_sort_ada = null;
-                if (ds.Tables["chk_sort"].Rows.Count > 0)
-                {
-                    sort = ds.Tables["chk_sort"].Rows[0]["sort"].ToString();
-                }
-                else
+                //SqlDataAdapter chk_sort_ada = new SqlDataAdapter();
+                //chk_sort_ada.SelectCommand = cmd;
+                //chk_sort_ada.Fill(ds, "chk_sort");
+                //chk_sort_ada = null;
+                //if (ds.Tables["chk_sort"].Rows.Count > 0)
+                //{
+                //    sort = ds.Tables["chk_sort"].Rows[0]["sort"].ToString();
+                //}
+                //else
+                //{
+                //    sort = "0";
+                //}
+                ////===============================================================================//
+                if (sort.Trim().Length == 0)
                 {
                     sort = "0";
                 }
-                //===============================================================================//
-
                 csql = @"insert into " + cate_dbf_name + "(cate_name,cate_desc,sort,status,lang_id) "
                      + "values(@cate_name,@cate_desc,@sort,@is_show,@lang_id)";
 
@@ -702,41 +705,44 @@ namespace OutWeb.Service
 
             try
             {
-                //========抓取sort==============================================================//
-                csql = "select "
-                     + "    (max(sort) + 1) as sort "
-                     + "from "
-                     + " " + dbf_name + " "
-                     + "where "
-                     + "    cate_id = @cate_id "
-                     + "and lang_id = @lang_id ";
+                ////========抓取sort==============================================================//
+                //csql = "select "
+                //     + "    (max(sort) + 1) as sort "
+                //     + "from "
+                //     + " " + dbf_name + " "
+                //     + "where "
+                //     + "    cate_id = @cate_id "
+                //     + "and lang_id = @lang_id ";
 
-                cmd.CommandText = csql;
+                //cmd.CommandText = csql;
 
-                ////讓ADO.NET自行判斷型別轉換
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@cate_id", cate_id);
-                cmd.Parameters.AddWithValue("@lang_id", lang_id);
+                //////讓ADO.NET自行判斷型別轉換
+                //cmd.Parameters.Clear();
+                //cmd.Parameters.AddWithValue("@cate_id", cate_id);
+                //cmd.Parameters.AddWithValue("@lang_id", lang_id);
 
-                if (ds.Tables["chk_sort"] != null)
-                {
-                    ds.Tables["chk_sort"].Clear();
-                }
+                //if (ds.Tables["chk_sort"] != null)
+                //{
+                //    ds.Tables["chk_sort"].Clear();
+                //}
 
-                SqlDataAdapter chk_sort_ada = new SqlDataAdapter();
-                chk_sort_ada.SelectCommand = cmd;
-                chk_sort_ada.Fill(ds, "chk_sort");
-                chk_sort_ada = null;
-                if (ds.Tables["chk_sort"].Rows.Count > 0)
-                {
-                    sort = ds.Tables["chk_sort"].Rows[0]["sort"].ToString();
-                }
-                else
+                //SqlDataAdapter chk_sort_ada = new SqlDataAdapter();
+                //chk_sort_ada.SelectCommand = cmd;
+                //chk_sort_ada.Fill(ds, "chk_sort");
+                //chk_sort_ada = null;
+                //if (ds.Tables["chk_sort"].Rows.Count > 0)
+                //{
+                //    sort = ds.Tables["chk_sort"].Rows[0]["sort"].ToString();
+                //}
+                //else
+                //{
+                //    sort = "0";
+                //}
+                ////===============================================================================//
+                if (sort.Trim().Length == 0)
                 {
                     sort = "0";
                 }
-                //===============================================================================//
-
                 csql = @"insert into " + dbf_name + "(c_title,c_date,c_desc,is_index,sort,status,lang_id,cate_id) "
                      + "values(@c_title,@c_date,@c_desc,@is_index,@sort,@is_show,@lang_id,@cate_id)";
 
@@ -1249,40 +1255,40 @@ namespace OutWeb.Service
 
             try
             {
-                //========抓取sort==============================================================//
-                csql = "select "
-                     + "    (max(sort) + 1) as sort "
-                     + "from "
-                     + " " + dbf_detail_name + " "
-                     + "where "
-                     + "    cate_id = @cate_id and "
-                     + " lang_id = @lang_id ";
+                ////========抓取sort==============================================================//
+                //csql = "select "
+                //     + "    (max(sort) + 1) as sort "
+                //     + "from "
+                //     + " " + dbf_detail_name + " "
+                //     + "where "
+                //     + "    cate_id = @cate_id and "
+                //     + " lang_id = @lang_id ";
 
-                cmd.CommandText = csql;
+                //cmd.CommandText = csql;
 
-                ////讓ADO.NET自行判斷型別轉換
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@cate_id", cate_id);
-                cmd.Parameters.AddWithValue("@lang_id", lang_id);
+                //////讓ADO.NET自行判斷型別轉換
+                //cmd.Parameters.Clear();
+                //cmd.Parameters.AddWithValue("@cate_id", cate_id);
+                //cmd.Parameters.AddWithValue("@lang_id", lang_id);
 
-                if (ds.Tables["chk_sort"] != null)
-                {
-                    ds.Tables["chk_sort"].Clear();
-                }
+                //if (ds.Tables["chk_sort"] != null)
+                //{
+                //    ds.Tables["chk_sort"].Clear();
+                //}
 
-                SqlDataAdapter chk_sort_ada = new SqlDataAdapter();
-                chk_sort_ada.SelectCommand = cmd;
-                chk_sort_ada.Fill(ds, "chk_sort");
-                chk_sort_ada = null;
-                if (ds.Tables["chk_sort"].Rows.Count > 0)
-                {
-                    sort = ds.Tables["chk_sort"].Rows[0]["sort"].ToString();
-                }
-                else
-                {
-                    sort = "0";
-                }
-                //===============================================================================//
+                //SqlDataAdapter chk_sort_ada = new SqlDataAdapter();
+                //chk_sort_ada.SelectCommand = cmd;
+                //chk_sort_ada.Fill(ds, "chk_sort");
+                //chk_sort_ada = null;
+                //if (ds.Tables["chk_sort"].Rows.Count > 0)
+                //{
+                //    sort = ds.Tables["chk_sort"].Rows[0]["sort"].ToString();
+                //}
+                //else
+                //{
+                //    sort = "0";
+                //}
+                ////===============================================================================//
 
                 csql = @"insert into " + dbf_detail_name + "(c_title,c_desc,sort,status,lang_id,cate_id) "
                      + "values(@c_title,@c_desc,@sort,@is_show,@lang_id,@cate_id)";
