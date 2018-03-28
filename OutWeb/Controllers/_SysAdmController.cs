@@ -576,6 +576,8 @@ namespace OutWeb.Controllers
             DataTable d_lang;
             DataTable d_cate;
             string err_msg = "";
+            string usr_grp = "";
+            string cstr = "";
 
             //排序設定
             if (txt_sort.Trim().Length > 0)
@@ -589,20 +591,82 @@ namespace OutWeb.Controllers
 
             //抓取資料
             dt = CAboutUs.List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_cate, txt_lang);
+            //資料篩選
+            //============================
+            usr_grp = Convert.ToString(Session["usr_grp"]);
+
+            DataTable CTemp;
+            if (usr_grp == "1")
+            {
+                CTemp = dt.Clone();
+            }
+            else
+            {
+                cstr = "(usr_grp = '" + usr_grp + "' or usr_grp like '" + usr_grp + ",%' or usr_grp like '%," + usr_grp + "' or usr_grp like '%," + usr_grp + ",%') ";
+
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    string cc_msg = "cstr:" + cstr;
+                    CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                }
+                //--------------------------------------//	
+
+                DataRow[] CT_Rows = dt.Select(cstr);
+                if (CT_Rows.Any())
+                {
+                    CTemp = CT_Rows.CopyToDataTable();
+                }
+                else
+                {
+                    CTemp = dt.Clone();
+                    CTemp.Clear();
+                }
+            }
+
             //語系
             d_lang = Clang.Lang_List(ref err_msg, "");
             //類別
             d_cate = CAboutUs.Cate_List(ref err_msg, "", "sort", "Y", "", txt_lang);
+            //資料篩選
+            //============================
+            usr_grp = Convert.ToString(Session["usr_grp"]);
+            cstr = "(usr_grp = '" + usr_grp + "' or usr_grp like '" + usr_grp + ",%' or usr_grp like '%," + usr_grp + "' or usr_grp like '%," + usr_grp + ",%') ";
+
+            DataTable CTemp1;
+            if (usr_grp == "1")
+            {
+                CTemp1 = d_cate.Clone();
+            }
+            else
+            {
+                DataRow[] CT_Rows1 = d_cate.Select(cstr);
+                if (CT_Rows1.Any())
+                {
+                    CTemp1 = CT_Rows1.CopyToDataTable();
+                }
+                else
+                {
+                    CTemp1 = d_cate.Clone();
+                    CTemp1.Clear();
+                }
+            }
             //設定傳值
             ViewData["page"] = page;
-            ViewData["dt"] = dt;
+            ViewData["dt"] = CTemp;
             ViewData["d_lang"] = d_lang;
-            ViewData["d_cate"] = d_cate;
+            ViewData["d_cate"] = CTemp1;
             ViewData["txt_title_query"] = txt_title_query;
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
             ViewData["txt_cate"] = txt_cate;
+
+            //--Temp檔--釋放-------//
+            CTemp.Dispose();
+            CTemp = null;
+            CTemp1.Dispose();
+            CTemp1 = null;
 
             return View();
         }
@@ -615,18 +679,45 @@ namespace OutWeb.Controllers
             string err_msg = "";
             DataTable d_cate;
             DataTable d_lang;
+            string usr_grp = "";
+            string cstr = "";
             //DataTable d_img;
             //抓取消息類別資料
 
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CAboutUs.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
+            //============================
+            usr_grp = Convert.ToString(Session["usr_grp"]);
+            cstr = "(usr_grp = '" + usr_grp + "' or usr_grp like '" + usr_grp + ",%' or usr_grp like '%," + usr_grp + "' or usr_grp like '%," + usr_grp + ",%') ";
+
+            DataTable CTemp1;
+            if (usr_grp == "1")
+            {
+                CTemp1 = d_cate.Clone();
+            }
+            else
+            {
+                DataRow[] CT_Rows1 = d_cate.Select(cstr);
+                if (CT_Rows1.Any())
+                {
+                    CTemp1 = CT_Rows1.CopyToDataTable();
+                }
+                else
+                {
+                    CTemp1 = d_cate.Clone();
+                    CTemp1.Clear();
+                }
+            }
             //d_img = DB.Img_List(ref err_msg, "", "", "AboutUs");
             //設定傳值
             ViewData["d_lang"] = d_lang;
-            ViewData["d_cate"] = d_cate;
+            ViewData["d_cate"] = CTemp1;
             //ViewData["d_img"] = d_img;
             ViewData["action_sty"] = "add";
 
+            //--Temp檔--釋放-------//
+            CTemp1.Dispose();
+            CTemp1 = null;
             return View("AboutUs_Data");
         }
         #endregion
@@ -640,10 +731,35 @@ namespace OutWeb.Controllers
             DataTable d_lang;
             DataTable dt;
             //DataTable d_img;
+            string cstr = "";
+            string usr_grp = "";
+
             //抓取類別資料
             dt = CAboutUs.List(ref err_msg, id);
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CAboutUs.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
+            //============================
+            usr_grp = Convert.ToString(Session["usr_grp"]);
+            cstr = "(usr_grp = '" + usr_grp + "' or usr_grp like '" + usr_grp + ",%' or usr_grp like '%," + usr_grp + "' or usr_grp like '%," + usr_grp + ",%') ";
+
+            DataTable CTemp1;
+            if (usr_grp == "1")
+            {
+                CTemp1 = d_cate.Clone();
+            }
+            else
+            {
+                DataRow[] CT_Rows1 = d_cate.Select(cstr);
+                if (CT_Rows1.Any())
+                {
+                    CTemp1 = CT_Rows1.CopyToDataTable();
+                }
+                else
+                {
+                    CTemp1 = d_cate.Clone();
+                    CTemp1.Clear();
+                }
+            }
             //d_img = DB.Img_List(ref err_msg, id, "", "AboutUs");
             //設定傳值
             ViewData["dt"] = dt;
@@ -651,7 +767,9 @@ namespace OutWeb.Controllers
             ViewData["d_cate"] = d_cate;
             //ViewData["d_img"] = d_img;
             ViewData["action_sty"] = "edit";
-
+            //--Temp檔--釋放-------//
+            CTemp1.Dispose();
+            CTemp1 = null;
             return View("AboutUs_Data");
         }
         #endregion
@@ -700,6 +818,9 @@ namespace OutWeb.Controllers
             //定義變數
             string c_sort = "";
             string err_msg = "";
+            string cstr = "";
+            string usr_grp = "";
+
             DataTable dt;
             DataTable d_lang;
 
@@ -720,6 +841,7 @@ namespace OutWeb.Controllers
             //設定傳值
             ViewData["page"] = page;
             ViewData["dt"] = dt;
+            //ViewData["dt"] = CTemp;
             ViewData["d_lang"] = d_lang;
             ViewData["txt_title_query"] = txt_title_query;
             ViewData["txt_sort"] = txt_sort;
@@ -803,6 +925,8 @@ namespace OutWeb.Controllers
             DataTable d_lang;
             DataTable d_cate;
             string err_msg = "";
+            string usr_grp = "";
+            string cstr = "";
 
             //排序設定
             if (txt_sort.Trim().Length > 0)
@@ -814,22 +938,100 @@ namespace OutWeb.Controllers
                 c_sort = c_sort + " " + txt_a_d;
             }
 
+
+
+
             //抓取資料
             dt = CJoinUs.List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_cate, txt_lang);
+            //資料篩選
+            //============================
+            usr_grp = Convert.ToString(Session["usr_grp"]);
+            
+            DataTable CTemp;
+            if (usr_grp == "1")
+            {
+                CTemp = dt.Clone();
+            }
+            else
+            {
+                cstr = "(usr_grp = '" + usr_grp + "' or usr_grp like '" + usr_grp + ",%' or usr_grp like '%," + usr_grp + "' or usr_grp like '%," + usr_grp + ",%') ";
+
+                if (usr_grp == "4")
+                {
+                    cstr += "and (states_id = '" + Convert.ToString(Session["usr_states"]) + "')";
+                }
+                else if (usr_grp == "3")
+                {
+                    cstr += "and (states_id <> '')";
+                }
+
+                //--------------------------------------//
+                if (IsDebug == "On")
+                {
+                    string cc_msg = "cstr:" + cstr;
+                    CService.msg_write("Debug", cc_msg, "", System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                }
+                //--------------------------------------//	
+
+                DataRow[] CT_Rows = dt.Select(cstr);
+                if (CT_Rows.Any())
+                {
+                    CTemp = CT_Rows.CopyToDataTable();
+                }
+                else
+                {
+                    CTemp = dt.Clone();
+                    CTemp.Clear();
+                }
+            }
+
+
+            //============================
             //語系
             d_lang = Clang.Lang_List(ref err_msg, "");
             //類別
             d_cate = CJoinUs.Cate_List(ref err_msg, "", "sort", "Y", "", txt_lang);
+            //資料篩選
+            //============================
+            usr_grp = Convert.ToString(Session["usr_grp"]);
+            cstr = "(usr_grp = '" + usr_grp + "' or usr_grp like '" + usr_grp + ",%' or usr_grp like '%," + usr_grp + "' or usr_grp like '%," + usr_grp + ",%') ";
+          
+            DataTable CTemp1;
+            if(usr_grp == "1")
+            {
+                CTemp1 = d_cate.Clone();
+            }
+            else
+            {
+                DataRow[] CT_Rows1 = d_cate.Select(cstr);
+                if (CT_Rows1.Any())
+                {
+                    CTemp1 = CT_Rows1.CopyToDataTable();
+                }
+                else
+                {
+                    CTemp1 = d_cate.Clone();
+                    CTemp1.Clear();
+                }
+            }
+
+            //============================
             //設定傳值
             ViewData["page"] = page;
-            ViewData["dt"] = dt;
+            ViewData["dt"] = CTemp;
             ViewData["d_lang"] = d_lang;
-            ViewData["d_cate"] = d_cate;
+            ViewData["d_cate"] = CTemp1;
             ViewData["txt_title_query"] = txt_title_query;
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
             ViewData["txt_cate"] = txt_cate;
+
+            //--Temp檔--釋放-------//
+            CTemp.Dispose();
+            CTemp = null;
+            CTemp1.Dispose();
+            CTemp1 = null;
 
             return View();
         }
@@ -840,6 +1042,8 @@ namespace OutWeb.Controllers
         {
             //定義變數
             string err_msg = "";
+            string usr_grp = "";
+            string cstr = "";
             DataTable d_cate;
             DataTable d_lang;
             //DataTable d_img;
@@ -847,12 +1051,42 @@ namespace OutWeb.Controllers
 
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CJoinUs.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
+            //資料篩選
+            //============================
+            usr_grp = Convert.ToString(Session["usr_grp"]);
+            
+            DataTable CTemp;
+            if (usr_grp == "1")
+            {
+                CTemp = d_cate.Clone();
+            }
+            else
+            {
+                cstr = "(usr_grp = '" + usr_grp + "' or usr_grp like '" + usr_grp + ",%' or usr_grp like '%," + usr_grp + "' or usr_grp like '%," + usr_grp + ",%')";
+
+                DataRow[] CT_Rows = d_cate.Select(cstr);
+
+                if (CT_Rows.Any())
+                {
+                    CTemp = CT_Rows.CopyToDataTable();
+                }
+                else
+                {
+                    CTemp = d_cate.Clone();
+                    CTemp.Clear();
+                }
+            }
+
+            //============================
             //d_img = DB.Img_List(ref err_msg, "", "", "AboutUs");
             //設定傳值
             ViewData["d_lang"] = d_lang;
-            ViewData["d_cate"] = d_cate;
+            ViewData["d_cate"] = CTemp;
             //ViewData["d_img"] = d_img;
             ViewData["action_sty"] = "add";
+            //--Temp檔--釋放-------//
+            CTemp.Dispose();
+            CTemp = null;
 
             return View("JoinUs_Data");
         }
@@ -862,7 +1096,8 @@ namespace OutWeb.Controllers
         public ActionResult JoinUs_Edit(string id = "")
         {
             string err_msg = "";
-
+            string usr_grp = "";
+            string cstr = "";
             DataTable d_cate;
             DataTable d_lang;
             DataTable dt;
@@ -871,13 +1106,42 @@ namespace OutWeb.Controllers
             dt = CJoinUs.List(ref err_msg, id);
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CJoinUs.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
+            //資料篩選
+            //============================
+            usr_grp = Convert.ToString(Session["usr_grp"]);
+            cstr = "usr_grp = '" + usr_grp + "' or usr_grp like '" + usr_grp + ",%' or usr_grp like '%," + usr_grp + "' or usr_grp like '%," + usr_grp + ",%'";
+
+
+            DataTable CTemp1;
+            if(usr_grp == "1")
+            {
+                CTemp1 = d_cate.Clone();
+            }
+            else
+            {
+                DataRow[] CT_Rows1 = dt.Select(cstr);
+                if (CT_Rows1.Any())
+                {
+                    CTemp1 = CT_Rows1.CopyToDataTable();
+                }
+                else
+                {
+                    CTemp1 = dt.Clone();
+                    CTemp1.Clear();
+                }
+            }
+
+            //============================
             //d_img = DB.Img_List(ref err_msg, id, "", "AboutUs");
             //設定傳值
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
-            ViewData["d_cate"] = d_cate;
+            ViewData["d_cate"] = CTemp1;
             //ViewData["d_img"] = d_img;
             ViewData["action_sty"] = "edit";
+            //--Temp檔--釋放-------//
+            CTemp1.Dispose();
+            CTemp1 = null;
 
             return View("JoinUs_Data");
         }
@@ -3088,6 +3352,8 @@ namespace OutWeb.Controllers
         {
             string str_return = "";
             string err_msg = "";
+            string usr_grp = "";
+            string cstr = "";
             DataTable dt;
             switch (cate_kind)
             {
@@ -3097,11 +3363,69 @@ namespace OutWeb.Controllers
                     break;
                 case "AboutUs":
                     dt = CAboutUs.Cate_List(ref err_msg, "", "sort", "Y", "", lang);
-                    str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+                    //============================
+                    usr_grp = Convert.ToString(Session["usr_grp"]);
+                    cstr = "usr_grp = '" + usr_grp + "' or usr_grp like '" + usr_grp + ",%' or usr_grp like '%," + usr_grp + "' or usr_grp like '%," + usr_grp + ",%'";
+
+
+                    DataTable CTemp1;
+                    if (usr_grp == "1")
+                    {
+                        CTemp1 = dt.Clone();
+                    }
+                    else
+                    {
+                        DataRow[] CT_Rows = dt.Select(cstr);
+                        if (CT_Rows.Any())
+                        {
+                            CTemp1 = CT_Rows.CopyToDataTable();
+                        }
+                        else
+                        {
+                            CTemp1 = dt.Clone();
+                            CTemp1.Clear();
+                        }
+
+                    }
+                    //============================
+                    str_return = JsonConvert.SerializeObject(CTemp1, Newtonsoft.Json.Formatting.Indented);
+                    //--Temp檔--釋放-------//
+                    CTemp1.Dispose();
+                    CTemp1 = null;
                     break;
                 case "JoinUs":
                     dt = CJoinUs.Cate_List(ref err_msg, "", "sort", "Y", "", lang);
-                    str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+                    //============================
+                    usr_grp = Convert.ToString(Session["usr_grp"]);
+                    cstr = "usr_grp = '" + usr_grp + "' or usr_grp like '" + usr_grp + ",%' or usr_grp like '%," + usr_grp + "' or usr_grp like '%," + usr_grp + ",%'";
+
+
+                    DataTable CTemp;
+                    if(usr_grp == "1")
+                    {
+                        CTemp = dt.Clone();
+                    }
+                    else
+                    {
+                        DataRow[] CT_Rows = dt.Select(cstr);
+                        if (CT_Rows.Any())
+                        {
+                            CTemp = CT_Rows.CopyToDataTable();
+                        }
+                        else
+                        {
+                            CTemp = dt.Clone();
+                            CTemp.Clear();
+                        }
+
+                    }
+                    //============================
+
+                    str_return = JsonConvert.SerializeObject(CTemp, Newtonsoft.Json.Formatting.Indented);
+                    //--Temp檔--釋放-------//
+                    CTemp.Dispose();
+                    CTemp = null;
+
                     break;
                 case "Edu":
                     dt = CEdu.Cate_List(ref err_msg, "", "sort", "Y", "", lang);
@@ -3125,7 +3449,6 @@ namespace OutWeb.Controllers
                     str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
                     break;
             }
-
 
             return Content(str_return);
         }
