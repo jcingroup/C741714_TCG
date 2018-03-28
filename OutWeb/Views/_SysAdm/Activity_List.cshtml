@@ -234,10 +234,10 @@
         <input type="text" placeholder="請輸入關鍵字..." id="txt_title_query" name="txt_title_query">
         @* 用 datetimepicker (之類的東西) 選日期 *@
         <label>起</label>
-        <input type="date" id="txt_start_date" name="txt_start_date" value="@txt_start_date">
+        <input type="date" id="txt_start_date" name="txt_start_date" value="@txt_start_date" max="2099-12-31">
         ~
         <label>迄</label>
-        <input type="date" id="txt_end_date" name="txt_end_date" value="@txt_end_date">
+        <input type="date" id="txt_end_date" name="txt_end_date" value="@txt_end_date" max="2099-12-31">
 
         <label>語系</label>
         <select class="form-element" id="txt_lang" name="txt_lang" onclick="get_cate();">
