@@ -598,7 +598,7 @@ namespace OutWeb.Controllers
             DataTable CTemp;
             if (usr_grp == "1")
             {
-                CTemp = dt.Clone();
+                CTemp = dt.Copy();
             }
             else
             {
@@ -636,7 +636,7 @@ namespace OutWeb.Controllers
             DataTable CTemp1;
             if (usr_grp == "1")
             {
-                CTemp1 = d_cate.Clone();
+                CTemp1 = d_cate.Copy();
             }
             else
             {
@@ -693,7 +693,7 @@ namespace OutWeb.Controllers
             DataTable CTemp1;
             if (usr_grp == "1")
             {
-                CTemp1 = d_cate.Clone();
+                CTemp1 = d_cate.Copy();
             }
             else
             {
@@ -745,7 +745,7 @@ namespace OutWeb.Controllers
             DataTable CTemp1;
             if (usr_grp == "1")
             {
-                CTemp1 = d_cate.Clone();
+                CTemp1 = d_cate.Copy();
             }
             else
             {
@@ -950,7 +950,7 @@ namespace OutWeb.Controllers
             DataTable CTemp;
             if (usr_grp == "1")
             {
-                CTemp = dt.Clone();
+                CTemp = dt.Copy();
             }
             else
             {
@@ -999,7 +999,7 @@ namespace OutWeb.Controllers
             DataTable CTemp1;
             if(usr_grp == "1")
             {
-                CTemp1 = d_cate.Clone();
+                CTemp1 = d_cate.Copy();
             }
             else
             {
@@ -1058,7 +1058,7 @@ namespace OutWeb.Controllers
             DataTable CTemp;
             if (usr_grp == "1")
             {
-                CTemp = d_cate.Clone();
+                CTemp = d_cate.Copy();
             }
             else
             {
@@ -1115,7 +1115,7 @@ namespace OutWeb.Controllers
             DataTable CTemp1;
             if(usr_grp == "1")
             {
-                CTemp1 = d_cate.Clone();
+                CTemp1 = d_cate.Copy();
             }
             else
             {
@@ -3371,7 +3371,7 @@ namespace OutWeb.Controllers
                     DataTable CTemp1;
                     if (usr_grp == "1")
                     {
-                        CTemp1 = dt.Clone();
+                        CTemp1 = dt.Copy();
                     }
                     else
                     {
@@ -3403,7 +3403,7 @@ namespace OutWeb.Controllers
                     DataTable CTemp;
                     if(usr_grp == "1")
                     {
-                        CTemp = dt.Clone();
+                        CTemp = dt.Copy();
                     }
                     else
                     {
