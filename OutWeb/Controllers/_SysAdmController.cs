@@ -2473,6 +2473,10 @@ namespace OutWeb.Controllers
             if(Convert.ToString(Session["usr_grp"]) == "4")
             {
                 c_cate = Convert.ToString(Session["usr_states"]);
+                if (txt_cate.Trim().Length == 0)
+                {
+                    txt_cate = Convert.ToString(Session["usr_states"]);
+                }
             }
 
             //排序設定
@@ -2740,6 +2744,10 @@ namespace OutWeb.Controllers
             if (Convert.ToString(Session["usr_grp"]) == "4")
             {
                 c_cate = Convert.ToString(Session["usr_states"]);
+                if (txt_cate.Trim().Length == 0)
+                {
+                    txt_cate = Convert.ToString(Session["usr_states"]);
+                }
             }
 
             //排序設定
@@ -2757,7 +2765,7 @@ namespace OutWeb.Controllers
             //語系
             d_lang = Clang.Lang_List(ref err_msg, "");
             //類別
-            d_cate = CStates.Cate_List(ref err_msg, c_cate, "sort", "Y", "", txt_lang);
+            d_cate = CStates.Cate_List(ref err_msg, txt_cate, "sort", "Y", "", txt_lang);
             //設定傳值
             ViewData["page"] = page;
             ViewData["dt"] = dt;
