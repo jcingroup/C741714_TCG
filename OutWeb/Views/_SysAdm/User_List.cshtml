@@ -249,9 +249,9 @@
 
                 if(Convert.ToString(Session["usr_grp"]) == "3")
                 {
-                    if(usr_grp == "1")
+                    if(usr_grp == "1" || usr_grp == "2" || usr_grp == "3")
                     {
-                        adm_chk = " disabled ";
+                        adm_chk = "hidden";
                     }
                     else
                     {
@@ -263,9 +263,9 @@
                     adm_chk = "";
                 }
 
-                <tr>
+                <tr class="@adm_chk">
                     <td>
-                        <button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?id=" + id)';" @adm_chk></button>
+                        <button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?id=" + id)';"></button>
                     </td>
                     <td>@grp_name</td>
                     <td class="text-left">@signin_id</td>
