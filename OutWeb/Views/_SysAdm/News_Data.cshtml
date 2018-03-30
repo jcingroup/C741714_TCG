@@ -435,22 +435,21 @@
                 <button type="button" name="btn_small_pic" onclick="upload('S');" class="btn btn-sm btn-success oi m-t-small" data-glyph="data-transfer-upload">
                     上傳
                 </button>
-                <br>
-                @* 照片縮圖(上傳圖片後顯示) *@
-                <div id="c_img_S" name="c_img_S">
-                    @for (int s = 0; s < d_img.Rows.Count; s++)
-                    {
-                        small_img = img_path + d_img.Rows[s]["img_file"].ToString();
-                        img_id = d_img.Rows[s]["id"].ToString();
-                        <div class="uploaded">
-                            <button class="close" id="btn_close_s_@s" name="btn_close_s_@s" onclick="del_img('@img_id','S');">&times;</button>
-                            <img id="img_S_@s" name="img_S_@s" src="@small_img" alt="">
-                        </div>
-                    }
-
-                </div>
             </div>
             <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*510px，建議檔案大小不超過 1000kb</small>
+            @* 照片縮圖(上傳圖片後顯示) *@
+            <div id="c_img_S" name="c_img_S">
+                @for (int s = 0; s < d_img.Rows.Count; s++)
+                {
+                    small_img = img_path + d_img.Rows[s]["img_file"].ToString();
+                    img_id = d_img.Rows[s]["id"].ToString();
+                    <div class="uploaded">
+                        <button class="close" id="btn_close_s_@s" name="btn_close_s_@s" onclick="del_img('@img_id','S');">&times;</button>
+                        <img id="img_S_@s" name="img_S_@s" src="@small_img" alt="">
+                    </div>
+                }
+
+            </div>
         </dd>
     </dl>
 
@@ -479,7 +478,7 @@
         <button type="button" class="btn success oi" data-glyph="circle-check" onclick="form_ok();" name="btn_ok" id="btn_ok" >
             確認儲存
         </button>
-        <button type="button" class="btn warning oi" data-glyph="x" onclick="location.href='@Url.Content(SysPath + "NewsList")'" id="btn_back" name="btn_back" >
+        <button type="button" class="btn warning oi" data-glyph="x" onclick="location.href='@Url.Content(SysPath + "News_List")'" id="btn_back" name="btn_back" >
             取消，回列表
         </button>
     </footer>
