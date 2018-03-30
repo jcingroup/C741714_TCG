@@ -1204,6 +1204,10 @@ namespace OutWeb.Controllers
                 c_sort = c_sort + " " + txt_a_d;
             }
 
+            if(c_sort.Trim().Length == 0)
+            {
+                c_sort = "a1.sort desc ";
+            }
             //抓取類別資料
             dt = CEdu.Cate_List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_lang);
 
@@ -1523,6 +1527,10 @@ namespace OutWeb.Controllers
                 c_sort = c_sort + " " + txt_a_d;
             }
 
+            if(c_sort.Trim().Length == 0)
+            {
+                c_sort = " a1.sort desc ";
+            }
             //抓取類別資料
             dt = CFocus.Cate_List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_lang);
 
@@ -1840,6 +1848,11 @@ namespace OutWeb.Controllers
             if (txt_a_d.Trim().Length > 0)
             {
                 c_sort = c_sort + " " + txt_a_d;
+            }
+
+            if(c_sort.Trim().Length == 0)
+            {
+                c_sort = " a1.sort desc ";
             }
 
             //抓取直播資料
