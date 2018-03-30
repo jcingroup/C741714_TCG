@@ -1695,7 +1695,7 @@ namespace OutWeb.Controllers
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, id, "", "Focus");
-            d_detail = CFocus.Detail_List(ref err_msg, "", "sort", "", "", id, "");
+            d_detail = CFocus.Detail_List(ref err_msg, "", "sort desc", "", "", id, "");
             //設定傳值
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
@@ -1751,7 +1751,7 @@ namespace OutWeb.Controllers
             string c_desc = "";
             DataTable dt;
 
-            dt = CFocus.Detail_List(ref err_msg, id, "sort", "", "", cate_id, "");
+            dt = CFocus.Detail_List(ref err_msg, id, "sort desc", "", "", cate_id, "");
             //if(dt.Rows.Count > 0)
             //{
             //    for(int i=0; i < dt.Rows.Count; i++)
@@ -2280,7 +2280,7 @@ namespace OutWeb.Controllers
             //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             //d_url = DB.URL_List(ref err_msg, id, "Activity");
             d_lang = Clang.Lang_List(ref err_msg, "");
-            d_detail = CActivity.Detail_List(ref err_msg, "", "sort", "", "", id, "");
+            d_detail = CActivity.Detail_List(ref err_msg, "", "sort desc", "", "", id, "");
             d_img = DB.Img_List(ref err_msg, id, "", "Activity");
             //設定傳值
             //ViewData["d_cate"] = d_cate;
@@ -2581,7 +2581,7 @@ namespace OutWeb.Controllers
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CStates.Cate_List(ref err_msg, c_cate, "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, id, "", "States");
-            d_detail = CStates.Detail_List(ref err_msg, "", "sort", "", "", id, "");
+            d_detail = CStates.Detail_List(ref err_msg, "", "sort desc", "", "", id, "");
             //設定傳值
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
