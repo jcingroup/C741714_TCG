@@ -1,6 +1,6 @@
 ﻿@using System.Data
 @{
-    ViewBag.Title = "行政區域圖&組織架構";
+    ViewBag.Title = "";
     ViewBag.BodyClass = "AboutUs Organization";
 
     DataTable dt = (DataTable)ViewData["dt"];
@@ -28,13 +28,14 @@
         cate_name = d_cate.Rows[i]["cate_name"].ToString();
         if (cate_id == c_cate_id)
         {
-            ViewBag.Title += "-" + cate_name;
+            ViewBag.Title = cate_name;
         }
     }
 }
 
 @section breadcrumb {
     <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
+    <li><a href="~/AboutUs/Organization?cate_id=7">行政區域圖&組織架構</a></li>
     <li>@ViewBag.Title</li>
 }
 
@@ -42,7 +43,7 @@
     <script src="~/Content/js/tabs.js"></script>
 } *@
 
-<h1 class="sr-only">關於我們 - @ViewBag.Title</h1>
+<h1 class="sr-only">關於我們 - 行政區域圖&組織架構</h1>
 
 <ul class="tabs list-inline text-center">
     <li class="back"><a href="~/AboutUs"><i class="oi" data-glyph="caret-left"></i> 回上層</a></li>

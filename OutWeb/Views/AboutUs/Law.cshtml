@@ -1,6 +1,6 @@
 ﻿@using System.Data
 @{
-    ViewBag.Title = "法律依據";
+    ViewBag.Title = "";
     ViewBag.BodyClass = "AboutUs Profile";
 
     DataTable dt = (DataTable)ViewData["dt"];
@@ -29,7 +29,7 @@
         cate_name = d_cate.Rows[i]["cate_name"].ToString();
         if (cate_id == c_cate_id)
         {
-            ViewBag.Title += "-" + cate_name;
+            ViewBag.Title = cate_name;
         }
     }
 }
@@ -37,6 +37,7 @@
 @section breadcrumb {
     <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
     <li><a href="~/AboutUs/Position">關於我們</a></li>
+    <li><a href="~/AboutUs/Law?cate_id=4">法律依據</a></li>
     <li>@ViewBag.Title</li>
 }
 
@@ -44,7 +45,7 @@
     <script src="~/Content/js/tabs.js"></script>
 } *@
 
-<h1 class="sr-only">關於我們 - @ViewBag.Title</span></h1>
+<h1 class="sr-only">關於我們 - 法律依據</span></h1>
 
 <ul class="tabs list-inline text-center">
     <li class="back"><a href="~/AboutUs/Position"><i class="oi" data-glyph="caret-left"></i> 回上層</a></li>
