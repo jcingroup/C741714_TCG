@@ -6,26 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="日屬美佔, 1945年4月1日, usmgtcg, 林志昇, 身分證, 台灣民政府官網, 台灣民政府, 日本天皇, USMG, 台灣身分證, 台灣政府, TCG, 何瑞元, 詔書, 台灣名政府, 台灣平民政府, 臺灣民政府, 台湾民政府, Taiwan, Government, 日本台灣, Civil, 台灣, 官網">
     <meta name="description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
-    @if (ViewBag.IsFirstPage) {
+    @if (ViewBag.IsFirstPage)
+    {
         <title id="title">台灣民政府 Taiwan Civil Government</title>
-    } else {
+    }
+    else
+    {
         <title id="title">@ViewBag.Title | 台灣民政府 TCG</title>
     }
-    
-    @if (ViewBag.IsFirstPage) {
+
+    @if (ViewBag.IsFirstPage)
+    {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="台灣民政府 Taiwan Civil Government" />
     }
-    else {
+    else
+    {
         <meta property="og:type" content="article" />
         <meta property="og:title" content="@ViewBag.Title" />
-        <meta id="ogImg" property="og:image" content="~/favicon.png">
     }
-    <meta property="og:site_name" content="IMDb"/>
     <meta property="og:description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
-    <!-- <meta property="og:site_name" content="台灣民政府 Taiwan Civil Government"> -->
+    <meta property="og:site_name" content="台灣民政府 Taiwan Civil Government">
     @RenderSection("OGMeta", false)
-    
+
     <!-- Favicons -->
     <!-- Standard -->
     <meta name="theme-color" content="#FFFFFF">
@@ -44,10 +47,12 @@
     <link rel="stylesheet" href="~/Content/css/vendor/icomoon.css">
     <link rel="stylesheet" href="~/Content/css/grid.css">
     <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-    @if (ViewBag.IsFirstPage) {
+    @if (ViewBag.IsFirstPage)
+    {
         <link rel="stylesheet" href="~/Content/css/index.css">
     }
-    else {
+    else
+    {
         <link rel="stylesheet" href="~/Content/css/page.css">
     }
     @RenderSection("css", false)
@@ -77,7 +82,8 @@
                 </div>
             </section>
 
-            @if (ViewBag.IsFirstPage) {
+            @if (ViewBag.IsFirstPage)
+            {
                 <nav id="menu">
                     <ul class="nav list-unstyled">
                         <li>
@@ -101,7 +107,8 @@
                     </ul>
                 </nav>
             }
-            else {
+            else
+            {
                 <nav id="menu" class="wrap">
                     <ul class="nav row no-gutters list-unstyled">
                         <li class="col-4">
@@ -179,10 +186,12 @@
             }
         </header>
 
-        @if (ViewBag.IsFirstPage) {
+        @if (ViewBag.IsFirstPage)
+        {
             @RenderBody()
         }
-        else {
+        else
+        {
             <main id="main" class="wrap">
                 <ul class="breadcrumb">
                     <li><a href="~/Home"><i class="oi" data-glyph="home"></i></a></li>
@@ -195,7 +204,8 @@
 
     </div><!-- wrapper //-->
 
-    @if (!ViewBag.IsFirstPage) {
+    @if (!ViewBag.IsFirstPage)
+    {
 
         <a href="#header" class="goTop oi" data-glyph="chevron-top" title="TOP"></a>
 
@@ -404,17 +414,17 @@
     </nav>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    
+
     <script>
 
         // search
-        $(".search-trigger").click(function(){
+        $(".search-trigger").click(function () {
             $("#search").fadeToggle();
             $("body").toggleClass("overlay");
         });
 
         // sitemap
-        $(".sitemap-trigger").click(function(){
+        $(".sitemap-trigger").click(function () {
             $("#sitemap").fadeToggle();
             $("body").toggleClass("overlay");
         });
@@ -422,23 +432,42 @@
         //     // 同一頁換tab需重載頁面
         //     location.reload();
         // });
-        
+
         // 點 Popup 空白處可以關閉
-        $(".popup").click(function() {
+        $(".popup").click(function () {
             $(this).fadeOut();
             $("body").removeClass("overlay");
         });
-        $(".popup li a, .popup > form").click(function(e){
+        $(".popup li a, .popup > form").click(function (e) {
             e.stopPropagation();
         });
     </script>
 
-    @if (!ViewBag.IsFirstPage) {
+    @* 客戶的GA & 奇怪的東西 *@
+    <script type="text/javascript" src="http://jj.revolvermaps.com/b.js">
+    </script>
+    <script type="text/javascript">
+        rmb_ki101('9lbmgekfbtl', '', '40', '40', 1, 'ffffff', '010020', 'aa0000');
+    </script>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-32942313-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    @if (!ViewBag.IsFirstPage)
+    {
         <!-- waypoints scrolling detector -->
         <script src="~/Content/js/jquery.waypoints.min.js"></script>
         <script>
             // 卷軸卷動效果
-            $('#menu').waypoint(function(direction) {
+            $('#menu').waypoint(function (direction) {
                 if (direction === 'down') {
                     $('body').addClass('scrolled');
                     $('.goTop').fadeIn();
@@ -459,13 +488,13 @@
             });
 
             // table-rwd
-            $( ".editor table" ).wrap( "<div class='table-rwd'></div>" );
+            $(".editor table").wrap("<div class='table-rwd'></div>");
         </script>
 
         <!-- addThis share btn -->
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a72b8d4c87ca24b"></script>
     }
-    
+
     @RenderSection("scripts", required: false)
 
 </body>
