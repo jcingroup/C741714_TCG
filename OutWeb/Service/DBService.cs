@@ -343,7 +343,7 @@ namespace OutWeb.Service
         #endregion
 
         #region 圖片更新 Img_Update
-        public string Img_Update(string img_id = "", string img_no = "", string img_file = "", string img_sty = "", string img_kind = "", string img_desc = "", string is_index = "")
+        public string Img_Update(string img_id = "", string img_no = "", string img_file = "", string img_sty = "", string img_kind = "", string img_desc = "", string is_index = "",int img_sort = 0)
         {
             string c_msg = "";
 
@@ -381,13 +381,22 @@ namespace OutWeb.Service
                     c_update += " img_sty = @img_sty ";
                 }
 
-                if (img_desc.Trim().Length > 0)
+                if (img_desc?.Trim().Length > 0)
                 {
                     if (c_update.Trim().Length > 0)
                     {
                         c_update += ",";
                     }
                     c_update += " img_desc = @img_desc ";
+                }
+
+                if (img_sort >= 0)
+                {
+                    if (c_update.Trim().Length > 0)
+                    {
+                        c_update += ",";
+                    }
+                    c_update += " sort = @img_sort ";
                 }
 
                 if (is_index.Trim().Length > 0)
@@ -421,7 +430,7 @@ namespace OutWeb.Service
                     cmd.Parameters.AddWithValue("@img_sty", img_sty);
                 }
 
-                if (img_desc.Trim().Length > 0)
+                if (img_desc?.Trim().Length > 0)
                 {
                     cmd.Parameters.AddWithValue("@img_desc", img_desc);
                 }
@@ -429,6 +438,11 @@ namespace OutWeb.Service
                 if (is_index.Trim().Length > 0)
                 {
                     cmd.Parameters.AddWithValue("@is_index", is_index);
+                }
+
+                if (img_sort >= 0)
+                {
+                    cmd.Parameters.AddWithValue("@img_sort", img_sort);
                 }
 
                 cmd.ExecuteNonQuery();
@@ -519,7 +533,8 @@ namespace OutWeb.Service
                     csql = csql + "and img_kind = @img_kind ";
                 }
                 csql = csql + "order by ";
-                csql = csql + "  id ";
+                //csql = csql + "  id ";
+                csql = csql + " sort desc,id asc"; //先照"排序"大小 降冪排序 再依ID升冪排序
 
                 cmd.CommandText = csql;
 

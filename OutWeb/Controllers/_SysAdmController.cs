@@ -245,7 +245,7 @@ namespace OutWeb.Controllers
                     cmsg = cmsg + "原密碼錯誤，請重新輸入。";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //logger.Error(ex.Message);
                 cmsg = "Update Error !!!";
@@ -253,7 +253,7 @@ namespace OutWeb.Controllers
             }
             finally
             {
-                if(cmsg == "")
+                if (cmsg == "")
                 {
                     cmsg = "success";
                 }
@@ -311,6 +311,7 @@ namespace OutWeb.Controllers
         }
         #endregion
 
+
         #region 圖片上傳 Upload
         public ActionResult Upload(string img_no, string img_cate, string img_sty = "", string img_id = "")
         {
@@ -329,19 +330,23 @@ namespace OutWeb.Controllers
             int files_count = 0;
             //string cmsg = "";
             string err_msg = "";
-            string new_filename = "";
+            List<string> new_filename = null; //記錄多檔案名稱
 
 
             if (hfc.Count > 0)
             {
-                file_name = hfc[0].FileName;
-                files = file_name.Split('\\');
-                files_count = files.Count();
-                filename = files[files_count - 1];
-                new_filename = img_cate + "_" + img_no + "_" + img_sty + "_" + filename;
-                imgPath = file_path + new_filename;
-                string PhysicalPath = Server.MapPath(imgPath);
-                hfc[0].SaveAs(PhysicalPath);
+                new_filename = new List<string>();
+                for(int i=0;i<hfc.Count;i++)
+                {
+                    file_name = hfc[i].FileName;
+                    files = file_name.Split('\\');
+                    files_count = files.Count();
+                    filename = files[files_count - 1];
+                    new_filename.Add(img_cate + "_" + img_no + "_" + img_sty + "_" + filename);
+                    imgPath = file_path + new_filename[i];
+                    string PhysicalPath = Server.MapPath(imgPath);
+                    hfc[i].SaveAs(PhysicalPath);
+                }
             }
 
             //抓取資料
@@ -358,39 +363,42 @@ namespace OutWeb.Controllers
                 }
             }
 
-            switch (chk_sty)
+            for (int i = 0; i < new_filename.Count; i++) //多檔案
             {
-                case "add": //加入到資料庫
-                    DB.Img_Insert(img_no, new_filename, img_sty, img_cate);
+                switch (chk_sty)
+                {
+                    case "add": //加入到資料庫
+                        DB.Img_Insert(img_no, new_filename[i], img_sty, img_cate);
 
-                    break;
-                case "update":
-                    DB.Img_Update(img_id, img_no, new_filename, img_sty, img_cate);
+                        break;
+                    case "update":
+                        DB.Img_Update(img_id, img_no, new_filename[i], img_sty, img_cate);
 
-                    //刪除原本檔案
-                    if (pre_filename == "")
-                    {
-                        string Pre_Path = Server.MapPath(pre_filename);
-
-                        // Delete a file by using File class static method...
-                        if (System.IO.File.Exists(Pre_Path))
+                        //刪除原本檔案
+                        if (pre_filename == "")
                         {
-                            // Use a try block to catch IOExceptions, to
-                            // handle the case of the file already being
-                            // opened by another process.
-                            try
+                            string Pre_Path = Server.MapPath(pre_filename);
+
+                            // Delete a file by using File class static method...
+                            if (System.IO.File.Exists(Pre_Path))
                             {
-                                System.IO.File.Delete(Pre_Path);
-                            }
-                            catch (System.IO.IOException e)
-                            {
-                                str_return = str_return + e.Message;
+                                // Use a try block to catch IOExceptions, to
+                                // handle the case of the file already being
+                                // opened by another process.
+                                try
+                                {
+                                    System.IO.File.Delete(Pre_Path);
+                                }
+                                catch (System.IO.IOException e)
+                                {
+                                    str_return = str_return + e.Message;
+                                }
                             }
                         }
-                    }
 
 
-                    break;
+                        break;
+                }
             }
 
             //抓取資料
@@ -3497,7 +3505,7 @@ namespace OutWeb.Controllers
         #endregion 圖片 Img_Get
 
         #region 圖片更新 Img_Update
-        public ActionResult Img_Update(string img_no, string img_cate, string img_id, string img_desc)
+        public ActionResult Img_Update(string img_no, string img_cate, string img_id, string img_desc,int img_sort)
         {
 
             DataTable Img_file;
@@ -3507,7 +3515,7 @@ namespace OutWeb.Controllers
 
             if (img_id.Trim().Length > 0)
             {
-                DB.Img_Update(img_id, "", "", "", img_cate, img_desc, "");
+                DB.Img_Update(img_id, "", "", "", img_cate, img_desc, "", img_sort);
                 //--------------------------------------//
                 if (IsDebug == "On")
                 {

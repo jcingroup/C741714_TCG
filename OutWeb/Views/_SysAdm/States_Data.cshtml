@@ -251,8 +251,14 @@
         var cimg_no = "";
         //var c_cate = "States"
         if (confirm("確定刪除??")) {
-            if ($("#id").val().length > 0) {
-                cimg_no = $("#id").val();
+            //if ($("#id").val().length > 0) {
+            //    cimg_no = $("#id").val();
+            //}else {
+            //    cimg_no = @img_no;
+            //}
+
+            if ($("#detail_id").val().length > 0) {
+                cimg_no = $("#detail_id").val();
             }else {
                 cimg_no = @img_no;
             }
@@ -279,6 +285,7 @@
                         c_html += "<tr>";
                         c_html += "    <th>圖片</th>";
                         c_html += "    <th>圖說</th>";
+                        c_html += "    <th>排序</th>";
                         //c_html += "    <th>封面圖</th>";
                         c_html += "    <th class=\"item-edit\">刪除</th>";
                         c_html += "</tr>";
@@ -293,6 +300,9 @@
                             c_html = c_html + "    </td>";
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" class=\"form-element\" value=\"" + obj.img_desc + "\">";
+                            c_html = c_html + "    </td>";
+                            c_html = c_html + "    <td>";
+                            c_html = c_html + "        <input type=\"text\" name=\"img_sort_" + i + "\" id=\"img_sort_" + i + "\" class=\"form-element\" value=\"" + obj.sort + "\">";
                             c_html = c_html + "    </td>";
                             //c_html = c_html + "    <td>";
 
@@ -432,6 +442,7 @@
                         c_html += "<tr>";
                         c_html += "    <th>圖片</th>";
                         c_html += "    <th>圖說</th>";
+                        c_html += "    <th>排序</th>";
                         //c_html += "    <th>封面圖</th>";
                         c_html += "    <th class=\"item-edit\">刪除</th>";
                         c_html += "</tr>";
@@ -447,6 +458,9 @@
                             c_html = c_html + "    </td>";
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" class=\"form-element\" value=\"" + obj.img_desc + "\">";
+                            c_html = c_html + "    </td>";
+                            c_html = c_html + "    <td>";
+                            c_html = c_html + "        <input type=\"text\" name=\"img_sort_" + i + "\" id=\"img_sort_" + i + "\" class=\"form-element\" value=\"" + obj.sort + "\">";
                             c_html = c_html + "    </td>";
                             //c_html = c_html + "    <td>";
 
@@ -687,7 +701,7 @@
                 }
             });
 
-            container_close('modalDetail');		
+            container_close('modalDetail');
         }
 
         return false;
@@ -908,6 +922,7 @@
                     c_html += "    <th>圖片</th>";
                     c_html += "    <th>圖說</th>";
                     //c_html += "    <th>封面圖</th>";
+                    c_html += "    <th>排序</th>";
                     c_html += "    <th class=\"item-edit\">刪除</th>";
                     c_html += "</tr>";
 
@@ -921,7 +936,10 @@
                         c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
                         c_html = c_html + "    </td>";
                         c_html = c_html + "    <td>";
-                        c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_name_" + i + "\" class=\"form-element\" value=\"" + obj.img_desc + "\">";
+                        c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" class=\"form-element\" value=\"" + obj.img_desc + "\">";
+                        c_html = c_html + "    </td>";
+                        c_html = c_html + "    <td>";
+                        c_html = c_html + "        <input type=\"text\" name=\"img_sort_" + i + "\" id=\"img_sort_" + i + "\" class=\"form-element\" value=\"" + obj.sort + "\">";
                         c_html = c_html + "    </td>";
                         //c_html = c_html + "    <td>";
 
@@ -976,11 +994,12 @@
         {
             img_id = $('#img_id_' + i).val();
             img_desc = $('#img_desc_' + i).val();
+            img_sort = $('#img_sort_' + i).val();
 
             //更新資料
             $.ajax({                
                 url: 'Img_Update',
-                data: { img_no: img_no, img_cate: c_cate, img_id: img_id, img_desc: img_desc  }, //此参数非常严谨，写错一个引号都不行
+                data: { img_no: img_no, img_cate: c_cate, img_id: img_id, img_desc: img_desc, img_sort: img_sort  }, //此参数非常严谨，写错一个引号都不行
                 type:"POST",
                 dataType: 'TEXT', //返回值类型 一般设置为json
                 async: false,
@@ -1495,7 +1514,7 @@
             <section class="upload mb-24">
                 <h5 class="text-primary mt-0 mb-16">圖片上傳</h5>
                 <div class="form-inline">
-                    <input type="file" name="pic_B" id="pic_B" accept="image/*" class="form-control form-control-sm">
+                    <input type="file" name="pic_B" id="pic_B" accept="image/*" class="form-control form-control-sm" multiple>
                     <button type="button" name="btn_big_pic" onclick="upload('B','States_Detail');" class="btn btn-sm btn-success oi m-t-small" data-glyph="data-transfer-upload">
                         上傳
                     </button>
