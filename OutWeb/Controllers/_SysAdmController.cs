@@ -1379,7 +1379,7 @@ namespace OutWeb.Controllers
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CEdu.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, id, "", "Edut");
-            d_detail = CEdu.Detail_List(ref err_msg, "", "sort", "", "", id, "");
+            d_detail = CEdu.Detail_List(ref err_msg, "", "sort desc", "", "", id, "");
             //設定傳值
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
