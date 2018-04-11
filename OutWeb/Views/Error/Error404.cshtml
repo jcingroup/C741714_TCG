@@ -1,14 +1,21 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Title = "Error404";
+    Layout = null;
+
+    ViewBag.Title = "錯誤-404";
 }
-<style>
-    .text-danger {
-        color: red;
-    }
-</style>
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">網站出錯了!</h2>
-@*<h1>錯誤代碼： @ViewData["LogGuId"]</h1>*@
+<html>
+<body>
+    <h3 style="color:#6699cc;border-bottom:1px solid #8cb2d9;padding-left:20px;">【 錯誤提示 】</h3>
+    <div style="padding-left:45px;line-height:35px;color:#666">
+
+        很抱歉，您要訪問的頁面無法正確顯示，可能是因為如下原因：<br />
+        1. 系統過於繁忙，請按下瀏覽器的『重新整理』按鈕，或稍後再試。<br />
+        2. 您輸入的網址有誤，請重新檢查您輸入的網址。<br />
+        3. 此頁面已經刪除，請訪問其他頁面。 <br />
+        4. <a href="@Url.Content("~/")">返回首頁</a> <br />
+
+    </div>
+</body>
+</html> 
