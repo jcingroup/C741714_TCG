@@ -96,6 +96,7 @@ namespace OutWeb.Repositories
                                 .Where(s => s.STATUS == "Y" && s.IMG_STY == "B" && s.IMG_KIND == "States_Detail" &&
                                 s.IMG_NO.Contains(id.ToString()))
                                 .OrderByDescending(s => s.SORT)
+                                .ThenByDescending(s => s.IMG_FILE) //20180412增加檔名排序
                                 .Select(s => new PagingImageInfo()
                                 {
                                     ImgFileName = s.IMG_FILE,
