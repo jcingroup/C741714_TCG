@@ -94,7 +94,6 @@
 </head>
 
 <body>
-
     <div class="wrapper">
         @if (!ViewBag.IsFirstPage)
         {
@@ -110,14 +109,11 @@
                             <font color="white">@ViewBag.mainName</font>
                         </a>
                     </h1>
-
                     <nav class="navbar">
                         <span class="nav-link">登入身份: @usr_info</span>
-
                         <a href="@Url.Content(HomePath)" class="nav-link oi home" data-glyph="home">
                             回首頁
                         </a>
-
                         <a href="@Url.Content(ManagePath + "/Logout")" class="nav-link oi logout" data-glyph="power-standby">
                             登出
                         </a>
@@ -125,9 +121,7 @@
                 </header><!-- header //-->
             }
         }
-
         <main id="main">
-
             @if (ViewBag.IsFirstPage)
             {
                 @RenderBody()
@@ -148,139 +142,132 @@
                             <!-- <a href="~/_SysAdm/AboutUs_Cate_List" class='@(ViewBag.subnav2 == "AboutUs_Cate" ? "active" : "")'>主頁管理</a> -->
                             @if (show2 != "0")
                             {
-                                <a href="~/_SysAdm/AboutUs_List" class='@(ViewBag.subnav2 == "AboutUs_List" ? "active" : "")' >分頁管理</a>
-                            }                            
+                                <a href="~/_SysAdm/AboutUs_List" class='@(ViewBag.subnav2 == "AboutUs_List" ? "active" : "")'>分頁管理</a>
+                            }
                         </nav>
                     }
-
                     @if (show3 != "0")
                     {
-                        <header class='collapse-toggle oi @(ViewBag.subnav == "Edu" ? "active" : "")' data-glyph="book" >教育專欄</header>
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "Edu" ? "active" : "")' data-glyph="book">教育專欄</header>
                         <nav class='collapse-content @(ViewBag.subnav == "Edu" ? "in" : "")'>
                             @if (show4 != "0")
                             {
-                                <a href="~/_SysAdm/Edu_Cate_List" class='@(ViewBag.subnav2 == "Edu_Cate" ? "active" : "")' >分類管理</a>
+                                <a href="~/_SysAdm/Edu_Cate_List" class='@(ViewBag.subnav2 == "Edu_Cate" ? "active" : "")'>分類管理</a>
                             }
-
                             @if (show5 != "0")
                             {
-                                <a href="~/_SysAdm/Edu_List" class='@(ViewBag.subnav2 == "Edu_List" ? "active" : "")' >文章管理</a>
+                                <a href="~/_SysAdm/Edu_List" class='@(ViewBag.subnav2 == "Edu_List" ? "active" : "")'>文章管理</a>
                             }
-                            
+
                         </nav>
 
                     }
-
                     @if (show6 != "0")
                     {
-                        <header class='collapse-toggle oi @(ViewBag.subnav == "JoinUs" ? "active" : "")' data-glyph="people" >加入台灣民政府</header>
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "JoinUs" ? "active" : "")' data-glyph="people">加入台灣民政府</header>
                         <nav class='collapse-content @(ViewBag.subnav == "JoinUs" ? "in" : "")'>
                             <!-- <a href="~/_SysAdm/JoinUs_Cate_List" class='@(ViewBag.subnav2 == "JoinUs_Cate" ? "active" : "")'>主頁管理</a> -->
                             @if (show7 != "0")
                             {
-                                <a href="~/_SysAdm/JoinUs_List" class='@(ViewBag.subnav2 == "JoinUs_List" ? "active" : "")' >分頁管理</a>
-                            }                            
+                                <a href="~/_SysAdm/JoinUs_List" class='@(ViewBag.subnav2 == "JoinUs_List" ? "active" : "")'>分頁管理</a>
+                            }
                         </nav>
 
                     }
-
                     @if (show8 != "0")
                     {
-                        <header class='collapse-toggle oi @(ViewBag.subnav == "School" ? "active" : "")' data-glyph="home" >法理學院</header>
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "School" ? "active" : "")' data-glyph="home">法理學院</header>
                         <nav class='collapse-content @(ViewBag.subnav == "School" ? "in" : "")'>
                             @if (show9 != "0")
                             {
-                                <a href="~/_SysAdm/School_Video_List" class='@(ViewBag.subnav2 == "School_Video" ? "active" : "")' >課堂直播</a>
+                                <a href="~/_SysAdm/School_Video_List" class='@(ViewBag.subnav2 == "School_Video" ? "active" : "")'>課堂直播</a>
                             }
-                            
+
                             <!-- <a href="~/_SysAdm/School_Cate_List" class='@(ViewBag.subnav2 == "School_Cate_List" ? "active" : "")'>班級管理</a> -->
                             @if (show10 != "0")
                             {
                                 <a href="~/_SysAdm/School_List" class='@(ViewBag.subnav2 == "School_List" ? "active" : "")'>歷屆合照</a>
-                            }                            
+                            }
                         </nav>
 
                     }
-
                     @if (show11 != "0")
                     {
-                        <header class='collapse-toggle oi @(ViewBag.subnav == "Event" ? "active" : "")' data-glyph="image" >活動寫真</header>
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "Event" ? "active" : "")' data-glyph="image">活動寫真</header>
                         <nav class='collapse-content @(ViewBag.subnav == "Event" ? "in" : "")'>
                             @if (show12 != "0")
                             {
                                 <a href="~/_SysAdm/Activity_List" class='@(ViewBag.subnav2 == "Activity_List" ? "active" : "")' style="visibility:@show12;">中央活動</a>
                             }
-
                             @if (show13 != "0")
                             {
-                                <a href="~/_SysAdm/States_List" class='@(ViewBag.subnav2 == "States_List" ? "active" : "")' >各州活動</a>
+                                <a href="~/_SysAdm/States_List" class='@(ViewBag.subnav2 == "States_List" ? "active" : "")'>各州活動</a>
                             }
                             <!-- <a href="~/_SysAdm/States_Cate_List" class='@(ViewBag.subnav2 == "States_Cate_List" ? "active" : "")'>各州資料</a> -->
                             @if (show14 != "0")
                             {
-                                <a href="~/_SysAdm/States_Video_List" class='@(ViewBag.subnav2 == "States_Video_List" ? "active" : "")' >各州直播網址</a>
+                                <a href="~/_SysAdm/States_Video_List" class='@(ViewBag.subnav2 == "States_Video_List" ? "active" : "")'>各州直播網址</a>
                             }
                             <!--<a href="~/_SysAdm/StatesVideoList" class='@(ViewBag.subnav2 == "StatesVideo" ? "active" : "")'>各州直播網址</a>-->
                         </nav>
                     }
-
                     @if (show15 != "0")
                     {
-                        <header class='collapse-toggle oi @(ViewBag.subnav == "News" ? "active" : "")' data-glyph="bell" >新聞公告聲明</header>
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "News" ? "active" : "")' data-glyph="bell">新聞公告聲明</header>
                         <nav class='collapse-content @(ViewBag.subnav == "News" ? "in" : "")'>
                             <!-- <a href="~/_SysAdm/News_Cate_List" class='@(ViewBag.subnav2 == "News_Cate" ? "active" : "")'>分類管理</a> -->
                             @if (show16 != "0")
                             {
-                                <a href="~/_SysAdm/News_List" class='@(ViewBag.subnav2 == "News_List" ? "active" : "")' >文章管理</a>
+                                <a href="~/_SysAdm/News_List" class='@(ViewBag.subnav2 == "News_List" ? "active" : "")'>文章管理</a>
                             }
                         </nav>
                     }
-
                     @if (show17 != "0")
                     {
-                        <header class='collapse-toggle oi @(ViewBag.subnav == "Focus" ? "active" : "")' data-glyph="eye" >焦點專欄</header>
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "Focus" ? "active" : "")' data-glyph="eye">焦點專欄</header>
                         <nav class='collapse-content @(ViewBag.subnav == "Focus" ? "in" : "")'>
                             @if (show18 != "0")
                             {
                                 <a href="~/_SysAdm/Focus_Cate_List" class='@(ViewBag.subnav2 == "Focus_Cate" ? "active" : "")'>分類管理</a>
                             }
-
-                            @if(show19 != "0")
+                            @if (show19 != "0")
                             {
-                                <a href="~/_SysAdm/Focus_List" class='@(ViewBag.subnav2 == "Focus_List" ? "active" : "")' >文章管理</a>
+                                <a href="~/_SysAdm/Focus_List" class='@(ViewBag.subnav2 == "Focus_List" ? "active" : "")'>文章管理</a>
                             }
                         </nav>
                     }
-
                     @if (show20 != "0")
                     {
-                        <header class='collapse-toggle oi @(ViewBag.subnav == "Setting" ? "active" : "")' data-glyph="cog" >系統設定</header>
+                        <header class='collapse-toggle oi @(ViewBag.subnav == "Setting" ? "active" : "")' data-glyph="cog">系統設定</header>
                         <nav class='collapse-content @(ViewBag.subnav == "Setting" ? "in" : "")'>
                             @if (show21 != "0")
                             {
-                                <a href="~/_SysAdm/User_List" class='@(ViewBag.subnav2 == "User_List" ? "active" : "")' >使用者管理</a>
+                                <a href="~/_SysAdm/User_List" class='@(ViewBag.subnav2 == "User_List" ? "active" : "")'>使用者管理</a>
                             }
-
                             @if (show22 != "0")
                             {
-                                <a href="~/_SysAdm/ChangePW" class='@(ViewBag.subnav2 == "ChangPW" ? "active" : "")' >變更密碼</a>
-                            }                            
+                                <a href="~/_SysAdm/ChangePW" class='@(ViewBag.subnav2 == "ChangPW" ? "active" : "")'>變更密碼</a>
+                            }
                         </nav>
                     }
-
                 </aside><!-- sidebar //-->
             }
-
         </main><!-- main //-->
-
     </div><!-- wrapper //-->
-
-    @if (ViewBag.IsFirstPage) {
+    @if (ViewBag.IsFirstPage)
+    {
         <footer id="footer" class="text-muted">
             <div class="copyright font-sp">Powered By <a class="hover-info" href="http://www.jcin.com.tw" target="new">JCIN INFORMATION CO.</a></div>
             <small>本網站適用 Chrome, firefox, IE10.0+, 最佳瀏覽解析度為 1280*800 以上</small>
         </footer><!-- footer //-->
     }
+
+    @* 客戶的分析工具 *@
+    <script type="text/javascript" src="http://jj.revolvermaps.com/b.js">
+    </script>
+    <script type="text/javascript">
+        rmb_ki101('9lbmgekfbtl', '', '40', '40', 1, 'ffffff', '010020', 'aa0000');
+    </script>
 
     @if (!ViewBag.IsFirstPage)
     {

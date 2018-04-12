@@ -281,9 +281,9 @@
         <colgroup>
             <col style="width: 5%">
             <col style="width: 12%">
-            <col style="width: 12%">
-            <col style="width: 10%">
             <col style="width: 24%">
+            <col style="width: 10%">
+            <col style="width: 12%">
             <col style="width: 10%">
             <col style="width: 9%">
             <col style="width: 13%">
@@ -302,15 +302,15 @@
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="th-sort-toggle @class_date" name="btn_date" id="btn_date" onclick="sort('n_date');">日期</button>
             </th>
-            <th>
-                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
-                <button class="th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
-            </th>
+            <th class="text-left">標題</th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="th-sort-toggle @class_cate" name="btn_cate" id="btn_cate" onclick="sort('cate_id');">分類</button>
             </th>
-            <th class="text-left">標題</th>
+            <th>
+                @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
+                <button class="th-sort-toggle @class_sort" name="btn_sort" id="btn_sort" onclick="sort('sort');">排序</button>
+            </th>
             <th>
                 @* 點選排序功能 (點一下遞增 asc, 點兩下遞減 desc) *@
                 <button class="th-sort-toggle @class_lang" name="btn_lang" id="btn_lang" onclick="sort('lang_id');">語系</button>
@@ -367,9 +367,9 @@
                             <button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content(SysPath + cFile_Edit + "?n_id=" + n_id)';"></button>
                         </td>
                         <td>@n_date</td>
-                        <td>@n_sort</td>
-                        <td>@cate_name</td>
                         <td class="text-left">@n_title</td>
+                        <td>@cate_name</td>
+                        <td>@n_sort</td>
                         <td>@lang_name</td>
                         <td><span class="label @show_class">@show</span></td>
                         <td><span class="label @index_class">@str_index</span></td>
