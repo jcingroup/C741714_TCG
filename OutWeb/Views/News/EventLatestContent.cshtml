@@ -13,9 +13,17 @@ string img_path = "/Images/";
     <li><a href="~/News/EventLatest">中央活動</a></li>
 }
 
-@* @section scripts {
-    <script src="~/Content/js/tabs.js"></script>
-} *@
+@section scripts {
+    @*<script src="~/Content/js/tabs.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.js"></script>
+    <script>
+        $(function() {
+            $("img.lazy").lazyload({
+                effect : "fadeIn"
+            });
+        });
+    </script>
+}
 
 <h1 class="sr-only">活動寫真</h1>
 
@@ -99,7 +107,7 @@ string img_path = "/Images/";
                     <li>
                         <figure class="pro">
                             <a href="@imgUrl" class="thumbnail" target="new">
-                                <img src="@imgUrl" alt="">
+                                <img class="lazy" data-original="@imgUrl" alt="">
                                 @* 圖說沒有資料則不顯示 *@
                                 @Html.Raw(description)
                             </a>
