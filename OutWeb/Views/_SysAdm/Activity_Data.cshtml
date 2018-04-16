@@ -359,7 +359,7 @@
 
             max_size = @FileSize * 1024 * 1024
             //檢查檔案大小(KB;MB = KB/1024);
-            f_size = findSize(c_img);
+            f_size = findSize("pic_" + c_sty);
             var cmsg = "上傳圖片的大小不能超過 @FileSize M!!!";
             if(f_size > max_size)
             {
