@@ -26,7 +26,13 @@
 }
 
 @section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.js"></script>
     <script src="~/Content/js/lightbox/js/lightbox.min.js"></script>
+    <script>
+        $(function() {
+            $("img.lazy").lazyload();
+        });
+    </script>
 } *@
 
 <h1 class="sr-only">如何加入台灣民政府</h1>
