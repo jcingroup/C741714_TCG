@@ -60,7 +60,7 @@ string img_path = "/Images/";
 @* 每頁5筆資料 *@
 <div class="articles">
 
-    @foreach (var data in Model.Data.Take(5))
+    @foreach (var data in Model.Data)
     {
         string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
         string contentUrl = Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesTypeID + "&ID=" + data.ID);
@@ -120,7 +120,7 @@ string img_path = "/Images/";
         </li>
 
         <li>
-            <form action="/News/EventLatest" method="get" class="form-inline">
+            <form action="/News/EventStatesList" method="get" class="form-inline">
                 第
                 <select name="page" id="numPage" class="form-element">
                     @for (int i = Model.Pagination.FirstPage; i <= Model.Pagination.LastPage; i++)
@@ -129,6 +129,7 @@ string img_path = "/Images/";
                     }
                 </select>
                 頁
+                <input name="statesTypeID" value="@Model.StatesTypeID" hidden />
             </form>
         </li>
 
