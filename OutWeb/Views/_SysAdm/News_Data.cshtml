@@ -14,6 +14,9 @@
     DataTable d_lang = (DataTable)ViewData["d_lang"];
     DataTable d_cate = (DataTable)ViewData["d_cate"];
 
+    //上傳檔案大小
+    string FileSize = "4";
+
     string n_id = "";
     string n_title = "";
     string n_desc = "";
@@ -262,7 +265,26 @@
         
         if ($("#pic_" + c_sty).val().length > 0) {
             //ajaxFileUpload('pic_small','small_img');
-            ajaxFileUpload(c_sty);
+            //ajaxFileUpload(c_sty);
+
+            var f_size = 0;
+            var max_size = 0;
+
+            max_size = @FileSize * 1024 * 1024
+            //檢查檔案大小(KB;MB = KB/1024);
+            f_size = findSize("pic_" + c_sty);
+            var cmsg = "上傳圖片的大小不能超過 @FileSize M!!!";
+            if(f_size > max_size)
+            {
+                alert(cmsg);
+                return false;
+            }
+            else
+            {
+                //ajaxFileUpload('pic_small','small_img');
+                //ajaxFileUpload(c_sty,c_cate);
+                ajaxFileUpload(c_sty);
+            }
         }
         else {
             alert("請選擇圖片");
@@ -321,6 +343,15 @@
             }
         )
         return false;
+    }
+
+    //獲得檔案大小
+    function findSize(field_id)
+    {
+        var byteSize = $("#" + field_id)[0].files[0].size;
+        //return ( Math.ceil(byteSize / 1024) ); // Size returned in KB.
+       
+        return ( Math.ceil(byteSize) ); // Size returned in B.
     }
 </script>
 <form class="form-list" action="News_Save" name="form1" id="form1" method="post" enctype="multipart/form-data">
