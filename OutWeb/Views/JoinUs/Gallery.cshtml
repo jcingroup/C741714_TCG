@@ -21,19 +21,21 @@
     <li>@ViewBag.Title</li>
 }
 
-@* @section css {
-    <link href="~/Content/js/lightbox/css/lightbox.min.css" rel="stylesheet">
+@section css {
+    @* <link href="~/Content/js/lightbox/css/lightbox.min.css" rel="stylesheet"> *@
 }
 
 @section scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.js"></script>
-    <script src="~/Content/js/lightbox/js/lightbox.min.js"></script>
+    @* <script src="~/Content/js/lightbox/js/lightbox.min.js"></script> *@
+    <script src="~/Content/js/jquery.lazyload.min.js"></script>
     <script>
         $(function() {
-            $("img.lazy").lazyload();
+            $("img.lazy").lazyload({
+                effect : "fadeIn"
+            });
         });
     </script>
-} *@
+}
 
 <h1 class="sr-only">如何加入台灣民政府</h1>
 
@@ -69,7 +71,7 @@
                 <figure class="pro text-center">
                     <!-- <a href="@Url.Content(img_path + img_file)" class="thumbnail" data-lightbox="gallery" data-title="台灣政府 法理學院 @cate_name 第 @c_title 期 (<a href='@Url.Content(img_path + img_file)' target='_blank'>按此看放大圖</a>)"> -->
                     <a href="@Url.Content(img_path + img_file)" class="thumbnail" target="new">
-                        <img src="@Url.Content(img_path + img_file)" alt="">
+                        <img class="lazy" data-original="@Url.Content(img_path + img_file)" alt="">
                         @* 初級班 class + primary *@
                         <span class="caption @spanSytle">
                             台灣政府 法理學院 @cate_name 第<strong>@c_title</strong>期

@@ -16,9 +16,17 @@ string img_path = "/Images/";
     <li><a href="@listTitleUrl">@Model.StatesCateInfo.Values.First()</a></li>
 }
 
-@* @section scripts {
-    <script src="~/Content/js/tabs.js"></script>
-} *@
+@section scripts {
+    @*<script src="~/Content/js/tabs.js"></script>*@
+    <script src="~/Content/js/jquery.lazyload.min.js"></script>
+    <script>
+        $(function() {
+            $("img.lazy").lazyload({
+                effect : "fadeIn"
+            });
+        });
+    </script>
+}
 
 <h1 class="sr-only">活動寫真</h1>
 
@@ -100,7 +108,7 @@ string img_path = "/Images/";
                 <li>
                     <figure class="pro">
                         <a href="@imgUrl" class="thumbnail" target="new">
-                            <img src="@imgUrl" alt="">
+                            <img class="lazy" data-original="@imgUrl" alt="">
                             @* 圖說沒有資料則不顯示 *@
                             @Html.Raw(description)
                         </a>
