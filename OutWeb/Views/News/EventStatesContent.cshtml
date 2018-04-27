@@ -16,14 +16,24 @@ string img_path = "/Images/";
     <li><a href="@listTitleUrl">@Model.StatesCateInfo.Values.First()</a></li>
 }
 
+@section css {
+    <link href="~/Content/js/fancybox/jquery.fancybox.min.css" rel="stylesheet">
+}
+
 @section scripts {
-    @*<script src="~/Content/js/tabs.js"></script>*@
+    <script src="~/Content/js/fancybox/jquery.fancybox.min.js"></script>
     <script src="~/Content/js/jquery.lazyload.min.js"></script>
     <script>
         $(function() {
             $("img.lazy").lazyload({
                 effect : "fadeIn"
             });
+        });
+
+        // 產生圖說
+        $("a[data-fancybox]").each(function(){
+            var caption = $(this).children(".caption").html();
+            $(this).data('caption', caption);
         });
     </script>
 }

@@ -22,17 +22,23 @@
 }
 
 @section css {
-    @* <link href="~/Content/js/lightbox/css/lightbox.min.css" rel="stylesheet"> *@
+    <link href="~/Content/js/fancybox/jquery.fancybox.min.css" rel="stylesheet">
 }
 
 @section scripts {
-    @* <script src="~/Content/js/lightbox/js/lightbox.min.js"></script> *@
+    <script src="~/Content/js/fancybox/jquery.fancybox.min.js"></script>
     <script src="~/Content/js/jquery.lazyload.min.js"></script>
     <script>
         $(function() {
             $("img.lazy").lazyload({
                 effect : "fadeIn"
             });
+        });
+
+        // 產生圖說
+        $("a[data-fancybox]").each(function(){
+            var caption = $(this).children(".caption").html();
+            $(this).data('caption', caption);
         });
     </script>
 }
@@ -70,7 +76,7 @@
                 <li class="col-md-6 col-12">
                 <figure class="pro text-center">
                     <!-- <a href="@Url.Content(img_path + img_file)" class="thumbnail" data-lightbox="gallery" data-title="台灣政府 法理學院 @cate_name 第 @c_title 期 (<a href='@Url.Content(img_path + img_file)' target='_blank'>按此看放大圖</a>)"> -->
-                    <a href="@Url.Content(img_path + img_file)" class="thumbnail" target="new">
+                    <a href="@Url.Content(img_path + img_file)" class="thumbnail" data-fancybox="gallery">
                         <img class="lazy" data-original="@Url.Content(img_path + img_file)" alt="">
                         @* 初級班 class + primary *@
                         <span class="caption @spanSytle">
