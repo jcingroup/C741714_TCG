@@ -476,7 +476,7 @@ namespace OutWeb.Service
             string[] cimg_id;
             string str_img_no = "";
             string str_img_id = "";
-
+            string oriFileNameReplace = "";//檔名要取代的字串(還原原始檔名)
 
             SqlConnection conn = new SqlConnection(CService.conn_string());
 
@@ -487,13 +487,15 @@ namespace OutWeb.Service
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
+            oriFileNameReplace = img_kind + "_" + img_no + "_" + img_sty + "_";
 
             try
             {
                 cimg_no = img_no.Split(',');
                 cimg_id = img_id.Split(',');
 
-                csql = "select * from img where status = 'Y' ";
+                csql = "select *,img_ori_name = Replace(img_file,@oriFileNameReplace,'')  from img where status = 'Y' ";
+
 
                 if (img_no != "ALL")
                 {
@@ -563,6 +565,10 @@ namespace OutWeb.Service
                         cmd.Parameters.AddWithValue("@str_img_id" + i.ToString(), cimg_id[i]);
                     }
                 }
+
+
+                cmd.Parameters.AddWithValue("@oriFileNameReplace", oriFileNameReplace);
+
 
                 if (dt.Tables["img"] != null)
                 {

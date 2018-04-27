@@ -256,7 +256,7 @@
 
             $.ajax({
                 url: 'Img_Del',
-                data: { img_id: img_id, img_sta: c_sty, img_no: cimg_no, img_cate: c_cate }, //此参数非常严谨，写错一个引号都不行
+                data: { img_id: img_id, img_sta: c_sty, img_no: cimg_no, img_cate: c_cate, img_sty: c_sty }, //此参数非常严谨，写错一个引号都不行
                 type: "POST",
                 dataType: 'TEXT', //返回值类型 一般设置为json
                 async: false,
@@ -276,6 +276,7 @@
                         c_html += "</colgroup>";
                         c_html += "<tr>";
                         c_html += "    <th>圖片</th>";
+                        c_html += "    <th>檔名</th>";
                         c_html += "    <th>圖說</th>";
                         c_html += "    <th>排序</th>";
                         //c_html += "    <th>封面圖</th>";
@@ -289,6 +290,9 @@
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
                             c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
+                            c_html = c_html + "    </td>";
+                            c_html = c_html + "    <td>";
+                            c_html = c_html + "        <label>" + obj.img_ori_name + "</label>";
                             c_html = c_html + "    </td>";
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" value=\"" + obj.img_desc + "\">";
@@ -454,6 +458,7 @@
                         c_html += "</colgroup>";
                         c_html += "<tr>";
                         c_html += "    <th>圖片</th>";
+                        c_html += "    <th>檔名</th>";
                         c_html += "    <th>圖說</th>";
                         c_html += "    <th>排序</th>";
                         //c_html += "    <th>封面圖</th>";
@@ -468,6 +473,9 @@
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
                             c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
+                            c_html = c_html + "    </td>";
+                            c_html = c_html + "    <td>";
+                            c_html = c_html + "        <label>" + obj.img_ori_name + "</label>";
                             c_html = c_html + "    </td>";
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" value=\"" + obj.img_desc + "\">";
@@ -935,6 +943,7 @@
                     c_html += "</colgroup>";
                     c_html += "<tr>";
                     c_html += "    <th>圖片</th>";
+                    c_html += "    <th>檔名</th>";
                     c_html += "    <th>圖說</th>";
                     c_html += "    <th>排序</th>";
                     //c_html += "    <th>封面圖</th>";
@@ -949,6 +958,9 @@
                         c_html = c_html + "    <td>";
                         c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
                         c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
+                        c_html = c_html + "    </td>";
+                        c_html = c_html + "    <td>";
+                        c_html = c_html + "        <label>" + obj.img_ori_name + "</label>";
                         c_html = c_html + "    </td>";
                         c_html = c_html + "    <td>";
                         c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" value=\"" + obj.img_desc + "\">";
