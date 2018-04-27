@@ -30,12 +30,13 @@
     @foreach (var data in Model.Data)
     {
         string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
+        string imgClass = string.IsNullOrEmpty(data.Img) ? "hidden" : "";
         string contentUrl = Url.Action("EventLatestContent", "News", new { ID = data.ID });
         string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : "<p>" + data.Remark + "</p>";
 
         <article class="article">
             <div class="row">
-                <div class="col-lg-3 col-sm-4 col-12">
+                <div class="col-lg-3 col-sm-4 col-12 @imgClass">
                     <a href="@contentUrl" class="thumbnail">
                         @* 沒有圖檔的替代圖 *@
                         <img src="@img" alt="">

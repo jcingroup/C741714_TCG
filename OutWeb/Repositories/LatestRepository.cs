@@ -148,7 +148,7 @@ namespace OutWeb.Repositories
 
             if (result.Count > 0)
             {
-                result = result.OrderByDescending(s => s.PublishDateString).ToList().Take(10).ToList();
+                result = result.OrderByDescending(s => s.PublishDateString).ToList().Take(20).ToList();
             }
             return result;
         }

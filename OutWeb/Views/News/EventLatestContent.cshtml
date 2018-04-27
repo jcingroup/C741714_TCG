@@ -18,9 +18,24 @@ string img_path = "/Images/";
 }
 
 @section scripts {
+    <!-- <script src="~/Content/js/load-image.all.min.js"></script> -->
     <script src="~/Content/js/fancybox/jquery.fancybox.min.js"></script>
     <script src="~/Content/js/jquery.lazyload.min.js"></script>
     <script>
+
+        // $(".prolist li a").each(function(){
+        //     var imgUrl = $(this).attr("href");
+
+        //     loadImage(
+        //         imgUrl,
+        //         function (img) {
+        //             // document.getElementById("test").appendChild(img);
+        //             $(this).append(img);
+        //         },
+        //         {orientation: true}
+        //     );
+        // });
+
         $(function() {
             $("img.lazy").lazyload({
                 effect : "fadeIn"
@@ -108,7 +123,7 @@ string img_path = "/Images/";
         @* 照片的呈現方式，有資料才顯示 *@
         @if (pageInfo.ImagesList.Count > 0)
             {
-            <ul class="prolist list-inline">
+            <ul id="test" class="prolist list-inline">
 
                 @foreach (var img in pageInfo.ImagesList)
                 {

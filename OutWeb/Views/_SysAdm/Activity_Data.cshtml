@@ -269,14 +269,13 @@
                     if (c_sty == "B") {
                         c_html += "<table class=\"uploader m-t-32\">";
                         c_html += "  <colgroup>";
-                        c_html += "    <col style=\"width: 15%\">";
-                        c_html += "    <col style=\"width: 60%\">";
-                        c_html += "    <col style=\"width: 15%\">";
+                        c_html += "    <col style=\"width: 25%\">";
+                        c_html += "    <col style=\"width: 55%\">";
+                        c_html += "    <col style=\"width: 10%\">";
                         c_html += "    <col style=\"width: 10%\">";
                         c_html += "</colgroup>";
                         c_html += "<tr>";
                         c_html += "    <th>圖片</th>";
-                        c_html += "    <th>檔名</th>";
                         c_html += "    <th>圖說</th>";
                         c_html += "    <th>排序</th>";
                         //c_html += "    <th>封面圖</th>";
@@ -290,9 +289,7 @@
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
                             c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
-                            c_html = c_html + "    </td>";
-                            c_html = c_html + "    <td>";
-                            c_html = c_html + "        <label>" + obj.img_ori_name + "</label>";
+                            c_html = c_html + "        <span class=\"block\">"+ obj.img_ori_name +"</span>";
                             c_html = c_html + "    </td>";
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" value=\"" + obj.img_desc + "\">";
@@ -451,14 +448,13 @@
                     {
                         c_html += "<table class=\"uploader m-t-32\">";
                         c_html += "  <colgroup>";
-                        c_html += "    <col style=\"width: 15%\">";
-                        c_html += "    <col style=\"width: 60%\">";
-                        c_html += "    <col style=\"width: 15%\">";
+                        c_html += "    <col style=\"width: 25%\">";
+                        c_html += "    <col style=\"width: 55%\">";
+                        c_html += "    <col style=\"width: 10%\">";
                         c_html += "    <col style=\"width: 10%\">";
                         c_html += "</colgroup>";
                         c_html += "<tr>";
                         c_html += "    <th>圖片</th>";
-                        c_html += "    <th>檔名</th>";
                         c_html += "    <th>圖說</th>";
                         c_html += "    <th>排序</th>";
                         //c_html += "    <th>封面圖</th>";
@@ -473,9 +469,7 @@
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
                             c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
-                            c_html = c_html + "    </td>";
-                            c_html = c_html + "    <td>";
-                            c_html = c_html + "        <label>" + obj.img_ori_name + "</label>";
+                            c_html = c_html + "        <span class=\"block\">"+ obj.img_ori_name +"</span>";
                             c_html = c_html + "    </td>";
                             c_html = c_html + "    <td>";
                             c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" value=\"" + obj.img_desc + "\">";
@@ -936,14 +930,13 @@
                 {
                     c_html += "<table class=\"uploader m-t-32\">";
                     c_html += "  <colgroup>";
-                    c_html += "    <col style=\"width: 15%\">";
-                    c_html += "    <col style=\"width: 60%\">";
-                    c_html += "    <col style=\"width: 15%\">";
+                    c_html += "    <col style=\"width: 25%\">";
+                    c_html += "    <col style=\"width: 55%\">";
+                    c_html += "    <col style=\"width: 10%\">";
                     c_html += "    <col style=\"width: 10%\">";
                     c_html += "</colgroup>";
                     c_html += "<tr>";
                     c_html += "    <th>圖片</th>";
-                    c_html += "    <th>檔名</th>";
                     c_html += "    <th>圖說</th>";
                     c_html += "    <th>排序</th>";
                     //c_html += "    <th>封面圖</th>";
@@ -958,9 +951,7 @@
                         c_html = c_html + "    <td>";
                         c_html = c_html + "        <input  type=\"hidden\" name=\"img_id_" + i + "\" id=\"img_id_" + i + "\" value=\"" + obj.id + "\" />";
                         c_html = c_html + "        <img id=\"img_B_" + i + "\" name=\"img_B_" + i + "\" src=\"../Images/" + obj.img_file + "\" alt=\"\">";
-                        c_html = c_html + "    </td>";
-                        c_html = c_html + "    <td>";
-                        c_html = c_html + "        <label>" + obj.img_ori_name + "</label>";
+                        c_html = c_html + "        <span class=\"block\">"+ obj.img_ori_name +"</span>";
                         c_html = c_html + "    </td>";
                         c_html = c_html + "    <td>";
                         c_html = c_html + "        <input type=\"text\" name=\"img_desc_" + i + "\" id=\"img_desc_" + i + "\" value=\"" + obj.img_desc + "\">";
@@ -1556,7 +1547,7 @@
 <!--//明細 新增 & 更新視窗 End -->
 
 <!--// 圖片管理 Start -->
-<div id="modalImage" class="modal modal-sm">
+<div id="modalImage" class="modal">
     <div class="modal-wrapper">
         <div class="modal-header">
             <h5 class="my-0">圖片管理</h5>

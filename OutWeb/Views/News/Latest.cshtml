@@ -18,7 +18,7 @@
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
 </h1>
 
-@* 後台有設定要顯示在最新訊息的文章 (最多10筆，依日期最新到最舊) *@
+@* 後台有設定要顯示在最新訊息的文章 (最多20筆，依日期最新到最舊) *@
 @if (Model.Count > 0)
 {
 
@@ -27,6 +27,7 @@
         @foreach (var data in Model)
         {
             string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
+            string imgClass = string.IsNullOrEmpty(data.Img) ? "hidden" : "";
             string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : "<p>" + data.Remark + "</p>";
             string listStyleFirst = string.Empty;
             string listStyle = string.Empty;
@@ -55,10 +56,9 @@
             }
             listStyleFirst = "label-" + listStyle;
 
-            @* 暫時先維持原狀 *@
             <article class="article">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-4 col-12">
+                    <div class="col-lg-3 col-sm-4 col-12 @imgClass">
                         <a href="@data.ContentUrl" class="thumbnail">
                             <img src="@img" alt="">
                         </a>

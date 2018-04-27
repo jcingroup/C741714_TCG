@@ -38,13 +38,14 @@ Dictionary<int, string> cateInfo = (TempData["CateInfo"] as Dictionary<int, stri
     {
         string listLink = Url.Content("~/News/AnnouncementList?typeID=" + data.CateIDInfo.Keys.First() + "&page=" + Model.Pagination.CurrentPage);
         string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
+        string imgClass = string.IsNullOrEmpty(data.Img) ? "hidden" : "";
         string contentUrl = Url.Content("~/News/AnnouncementContent?ID=" + data.ID + "&typeID=" + data.CateIDInfo.Keys.First());
         string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : data.Content.Length > 145 ? @"<p>" + data.Content.Substring(0, 145) + "...</p>" : "<p>" + data.Content + "</p>";
         string labelStyle = data.CateIDInfo.Keys.First() == 1 ? "label-danger" : data.CateIDInfo.Keys.First() == 2 ? "label-pink" : data.CateIDInfo.Keys.First() == 4 ? "label-purple" : "";
 
         <article class="article">
             <div class="row">
-                <div class="col-lg-3 col-sm-4 col-12">
+                <div class="col-lg-3 col-sm-4 col-12 @imgClass">
                     <a href="@contentUrl" class="thumbnail">
                         @* 沒有圖檔的替代圖 *@
                         <img src="@img" alt="">
