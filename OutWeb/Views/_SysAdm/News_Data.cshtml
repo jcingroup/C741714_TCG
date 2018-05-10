@@ -389,7 +389,10 @@
             {
                 for (int i = 0; i < d_cate.Rows.Count; i++)
                 {
-                    if (d_cate.Rows[i]["id"].ToString() == cate_id)
+                    if (action_sty == "add" && d_cate.Rows[i]["id"].ToString() == "1")  {
+                        cate_selected = "checked";
+                    }
+                    else if (d_cate.Rows[i]["id"].ToString() == cate_id)
                     {
                         cate_selected = "checked";
                     }
