@@ -90,7 +90,7 @@ string img_path = "/Images/";
 
     @* 文章分頁，有資料才顯示，第一頁 class + current *@
     //===FB share=====
-    System.Text.RegularExpressions.Regex rx = new System.Text.RegularExpressions.Regex("<[^>]*>|&nbsp;|\n"); //filter all html tag
+    System.Text.RegularExpressions.Regex rx = new System.Text.RegularExpressions.Regex("<[^>]*>|&nbsp;|\n|&quot;|\r"); //filter all html tag
     string desReTag = rx.Replace(pageInfo.Description, "");
     string remark = string.IsNullOrEmpty(desReTag) || desReTag.Length == 0 ? "" : desReTag.Length > 130 ? desReTag.Substring(0, 130) + "..." : desReTag; //catch 130 words
     string imgPath = string.IsNullOrEmpty(repImg) ? "" : img_path + repImg;

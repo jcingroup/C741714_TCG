@@ -15,13 +15,14 @@
         <title id="title">@ViewBag.Title | 台灣民政府 TCG</title>
     }
 
-    @if (ViewBag.Description != null)
+    @if (ViewBag.Description != null && ViewBag.Description != "")
     {
         <meta name="og:description" content="@ViewBag.Description">
     }
     else
     {
-        <meta name="og:description" content="">
+        @*<meta name="og:description" content="&hellip;">*@
+        <meta name="og:description" content="&nbsp;">
     }
 
     @if (ViewBag.IsFirstPage)
