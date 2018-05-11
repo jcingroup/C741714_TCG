@@ -15,6 +15,15 @@
         <title id="title">@ViewBag.Title | 台灣民政府 TCG</title>
     }
 
+    @if (ViewBag.Description != null)
+    {
+        <meta name="og:description" content="@ViewBag.Description">
+    }
+    else
+    {
+        <meta name="og:description" content="">
+    }
+
     @if (ViewBag.IsFirstPage)
     {
         <meta property="og:type" content="website" />
@@ -24,8 +33,15 @@
     {
         <meta property="og:type" content="article" />
         <meta property="og:title" content="@ViewBag.Title" />
+        if (@ViewBag.Image != null)
+        {
+            string urScheme = @HttpContext.Current.Request.Url.Scheme;
+            string urlAuth = @HttpContext.Current.Request.Url.Authority;
+            string img_path = urScheme + "://" + urlAuth + ViewBag.Image;
+            <meta property="og:image" content="@img_path" />
+        }
     }
-    <meta property="og:description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
+    @*<meta property="og:description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">*@
     <meta property="og:site_name" content="台灣民政府 Taiwan Civil Government">
     @RenderSection("OGMeta", false)
 

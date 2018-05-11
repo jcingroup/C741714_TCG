@@ -64,7 +64,16 @@
 
     @if (d_detail.Rows.Count > 0)
     {
+
         c_desc = d_detail.Rows[0]["c_desc"].ToString();
+
+        //====FB share===
+        System.Text.RegularExpressions.Regex rx = new System.Text.RegularExpressions.Regex("<[^>]*>|&nbsp;|\n"); //filter all html tag
+        string desReTag = rx.Replace(c_desc, "");
+        string remark = string.IsNullOrEmpty(desReTag) || desReTag.Length == 0 ? "" : desReTag.Length > 130 ? desReTag.Substring(0, 130) + "..." : desReTag; //catch 130 words
+        ViewBag.Description = remark; //FB share description
+
+        //=================
 
         <div>
             @Html.Raw(c_desc)

@@ -4,6 +4,7 @@
     ViewBag.Title = Model.Data.Title;
     ViewBag.BodyClass = "News Focus";
     string listTitleUrl = Url.Content("~/News/FocusList?focusTypeID=" + Model.FocusCateInfo.Keys.First());
+    string img_path = "/Images/";
 }
 
 @section breadcrumb {
@@ -45,11 +46,24 @@
         </ul>
     }
 
-    @{ var pageInfo = Model.Data.PagingList.Where(s => !string.IsNullOrEmpty(s.Current)).FirstOrDefault();}
+    @{ 
+        var pageInfo = Model.Data.PagingList.Where(s => !string.IsNullOrEmpty(s.Current)).FirstOrDefault();
+        string repImg = Model.Data.Img; //代表圖
+
+    }
+
     @if (pageInfo != null)
     {
         @* 文章分頁，有資料才顯示，第一頁 class + current *@
-        <div class="tab current">
+        //===FB share=====
+        System.Text.RegularExpressions.Regex rx = new System.Text.RegularExpressions.Regex("<[^>]*>|&nbsp;|\n"); //filter all html tag
+        string desReTag = rx.Replace(pageInfo.Description, "");
+        string remark = string.IsNullOrEmpty(desReTag) || desReTag.Length == 0 ? "" : desReTag.Length > 130 ? desReTag.Substring(0, 130) + "..."  : desReTag; //catch 130 words
+        string img = string.IsNullOrEmpty(repImg) ? "" : img_path + repImg;
+        ViewBag.Description = remark; //FB share description
+        ViewBag.Image = img; //FB share img
+        //=================
+            <div class="tab current">
             <div class="mb-16 clearfix">
                 @Html.Raw(pageInfo.Description.ToString())
             </div>

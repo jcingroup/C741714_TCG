@@ -3,8 +3,10 @@
 
 @{
     ViewBag.Title = Model.Data.Title; @* 文章標題 *@
-ViewBag.BodyClass = "News Announcement";
-string listLink = Url.Content("~/News/AnnouncementList?typeID=" + Model.Data.CateIDInfo.Keys.First());
+    ViewBag.BodyClass = "News Announcement";
+    ViewBag.Url = HttpContext.Current.Request.Url.AbsoluteUri; //FB share url
+    string listLink = Url.Content("~/News/AnnouncementList?typeID=" + Model.Data.CateIDInfo.Keys.First());
+    string img_path = "/Images/";
 }
 
 @section breadcrumb {
@@ -45,6 +47,17 @@ string listLink = Url.Content("~/News/AnnouncementList?typeID=" + Model.Data.Cat
         </li>
     </ul> -->
     @* 文章分頁，有資料才顯示，第一頁 class + current *@
+    @{ 
+        //====FB share===
+        System.Text.RegularExpressions.Regex rx = new System.Text.RegularExpressions.Regex("<[^>]*>|&nbsp;|\n"); //filter all html tag
+        string desReTag = rx.Replace(Model.Data.Content, "");
+        string remark = string.IsNullOrEmpty(desReTag) || desReTag.Length == 0 ? "" : desReTag.Length > 130 ? desReTag.Substring(0, 130) + "..." : desReTag; //catch 130 words
+        string img = string.IsNullOrEmpty(Model.Data.Img) ? "" : img_path + Model.Data.Img;
+        ViewBag.Description = remark; //FB share description
+        ViewBag.Image = img; //FB share img
+
+        //=================
+    }
     <div class="tab current" id="">
         @Html.Raw(Model.Data.Content)
     </div>
