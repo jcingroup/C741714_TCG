@@ -1,0 +1,53 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = "クラススケジュール";
+    ViewBag.BodyClass = "JoinUs School";
+
+    DataTable dt = (DataTable)ViewData["dt"];
+    string img_path = "~/Images/";
+    string c_title = "";
+    string c_desc = "";
+    string cate_id = "";
+    string lang_id = "";
+    string lang_name = "";
+    string cate_name = "";
+    string ci = "";
+    string c_tab = "";
+    string c_tab_nav = "";
+}
+
+@section breadcrumb {
+    <li><a href="~/JoinUs">台湾民政府への参加方法</a></li>
+    <li><a href="~/JoinUs/Live">台湾法学部に参加する</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<h1 class="sr-only">台湾民政府への参加方法</h1>
+
+<ul class="tabs list-inline text-center">
+    <li><a href="~/JoinUs/Live">クラスルームライブ</a></li>
+    <li><a class="current" href="~/JoinUs/Schedule">クラススケジュール</a></li>
+    <li><a href="~/JoinUs/Gallery">前の写真</a></li>
+    @* 歷屆課程影片網址來源: 後台 > 加入台灣民政府 > 參加台灣法理學院 > 歷屆課程影片 *@
+    <li><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">前のコースビデオ</a></li>
+</ul>
+
+<h2 class="title">
+    <span class="underline">@ViewBag.Title</span>
+    <!-- <div class="addthis_inline_share_toolbox"></div> -->
+</h2>
+
+<div class="clearfix editor">
+
+    <div class="calendar embed-responsive">
+        <iframe class="calendar" src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;height=400&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=6tkmi89t522780142r1u1b4ep8%40group.calendar.google.com&amp;color=%23182C57&amp;src=7m2501qkk7nivpuiu7fv7t0soc%40group.calendar.google.com&amp;color=%23711616&amp;src=zh.taiwan%23holiday%40group.v.calendar.google.com&amp;color=%23125A12&amp;ctz=Asia%2FTaipei" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <ul class="list-unstyled">
+        <li><strong>資格：</strong>何でも</li>
+        <li><strong>登録時間：</strong>授業の日 午後1時から午後6時まで</li>
+        <li><strong>経費：</strong>宿泊施設(2泊)、食べ物、教科書 合計 6,000 元(上級クラス 10,000元)</li>
+        <li><strong>住所：</strong>桃園市龜山區員林坑路100-1號</li>
+        <li><strong>コール：</strong>(03)355-6363</li>
+    </ul>
+    
+</div>

@@ -920,6 +920,8 @@
     <Content Include="Views\_SysAdm\Dashboard.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
+    <Content Include="Views\JoinUs\Schedule.en-US.cshtml" />
+    <Content Include="Views\JoinUs\Schedule.ja-JP.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
