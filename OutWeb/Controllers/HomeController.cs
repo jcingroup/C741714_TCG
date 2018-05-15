@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace OutWeb.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : LanguageController
     {
         public HomeController()
         {
@@ -16,9 +16,11 @@ namespace OutWeb.Controllers
         }
 
         // all 靜態
-        public ActionResult Index()
+        public ActionResult Index(string lang = "")
         {
             ViewBag.IsFirstPage = true;
+
+            Change_Lang(lang);  // 前端多國語言 
 
             return View();
         }
