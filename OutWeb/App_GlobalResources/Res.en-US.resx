@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="home_about" xml:space="preserve">
-    <value>台灣民政府</value>
+    <value>台灣民政府(E)</value>
   </data>
   <data name="home_joinUs" xml:space="preserve">
     <value>如何加入</value>

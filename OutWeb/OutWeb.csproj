@@ -166,15 +166,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Res.cn.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Res.en.designer.cs">
+    <Compile Include="App_GlobalResources\Res.en-US.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Res.en.resx</DependentUpon>
+      <DependentUpon>Res.en-US.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Res.JPN.Designer.cs">
+    <Compile Include="App_GlobalResources\Res.ja-JP.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Res.JPN.resx</DependentUpon>
+      <DependentUpon>Res.ja-JP.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\ResO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResO.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\Res.zh-tw.designer.cs">
       <AutoGen>True</AutoGen>
@@ -187,6 +192,7 @@
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\JoinUsController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -836,10 +842,6 @@
     <Content Include="ckeditor\CHANGES.md" />
     <Content Include="ckeditor\LICENSE.md" />
     <Content Include="ckeditor\README.md" />
-    <Content Include="App_GlobalResources\Res.en.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Res.en.designer.cs</LastGenOutput>
-    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -976,22 +978,34 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Res.zh-tw.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Res.zh-tw.designer.cs</LastGenOutput>
-    </Content>
+    <EmbeddedResource Include="App_GlobalResources\Res.ja-JP.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Res.ja-JP.designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Res.JPN.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Res.JPN.Designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\Res.cn.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+    <EmbeddedResource Include="App_GlobalResources\Res.cn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Res.cn.Designer.cs</LastGenOutput>
-    </Content>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\Res.zh-tw.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Res.zh-tw.designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\ResO.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\Res.en-US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Res.en-US.designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

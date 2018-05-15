@@ -81,8 +81,9 @@
             <section id="pageBanner">
                 <div class="wrap">
                     <ul class="topNav list-inline">
-                        <!-- <li class="lang"><a href="">English</a></li>
-                        <li class="lang"><a href="">日本語</a></li> -->
+                        <li class="lang"><a href="@Url.Action("Index", new { lang = "zh-tw" })">繁體中文</a></li>
+                        <li class="lang"><a href="@Url.Action("Index", new { lang = "en-US" })">English</a></li>
+                        <li class="lang"><a href="@Url.Action("Index", new { lang = "ja-JP" })">日本語</a></li>
                         <li class="search">
                             <button class="search-trigger icon-search"></button>
                         </li>
@@ -106,19 +107,19 @@
                         <li>
                             <a href="~/AboutUs">
                                 <i class="icon-about"></i>
-                                認識民政府
+                                @OutWeb.App_GlobalResources.ResO.home_about
                             </a>
                         </li>
                         <li>
                             <a href="~/JoinUs">
                                 <i class="icon-join-us"></i>
-                                如何加入
+                                @OutWeb.App_GlobalResources.ResO.home_joinUs
                             </a>
                         </li>
                         <li>
                             <a href="~/News">
                                 <i class="icon-news2"></i>
-                                活動公告
+                                @OutWeb.App_GlobalResources.ResO.home_news
                             </a>
                         </li>
                     </ul>
