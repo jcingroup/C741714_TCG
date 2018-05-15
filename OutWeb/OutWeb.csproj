@@ -176,10 +176,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Res.ja-JP.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\ResO.Designer.cs">
+    <Compile Include="App_GlobalResources\Res.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ResO.resx</DependentUpon>
+      <DependentUpon>Res.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\Res.zh-tw.designer.cs">
       <AutoGen>True</AutoGen>
@@ -996,9 +996,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_GlobalResources\ResO.resx">
+    <EmbeddedResource Include="App_GlobalResources\Res.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResO.Designer.cs</LastGenOutput>
+      <LastGenOutput>Res.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
