@@ -114,6 +114,29 @@ namespace OutWeb.Service
 
             return dt;
         }
+
+        public DataTable GetLangID(string lang_name)
+        {
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand();
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+            cmd.Connection = conn;
+
+            csql = "select "
+                + "  * "
+                + "from "
+                + "  lang "
+                + "where "
+                + "  status = 'Y' and lang_id = @lang_name";
+
+            cmd.CommandText = csql;
+            cmd.Parameters.AddWithValue("@lang_name", lang_name);
+
+            SqlDataAdapter lang_ada = new SqlDataAdapter();
+            lang_ada.SelectCommand = cmd;
+            lang_ada.Fill(ds, "lang");
+            return dt;
+        }
         #endregion
     }
 }
