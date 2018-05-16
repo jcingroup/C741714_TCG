@@ -1,6 +1,7 @@
 ﻿@using System.Data
+@using OutWeb.App_GlobalResources
 @{
-    ViewBag.Title = "申請台灣民政府身分證";
+    ViewBag.Title = Res.joinUs_apply;
     ViewBag.BodyClass = "JoinUs Apply";
 
     DataTable dt = (DataTable)ViewData["dt"];
@@ -20,7 +21,7 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/JoinUs">如何加入台灣民政府</a></li>
+    <li><a href="~/JoinUs">@Res.nav_joinUs</a></li>
     <li>@ViewBag.Title</li>
 }
 

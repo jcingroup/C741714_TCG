@@ -16,7 +16,7 @@ using System.Web.Configuration;
 
 namespace OutWeb.Controllers
 {
-    public class JoinUsController : Controller
+    public class JoinUsController : LanguageController
     {
         //== Class 建立 =========================================//
         DBService DB = new DBService();
@@ -41,8 +41,9 @@ namespace OutWeb.Controllers
             ViewBag.IsFirstPage = false;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string lang="")
         {
+            Change_Lang(lang);
             return RedirectToAction("Apply");
         }
 
@@ -55,7 +56,7 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             DataTable dt1;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
             dt1 = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)

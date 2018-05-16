@@ -1,4 +1,5 @@
 ﻿@using System.Data
+@using OutWeb.App_GlobalResources
 @{
     ViewBag.Title = "";
     ViewBag.BodyClass = "AboutUs Organization";
@@ -34,8 +35,8 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
-    <li><a href="~/AboutUs/Organization?cate_id=7">行政區域圖&組織架構</a></li>
+    <li><a href="~/AboutUs">@Res.aboutUs_sub</a></li>
+    <li><a href="~/AboutUs/Organization?cate_id=7">@Res.aboutUs_org</a></li>
     <li>@ViewBag.Title</li>
 }
 
@@ -43,10 +44,10 @@
     <script src="~/Content/js/tabs.js"></script>
 } *@
 
-<h1 class="sr-only">關於我們 - 行政區域圖&組織架構</h1>
+<h1 class="sr-only">@Res.aboutUs - @Res.aboutUs_org</h1>
 
 <ul class="tabs list-inline text-center">
-    <li class="back"><a href="~/AboutUs"><i class="oi" data-glyph="caret-left"></i> 回上層</a></li>
+    <li class="back"><a href="~/AboutUs"><i class="oi" data-glyph="caret-left"></i> @Res.back</a></li>
 
     @for (int i = 0; i < d_cate.Rows.Count; i++)
     {
@@ -61,6 +62,29 @@
         else
         {
             c_tab_nav = "";
+        }
+
+        //切換相對應語言
+        if (Res.lang == "en-US" || Res.lang == "ja-JP")
+        {
+            switch (cate_name)
+            {
+                case "行政區域圖":
+                    cate_name = Res.org_adminReg;
+                    ViewBag.Title = Res.org_adminReg;
+                    break;
+                case "組織架構":
+                    cate_name = Res.org_org;
+                    ViewBag.Title = Res.org_org;
+                    break;
+                case "人事名單":
+                    cate_name = Res.org_people;
+                    ViewBag.Title = Res.org_people;
+                    break;
+                default:
+                    break;
+
+            }
         }
         <li><a class="@c_tab_nav" href="@Url.Content(cFile + "?cate_id=" + c_cate_id)">@cate_name</a></li>
     }

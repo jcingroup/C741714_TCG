@@ -61,7 +61,160 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 台灣民政府 的當地語系化字串。
+        ///   查詢類似 關於我們 的當地語系化字串。
+        /// </summary>
+        public static string aboutUs {
+            get {
+                return ResourceManager.GetString("aboutUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 教育專欄 的當地語系化字串。
+        /// </summary>
+        public static string aboutUs_eduCategory {
+            get {
+                return ResourceManager.GetString("aboutUs_eduCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 官方證明文件 的當地語系化字串。
+        /// </summary>
+        public static string aboutUs_law {
+            get {
+                return ResourceManager.GetString("aboutUs_law", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 行政區域圖&amp;組織架構 的當地語系化字串。
+        /// </summary>
+        public static string aboutUs_org {
+            get {
+                return ResourceManager.GetString("aboutUs_org", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 主張與立場 的當地語系化字串。
+        /// </summary>
+        public static string aboutUs_position {
+            get {
+                return ResourceManager.GetString("aboutUs_position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 台灣地位的聲明 的當地語系化字串。
+        /// </summary>
+        public static string aboutUs_statement {
+            get {
+                return ResourceManager.GetString("aboutUs_statement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 什麼是台灣民政府 的當地語系化字串。
+        /// </summary>
+        public static string aboutUs_sub {
+            get {
+                return ResourceManager.GetString("aboutUs_sub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 新竹州桃園郡龜山鄉員林坑路100-1號 的當地語系化字串。
+        /// </summary>
+        public static string address {
+            get {
+                return ResourceManager.GetString("address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 回上頁 的當地語系化字串。
+        /// </summary>
+        public static string back {
+            get {
+                return ResourceManager.GetString("back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 新竹州 的當地語系化字串。
+        /// </summary>
+        public static string consult_hsinchu {
+            get {
+                return ResourceManager.GetString("consult_hsinchu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 高雄州 的當地語系化字串。
+        /// </summary>
+        public static string consult_kaohsiung {
+            get {
+                return ResourceManager.GetString("consult_kaohsiung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 台中州 的當地語系化字串。
+        /// </summary>
+        public static string consult_taichung {
+            get {
+                return ResourceManager.GetString("consult_taichung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 台南州 的當地語系化字串。
+        /// </summary>
+        public static string consult_tainan {
+            get {
+                return ResourceManager.GetString("consult_tainan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 台北州 的當地語系化字串。
+        /// </summary>
+        public static string consult_taipei {
+            get {
+                return ResourceManager.GetString("consult_taipei", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 宜蘭州 的當地語系化字串。
+        /// </summary>
+        public static string consult_yilan {
+            get {
+                return ResourceManager.GetString("consult_yilan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 FB 官方粉絲頁1 的當地語系化字串。
+        /// </summary>
+        public static string fbPage_1 {
+            get {
+                return ResourceManager.GetString("fbPage_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 FB 官方粉絲頁2 的當地語系化字串。
+        /// </summary>
+        public static string fbPage_2 {
+            get {
+                return ResourceManager.GetString("fbPage_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 認識民政府 的當地語系化字串。
         /// </summary>
         public static string home_about {
             get {
@@ -84,6 +237,321 @@ namespace OutWeb.App_GlobalResources {
         public static string home_news {
             get {
                 return ResourceManager.GetString("home_news", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 申請台灣民政府身分證 的當地語系化字串。
+        /// </summary>
+        public static string joinUs_apply {
+            get {
+                return ResourceManager.GetString("joinUs_apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 地方服務處諮詢 的當地語系化字串。
+        /// </summary>
+        public static string joinUs_consult {
+            get {
+                return ResourceManager.GetString("joinUs_consult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 歷屆合照 的當地語系化字串。
+        /// </summary>
+        public static string joinUs_gallery {
+            get {
+                return ResourceManager.GetString("joinUs_gallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 參加台灣法理學院 的當地語系化字串。
+        /// </summary>
+        public static string joinUs_joinCollege {
+            get {
+                return ResourceManager.GetString("joinUs_joinCollege", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 課堂LIVE直播 的當地語系化字串。
+        /// </summary>
+        public static string joinUs_live {
+            get {
+                return ResourceManager.GetString("joinUs_live", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 開課時間表 的當地語系化字串。
+        /// </summary>
+        public static string joinUs_schedule {
+            get {
+                return ResourceManager.GetString("joinUs_schedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 歷屆課程影片 的當地語系化字串。
+        /// </summary>
+        public static string joinUs_tchVideo {
+            get {
+                return ResourceManager.GetString("joinUs_tchVideo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 zh-tw 的當地語系化字串。
+        /// </summary>
+        public static string lang {
+            get {
+                return ResourceManager.GetString("lang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 法律依據 的當地語系化字串。
+        /// </summary>
+        public static string law {
+            get {
+                return ResourceManager.GetString("law", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 台灣公民權利法 的當地語系化字串。
+        /// </summary>
+        public static string law_auth {
+            get {
+                return ResourceManager.GetString("law_auth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 台灣基本法 的當地語系化字串。
+        /// </summary>
+        public static string law_basic {
+            get {
+                return ResourceManager.GetString("law_basic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 官方證明文件 的當地語系化字串。
+        /// </summary>
+        public static string law_paper {
+            get {
+                return ResourceManager.GetString("law_paper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 相關連結 的當地語系化字串。
+        /// </summary>
+        public static string link {
+            get {
+                return ResourceManager.GetString("link", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 認識台灣民政府 的當地語系化字串。
+        /// </summary>
+        public static string nav_aboutUs {
+            get {
+                return ResourceManager.GetString("nav_aboutUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 如何加入台灣民政府 的當地語系化字串。
+        /// </summary>
+        public static string nav_joinUs {
+            get {
+                return ResourceManager.GetString("nav_joinUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 最新消息 活動公告 的當地語系化字串。
+        /// </summary>
+        public static string nav_news {
+            get {
+                return ResourceManager.GetString("nav_news", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 最新消息 的當地語系化字串。
+        /// </summary>
+        public static string news {
+            get {
+                return ResourceManager.GetString("news", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 新聞 公告 聲明 的當地語系化字串。
+        /// </summary>
+        public static string news_announLatest {
+            get {
+                return ResourceManager.GetString("news_announLatest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 中央公告 的當地語系化字串。
+        /// </summary>
+        public static string news_centralAnnounce {
+            get {
+                return ResourceManager.GetString("news_centralAnnounce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 中央新聞 的當地語系化字串。
+        /// </summary>
+        public static string news_centralNews {
+            get {
+                return ResourceManager.GetString("news_centralNews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 中央聲明 的當地語系化字串。
+        /// </summary>
+        public static string news_centralStatement {
+            get {
+                return ResourceManager.GetString("news_centralStatement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 活動寫真 的當地語系化字串。
+        /// </summary>
+        public static string news_event {
+            get {
+                return ResourceManager.GetString("news_event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 中央活動 的當地語系化字串。
+        /// </summary>
+        public static string news_eventLatest {
+            get {
+                return ResourceManager.GetString("news_eventLatest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 各州活動 的當地語系化字串。
+        /// </summary>
+        public static string news_eventStatesCategory {
+            get {
+                return ResourceManager.GetString("news_eventStatesCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 焦點專欄 的當地語系化字串。
+        /// </summary>
+        public static string news_focusCategory {
+            get {
+                return ResourceManager.GetString("news_focusCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 行政區域圖 的當地語系化字串。
+        /// </summary>
+        public static string org_adminReg {
+            get {
+                return ResourceManager.GetString("org_adminReg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 組織架構 的當地語系化字串。
+        /// </summary>
+        public static string org_org {
+            get {
+                return ResourceManager.GetString("org_org", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 人事名單 的當地語系化字串。
+        /// </summary>
+        public static string org_people {
+            get {
+                return ResourceManager.GetString("org_people", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 33391 的當地語系化字串。
+        /// </summary>
+        public static string postCode {
+            get {
+                return ResourceManager.GetString("postCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 TCG舊官網 的當地語系化字串。
+        /// </summary>
+        public static string pre_site {
+            get {
+                return ResourceManager.GetString("pre_site", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 搜尋 的當地語系化字串。
+        /// </summary>
+        public static string search {
+            get {
+                return ResourceManager.GetString("search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 溫晟志 0987-577-175 的當地語系化字串。
+        /// </summary>
+        public static string spokesman_p {
+            get {
+                return ResourceManager.GetString("spokesman_p", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 台灣民政府 中央發言人 的當地語系化字串。
+        /// </summary>
+        public static string spokesman_w {
+            get {
+                return ResourceManager.GetString("spokesman_w", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 (03) 355-6363 的當地語系化字串。
+        /// </summary>
+        public static string tel {
+            get {
+                return ResourceManager.GetString("tel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 TCG華盛頓官網 的當地語系化字串。
+        /// </summary>
+        public static string WV_site {
+            get {
+                return ResourceManager.GetString("WV_site", resourceCulture);
             }
         }
     }

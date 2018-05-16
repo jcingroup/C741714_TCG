@@ -161,10 +161,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionFilter\CheckFolderAttribute.cs" />
-    <Compile Include="App_GlobalResources\Res.cn.Designer.cs">
+    <Compile Include="App_GlobalResources\Res.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Res.cn.resx</DependentUpon>
+      <DependentUpon>Res.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\Res.en-US.designer.cs">
       <AutoGen>True</AutoGen>
@@ -176,10 +176,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Res.ja-JP.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Res.Designer.cs">
+    <Compile Include="App_GlobalResources\Res.zh-CN.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Res.resx</DependentUpon>
+      <DependentUpon>Res.zh-CN.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\Res.zh-tw.designer.cs">
       <AutoGen>True</AutoGen>
@@ -978,33 +978,26 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\Res.en-US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Res.en-US.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="App_GlobalResources\Res.ja-JP.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Res.ja-JP.designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App_GlobalResources\Res.cn.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Res.cn.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App_GlobalResources\Res.zh-tw.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Res.zh-tw.designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\Res.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Res.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App_GlobalResources\Res.en-US.resx">
+    <EmbeddedResource Include="App_GlobalResources\Res.zh-tw.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Res.en-US.designer.cs</LastGenOutput>
+      <LastGenOutput>Res.zh-tw.designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_GlobalResources\Res.zh-CN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Res.zh-CN.designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

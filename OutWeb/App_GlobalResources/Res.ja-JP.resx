@@ -117,13 +117,98 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="aboutUs" xml:space="preserve">
+    <value>關於我們</value>
+  </data>
+  <data name="aboutUs_eduCategory" xml:space="preserve">
+    <value>教育專欄</value>
+  </data>
+  <data name="aboutUs_law" xml:space="preserve">
+    <value>官方證明文件</value>
+  </data>
+  <data name="aboutUs_org" xml:space="preserve">
+    <value>行政區域圖&amp;組織架構</value>
+  </data>
+  <data name="aboutUs_position" xml:space="preserve">
+    <value>主張與立場</value>
+  </data>
+  <data name="aboutUs_statement" xml:space="preserve">
+    <value>台灣地位的聲明</value>
+  </data>
   <data name="home_about" xml:space="preserve">
-    <value>台灣民政府(繁中)</value>
+    <value>認識民政府</value>
   </data>
   <data name="home_joinUs" xml:space="preserve">
     <value>如何加入</value>
   </data>
   <data name="home_news" xml:space="preserve">
     <value>活動公告</value>
+  </data>
+  <data name="joinUs_apply" xml:space="preserve">
+    <value>申請台灣民政府身分證</value>
+  </data>
+  <data name="joinUs_consult" xml:space="preserve">
+    <value>地方服務處諮詢</value>
+  </data>
+  <data name="joinUs_gallery" xml:space="preserve">
+    <value>歷屆合照</value>
+  </data>
+  <data name="joinUs_live" xml:space="preserve">
+    <value>課堂LIVE直播</value>
+  </data>
+  <data name="joinUs_schedule" xml:space="preserve">
+    <value>課堂時間表</value>
+  </data>
+  <data name="joinUs_tchVideo" xml:space="preserve">
+    <value>歷屆課程影片</value>
+  </data>
+  <data name="lang" xml:space="preserve">
+    <value>ja-JP</value>
+  </data>
+  <data name="law_auth" xml:space="preserve">
+    <value>台灣公民權利法</value>
+  </data>
+  <data name="law_basic" xml:space="preserve">
+    <value>台灣基本法</value>
+  </data>
+  <data name="law_paper" xml:space="preserve">
+    <value>官方證明文件</value>
+  </data>
+  <data name="nav_aboutUs" xml:space="preserve">
+    <value>認識台灣民政府(jp)</value>
+  </data>
+  <data name="nav_joinUs" xml:space="preserve">
+    <value>如何加入台灣民政府</value>
+  </data>
+  <data name="nav_news" xml:space="preserve">
+    <value>最新消息 活動公告</value>
+  </data>
+  <data name="news_even" xml:space="preserve">
+    <value>活動寫真</value>
+  </data>
+  <data name="news_evenLatest" xml:space="preserve">
+    <value>中央活動(jp)</value>
+  </data>
+  <data name="news_eventStatesCategory" xml:space="preserve">
+    <value>各州活動</value>
+  </data>
+  <data name="org_adminReg" xml:space="preserve">
+    <value>行政區域圖</value>
+    <comment>行政區域圖&amp;組織架構 子分頁</comment>
+  </data>
+  <data name="org_org" xml:space="preserve">
+    <value>組織架構</value>
+    <comment>行政區域圖&amp;組織架構 子分頁</comment>
+  </data>
+  <data name="org_people" xml:space="preserve">
+    <value>人事名單</value>
+    <comment>行政區域圖&amp;組織架構 子分頁</comment>
+  </data>
+  <data name="postCode" xml:space="preserve">
+    <value>33391</value>
+    <comment>郵遞區號</comment>
+  </data>
+  <data name="tel" xml:space="preserve">
+    <value>(03) 355-6363</value>
   </data>
 </root>
