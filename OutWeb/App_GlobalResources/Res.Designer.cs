@@ -358,6 +358,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 閱讀全文 的當地語系化字串。
+        /// </summary>
+        public static string more {
+            get {
+                return ResourceManager.GetString("more", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 認識台灣民政府 的當地語系化字串。
         /// </summary>
         public static string nav_aboutUs {
@@ -466,6 +475,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 下一頁 的當地語系化字串。
+        /// </summary>
+        public static string next_page {
+            get {
+                return ResourceManager.GetString("next_page", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 行政區域圖 的當地語系化字串。
         /// </summary>
         public static string org_adminReg {
@@ -498,6 +516,15 @@ namespace OutWeb.App_GlobalResources {
         public static string postCode {
             get {
                 return ResourceManager.GetString("postCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 上一頁 的當地語系化字串。
+        /// </summary>
+        public static string pre_page {
+            get {
+                return ResourceManager.GetString("pre_page", resourceCulture);
             }
         }
         

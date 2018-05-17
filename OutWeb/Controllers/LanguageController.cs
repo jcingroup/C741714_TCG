@@ -116,7 +116,7 @@ namespace OutWeb.Controllers
             switch (cookie.Value) {
                 case "en-US":
                     return "en";
-                case "zh-tw":
+                case "zh-TW":
                     return "zh-tw";
                 case "zh-CN":
                     return "cn";

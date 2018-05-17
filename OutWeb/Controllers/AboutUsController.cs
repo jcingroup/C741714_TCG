@@ -203,12 +203,14 @@ namespace OutWeb.Controllers
 
             EducationRepository repo = new EducationRepository();
             EducationResult mdoel = repo.GetList((int)eduTypeID, filter);
+            GetLang();
             return View(mdoel);
         }
 
         // 焦點專欄 - 內容
         public ActionResult EducationContent(int? eduTypeID, int? ID, int? pagingID)
         {
+
             if (!eduTypeID.HasValue || !ID.HasValue)
                 return RedirectToAction("EducationList");
             string langCd = string.Empty;

@@ -301,4 +301,13 @@
   <data name="WV_site" xml:space="preserve">
     <value>TCG華盛頓官網(en)</value>
   </data>
+  <data name="more" xml:space="preserve">
+    <value>閱讀全文(en)</value>
+  </data>
+  <data name="next_page" xml:space="preserve">
+    <value>下一頁</value>
+  </data>
+  <data name="pre_page" xml:space="preserve">
+    <value>上一頁</value>
+  </data>
 </root>
