@@ -197,7 +197,7 @@
     <value>參加台灣法理學院</value>
   </data>
   <data name="joinUs_live" xml:space="preserve">
-    <value>課堂LIVE直播</value>
+    <value>課堂 LIVE 直播</value>
     <comment>參加台灣法理學院 子分頁</comment>
   </data>
   <data name="joinUs_schedule" xml:space="preserve">
@@ -304,5 +304,17 @@
   </data>
   <data name="pre_page" xml:space="preserve">
     <value>上一頁</value>
+  </data>
+  <data name="gallery_t" xml:space="preserve">
+    <value>台灣政府 法理學院</value>
+  </data>
+  <data name="gallery_tchVideo" xml:space="preserve">
+    <value>上課影片</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>第</value>
+  </data>
+  <data name="vol" xml:space="preserve">
+    <value>期</value>
   </data>
 </root>

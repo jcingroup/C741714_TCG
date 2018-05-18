@@ -1,10 +1,11 @@
 ﻿@using OutWeb.Models.FrontModels.News.LatestModels
 @using OutWeb.Repositories
+@using OutWeb.App_GlobalResources
 
 @model List<LatestData>
 
 @{
-    ViewBag.Title = "最新訊息 活動公告";
+    ViewBag.Title = Res.nav_news;
     ViewBag.BodyClass = "News Latest";
     string img_path = "/Images/";
 }
@@ -75,7 +76,7 @@
                         <h3><a href="@data.ContentUrl">@data.Title</a></h3>
                         <!-- 摘要 取前 145 個字，有資料的話才顯示 -->
                         <p>@Html.Raw(remark)</p>
-                        <a href="@data.ContentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                        <a href="@data.ContentUrl" class="more"> @Res.more <i class="oi" data-glyph="caret-right"></i></a>
                     </div>
                 </div>
             </article>

@@ -214,6 +214,24 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 台灣政府 法理學院 的當地語系化字串。
+        /// </summary>
+        public static string gallery_t {
+            get {
+                return ResourceManager.GetString("gallery_t", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 上課影片 的當地語系化字串。
+        /// </summary>
+        public static string gallery_tchVideo {
+            get {
+                return ResourceManager.GetString("gallery_tchVideo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 認識民政府 的當地語系化字串。
         /// </summary>
         public static string home_about {
@@ -277,7 +295,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 課堂LIVE直播 的當地語系化字串。
+        ///   查詢類似 課堂 LIVE 直播 的當地語系化字串。
         /// </summary>
         public static string joinUs_live {
             get {
@@ -484,6 +502,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 第 的當地語系化字串。
+        /// </summary>
+        public static string no {
+            get {
+                return ResourceManager.GetString("no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 行政區域圖 的當地語系化字串。
         /// </summary>
         public static string org_adminReg {
@@ -570,6 +597,15 @@ namespace OutWeb.App_GlobalResources {
         public static string tel {
             get {
                 return ResourceManager.GetString("tel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 期 的當地語系化字串。
+        /// </summary>
+        public static string vol {
+            get {
+                return ResourceManager.GetString("vol", resourceCulture);
             }
         }
         

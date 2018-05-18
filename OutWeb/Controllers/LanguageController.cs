@@ -26,13 +26,13 @@ namespace OutWeb.Controllers
         {
 
             HttpCookie cookie = Request.Cookies["_culture"];
-            if (lang != "")   //點擊其他頁面時
+            if (lang != "" && lang!=null)   //點擊其他頁面時
             {
                 // update cookie value 
                 cookie.Value = lang;
                 Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(lang);
                 Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;// 主要
-            }else if ((cookie == null) && (lang == "")) //初次瀏覽頁面時
+            }else if ((cookie == null) && ((lang == "") || lang == null)) //初次瀏覽頁面時
             {
                 try
                 {
