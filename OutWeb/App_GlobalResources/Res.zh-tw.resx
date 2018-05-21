@@ -126,8 +126,8 @@
   <data name="aboutUs_law" xml:space="preserve">
     <value>官方證明文件</value>
   </data>
-  <data name="aboutUs_org" xml:space="preserve">
-    <value>行政區域圖&amp;組織架構</value>
+  <data name="aboutUs_org_1" xml:space="preserve">
+    <value>行政區域圖&amp;amp;&lt;br class="visible-xs"&gt;組織架構</value>
   </data>
   <data name="aboutUs_position" xml:space="preserve">
     <value>主張與立場</value>
@@ -316,5 +316,23 @@
   </data>
   <data name="vol" xml:space="preserve">
     <value>期</value>
+  </data>
+  <data name="aboutUs_org" xml:space="preserve">
+    <value>行政區域圖&amp;組織架構</value>
+  </data>
+  <data name="joinUs_apply_1" xml:space="preserve">
+    <value>申請台灣&lt;br class="visible-xs"&gt;民政府身分證</value>
+  </data>
+  <data name="joinUs_consult_1" xml:space="preserve">
+    <value>地方服務處&lt;br class="visible-xs"&gt;諮詢</value>
+  </data>
+  <data name="joinUs_joinCollege_1" xml:space="preserve">
+    <value>參加台灣&lt;br class="visible-xs"&gt;法理學院</value>
+  </data>
+  <data name="news_announLatest_1" xml:space="preserve">
+    <value>新聞 &lt;br class="visible-xs"&gt;公告 聲明</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>搜尋</value>
   </data>
 </root>

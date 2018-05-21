@@ -165,21 +165,21 @@
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization?cate_id=7">
                                 <i class="icon-organization"></i>
-                                @OutWeb.App_GlobalResources.Res.aboutUs_org
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_org)
                             </a>
                         </li>
                         <li class="@(ViewBag.BodyClass.Contains("JoinUs") ? "" : "hidden")">
                             <a class="@(ViewBag.BodyClass.Contains("Apply") ? "current" : "")" href="~/JoinUs/Apply">
                                 <i class="icon-drivers-license-o"></i>
-                                申請台灣<br class="visible-xs">民政府身分證
+                                @Html.Raw(OutWeb.App_GlobalResources.Res.joinUs_apply_1)
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Consult") ? "current" : "")" href="~/JoinUs/Consult">
                                 <i class="icon-phone"></i>
-                                地方服務處<br class="visible-xs">諮詢
+                                @Html.Raw(OutWeb.App_GlobalResources.Res.joinUs_consult_1)
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("School") ? "current" : "")" href="~/JoinUs/Live">
                                 <i class="icon-school"></i>
-                                參加台灣<br class="visible-xs">法理學院
+                                @Html.Raw(OutWeb.App_GlobalResources.Res.joinUs_joinCollege_1)
                             </a>
                         </li>
                         <li class="@(ViewBag.BodyClass.Contains("News") ? "" : "hidden")">
@@ -193,7 +193,7 @@
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Announcement") ? "current" : "")" href="~/News/AnnouncementLatest">
                                 <i class="icon-bullhorn"></i>
-                                新聞 <br class="visible-xs">公告 聲明
+                                @Html.Raw(OutWeb.App_GlobalResources.Res.news_announLatest_1)
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Focus") ? "current" : "")" href="~/News/FocusCategory">
                                 <i class="icon-focus"></i>
@@ -293,7 +293,7 @@
                     </li>
                     <li>
                         <h2>
-                            <a href="~/AboutUs/Organization?cate_id=7">@OutWeb.App_GlobalResources.Res.aboutUs_org</a>
+                            <a href="~/AboutUs/Organization?cate_id=7">@Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_org_1)</a>
                         </h2>
                         <ul class="list-unstyled">
                             <li>

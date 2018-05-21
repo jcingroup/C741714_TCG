@@ -97,6 +97,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 行政區域圖&amp;amp;&lt;br class=&quot;visible-xs&quot;&gt;組織架構 的當地語系化字串。
+        /// </summary>
+        public static string aboutUs_org_1 {
+            get {
+                return ResourceManager.GetString("aboutUs_org_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 主張與立場 的當地語系化字串。
         /// </summary>
         public static string aboutUs_position {
@@ -268,11 +277,29 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 申請台灣&lt;br class=&quot;visible-xs&quot;&gt;民政府身分證 的當地語系化字串。
+        /// </summary>
+        public static string joinUs_apply_1 {
+            get {
+                return ResourceManager.GetString("joinUs_apply_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 地方服務處諮詢 的當地語系化字串。
         /// </summary>
         public static string joinUs_consult {
             get {
                 return ResourceManager.GetString("joinUs_consult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 地方服務處&lt;br class=&quot;visible-xs&quot;&gt;諮詢 的當地語系化字串。
+        /// </summary>
+        public static string joinUs_consult_1 {
+            get {
+                return ResourceManager.GetString("joinUs_consult_1", resourceCulture);
             }
         }
         
@@ -291,6 +318,15 @@ namespace OutWeb.App_GlobalResources {
         public static string joinUs_joinCollege {
             get {
                 return ResourceManager.GetString("joinUs_joinCollege", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 參加台灣&lt;br class=&quot;visible-xs&quot;&gt;法理學院 的當地語系化字串。
+        /// </summary>
+        public static string joinUs_joinCollege_1 {
+            get {
+                return ResourceManager.GetString("joinUs_joinCollege_1", resourceCulture);
             }
         }
         
@@ -426,6 +462,15 @@ namespace OutWeb.App_GlobalResources {
         public static string news_announLatest {
             get {
                 return ResourceManager.GetString("news_announLatest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 新聞 &lt;br class=&quot;visible-xs&quot;&gt;公告 聲明 的當地語系化字串。
+        /// </summary>
+        public static string news_announLatest_1 {
+            get {
+                return ResourceManager.GetString("news_announLatest_1", resourceCulture);
             }
         }
         

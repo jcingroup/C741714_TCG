@@ -129,11 +129,59 @@
   <data name="aboutUs_org" xml:space="preserve">
     <value>行政區域圖&amp;組織架構</value>
   </data>
+  <data name="aboutUs_org_1" xml:space="preserve">
+    <value>行政區域圖&amp;amp;&lt;br class="visible-xs"&gt;組織架構</value>
+  </data>
   <data name="aboutUs_position" xml:space="preserve">
     <value>主張與立場</value>
   </data>
   <data name="aboutUs_statement" xml:space="preserve">
     <value>台灣地位的聲明</value>
+  </data>
+  <data name="aboutUs_sub" xml:space="preserve">
+    <value>什麼是台灣民政府</value>
+  </data>
+  <data name="address" xml:space="preserve">
+    <value>新竹州桃園郡龜山鄉員林坑路100-1號</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>回上頁</value>
+  </data>
+  <data name="consult_hsinchu" xml:space="preserve">
+    <value>新竹州</value>
+    <comment>地方服務處諮詢 子分頁</comment>
+  </data>
+  <data name="consult_kaohsiung" xml:space="preserve">
+    <value>高雄州</value>
+    <comment>地方服務處諮詢 子分頁</comment>
+  </data>
+  <data name="consult_taichung" xml:space="preserve">
+    <value>台中州</value>
+    <comment>地方服務處諮詢 子分頁</comment>
+  </data>
+  <data name="consult_tainan" xml:space="preserve">
+    <value>台南州</value>
+    <comment>地方服務處諮詢 子分頁</comment>
+  </data>
+  <data name="consult_taipei" xml:space="preserve">
+    <value>台北州</value>
+    <comment>地方服務處諮詢 子分頁</comment>
+  </data>
+  <data name="consult_yilan" xml:space="preserve">
+    <value>宜蘭州</value>
+    <comment>地方服務處諮詢 子分頁</comment>
+  </data>
+  <data name="fbPage_1" xml:space="preserve">
+    <value>FB 官方粉絲頁1</value>
+  </data>
+  <data name="fbPage_2" xml:space="preserve">
+    <value>FB 官方粉絲頁2</value>
+  </data>
+  <data name="gallery_t" xml:space="preserve">
+    <value>台灣政府 法理學院</value>
+  </data>
+  <data name="gallery_tchVideo" xml:space="preserve">
+    <value>上課影片</value>
   </data>
   <data name="home_about" xml:space="preserve">
     <value>認識民政府</value>
@@ -147,23 +195,42 @@
   <data name="joinUs_apply" xml:space="preserve">
     <value>申請台灣民政府身分證</value>
   </data>
+  <data name="joinUs_apply_1" xml:space="preserve">
+    <value>申請台灣&lt;br class="visible-xs"&gt;民政府身分證</value>
+  </data>
   <data name="joinUs_consult" xml:space="preserve">
     <value>地方服務處諮詢</value>
   </data>
+  <data name="joinUs_consult_1" xml:space="preserve">
+    <value>地方服務處&lt;br class="visible-xs"&gt;諮詢</value>
+  </data>
   <data name="joinUs_gallery" xml:space="preserve">
     <value>歷屆合照</value>
+    <comment>參加台灣法理學院 子分頁</comment>
+  </data>
+  <data name="joinUs_joinCollege" xml:space="preserve">
+    <value>參加台灣法理學院</value>
+  </data>
+  <data name="joinUs_joinCollege_1" xml:space="preserve">
+    <value>參加台灣&lt;br class="visible-xs"&gt;法理學院</value>
   </data>
   <data name="joinUs_live" xml:space="preserve">
-    <value>課堂LIVE直播</value>
+    <value>課堂 LIVE 直播</value>
+    <comment>參加台灣法理學院 子分頁</comment>
   </data>
   <data name="joinUs_schedule" xml:space="preserve">
-    <value>課堂時間表</value>
+    <value>開課時間表</value>
+    <comment>參加台灣法理學院 子分頁</comment>
   </data>
   <data name="joinUs_tchVideo" xml:space="preserve">
     <value>歷屆課程影片</value>
+    <comment>參加台灣法理學院 子分頁</comment>
   </data>
   <data name="lang" xml:space="preserve">
-    <value>ja-JP</value>
+    <value>zh-tw</value>
+  </data>
+  <data name="law" xml:space="preserve">
+    <value>法律依據</value>
   </data>
   <data name="law_auth" xml:space="preserve">
     <value>台灣公民權利法</value>
@@ -174,8 +241,14 @@
   <data name="law_paper" xml:space="preserve">
     <value>官方證明文件</value>
   </data>
+  <data name="link" xml:space="preserve">
+    <value>相關連結</value>
+  </data>
+  <data name="more" xml:space="preserve">
+    <value>閱讀全文</value>
+  </data>
   <data name="nav_aboutUs" xml:space="preserve">
-    <value>認識台灣民政府(jp)</value>
+    <value>認識台灣民政府</value>
   </data>
   <data name="nav_joinUs" xml:space="preserve">
     <value>如何加入台灣民政府</value>
@@ -183,14 +256,44 @@
   <data name="nav_news" xml:space="preserve">
     <value>最新消息 活動公告</value>
   </data>
-  <data name="news_even" xml:space="preserve">
+  <data name="news" xml:space="preserve">
+    <value>最新消息</value>
+  </data>
+  <data name="news_announLatest" xml:space="preserve">
+    <value>新聞 公告 聲明</value>
+  </data>
+  <data name="news_announLatest_1" xml:space="preserve">
+    <value>新聞 &lt;br class="visible-xs"&gt;公告 聲明</value>
+  </data>
+  <data name="news_centralAnnounce" xml:space="preserve">
+    <value>中央公告</value>
+    <comment>新聞 公告 聲明 子分頁</comment>
+  </data>
+  <data name="news_centralNews" xml:space="preserve">
+    <value>中央新聞</value>
+    <comment>新聞 公告 聲明 子分頁</comment>
+  </data>
+  <data name="news_centralStatement" xml:space="preserve">
+    <value>中央聲明</value>
+    <comment>新聞 公告 聲明 子分頁</comment>
+  </data>
+  <data name="news_event" xml:space="preserve">
     <value>活動寫真</value>
   </data>
-  <data name="news_evenLatest" xml:space="preserve">
-    <value>中央活動(jp)</value>
+  <data name="news_eventLatest" xml:space="preserve">
+    <value>中央活動</value>
   </data>
   <data name="news_eventStatesCategory" xml:space="preserve">
     <value>各州活動</value>
+  </data>
+  <data name="news_focusCategory" xml:space="preserve">
+    <value>焦點專欄</value>
+  </data>
+  <data name="next_page" xml:space="preserve">
+    <value>下一頁</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>第</value>
   </data>
   <data name="org_adminReg" xml:space="preserve">
     <value>行政區域圖</value>
@@ -208,7 +311,28 @@
     <value>33391</value>
     <comment>郵遞區號</comment>
   </data>
+  <data name="pre_page" xml:space="preserve">
+    <value>上一頁</value>
+  </data>
+  <data name="pre_site" xml:space="preserve">
+    <value>TCG舊官網</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>搜尋</value>
+  </data>
+  <data name="spokesman_p" xml:space="preserve">
+    <value>溫晟志 0987-577-175</value>
+  </data>
+  <data name="spokesman_w" xml:space="preserve">
+    <value>台灣民政府 中央發言人</value>
+  </data>
   <data name="tel" xml:space="preserve">
     <value>(03) 355-6363</value>
+  </data>
+  <data name="vol" xml:space="preserve">
+    <value>期</value>
+  </data>
+  <data name="WV_site" xml:space="preserve">
+    <value>TCG華盛頓官網</value>
   </data>
 </root>
