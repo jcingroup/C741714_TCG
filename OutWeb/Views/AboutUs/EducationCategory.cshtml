@@ -1,11 +1,12 @@
 ﻿@model Dictionary<int, string>
+@using OutWeb.App_GlobalResources
 @{
-    ViewBag.Title = "教育專欄";
+    ViewBag.Title = @Res.aboutUs_eduCategory;
     ViewBag.BodyClass = "AboutUs Education";
 }
 
 @section breadcrumb {
-    <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
+    <li><a href="~/AboutUs">@Res.aboutUs_sub</a></li>
     <li>@ViewBag.Title</li>
 }
 

@@ -81,8 +81,9 @@
             <section id="pageBanner">
                 <div class="wrap">
                     <ul class="topNav list-inline">
-                        <!-- <li class="lang"><a href="">English</a></li>
-                        <li class="lang"><a href="">日本語</a></li> -->
+                        <li class="lang"><a href="@Url.Action("Index", new { lang = "zh-TW" })">繁體中文</a></li>
+                        <li class="lang"><a href="@Url.Action("Index", new { lang = "en-US" })">English</a></li>
+                        <li class="lang"><a href="@Url.Action("Index", new { lang = "ja-JP" })">日本語</a></li>
                         <li class="search">
                             <button class="search-trigger icon-search"></button>
                         </li>
@@ -106,19 +107,19 @@
                         <li>
                             <a href="~/AboutUs">
                                 <i class="icon-about"></i>
-                                @Resources.Res.home_about
+                                @OutWeb.App_GlobalResources.Res.home_about
                             </a>
                         </li>
                         <li>
                             <a href="~/JoinUs">
                                 <i class="icon-join-us"></i>
-                                @Resources.Res.home_joinUs
+                                @OutWeb.App_GlobalResources.Res.home_joinUs
                             </a>
                         </li>
                         <li>
                             <a href="~/News">
                                 <i class="icon-news2"></i>
-                                @Resources.Res.home_news
+                                @OutWeb.App_GlobalResources.Res.home_news
                             </a>
                         </li>
                     </ul>
@@ -131,19 +132,20 @@
                         <li class="col-4">
                             <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs">
                                 <i class="icon-about"></i>
-                                @Resources.Res.aboutus_TCG
+                                @System.Threading.Thread.CurrentThread.CurrentCulture;
+                                @OutWeb.App_GlobalResources.Res.nav_aboutUs
                             </a>
                         </li>
                         <li class="col-4">
                             <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs">
                                 <i class="icon-join-us"></i>
-                                @Resources.Res.joinus
+                                @OutWeb.App_GlobalResources.Res.nav_joinUs
                             </a>
                         </li>
                         <li class="col-4">
                             <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/News">
                                 <i class="icon-news2"></i>
-                                @Resources.Res.news
+                                @OutWeb.App_GlobalResources.Res.nav_news
                             </a>
                         </li>
                     </ul>
@@ -155,15 +157,15 @@
                             </a> -->
                             <a class="@(ViewBag.BodyClass.Contains("Profile") ? "current" : "")" href="~/AboutUs/Position">
                                 <i class="icon-people"></i>
-                                關於我們
+                                @OutWeb.App_GlobalResources.Res.aboutUs
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Education") ? "current" : "")" href="~/AboutUs/EducationCategory">
                                 <i class="icon-graduation-cap"></i>
-                                教育專欄
+                                @OutWeb.App_GlobalResources.Res.aboutUs_eduCategory
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization?cate_id=7">
                                 <i class="icon-organization"></i>
-                                行政區域圖&amp;<br class="visible-xs">組織架構
+                                @OutWeb.App_GlobalResources.Res.aboutUs_org
                             </a>
                         </li>
                         <li class="@(ViewBag.BodyClass.Contains("JoinUs") ? "" : "hidden")">
@@ -187,7 +189,7 @@
                             </a> -->
                             <a class="@(ViewBag.BodyClass.Contains("Event") ? "current" : "")" href="~/News/EventLatest">
                                 <i class="icon-camera"></i>
-                                活動寫真
+                                @OutWeb.App_GlobalResources.Res.news_event
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Announcement") ? "current" : "")" href="~/News/AnnouncementLatest">
                                 <i class="icon-bullhorn"></i>
@@ -234,8 +236,8 @@
                     <span class="hidden-sm">Taiwan Civil Government Central Headquarters</span> &copy; 2018
                 </div>
                 <nav class="foot-nav pull-right">
-                    <span><a href="https://goo.gl/maps/YnjYAMLxhwr" target="new"><span class="hidden-sm">33391</span>新竹州桃園郡龜山鄉員林坑路100-1號</a></span>
-                    <span>(03) 355-6363</span>
+                    <span><a href="https://goo.gl/maps/YnjYAMLxhwr" target="new"><span class="hidden-sm">@OutWeb.App_GlobalResources.Res.postCode</span>@OutWeb.App_GlobalResources.Res.address</a></span>
+                    <span>@OutWeb.App_GlobalResources.Res.tel</span>
                 </nav>
             </div>
         </footer><!-- footer //-->
@@ -248,7 +250,7 @@
             <li>
                 <h1>
                     <a href="~/AboutUs">
-                        認識台灣民政府
+                        @OutWeb.App_GlobalResources.Res.nav_aboutUs
                     </a>
                 </h1>
                 <ul class="list-unstyled">
@@ -259,26 +261,26 @@
                     </li> -->
                     <li>
                         <h2>
-                            <a href="~/AboutUs/Position">關於我們</a>
+                            <a href="~/AboutUs/Position">@OutWeb.App_GlobalResources.Res.aboutUs</a>
                         </h2>
                         <ul class="list-unstyled">
                             <li>
-                                <h3><a href="~/AboutUs/Position">主張與立場</a></h3>
+                                <h3><a href="~/AboutUs/Position">@OutWeb.App_GlobalResources.Res.aboutUs_position</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/AboutUs/Statement">台灣地位的聲明</a></h3>
+                                <h3><a href="~/AboutUs/Statement">@OutWeb.App_GlobalResources.Res.aboutUs_statement</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/AboutUs/Law?cate_id=4">法律依據</a></h3>
+                                <h3><a href="~/AboutUs/Law?cate_id=4">@OutWeb.App_GlobalResources.Res.law</a></h3>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <h4><a href="~/AboutUs/Law?cate_id=4">台灣基本法</a></h4>
+                                        <h4><a href="~/AboutUs/Law?cate_id=4">@OutWeb.App_GlobalResources.Res.law_basic</a></h4>
                                     </li>
                                     <li>
-                                        <h4><a href="~/AboutUs/Law?cate_id=5">台灣公民權利法</a></h4>
+                                        <h4><a href="~/AboutUs/Law?cate_id=5">@OutWeb.App_GlobalResources.Res.law_auth</a></h4>
                                     </li>
                                     <li>
-                                        <h4><a href="~/AboutUs/Law?cate_id=6">官方證明文件</a></h4>
+                                        <h4><a href="~/AboutUs/Law?cate_id=6">@OutWeb.App_GlobalResources.Res.law_paper</a></h4>
                                     </li>
                                 </ul>
                             </li>
@@ -286,22 +288,22 @@
                     </li>
                     <li>
                         <h2>
-                            <a href="~/AboutUs/EducationCategory">教育專欄</a>
+                            <a href="~/AboutUs/EducationCategory">@OutWeb.App_GlobalResources.Res.aboutUs_eduCategory</a>
                         </h2>
                     </li>
                     <li>
                         <h2>
-                            <a href="~/AboutUs/Organization?cate_id=7">行政區域圖&amp;組織架構</a>
+                            <a href="~/AboutUs/Organization?cate_id=7">@OutWeb.App_GlobalResources.Res.aboutUs_org</a>
                         </h2>
                         <ul class="list-unstyled">
                             <li>
-                                <h3><a href="~/AboutUs/Organization?cate_id=7">行政區域圖</a></h3>
+                                <h3><a href="~/AboutUs/Organization?cate_id=7">@OutWeb.App_GlobalResources.Res.org_adminReg</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/AboutUs/Organization?cate_id=8">組織架構</a></h3>
+                                <h3><a href="~/AboutUs/Organization?cate_id=8">@OutWeb.App_GlobalResources.Res.org_org</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/AboutUs/Organization?cate_id=9">人事名單</a></h3>
+                                <h3><a href="~/AboutUs/Organization?cate_id=9">@OutWeb.App_GlobalResources.Res.org_people</a></h3>
                             </li>
                         </ul>
                     </li>
@@ -310,52 +312,52 @@
             <li>
                 <h1>
                     <a href="~/JoinUs">
-                        如何加入台灣民政府
+                        @OutWeb.App_GlobalResources.Res.nav_joinUs
                     </a>
                 </h1>
                 <ul class="list-unstyled">
                     <li>
-                        <h2><a href="~/JoinUs/Apply">申請台灣民政府身分證</a></h2>
+                        <h2><a href="~/JoinUs/Apply">@OutWeb.App_GlobalResources.Res.joinUs_apply</a></h2>
                     </li>
                     <li>
-                        <h2><a href="~/JoinUs/Consult?id=2">地方服務處諮詢</a></h2>
+                        <h2><a href="~/JoinUs/Consult?id=2">@OutWeb.App_GlobalResources.Res.joinUs_consult</a></h2>
                         <ul class="list-unstyled">
                             <li>
                                 <h3>
-                                    <a href="~/JoinUs/Consult?id=2">宜蘭州</a>
-                                    <a href="~/JoinUs/Consult?id=3">台北州</a>
+                                    <a href="~/JoinUs/Consult?id=2">@OutWeb.App_GlobalResources.Res.consult_yilan</a>
+                                    <a href="~/JoinUs/Consult?id=3">@OutWeb.App_GlobalResources.Res.consult_taipei</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
-                                    <a href="~/JoinUs/Consult?id=5">新竹州</a>
-                                    <a href="~/JoinUs/Consult?id=6">台中州</a>
+                                    <a href="~/JoinUs/Consult?id=5">@OutWeb.App_GlobalResources.Res.consult_hsinchu</a>
+                                    <a href="~/JoinUs/Consult?id=6">@OutWeb.App_GlobalResources.Res.consult_taichung</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
-                                    <a href="~/JoinUs/Consult?id=7">台南州</a>
-                                    <a href="~/JoinUs/Consult?id=8">高雄州</a>
+                                    <a href="~/JoinUs/Consult?id=7">@OutWeb.App_GlobalResources.Res.consult_tainan</a>
+                                    <a href="~/JoinUs/Consult?id=8">@OutWeb.App_GlobalResources.Res.consult_kaohsiung</a>
                                 </h3>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <h2><a href="~/JoinUs/Live">參加台灣法理學院</a></h2>
+                        <h2><a href="~/JoinUs/Live">@OutWeb.App_GlobalResources.Res.joinUs_joinCollege</a></h2>
                         <ul class="list-unstyled">
                             <li>
                                 <h3>
-                                    <a href="~/JoinUs/Live">課堂 LIVE 直播</a>
+                                    <a href="~/JoinUs/Live">@OutWeb.App_GlobalResources.Res.joinUs_live</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
-                                    <a href="~/JoinUs/Schedule">開課時間表</a>
+                                    <a href="~/JoinUs/Schedule">@OutWeb.App_GlobalResources.Res.joinUs_schedule</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
-                                    <a href="~/JoinUs/Gallery">歷屆合照</a>
+                                    <a href="~/JoinUs/Gallery">@OutWeb.App_GlobalResources.Res.joinUs_gallery</a>
                                 </h3>
                             </li>
                         </ul>
@@ -364,58 +366,58 @@
             </li>
             <li>
                 <h1>
-                    <a href="~/News">最新訊息</a>
+                    <a href="~/News">@OutWeb.App_GlobalResources.Res.news</a>
                 </h1>
                 <ul class="list-unstyled">
                     <li>
-                        <h2><a href="~/News/EventLatest">活動寫真</a></h2>
+                        <h2><a href="~/News/EventLatest">@OutWeb.App_GlobalResources.Res.news_event</a></h2>
                         <ul class="list-unstyled">
                             <li>
-                                <h3><a href="~/News/EventLatest">中央活動</a></h3>
+                                <h3><a href="~/News/EventLatest">@OutWeb.App_GlobalResources.Res.news_eventLatest</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/News/EventStatesCategory">各州活動</a></h3>
+                                <h3><a href="~/News/EventStatesCategory">@OutWeb.App_GlobalResources.Res.news_eventStatesCategory</a></h3>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <h2><a href="~/News/AnnouncementLatest">新聞 公告 聲明</a></h2>
+                        <h2><a href="~/News/AnnouncementLatest">@OutWeb.App_GlobalResources.Res.news_announLatest</a></h2>
                         <ul class="list-unstyled">
                             <li>
-                                <h3><a href="~/News/AnnouncementList?typeID=1">中央新聞</a></h3>
+                                <h3><a href="~/News/AnnouncementList?typeID=1">@OutWeb.App_GlobalResources.Res.news_centralNews</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/News/AnnouncementList?typeID=2">中央公告</a></h3>
+                                <h3><a href="~/News/AnnouncementList?typeID=2">@OutWeb.App_GlobalResources.Res.news_centralAnnounce</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/News/AnnouncementList?typeID=4">中央聲明</a></h3>
+                                <h3><a href="~/News/AnnouncementList?typeID=4">@OutWeb.App_GlobalResources.Res.news_centralStatement</a></h3>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <h2><a href="~/News/FocusCategory">焦點專欄</a></h2>
+                        <h2><a href="~/News/FocusCategory">@OutWeb.App_GlobalResources.Res.news_focusCategory</a></h2>
                     </li>
                 </ul>
             </li>
             <li>
                 <h1 class="sr-only">
-                    相關連結
+                    @OutWeb.App_GlobalResources.Res.link
                 </h1>
                 <ul class="list-unstyled">
                     <li class="mt-0">
-                        <h2 class="text">台灣民政府 中央發言人<br>溫晟志 0987-577-175</h2>
+                        <h2 class="text">@OutWeb.App_GlobalResources.Res.spokesman_w<br>@OutWeb.App_GlobalResources.Res.spokesman_p</h2>
                     </li>
                     <li>
-                        <h2><a href="https://www.facebook.com/TaiwanCivilGovernment/" target="new">FB 官方粉絲頁1</a></h2>
+                        <h2><a href="https://www.facebook.com/TaiwanCivilGovernment/" target="new">@OutWeb.App_GlobalResources.Res.fbPage_1</a></h2>
                     </li>
                     <li>
-                        <h2><a href="https://www.facebook.com/usmgtcgov.tw/" target="new">FB 官方粉絲頁2</a></h2>
+                        <h2><a href="https://www.facebook.com/usmgtcgov.tw/" target="new">@OutWeb.App_GlobalResources.Res.fbPage_2</a></h2>
                     </li>
                     <li>
-                        <h2><a href="http://usmgtcg.ning.com/" target="new">TCG舊官網</a></h2>
+                        <h2><a href="http://usmgtcg.ning.com/" target="new">@OutWeb.App_GlobalResources.Res.pre_site</a></h2>
                     </li>
                     <li>
-                        <h2><a href="http://taiwancivilgovernment.com/events" target="new">TCG華盛頓官網</a></h2>
+                        <h2><a href="http://taiwancivilgovernment.com/events" target="new">@OutWeb.App_GlobalResources.Res.WV_site</a></h2>
                     </li>
                 </ul>
             </li>
@@ -428,7 +430,7 @@
         <form class="search-form" action="~/Home/Search">
             <input type="text" class="form-element" name="str" placeholder="請在此輸入">
             <button>
-                <i class="icon-search"></i> 搜尋
+                <i class="icon-search"></i> @OutWeb.App_GlobalResources.Res.search
             </button>
         </form>
     </nav>

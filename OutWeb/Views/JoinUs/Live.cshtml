@@ -1,25 +1,26 @@
 ﻿@using System.Data
+@using OutWeb.App_GlobalResources
 @{
-    ViewBag.Title = "課堂 LIVE 直播";
+    ViewBag.Title = Res.joinUs_live;
     ViewBag.BodyClass = "JoinUs School";
 
     DataTable dt = (DataTable)ViewData["dt"];
 }
 
 @section breadcrumb {
-    <li><a href="~/JoinUs">如何加入台灣民政府</a></li>
-    <li><a href="~/JoinUs/Live">參加台灣法理學院</a></li>
+    <li><a href="~/JoinUs">@Res.nav_joinUs</a></li>
+    <li><a href="~/JoinUs/Live">@Res.joinUs_joinCollege</a></li>
     <li>@ViewBag.Title</li>
 }
 
-<h1 class="sr-only">如何加入台灣民政府</h1>
+<h1 class="sr-only">@Res.nav_joinUs</h1>
 
 <ul class="tabs list-inline text-center">
-    <li><a class="current" href="~/JoinUs/Live">課堂 LIVE 直播</a></li>
-    <li><a href="~/JoinUs/Schedule">開課時間表</a></li>
-    <li><a href="~/JoinUs/Gallery">歷屆合照</a></li>
+    <li><a class="current" href="~/JoinUs/Live">@Res.joinUs_live</a></li>
+    <li><a href="~/JoinUs/Schedule">@Res.joinUs_schedule</a></li>
+    <li><a href="~/JoinUs/Gallery">@Res.joinUs_gallery</a></li>
     @* 歷屆課程影片網址來源: 後台 > 加入台灣民政府 > 參加台灣法理學院 > 歷屆課程影片 *@
-    <li><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">歷屆課程影片</a></li>
+    <li><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">@Res.joinUs_tchVideo</a></li>
 </ul>
 
 <h2 class="title">

@@ -18,7 +18,7 @@ using OutWeb.Models.FrontModels.AboutModels.EducationModels;
 
 namespace OutWeb.Controllers
 {
-    public class AboutUsController : Controller
+    public class AboutUsController : LanguageController
     {
         //== Class 建立 =========================================//
         DBService DB = new DBService();
@@ -41,9 +41,9 @@ namespace OutWeb.Controllers
             ViewBag.IsFirstPage = false;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string lang="")
         {
-
+            Change_Lang(lang);
             return RedirectToAction("TCG");
         }
 
@@ -51,12 +51,14 @@ namespace OutWeb.Controllers
         public ActionResult TCG(string id = "")
         {
             //抓取資料
-            string cate_id = "1";
+
+            string cate_id = "1,20,21";
             DataTable dt;
             DataTable d_detail;
             DataTable dt1;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
+         
             dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)
@@ -73,6 +75,7 @@ namespace OutWeb.Controllers
             ViewData["dt"] = dt;
             ViewData["d_detail"] = d_detail;
             ViewData["id"] = id;
+
             return View();
         }
 
@@ -80,12 +83,12 @@ namespace OutWeb.Controllers
         public ActionResult Position(string id = "")
         {
             //抓取資料
-            string cate_id = "2";
+            string cate_id = "2,12,13";
             DataTable dt;
             DataTable dt1;
             DataTable d_detail;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
             dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)
@@ -108,12 +111,12 @@ namespace OutWeb.Controllers
         public ActionResult Statement(string id = "")
         {
             //抓取資料
-            string cate_id = "3";
+            string cate_id = "3,14,15";
             DataTable dt;
             DataTable dt1;
             DataTable d_detail;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
             dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)
@@ -136,13 +139,13 @@ namespace OutWeb.Controllers
         public ActionResult Law(string cate_id = "", string id = "")
         {
             //抓取資料
-            string scate_id = "4,5,6";
+            string scate_id = "4,5,6,10,11,16,17,18,19";
             DataTable dt;
             DataTable d_cate;
             DataTable dt1;
             DataTable d_detail;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
             d_cate = CAboutUs.Cate_List(ref err_msg, scate_id, "sort", "Y", "", lang_id);
             if (d_cate.Rows.Count > 0)
             {
@@ -178,7 +181,7 @@ namespace OutWeb.Controllers
 
         public ActionResult EducationCategory()
         {
-            string langCd = string.Empty;
+            string langCd = GetLang();
             EducationRepository repo = new EducationRepository();
             var mdoel = repo.GetEducationCate(langCd);
 
@@ -200,12 +203,14 @@ namespace OutWeb.Controllers
 
             EducationRepository repo = new EducationRepository();
             EducationResult mdoel = repo.GetList((int)eduTypeID, filter);
+            GetLang();
             return View(mdoel);
         }
 
         // 焦點專欄 - 內容
         public ActionResult EducationContent(int? eduTypeID, int? ID, int? pagingID)
         {
+
             if (!eduTypeID.HasValue || !ID.HasValue)
                 return RedirectToAction("EducationList");
             string langCd = string.Empty;
@@ -299,7 +304,7 @@ namespace OutWeb.Controllers
             DataTable dt1;
             DataTable d_detail;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
             d_cate = CAboutUs.Cate_List(ref err_msg, scate_id, "sort", "Y", "", lang_id);
             if (d_cate.Rows.Count > 0)
             {

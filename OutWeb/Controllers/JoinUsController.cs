@@ -16,7 +16,7 @@ using System.Web.Configuration;
 
 namespace OutWeb.Controllers
 {
-    public class JoinUsController : Controller
+    public class JoinUsController : LanguageController
     {
         //== Class 建立 =========================================//
         DBService DB = new DBService();
@@ -41,8 +41,9 @@ namespace OutWeb.Controllers
             ViewBag.IsFirstPage = false;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string lang="")
         {
+            Change_Lang(lang);
             return RedirectToAction("Apply");
         }
 
@@ -55,7 +56,7 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             DataTable dt1;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
             dt1 = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)
@@ -79,12 +80,12 @@ namespace OutWeb.Controllers
         public ActionResult Consult(string id="")
         {
             //抓取資料
-            string cate_id = "2";
+            string cate_id = "2,6";
             DataTable dt;
             DataTable d_detail;
             DataTable dt1;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
             dt1 = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)
@@ -109,7 +110,7 @@ namespace OutWeb.Controllers
         {
             DataTable dt;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
             dt = Cschool.Video_List(ref err_msg, "", "sort desc", "Y", "", lang_id);
             ViewData["dt"] = dt;
             return View();
@@ -122,11 +123,12 @@ namespace OutWeb.Controllers
             string cate_id = "3";
             DataTable dt;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
+            string langView = Lang_Page("Schedule");
             dt = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
 
             ViewData["dt"] = dt;
-            return View();
+            return View(langView);
         }
 
         // 參加台灣法理學院 - 歷屆合照
@@ -134,7 +136,7 @@ namespace OutWeb.Controllers
         {
             DataTable dt;
             string err_msg = "";
-            string lang_id = "zh-tw";
+            string lang_id = GetLang();
             dt = Cschool.List(ref err_msg, "", " sort desc , cate_id desc ", "Y", "", "", "", "", lang_id);
             ViewData["dt"] = dt;
             return View();

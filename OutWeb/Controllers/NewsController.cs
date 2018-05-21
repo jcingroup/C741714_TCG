@@ -12,7 +12,7 @@ using System.Web.Mvc;
 using System.Linq;
 namespace OutWeb.Controllers
 {
-    public class NewsController : Controller
+    public class NewsController : LanguageController
     {
         //== Class 建立 =========================================//
         private DBService DB = new DBService();
@@ -38,15 +38,16 @@ namespace OutWeb.Controllers
             ViewBag.IsFirstPage = false;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string lang)
         {
+            Change_Lang(lang);
             return RedirectToAction("Latest");
         }
 
         // 最新訊息
         public ActionResult Latest()
         {
-            string langCode = string.Empty;
+            string langCode = GetLang();
             LatestRepository repo = new LatestRepository();
             var model = repo.GetLatestList(langCode);
             return View(model);

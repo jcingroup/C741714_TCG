@@ -1,4 +1,5 @@
 ﻿@using OutWeb.Models.FrontModels.AboutModels.EducationModels
+@using OutWeb.App_GlobalResources
 @model EducationResult
 @{
     //分類名稱
@@ -6,15 +7,15 @@
     ViewBag.BodyClass = "AboutUs Education";
 }
 @section breadcrumb {
-    <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
-    <li><a href="~/AboutUs/EducationCategory">教育專欄</a></li>
+    <li><a href="~/AboutUs">@Res.aboutUs_sub</a></li>
+    <li><a href="~/AboutUs/EducationCategory">@Res.aboutUs_eduCategory</a></li>
     <li>@ViewBag.Title</li>
 }
 
-<h1 class="sr-only">教育專欄</h1>
+<h1 class="sr-only">@Res.aboutUs_eduCategory</h1>
 
 <p class="back">
-    <a href="~/AboutUs/EducationCategory"><i class="oi" data-glyph="caret-left"></i> 回上層</a>
+    <a href="~/AboutUs/EducationCategory"><i class="oi" data-glyph="caret-left"></i> @Res.back</a>
 </p>
 
 <h2 class="title">
@@ -36,7 +37,7 @@
                 <small class="date">@data.PublishDateString</small>
                 <h3><a href="@contentUrl">@data.Title</a></h3>
                 <p>@Html.Raw(remark)</p>
-                <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                <a href="@contentUrl" class="more"> @Res.more <i class="oi" data-glyph="caret-right"></i></a>
             </article>
 
         }
@@ -53,7 +54,7 @@
             @* 有資料的話才顯示 *@
             <a @disabledPre href="javascript:;" onclick="paginationSubmit('@Model.Pagination.PrePage');">
                 <i class="oi" data-glyph="chevron-left"></i>
-                <span class="hidden-xs">上一頁</span>
+                <span class="hidden-xs">@Res.pre_page</span>
             </a>
         </li>
 
@@ -74,7 +75,7 @@
         <li class="next">
             @* 有資料的話才顯示 *@
             <a @disabledNext href="javascript:;" onclick="paginationSubmit('@Model.Pagination.NextPage');">
-                <span class="hidden-xs">下一頁</span>
+                <span class="hidden-xs">@Res.next_page</span>
                 <i class="oi" data-glyph="chevron-right"></i>
             </a>
         </li>
