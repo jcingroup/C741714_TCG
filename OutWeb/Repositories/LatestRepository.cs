@@ -12,6 +12,8 @@ namespace OutWeb.Repositories
         中央活動 = 1, 各州活動 = 2,
         中央新聞 = 3, 中央公告 = 4,
         中央聲明 = 5, 焦點專欄 = 6,
+        News = 7, Announcement = 8,
+        Statement = 9,
     }
 
     public class LatestRepository
@@ -30,7 +32,8 @@ namespace OutWeb.Repositories
             string isIndex = "Y";
             //新聞 公告 聲明
             AnnouncementLatestRepository aclRepo = new AnnouncementLatestRepository();
-            var aclData = aclRepo.GetList(new Models.FrontModels.News.AnnouncementLatest.AnnouncementLatestFilter(), 10000, isIndex);
+
+            var aclData = aclRepo.GetList(new Models.FrontModels.News.AnnouncementLatest.AnnouncementLatestFilter() { LangCode = langCode }, 10000, isIndex);
 
             foreach (var acl in aclData.Data)
             {
@@ -59,6 +62,19 @@ namespace OutWeb.Repositories
                         temp.DataType = ListKind.中央聲明;
                         break;
 
+                    case 5:
+                        temp.DataType = ListKind.News;
+                        break;
+
+                    case 7:
+                        temp.DataType = ListKind.Announcement;
+                        break;
+
+                    case 9:
+                        temp.DataType = ListKind.Statement;
+                        break;
+
+
                     default:
                         break;
                 }
@@ -70,9 +86,10 @@ namespace OutWeb.Repositories
             var statesType = statesRepo.GetStatesCate(langCode);
 
             List<EventStatesResult> statesList = new List<EventStatesResult>();
+
             foreach (var states in statesType)
             {
-                var d = statesRepo.GetList(states.Key, new Models.FrontModels.News.EventStatesModels.EventStatesListFilter(), 10000, isIndex);
+                var d = statesRepo.GetList(states.Key, new Models.FrontModels.News.EventStatesModels.EventStatesListFilter{ LangCode = langCode }, 10000, isIndex);
                 statesList.Add(d);
             }
 
@@ -102,7 +119,7 @@ namespace OutWeb.Repositories
             var focusType = focusReps.GetFocusCate(langCode);
             foreach (var fcous in focusType)
             {
-                var d = focusReps.GetList(fcous.Key, new FocusNewsListFilter(), 10000, isIndex);
+                var d = focusReps.GetList(fcous.Key, new FocusNewsListFilter { LangCode = langCode }, 10000, isIndex);
                 focusList.Add(d);
             }
 
@@ -129,7 +146,7 @@ namespace OutWeb.Repositories
 
             //中央活動
             EventLatestRepository eventRepo = new EventLatestRepository();
-            var eventData = eventRepo.GetList(new EventLatestListFilter(), 10000, isIndex);
+            var eventData = eventRepo.GetList(new EventLatestListFilter { LangCode = langCode}, 10000, isIndex);
             foreach (var ev in eventData.Data)
             {
                 LatestData temp = new LatestData()

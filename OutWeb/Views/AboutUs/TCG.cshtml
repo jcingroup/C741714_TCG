@@ -1,6 +1,7 @@
 ﻿@using System.Data
+@using OutWeb.App_GlobalResources
 @{
-    ViewBag.Title = OutWeb.App_GlobalResources.Res.nav_aboutUs;
+    ViewBag.Title = Res.nav_aboutUs;
     ViewBag.BodyClass = "AboutUs TCG";
 
     DataTable dt = (DataTable)ViewData["dt"];
@@ -56,7 +57,7 @@
 
                 <li>
                     @*<a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>*@
-                    <a class="@c_tab_nav" href="@Url.Content(cFile + "?id=" + c_id)">@c_title</a>
+                    <a class="@c_tab_nav" href="@Url.Content(cFile + "?id=" + c_id + "&langCode=" + Res.lang)">@c_title</a>
                 </li>
             }
         </ul>

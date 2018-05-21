@@ -48,7 +48,7 @@ namespace OutWeb.Controllers
         }
 
         // 台灣民政府由來
-        public ActionResult TCG(string id = "")
+        public ActionResult TCG(string id = "",string langCode="")
         {
             //抓取資料
 
@@ -57,8 +57,13 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             DataTable dt1;
             string err_msg = "";
+
+
+            //======語系轉換========
+            Change_Lang(langCode);
             string lang_id = GetLang();
-         
+            //======================
+
             dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)
@@ -80,7 +85,7 @@ namespace OutWeb.Controllers
         }
 
         // 關於我們 - 主張與立場
-        public ActionResult Position(string id = "")
+        public ActionResult Position(string id = "", string langCode = "")
         {
             //抓取資料
             string cate_id = "2,12,13";
@@ -88,7 +93,12 @@ namespace OutWeb.Controllers
             DataTable dt1;
             DataTable d_detail;
             string err_msg = "";
+
+            //======語系轉換========
+            Change_Lang(langCode);
             string lang_id = GetLang();
+            //======================
+
             dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)
@@ -108,7 +118,7 @@ namespace OutWeb.Controllers
         }
 
         // 關於我們 - 台灣地位的聲明
-        public ActionResult Statement(string id = "")
+        public ActionResult Statement(string id = "",string langCode="")
         {
             //抓取資料
             string cate_id = "3,14,15";
@@ -116,7 +126,10 @@ namespace OutWeb.Controllers
             DataTable dt1;
             DataTable d_detail;
             string err_msg = "";
+            //======語系轉換========
+            Change_Lang(langCode);
             string lang_id = GetLang();
+            //======================
             dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)
@@ -136,7 +149,7 @@ namespace OutWeb.Controllers
         }
 
         // 關於我們 - 法律依據
-        public ActionResult Law(string cate_id = "", string id = "")
+        public ActionResult Law(string cate_id = "", string id = "",string langCode="")
         {
             //抓取資料
             string scate_id = "4,5,6,10,11,16,17,18,19";
@@ -145,7 +158,12 @@ namespace OutWeb.Controllers
             DataTable dt1;
             DataTable d_detail;
             string err_msg = "";
+
+            //======語系轉換========
+            Change_Lang(langCode);
             string lang_id = GetLang();
+            //======================
+
             d_cate = CAboutUs.Cate_List(ref err_msg, scate_id, "sort", "Y", "", lang_id);
             if (d_cate.Rows.Count > 0)
             {
@@ -179,9 +197,12 @@ namespace OutWeb.Controllers
             return View();
         }
 
-        public ActionResult EducationCategory()
+        public ActionResult EducationCategory(string langCode="")
         {
+            //======語系轉換========
+            Change_Lang(langCode);
             string langCd = GetLang();
+            //======================
             EducationRepository repo = new EducationRepository();
             var mdoel = repo.GetEducationCate(langCd);
 
@@ -189,7 +210,7 @@ namespace OutWeb.Controllers
         }
 
         // 焦點專欄 - 列表
-        public ActionResult EducationList(int? eduTypeID, int? page, string langCode)
+        public ActionResult EducationList(int? eduTypeID, int? page, string langCode="")
         {
             if (!eduTypeID.HasValue)
                 return View();
@@ -295,7 +316,7 @@ namespace OutWeb.Controllers
         //}
 
         // 行政區域圖&組織架構
-        public ActionResult Organization(string cate_id = "", string id = "")
+        public ActionResult Organization(string cate_id = "", string id = "",string langCode="")
         {
             //抓取資料
             string scate_id = "7,8,9";
@@ -304,7 +325,12 @@ namespace OutWeb.Controllers
             DataTable dt1;
             DataTable d_detail;
             string err_msg = "";
+
+            //======語系轉換========
+            Change_Lang(langCode);
             string lang_id = GetLang();
+            //======================
+
             d_cate = CAboutUs.Cate_List(ref err_msg, scate_id, "sort", "Y", "", lang_id);
             if (d_cate.Rows.Count > 0)
             {

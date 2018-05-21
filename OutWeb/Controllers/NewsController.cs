@@ -56,6 +56,8 @@ namespace OutWeb.Controllers
         // 最新訊息 - 活動寫真 - 最新（中央）活動
         public ActionResult EventLatest(int? page, string langCode)
         {
+            Change_Lang(langCode);
+            langCode = GetLang();
             EventLatestListFilter filter = new EventLatestListFilter()
             {
                 CurrentPage = page ?? 1,
@@ -93,9 +95,14 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 活動寫真 - 各州活動分類
-        public ActionResult EventStatesCategory()
+        public ActionResult EventStatesCategory(string langCode)
         {
-            string langCd = string.Empty;
+            if (String.IsNullOrEmpty(langCode))
+            {
+                Change_Lang(langCode);
+            }
+
+            string langCd = GetLang();
             EventStatesRepository repo = new EventStatesRepository();
             var mdoel = repo.GetStatesCate(langCd);
 
