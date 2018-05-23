@@ -97,7 +97,7 @@ namespace OutWeb.Controllers
             HttpCookie cookie = Request.Cookies["_culture"];
             string lang = cookie.Value;
             string pageFullName = "";
-            if (lang == "zh-TW")
+            if (lang == "zh-TW" || lang == "zh-tw")
             {
                 pageFullName = pageName;
             }
@@ -112,7 +112,6 @@ namespace OutWeb.Controllers
         public string GetLang()
         {
             HttpCookie cookie = Request.Cookies["_culture"];
-            Change_Lang(cookie.Value);
             switch (cookie.Value) {
                 case "en-US":
                     return "en";
@@ -123,7 +122,7 @@ namespace OutWeb.Controllers
                 case "ja-JP":
                     return "JPN";
                 default:
-                    return "";
+                    return cookie.Value;
 
             }
         }

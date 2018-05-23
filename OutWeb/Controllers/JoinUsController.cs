@@ -48,7 +48,7 @@ namespace OutWeb.Controllers
         }
 
         // 申請民政府身分證
-        public ActionResult Apply(string id = "")
+        public ActionResult Apply(string id = "",string langCode="")
         {
             //抓取資料
             string cate_id = "1";
@@ -56,7 +56,10 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             DataTable dt1;
             string err_msg = "";
+            //======語系轉換========
+            Change_Lang(langCode);
             string lang_id = GetLang();
+            //======================
             dt1 = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)
@@ -77,7 +80,7 @@ namespace OutWeb.Controllers
         }
 
         // 地方服務處諮詢
-        public ActionResult Consult(string id="")
+        public ActionResult Consult(string id="",string langCode="")
         {
             //抓取資料
             string cate_id = "2,6";
@@ -85,7 +88,10 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             DataTable dt1;
             string err_msg = "";
+            //======語系轉換========
+            Change_Lang(langCode);
             string lang_id = GetLang();
+            //======================
             dt1 = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
             dt = dt1.Copy();
             if (dt1.Rows.Count > 0)
@@ -106,24 +112,30 @@ namespace OutWeb.Controllers
         }
 
         // 參加台灣法理學院 - 課堂 LIVE 直播
-        public ActionResult Live()
+        public ActionResult Live(string langCode="")
         {
             DataTable dt;
             string err_msg = "";
+            //======語系轉換========
+            Change_Lang(langCode);
             string lang_id = GetLang();
+            //======================
             dt = Cschool.Video_List(ref err_msg, "", "sort desc", "Y", "", lang_id);
             ViewData["dt"] = dt;
             return View();
         }
 
         // 參加台灣法理學院 - 開課時間表
-        public ActionResult Schedule()
+        public ActionResult Schedule(string langCode="")
         {
             //抓取資料
             string cate_id = "3";
             DataTable dt;
             string err_msg = "";
+            //======語系轉換========
+            Change_Lang(langCode);
             string lang_id = GetLang();
+            //======================
             string langView = Lang_Page("Schedule");
             dt = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
 
@@ -132,11 +144,14 @@ namespace OutWeb.Controllers
         }
 
         // 參加台灣法理學院 - 歷屆合照
-        public ActionResult Gallery()
+        public ActionResult Gallery(string langCode="")
         {
             DataTable dt;
             string err_msg = "";
+            //======語系轉換========
+            Change_Lang(langCode);
             string lang_id = GetLang();
+            //======================
             dt = Cschool.List(ref err_msg, "", " sort desc , cate_id desc ", "Y", "", "", "", "", lang_id);
             ViewData["dt"] = dt;
             return View();

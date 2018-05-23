@@ -37,9 +37,9 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/AboutUs">@Res.aboutUs_sub</a></li>
-    <li><a href="~/AboutUs/Position">@Res.aboutUs</a></li>
-    <li><a href="~/AboutUs/Law?cate_id=4">@Res.law</a></li>
+    <li><a href="~/AboutUs?langCode=@Res.lang">@Res.aboutUs_sub</a></li>
+    <li><a href="~/AboutUs/Position?langCode=@Res.lang">@Res.aboutUs</a></li>
+    <li><a href="~/AboutUs/Law?cate_id=4&langCode=@Res.lang">@Res.law</a></li>
     <li>@ViewBag.Title</li>
 }
 

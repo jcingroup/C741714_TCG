@@ -23,8 +23,8 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/AboutUs">@Res.aboutUs_sub</a></li>
-    <li><a href="~/AboutUs/Position">@Res.aboutUs</a></li>
+    <li><a href="~/AboutUs?lang=@Res.lang">@Res.aboutUs_sub</a></li>
+    <li><a href="~/AboutUs/Position?langCode=@Res.lang">@Res.aboutUs</a></li>
     <li>@ViewBag.Title</li>
 }
 
@@ -35,9 +35,9 @@
 <h1 class="sr-only">@Res.aboutUs</h1>
 
 <ul class="tabs list-inline text-center">
-    <li><a class="current" href="~/AboutUs/Position">@Res.aboutUs_position</a></li>
-    <li><a href="~/AboutUs/Statement">@Res.aboutUs_statement</a></li>
-    <li><a href="~/AboutUs/Law?cate_id=4">@Res.law</a></li>
+    <li><a class="current" href="~/AboutUs/Position?langCode=@Res.lang">@Res.aboutUs_position</a></li>
+    <li><a href="~/AboutUs/Statement?langCode=@Res.lang">@Res.aboutUs_statement</a></li>
+    <li><a href="~/AboutUs/Law?cate_id=4&langCode=@Res.lang">@Res.law</a></li>
 </ul>
 
 <h2 class="title">
