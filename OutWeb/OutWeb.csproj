@@ -878,13 +878,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\_SysAdm\EventHistoryAdd.cshtml" />
-    <Content Include="Views\_SysAdm\EventHistoryEdit.cshtml" />
-    <Content Include="Views\_SysAdm\EventHistoryList.cshtml" />
-    <Content Include="Views\_SysAdm\EventStatesAdd.cshtml" />
-    <Content Include="Views\_SysAdm\EventStatesEdit.cshtml" />
-    <Content Include="Views\_SysAdm\EventStatesList.cshtml" />
-    <Content Include="Views\_SysAdm\StatesVideoList.cshtml" />
     <Content Include="Views\_SysAdm\Login.cshtml" />
     <Content Include="Views\_SysAdm\News_Cate_Data.cshtml" />
     <Content Include="Views\_SysAdm\News_Cate_List.cshtml" />
@@ -948,6 +941,8 @@
     <Content Include="Views\Error\Error500.cshtml" />
     <Content Include="Views\JoinUs\Schedule.en-US.cshtml" />
     <Content Include="Views\JoinUs\Schedule.ja-JP.cshtml" />
+    <Content Include="Views\JoinUs\Gallery.en-US.cshtml" />
+    <Content Include="Views\JoinUs\Gallery.ja-JP.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

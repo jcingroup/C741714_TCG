@@ -7,8 +7,8 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/AboutUs">什麼是台灣民政府</a></li>
-    <li><a href="~/AboutUs/EducationCategory">教育專欄</a></li>
+    <li><a href="~/AboutUs">@Res.nav_aboutUs</a></li>
+    <li><a href="~/AboutUs/EducationCategory">@Res.aboutUs_eduCategory</a></li>
     <li><a href="@listTitleUrl">@Model.EduCateInfo.Values.First()</a></li> @* 分類名稱 *@
 }
 
@@ -16,7 +16,7 @@
     <script src="~/Content/js/tabs.js"></script>
 } *@
 
-<h1 class="sr-only">教育專欄</h1>
+<h1 class="sr-only">@Res.aboutUs_eduCategory</h1>
 
 <p class="back">
     <a href="@listTitleUrl"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>

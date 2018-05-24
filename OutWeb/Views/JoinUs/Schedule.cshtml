@@ -1,4 +1,5 @@
 ﻿@using System.Data
+@using OutWeb.App_GlobalResources
 @{
     ViewBag.Title = "開課時間表";
     ViewBag.BodyClass = "JoinUs School";
@@ -17,19 +18,19 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/JoinUs?langCode=zh-TW">如何加入台灣民政府</a></li>
-    <li><a href="~/JoinUs/Live?langCode=zh-TW">參加台灣法理學院</a></li>
+    <li><a href="~/JoinUs?langCode=zh-TW">@Res.nav_joinUs</a></li>
+    <li><a href="~/JoinUs/Live?langCode=zh-TW">@Res.joinUs_joinCollege</a></li>
     <li>@ViewBag.Title</li>
 }
 
-<h1 class="sr-only">如何加入台灣民政府</h1>
+<h1 class="sr-only">@Res.nav_joinUs</h1>
 
 <ul class="tabs list-inline text-center">
-    <li><a href="~/JoinUs/Live?langCode=zh-TW">課堂 LIVE 直播</a></li>
-    <li><a class="current" href="~/JoinUs/Schedule?langCode=zh-TW">開課時間表</a></li>
-    <li><a href="~/JoinUs/Gallery?langCode=zh-TW">歷屆合照</a></li>
+    <li><a href="~/JoinUs/Live?langCode=zh-TW">@Res.joinUs_live</a></li>
+    <li><a class="current" href="~/JoinUs/Schedule?langCode=zh-TW">@Res.joinUs_schedule</a></li>
+    <li><a href="~/JoinUs/Gallery?langCode=zh-TW">@Res.joinUs_gallery</a></li>
     @* 歷屆課程影片網址來源: 後台 > 加入台灣民政府 > 參加台灣法理學院 > 歷屆課程影片 *@
-    <li><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">歷屆課程影片</a></li>
+    <li><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">@Res.joinUs_tchVideo</a></li>
 </ul>
 
 <h2 class="title">

@@ -204,33 +204,6 @@
     <input type="hidden" id="txt_sort" name="txt_sort" value="@txt_sort" />
     <input type="hidden" id="txt_a_d" name="txt_a_d" value="@txt_a_d" />
     <header class="table-head form-inline">
-        <label>班別</label>
-        <select class="form-element" id="txt_cate" name="txt_cate">
-            <option value="">全部</option>
-            @if (d_cate.Rows.Count > 0)
-            {
-                for (int i = 0; i < d_cate.Rows.Count; i++)
-                {
-                    if (d_cate.Rows[i]["id"].ToString() == txt_lang)
-                    {
-                        c_selected = "selected";
-                    }
-                    else
-                    {
-                        c_selected = "";
-                    }
-                    <option value="@d_cate.Rows[i]["id"].ToString()" @c_selected>@d_cate.Rows[i]["cate_name"].ToString()</option>
-                }
-            }
-        </select>
-        @* 用 datetimepicker (之類的東西) 選日期 *@
-        <label>起</label>
-        <input type="date" id="txt_start_date" name="txt_start_date" value="@txt_start_date" max="9999-12-31">
-        ~
-        <label>迄</label>
-        <input type="date" id="txt_end_date" name="txt_end_date" value="@txt_end_date" max="9999-12-31">
-        <label>期別</label>
-        <input type="text" placeholder="請輸入關鍵字..." id="txt_title_query" name="txt_title_query">
         <label>語系</label>
         <select class="form-element" id="txt_lang" name="txt_lang" onclick="get_cate();">
             <option value="">全部</option>
@@ -250,6 +223,27 @@
                 }
             }
         </select>
+        <label>班別</label>
+        <select class="form-element" id="txt_cate" name="txt_cate">
+            <option value="">全部</option>
+            @if (d_cate.Rows.Count > 0)
+            {
+                for (int i = 0; i < d_cate.Rows.Count; i++)
+                {
+                    if (d_cate.Rows[i]["id"].ToString() == txt_lang)
+                    {
+                        c_selected = "selected";
+                    }
+                    else
+                    {
+                        c_selected = "";
+                    }
+                    <option value="@d_cate.Rows[i]["id"].ToString()" @c_selected>@d_cate.Rows[i]["cate_name"].ToString()</option>
+                }
+            }
+        </select>
+        <label>期別</label>
+        <input type="text" placeholder="請輸入關鍵字..." id="txt_title_query" name="txt_title_query">
         <label>狀態</label>
         <select id="txt_show" name="txt_show">
             <option value="">全部</option>

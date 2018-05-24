@@ -118,31 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="aboutUs" xml:space="preserve">
-    <value>關於我們</value>
+    <value>台湾民政府について</value>
   </data>
   <data name="aboutUs_eduCategory" xml:space="preserve">
-    <value>教育專欄</value>
+    <value>教育コラム</value>
   </data>
   <data name="aboutUs_law" xml:space="preserve">
-    <value>官方證明文件</value>
+    <value>公式証明書類</value>
   </data>
   <data name="aboutUs_org" xml:space="preserve">
-    <value>行政區域圖&amp;組織架構</value>
+    <value>行政区域図及び組織体系</value>
   </data>
   <data name="aboutUs_org_1" xml:space="preserve">
-    <value>行政區域圖&amp;amp;&lt;br class="visible-xs"&gt;組織架構</value>
+    <value>行政区域図&lt;br class="visible-xs"&gt;及び組織体系</value>
   </data>
   <data name="aboutUs_position" xml:space="preserve">
-    <value>主張與立場</value>
+    <value>主張及び立場</value>
   </data>
   <data name="aboutUs_statement" xml:space="preserve">
-    <value>台灣地位的聲明</value>
-  </data>
-  <data name="aboutUs_sub" xml:space="preserve">
-    <value>什麼是台灣民政府</value>
+    <value>台湾の地位に関する声明</value>
   </data>
   <data name="address" xml:space="preserve">
-    <value>新竹州桃園郡龜山鄉員林坑路100-1號</value>
+    <value>桃園市亀山区員林坑路100-1号</value>
   </data>
   <data name="back" xml:space="preserve">
     <value>回上頁</value>
@@ -172,54 +169,48 @@
     <comment>地方服務處諮詢 子分頁</comment>
   </data>
   <data name="fbPage_1" xml:space="preserve">
-    <value>FB 官方粉絲頁1</value>
+    <value>台湾民政府公式フェイスブック1</value>
   </data>
   <data name="fbPage_2" xml:space="preserve">
-    <value>FB 官方粉絲頁2</value>
-  </data>
-  <data name="gallery_t" xml:space="preserve">
-    <value>台灣政府 法理學院</value>
-  </data>
-  <data name="gallery_tchVideo" xml:space="preserve">
-    <value>上課影片</value>
+    <value>台湾民政府公式フェイスブック2</value>
   </data>
   <data name="home_about" xml:space="preserve">
-    <value>認識民政府</value>
+    <value>民政府とは</value>
   </data>
   <data name="home_joinUs" xml:space="preserve">
-    <value>如何加入</value>
+    <value>加入するには</value>
   </data>
   <data name="home_news" xml:space="preserve">
-    <value>活動公告</value>
+    <value>活動のお知らせ</value>
   </data>
   <data name="joinUs_apply" xml:space="preserve">
-    <value>申請台灣民政府身分證</value>
+    <value>台湾民政府の身分証の申請手続</value>
   </data>
   <data name="joinUs_apply_1" xml:space="preserve">
-    <value>申請台灣&lt;br class="visible-xs"&gt;民政府身分證</value>
+    <value>台湾民政府&lt;br class="visible-xs"&gt;身分証の申請手続</value>
   </data>
   <data name="joinUs_consult" xml:space="preserve">
-    <value>地方服務處諮詢</value>
+    <value>地方役所のご案内</value>
   </data>
   <data name="joinUs_consult_1" xml:space="preserve">
-    <value>地方服務處&lt;br class="visible-xs"&gt;諮詢</value>
+    <value>地方役所の&lt;br class="visible-xs"&gt;ご案内</value>
   </data>
   <data name="joinUs_gallery" xml:space="preserve">
-    <value>歷屆合照</value>
+    <value>各回受講者の写真</value>
     <comment>參加台灣法理學院 子分頁</comment>
   </data>
   <data name="joinUs_joinCollege" xml:space="preserve">
-    <value>參加台灣法理學院</value>
+    <value>台湾法理学院の受講</value>
   </data>
   <data name="joinUs_joinCollege_1" xml:space="preserve">
-    <value>參加台灣&lt;br class="visible-xs"&gt;法理學院</value>
+    <value>台湾法理学院&lt;br class="visible-xs"&gt;の受講</value>
   </data>
   <data name="joinUs_live" xml:space="preserve">
-    <value>課堂 LIVE 直播</value>
+    <value>講義ライブ中継</value>
     <comment>參加台灣法理學院 子分頁</comment>
   </data>
   <data name="joinUs_schedule" xml:space="preserve">
-    <value>開課時間表</value>
+    <value>開講スケジュール</value>
     <comment>參加台灣法理學院 子分頁</comment>
   </data>
   <data name="joinUs_tchVideo" xml:space="preserve">
@@ -227,84 +218,81 @@
     <comment>參加台灣法理學院 子分頁</comment>
   </data>
   <data name="lang" xml:space="preserve">
-    <value>zh-tw</value>
+    <value>ja-JP</value>
   </data>
   <data name="law" xml:space="preserve">
-    <value>法律依據</value>
+    <value>法的根拠</value>
   </data>
   <data name="law_auth" xml:space="preserve">
-    <value>台灣公民權利法</value>
+    <value>台湾公民権利法</value>
   </data>
   <data name="law_basic" xml:space="preserve">
-    <value>台灣基本法</value>
+    <value>台湾基本法</value>
   </data>
   <data name="law_paper" xml:space="preserve">
-    <value>官方證明文件</value>
+    <value>公式証明書類</value>
   </data>
   <data name="link" xml:space="preserve">
-    <value>相關連結</value>
+    <value>関連リンク</value>
   </data>
   <data name="more" xml:space="preserve">
-    <value>閱讀全文</value>
+    <value>もっと読む</value>
   </data>
   <data name="nav_aboutUs" xml:space="preserve">
-    <value>認識台灣民政府</value>
+    <value>台湾民政府とは</value>
   </data>
   <data name="nav_joinUs" xml:space="preserve">
-    <value>如何加入台灣民政府</value>
+    <value>台湾民政府に加入するには</value>
   </data>
   <data name="nav_news" xml:space="preserve">
-    <value>最新消息 活動公告</value>
+    <value>新着情報・活動のお知らせ</value>
   </data>
   <data name="news" xml:space="preserve">
-    <value>最新消息</value>
+    <value>新着情報</value>
   </data>
   <data name="news_announLatest" xml:space="preserve">
-    <value>新聞 公告 聲明</value>
+    <value>ニュース・お知らせ・声明</value>
   </data>
   <data name="news_announLatest_1" xml:space="preserve">
-    <value>新聞 &lt;br class="visible-xs"&gt;公告 聲明</value>
+    <value>ニュース &lt;br class="visible-xs"&gt;お知らせ・声明</value>
   </data>
   <data name="news_centralAnnounce" xml:space="preserve">
-    <value>中央公告</value>
+    <value>中央のお知らせ</value>
     <comment>新聞 公告 聲明 子分頁</comment>
   </data>
   <data name="news_centralNews" xml:space="preserve">
-    <value>中央新聞</value>
+    <value>中央のニュース</value>
     <comment>新聞 公告 聲明 子分頁</comment>
   </data>
   <data name="news_centralStatement" xml:space="preserve">
-    <value>中央聲明</value>
+    <value>中央の声明</value>
     <comment>新聞 公告 聲明 子分頁</comment>
   </data>
   <data name="news_event" xml:space="preserve">
-    <value>活動寫真</value>
+    <value>活動の写真・動画</value>
   </data>
   <data name="news_eventLatest" xml:space="preserve">
-    <value>中央活動</value>
+    <value>中央の活動</value>
   </data>
   <data name="news_eventStatesCategory" xml:space="preserve">
-    <value>各州活動</value>
+    <value>各州の活動</value>
   </data>
   <data name="news_focusCategory" xml:space="preserve">
-    <value>焦點專欄</value>
+    <value>フォーカスコラム</value>
   </data>
   <data name="next_page" xml:space="preserve">
-    <value>下一頁</value>
-  </data>
-  <data name="no" xml:space="preserve">
-    <value>第</value>
+    <value>次のページ</value>
   </data>
   <data name="org_adminReg" xml:space="preserve">
-    <value>行政區域圖</value>
+    <value>行政区域図</value>
     <comment>行政區域圖&amp;組織架構 子分頁</comment>
   </data>
   <data name="org_org" xml:space="preserve">
-    <value>組織架構</value>
+    <value>組織体系</value>
     <comment>行政區域圖&amp;組織架構 子分頁</comment>
   </data>
   <data name="org_people" xml:space="preserve">
-    <value>人事名單</value>
+    <value>人事名簿</value>
     <comment>行政區域圖&amp;組織架構 子分頁</comment>
   </data>
   <data name="postCode" xml:space="preserve">
@@ -312,13 +300,13 @@
     <comment>郵遞區號</comment>
   </data>
   <data name="pre_page" xml:space="preserve">
-    <value>上一頁</value>
+    <value>前のページ</value>
   </data>
   <data name="pre_site" xml:space="preserve">
-    <value>TCG舊官網</value>
+    <value>台湾民政府旧公式サイト</value>
   </data>
   <data name="search" xml:space="preserve">
-    <value>搜尋</value>
+    <value>検索</value>
   </data>
   <data name="spokesman_p" xml:space="preserve">
     <value>溫晟志 0987-577-175</value>
@@ -327,12 +315,9 @@
     <value>台灣民政府 中央發言人</value>
   </data>
   <data name="tel" xml:space="preserve">
-    <value>(03) 355-6363</value>
-  </data>
-  <data name="vol" xml:space="preserve">
-    <value>期</value>
+    <value>+886-3-355-6363</value>
   </data>
   <data name="WV_site" xml:space="preserve">
-    <value>TCG華盛頓官網</value>
+    <value>台湾民政府（ワシントン）公式サイト</value>
   </data>
 </root>
