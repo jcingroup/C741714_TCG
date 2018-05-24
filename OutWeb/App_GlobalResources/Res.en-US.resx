@@ -316,4 +316,10 @@
   <data name="search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="back_list" xml:space="preserve">
+    <value>回文章列表</value>
+  </data>
+  <data name="back_pre" xml:space="preserve">
+    <value>回上層</value>
+  </data>
 </root>

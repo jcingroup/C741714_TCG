@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using OutWeb.Service;
+using System.Globalization;
+using System.Threading;
 
 namespace OutWeb
 {
@@ -68,6 +70,94 @@ namespace OutWeb
                 Response.Redirect(string.Format("~/Error/Error500"), true);
                 Server.ClearError();
             }
+        }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+
+            Language Clang = new Language();
+            CultureInfo ci = null;
+            string lang = string.Empty;
+            lang = Request.QueryString["lang"]; //參數切換語系 參數查詢列為高優先權
+
+            if (string.IsNullOrEmpty(lang))
+            {
+                lang = Request.QueryString["langCode"];
+            }
+
+            HttpCookie cookie = Request.Cookies["_culture"];
+            if (lang != "" && lang != null)   //點擊其他頁面時
+            {
+                if (GetCurrentCulture() != lang || cookie.Value != lang)
+                {
+                    // update cookie value 
+                    cookie.Value = lang;
+                    Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(lang);
+                    Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;// 主要
+                }
+            }
+            else if ((cookie == null) && ((lang == "") || lang == null)) //初次瀏覽頁面時
+            {
+                try
+                {
+                    //取得用戶端瀏覽器語言喜好設定
+                    var userLanguages = Request.UserLanguages;
+                    if (userLanguages.Length > 0)
+                    {
+                        try
+                        {
+                            ci = new CultureInfo(userLanguages[0]);
+                        }
+                        catch (CultureNotFoundException)
+                        {
+                            ci = CultureInfo.InvariantCulture;
+                        }
+                    }
+                    else
+                    {
+                        ci = CultureInfo.InvariantCulture;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    var webLang = ci.ToString();
+                    // create cookie value 
+                    cookie = new HttpCookie("_culture");
+                    if (webLang == "en-US" || webLang == "zh-CN" || webLang == "zh-TW")
+                    {
+                        System.Diagnostics.Debug.WriteLine(webLang);
+                    }
+                    else if (webLang == "ja")
+                    {
+                        webLang = "ja-JP";
+                    }
+                    else
+                    {
+                        webLang = "en-US";
+                    }
+                    cookie.Value = webLang;
+                    cookie.Expires = DateTime.Now.AddDays(1);
+                    Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cookie.Value);
+                    Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;// 主要
+                    Response.Cookies.Add(cookie);
+                }
+            }
+            else //非初次瀏覽頁面
+            {
+                // resume cookie value 
+                Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cookie.Value);
+                Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;// 主要
+            }
+
+        }
+
+        public string GetCurrentCulture()
+        {
+            return System.Threading.Thread.CurrentThread.CurrentCulture.Name;
         }
     }
 }

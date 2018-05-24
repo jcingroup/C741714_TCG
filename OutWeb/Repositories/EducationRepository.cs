@@ -35,8 +35,8 @@ namespace OutWeb.Repositories
                  .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
                  s.STATUS == "Y")
                   .ToDictionary(d => d.ID, d => d.CATE_NAME);
-                if (cate.Count == 0)
-                    throw new Exception("無法取得教育分類");
+                //if (cate.Count == 0)
+                //    throw new Exception("無法取得教育分類");
             }
             return cate;
         }
@@ -53,8 +53,8 @@ namespace OutWeb.Repositories
                 .Where(s => s.Key == id)
                 .ToDictionary(d => d.Key, d => d.Value);
 
-            if (cate.Count == 0)
-                throw new Exception("無法取得教育分類");
+            //if (cate.Count == 0)
+            //    throw new Exception("無法取得教育分類");
 
             return cate;
         }

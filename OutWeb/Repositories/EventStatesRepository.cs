@@ -35,8 +35,8 @@ namespace OutWeb.Repositories
                  s.STATUS == "Y")
                  .OrderByDescending(s => s.SORT)
                   .ToDictionary(d => d.ID, d => d.CATE_NAME);
-                if (cate.Count == 0)
-                    throw new Exception("無法取得洲別分類");
+                //if (cate.Count == 0)
+                //    throw new Exception("無法取得洲別分類");
             }
             return cate;
         }

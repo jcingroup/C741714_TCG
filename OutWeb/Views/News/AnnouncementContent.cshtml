@@ -1,4 +1,5 @@
 ﻿@using OutWeb.Models.FrontModels.News.AnnouncementLatest
+@using OutWeb.App_GlobalResources
 @model AnnouncementLatestContent
 
 @{
@@ -10,8 +11,8 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/News">最新訊息 活動公告</a></li>
-    <li><a href="~/News/AnnouncementLatest">新聞 公告 聲明</a></li>
+    <li><a href="~/News">@Res.nav_news</a></li>
+    <li><a href="~/News/AnnouncementLatest">@Res.news_announLatest</a></li>
     <li><a href="@listLink">@Model.Data.CateIDInfo.Values.First()</a></li> @* 分類名稱 *@
 }
 
@@ -19,10 +20,10 @@
     <script src="~/Content/js/tabs.js"></script>
 } *@
 
-<h1 class="sr-only">中央新聞</h1>
+<h1 class="sr-only">@Res.news_centralNews</h1>
 
 <p class="back">
-    <a href="@listLink"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+    <a href="@listLink"><i class="oi" data-glyph="caret-left"></i> @Res.backList</a>
 </p>
 
 <h2 class="title">

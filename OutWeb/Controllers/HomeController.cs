@@ -20,8 +20,6 @@ namespace OutWeb.Controllers
         {
             ViewBag.IsFirstPage = true;
 
-            Change_Lang(lang);  // 前端多國語言 
-
             return View();
         }
 

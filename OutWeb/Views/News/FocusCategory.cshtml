@@ -1,11 +1,12 @@
 ﻿@model Dictionary<int, string>
+@using OutWeb.App_GlobalResources
 @{
-    ViewBag.Title = "焦點專欄";
+    ViewBag.Title = Res.news_focusCategory;
     ViewBag.BodyClass = "News Focus";
 }
 
 @section breadcrumb {
-    <li><a href="~/News">最新訊息 活動公告</a></li>
+    <li><a href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.nav_news</a></li>
     <li>@ViewBag.Title</li>
 }
 
@@ -18,7 +19,7 @@
 @foreach (var focus in Model)
 {
         <li class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <a href="@Url.Content("~/News/FocusList?focusTypeID=" + focus.Key)">
+            <a href="@Url.Content("~/News/FocusList?focusTypeID=" + focus.Key + "&langCode=" + @OutWeb.App_GlobalResources.Res.lang)">
                 <span>@focus.Value</span>
             </a>
         </li>

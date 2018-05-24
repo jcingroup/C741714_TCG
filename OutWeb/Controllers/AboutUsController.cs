@@ -43,8 +43,8 @@ namespace OutWeb.Controllers
 
         public ActionResult Index(string lang="")
         {
-            Change_Lang(lang);
-            return RedirectToAction("TCG");
+
+            return RedirectToAction("TCG", new { langCode = lang });
         }
 
         // 台灣民政府由來
@@ -59,8 +59,7 @@ namespace OutWeb.Controllers
             string err_msg = "";
 
 
-            //======語系轉換========
-            Change_Lang(langCode);
+            //======語系取得========
             string lang_id = GetLang();
             //======================
 
@@ -94,8 +93,7 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             string err_msg = "";
 
-            //======語系轉換========
-            Change_Lang(langCode);
+            //======語系取得========
             string lang_id = GetLang();
             //======================
 
@@ -126,8 +124,8 @@ namespace OutWeb.Controllers
             DataTable dt1;
             DataTable d_detail;
             string err_msg = "";
-            //======語系轉換========
-            Change_Lang(langCode);
+
+            //======語系取得========
             string lang_id = GetLang();
             //======================
             dt1 = CAboutUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
@@ -159,8 +157,8 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             string err_msg = "";
 
-            //======語系轉換========
-            Change_Lang(langCode);
+
+            //======語系取得========
             string lang_id = GetLang();
             //======================
 
@@ -199,8 +197,8 @@ namespace OutWeb.Controllers
 
         public ActionResult EducationCategory(string langCode="")
         {
-            //======語系轉換========
-            Change_Lang(langCode);
+
+            //======語系取得========
             string langCd = GetLang();
             //======================
             EducationRepository repo = new EducationRepository();
@@ -214,10 +212,16 @@ namespace OutWeb.Controllers
         {
             if (!eduTypeID.HasValue)
                 return View();
+
+
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
+
             EducationListFilter filter = new EducationListFilter()
             {
                 CurrentPage = page ?? 1,
-                LangCode = langCode
+                LangCode = langCd
             };
 
             eduTypeID = eduTypeID ?? 1;
@@ -229,12 +233,16 @@ namespace OutWeb.Controllers
         }
 
         // 焦點專欄 - 內容
-        public ActionResult EducationContent(int? eduTypeID, int? ID, int? pagingID)
+        public ActionResult EducationContent(int? eduTypeID, int? ID, int? pagingID,string langCode="")
         {
 
             if (!eduTypeID.HasValue || !ID.HasValue)
                 return RedirectToAction("EducationList");
-            string langCd = string.Empty;
+
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
+
             EducationRepository repo = new EducationRepository();
             EducationContent model = repo.GetContentByID((int)eduTypeID, (int)ID, langCd);
             if (pagingID != null)
@@ -326,8 +334,7 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             string err_msg = "";
 
-            //======語系轉換========
-            Change_Lang(langCode);
+            //======語系取得========
             string lang_id = GetLang();
             //======================
 

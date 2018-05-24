@@ -6,7 +6,7 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/AboutUs">@Res.nav_aboutUs</a></li>
+    <li><a href="~/AboutUs?lang=@Res.lang">@Res.nav_aboutUs</a></li>
     <li>@ViewBag.Title</li>
 }
 
@@ -19,7 +19,7 @@
 @foreach (var edu in Model)
 {
     <li class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <a href="@Url.Content("~/AboutUs/EducationList?eduTypeID=" + edu.Key)">
+        <a href="@Url.Content("~/AboutUs/EducationList?eduTypeID=" + edu.Key + "&langCode=" + Res.lang)">
             <span>@edu.Value</span>
         </a>
     </li>

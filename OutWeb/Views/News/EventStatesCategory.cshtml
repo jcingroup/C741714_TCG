@@ -1,21 +1,21 @@
 ﻿@model Dictionary<int, string>
-
+@using  OutWeb.App_GlobalResources
     @{
-        ViewBag.Title = "各州活動";
+        ViewBag.Title = Res.news_eventStatesCategory;
         ViewBag.BodyClass = "News Event";
     }
 
     @section breadcrumb {
-        <li><a href="~/News">最新訊息 活動公告</a></li>
-        <li><a href="~/News/EventLatest">活動寫真</a></li>
+        <li><a href="~/News">@Res.nav_news</a></li>
+        <li><a href="~/News/EventLatest">@Res.news_event</a></li>
         <li>@ViewBag.Title</li>
     }
 
-    <h1 class="sr-only">活動寫真</h1>
+    <h1 class="sr-only">@Res.news_event</h1>
 
     <ul class="tabs list-inline text-center">
-        <li><a href="~/News/EventLatest">中央活動</a></li>
-        <li><a class="current" href="~/News/EventStatesCategory">各州活動</a></li>
+        <li><a href="~/News/EventLatest">@Res.news_eventLatest</a></li>
+        <li><a class="current" href="~/News/EventStatesCategory">@Res.news_eventStatesCategory</a></li>
     </ul>
 
     <h2 class="title">
@@ -52,7 +52,7 @@
             }
             string stateStyleList = string.Concat("icon-state-",stateStyle);
 
-            string stateListUrl = Url.Content("~/News/EventStatesList?statesTypeID=" + state.Key);
+            string stateListUrl = Url.Content("~/News/EventStatesList?statesTypeID=" + state.Key + "&langCode=" + Res.lang);
             <li class="col-md-4 col-sm-6 col-12">
                 <a class="@stateStyle" href="@stateListUrl">
                     <i class="@stateStyleList"></i>

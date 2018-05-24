@@ -45,7 +45,6 @@
 
     string cate_id = "";
     string cate_selected = "";
-
     img_no = DateTime.Now.ToString("yyyyMMddHHmmss");
 
     if (action_sty == "add")
@@ -195,13 +194,25 @@
                 c_html = "";
 
                 //  移除全部的項目
-                $("#cate_id option").remove();
+                //$("#cate_id option").remove();
+                $('span[name="cateSpan"]').remove();
+
                 //新增空白
                 //$("#cate_id").append($("<option></option>").attr("value", "").text("全部"));
-
+                var spanStr = "";
                 $.each($.parseJSON(data), function (idx, obj) {
                     //$("#select").append($("<option></option>").attr("value", "值").text("文字"));
-                    $("#cate_id").append($("<option></option>").attr("value", obj.ID).text(obj.CATE_NAME));
+                    //$("#cate_id").append($("<option></option>").attr("value", obj.ID).text(obj.CATE_NAME));
+
+                    spanStr = spanStr + "<span name=\"cateSpan\">";
+                    spanStr = spanStr + "    <input  type=\"radio\" class =\"radio\" name=\"cate_id\" id=" + obj.ID + " value=" + obj.ID + "/>";
+                    spanStr = spanStr + "    <label for=" + obj.ID +"></label> ";
+                    spanStr = spanStr + obj.CATE_NAME;
+                    spanStr = spanStr + "</span>";
+
+                    $("#spanDD").append(spanStr);
+
+                    spanStr = ""; //清空選項
                 });
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -262,7 +273,7 @@
 
     function upload(c_sty)
     {
-        
+
         if ($("#pic_" + c_sty).val().length > 0) {
             //ajaxFileUpload('pic_small','small_img');
             //ajaxFileUpload(c_sty);
@@ -350,7 +361,7 @@
     {
         var byteSize = $("#" + field_id)[0].files[0].size;
         //return ( Math.ceil(byteSize / 1024) ); // Size returned in KB.
-       
+
         return ( Math.ceil(byteSize) ); // Size returned in B.
     }
 </script>
@@ -384,7 +395,7 @@
 
     <dl class="field">
         <dt class="col-1"><sup title="必填">*</sup> 分類</dt>
-        <dd class="col-6">
+        <dd class="col-6" id="spanDD">
             @if (d_cate.Rows.Count > 0)
             {
                 for (int i = 0; i < d_cate.Rows.Count; i++)
@@ -400,9 +411,11 @@
                     {
                         cate_selected = "";
                     }
-                    <input type="radio" class="radio" name="cate_id" id="@d_cate.Rows[i]["id"].ToString()" value="@d_cate.Rows[i]["id"].ToString()" @cate_selected>
-                    <label for="@d_cate.Rows[i]["id"].ToString()"></label>
-                    @d_cate.Rows[i]["cate_name"].ToString()
+                    <span name="cateSpan">
+                        <input type="radio" class="radio" name="cate_id" id="@d_cate.Rows[i]["id"].ToString()" value="@d_cate.Rows[i]["id"].ToString()" @cate_selected>
+                        <label for="@d_cate.Rows[i]["id"].ToString()"></label>
+                        @d_cate.Rows[i]["cate_name"].ToString()
+                    </span>
                 }
             }
         </dd>

@@ -151,6 +151,24 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 回文章列表 的當地語系化字串。
+        /// </summary>
+        public static string back_list {
+            get {
+                return ResourceManager.GetString("back_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 回上層 的當地語系化字串。
+        /// </summary>
+        public static string back_pre {
+            get {
+                return ResourceManager.GetString("back_pre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 新竹州 的當地語系化字串。
         /// </summary>
         public static string consult_hsinchu {

@@ -7,15 +7,15 @@
     ViewBag.BodyClass = "AboutUs Education";
 }
 @section breadcrumb {
-    <li><a href="~/AboutUs">@Res.nav_aboutUs</a></li>
-    <li><a href="~/AboutUs/EducationCategory">@Res.aboutUs_eduCategory</a></li>
+    <li><a href="~/AboutUs?lang=@Res.lang">@Res.nav_aboutUs</a></li>
+    <li><a href="~/AboutUs/EducationCategory?langCode=@Res.lang">@Res.aboutUs_eduCategory</a></li>
     <li>@ViewBag.Title</li>
 }
 
 <h1 class="sr-only">@Res.aboutUs_eduCategory</h1>
 
 <p class="back">
-    <a href="~/AboutUs/EducationCategory"><i class="oi" data-glyph="caret-left"></i> @Res.back</a>
+    <a href="~/AboutUs/EducationCategory?langCode=@Res.lang"><i class="oi" data-glyph="caret-left"></i> @Res.back</a>
 </p>
 
 <h2 class="title">
@@ -29,7 +29,7 @@
         @foreach (var data in Model.Data)
         {
             // string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
-            string contentUrl = Url.Content("~/AboutUs/EducationContent?eduTypeID=" + Model.EduTypeInfo.Keys.First() + "&ID=" + data.ID);
+            string contentUrl = Url.Content("~/AboutUs/EducationContent?eduTypeID=" + Model.EduTypeInfo.Keys.First() + "&ID=" + data.ID + "&langCode" + Res.lang);
             string remark = string.IsNullOrEmpty(data.Remark) || data.Remark.Length == 0 ? "" : data.Remark.Length > 145 ? @"<p>" + data.Remark.Substring(0, 145) + "...</p>" : data.Remark;
 
             //編輯器內容 取前 145 個字，有資料的話才顯示
@@ -59,7 +59,7 @@
         </li>
 
         <li>
-            <form action="/News/EducationList" method="get" class="form-inline">
+            <form action="/News/EducationList?langCode=@Res.lang" method="get" class="form-inline">
                 <input type="hidden" name="focusTypeID" value="@Model.EduTypeInfo.Keys.First()" />
                 第
                 <select name="page" id="numPage" class="form-element">

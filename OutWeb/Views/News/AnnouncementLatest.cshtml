@@ -1,14 +1,15 @@
 ﻿@using OutWeb.Models.FrontModels.News.AnnouncementLatest
+@using OutWeb.App_GlobalResources
 @model AnnouncementLatestResult
 
 @{
-    ViewBag.Title = "新聞 公告 聲明";
+    ViewBag.Title = Res.news_announLatest;
     ViewBag.BodyClass = "News Announcement";
     string img_path = "/Images/";
 }
 
 @section breadcrumb {
-    <li><a href="~/News">最新訊息 活動公告</a></li>
+    <li><a href="~/News?langCode=@Res.lang" + Res.lang">@Res.nav_news</a></li>
     <li>@ViewBag.Title</li>
 }
 
@@ -28,10 +29,10 @@
 <div class="articles">
     @foreach (var data in Model.Data)
     {
-        string listLink = Url.Content("~/News/AnnouncementList?typeID=" + data.CateIDInfo.Keys.First());
+        string listLink = Url.Content("~/News/AnnouncementList?typeID=" + data.CateIDInfo.Keys.First() + "&langCode=" + Res.lang);
         string img = string.IsNullOrEmpty(data.Img) ? @"/Content/Images/NoImages.jpg" : img_path + data.Img;
         string imgClass = string.IsNullOrEmpty(data.Img) ? "hidden" : "";
-        string contentUrl = Url.Content("~/News/AnnouncementContent?ID=" + data.ID + "&typeID=" + data.CateIDInfo.Keys.First());
+        string contentUrl = Url.Content("~/News/AnnouncementContent?ID=" + data.ID + "&typeID=" + data.CateIDInfo.Keys.First() + "&langCode=" + Res.lang);
         string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : data.Content.Length > 145 ? @"<p>" + data.Content.Substring(0, 145) + "...</p>" : "<p>" + data.Content + "</p>";
         string labelStyle = data.CateIDInfo.Keys.First() == 1 ? "label-danger" : data.CateIDInfo.Keys.First() == 2 ? "label-pink" : data.CateIDInfo.Keys.First() == 4 ? "label-purple" : "";
         <article class="article">
@@ -53,7 +54,7 @@
                     <h3><a href="@contentUrl">@data.Title</a></h3>
                     @* 摘要 取前 145 個字，有資料的話才顯示 *@
                     <p>@Html.Raw(remark)</p>
-                    <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                    <a href="@contentUrl" class="more"> @Res.more <i class="oi" data-glyph="caret-right"></i></a>
                 </div>
             </div>
         </article>

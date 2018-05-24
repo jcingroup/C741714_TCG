@@ -320,4 +320,10 @@
   <data name="WV_site" xml:space="preserve">
     <value>台湾民政府（ワシントン）公式サイト</value>
   </data>
+  <data name="back_list" xml:space="preserve">
+    <value>回文章列表</value>
+  </data>
+  <data name="back_pre" xml:space="preserve">
+    <value>回上層</value>
+  </data>
 </root>

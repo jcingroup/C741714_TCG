@@ -1,23 +1,24 @@
 ﻿@using OutWeb.Models.FrontModels.News.EventLatestModels
+@using OutWeb.App_GlobalResources
 @model EventLatestResult
 @{
-    ViewBag.Title = "中央活動";
+    ViewBag.Title = Res.news_eventLatest;
     ViewBag.BodyClass = "News Event";
     string img_path = "../Images/";
 
 }
 
 @section breadcrumb {
-    <li><a href="~/News">最新訊息 活動公告</a></li>
-    <li><a href="~/News/EventLatest">活動寫真</a></li>
+    <li><a href="~/News?lang=@Res.lang">@Res.nav_news</a></li>
+    <li><a href="~/News/EventLatest?langCode=@Res.lang">@Res.news_event</a></li>
     <li>@ViewBag.Title</li>
 }
 
-<h1 class="sr-only">活動寫真</h1>
+<h1 class="sr-only">@Res.news_event</h1>
 
 <ul class="tabs list-inline text-center">
-    <li><a class="current" href="~/News/EventLatest">中央活動</a></li>
-    <li><a href="~/News/EventStatesCategory">各州活動</a></li>
+    <li><a class="current" href="~/News/EventLatest?langCode=@Res.lang">@Res.news_eventLatest</a></li>
+    <li><a href="~/News/EventStatesCategory?langCode=@Res.lang">@Res.news_eventStatesCategory</a></li>
 </ul>
 
 <h2 class="title">
@@ -47,12 +48,12 @@
                         中央活動     class + label-warning
                         各州活動     class + label-orange
                     *@
-                    <a class="label label-warning" href="~/News/EventLatest">中央活動</a>
+                    <a class="label label-warning" href="~/News/EventLatest?langCode=@Res.lang">@Res.news_eventLatest</a>
                     <small class="date">@data.PublishDateString</small>
                     <h3><a href="@contentUrl">@data.Title</a></h3>
                     @* 摘要 取前 145 個字，有資料的話才顯示 *@
                     <p>@Html.Raw(remark)</p>
-                    <a href="@contentUrl" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                    <a href="@contentUrl" class="more"> @Res.more <i class="oi" data-glyph="caret-right"></i></a>
                 </div>
             </div>
         </article>

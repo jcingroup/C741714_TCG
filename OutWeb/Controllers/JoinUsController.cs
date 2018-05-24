@@ -43,8 +43,7 @@ namespace OutWeb.Controllers
 
         public ActionResult Index(string lang="")
         {
-            Change_Lang(lang);
-            return RedirectToAction("Apply");
+            return RedirectToAction("Apply", new {  langCode=lang});
         }
 
         // 申請民政府身分證
@@ -56,8 +55,7 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             DataTable dt1;
             string err_msg = "";
-            //======語系轉換========
-            Change_Lang(langCode);
+            //======語系取得========
             string lang_id = GetLang();
             //======================
             dt1 = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
@@ -88,8 +86,7 @@ namespace OutWeb.Controllers
             DataTable d_detail;
             DataTable dt1;
             string err_msg = "";
-            //======語系轉換========
-            Change_Lang(langCode);
+            //======語系取得========
             string lang_id = GetLang();
             //======================
             dt1 = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
@@ -116,8 +113,7 @@ namespace OutWeb.Controllers
         {
             DataTable dt;
             string err_msg = "";
-            //======語系轉換========
-            Change_Lang(langCode);
+            //======語系取得========
             string lang_id = GetLang();
             //======================
             dt = Cschool.Video_List(ref err_msg, "", "sort desc", "Y", "", lang_id);
@@ -132,8 +128,7 @@ namespace OutWeb.Controllers
             string cate_id = "3";
             DataTable dt;
             string err_msg = "";
-            //======語系轉換========
-            Change_Lang(langCode);
+            //======語系取得========
             string lang_id = GetLang();
             //======================
             string langView = Lang_Page("Schedule");
@@ -148,8 +143,7 @@ namespace OutWeb.Controllers
         {
             DataTable dt;
             string err_msg = "";
-            //======語系轉換========
-            Change_Lang(langCode);
+            //======語系取得========
             string lang_id = GetLang();
             //======================
             dt = Cschool.List(ref err_msg, "", " sort desc , cate_id desc ", "Y", "", "", "", "", lang_id);

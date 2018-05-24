@@ -1,4 +1,5 @@
 ﻿@using OutWeb.Models.FrontModels.AboutModels.EducationModels
+@using OutWeb.App_GlobalResources
 @model EducationContent
 @{
     ViewBag.Title = Model.Data.Title;
@@ -7,8 +8,8 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/AboutUs">@Res.nav_aboutUs</a></li>
-    <li><a href="~/AboutUs/EducationCategory">@Res.aboutUs_eduCategory</a></li>
+    <li><a href="~/AboutUs?lang=@Res.lang">@Res.nav_aboutUs</a></li>
+    <li><a href="~/AboutUs/EducationCategory?langCode=@Res.lang">@Res.aboutUs_eduCategory</a></li>
     <li><a href="@listTitleUrl">@Model.EduCateInfo.Values.First()</a></li> @* 分類名稱 *@
 }
 
@@ -19,7 +20,7 @@
 <h1 class="sr-only">@Res.aboutUs_eduCategory</h1>
 
 <p class="back">
-    <a href="@listTitleUrl"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+    <a href="@listTitleUrl"><i class="oi" data-glyph="caret-left"></i> @Res.back_list</a>
 </p>
 
 <h2 class="title">
@@ -37,7 +38,7 @@
             {
                 int index = Model.Data.PagingList.IndexOf(paging);
                 string currentStyle = string.IsNullOrEmpty(paging.Current) ? "" : "current";
-                string pagingUrl = Url.Content("~/AboutUs/EducationContent?eduTypeID=" + Model.EduCateInfo.Keys.First() + "&ID=" + Model.Data.ID + "&pagingID=" + paging.ID);
+                string pagingUrl = Url.Content("~/AboutUs/EducationContent?eduTypeID=" + Model.EduCateInfo.Keys.First() + "&ID=" + Model.Data.ID + "&pagingID=" + paging.ID + "&langCode=" + Res.lang);
                 <li>
                     <a class="tab-nav @currentStyle" href="@pagingUrl">@paging.Title</a>
                 </li>

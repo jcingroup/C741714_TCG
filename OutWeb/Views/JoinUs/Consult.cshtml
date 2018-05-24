@@ -21,7 +21,7 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/JoinUs">@Res.nav_joinUs</a></li>
+    <li><a href="~/JoinUs?lang=@Res.lang">@Res.nav_joinUs</a></li>
     <li>@ViewBag.Title</li>
 }
 
@@ -57,7 +57,7 @@
 
                 <li>
                     @*<a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>*@
-                    <a class="@c_tab_nav" href="@Url.Content(cFile + "?id=" + c_id)">@c_title</a>
+                    <a class="@c_tab_nav" href="@Url.Content(cFile + "?id=" + c_id + "&langCode=" + Res.lang)">@c_title</a>
                 </li>
             }
         </ul>

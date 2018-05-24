@@ -71,12 +71,12 @@
                             公告         class + label-pink
                             聲明         class + label-purple
                             焦點專欄     class + label-info -->
-                        <a class="label @listStyleFirst" href="@data.ListTitleUrl">@data.DataType.ToString()</a>
+                        <a class="label @listStyleFirst" href="@(data.ListTitleUrl +"&langCode=" + @Res.lang)">@data.DataType.ToString()</a>
                         <small class="date">@data.PublishDateString</small>
-                        <h3><a href="@data.ContentUrl">@data.Title</a></h3>
+                        <h3><a href="@(data.ContentUrl +"&langCode=" + @Res.lang)">@data.Title</a></h3>
                         <!-- 摘要 取前 145 個字，有資料的話才顯示 -->
                         <p>@Html.Raw(remark)</p>
-                        <a href="@data.ContentUrl" class="more"> @Res.more <i class="oi" data-glyph="caret-right"></i></a>
+                        <a href="@(data.ContentUrl  +"&langCode=" + @Res.lang)" class="more"> @Res.more <i class="oi" data-glyph="caret-right"></i></a>
                     </div>
                 </div>
             </article>

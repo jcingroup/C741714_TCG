@@ -40,28 +40,31 @@ namespace OutWeb.Controllers
 
         public ActionResult Index(string lang)
         {
-            Change_Lang(lang);
-            return RedirectToAction("Latest");
+
+            return RedirectToAction("Latest",new { langCode=lang});
         }
 
         // 最新訊息
-        public ActionResult Latest()
+        public ActionResult Latest(string langCode="")
         {
-            string langCode = GetLang();
+            //======語系取得========
+            string lang_id = GetLang();
+            //======================
             LatestRepository repo = new LatestRepository();
-            var model = repo.GetLatestList(langCode);
+            var model = repo.GetLatestList(lang_id);
             return View(model);
         }
 
         // 最新訊息 - 活動寫真 - 最新（中央）活動
         public ActionResult EventLatest(int? page, string langCode)
         {
-            Change_Lang(langCode);
-            langCode = GetLang();
+            //======語系取得========
+            string lang_id = GetLang();
+            //======================
             EventLatestListFilter filter = new EventLatestListFilter()
             {
                 CurrentPage = page ?? 1,
-                LangCode = langCode
+                LangCode = lang_id
             };
 
             EventLatestRepository repo = new EventLatestRepository();
@@ -71,11 +74,13 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 活動寫真 - 最新活動內容
-        public ActionResult EventLatestContent(int? ID, int? pagingID)
+        public ActionResult EventLatestContent(int? ID, int? pagingID,string langCode="")
         {
             if (!ID.HasValue)
                 return RedirectToAction("EventLatest");
-            string langCd = string.Empty;
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
             EventLatestRepository repo = new EventLatestRepository();
             EventContent model = repo.GetContentByID((int)ID, langCd);
             if (pagingID != null)
@@ -97,12 +102,11 @@ namespace OutWeb.Controllers
         // 最新訊息 - 活動寫真 - 各州活動分類
         public ActionResult EventStatesCategory(string langCode)
         {
-            if (String.IsNullOrEmpty(langCode))
-            {
-                Change_Lang(langCode);
-            }
 
+            //======語系取得========
             string langCd = GetLang();
+            //======================
+
             EventStatesRepository repo = new EventStatesRepository();
             var mdoel = repo.GetStatesCate(langCd);
 
@@ -114,10 +118,15 @@ namespace OutWeb.Controllers
         {
             if (!statesTypeID.HasValue)
                 return RedirectToAction("EventLatest");
+
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
+
             EventStatesListFilter filter = new EventStatesListFilter()
             {
                 CurrentPage = page ?? 1,
-                LangCode = langCode
+                LangCode = langCd
             };
 
             statesTypeID = statesTypeID ?? 1;
@@ -125,7 +134,7 @@ namespace OutWeb.Controllers
             EventStatesRepository repo = new EventStatesRepository();
             EventStatesResult mdoel = repo.GetList((int)statesTypeID, filter);
             mdoel.StatesTypeID = (int)statesTypeID;
-            TempData["StateInfo"] = repo.GetStatesCateByID((int)statesTypeID, langCode);
+            TempData["StateInfo"] = repo.GetStatesCateByID((int)statesTypeID, langCd);
             return View(mdoel);
         }
 
@@ -134,7 +143,11 @@ namespace OutWeb.Controllers
         {
             if (!statesTypeID.HasValue || !ID.HasValue)
                 return RedirectToAction("EventStatesList");
-            string langCd = string.Empty;
+
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
+
             EventStatesRepository repo = new EventStatesRepository();
             EventStatesContent model = repo.GetContentByID((int)statesTypeID, (int)ID, langCd);
             if (pagingID != null)
@@ -156,10 +169,13 @@ namespace OutWeb.Controllers
         // 最新訊息 - 新聞 公告 聲明 - 最新消息
         public ActionResult AnnouncementLatest(int? page, string langCode)
         {
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
             AnnouncementLatestFilter filter = new AnnouncementLatestFilter()
             {
                 CurrentPage = page ?? 1,
-                LangCode = langCode
+                LangCode = langCd
             };
 
             AnnouncementLatestRepository repo = new AnnouncementLatestRepository();
@@ -169,15 +185,18 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 新聞 公告 聲明 列表
-        public ActionResult AnnouncementList(int? typeID, int? page, string langCode = "zh-tw")
+        public ActionResult AnnouncementList(int? typeID, int? page, string langCode = "")
         {
             if (!typeID.HasValue)
                 return RedirectToAction("AnnouncementLatest");
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
             AnnouncementLatestFilter filter = new AnnouncementLatestFilter()
             {
                 CurrentPage = page ?? 1,
                 TypeID = typeID,
-                LangCode = langCode
+                LangCode = langCd
             };
             AnnouncementLatestRepository repo = new AnnouncementLatestRepository();
             AnnouncementLatestResult mdoel = repo.GetList(filter);
@@ -188,20 +207,24 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 新聞 公告 聲明 內容
-        public ActionResult AnnouncementContent(int? ID, int? typeID)
+        public ActionResult AnnouncementContent(int? ID, int? typeID,string langCode="")
         {
             if (!ID.HasValue || !typeID.HasValue)
                 return RedirectToAction("AnnouncementLatest");
-            string langCd = string.Empty;
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
             AnnouncementLatestRepository repo = new AnnouncementLatestRepository();
             AnnouncementLatestContent mdoel = repo.GetContentByID((int)ID, (int)typeID, langCd);
             return View(mdoel);
         }
         
 
-        public ActionResult FocusCategory()
+        public ActionResult FocusCategory(string langCode="")
         {
-            string langCd = string.Empty;
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
             FocusRepository repo = new FocusRepository();
             var mdoel = repo.GetFocusCate(langCd);
 
@@ -213,10 +236,13 @@ namespace OutWeb.Controllers
         {
             if (!focusTypeID.HasValue)
                 return RedirectToAction("EventLatest");
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
             FocusNewsListFilter filter = new FocusNewsListFilter()
             {
                 CurrentPage = page ?? 1,
-                LangCode = langCode
+                LangCode = langCd
             };
 
             focusTypeID = focusTypeID ?? 1;
@@ -227,11 +253,14 @@ namespace OutWeb.Controllers
         }
 
         // 焦點專欄 - 內容
-        public ActionResult FocusContent(int? focusTypeID, int? ID, int? pagingID)
+        public ActionResult FocusContent(int? focusTypeID, int? ID, int? pagingID,string langCode)
         {
             if (!focusTypeID.HasValue || !ID.HasValue)
                 return RedirectToAction("EventLatest");
-            string langCd = string.Empty;
+
+            //======語系取得========
+            string langCd = GetLang();
+            //======================
             FocusRepository repo = new FocusRepository();
             FocusNewsContent model = repo.GetContentByID((int)focusTypeID, (int)ID, langCd);
             if (pagingID != null)

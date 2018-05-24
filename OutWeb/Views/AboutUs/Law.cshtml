@@ -37,7 +37,7 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/AboutUs?langCode=@Res.lang">@Res.nav_aboutUs</a></li>
+    <li><a href="~/AboutUs?lang=@Res.lang">@Res.nav_aboutUs</a></li>
     <li><a href="~/AboutUs/Position?langCode=@Res.lang">@Res.aboutUs</a></li>
     <li><a href="~/AboutUs/Law?cate_id=4&langCode=@Res.lang">@Res.law</a></li>
     <li>@ViewBag.Title</li>
@@ -50,7 +50,7 @@
 <h1 class="sr-only">@Res.aboutUs - @Res.law</span></h1>
 
 <ul class="tabs list-inline text-center">
-    <li class="back"><a href="~/AboutUs/Position"><i class="oi" data-glyph="caret-left"></i> @Res.back</a></li>
+    <li class="back"><a href="~/AboutUs/Position?langCode=@Res.lang"><i class="oi" data-glyph="caret-left"></i> @Res.back</a></li>
     @for (int i = 0; i < d_cate.Rows.Count; i++)
     {
         ci = d_cate.Rows[i]["id"].ToString();
@@ -91,7 +91,7 @@
 
 
 
-        <li><a class="@c_tab_nav" href="@Url.Content(cFile + "?cate_id=" + c_cate_id)">@cate_name</a></li>
+        <li><a class="@c_tab_nav" href="@Url.Content(cFile + "?cate_id=" + c_cate_id + "&langCode=" + Res.lang)">@cate_name</a></li>
     }
 
 
@@ -124,7 +124,7 @@
 
                 <li>
                     @*<a class="@c_tab_nav" href="#tab1-@ci">@c_title</a>*@
-                    <a class="@c_tab_nav" href="@Url.Content(cFile + "?cate_id=" + cate_id + "&id=" + c_id)">@c_title</a>
+                    <a class="@c_tab_nav" href="@Url.Content(cFile + "?cate_id=" + cate_id + "&id=" + c_id + "&langCode=" + Res.lang)">@c_title</a>
                 </li>
             }
         </ul>
