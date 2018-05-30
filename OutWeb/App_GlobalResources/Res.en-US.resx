@@ -127,7 +127,7 @@
     <value>U.S. Administrative Certifications</value>
   </data>
   <data name="aboutUs_org_1" xml:space="preserve">
-    <value>Administrative&lt;br class="visible-xs"&gt;Regions and Organizations</value>
+    <value>Administrative &lt;br class="visible-xs"&gt;Regions and Organizations</value>
   </data>
   <data name="aboutUs_position" xml:space="preserve">
     <value>Proclaim and Standpoint</value>
@@ -302,13 +302,13 @@
     <value>Administrative Regions and Organizations</value>
   </data>
   <data name="joinUs_apply_1" xml:space="preserve">
-    <value>Submit TCG ID&lt;br class="visible-xs"&gt;Application</value>
+    <value>Submit TCG ID &lt;br class="visible-xs"&gt;Application</value>
   </data>
   <data name="joinUs_consult_1" xml:space="preserve">
-    <value>State Offices&lt;br class="visible-xs"&gt;Offices</value>
+    <value>State Offices &lt;br class="visible-xs"&gt;Offices</value>
   </data>
   <data name="joinUs_joinCollege_1" xml:space="preserve">
-    <value>Submit&lt;br class="visible-xs"&gt;Class</value>
+    <value>Submit &lt;br class="visible-xs"&gt;Class</value>
   </data>
   <data name="news_announLatest_1" xml:space="preserve">
     <value>News, &lt;br class="visible-xs"&gt;Announcements, Statements</value>
@@ -336,5 +336,8 @@
   </data>
   <data name="page_num" xml:space="preserve">
     <value>頁</value>
+  </data>
+  <data name="searchText" xml:space="preserve">
+    <value>Type here</value>
   </data>
 </root>
