@@ -340,4 +340,7 @@
   <data name="searchText" xml:space="preserve">
     <value>Type here</value>
   </data>
+  <data name="searchText1" xml:space="preserve">
+    <value>請在此輸入</value>
+  </data>
 </root>

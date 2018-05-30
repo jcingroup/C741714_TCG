@@ -700,6 +700,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 請在此輸入 的當地語系化字串。
+        /// </summary>
+        public static string searchText {
+            get {
+                return ResourceManager.GetString("searchText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 溫晟志 0987-577-175 的當地語系化字串。
         /// </summary>
         public static string spokesman_p {
