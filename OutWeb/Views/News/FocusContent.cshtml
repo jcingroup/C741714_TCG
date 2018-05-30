@@ -10,7 +10,7 @@
 
 @section breadcrumb {
     <li><a href="~/News?lang=@Res.lang">@Res.nav_news</a></li>
-    <li><a href="~/News/FocusCategory?langCode=@Res.lang">@Res.focus_news</a></li>
+    <li><a href="~/News/FocusCategory?langCode=@Res.lang">@Res.news_focusCategory</a></li>
     <li><a href="@listTitleUrl">@Model.FocusCateInfo.Values.First()</a></li> @* 分類名稱 *@
 }
 
@@ -18,7 +18,7 @@
     <script src="~/Content/js/tabs.js"></script>
 } *@
 
-<h1 class="sr-only">@Res.focus_news</h1>
+<h1 class="sr-only">@Res.news_focusCategory</h1>
 
 <p class="back">
     <a href="@listTitleUrl"><i class="oi" data-glyph="caret-left"></i> @Res.back_list</a>

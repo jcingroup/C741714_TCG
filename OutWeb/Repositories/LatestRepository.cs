@@ -25,8 +25,8 @@ namespace OutWeb.Repositories
         HQ_Events = 13, //各州活動(En)
         各州の活動 = 14, //各州活動(JP)
 
-        Focus_Column = 15,//焦點專欄(En)
-        フォーカス列 = 16, //焦點專欄(JP)
+        HighlightsColumn = 15,//焦點專欄(En)
+        フォーカスコラム = 16, //焦點專欄(JP)
 
         State_Events = 17, //中央活動(En)
         中央の活動 = 18, //中央活動(JP)
@@ -191,11 +191,11 @@ namespace OutWeb.Repositories
                     switch (langCode)
                     {
                         case "en":
-                            temp.DataType = ListKind.Focus_Column;
+                            temp.DataType = ListKind.HighlightsColumn;
                             break;
 
                         case "JPN":
-                            temp.DataType = ListKind.フォーカス列;
+                            temp.DataType = ListKind.フォーカスコラム;
                             break;
 
                         case "zh-tw":

@@ -347,9 +347,6 @@
   <data name="back_home" xml:space="preserve">
     <value>回首頁</value>
   </data>
-  <data name="focus_news" xml:space="preserve">
-    <value>焦點專欄</value>
-  </data>
   <data name="live_video" xml:space="preserve">
     <value>直播影片</value>
   </data>
