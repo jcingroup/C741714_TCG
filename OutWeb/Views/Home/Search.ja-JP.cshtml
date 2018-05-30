@@ -2,7 +2,7 @@
 @model SearchListViewModel
 
     @{
-        ViewBag.Title = "全文檢索";
+        ViewBag.Title = Res.searchAll;
         ViewBag.BodyClass = "Search";
     }
 
@@ -15,7 +15,7 @@
     </h1>
 
     <p class="font-lg mb-24">
-        找到 <span class="text-info">@Model.Result.Pagination.DataCount</span> 筆 「<strong class="text-danger">@Model.Filter.QueryString</strong>」的相關資料：
+       "<strong class="text-danger">@Model.Filter.QueryString</strong>" の <span class="text-info">@Model.Result.Pagination.DataCount</span> 関連情報を検索：
     </p>
 
     @* 每頁10筆資料 *@
@@ -29,7 +29,7 @@
                     <h3><a href="@data.LinkAddr">@data.Title</a></h3>
                     @* 編輯器內容 取前 145 個字，有資料的話才顯示 *@
                     @Html.Raw(remark)
-                    <a href="@data.LinkAddr" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+                    <a href="@data.LinkAddr" class="more"> @Res.more <i class="oi" data-glyph="caret-right"></i></a>
                 </article>
             }
             @*<article class="article">
@@ -88,28 +88,26 @@
             @* 有資料的話才顯示 *@
             <a @disabledPre href="javascript:;" onclick="paginationSubmit('@Model.Result.Pagination.PrePage');">
                 <i class="oi" data-glyph="chevron-left"></i>
-                <span class="hidden-xs">上一頁</span>
+                <span class="hidden-xs">@Res.pre_page</span>
             </a>
         </li>
 
         <li>
             <form action="/Home/Search" method="get" class="form-inline">
                 <input type="hidden" name="str" value="@Model.Filter.QueryString" />
-                第
                 <select name="page" id="numPage" class="form-element">
                     @for (int i = Model.Result.Pagination.FirstPage; i <= Model.Result.Pagination.LastPage; i++)
                 {
                         <option value="@i">@i</option>
                     }
                 </select>
-                頁
             </form>
         </li>
 
         <li class="next">
             @* 有資料的話才顯示 *@
             <a @disabledNext href="javascript:;" onclick="paginationSubmit('@Model.Result.Pagination.NextPage');">
-                <span class="hidden-xs">下一頁</span>
+                <span class="hidden-xs">@Res.next_page</span>
                 <i class="oi" data-glyph="chevron-right"></i>
             </a>
         </li>

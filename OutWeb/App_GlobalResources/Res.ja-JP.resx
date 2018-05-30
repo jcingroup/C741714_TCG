@@ -142,7 +142,7 @@
     <value>桃園市亀山区員林坑路100-1号</value>
   </data>
   <data name="back" xml:space="preserve">
-    <value>回上頁</value>
+    <value>戻る</value>
   </data>
   <data name="consult_hsinchu" xml:space="preserve">
     <value>新竹州</value>
@@ -321,10 +321,10 @@
     <value>台湾民政府（ワシントン）公式サイト</value>
   </data>
   <data name="back_list" xml:space="preserve">
-    <value>回文章列表</value>
+    <value>記事一覧に戻る</value>
   </data>
   <data name="back_pre" xml:space="preserve">
-    <value>回上層</value>
+    <value>戻る</value>
   </data>
   <data name="live_video" xml:space="preserve">
     <value>ライブ中継</value>
@@ -333,7 +333,7 @@
     <value>活動の情報</value>
   </data>
   <data name="back_home" xml:space="preserve">
-    <value>回首頁</value>
+    <value>ホーム</value>
   </data>
   <data name="page_num" xml:space="preserve">
     <value>頁</value>
@@ -342,6 +342,6 @@
     <value>全文検索</value>
   </data>
   <data name="searchText" xml:space="preserve">
-    <value>Type here</value>
+    <value>ここに入力する</value>
   </data>
 </root>

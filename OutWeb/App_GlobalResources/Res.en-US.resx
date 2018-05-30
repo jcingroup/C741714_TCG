@@ -278,10 +278,10 @@
     <value>Former TCG Website</value>
   </data>
   <data name="spokesman_p" xml:space="preserve">
-    <value>溫晟志 0987-577-175(en)</value>
+    <value>溫晟志 0987-577-175</value>
   </data>
   <data name="spokesman_w" xml:space="preserve">
-    <value>台灣民政府 中央發言人(en)</value>
+    <value>台灣民政府 中央發言人</value>
   </data>
   <data name="tel" xml:space="preserve">
     <value>+886-3-355-6363</value>
@@ -317,10 +317,10 @@
     <value>Search</value>
   </data>
   <data name="back_list" xml:space="preserve">
-    <value>回文章列表</value>
+    <value>Back to list</value>
   </data>
   <data name="back_pre" xml:space="preserve">
-    <value>回上層</value>
+    <value>Back</value>
   </data>
   <data name="live_video" xml:space="preserve">
     <value>Live Video</value>
@@ -329,7 +329,7 @@
     <value>Events</value>
   </data>
   <data name="back_home" xml:space="preserve">
-    <value>回首頁</value>
+    <value>Home</value>
   </data>
   <data name="page_num" xml:space="preserve">
     <value>頁</value>

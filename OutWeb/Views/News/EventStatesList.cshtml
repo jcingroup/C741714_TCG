@@ -123,14 +123,12 @@ string img_path = "/Images/";
 
         <li>
             <form action="/News/EventStatesList" method="get" class="form-inline">
-                @Res.no
                 <select name="page" id="numPage" class="form-element">
                     @for (int i = Model.Pagination.FirstPage; i <= Model.Pagination.LastPage; i++)
                 {
                         <option value="@i">@i</option>
                     }
                 </select>
-                @Res.page_num
                 <input name="statesTypeID" value="@Model.StatesTypeID" hidden />
             </form>
         </li>

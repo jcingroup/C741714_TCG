@@ -100,14 +100,12 @@ Dictionary<int, string> cateInfo = (TempData["CateInfo"] as Dictionary<int, stri
         <li>
             <form action="/News/AnnouncementList" method="get" class="form-inline">
                 <input type="hidden" name="typeID" value="@Model.Data.First().CateIDInfo.Keys.First()" />
-                @Res.no
                 <select name="page" id="numPage" class="form-element">
                     @for (int i = Model.Pagination.FirstPage; i <= Model.Pagination.LastPage; i++)
                 {
                         <option value="@i">@i</option>
                     }
                 </select>
-                @Res.page_num
             </form>
         </li>
 

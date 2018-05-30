@@ -139,14 +139,12 @@
 
         <li>
             <form action="/News/AnnouncementLatest" method="get" class="form-inline">
-                @Res.no
                 <select name="page" id="numPage" class="form-element">
                     @for (int i = Model.Pagination.FirstPage; i <= Model.Pagination.LastPage; i++)
                     {
                         <option value="@i">@i</option>
                     }
                 </select>
-                @Res.page_num
             </form>
         </li>
 

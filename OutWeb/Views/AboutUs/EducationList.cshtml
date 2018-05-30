@@ -61,14 +61,12 @@
         <li>
             <form action="/News/EducationList?langCode=@Res.lang" method="get" class="form-inline">
                 <input type="hidden" name="focusTypeID" value="@Model.EduTypeInfo.Keys.First()" />
-                第
                 <select name="page" id="numPage" class="form-element">
                     @for (int i = Model.Pagination.FirstPage; i <= Model.Pagination.LastPage; i++)
                 {
                         <option value="@i">@i</option>
                     }
                 </select>
-                頁
             </form>
         </li>
 
