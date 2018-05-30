@@ -202,7 +202,7 @@ namespace OutWeb.Controllers
             AnnouncementLatestResult mdoel = repo.GetList(filter);
             mdoel.TypeID = (int)filter.TypeID;
 
-            TempData["CateInfo"] = repo.GetNewsCate(langCode);
+            TempData["CateInfo"] = repo.GetNewsCate(langCd);
             return View(mdoel);
         }
 

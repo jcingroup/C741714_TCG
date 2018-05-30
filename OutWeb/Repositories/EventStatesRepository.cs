@@ -53,8 +53,8 @@ namespace OutWeb.Repositories
                 .Where(s => s.Key == id)
                 .ToDictionary(d => d.Key, d => d.Value);
 
-            if (cate.Count == 0)
-                throw new Exception("無法取得洲別分類");
+            //if (cate.Count == 0)
+            //    throw new Exception("無法取得洲別分類");
 
             return cate;
         }

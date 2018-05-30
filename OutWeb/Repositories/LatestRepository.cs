@@ -12,8 +12,27 @@ namespace OutWeb.Repositories
         中央活動 = 1, 各州活動 = 2,
         中央新聞 = 3, 中央公告 = 4,
         中央聲明 = 5, 焦點專欄 = 6,
-        News = 7, Announcement = 8,
-        Statement = 9,
+
+        News = 7, //中央新聞(En)
+        ニュース = 8, //中央新聞(JP)
+
+        Announcement = 9, //中央公告(En)
+        お知らせ = 10, //中央公告(JP)
+
+        Statement = 11, //中央聲明(En)
+        掲示される = 12, //中央聲明(JP)
+
+        HQ_Events = 13, //各州活動(En)
+        各州の活動 = 14, //各州活動(JP)
+
+        Focus_Column = 15,//焦點專欄(En)
+        フォーカス列 = 16, //焦點專欄(JP)
+
+        State_Events = 17, //中央活動(En)
+        中央の活動 = 18, //中央活動(JP)
+
+        DefaultValue = 999,
+
     }
 
     public class LatestRepository
@@ -66,14 +85,25 @@ namespace OutWeb.Repositories
                         temp.DataType = ListKind.News;
                         break;
 
+                    case 6:
+                        temp.DataType = ListKind.ニュース;
+                        break;
+
                     case 7:
                         temp.DataType = ListKind.Announcement;
+                        break;
+
+                    case 8:
+                        temp.DataType = ListKind.お知らせ;
                         break;
 
                     case 9:
                         temp.DataType = ListKind.Statement;
                         break;
 
+                    case 10:
+                        temp.DataType = ListKind.掲示される;
+                        break;
 
                     default:
                         break;
@@ -105,10 +135,28 @@ namespace OutWeb.Repositories
                         Remark = d.Remark,
                         Title = d.Title,
                         TypeInfo = statesRepo.GetStatesCateByID(states.StatesTypeID, langCode),
-                        DataType = ListKind.各州活動,
+                        //DataType = ListKind.各州活動,
                         ListTitleUrl = @"/News/EventStatesList?statesTypeID=" + states.StatesTypeID,
                         ContentUrl = @"/News/EventStatesContent?statesTypeID=" + states.StatesTypeID + "&ID=" + d.ID
                     };
+
+                    switch (langCode)
+                    {
+                        case  "en":
+                            temp.DataType = ListKind.HQ_Events;
+                            break;
+
+                        case "JP":
+                            temp.DataType = ListKind.各州の活動;
+                            break;
+
+                        case "zh-tw":
+                        default:
+                            temp.DataType = ListKind.各州活動;
+                            break;
+                       
+                    }
+
                     result.Add(temp);
                 }
             }
@@ -135,10 +183,27 @@ namespace OutWeb.Repositories
                         Remark = d.Remark,
                         Title = d.Title,
                         TypeInfo = statesRepo.GetStatesCateByID(focus.FocusTypeInfo.Keys.First(), langCode),
-                        DataType = ListKind.焦點專欄,
+                        //DataType = ListKind.焦點專欄,
                         ListTitleUrl = @"/News/FocusList?focusTypeID=" + focus.FocusTypeInfo.Keys.First(),
                         ContentUrl = @"/News/FocusContent?focusTypeID=" + focus.FocusTypeInfo.Keys.First() + "&ID=" + d.ID
                     };
+
+                    switch (langCode)
+                    {
+                        case "en":
+                            temp.DataType = ListKind.Focus_Column;
+                            break;
+
+                        case "JP":
+                            temp.DataType = ListKind.フォーカス列;
+                            break;
+
+                        case "zh-tw":
+                        default:
+                            temp.DataType = ListKind.焦點專欄;
+                            break;
+
+                    }
 
                     result.Add(temp);
                 }
@@ -156,10 +221,27 @@ namespace OutWeb.Repositories
                     PublishDateString = ev.PublishDateString,
                     Remark = ev.Remark,
                     Title = ev.Title,
-                    DataType = ListKind.中央活動,
+                    //DataType = ListKind.中央活動,
                     ListTitleUrl = @"/News/EventLatest",
                     ContentUrl = @"/News/EventLatestContent?&ID=" + ev.ID
                 };
+
+                switch (langCode)
+                {
+                    case "en":
+                        temp.DataType = ListKind.State_Events;
+                        break;
+
+                    case "JP":
+                        temp.DataType = ListKind.中央の活動;
+                        break;
+
+                    case "zh-tw":
+                    default:
+                        temp.DataType = ListKind.中央活動;
+                        break;
+
+                }
                 result.Add(temp);
             }
 
@@ -169,5 +251,7 @@ namespace OutWeb.Repositories
             }
             return result;
         }
+
+      
     }
 }
