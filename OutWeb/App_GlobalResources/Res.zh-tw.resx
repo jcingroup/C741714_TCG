@@ -341,4 +341,7 @@
   <data name="page_num" xml:space="preserve">
     <value>頁</value>
   </data>
+  <data name="searchText" xml:space="preserve">
+    <value>請在此輸入</value>
+  </data>
 </root>
