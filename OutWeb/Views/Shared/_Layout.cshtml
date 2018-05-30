@@ -95,7 +95,7 @@
                         </li>
                     </ul>
                     <h1 class="logo">
-                        <a href="~/Home" title="回首頁">台灣民政府 Taiwan Civil Government</a>
+                        <a href="~/Home?lang=@OutWeb.App_GlobalResources.Res.lang" title="@OutWeb.App_GlobalResources.Res.back_home">台灣民政府 Taiwan Civil Government</a>
                     </h1>
                 </div>
             </section>
@@ -105,19 +105,19 @@
                 <nav id="menu">
                     <ul class="nav list-unstyled">
                         <li>
-                            <a href="~/AboutUs">
+                            <a href="~/AboutUs?lang=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-about"></i>
                                 @OutWeb.App_GlobalResources.Res.home_about
                             </a>
                         </li>
                         <li>
-                            <a href="~/JoinUs">
+                            <a href="~/JoinUs?lang=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-join-us"></i>
                                 @OutWeb.App_GlobalResources.Res.home_joinUs
                             </a>
                         </li>
                         <li>
-                            <a href="~/News">
+                            <a href="~/News?lang=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-news2"></i>
                                 @OutWeb.App_GlobalResources.Res.home_news
                             </a>
@@ -130,19 +130,19 @@
                 <nav id="menu" class="wrap">
                     <ul class="nav row no-gutters list-unstyled">
                         <li class="col-4">
-                            <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
+                            <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs?lang=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-about"></i>
                                 @OutWeb.App_GlobalResources.Res.nav_aboutUs
                             </a>
                         </li>
                         <li class="col-4">
-                            <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
+                            <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs?lang=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-join-us"></i>
                                 @OutWeb.App_GlobalResources.Res.nav_joinUs
                             </a>
                         </li>
                         <li class="col-4">
-                            <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">
+                            <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/News?lang=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-news2"></i>
                                 @OutWeb.App_GlobalResources.Res.nav_news
                             </a>
@@ -194,7 +194,7 @@
                                 <i class="icon-bullhorn"></i>
                                 @Html.Raw(OutWeb.App_GlobalResources.Res.news_announLatest_1)
                             </a>
-                            <a class="@(ViewBag.BodyClass.Contains("Focus") ? "current" : "")" href="~/News/FocusCategory">
+                            <a class="@(ViewBag.BodyClass.Contains("Focus") ? "current" : "")" href="~/News/FocusCategory?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-focus"></i>
                                 @OutWeb.App_GlobalResources.Res.news_focusCategory
                             </a>
@@ -248,7 +248,7 @@
         <ul class="list-unstyled row">
             <li>
                 <h1>
-                    <a href="~/AboutUs">
+                    <a href="~/AboutUs?lang=@OutWeb.App_GlobalResources.Res.lang">
                         @OutWeb.App_GlobalResources.Res.nav_aboutUs
                     </a>
                 </h1>
@@ -260,17 +260,17 @@
                     </li> -->
                     <li>
                         <h2>
-                            <a href="~/AboutUs/Position">@OutWeb.App_GlobalResources.Res.aboutUs</a>
+                            <a href="~/AboutUs/Position?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs</a>
                         </h2>
                         <ul class="list-unstyled">
                             <li>
-                                <h3><a href="~/AboutUs/Position">@OutWeb.App_GlobalResources.Res.aboutUs_position</a></h3>
+                                <h3><a href="~/AboutUs/Position?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs_position</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/AboutUs/Statement">@OutWeb.App_GlobalResources.Res.aboutUs_statement</a></h3>
+                                <h3><a href="~/AboutUs/Statement?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs_statement</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/AboutUs/Law?cate_id=4">@OutWeb.App_GlobalResources.Res.law</a></h3>
+                                <h3><a href="~/AboutUs/Law?cate_id=4&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law</a></h3>
                                 <ul class="list-unstyled">
                                     <li>
                                         <h4><a href="~/AboutUs/Law?cate_id=4&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law_basic</a></h4>
@@ -287,12 +287,12 @@
                     </li>
                     <li>
                         <h2>
-                            <a href="~/AboutUs/EducationCategory">@OutWeb.App_GlobalResources.Res.aboutUs_eduCategory</a>
+                            <a href="~/AboutUs/EducationCategory?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs_eduCategory</a>
                         </h2>
                     </li>
                     <li>
                         <h2>
-                            <a href="~/AboutUs/Organization?cate_id=7">@Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_org_1)</a>
+                            <a href="~/AboutUs/Organization?cate_id=7&langCode=@OutWeb.App_GlobalResources.Res.lang">@Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_org_1)</a>
                         </h2>
                         <ul class="list-unstyled">
                             <li>
@@ -316,7 +316,7 @@
                 </h1>
                 <ul class="list-unstyled">
                     <li>
-                        <h2><a href="~/JoinUs/Apply">@OutWeb.App_GlobalResources.Res.joinUs_apply</a></h2>
+                        <h2><a href="~/JoinUs/Apply?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_apply</a></h2>
                     </li>
                     <li>
                         <h2><a href="~/JoinUs/Consult?id=2&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_consult</a></h2>
@@ -342,21 +342,21 @@
                         </ul>
                     </li>
                     <li>
-                        <h2><a href="~/JoinUs/Live">@OutWeb.App_GlobalResources.Res.joinUs_joinCollege</a></h2>
+                        <h2><a href="~/JoinUs/Live?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_joinCollege</a></h2>
                         <ul class="list-unstyled">
                             <li>
                                 <h3>
-                                    <a href="~/JoinUs/Live">@OutWeb.App_GlobalResources.Res.joinUs_live</a>
+                                    <a href="~/JoinUs/Live?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_live</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
-                                    <a href="~/JoinUs/Schedule">@OutWeb.App_GlobalResources.Res.joinUs_schedule</a>
+                                    <a href="~/JoinUs/Schedule?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_schedule</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
-                                    <a href="~/JoinUs/Gallery">@OutWeb.App_GlobalResources.Res.joinUs_gallery</a>
+                                    <a href="~/JoinUs/Gallery?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_gallery</a>
                                 </h3>
                             </li>
                         </ul>
@@ -369,18 +369,18 @@
                 </h1>
                 <ul class="list-unstyled">
                     <li>
-                        <h2><a href="~/News/EventLatest">@OutWeb.App_GlobalResources.Res.news_event</a></h2>
+                        <h2><a href="~/News/EventLatest?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_event</a></h2>
                         <ul class="list-unstyled">
                             <li>
-                                <h3><a href="~/News/EventLatest">@OutWeb.App_GlobalResources.Res.news_eventLatest</a></h3>
+                                <h3><a href="~/News/EventLatest?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_eventLatest</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/News/EventStatesCategory">@OutWeb.App_GlobalResources.Res.news_eventStatesCategory</a></h3>
+                                <h3><a href="~/News/EventStatesCategory?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_eventStatesCategory</a></h3>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <h2><a href="~/News/AnnouncementLatest">@OutWeb.App_GlobalResources.Res.news_announLatest</a></h2>
+                        <h2><a href="~/News/AnnouncementLatest?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_announLatest</a></h2>
                         <ul class="list-unstyled">
                             <li>
                                 <h3><a href="~/News/AnnouncementList?typeID=1&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_centralNews</a></h3>
@@ -394,7 +394,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h2><a href="~/News/FocusCategory">@OutWeb.App_GlobalResources.Res.news_focusCategory</a></h2>
+                        <h2><a href="~/News/FocusCategory?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_focusCategory</a></h2>
                     </li>
                 </ul>
             </li>

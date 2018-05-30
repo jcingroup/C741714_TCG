@@ -6,13 +6,13 @@
     ViewBag.Title = Model.Data.Title; @* 文章標題 *@
     ViewBag.BodyClass = "News Announcement";
     ViewBag.Url = HttpContext.Current.Request.Url.AbsoluteUri; //FB share url
-    string listLink = Url.Content("~/News/AnnouncementList?typeID=" + Model.Data.CateIDInfo.Keys.First());
+    string listLink = Url.Content("~/News/AnnouncementList?typeID=" + Model.Data.CateIDInfo.Keys.First() + "&langCode=" + @Res.lang);
     string img_path = "/Images/";
 }
 
 @section breadcrumb {
-    <li><a href="~/News">@Res.nav_news</a></li>
-    <li><a href="~/News/AnnouncementLatest">@Res.news_announLatest</a></li>
+    <li><a href="~/News?lang=@Res.lang">@Res.nav_news</a></li>
+    <li><a href="~/News/AnnouncementLatest?langCode=@Res.lang">@Res.news_announLatest</a></li>
     <li><a href="@listLink">@Model.Data.CateIDInfo.Values.First()</a></li> @* 分類名稱 *@
 }
 
@@ -77,9 +77,9 @@
     {
         <li class="prev">
             @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
-            <a href="@Url.Content("~/News/AnnouncementContent?ID=" + Model.PreviousIDStr + "&typeID=" + Model.Data.CateIDInfo.Keys.First())">
+            <a href="@Url.Content("~/News/AnnouncementContent?ID=" + Model.PreviousIDStr + "&typeID=" + Model.Data.CateIDInfo.Keys.First() + "&langCode=" + Res.lang)">
                 <i class="oi" data-glyph="chevron-left"></i>
-                上一篇
+                @Res.pre_article
             </a>
         </li>
     }
@@ -89,8 +89,8 @@
 
         <li class="next">
             @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
-            <a href="@Url.Content("~/News/AnnouncementContent?ID=" + Model.NextIDStr + "&typeID=" + Model.Data.CateIDInfo.Keys.First())">
-                下一篇
+            <a href="@Url.Content("~/News/AnnouncementContent?ID=" + Model.NextIDStr + "&typeID=" + Model.Data.CateIDInfo.Keys.First()+ "&langCode=" + Res.lang)">
+                @Res.next_article
                 <i class="oi" data-glyph="chevron-right"></i>
             </a>
         </li>

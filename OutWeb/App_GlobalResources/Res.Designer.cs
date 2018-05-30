@@ -133,6 +133,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 活動資訊 的當地語系化字串。
+        /// </summary>
+        public static string acitivity_info {
+            get {
+                return ResourceManager.GetString("acitivity_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 新竹州桃園郡龜山鄉員林坑路100-1號 的當地語系化字串。
         /// </summary>
         public static string address {
@@ -147,6 +156,15 @@ namespace OutWeb.App_GlobalResources {
         public static string back {
             get {
                 return ResourceManager.GetString("back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 回首頁 的當地語系化字串。
+        /// </summary>
+        public static string back_home {
+            get {
+                return ResourceManager.GetString("back_home", resourceCulture);
             }
         }
         
@@ -237,6 +255,15 @@ namespace OutWeb.App_GlobalResources {
         public static string fbPage_2 {
             get {
                 return ResourceManager.GetString("fbPage_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 焦點專欄 的當地語系化字串。
+        /// </summary>
+        public static string focus_news {
+            get {
+                return ResourceManager.GetString("focus_news", resourceCulture);
             }
         }
         
@@ -430,6 +457,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 直播影片 的當地語系化字串。
+        /// </summary>
+        public static string live_video {
+            get {
+                return ResourceManager.GetString("live_video", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 閱讀全文 的當地語系化字串。
         /// </summary>
         public static string more {
@@ -556,6 +592,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 下一篇 的當地語系化字串。
+        /// </summary>
+        public static string next_article {
+            get {
+                return ResourceManager.GetString("next_article", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 下一頁 的當地語系化字串。
         /// </summary>
         public static string next_page {
@@ -601,11 +646,29 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 頁 的當地語系化字串。
+        /// </summary>
+        public static string page_num {
+            get {
+                return ResourceManager.GetString("page_num", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 33391 的當地語系化字串。
         /// </summary>
         public static string postCode {
             get {
                 return ResourceManager.GetString("postCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 上一篇 的當地語系化字串。
+        /// </summary>
+        public static string pre_article {
+            get {
+                return ResourceManager.GetString("pre_article", resourceCulture);
             }
         }
         

@@ -1,18 +1,19 @@
 ﻿@using OutWeb.Models.FrontModels.News.EventStatesModels
+@using OutWeb.App_GlobalResources
 @model EventStatesContent
 
 @{
     ViewBag.Title = Model.Data.Title; @* 文章標題 *@
 ViewBag.BodyClass = "News Event";
-string listTitleUrl = Url.Content("~/News/EventStatesList?statesTypeID=" + Model.StatesCateInfo.Keys.First());
+string listTitleUrl = Url.Content("~/News/EventStatesList?statesTypeID=" + Model.StatesCateInfo.Keys.First() + "&langCode=" + Res.lang);
 string img_path = "/Images/";
 
 }
 
 @section breadcrumb {
-    <li><a href="~/News">最新訊息 活動公告</a></li>
-    <li><a href="~/News/EventLatest">活動寫真</a></li>
-    <li><a href="~/News/EventStatesCategory">各州活動</a></li>
+    <li><a href="~/News">@Res.nav_news</a></li>
+    <li><a href="~/News/EventLatest">@Res.news_event</a></li>
+    <li><a href="~/News/EventStatesCategory">@Res.news_eventStatesCategory</a></li>
     <li><a href="@listTitleUrl">@Model.StatesCateInfo.Values.First()</a></li>
 }
 
@@ -38,10 +39,10 @@ string img_path = "/Images/";
     </script>
 }
 
-<h1 class="sr-only">活動寫真</h1>
+<h1 class="sr-only">@Res.news_event</h1>
 
 <p class="back">
-    <a href="@listTitleUrl"><i class=" oi" data-glyph="caret-left"></i> 回文章列表</a>
+    <a href="@listTitleUrl"><i class=" oi" data-glyph="caret-left"></i> @Res.back_list</a>
 </p>
 
 <h2 class="title">
@@ -60,7 +61,7 @@ string img_path = "/Images/";
             {
                 int index = Model.Data.PagingList.IndexOf(paging);
                 string currentStyle = string.IsNullOrEmpty(paging.Current) ? "" : "current";
-                string pagingUrl = Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesCateInfo.Keys.First() + "&ID=" + Model.Data.ID + "&pagingID=" + paging.ID);
+                string pagingUrl = Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesCateInfo.Keys.First() + "&ID=" + Model.Data.ID + "&pagingID=" + paging.ID + "&langCode=" + Res.lang);
                 <li>
                     <a class="tab-nav @currentStyle" href="@pagingUrl">@paging.Title</a>
                 </li>
@@ -243,7 +244,7 @@ string img_path = "/Images/";
     {
         <li class="prev">
             @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
-            <a href="@Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesCateInfo.Keys.First() + "&ID=" + Model.PreviousIDStr)">
+            <a href="@Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesCateInfo.Keys.First() + "&ID=" + Model.PreviousIDStr+ "&langCode=" + Res.lang)">
                 <i class="oi" data-glyph="chevron-left"></i>
                 上一篇
             </a>
@@ -255,7 +256,7 @@ string img_path = "/Images/";
 
         <li class="next">
             @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
-            <a href="@Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesCateInfo.Keys.First() + "&ID=" + Model.NextIDStr)">
+            <a href="@Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesCateInfo.Keys.First() + "&ID=" + Model.NextIDStr+ "&langCode=" + Res.lang)">
                 下一篇
                 <i class="oi" data-glyph="chevron-right"></i>
             </a>

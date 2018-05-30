@@ -1,4 +1,5 @@
 ﻿@using OutWeb.Models.FrontModels.News.EventLatestModels
+@using OutWeb.App_GlobalResources
 @model EventContent
 @{
     ViewBag.Title = Model.Data.Title; @* 文章標題 *@
@@ -8,9 +9,9 @@ string img_path = "/Images/";
 }
 
 @section breadcrumb {
-    <li><a href="~/News">最新訊息 活動公告</a></li>
-    <li><a href="~/News/EventLatest">活動寫真</a></li>
-    <li><a href="~/News/EventLatest">中央活動</a></li>
+    <li><a href="~/News&lang=@Res.lang">@Res.nav_news</a></li>
+    <li><a href="~/News/EventLatest?langCode=@Res.lang">@Res.news_event</a></li>
+    <li><a href="~/News/EventLatest?langCode=@Res.lang">@Res.news_eventLatest</a></li>
 }
 
 @section css {
@@ -50,14 +51,14 @@ string img_path = "/Images/";
     </script>
 }
 
-<h1 class="sr-only">活動寫真</h1>
+<h1 class="sr-only">@Res.news_event</h1>
 
 <p class="back">
-    <a href="~/News/EventLatest"><i class="oi" data-glyph="caret-left"></i> 回文章列表</a>
+    <a href="~/News/EventLatest"><i class="oi" data-glyph="caret-left"></i> @Res.back_list</a>
 </p>
 
 <h2 class="title">
-    <a class="label label-warning" href="~/News/EventLatest">中央活動</a>
+    <a class="label label-warning" href="~/News/EventLatest?langCode=@Res.lang">@Res.news_eventLatest</a>
     <small class="date">@Model.Data.PublishDateString</small>
     <span class="underline">@ViewBag.Title</span>
     <!-- <div class="addthis_inline_share_toolbox"></div> -->
