@@ -146,7 +146,7 @@ namespace OutWeb.Repositories
                             temp.DataType = ListKind.HQ_Events;
                             break;
 
-                        case "JP":
+                        case "JPN":
                             temp.DataType = ListKind.各州の活動;
                             break;
 
@@ -194,7 +194,7 @@ namespace OutWeb.Repositories
                             temp.DataType = ListKind.Focus_Column;
                             break;
 
-                        case "JP":
+                        case "JPN":
                             temp.DataType = ListKind.フォーカス列;
                             break;
 
@@ -232,7 +232,7 @@ namespace OutWeb.Repositories
                         temp.DataType = ListKind.State_Events;
                         break;
 
-                    case "JP":
+                    case "JPN":
                         temp.DataType = ListKind.中央の活動;
                         break;
 
