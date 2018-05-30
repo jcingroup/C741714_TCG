@@ -181,6 +181,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Res.zh-CN.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Res.zh-TW.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Res.zh-TW.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -607,6 +612,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Res.zh-CN.designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="App_GlobalResources\Res.zh-TW.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Res.zh-TW.designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
