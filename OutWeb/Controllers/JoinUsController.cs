@@ -148,7 +148,7 @@ namespace OutWeb.Controllers
             //======================
             dt = Cschool.List(ref err_msg, "", " sort desc , cate_id desc ", "Y", "", "", "", "", lang_id);
             ViewData["dt"] = dt;
-            return View();
+            return View(Lang_Page("Gallery"));
         }
     }
 }

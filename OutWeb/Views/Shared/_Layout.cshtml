@@ -426,7 +426,7 @@
     <nav id="search" class="popup">
         <button class="search-trigger oi" data-glyph="x"></button>
         @* 全文檢索: 找標題/內文 關鍵字 *@
-        <form class="search-form" action="~/Home/Search">
+        <form class="search-form" action="~/Home/Search?langCode=@OutWeb.App_GlobalResources.Res.lang">
             <input type="text" class="form-element" name="str" placeholder="@OutWeb.App_GlobalResources.Res.searchText">
             <button>
                 <i class="icon-search"></i> @OutWeb.App_GlobalResources.Res.search

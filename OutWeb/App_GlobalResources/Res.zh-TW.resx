@@ -335,13 +335,13 @@
   <data name="back_home" xml:space="preserve">
     <value>回首頁</value>
   </data>
-  <data name="focus_news" xml:space="preserve">
-    <value>焦點專欄</value>
-  </data>
   <data name="page_num" xml:space="preserve">
     <value>頁</value>
   </data>
   <data name="searchText" xml:space="preserve">
     <value>請在此輸入</value>
+  </data>
+  <data name="searchAll" xml:space="preserve">
+    <value>全文檢索</value>
   </data>
 </root>

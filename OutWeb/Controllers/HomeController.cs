@@ -24,14 +24,14 @@ namespace OutWeb.Controllers
         }
 
         // 全文檢索
-        public ActionResult Search(string str, int? page)
+        public ActionResult Search(string str, int? page,string langCode="")
         {
             SearchListViewModel model = new SearchListViewModel();
             model.Filter.CurrentPage = page ?? 1;
             model.Filter.QueryString = str;
             SearchRepository repo = new SearchRepository();
             model.Result = repo.SearchSite(model.Filter);
-            return View(model);
+            return View(Lang_Page("Search"));
         }
     }
 }
