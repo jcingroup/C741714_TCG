@@ -323,10 +323,10 @@
     <value>回上層</value>
   </data>
   <data name="live_video" xml:space="preserve">
-    <value>直播影片(en)</value>
+    <value>Live Video</value>
   </data>
   <data name="acitivity_info" xml:space="preserve">
-    <value>活動資訊</value>
+    <value>Events</value>
   </data>
   <data name="back_home" xml:space="preserve">
     <value>回首頁</value>
