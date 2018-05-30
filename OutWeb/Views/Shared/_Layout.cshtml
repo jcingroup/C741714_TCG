@@ -14,7 +14,6 @@
     {
         <title id="title">@ViewBag.Title | 台灣民政府 TCG</title>
     }
-
     @if (ViewBag.Description != null && ViewBag.Description != "")
     {
         <meta name="og:description" content="@ViewBag.Description">
@@ -24,7 +23,6 @@
         @*<meta name="og:description" content="&hellip;">*@
         <meta name="og:description" content="&nbsp;">
     }
-
     @if (ViewBag.IsFirstPage)
     {
         <meta property="og:type" content="website" />
@@ -59,6 +57,11 @@
     <link rel="apple-touch-startup-image" href="~/favicon_apple.png">
     <meta name="apple-mobile-web-app-title" content="台灣民政府">
     <link rel="apple-touch-icon" sizes="256x256" href="~/favicon_apple.png">
+    <!-- // Favicons -->
+
+    <!-- lang -->
+    @Html.Raw(@OutWeb.App_GlobalResources.Res.rel_lang_tag)
+    <!-- // lang -->
 
     <link rel="stylesheet" href="~/Content/css/vendor/open-iconic.css">
     <link rel="stylesheet" href="~/Content/css/vendor/icomoon.css">
@@ -156,15 +159,15 @@
                             </a> -->
                             <a class="@(ViewBag.BodyClass.Contains("Profile") ? "current" : "")" href="~/AboutUs/Position?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-people"></i>
-                                @OutWeb.App_GlobalResources.Res.aboutUs
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_1)
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Education") ? "current" : "")" href="~/AboutUs/EducationCategory?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-graduation-cap"></i>
-                                @OutWeb.App_GlobalResources.Res.aboutUs_eduCategory
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_eduCategory_1)
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization?cate_id=7&langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-organization"></i>
-                                @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_org)
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_org_1)
                             </a>
                         </li>
                         <li class="@(ViewBag.BodyClass.Contains("JoinUs") ? "" : "hidden")">
@@ -188,7 +191,7 @@
                             </a> -->
                             <a class="@(ViewBag.BodyClass.Contains("Event") ? "current" : "")" href="~/News/EventLatest?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-camera"></i>
-                                @OutWeb.App_GlobalResources.Res.news_event
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.news_event_1)
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Announcement") ? "current" : "")" href="~/News/AnnouncementLatest?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-bullhorn"></i>
@@ -196,7 +199,7 @@
                             </a>
                             <a class="@(ViewBag.BodyClass.Contains("Focus") ? "current" : "")" href="~/News/FocusCategory?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-focus"></i>
-                                @OutWeb.App_GlobalResources.Res.news_focusCategory
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.news_focusCategory_1)
                             </a>
                         </li>
                     </ul>
@@ -292,7 +295,7 @@
                     </li>
                     <li>
                         <h2>
-                            <a href="~/AboutUs/Organization?cate_id=7&langCode=@OutWeb.App_GlobalResources.Res.lang">@Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_org_1)</a>
+                            <a href="~/AboutUs/Organization?cate_id=7&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs_org</a>
                         </h2>
                         <ul class="list-unstyled">
                             <li>

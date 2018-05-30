@@ -187,7 +187,7 @@
     <value>台湾民政府の身分証の申請手続</value>
   </data>
   <data name="joinUs_apply_1" xml:space="preserve">
-    <value>台湾民政府&lt;br class="visible-xs"&gt;身分証の申請手続</value>
+    <value>台湾民政府&lt;br class="visible-md"&gt;身分証の&lt;br class="visible-xs"&gt;申請手続</value>
   </data>
   <data name="joinUs_consult" xml:space="preserve">
     <value>地方役所のご案内</value>
@@ -254,7 +254,7 @@
     <value>ニュース・お知らせ・声明</value>
   </data>
   <data name="news_announLatest_1" xml:space="preserve">
-    <value>ニュース &lt;br class="visible-xs"&gt;お知らせ・声明</value>
+    <value>ニュース・&lt;br class="visible-sm"&gt;お知らせ・&lt;br class="visible-xs"&gt;声明</value>
   </data>
   <data name="news_centralAnnounce" xml:space="preserve">
     <value>中央のお知らせ</value>
@@ -337,6 +337,25 @@
   </data>
   <data name="page_num" xml:space="preserve">
     <value>頁</value>
+  </data>
+  <data name="aboutUs_1" xml:space="preserve">
+    <value>台湾民政府に&lt;br class="visible-xs"&gt;ついて</value>
+  </data>
+  <data name="aboutUs_eduCategory_1" xml:space="preserve">
+    <value>教育コラム</value>
+  </data>
+  <data name="news_event_1" xml:space="preserve">
+    <value>活動の写真・&lt;br class="visible-xs"&gt;動画</value>
+  </data>
+  <data name="news_focusCategory_1" xml:space="preserve">
+    <value>フォーカス&lt;br class="visible-xs"&gt;コラム</value>
+  </data>
+  <data name="rel_lang_tag" xml:space="preserve">
+    <value>&lt;link rel="alternate" href="http://usmgtcgov.tw/" hreflang="zh-Hant" /&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=ja-JP" hreflang="ja"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=zh-TW" hreflang="zh-Hant"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=en-US" hreflang="en"&gt;</value>
+    <comment>Google 搜尋: 使用 hreflang 提供正確語言和地區的網址</comment>
   </data>
   <data name="searchAll" xml:space="preserve">
     <value>全文検索</value>

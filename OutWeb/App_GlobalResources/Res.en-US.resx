@@ -127,7 +127,7 @@
     <value>U.S. Administrative Certifications</value>
   </data>
   <data name="aboutUs_org_1" xml:space="preserve">
-    <value>Administrative &lt;br class="visible-xs"&gt;Regions and Organizations</value>
+    <value>Administrative &lt;br class="visible-xs"&gt;Regions and &lt;br class="visible-xs"&gt;Organizations</value>
   </data>
   <data name="aboutUs_position" xml:space="preserve">
     <value>Proclaim and Standpoint</value>
@@ -311,7 +311,7 @@
     <value>Submit &lt;br class="visible-xs"&gt;Class</value>
   </data>
   <data name="news_announLatest_1" xml:space="preserve">
-    <value>News, &lt;br class="visible-xs"&gt;Announcements, Statements</value>
+    <value>News, &lt;br class="visible-xs"&gt;Announcements, &lt;br class="visible-xs"&gt;Statements</value>
   </data>
   <data name="search" xml:space="preserve">
     <value>Search</value>
@@ -333,6 +333,25 @@
   </data>
   <data name="page_num" xml:space="preserve">
     <value>頁</value>
+  </data>
+  <data name="aboutUs_1" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="aboutUs_eduCategory_1" xml:space="preserve">
+    <value>Educational &lt;br class="visible-xs"&gt;Column</value>
+  </data>
+  <data name="news_event_1" xml:space="preserve">
+    <value>Event &lt;br class="visible-xs"&gt;Albums</value>
+  </data>
+  <data name="news_focusCategory_1" xml:space="preserve">
+    <value>Highlights &lt;br class="visible-xs"&gt;Column</value>
+  </data>
+  <data name="rel_lang_tag" xml:space="preserve">
+    <value>&lt;link rel="alternate" href="http://usmgtcgov.tw/" hreflang="zh-Hant" /&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=en-US" hreflang="en"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=zh-TW" hreflang="zh-Hant"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=ja-JP" hreflang="ja"</value>
+    <comment>Google 搜尋: 使用 hreflang 提供正確語言和地區的網址</comment>
   </data>
   <data name="searchAll" xml:space="preserve">
     <value>Search</value>

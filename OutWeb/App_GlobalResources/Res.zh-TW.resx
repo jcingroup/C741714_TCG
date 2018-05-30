@@ -344,4 +344,23 @@
   <data name="searchAll" xml:space="preserve">
     <value>全文檢索</value>
   </data>
+  <data name="aboutUs_1" xml:space="preserve">
+    <value>關於我們</value>
+  </data>
+  <data name="aboutUs_eduCategory_1" xml:space="preserve">
+    <value>教育專欄</value>
+  </data>
+  <data name="news_event_1" xml:space="preserve">
+    <value>活動寫真</value>
+  </data>
+  <data name="news_focusCategory_1" xml:space="preserve">
+    <value>焦點專欄</value>
+  </data>
+  <data name="rel_lang_tag" xml:space="preserve">
+    <value>&lt;link rel="alternate" href="http://usmgtcgov.tw/" hreflang="zh-Hant" /&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=zh-TW" hreflang="zh-Hant"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=en-US" hreflang="en"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=ja-JP" hreflang="ja"&gt;</value>
+    <comment>Google 搜尋: 使用 hreflang 提供正確語言和地區的網址</comment>
+  </data>
 </root>

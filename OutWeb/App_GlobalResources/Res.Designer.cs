@@ -70,11 +70,29 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 關於我們 的當地語系化字串。
+        /// </summary>
+        public static string aboutUs_1 {
+            get {
+                return ResourceManager.GetString("aboutUs_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 教育專欄 的當地語系化字串。
         /// </summary>
         public static string aboutUs_eduCategory {
             get {
                 return ResourceManager.GetString("aboutUs_eduCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 教育專欄 的當地語系化字串。
+        /// </summary>
+        public static string aboutUs_eduCategory_1 {
+            get {
+                return ResourceManager.GetString("aboutUs_eduCategory_1", resourceCulture);
             }
         }
         
@@ -556,6 +574,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 活動寫真 的當地語系化字串。
+        /// </summary>
+        public static string news_event_1 {
+            get {
+                return ResourceManager.GetString("news_event_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 中央活動 的當地語系化字串。
         /// </summary>
         public static string news_eventLatest {
@@ -579,6 +606,15 @@ namespace OutWeb.App_GlobalResources {
         public static string news_focusCategory {
             get {
                 return ResourceManager.GetString("news_focusCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 焦點專欄 的當地語系化字串。
+        /// </summary>
+        public static string news_focusCategory_1 {
+            get {
+                return ResourceManager.GetString("news_focusCategory_1", resourceCulture);
             }
         }
         
@@ -678,6 +714,18 @@ namespace OutWeb.App_GlobalResources {
         public static string pre_site {
             get {
                 return ResourceManager.GetString("pre_site", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 &lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/&quot; hreflang=&quot;zh-Hant&quot; /&gt;
+        ///&lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/?lang=zh-TW&quot; hreflang=&quot;zh-Hant&quot;&gt;
+        ///&lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/?lang=en-US&quot; hreflang=&quot;en&quot;&gt;
+        ///&lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/?lang=ja-JP&quot; hreflang=&quot;ja&quot;&gt; 的當地語系化字串。
+        /// </summary>
+        public static string rel_lang_tag {
+            get {
+                return ResourceManager.GetString("rel_lang_tag", resourceCulture);
             }
         }
         
