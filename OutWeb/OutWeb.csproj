@@ -564,6 +564,8 @@
     <Content Include="Views\JoinUs\Schedule.ja-JP.cshtml" />
     <Content Include="Views\JoinUs\Gallery.en-US.cshtml" />
     <Content Include="Views\JoinUs\Gallery.ja-JP.cshtml" />
+    <Content Include="Views\Home\Search.en-US.cshtml" />
+    <Content Include="Views\Home\Search.ja-JP.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

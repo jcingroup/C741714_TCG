@@ -338,6 +338,9 @@
   <data name="page_num" xml:space="preserve">
     <value>頁</value>
   </data>
+  <data name="searchAll" xml:space="preserve">
+    <value>全文検索</value>
+  </data>
   <data name="searchText" xml:space="preserve">
     <value>Type here</value>
   </data>
