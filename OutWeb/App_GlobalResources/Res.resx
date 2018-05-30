@@ -365,4 +365,7 @@
   <data name="searchText" xml:space="preserve">
     <value>請在此輸入</value>
   </data>
+  <data name="searchAll" xml:space="preserve">
+    <value>全文檢索</value>
+  </data>
 </root>

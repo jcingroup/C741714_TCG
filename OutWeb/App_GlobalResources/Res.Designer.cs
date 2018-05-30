@@ -700,6 +700,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 全文檢索 的當地語系化字串。
+        /// </summary>
+        public static string searchAll {
+            get {
+                return ResourceManager.GetString("searchAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 請在此輸入 的當地語系化字串。
         /// </summary>
         public static string searchText {
