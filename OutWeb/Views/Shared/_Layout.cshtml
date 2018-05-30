@@ -74,16 +74,16 @@
     }
     @RenderSection("css", false)
 </head>
-<body class="@ViewBag.BodyClass">
+<body class="@ViewBag.BodyClass @OutWeb.App_GlobalResources.Res.lang">
     <div id="wrapper">
 
         <header id="header">
             <section id="pageBanner">
                 <div class="wrap">
                     <ul class="topNav list-inline">
-                        <li class="lang"><a href="@Url.Action("Index", new { lang = "zh-TW" })">繁體中文</a></li>
-                        <li class="lang"><a href="@Url.Action("Index", new { lang = "en-US" })">English</a></li>
-                        <li class="lang"><a href="@Url.Action("Index", new { lang = "ja-JP" })">日本語</a></li>
+                        <li class="lang"><a href="@Url.Action("Index", new { lang = "zh-TW" })">中</a></li>
+                        <li class="lang"><a href="@Url.Action("Index", new { lang = "en-US" })">En</a></li>
+                        <li class="lang"><a href="@Url.Action("Index", new { lang = "ja-JP" })">日</a></li>
                         <li class="search">
                             <button class="search-trigger icon-search"></button>
                         </li>
@@ -95,7 +95,7 @@
                         </li>
                     </ul>
                     <h1 class="logo">
-                        <a href="~/Home" title="回首頁">台灣民政府 Taiwan Civil Government</a>
+                        <a href="~/Home?langCode=@OutWeb.App_GlobalResources.Res.lang" title="回首頁">台灣民政府 Taiwan Civil Government</a>
                     </h1>
                 </div>
             </section>
@@ -105,21 +105,21 @@
                 <nav id="menu">
                     <ul class="nav list-unstyled">
                         <li>
-                            <a href="~/AboutUs">
+                            <a href="~/AboutUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-about"></i>
-                                @OutWeb.App_GlobalResources.Res.home_about
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.home_about)
                             </a>
                         </li>
                         <li>
-                            <a href="~/JoinUs">
+                            <a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-join-us"></i>
-                                @OutWeb.App_GlobalResources.Res.home_joinUs
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.home_joinUs)
                             </a>
                         </li>
                         <li>
-                            <a href="~/News">
+                            <a href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-news2"></i>
-                                @OutWeb.App_GlobalResources.Res.home_news
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.home_news)
                             </a>
                         </li>
                     </ul>

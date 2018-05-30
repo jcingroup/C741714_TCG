@@ -178,10 +178,10 @@
     <value>民政府とは</value>
   </data>
   <data name="home_joinUs" xml:space="preserve">
-    <value>加入するには</value>
+    <value>加入する&lt;br&gt;には</value>
   </data>
   <data name="home_news" xml:space="preserve">
-    <value>活動のお知らせ</value>
+    <value>活動の&lt;br&gt;お知らせ</value>
   </data>
   <data name="joinUs_apply" xml:space="preserve">
     <value>台湾民政府の身分証の申請手続</value>
@@ -214,7 +214,7 @@
     <comment>參加台灣法理學院 子分頁</comment>
   </data>
   <data name="joinUs_tchVideo" xml:space="preserve">
-    <value>歷屆課程影片</value>
+    <value>各回講義の動画</value>
     <comment>參加台灣法理學院 子分頁</comment>
   </data>
   <data name="lang" xml:space="preserve">
