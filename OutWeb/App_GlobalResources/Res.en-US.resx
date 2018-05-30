@@ -322,4 +322,19 @@
   <data name="back_pre" xml:space="preserve">
     <value>回上層</value>
   </data>
+  <data name="live_video" xml:space="preserve">
+    <value>直播影片(en)</value>
+  </data>
+  <data name="acitivity_info" xml:space="preserve">
+    <value>活動資訊</value>
+  </data>
+  <data name="back_home" xml:space="preserve">
+    <value>回首頁</value>
+  </data>
+  <data name="focus_news" xml:space="preserve">
+    <value>焦點專欄</value>
+  </data>
+  <data name="page_num" xml:space="preserve">
+    <value>頁</value>
+  </data>
 </root>

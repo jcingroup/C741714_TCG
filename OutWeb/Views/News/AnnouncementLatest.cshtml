@@ -9,7 +9,7 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/News?langCode=@Res.lang" + Res.lang">@Res.nav_news</a></li>
+    <li><a href="~/News?lang=@Res.lang" + Res.lang">@Res.nav_news</a></li>
     <li>@ViewBag.Title</li>
 }
 
@@ -133,27 +133,27 @@
             @* 有資料的話才顯示 *@
             <a @disabledPre href="javascript:;" onclick="paginationSubmit('@Model.Pagination.PrePage');">
                 <i class="oi" data-glyph="chevron-left"></i>
-                <span class="hidden-xs">上一頁</span>
+                <span class="hidden-xs">@Res.pre_page</span>
             </a>
         </li>
 
         <li>
             <form action="/News/AnnouncementLatest" method="get" class="form-inline">
-                第
+                @Res.no
                 <select name="page" id="numPage" class="form-element">
                     @for (int i = Model.Pagination.FirstPage; i <= Model.Pagination.LastPage; i++)
                     {
                         <option value="@i">@i</option>
                     }
                 </select>
-                頁
+                @Res.page_num
             </form>
         </li>
 
         <li class="next">
             @* 有資料的話才顯示 *@
             <a @disabledNext href="javascript:;" onclick="paginationSubmit('@Model.Pagination.NextPage');">
-                <span class="hidden-xs">下一頁</span>
+                <span class="hidden-xs">@Res.next_page</span>
                 <i class="oi" data-glyph="chevron-right"></i>
             </a>
         </li>
