@@ -259,15 +259,6 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 焦點專欄 的當地語系化字串。
-        /// </summary>
-        public static string focus_news {
-            get {
-                return ResourceManager.GetString("focus_news", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查詢類似 台灣政府 法理學院 的當地語系化字串。
         /// </summary>
         public static string gallery_t {
