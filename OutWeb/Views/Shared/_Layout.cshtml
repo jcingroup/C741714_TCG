@@ -428,6 +428,7 @@
         @* 全文檢索: 找標題/內文 關鍵字 *@
         <form class="search-form" action="~/Home/Search">
             <input type="text" class="form-element" name="str" placeholder="@OutWeb.App_GlobalResources.Res.searchText">
+            <input type="text" class="form-element" name="langCode" value="@OutWeb.App_GlobalResources.Res.lang" hidden>
             <button>
                 <i class="icon-search"></i> @OutWeb.App_GlobalResources.Res.search
             </button>
