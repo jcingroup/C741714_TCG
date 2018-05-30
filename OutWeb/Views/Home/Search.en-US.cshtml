@@ -1,58 +1,59 @@
 ﻿@using OutWeb.Models.FrontModels.SearchSiteModels
+@using OutWeb.App_GlobalResources
 @model SearchListViewModel
 
-    @{
-        ViewBag.Title = Res.searchAll;
-        ViewBag.BodyClass = "Search";
-    }
+@{
+    ViewBag.Title = Res.searchAll;
+    ViewBag.BodyClass = "Search";
+}
 
-    @section breadcrumb {
-        <li>@ViewBag.Title</li>
-    }
+@section breadcrumb {
+    <li>@ViewBag.Title</li>
+}
 
-    <h1 class="title">
-        <span class="underline">@ViewBag.Title</span>
-    </h1>
+<h1 class="title">
+    <span class="underline">@ViewBag.Title</span>
+</h1>
 
-    <p class="font-lg mb-24">
-        About <span class="text-info">@Model.Result.Pagination.DataCount</span> results related to <strong class="text-danger">@Model.Filter.QueryString</strong>:
-    </p>
+<p class="font-lg mb-24">
+    About <span class="text-info">@Model.Result.Pagination.DataCount</span> results related to <strong class="text-danger">@Model.Filter.QueryString</strong>:
+</p>
 
-    @* 每頁10筆資料 *@
-    @if (Model.Result.Data.Count > 0)
-    {
-        <div class="articles">
-            @foreach (var data in Model.Result.Data)
-            {
-                string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : data.Content.Length > 145 ? @"<p>" + data.Content.Substring(0, 145) + "...</p>" : "<p>"+  data.Content+ "</p>";
-                <article class="article">
-                    <h3><a href="@data.LinkAddr">@data.Title</a></h3>
-                    @* 編輯器內容 取前 145 個字，有資料的話才顯示 *@
-                    @Html.Raw(remark)
-                    <a href="@data.LinkAddr" class="more"> @Res.more <i class="oi" data-glyph="caret-right"></i></a>
-                </article>
-            }
-            @*<article class="article">
-                    <h3><a href="~/AboutUs/EducationContent">美國政府明白表示：「反對台灣獨立」?</a></h3>
-                     編輯器內容 取前 145 個字，有資料的話才顯示
-                    <p>美國政府明白表示：「反對台灣獨立」。本土台灣人似乎不能了解：「為什麼？」，1952年4月28日，<span class="text-danger">舊金山和平條約</span>生效，美國依照條約第23條對，日本台灣實施主要佔領權佔領，依照第四b條規定，取得日本台灣領土之『處分與分配權』」。所以，美國與中國簽訂「上海公報」或「台灣關係法」，都是該條約所賦予的「權利」。</p>
-                    <a href="~/AboutUs/EducationContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-                </article>
+@* 每頁10筆資料 *@
+@if (Model.Result.Data.Count > 0)
+{
+    <div class="articles">
+        @foreach (var data in Model.Result.Data)
+        {
+            string remark = string.IsNullOrEmpty(data.Content) || data.Content.Length == 0 ? "" : data.Content.Length > 145 ? @"<p>" + data.Content.Substring(0, 145) + "...</p>" : "<p>" + data.Content + "</p>";
+            <article class="article">
+                <h3><a href="@data.LinkAddr">@data.Title</a></h3>
+                @* 編輯器內容 取前 145 個字，有資料的話才顯示 *@
+                @Html.Raw(remark)
+                <a href="@data.LinkAddr" class="more"> @Res.more <i class="oi" data-glyph="caret-right"></i></a>
+            </article>
+        }
+        @*<article class="article">
+                <h3><a href="~/AboutUs/EducationContent">美國政府明白表示：「反對台灣獨立」?</a></h3>
+                 編輯器內容 取前 145 個字，有資料的話才顯示
+                <p>美國政府明白表示：「反對台灣獨立」。本土台灣人似乎不能了解：「為什麼？」，1952年4月28日，<span class="text-danger">舊金山和平條約</span>生效，美國依照條約第23條對，日本台灣實施主要佔領權佔領，依照第四b條規定，取得日本台灣領土之『處分與分配權』」。所以，美國與中國簽訂「上海公報」或「台灣關係法」，都是該條約所賦予的「權利」。</p>
+                <a href="~/AboutUs/EducationContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+            </article>
 
-                <article class="article">
-                    <h3><a href="~/AboutUs/EducationContent">美國政府明白表示：「反對台灣獨立」?</a></h3>
-                    @編輯器內容 取前 145 個字，有資料的話才顯示
-                    <p>美國政府明白表示：「反對台灣獨立」。本土台灣人似乎不能了解：「為什麼？」，1952年4月28日，<span class="text-danger">舊金山和平條約</span>生效，美國依照條約第23條對，日本台灣實施主要佔領權佔領，依照第四b條規定，取得日本台灣領土之『處分與分配權』」。所以，美國與中國簽訂「上海公報」或「台灣關係法」，都是該條約所賦予的「權利」。</p>
-                    <a href="~/AboutUs/EducationContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
-                </article>*@
+            <article class="article">
+                <h3><a href="~/AboutUs/EducationContent">美國政府明白表示：「反對台灣獨立」?</a></h3>
+                @編輯器內容 取前 145 個字，有資料的話才顯示
+                <p>美國政府明白表示：「反對台灣獨立」。本土台灣人似乎不能了解：「為什麼？」，1952年4月28日，<span class="text-danger">舊金山和平條約</span>生效，美國依照條約第23條對，日本台灣實施主要佔領權佔領，依照第四b條規定，取得日本台灣領土之『處分與分配權』」。所以，美國與中國簽訂「上海公報」或「台灣關係法」，都是該條約所賦予的「權利」。</p>
+                <a href="~/AboutUs/EducationContent" class="more"> 閱讀全文 <i class="oi" data-glyph="caret-right"></i></a>
+            </article>*@
 
-        </div>
-    }
+    </div>
+}
 
 
-    @*<ul class="pager list-inline text-center">
+@*<ul class="pager list-inline text-center">
         <li class="prev hidden">
-            有資料的話才顯示 
+            有資料的話才顯示
             <a href="#">
                 <i class="oi" data-glyph="chevron-left"></i>
                 <span class="hidden-xs">上一頁</span>
@@ -68,7 +69,7 @@
             </form>
         </li>
         <li class="next">
-            有資料的話才顯示 
+            有資料的話才顯示
             <a href="#">
                 <span class="hidden-xs">下一頁</span>
                 <i class="oi" data-glyph="chevron-right"></i>
@@ -97,7 +98,7 @@
                 <input type="hidden" name="str" value="@Model.Filter.QueryString" />
                 <select name="page" id="numPage" class="form-element">
                     @for (int i = Model.Result.Pagination.FirstPage; i <= Model.Result.Pagination.LastPage; i++)
-                {
+                    {
                         <option value="@i">@i</option>
                     }
                 </select>
