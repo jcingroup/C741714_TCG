@@ -335,9 +335,6 @@
   <data name="back_home" xml:space="preserve">
     <value>回首頁</value>
   </data>
-  <data name="page_num" xml:space="preserve">
-    <value>頁</value>
-  </data>
   <data name="searchText" xml:space="preserve">
     <value>請在此輸入</value>
   </data>
@@ -362,5 +359,11 @@
 &lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=en-US" hreflang="en"&gt;
 &lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=ja-JP" hreflang="ja"&gt;</value>
     <comment>Google 搜尋: 使用 hreflang 提供正確語言和地區的網址</comment>
+  </data>
+  <data name="next_article" xml:space="preserve">
+    <value>下一篇</value>
+  </data>
+  <data name="pre_article" xml:space="preserve">
+    <value>上一篇</value>
   </data>
 </root>

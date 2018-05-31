@@ -673,15 +673,6 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 頁 的當地語系化字串。
-        /// </summary>
-        public static string page_num {
-            get {
-                return ResourceManager.GetString("page_num", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查詢類似 33391 的當地語系化字串。
         /// </summary>
         public static string postCode {

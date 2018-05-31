@@ -331,9 +331,6 @@
   <data name="back_home" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="page_num" xml:space="preserve">
-    <value>頁</value>
-  </data>
   <data name="aboutUs_1" xml:space="preserve">
     <value>About Us</value>
   </data>
@@ -358,5 +355,11 @@
   </data>
   <data name="searchText" xml:space="preserve">
     <value>Type here</value>
+  </data>
+  <data name="next_article" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="pre_article" xml:space="preserve">
+    <value>Prev</value>
   </data>
 </root>

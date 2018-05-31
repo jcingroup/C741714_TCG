@@ -335,9 +335,6 @@
   <data name="back_home" xml:space="preserve">
     <value>ホーム</value>
   </data>
-  <data name="page_num" xml:space="preserve">
-    <value>頁</value>
-  </data>
   <data name="aboutUs_1" xml:space="preserve">
     <value>台湾民政府に&lt;br class="visible-xs"&gt;ついて</value>
   </data>
@@ -362,5 +359,11 @@
   </data>
   <data name="searchText" xml:space="preserve">
     <value>ここに入力する</value>
+  </data>
+  <data name="next_article" xml:space="preserve">
+    <value>次へ</value>
+  </data>
+  <data name="pre_article" xml:space="preserve">
+    <value>前へ</value>
   </data>
 </root>
