@@ -331,9 +331,6 @@
   <data name="back_home" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="page_num" xml:space="preserve">
-    <value>頁</value>
-  </data>
   <data name="aboutUs_1" xml:space="preserve">
     <value>About Us</value>
   </data>
@@ -418,5 +415,11 @@
   <data name="MenuState_yilan" xml:space="preserve">
     <value>9</value>
     <comment>宜蘭州</comment>
+  </data>
+  <data name="next_article" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="pre_article" xml:space="preserve">
+    <value>Prev</value>
   </data>
 </root>

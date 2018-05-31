@@ -246,7 +246,7 @@ string img_path = "/Images/";
             @* 此分類的上一篇文章(日期較舊)，有資料的話才顯示 *@
             <a href="@Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesCateInfo.Keys.First() + "&ID=" + Model.PreviousIDStr+ "&langCode=" + Res.lang)">
                 <i class="oi" data-glyph="chevron-left"></i>
-                上一篇
+                @Res.pre_article
             </a>
         </li>
     }
@@ -257,7 +257,7 @@ string img_path = "/Images/";
         <li class="next">
             @* 此分類的下一篇文章(日期較新)，有資料的話才顯示 *@
             <a href="@Url.Content("~/News/EventStatesContent?statesTypeID=" + Model.StatesCateInfo.Keys.First() + "&ID=" + Model.NextIDStr+ "&langCode=" + Res.lang)">
-                下一篇
+                @Res.next_article
                 <i class="oi" data-glyph="chevron-right"></i>
             </a>
         </li>
