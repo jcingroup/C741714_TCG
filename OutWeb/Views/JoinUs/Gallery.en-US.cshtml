@@ -61,18 +61,18 @@
 
 <ul class="gallery prolist row row-center list-unstyled">
     @if (dt.Rows.Count > 0)
+    {
+        for (int i = 0; i < dt.Rows.Count; i++)
         {
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                id = dt.Rows[i]["id"].ToString();
-                cate_id = dt.Rows[i]["cate_id"].ToString();
-                cate_name = dt.Rows[i]["cate_name"].ToString();
-                lang_id = dt.Rows[i]["lang_id"].ToString();
-                lang_name = dt.Rows[i]["lang_name"].ToString();
-                c_title = dt.Rows[i]["c_title"].ToString();
-                c_desc = dt.Rows[i]["c_desc"].ToString();
-                img_file = dt.Rows[i]["img_file"].ToString();
-                string spanSytle = cate_id == "3" ? "primary" : "advanced";
+            id = dt.Rows[i]["id"].ToString();
+            cate_id = dt.Rows[i]["cate_id"].ToString();
+            cate_name = dt.Rows[i]["cate_name"].ToString();
+            lang_id = dt.Rows[i]["lang_id"].ToString();
+            lang_name = dt.Rows[i]["lang_name"].ToString();
+            c_title = dt.Rows[i]["c_title"].ToString();
+            c_desc = dt.Rows[i]["c_desc"].ToString();
+            img_file = dt.Rows[i]["img_file"].ToString();
+            string spanSytle = (cate_id == "1"  || cate_id == "3"  || cate_id == "5") ? "primary" : "advanced";
 
                 <li class="col-md-6 col-12">
                 <figure class="pro text-center">

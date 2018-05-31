@@ -61,9 +61,9 @@
 
 <ul class="gallery prolist row row-center list-unstyled">
     @if (dt.Rows.Count > 0)
+    {
+        for (int i = 0; i < dt.Rows.Count; i++)
         {
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
                 id = dt.Rows[i]["id"].ToString();
                 cate_id = dt.Rows[i]["cate_id"].ToString();
                 cate_name = dt.Rows[i]["cate_name"].ToString();
@@ -72,7 +72,7 @@
                 c_title = dt.Rows[i]["c_title"].ToString();
                 c_desc = dt.Rows[i]["c_desc"].ToString();
                 img_file = dt.Rows[i]["img_file"].ToString();
-                string spanSytle = cate_id == "1" ? "primary" : "advanced";
+                string spanSytle = (cate_id == "1" || cate_id == "3" || cate_id == "5") ? "primary" : "advanced";
                 <li class="col-md-6 col-12">
                 <figure class="pro text-center">
                     <!-- <a href="@Url.Content(img_path + img_file)" class="thumbnail" data-lightbox="gallery" data-title="台灣政府 法理學院 @cate_name 第 @c_title 期 (<a href='@Url.Content(img_path + img_file)' target='_blank'>按此看放大圖</a>)"> -->
