@@ -165,7 +165,7 @@
                                 <i class="icon-graduation-cap"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_eduCategory_1)
                             </a>
-                            <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization?cate_id=7&langCode=@OutWeb.App_GlobalResources.Res.lang">
+                            <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization?cate_id=@OutWeb.App_GlobalResources.Res.MenuOrg_adminReg&langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-organization"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_org_1)
                             </a>
@@ -273,16 +273,16 @@
                                 <h3><a href="~/AboutUs/Statement?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs_statement</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/AboutUs/Law?cate_id=4&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law</a></h3>
+                                <h3><a href="~/AboutUs/Law?cate_id=@OutWeb.App_GlobalResources.Res.MenuLaw_basic&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law</a></h3>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <h4><a href="~/AboutUs/Law?cate_id=4&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law_basic</a></h4>
+                                        <h4><a href="~/AboutUs/Law?cate_id=@OutWeb.App_GlobalResources.Res.MenuLaw_basic&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law_basic</a></h4>
                                     </li>
                                     <li>
-                                        <h4><a href="~/AboutUs/Law?cate_id=5&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law_auth</a></h4>
+                                        <h4><a href="~/AboutUs/Law?cate_id=@OutWeb.App_GlobalResources.Res.MenuLaw_auth&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law_auth</a></h4>
                                     </li>
                                     <li>
-                                        <h4><a href="~/AboutUs/Law?cate_id=6&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law_paper</a></h4>
+                                        <h4><a href="~/AboutUs/Law?cate_id=@OutWeb.App_GlobalResources.Res.MenuLaw_auth&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law_paper</a></h4>
                                     </li>
                                 </ul>
                             </li>
@@ -295,17 +295,17 @@
                     </li>
                     <li>
                         <h2>
-                            <a href="~/AboutUs/Organization?cate_id=7&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs_org</a>
+                            <a href="~/AboutUs/Organization?cate_id=@OutWeb.App_GlobalResources.Res.MenuOrg_adminReg&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs_org</a>
                         </h2>
                         <ul class="list-unstyled">
                             <li>
-                                <h3><a href="~/AboutUs/Organization?cate_id=7&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.org_adminReg</a></h3>
+                                <h3><a href="~/AboutUs/Organization?cate_id==@OutWeb.App_GlobalResources.Res.MenuOrg_adminReg&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.org_adminReg</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/AboutUs/Organization?cate_id=8&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.org_org</a></h3>
+                                <h3><a href="~/AboutUs/Organization?cate_id=@OutWeb.App_GlobalResources.Res.MenuOrg_org&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.org_org</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/AboutUs/Organization?cate_id=9&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.org_people</a></h3>
+                                <h3><a href="~/AboutUs/Organization?cate_id=@OutWeb.App_GlobalResources.Res.MenuOrg_people&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.org_people</a></h3>
                             </li>
                         </ul>
                     </li>
@@ -326,20 +326,20 @@
                         <ul class="list-unstyled">
                             <li>
                                 <h3>
-                                    <a class="state" href="~/JoinUs/Consult?id=2&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_yilan</a>
-                                    <a class="state" href="~/JoinUs/Consult?id=3&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_taipei</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.MenuState_yilan&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_yilan</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.consult_taipei&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_taipei</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
-                                    <a class="state" href="~/JoinUs/Consult?id=5&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_hsinchu</a>
-                                    <a class="state" href="~/JoinUs/Consult?id=6&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_taichung</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.consult_hsinchu&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_hsinchu</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.consult_taichung&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_taichung</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
-                                    <a class="state" href="~/JoinUs/Consult?id=7&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_tainan</a>
-                                    <a class="state" href="~/JoinUs/Consult?id=8&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_kaohsiung</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.consult_tainan&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_tainan</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.consult_kaohsiung&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_kaohsiung</a>
                                 </h3>
                             </li>
                         </ul>
@@ -386,13 +386,13 @@
                         <h2><a href="~/News/AnnouncementLatest?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_announLatest</a></h2>
                         <ul class="list-unstyled">
                             <li>
-                                <h3><a href="~/News/AnnouncementList?typeID=1&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_centralNews</a></h3>
+                                <h3><a href="~/News/AnnouncementList?typeID=@OutWeb.App_GlobalResources.Res.MenuAnnList_news_centralNews&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_centralNews</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/News/AnnouncementList?typeID=2&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_centralAnnounce</a></h3>
+                                <h3><a href="~/News/AnnouncementList?typeID=@OutWeb.App_GlobalResources.Res.MenuAnnList_news_centralAnnounce&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_centralAnnounce</a></h3>
                             </li>
                             <li>
-                                <h3><a href="~/News/AnnouncementList?typeID=4&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_centralStatement</a></h3>
+                                <h3><a href="~/News/AnnouncementList?typeID=@OutWeb.App_GlobalResources.Res.MenuAnnList_news_centralStatement&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news_centralStatement</a></h3>
                             </li>
                         </ul>
                     </li>

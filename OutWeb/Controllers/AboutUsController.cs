@@ -327,7 +327,7 @@ namespace OutWeb.Controllers
         public ActionResult Organization(string cate_id = "", string id = "",string langCode="")
         {
             //抓取資料
-            string scate_id = "7,8,9";
+            string scate_id = "7,8,9,22,23,24,25,26,27";
             DataTable dt;
             DataTable d_cate;
             DataTable dt1;

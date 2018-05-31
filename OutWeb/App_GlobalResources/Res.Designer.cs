@@ -475,6 +475,141 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 2 的當地語系化字串。
+        /// </summary>
+        public static string MenuAnnList_news_centralAnnounce {
+            get {
+                return ResourceManager.GetString("MenuAnnList_news_centralAnnounce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 1 的當地語系化字串。
+        /// </summary>
+        public static string MenuAnnList_news_centralNews {
+            get {
+                return ResourceManager.GetString("MenuAnnList_news_centralNews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 4 的當地語系化字串。
+        /// </summary>
+        public static string MenuAnnList_news_centralStatement {
+            get {
+                return ResourceManager.GetString("MenuAnnList_news_centralStatement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 5 的當地語系化字串。
+        /// </summary>
+        public static string MenuLaw_auth {
+            get {
+                return ResourceManager.GetString("MenuLaw_auth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 4 的當地語系化字串。
+        /// </summary>
+        public static string MenuLaw_basic {
+            get {
+                return ResourceManager.GetString("MenuLaw_basic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 6 的當地語系化字串。
+        /// </summary>
+        public static string MenuLaw_paper {
+            get {
+                return ResourceManager.GetString("MenuLaw_paper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 7 的當地語系化字串。
+        /// </summary>
+        public static string MenuOrg_adminReg {
+            get {
+                return ResourceManager.GetString("MenuOrg_adminReg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 8 的當地語系化字串。
+        /// </summary>
+        public static string MenuOrg_org {
+            get {
+                return ResourceManager.GetString("MenuOrg_org", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 9 的當地語系化字串。
+        /// </summary>
+        public static string MenuOrg_people {
+            get {
+                return ResourceManager.GetString("MenuOrg_people", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 5 的當地語系化字串。
+        /// </summary>
+        public static string MenuState_hsinchu {
+            get {
+                return ResourceManager.GetString("MenuState_hsinchu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 8 的當地語系化字串。
+        /// </summary>
+        public static string MenuState_kaohsiung {
+            get {
+                return ResourceManager.GetString("MenuState_kaohsiung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 6 的當地語系化字串。
+        /// </summary>
+        public static string MenuState_taichung {
+            get {
+                return ResourceManager.GetString("MenuState_taichung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 7 的當地語系化字串。
+        /// </summary>
+        public static string MenuState_tainan {
+            get {
+                return ResourceManager.GetString("MenuState_tainan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 3 的當地語系化字串。
+        /// </summary>
+        public static string MenuState_taipei {
+            get {
+                return ResourceManager.GetString("MenuState_taipei", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 2 的當地語系化字串。
+        /// </summary>
+        public static string MenuState_yilan {
+            get {
+                return ResourceManager.GetString("MenuState_yilan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 閱讀全文 的當地語系化字串。
         /// </summary>
         public static string more {

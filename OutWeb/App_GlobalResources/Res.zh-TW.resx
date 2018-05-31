@@ -363,4 +363,64 @@
 &lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=ja-JP" hreflang="ja"&gt;</value>
     <comment>Google 搜尋: 使用 hreflang 提供正確語言和地區的網址</comment>
   </data>
+  <data name="MenuAnnList_news_centralAnnounce" xml:space="preserve">
+    <value>2</value>
+    <comment>中央公告</comment>
+  </data>
+  <data name="MenuAnnList_news_centralNews" xml:space="preserve">
+    <value>1</value>
+    <comment>中央新聞</comment>
+  </data>
+  <data name="MenuAnnList_news_centralStatement" xml:space="preserve">
+    <value>4</value>
+    <comment>中央聲明</comment>
+  </data>
+  <data name="MenuLaw_auth" xml:space="preserve">
+    <value>5</value>
+    <comment>台灣公民權利法</comment>
+  </data>
+  <data name="MenuLaw_basic" xml:space="preserve">
+    <value>4</value>
+    <comment>法律依據(台灣基本法)</comment>
+  </data>
+  <data name="MenuLaw_paper" xml:space="preserve">
+    <value>6</value>
+    <comment>官方證明文件</comment>
+  </data>
+  <data name="MenuOrg_adminReg" xml:space="preserve">
+    <value>7</value>
+    <comment>行政區域圖</comment>
+  </data>
+  <data name="MenuOrg_org" xml:space="preserve">
+    <value>8</value>
+    <comment>組織架構</comment>
+  </data>
+  <data name="MenuOrg_people" xml:space="preserve">
+    <value>9</value>
+    <comment>人事名單</comment>
+  </data>
+  <data name="MenuState_hsinchu" xml:space="preserve">
+    <value>5</value>
+    <comment>新竹州</comment>
+  </data>
+  <data name="MenuState_kaohsiung" xml:space="preserve">
+    <value>8</value>
+    <comment>高雄州</comment>
+  </data>
+  <data name="MenuState_taichung" xml:space="preserve">
+    <value>6</value>
+    <comment>台中州</comment>
+  </data>
+  <data name="MenuState_tainan" xml:space="preserve">
+    <value>7</value>
+    <comment>台南州</comment>
+  </data>
+  <data name="MenuState_taipei" xml:space="preserve">
+    <value>3</value>
+    <comment>台北州</comment>
+  </data>
+  <data name="MenuState_yilan" xml:space="preserve">
+    <value>2</value>
+    <comment>宜蘭州</comment>
+  </data>
 </root>
