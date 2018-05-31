@@ -129,7 +129,7 @@ string img_path = "/Images/";
                     string description = string.IsNullOrEmpty(img.ImgDescription) ? "" : @"<span class=""caption"">" + img.ImgDescription + "</span>";
                 <li>
                     <figure class="pro">
-                        <a href="@imgUrl" class="thumbnail" target="new">
+                        <a href="@imgUrl" class="thumbnail" data-fancybox="gallery">
                             <img class="lazy" data-original="@imgUrl" alt="">
                             @* 圖說沒有資料則不顯示 *@
                             @Html.Raw(description)
