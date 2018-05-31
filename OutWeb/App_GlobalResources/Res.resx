@@ -353,9 +353,6 @@
   <data name="next_article" xml:space="preserve">
     <value>下一篇</value>
   </data>
-  <data name="page_num" xml:space="preserve">
-    <value>頁</value>
-  </data>
   <data name="pre_article" xml:space="preserve">
     <value>上一篇</value>
   </data>
