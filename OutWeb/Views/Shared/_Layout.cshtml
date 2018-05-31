@@ -84,9 +84,15 @@
             <section id="pageBanner">
                 <div class="wrap">
                     <ul class="topNav list-inline">
-                        <li class="lang"><a href="@Url.Action("Index", new { lang = "zh-TW" })">中</a></li>
-                        <li class="lang"><a href="@Url.Action("Index", new { lang = "en-US" })">En</a></li>
-                        <li class="lang"><a href="@Url.Action("Index", new { lang = "ja-JP" })">日</a></li>
+                        <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "zh-TW" ? "hidden" : "")">
+                            <a href="@Url.Action("Index", new { lang = "zh-TW" })">漢字</a>
+                        </li>
+                        <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "en-US" ? "hidden" : "")">
+                            <a href="@Url.Action("Index", new { lang = "en-US" })">English</a>
+                        </li>
+                        <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "ja-JP" ? "hidden" : "")">
+                            <a href="@Url.Action("Index", new { lang = "ja-JP" })">日本語</a>
+                        </li>
                         <li class="search">
                             <button class="search-trigger icon-search"></button>
                         </li>
