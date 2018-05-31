@@ -919,6 +919,51 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。 的當地語系化字串。
+        /// </summary>
+        public static string webDescription {
+            get {
+                return ResourceManager.GetString("webDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 日屬美佔, 1945年4月1日, usmgtcg, 林志昇, 身分證, 台灣民政府官網, 台灣民政府, 日本天皇, USMG, 台灣身分證, 台灣政府, TCG, 何瑞元, 詔書, 台灣名政府, 台灣平民政府, 臺灣民政府, 台湾民政府, Taiwan, Government, 日本台灣, Civil, 台灣, 官網 的當地語系化字串。
+        /// </summary>
+        public static string webKeywords {
+            get {
+                return ResourceManager.GetString("webKeywords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 台灣民政府 Taiwan Civil Government 的當地語系化字串。
+        /// </summary>
+        public static string webTitle {
+            get {
+                return ResourceManager.GetString("webTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 台灣民政府 TCG 的當地語系化字串。
+        /// </summary>
+        public static string webTitle2 {
+            get {
+                return ResourceManager.GetString("webTitle2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 台灣民政府 的當地語系化字串。
+        /// </summary>
+        public static string webTitle3 {
+            get {
+                return ResourceManager.GetString("webTitle3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 TCG華盛頓官網 的當地語系化字串。
         /// </summary>
         public static string WV_site {

@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="日屬美佔, 1945年4月1日, usmgtcg, 林志昇, 身分證, 台灣民政府官網, 台灣民政府, 日本天皇, USMG, 台灣身分證, 台灣政府, TCG, 何瑞元, 詔書, 台灣名政府, 台灣平民政府, 臺灣民政府, 台湾民政府, Taiwan, Government, 日本台灣, Civil, 台灣, 官網">
-    <meta name="description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
+    <meta name="keywords" content="@OutWeb.App_GlobalResources.Res.webKeywords">
+    <meta name="description" content="@OutWeb.App_GlobalResources.Res.webDescription">
     @if (ViewBag.IsFirstPage)
     {
-        <title id="title">台灣民政府 Taiwan Civil Government</title>
+        <title id="title">@OutWeb.App_GlobalResources.Res.webTitle</title>
     }
     else
     {
-        <title id="title">@ViewBag.Title | 台灣民政府 TCG</title>
+        <title id="title">@ViewBag.Title | @OutWeb.App_GlobalResources.Res.webTitle2</title>
     }
     @if (ViewBag.Description != null && ViewBag.Description != "")
     {
@@ -26,7 +26,7 @@
     @if (ViewBag.IsFirstPage)
     {
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="台灣民政府 Taiwan Civil Government" />
+        <meta property="og:title" content="@OutWeb.App_GlobalResources.Res.webTitle" />
     }
     else
     {
@@ -41,21 +41,21 @@
         }
     }
     @*<meta property="og:description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">*@
-    <meta property="og:site_name" content="台灣民政府 Taiwan Civil Government">
+    <meta property="og:site_name" content="@OutWeb.App_GlobalResources.Res.webTitle">
     @RenderSection("OGMeta", false)
 
     <!-- Favicons -->
     <!-- Standard -->
     <meta name="theme-color" content="#FFFFFF">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="台灣民政府">
+    <meta name="application-name" content="@OutWeb.App_GlobalResources.Res.webTitle3">
     <link rel="icon" type="image/png" href="~/favicon.png" sizes="256x256">
     <link rel="shortcut icon" href="~/favicon.ico">
     <!-- Apple -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-startup-image" href="~/favicon_apple.png">
-    <meta name="apple-mobile-web-app-title" content="台灣民政府">
+    <meta name="apple-mobile-web-app-title" content="@OutWeb.App_GlobalResources.Res.webTitle3">
     <link rel="apple-touch-icon" sizes="256x256" href="~/favicon_apple.png">
     <!-- // Favicons -->
 
