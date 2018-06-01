@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -355,9 +355,9 @@
   </data>
   <data name="rel_lang_tag" xml:space="preserve">
     <value>&lt;link rel="alternate" href="http://usmgtcgov.tw/" hreflang="zh-Hant" /&gt;
-&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=zh-TW" hreflang="zh-Hant"&gt;
-&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=en-US" hreflang="en"&gt;
-&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=ja-JP" hreflang="ja"&gt;</value>
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?langCode=zh-TW" hreflang="zh-Hant"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?langCode=en-US" hreflang="en"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?langCode=ja-JP" hreflang="ja"&gt;</value>
     <comment>Google 搜尋: 使用 hreflang 提供正確語言和地區的網址</comment>
   </data>
   <data name="MenuAnnList_news_centralAnnounce" xml:space="preserve">

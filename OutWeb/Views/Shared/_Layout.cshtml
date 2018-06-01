@@ -85,13 +85,13 @@
                 <div class="wrap">
                     <ul class="topNav list-inline">
                         <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "zh-TW" ? "hidden" : "")">
-                            <a href="@Url.Action("Index", new { lang = "zh-TW" })">漢字</a>
+                            <a href="@Url.Action("Index", new { langCode = "zh-TW" })">漢字</a>
                         </li>
                         <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "en-US" ? "hidden" : "")">
-                            <a href="@Url.Action("Index", new { lang = "en-US" })">English</a>
+                            <a href="@Url.Action("Index", new { langCode = "en-US" })">English</a>
                         </li>
                         <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "ja-JP" ? "hidden" : "")">
-                            <a href="@Url.Action("Index", new { lang = "ja-JP" })">日本語</a>
+                            <a href="@Url.Action("Index", new { langCode = "ja-JP" })">日本語</a>
                         </li>
                         <li class="search">
                             <button class="search-trigger icon-search"></button>
@@ -104,7 +104,7 @@
                         </li>
                     </ul>
                     <h1 class="logo">
-                        <a href="~/Home?lang=@OutWeb.App_GlobalResources.Res.lang" title="@OutWeb.App_GlobalResources.Res.back_home">台灣民政府 Taiwan Civil Government</a>
+                        <a href="~/Home?langCode=@OutWeb.App_GlobalResources.Res.lang" title="@OutWeb.App_GlobalResources.Res.back_home">台灣民政府 Taiwan Civil Government</a>
                     </h1>
                 </div>
             </section>
@@ -114,19 +114,19 @@
                 <nav id="menu">
                     <ul class="nav list-unstyled">
                         <li>
-                            <a href="~/AboutUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a href="~/AboutUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-about"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.home_about)
                             </a>
                         </li>
                         <li>
-                            <a href="~/JoinUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-join-us"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.home_joinUs)
                             </a>
                         </li>
                         <li>
-                            <a href="~/News?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-news2"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.home_news)
                             </a>
@@ -139,19 +139,19 @@
                 <nav id="menu" class="wrap">
                     <ul class="nav row no-gutters list-unstyled">
                         <li class="col-4">
-                            <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-about"></i>
                                 @OutWeb.App_GlobalResources.Res.nav_aboutUs
                             </a>
                         </li>
                         <li class="col-4">
-                            <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-join-us"></i>
                                 @OutWeb.App_GlobalResources.Res.nav_joinUs
                             </a>
                         </li>
                         <li class="col-4">
-                            <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/News?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-news2"></i>
                                 @OutWeb.App_GlobalResources.Res.nav_news
                             </a>
@@ -257,7 +257,7 @@
         <ul class="list-unstyled row">
             <li>
                 <h1>
-                    <a href="~/AboutUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                    <a href="~/AboutUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                         @OutWeb.App_GlobalResources.Res.nav_aboutUs
                     </a>
                 </h1>
@@ -319,7 +319,7 @@
             </li>
             <li>
                 <h1>
-                    <a href="~/JoinUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                    <a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                         @OutWeb.App_GlobalResources.Res.nav_joinUs
                     </a>
                 </h1>
@@ -374,7 +374,7 @@
             </li>
             <li>
                 <h1>
-                    <a href="~/News?lang=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news</a>
+                    <a href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news</a>
                 </h1>
                 <ul class="list-unstyled">
                     <li>

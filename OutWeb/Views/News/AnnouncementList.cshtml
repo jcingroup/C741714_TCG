@@ -11,7 +11,7 @@ Dictionary<int, string> cateInfo = (TempData["CateInfo"] as Dictionary<int, stri
 }
 
 @section breadcrumb {
-    <li><a href="~/News?lang=@Res.lang">@Res.nav_news</a></li>
+    <li><a href="~/News?langCode=@Res.lang">@Res.nav_news</a></li>
     <li><a href="~/News/AnnouncementLatest?langCode=@Res.lang">@Res.news_announLatest</a></li>
     <li>@ViewBag.Title</li>
 }

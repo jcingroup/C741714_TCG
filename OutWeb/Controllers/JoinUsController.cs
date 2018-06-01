@@ -41,13 +41,13 @@ namespace OutWeb.Controllers
             ViewBag.IsFirstPage = false;
         }
 
-        public ActionResult Index(string lang="")
+        public ActionResult Index(string langCode = "")
         {
-            return RedirectToAction("Apply", new {  langCode=lang});
+            return RedirectToAction("Apply", new { langCode });
         }
 
         // 申請民政府身分證
-        public ActionResult Apply(string id = "",string langCode="")
+        public ActionResult Apply(string id = "")
         {
             //抓取資料
             string cate_id = "1";
@@ -78,7 +78,7 @@ namespace OutWeb.Controllers
         }
 
         // 地方服務處諮詢
-        public ActionResult Consult(string id="",string langCode="")
+        public ActionResult Consult(string id = "")
         {
             //抓取資料
             string cate_id = "2,6";
@@ -109,7 +109,7 @@ namespace OutWeb.Controllers
         }
 
         // 參加台灣法理學院 - 課堂 LIVE 直播
-        public ActionResult Live(string langCode="")
+        public ActionResult Live()
         {
             DataTable dt;
             string err_msg = "";
@@ -122,7 +122,7 @@ namespace OutWeb.Controllers
         }
 
         // 參加台灣法理學院 - 開課時間表
-        public ActionResult Schedule(string langCode="")
+        public ActionResult Schedule()
         {
             //抓取資料
             string cate_id = "3";
@@ -131,15 +131,14 @@ namespace OutWeb.Controllers
             //======語系取得========
             string lang_id = GetLang();
             //======================
-            string langView = Lang_Page("Schedule");
             dt = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
 
             ViewData["dt"] = dt;
-            return View(langView);
+            return View();
         }
 
         // 參加台灣法理學院 - 歷屆合照
-        public ActionResult Gallery(string langCode="")
+        public ActionResult Gallery()
         {
             DataTable dt;
             string err_msg = "";
@@ -148,7 +147,7 @@ namespace OutWeb.Controllers
             //======================
             dt = Cschool.List(ref err_msg, "", " sort desc , cate_id desc ", "Y", "", "", "", "", lang_id);
             ViewData["dt"] = dt;
-            return View(Lang_Page("Gallery"));
+            return View();
         }
     }
 }

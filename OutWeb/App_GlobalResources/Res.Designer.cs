@@ -845,9 +845,9 @@ namespace OutWeb.App_GlobalResources {
         
         /// <summary>
         ///   查詢類似 &lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/&quot; hreflang=&quot;zh-Hant&quot; /&gt;
-        ///&lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/?lang=zh-TW&quot; hreflang=&quot;zh-Hant&quot;&gt;
-        ///&lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/?lang=en-US&quot; hreflang=&quot;en&quot;&gt;
-        ///&lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/?lang=ja-JP&quot; hreflang=&quot;ja&quot;&gt; 的當地語系化字串。
+        ///&lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/?langCode=zh-TW&quot; hreflang=&quot;zh-Hant&quot;&gt;
+        ///&lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/?langCode=en-US&quot; hreflang=&quot;en&quot;&gt;
+        ///&lt;link rel=&quot;alternate&quot; href=&quot;http://usmgtcgov.tw/?langCode=ja-JP&quot; hreflang=&quot;ja&quot;&gt; 的當地語系化字串。
         /// </summary>
         public static string rel_lang_tag {
             get {

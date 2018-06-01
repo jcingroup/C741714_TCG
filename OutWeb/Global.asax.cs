@@ -9,6 +9,7 @@ using System.Web.Routing;
 using OutWeb.Service;
 using System.Globalization;
 using System.Threading;
+using System.Web.WebPages;
 
 namespace OutWeb
 {
@@ -27,6 +28,18 @@ namespace OutWeb
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("zh-TW")
+            { //使用狀況條件為 Cookies值 或 QueryString["lang"]
+                ContextCondition = (C =>
+                (
+                C.Request.Cookies["_culture"] != null &&
+                C.Request.Cookies["_culture"].Value.Contains("zh-TW") &&
+                string.IsNullOrEmpty(C.Request.QueryString["langCode"])
+                ) ||
+                C.Request.QueryString["lang"] == "zh-TW"
+                )
+            });
         }
 
         protected void Application_Error(Object sender, EventArgs e)
@@ -72,86 +85,77 @@ namespace OutWeb
             }
         }
 
+        string langname = "_culture";
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+            #region language follow
+            HttpCookie WebLang = Request.Cookies[langname];
+            string set_lang = string.Empty;
+            string fource_lang = string.Empty; //預設強制語系 
+            string query_lang = string.Empty; //參數設定語系
+            string[] allow_lang = new string[] { "zh-TW", "zh-CN", "en-US", "ja-JP" };
 
-            Language Clang = new Language();
-            CultureInfo ci = null;
-            string lang = string.Empty;
-            lang = Request.QueryString["lang"]; //參數切換語系 參數查詢列為高優先權
+            fource_lang = allow_lang[0]; //不預強制語系 此行註解
+            query_lang = Request.QueryString["langCode"]; //參數切換語系 參數查詢列為高優先權
 
-            if (string.IsNullOrEmpty(lang))
+            if (!string.IsNullOrEmpty(query_lang) && allow_lang.Contains(query_lang))
             {
-                lang = Request.QueryString["langCode"];
-            }
 
-            HttpCookie cookie = Request.Cookies["_culture"];
-            if (lang != "" && lang != null)   //點擊其他頁面時
-            {
-                if (GetCurrentCulture() != lang || cookie.Value != lang)
+                var n = System.Globalization.CultureInfo.CreateSpecificCulture(query_lang);
+                set_lang = n.Name;
+                //網址參數切換語系
+                if (WebLang == null)
                 {
-                    // update cookie value 
-                    cookie.Value = lang;
-                    Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(lang);
-                    Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;// 主要
+                    WebLang = new HttpCookie(langname, set_lang);
                 }
-            }
-            else if ((cookie == null) && ((lang == "") || lang == null)) //初次瀏覽頁面時
-            {
-                try
+                else
                 {
-                    //取得用戶端瀏覽器語言喜好設定
-                    var userLanguages = Request.UserLanguages;
-                    if (userLanguages.Length > 0)
-                    {
-                        try
-                        {
-                            ci = new CultureInfo(userLanguages[0]);
-                        }
-                        catch (CultureNotFoundException)
-                        {
-                            ci = CultureInfo.InvariantCulture;
-                        }
-                    }
+                    WebLang.Value = query_lang;            
+                }
+                Response.Cookies.Add(WebLang);
+            }
+            else if (WebLang == null)
+            {
+                if (!string.IsNullOrEmpty(fource_lang)) //採用系統強制設定語系
+                {
+                    var q = fource_lang;
+                    var n = System.Globalization.CultureInfo.CreateSpecificCulture(q); //轉換完整 語系-國家 編碼
+                    set_lang = n.Name;
+                }
+                else if (Request.UserLanguages != null && Request.UserLanguages.Length > 0) //使用瀏覽器提供的語系
+                {
+                    var q = Request.UserLanguages[0];
+                    var n = System.Globalization.CultureInfo.CreateSpecificCulture(q);//轉換完整 語系-國家 編碼
+
+                    if (allow_lang.Contains(n.Name))
+                        set_lang = n.Name;
                     else
-                    {
-                        ci = CultureInfo.InvariantCulture;
-                    }
+                        set_lang = allow_lang[0];
                 }
-                catch (Exception)
+                else //提供其他系統直接進行Request但Request Header裡無Accept-Language參數
                 {
-                    throw;
-                }
-                finally
-                {
-                    var webLang = ci.ToString();
-                    // create cookie value 
-                    cookie = new HttpCookie("_culture");
-                    if (webLang == "en-US" || webLang == "zh-CN" || webLang == "zh-TW")
-                    {
-                        System.Diagnostics.Debug.WriteLine(webLang);
-                    }
-                    else if (webLang == "ja")
-                    {
-                        webLang = "ja-JP";
-                    }
+                    var n = System.Threading.Thread.CurrentThread.CurrentCulture;
+                    if (allow_lang.Contains(n.Name))
+                        set_lang = n.Name;
                     else
-                    {
-                        webLang = "en-US";
-                    }
-                    cookie.Value = webLang;
-                    cookie.Expires = DateTime.Now.AddDays(1);
-                    Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cookie.Value);
-                    Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;// 主要
-                    Response.Cookies.Add(cookie);
+                        set_lang = allow_lang[0];
+                }
+                WebLang = new HttpCookie(langname, set_lang);
+                Response.Cookies.Add(WebLang);
+            }
+            else
+            {
+                if (!allow_lang.Contains(WebLang.Value))
+                {
+                    set_lang = allow_lang[0];
+                    WebLang.Value = set_lang;
                 }
             }
-            else //非初次瀏覽頁面
-            {
-                // resume cookie value 
-                Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cookie.Value);
-                Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;// 主要
-            }
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(WebLang.Value);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.Name);
+
+            #endregion
 
         }
 

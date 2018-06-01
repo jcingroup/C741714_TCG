@@ -41,14 +41,13 @@ namespace OutWeb.Controllers
             ViewBag.IsFirstPage = false;
         }
 
-        public ActionResult Index(string lang="")
+        public ActionResult Index(string langCode = "")
         {
-
-            return RedirectToAction("TCG", new { langCode = lang });
+            return RedirectToAction("TCG", new { langCode });
         }
 
         // 台灣民政府由來
-        public ActionResult TCG(string id = "",string langCode="")
+        public ActionResult TCG(string id = "")
         {
             //抓取資料
 
@@ -84,7 +83,7 @@ namespace OutWeb.Controllers
         }
 
         // 關於我們 - 主張與立場
-        public ActionResult Position(string id = "", string langCode = "")
+        public ActionResult Position(string id = "")
         {
             //抓取資料
             string cate_id = "2,12,13";
@@ -116,7 +115,7 @@ namespace OutWeb.Controllers
         }
 
         // 關於我們 - 台灣地位的聲明
-        public ActionResult Statement(string id = "",string langCode="")
+        public ActionResult Statement(string id = "")
         {
             //抓取資料
             string cate_id = "3,14,15";
@@ -147,7 +146,7 @@ namespace OutWeb.Controllers
         }
 
         // 關於我們 - 法律依據
-        public ActionResult Law(string cate_id = "", string id = "",string langCode="")
+        public ActionResult Law(string cate_id = "", string id = "")
         {
             //抓取資料
             string scate_id = "4,5,6,10,11,16,17,18,19";
@@ -195,7 +194,7 @@ namespace OutWeb.Controllers
             return View();
         }
 
-        public ActionResult EducationCategory(string langCode="")
+        public ActionResult EducationCategory()
         {
 
             //======語系取得========
@@ -208,7 +207,7 @@ namespace OutWeb.Controllers
         }
 
         // 焦點專欄 - 列表
-        public ActionResult EducationList(int? eduTypeID, int? page, string langCode="")
+        public ActionResult EducationList(int? eduTypeID, int? page)
         {
             if (!eduTypeID.HasValue)
                 return View();
@@ -233,7 +232,7 @@ namespace OutWeb.Controllers
         }
 
         // 焦點專欄 - 內容
-        public ActionResult EducationContent(int? eduTypeID, int? ID, int? pagingID,string langCode="")
+        public ActionResult EducationContent(int? eduTypeID, int? ID, int? pagingID)
         {
 
             if (!eduTypeID.HasValue || !ID.HasValue)
@@ -324,7 +323,7 @@ namespace OutWeb.Controllers
         //}
 
         // 行政區域圖&組織架構
-        public ActionResult Organization(string cate_id = "", string id = "",string langCode="")
+        public ActionResult Organization(string cate_id = "", string id = "")
         {
             //抓取資料
             string scate_id = "7,8,9,22,23,24,25,26,27";
