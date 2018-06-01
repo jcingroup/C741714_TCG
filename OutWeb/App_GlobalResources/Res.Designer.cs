@@ -412,7 +412,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 zh-tw 的當地語系化字串。
+        ///   查詢類似 zh-TW 的當地語系化字串。
         /// </summary>
         public static string lang {
             get {
