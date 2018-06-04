@@ -17,8 +17,8 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/JoinUs?langCode=zh-TW">@Res.nav_joinUs</a></li>
-    <li><a href="~/JoinUs/Live?langCode=zh-TW">@Res.joinUs_joinCollege</a></li>
+    <li><a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.nav_joinUs</a></li>
+    <li><a href="~/JoinUs/Live?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.joinUs_joinCollege</a></li>
     <li>@ViewBag.Title</li>
 }
 
@@ -47,9 +47,9 @@
 <h1 class="sr-only">@Res.nav_joinUs</h1>
 
 <ul class="tabs list-inline text-center">
-    <li><a href="~/JoinUs/Live?langCode=zh-TW">@Res.joinUs_live</a></li>
-    <li><a href="~/JoinUs/Schedule?langCode=zh-TW">@Res.joinUs_schedule</a></li>
-    <li><a class="current" href="~/JoinUs/Gallery?langCode=zh-TW">@Res.joinUs_gallery</a></li>
+    <li><a href="~/JoinUs/Live?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.joinUs_live</a></li>
+    <li><a href="~/JoinUs/Schedule?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.joinUs_schedule</a></li>
+    <li><a class="current" href="~/JoinUs/Gallery?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.joinUs_gallery</a></li>
     @* 歷屆課程影片網址來源: 後台 > 加入台灣民政府 > 參加台灣法理學院 > 歷屆課程影片 *@
     <li><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">@Res.joinUs_tchVideo</a></li>
 </ul>
