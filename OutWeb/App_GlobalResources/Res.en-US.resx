@@ -393,27 +393,27 @@
     <comment>人事名單</comment>
   </data>
   <data name="MenuState_hsinchu" xml:space="preserve">
-    <value>11</value>
+    <value>24</value>
     <comment>新竹州</comment>
   </data>
   <data name="MenuState_kaohsiung" xml:space="preserve">
-    <value>17</value>
+    <value>27</value>
     <comment>高雄州</comment>
   </data>
   <data name="MenuState_taichung" xml:space="preserve">
-    <value>13</value>
+    <value>25</value>
     <comment>台中州</comment>
   </data>
   <data name="MenuState_tainan" xml:space="preserve">
-    <value>15</value>
+    <value>26</value>
     <comment>台南州</comment>
   </data>
   <data name="MenuState_taipei" xml:space="preserve">
-    <value>7</value>
+    <value>23</value>
     <comment>台北州</comment>
   </data>
   <data name="MenuState_yilan" xml:space="preserve">
-    <value>9</value>
+    <value>22</value>
     <comment>宜蘭州</comment>
   </data>
   <data name="next_article" xml:space="preserve">
