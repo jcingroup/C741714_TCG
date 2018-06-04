@@ -50,7 +50,7 @@ namespace OutWeb.Controllers
         public ActionResult Apply(string id = "",string langCode="")
         {
             //抓取資料
-            string cate_id = "1";
+            string cate_id = "1,4,5";
             DataTable dt;
             DataTable d_detail;
             DataTable dt1;
@@ -81,7 +81,7 @@ namespace OutWeb.Controllers
         public ActionResult Consult(string id="",string langCode="")
         {
             //抓取資料
-            string cate_id = "2,6";
+            string cate_id = "2,6,7";
             DataTable dt;
             DataTable d_detail;
             DataTable dt1;
