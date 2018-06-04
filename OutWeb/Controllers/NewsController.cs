@@ -10,6 +10,8 @@ using OutWeb.Service;
 using System;
 using System.Web.Mvc;
 using System.Linq;
+using System.Web;
+
 namespace OutWeb.Controllers
 {
     public class NewsController : LanguageController
@@ -38,14 +40,13 @@ namespace OutWeb.Controllers
             ViewBag.IsFirstPage = false;
         }
 
-        public ActionResult Index(string lang)
+        public ActionResult Index()
         {
-
-            return RedirectToAction("Latest",new { langCode=lang});
+            return RedirectToAction("Latest");
         }
 
         // 最新訊息
-        public ActionResult Latest(string langCode="")
+        public ActionResult Latest()
         {
             //======語系取得========
             string lang_id = GetLang();
@@ -56,7 +57,7 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 活動寫真 - 最新（中央）活動
-        public ActionResult EventLatest(int? page, string langCode)
+        public ActionResult EventLatest(int? page)
         {
             //======語系取得========
             string lang_id = GetLang();
@@ -74,7 +75,7 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 活動寫真 - 最新活動內容
-        public ActionResult EventLatestContent(int? ID, int? pagingID,string langCode="")
+        public ActionResult EventLatestContent(int? ID, int? pagingID)
         {
             if (!ID.HasValue)
                 return RedirectToAction("EventLatest");
@@ -100,7 +101,7 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 活動寫真 - 各州活動分類
-        public ActionResult EventStatesCategory(string langCode)
+        public ActionResult EventStatesCategory()
         {
 
             //======語系取得========
@@ -114,7 +115,7 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 活動寫真 - 各州活動列表
-        public ActionResult EventStatesList(int? statesTypeID, int? page, string langCode)
+        public ActionResult EventStatesList(int? statesTypeID, int? page)
         {
             if (!statesTypeID.HasValue)
                 return RedirectToAction("EventLatest");
@@ -167,7 +168,7 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 新聞 公告 聲明 - 最新消息
-        public ActionResult AnnouncementLatest(int? page, string langCode)
+        public ActionResult AnnouncementLatest(int? page)
         {
             //======語系取得========
             string langCd = GetLang();
@@ -185,7 +186,7 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 新聞 公告 聲明 列表
-        public ActionResult AnnouncementList(int? typeID, int? page, string langCode = "")
+        public ActionResult AnnouncementList(int? typeID, int? page)
         {
             if (!typeID.HasValue)
                 return RedirectToAction("AnnouncementLatest");
@@ -207,7 +208,7 @@ namespace OutWeb.Controllers
         }
 
         // 最新訊息 - 新聞 公告 聲明 內容
-        public ActionResult AnnouncementContent(int? ID, int? typeID,string langCode="")
+        public ActionResult AnnouncementContent(int? ID, int? typeID)
         {
             if (!ID.HasValue || !typeID.HasValue)
                 return RedirectToAction("AnnouncementLatest");
@@ -218,9 +219,9 @@ namespace OutWeb.Controllers
             AnnouncementLatestContent mdoel = repo.GetContentByID((int)ID, (int)typeID, langCd);
             return View(mdoel);
         }
-        
 
-        public ActionResult FocusCategory(string langCode="")
+
+        public ActionResult FocusCategory()
         {
             //======語系取得========
             string langCd = GetLang();
@@ -232,7 +233,7 @@ namespace OutWeb.Controllers
         }
 
         // 焦點專欄 - 列表
-        public ActionResult FocusList(int? focusTypeID, int? page, string langCode)
+        public ActionResult FocusList(int? focusTypeID, int? page)
         {
             if (!focusTypeID.HasValue)
                 return RedirectToAction("EventLatest");
@@ -253,7 +254,7 @@ namespace OutWeb.Controllers
         }
 
         // 焦點專欄 - 內容
-        public ActionResult FocusContent(int? focusTypeID, int? ID, int? pagingID,string langCode)
+        public ActionResult FocusContent(int? focusTypeID, int? ID, int? pagingID)
         {
             if (!focusTypeID.HasValue || !ID.HasValue)
                 return RedirectToAction("EventLatest");

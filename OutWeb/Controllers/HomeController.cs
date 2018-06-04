@@ -16,7 +16,7 @@ namespace OutWeb.Controllers
         }
 
         // all 靜態
-        public ActionResult Index(string lang = "")
+        public ActionResult Index()
         {
             ViewBag.IsFirstPage = true;
 
@@ -24,7 +24,7 @@ namespace OutWeb.Controllers
         }
 
         // 全文檢索
-        public ActionResult Search(string str, int? page,string langCode = "")
+        public ActionResult Search(string str, int? page)
         {
             //======語系取得========
             string lang_id = GetLang();
@@ -36,7 +36,7 @@ namespace OutWeb.Controllers
             model.Filter.LangCode = lang_id;
             SearchRepository repo = new SearchRepository();
             model.Result = repo.SearchSite(model.Filter);
-            return View(Lang_Page("Search"), model);
+            return View(model);
         }
     }
 }

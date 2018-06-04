@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -335,9 +335,6 @@
   <data name="back_home" xml:space="preserve">
     <value>回首頁</value>
   </data>
-  <data name="page_num" xml:space="preserve">
-    <value>頁</value>
-  </data>
   <data name="searchText" xml:space="preserve">
     <value>請在此輸入</value>
   </data>
@@ -358,9 +355,9 @@
   </data>
   <data name="rel_lang_tag" xml:space="preserve">
     <value>&lt;link rel="alternate" href="http://usmgtcgov.tw/" hreflang="zh-Hant" /&gt;
-&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=zh-TW" hreflang="zh-Hant"&gt;
-&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=en-US" hreflang="en"&gt;
-&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=ja-JP" hreflang="ja"&gt;</value>
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?langCode=zh-TW" hreflang="zh-Hant"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?langCode=en-US" hreflang="en"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?langCode=ja-JP" hreflang="ja"&gt;</value>
     <comment>Google 搜尋: 使用 hreflang 提供正確語言和地區的網址</comment>
   </data>
   <data name="MenuAnnList_news_centralAnnounce" xml:space="preserve">
@@ -422,5 +419,29 @@
   <data name="MenuState_yilan" xml:space="preserve">
     <value>2</value>
     <comment>宜蘭州</comment>
+  </data>
+  <data name="next_article" xml:space="preserve">
+    <value>下一篇</value>
+  </data>
+  <data name="pre_article" xml:space="preserve">
+    <value>上一篇</value>
+  </data>
+  <data name="webDescription" xml:space="preserve">
+    <value>台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。</value>
+  </data>
+  <data name="webKeywords" xml:space="preserve">
+    <value>日屬美佔, 1945年4月1日, usmgtcg, 林志昇, 身分證, 台灣民政府官網, 台灣民政府, 日本天皇, USMG, 台灣身分證, 台灣政府, TCG, 何瑞元, 詔書, 台灣名政府, 台灣平民政府, 臺灣民政府, 台湾民政府, Taiwan, Government, 日本台灣, Civil, 台灣, 官網</value>
+  </data>
+  <data name="webTitle" xml:space="preserve">
+    <value>台灣民政府 Taiwan Civil Government</value>
+    <comment>首頁 title</comment>
+  </data>
+  <data name="webTitle2" xml:space="preserve">
+    <value>台灣民政府 TCG</value>
+    <comment>內頁 title</comment>
+  </data>
+  <data name="webTitle3" xml:space="preserve">
+    <value>台灣民政府</value>
+    <comment>app icon title</comment>
   </data>
 </root>

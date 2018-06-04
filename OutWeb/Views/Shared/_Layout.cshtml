@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="日屬美佔, 1945年4月1日, usmgtcg, 林志昇, 身分證, 台灣民政府官網, 台灣民政府, 日本天皇, USMG, 台灣身分證, 台灣政府, TCG, 何瑞元, 詔書, 台灣名政府, 台灣平民政府, 臺灣民政府, 台湾民政府, Taiwan, Government, 日本台灣, Civil, 台灣, 官網">
-    <meta name="description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">
+    <meta name="keywords" content="@OutWeb.App_GlobalResources.Res.webKeywords">
+    <meta name="description" content="@OutWeb.App_GlobalResources.Res.webDescription">
     @if (ViewBag.IsFirstPage)
     {
-        <title id="title">台灣民政府 Taiwan Civil Government</title>
+        <title id="title">@OutWeb.App_GlobalResources.Res.webTitle</title>
     }
     else
     {
-        <title id="title">@ViewBag.Title | 台灣民政府 TCG</title>
+        <title id="title">@ViewBag.Title | @OutWeb.App_GlobalResources.Res.webTitle2</title>
     }
     @if (ViewBag.Description != null && ViewBag.Description != "")
     {
@@ -26,7 +26,7 @@
     @if (ViewBag.IsFirstPage)
     {
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="台灣民政府 Taiwan Civil Government" />
+        <meta property="og:title" content="@OutWeb.App_GlobalResources.Res.webTitle" />
     }
     else
     {
@@ -41,21 +41,21 @@
         }
     }
     @*<meta property="og:description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">*@
-    <meta property="og:site_name" content="台灣民政府 Taiwan Civil Government">
+    <meta property="og:site_name" content="@OutWeb.App_GlobalResources.Res.webTitle">
     @RenderSection("OGMeta", false)
 
     <!-- Favicons -->
     <!-- Standard -->
     <meta name="theme-color" content="#FFFFFF">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="台灣民政府">
+    <meta name="application-name" content="@OutWeb.App_GlobalResources.Res.webTitle3">
     <link rel="icon" type="image/png" href="~/favicon.png" sizes="256x256">
     <link rel="shortcut icon" href="~/favicon.ico">
     <!-- Apple -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-startup-image" href="~/favicon_apple.png">
-    <meta name="apple-mobile-web-app-title" content="台灣民政府">
+    <meta name="apple-mobile-web-app-title" content="@OutWeb.App_GlobalResources.Res.webTitle3">
     <link rel="apple-touch-icon" sizes="256x256" href="~/favicon_apple.png">
     <!-- // Favicons -->
 
@@ -84,9 +84,15 @@
             <section id="pageBanner">
                 <div class="wrap">
                     <ul class="topNav list-inline">
-                        <li class="lang"><a href="@Url.Action("Index", new { lang = "zh-TW" })">中</a></li>
-                        <li class="lang"><a href="@Url.Action("Index", new { lang = "en-US" })">En</a></li>
-                        <li class="lang"><a href="@Url.Action("Index", new { lang = "ja-JP" })">日</a></li>
+                        <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "zh-TW" ? "hidden" : "")">
+                            <a href="@Url.Action("Index", new { langCode = "zh-TW" })">漢字</a>
+                        </li>
+                        <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "en-US" ? "hidden" : "")">
+                            <a href="@Url.Action("Index", new { langCode = "en-US" })">English</a>
+                        </li>
+                        <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "ja-JP" ? "hidden" : "")">
+                            <a href="@Url.Action("Index", new { langCode = "ja-JP" })">日本語</a>
+                        </li>
                         <li class="search">
                             <button class="search-trigger icon-search"></button>
                         </li>
@@ -98,7 +104,7 @@
                         </li>
                     </ul>
                     <h1 class="logo">
-                        <a href="~/Home?lang=@OutWeb.App_GlobalResources.Res.lang" title="@OutWeb.App_GlobalResources.Res.back_home">台灣民政府 Taiwan Civil Government</a>
+                        <a href="~/Home?langCode=@OutWeb.App_GlobalResources.Res.lang" title="@OutWeb.App_GlobalResources.Res.back_home">台灣民政府 Taiwan Civil Government</a>
                     </h1>
                 </div>
             </section>
@@ -108,19 +114,19 @@
                 <nav id="menu">
                     <ul class="nav list-unstyled">
                         <li>
-                            <a href="~/AboutUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a href="~/AboutUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-about"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.home_about)
                             </a>
                         </li>
                         <li>
-                            <a href="~/JoinUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-join-us"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.home_joinUs)
                             </a>
                         </li>
                         <li>
-                            <a href="~/News?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-news2"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.home_news)
                             </a>
@@ -133,19 +139,19 @@
                 <nav id="menu" class="wrap">
                     <ul class="nav row no-gutters list-unstyled">
                         <li class="col-4">
-                            <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a class="@(ViewBag.BodyClass.Contains("AboutUs") ? "current" : "")" href="~/AboutUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-about"></i>
                                 @OutWeb.App_GlobalResources.Res.nav_aboutUs
                             </a>
                         </li>
                         <li class="col-4">
-                            <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-join-us"></i>
                                 @OutWeb.App_GlobalResources.Res.nav_joinUs
                             </a>
                         </li>
                         <li class="col-4">
-                            <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/News?lang=@OutWeb.App_GlobalResources.Res.lang">
+                            <a class="@(ViewBag.BodyClass.Contains("News") ? "current" : "")" href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-news2"></i>
                                 @OutWeb.App_GlobalResources.Res.nav_news
                             </a>
@@ -251,7 +257,7 @@
         <ul class="list-unstyled row">
             <li>
                 <h1>
-                    <a href="~/AboutUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                    <a href="~/AboutUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                         @OutWeb.App_GlobalResources.Res.nav_aboutUs
                     </a>
                 </h1>
@@ -313,7 +319,7 @@
             </li>
             <li>
                 <h1>
-                    <a href="~/JoinUs?lang=@OutWeb.App_GlobalResources.Res.lang">
+                    <a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                         @OutWeb.App_GlobalResources.Res.nav_joinUs
                     </a>
                 </h1>
@@ -327,19 +333,19 @@
                             <li>
                                 <h3>
                                     <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.MenuState_yilan&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_yilan</a>
-                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.consult_taipei&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_taipei</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.MenuState_taipei&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_taipei</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
-                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.consult_hsinchu&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_hsinchu</a>
-                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.consult_taichung&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_taichung</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.MenuState_hsinchu&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_hsinchu</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.MenuState_taichung&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_taichung</a>
                                 </h3>
                             </li>
                             <li>
                                 <h3>
-                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.consult_tainan&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_tainan</a>
-                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.consult_kaohsiung&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_kaohsiung</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.MenuState_tainan&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_tainan</a>
+                                    <a class="state" href="~/JoinUs/Consult?id=@OutWeb.App_GlobalResources.Res.MenuState_kaohsiung&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.consult_kaohsiung</a>
                                 </h3>
                             </li>
                         </ul>
@@ -368,7 +374,7 @@
             </li>
             <li>
                 <h1>
-                    <a href="~/News?lang=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news</a>
+                    <a href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.news</a>
                 </h1>
                 <ul class="list-unstyled">
                     <li>
