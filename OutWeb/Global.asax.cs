@@ -16,7 +16,7 @@ namespace OutWeb
     public class MvcApplication : System.Web.HttpApplication
     {
         Service.Service CService = new Service.Service();
-
+        string langname = "_culture";
         //Log 記錄
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -29,16 +29,38 @@ namespace OutWeb
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("zh-TW")
+            DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("en-US")
             { //使用狀況條件為 Cookies值 或 QueryString["lang"]
                 ContextCondition = (C =>
                 (
-                C.Request.Cookies["_culture"] != null &&
-                C.Request.Cookies["_culture"].Value.Contains("zh-TW") &&
+                C.Request.Cookies[langname] != null &&
+                C.Request.Cookies[langname].Value.Contains("en-US") &&
                 string.IsNullOrEmpty(C.Request.QueryString["langCode"])
                 ) ||
-                C.Request.QueryString["lang"] == "zh-TW"
+                C.Request.QueryString["langCode"] == "en-US"
                 )
+            });
+            DisplayModeProvider.Instance.Modes.Insert(1, new DefaultDisplayMode("ja-JP")
+            { //使用狀況條件為 Cookies值 或 QueryString["lang"]
+                ContextCondition = (C =>
+                (
+                C.Request.Cookies[langname] != null &&
+                C.Request.Cookies[langname].Value.Contains("ja-JP") &&
+                string.IsNullOrEmpty(C.Request.QueryString["langCode"])
+                ) ||
+                C.Request.QueryString["langCode"] == "ja-JP"
+              )
+            });
+            DisplayModeProvider.Instance.Modes.Insert(2, new DefaultDisplayMode("zh-CN")
+            { //使用狀況條件為 Cookies值 或 QueryString["lang"]
+                ContextCondition = (C =>
+                (
+                C.Request.Cookies[langname] != null &&
+                C.Request.Cookies[langname].Value.Contains("zh-CN") &&
+                string.IsNullOrEmpty(C.Request.QueryString["langCode"])
+                ) ||
+                C.Request.QueryString["langCode"] == "zh-CN"
+          )
             });
         }
 
@@ -84,8 +106,6 @@ namespace OutWeb
                 Server.ClearError();
             }
         }
-
-        string langname = "_culture";
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
             #region language follow
