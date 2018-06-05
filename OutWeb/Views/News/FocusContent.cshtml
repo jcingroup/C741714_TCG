@@ -9,7 +9,7 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/News?lang=@Res.lang">@Res.nav_news</a></li>
+    <li><a href="~/News?langCode=@Res.lang">@Res.nav_news</a></li>
     <li><a href="~/News/FocusCategory?langCode=@Res.lang">@Res.news_focusCategory</a></li>
     <li><a href="@listTitleUrl">@Model.FocusCateInfo.Values.First()</a></li> @* 分類名稱 *@
 }

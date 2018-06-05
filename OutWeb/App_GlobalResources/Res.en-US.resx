@@ -154,7 +154,7 @@
     <comment>地方服務處諮詢 子分頁</comment>
   </data>
   <data name="consult_tainan" xml:space="preserve">
-    <value>Taichung State</value>
+    <value>Tainan State</value>
     <comment>地方服務處諮詢 子分頁</comment>
   </data>
   <data name="consult_taipei" xml:space="preserve">
@@ -345,9 +345,9 @@
   </data>
   <data name="rel_lang_tag" xml:space="preserve">
     <value>&lt;link rel="alternate" href="http://usmgtcgov.tw/" hreflang="zh-Hant" /&gt;
-&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=en-US" hreflang="en"&gt;
-&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=zh-TW" hreflang="zh-Hant"&gt;
-&lt;link rel="alternate" href="http://usmgtcgov.tw/?lang=ja-JP" hreflang="ja"</value>
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?langCode=en-US" hreflang="en"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?langCode=zh-TW" hreflang="zh-Hant"&gt;
+&lt;link rel="alternate" href="http://usmgtcgov.tw/?langCode=ja-JP" hreflang="ja"</value>
     <comment>Google 搜尋: 使用 hreflang 提供正確語言和地區的網址</comment>
   </data>
   <data name="searchAll" xml:space="preserve">
@@ -393,27 +393,27 @@
     <comment>人事名單</comment>
   </data>
   <data name="MenuState_hsinchu" xml:space="preserve">
-    <value>11</value>
+    <value>24</value>
     <comment>新竹州</comment>
   </data>
   <data name="MenuState_kaohsiung" xml:space="preserve">
-    <value>17</value>
+    <value>27</value>
     <comment>高雄州</comment>
   </data>
   <data name="MenuState_taichung" xml:space="preserve">
-    <value>13</value>
+    <value>25</value>
     <comment>台中州</comment>
   </data>
   <data name="MenuState_tainan" xml:space="preserve">
-    <value>15</value>
+    <value>26</value>
     <comment>台南州</comment>
   </data>
   <data name="MenuState_taipei" xml:space="preserve">
-    <value>7</value>
+    <value>23</value>
     <comment>台北州</comment>
   </data>
   <data name="MenuState_yilan" xml:space="preserve">
-    <value>9</value>
+    <value>22</value>
     <comment>宜蘭州</comment>
   </data>
   <data name="next_article" xml:space="preserve">

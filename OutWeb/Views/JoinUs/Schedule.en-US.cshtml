@@ -18,17 +18,17 @@
 }
 
 @section breadcrumb {
-    <li><a href="~/JoinUs?lang=en-US">@Res.nav_joinUs</a></li>
-    <li><a href="~/JoinUs/Live?langCode=en-US">@Res.joinUs_joinCollege</a></li>
+    <li><a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.nav_joinUs</a></li>
+    <li><a href="~/JoinUs/Live?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.joinUs_joinCollege</a></li>
     <li>@ViewBag.Title</li>
 }
 
 <h1 class="sr-only">@Res.nav_joinUs</h1>
 
 <ul class="tabs list-inline text-center">
-    <li><a href="~/JoinUs/Live?langCode=en-US">@Res.joinUs_live</a></li>
-    <li><a class="current" href="~/JoinUs/Schedule?langCode=en-US">@Res.joinUs_schedule</a></li>
-    <li><a href="~/JoinUs/Gallery?langCode=en-US">@Res.joinUs_gallery</a></li>
+    <li><a href="~/JoinUs/Live?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.joinUs_live</a></li>
+    <li><a class="current" href="~/JoinUs/Schedule?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.joinUs_schedule</a></li>
+    <li><a href="~/JoinUs/Gallery?langCode=@OutWeb.App_GlobalResources.Res.lang">@Res.joinUs_gallery</a></li>
     @* 歷屆課程影片網址來源: 後台 > 加入台灣民政府 > 參加台灣法理學院 > 歷屆課程影片 *@
     <li><a href="https://www.youtube.com/user/bmudw/playlists?view=1&sort=dd" target="new">@Res.joinUs_tchVideo</a></li>
 </ul>
@@ -41,7 +41,7 @@
 <div class="clearfix editor">
 
     <div class="calendar embed-responsive">
-        <iframe class="calendar" src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;height=400&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=6tkmi89t522780142r1u1b4ep8%40group.calendar.google.com&amp;color=%23182C57&amp;src=7m2501qkk7nivpuiu7fv7t0soc%40group.calendar.google.com&amp;color=%23711616&amp;src=zh.taiwan%23holiday%40group.v.calendar.google.com&amp;color=%23125A12&amp;ctz=Asia%2FTaipei" frameborder="0" scrolling="no"></iframe>
+        <iframe class="calendar" src="https://calendar.google.com/calendar/embed?showTabs=0&height=600&wkst=2&bgcolor=%23FFFFFF&src=tcgw47%40gmail.com&color=%231B887A&src=6tkmi89t522780142r1u1b4ep8%40group.calendar.google.com&color=%23182C57&src=7m2501qkk7nivpuiu7fv7t0soc%40group.calendar.google.com&color=%23711616&src=lf34gpclfidl76t852dv3bio5k%40group.calendar.google.com&color=%232952A3&ctz=Asia%2FTaipei" frameborder="0" scrolling="no"></iframe>
     </div>
     <ul class="list-unstyled">
         <li><strong>Qualification: </strong>Unrestricted</li>

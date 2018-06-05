@@ -11,7 +11,7 @@ string img_path = "/Images/";
 }
 
 @section breadcrumb {
-    <li><a href="~/News?lang=@Res.lang">@Res.nav_news</a></li>
+    <li><a href="~/News?langCode=@Res.lang">@Res.nav_news</a></li>
     <li><a href="~/News/EventLatest?langCode=@Res.lang">@Res.news_event</a></li>
     <li><a href="~/News/EventStatesCategory?langCode=@Res.lang">@Res.news_eventStatesCategory</a></li>
     <li><a href="@listTitleUrl">@Model.StatesCateInfo.Values.First()</a></li>
