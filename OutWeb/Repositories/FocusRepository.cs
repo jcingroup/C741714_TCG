@@ -33,7 +33,8 @@ namespace OutWeb.Repositories
                 cate = db.FOCUS_CATE
                  .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
                  s.STATUS == "Y")
-                 .OrderByDescending(s => s.SORT)
+                .OrderByDescending(o => o.SORT) //排序大到小、建檔日期新到舊
+                .ThenByDescending(d => d.BD_DT)
                   .ToDictionary(d => d.ID, d => d.CATE_NAME);
                 //if (cate.Count == 0)
                 //    throw new Exception("無法取得焦點分類");
@@ -249,8 +250,9 @@ namespace OutWeb.Repositories
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
                         s.STATUS == "Y" && s.CATE_ID == focusTypeID &&
                         (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
-                        .OrderByDescending(o => o.SORT)
-                        .OrderByDescending(s => s.C_DATE)
+                        .OrderByDescending(o => o.SORT) //排序大到小、發布日期新到舊、建檔日期新到舊
+                        .ThenByDescending(s => s.C_DATE)
+                        .ThenByDescending(d => d.BD_DT)
                         .ToList();
 
                     foreach (var item in source)

@@ -477,7 +477,7 @@ namespace OutWeb.Service
                      + "from "
                      + "("
                      + "select distinct "
-                     + "  a1.id, a1.n_title, convert(nvarchar(10),a1.n_date,23) as n_date, a1.n_url, a1.n_desc, a1.n_memo "
+                     + "  a1.id,a1.bd_dt, a1.n_title, convert(nvarchar(10),a1.n_date,23) as n_date, a1.n_url, a1.n_desc, a1.n_memo "
                      + ", a1.is_index, a1.sort, a1.status,a1.lang_id,a2.lang_name,a1.cate_id, a3.cate_name "
                      + "from "
                      + "   news a1 "

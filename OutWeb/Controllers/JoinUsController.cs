@@ -145,7 +145,7 @@ namespace OutWeb.Controllers
             //======語系取得========
             string lang_id = GetLang();
             //======================
-            dt = Cschool.List(ref err_msg, "", " sort desc , cate_id desc ", "Y", "", "", "", "", lang_id);
+            dt = Cschool.List(ref err_msg, "", " sort desc,cate_id desc ", "Y", "", "", "", "", lang_id); //排序大到小、資料建檔日期新到舊
             ViewData["dt"] = dt;
             return View();
         }

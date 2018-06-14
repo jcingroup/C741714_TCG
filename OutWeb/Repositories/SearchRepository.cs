@@ -46,6 +46,8 @@ namespace OutWeb.Modules.FrontEnd
                    s.STATUS == "Y" &&(
                     s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
                    s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                    .OrderByDescending(o => o.SORT) //排序大到小、建檔日期新到舊
+                    .ThenByDescending(d => d.BD_DT)
                    .ToList();
 
                 foreach (var about in source)
@@ -128,7 +130,8 @@ namespace OutWeb.Modules.FrontEnd
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
                 .Where(w => w.Details.STATUS == "Y")
-                .OrderByDescending(d => d.Details.UPD_DT)
+                .OrderByDescending(o => o.Details.SORT) //排序大到小、建檔日期新到舊
+                .ThenByDescending(d => d.Details.BD_DT)
                 .GroupBy(g => g.Main.C_TITLE)
                 .ToList()
                 .Select(o => new SearchListDataModel()
@@ -167,6 +170,8 @@ namespace OutWeb.Modules.FrontEnd
                    s.STATUS == "Y" && (
                     s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
                    s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                    .OrderByDescending(o => o.SORT) //排序大到小、建檔日期新到舊
+                    .ThenByDescending(d => d.BD_DT)
                    .ToList();
 
                 foreach (var join in source)
@@ -221,7 +226,8 @@ namespace OutWeb.Modules.FrontEnd
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
                 .Where(w => w.Details.STATUS == "Y")
-                .OrderByDescending(d => d.Details.UPD_DT)
+                .OrderByDescending(o => o.Details.SORT) //排序大到小、建檔日期新到舊
+                .ThenByDescending(d => d.Details.BD_DT)
                 .GroupBy(g => g.Main.C_TITLE)
                 .ToList()
                .Select(o => new SearchListDataModel()
@@ -265,7 +271,8 @@ namespace OutWeb.Modules.FrontEnd
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
                 .Where(w => w.Details.STATUS == "Y")
-                .OrderByDescending(d => d.Details.UPD_DT)
+                .OrderByDescending(o => o.Details.SORT) //排序大到小、建檔日期新到舊
+                .ThenByDescending(d => d.Details.BD_DT)
                 .GroupBy(g => g.Main.C_TITLE)
                 .ToList()
                 .Select(o => new SearchListDataModel()
@@ -300,6 +307,9 @@ namespace OutWeb.Modules.FrontEnd
                    s.STATUS == "Y" &&(
                     s.N_TITLE == qry || s.N_DESC.RemoveHtmlAllTags() == qry ||
                    s.N_TITLE.Contains(qry) || s.N_DESC.RemoveHtmlAllTags().Contains(qry)))
+                    .OrderByDescending(o => o.SORT) //排序大到小、發布日期新到舊、建檔日期新到舊
+                    .ThenByDescending(s => s.N_DATE)
+                    .ThenByDescending(d => d.BD_DT)
                    .ToList();
 
                 foreach (var news in source)
@@ -339,7 +349,8 @@ namespace OutWeb.Modules.FrontEnd
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
                 .Where(w => w.Details.STATUS == "Y")
-                .OrderByDescending(d => d.Details.UPD_DT)
+                .OrderByDescending(o => o.Details.SORT) //排序大到小、建檔日期新到舊
+                .ThenByDescending(d => d.Details.BD_DT)
                 .GroupBy(g => g.Main.C_TITLE)
                 .ToList()
                 .Select(o => new SearchListDataModel()
@@ -374,8 +385,8 @@ namespace OutWeb.Modules.FrontEnd
             SearchAnnouncement(filter.QueryString, filter.LangCode, ref data);
             SearchFocus(filter.QueryString, filter.LangCode, ref data);
 
-            result.Data = data.OrderByDescending(o => o.UpDateTime).ToList();
-
+            //result.Data = data.OrderByDescending(o => o.UpDateTime).ToList();
+            result.Data = data.ToList();
             result = ListPagination(result, (int)filter.CurrentPage, (int)PageSizeConfig.SIZE10);
 
             return result;

@@ -486,7 +486,7 @@ namespace OutWeb.Service
                      + "from "
                      + "("
                      + "select distinct "
-                     + "  a1.id, a1.c_title, a1.c_desc, a1.sort, a1.status "
+                     + "  a1.id,a1.bd_dt, a1.c_title, a1.c_desc, a1.sort, a1.status "
                      + ", a1.lang_id, a2.lang_name, a1.cate_id, a3.cate_name "
                      + ", a3.usr_grp "
                      + "from "

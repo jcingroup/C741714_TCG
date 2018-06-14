@@ -157,8 +157,9 @@ namespace OutWeb.Repositories
                         .Where(s => (string.IsNullOrEmpty(filter.LangCode) ? true : s.LANG_ID == filter.LangCode) &&
                         s.STATUS == "Y" && (filter.TypeID == null ? true : s.CATE_ID == (int)filter.TypeID) &&
                          (string.IsNullOrEmpty(isIndex) ? true : s.IS_INDEX == isIndex))
-                        .OrderByDescending(o => o.SORT)
-                        .OrderByDescending(s => s.N_DATE)
+                        .OrderByDescending(o => o.SORT) //排序大到小、發布日期新到舊、建檔日期新到舊
+                        .ThenByDescending(s => s.N_DATE)
+                        .ThenByDescending(d=>d.BD_DT)
                         .ToList();
 
                     foreach (var item in source)

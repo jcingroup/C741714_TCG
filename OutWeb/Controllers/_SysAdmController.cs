@@ -579,7 +579,7 @@ namespace OutWeb.Controllers
         public ActionResult AboutUs_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_lang = "", string txt_cate = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort = "sort desc,a1.bd_dt desc"; //排序大到小、資料建檔日期新到舊
             DataTable dt;
             DataTable d_lang;
             DataTable d_cate;
@@ -928,7 +928,7 @@ namespace OutWeb.Controllers
         public ActionResult JoinUs_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_lang = "", string txt_cate = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort = "sort desc, a1.bd_dt desc"; //排序大到小、資料建檔日期新到舊
             DataTable dt;
             DataTable d_lang;
             DataTable d_cate;
@@ -1197,7 +1197,7 @@ namespace OutWeb.Controllers
         public ActionResult Edu_Cate_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_lang = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort = "sort desc,a1.bd_dt desc"; //排序大到小、資料建檔日期新到舊
             string err_msg = "";
             DataTable dt;
             DataTable d_lang;
@@ -1212,10 +1212,10 @@ namespace OutWeb.Controllers
                 c_sort = c_sort + " " + txt_a_d;
             }
 
-            if(c_sort.Trim().Length == 0)
-            {
-                c_sort = "a1.sort desc ";
-            }
+            //if(c_sort.Trim().Length == 0)
+            //{
+            //    c_sort = "a1.sort desc ";
+            //}
             //抓取類別資料
             dt = CEdu.Cate_List(ref err_msg, "", c_sort, txt_show, txt_title_query, txt_lang);
 
@@ -1301,7 +1301,7 @@ namespace OutWeb.Controllers
         public ActionResult Edu_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_lang = "", string txt_cate = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort =  "sort desc,a1.c_date desc,a1.bd_dt desc"; //排序大到小、發布日期新到舊、資料建檔日期新到舊
             DataTable dt;
             DataTable d_lang;
             DataTable d_cate;
@@ -1368,7 +1368,7 @@ namespace OutWeb.Controllers
         public ActionResult Edu_Edit(string id = "")
         {
             string err_msg = "";
-
+          
             DataTable d_cate;
             DataTable d_lang;
             DataTable dt;
@@ -1379,7 +1379,7 @@ namespace OutWeb.Controllers
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CEdu.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, id, "", "Edut");
-            d_detail = CEdu.Detail_List(ref err_msg, "", "sort desc", "", "", id, "");
+            d_detail = CEdu.Detail_List(ref err_msg, "", "sort desc,a1.bd_dt desc", "", "", id, "");//排序大到小、資料建檔日期新到舊
             //設定傳值
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
@@ -1520,7 +1520,7 @@ namespace OutWeb.Controllers
         public ActionResult Focus_Cate_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_lang = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort =  "sort desc,a1.bd_dt desc"; //排序大到小、發布日期新到舊、資料建檔日期新到舊
             string err_msg = "";
             DataTable dt;
             DataTable d_lang;
@@ -1624,7 +1624,7 @@ namespace OutWeb.Controllers
         public ActionResult Focus_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_index = "", string txt_lang = "", string txt_cate = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort = "sort desc,a1.c_date desc,a1.bd_dt desc"; //排序大到小、發布日期新到舊、資料建檔日期新到舊
             DataTable dt;
             DataTable d_lang;
             DataTable d_cate;
@@ -1703,7 +1703,7 @@ namespace OutWeb.Controllers
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, id, "", "Focus");
-            d_detail = CFocus.Detail_List(ref err_msg, "", "sort desc", "", "", id, "");
+            d_detail = CFocus.Detail_List(ref err_msg, "", "sort desc,a1.bd_dt desc", "", "", id, ""); //排序大到小、發布日期新到舊、資料建檔日期新到舊
             //設定傳值
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
@@ -1843,7 +1843,7 @@ namespace OutWeb.Controllers
         public ActionResult School_Video_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_lang = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort =  "sort desc,a1.bd_dt desc"; //排序大到小、資料建檔日期新到舊
             string err_msg = "";
             DataTable dt;
             DataTable d_lang;
@@ -2050,7 +2050,7 @@ namespace OutWeb.Controllers
         public ActionResult School_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_lang = "", string txt_cate = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort = "sort desc,a1.c_date desc, a1.bd_dt desc"; //排序大到小、發布日期新到舊、資料建檔日期新到舊
             DataTable dt;
             DataTable d_lang;
             DataTable d_cate;
@@ -2192,7 +2192,7 @@ namespace OutWeb.Controllers
         public ActionResult Activity_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_index = "", string txt_lang = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort =  "sort desc,a1.c_date desc, a1.bd_dt desc"; //排序大到小、發布日期新到舊、資料建檔日期新到舊
             DataTable dt;
             DataTable d_lang;
             //DataTable d_cate;
@@ -2288,7 +2288,7 @@ namespace OutWeb.Controllers
             //d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             //d_url = DB.URL_List(ref err_msg, id, "Activity");
             d_lang = Clang.Lang_List(ref err_msg, "");
-            d_detail = CActivity.Detail_List(ref err_msg, "", "sort desc", "", "", id, "");
+            d_detail = CActivity.Detail_List(ref err_msg, "", "sort desc,a1.bd_dt desc", "", "", id, ""); //排序大到小、資料建檔日期新到舊
             d_img = DB.Img_List(ref err_msg, id, "", "Activity");
             //設定傳值
             //ViewData["d_cate"] = d_cate;
@@ -2485,7 +2485,7 @@ namespace OutWeb.Controllers
         public ActionResult States_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_index = "", string txt_lang = "", string txt_cate = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort = "sort desc,a1.c_date desc, a1.bd_dt desc"; //排序大到小、發布日期新到舊、資料建檔日期新到舊
             DataTable dt;
             DataTable d_lang;
             DataTable d_cate;
@@ -2589,7 +2589,7 @@ namespace OutWeb.Controllers
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CStates.Cate_List(ref err_msg, c_cate, "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, id, "", "States");
-            d_detail = CStates.Detail_List(ref err_msg, "", "sort desc", "", "", id, "");
+            d_detail = CStates.Detail_List(ref err_msg, "", "sort desc,a1.bd_dt desc", "", "", id, ""); //排序大到小、資料建檔日期新到舊
             //設定傳值
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
@@ -2755,7 +2755,7 @@ namespace OutWeb.Controllers
         public ActionResult States_Video_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_show = "", string txt_lang = "", string txt_cate = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort =  "sort desc, a1.bd_dt desc"; //排序大到小、資料建檔日期新到舊
             DataTable dt;
             DataTable d_lang;
             DataTable d_cate;
@@ -3103,7 +3103,7 @@ namespace OutWeb.Controllers
         public ActionResult News_List(string txt_title_query = "", int page = 1, string txt_sort = "", string txt_a_d = "", string txt_start_date = "", string txt_end_date = "", string txt_show = "", string txt_index = "", string txt_lang = "", string txt_cate = "")
         {
             //定義變數
-            string c_sort = "";
+            string c_sort = "sort desc,a1.n_date desc, a1.bd_dt desc"; //排序大到小、發布日期新到舊、資料建檔日期新到舊
             DataTable dt;
             DataTable d_lang;
             DataTable d_cate;

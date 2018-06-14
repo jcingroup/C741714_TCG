@@ -536,7 +536,7 @@ namespace OutWeb.Service
                 }
                 csql = csql + "order by ";
                 //csql = csql + "  id ";
-                csql = csql + " sort desc,img_file desc"; //順序:1."排序"降冪排序 2."檔名"降冪排序
+                csql = csql + " sort desc,img_file asc"; //順序:1."排序"降冪排序 2."檔名"升冪排序
 
                 cmd.CommandText = csql;
 
