@@ -96,8 +96,8 @@ namespace OutWeb.Repositories
                 data = db.IMG
                                 .Where(s => s.STATUS == "Y" && s.IMG_STY == "B" && s.IMG_KIND == "States_Detail" &&
                                 s.IMG_NO.Contains(id.ToString()))
-                                .OrderByDescending(s => s.SORT)
-                                .ThenByDescending(s => s.IMG_FILE) //20180412增加檔名排序
+                                .OrderByDescending(s => s.SORT) //排序大到小 > 圖片檔名小到大
+                                .ThenBy(s => s.IMG_FILE)
                                 .Select(s => new PagingImageInfo()
                                 {
                                     ImgFileName = s.IMG_FILE,
