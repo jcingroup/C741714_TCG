@@ -1328,7 +1328,7 @@
             <input type="number" min="0" class="form-element" id="sort" name="sort" value="@sort">
         </dd>
         <dd class="col-5">
-            <small class="text-secondary">數字愈大愈前面</small>
+            <small class="text-secondary">數字愈大愈前面 (若排序數字相同，則依日期新→舊排序)</small>
         </dd>
     </dl>
     <dl class="field">
@@ -1341,7 +1341,7 @@
                     上傳
                 </button>
             </div>
-            <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*510px，建議檔案大小不超過 4MB，檔名請勿包含特殊字元如 空白 % # + - ? * &amp; $ 等</small>
+            <small class="block text-secondary">可上傳 1 張圖片，建議尺寸 800*510px，建議檔案大小不超過 4MB，檔名請勿包含中文或特殊字元如 空白 % # + - ? * &amp; $ 等</small>
             @* 照片縮圖(上傳圖片後顯示) *@
             <div id="c_img_S" name="c_img_S">
                 @for (int s = 0; s < d_img.Rows.Count; s++)
@@ -1560,7 +1560,7 @@
                 <h5 class="text-primary mt-0 mb-16">圖片上傳</h5>
                 <div class="alert-warning mb-16">
                     1. 一次上傳的檔案大小總計最多4MB<br>
-                    2. 檔名盡量不要有中文，以免產生亂碼造成系統問題
+                    2. 檔名請勿包含中文或特殊字元如 空白 % # + - ? * &amp; $ 等
                 </div>
                 <div class="form-inline">
                     <input type="file" name="pic_B" id="pic_B" accept="image/*" class="form-control form-control-sm" multiple>
@@ -1572,7 +1572,7 @@
             <section class="uploaded-list">
                 <h5 class="text-primary mt-0 mb-16">已上傳圖片</h5>
                 <div class="alert-warning mb-16">
-                    排序數字愈大愈前面 (若排序數字相同，則依檔名Z→A排序)
+                    排序數字愈大愈前面 (若排序數字相同，則依檔名A→Z排序)
                 </div>
                 <!-- Img Start -->
                 <div id="images_container" name="images_container">
