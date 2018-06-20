@@ -1826,7 +1826,7 @@ namespace OutWeb.Controllers
 
             CFocus.Detail_Del(id);
 
-            dt = CFocus.Detail_List(ref err_msg, "", "sort desc", "", "", cate_id, "");
+            dt = CFocus.Detail_List(ref err_msg, "", "sort desc,a1.bd_dt desc", "", "", cate_id, ""); //排序大到小、資料建檔日期新到舊
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
         }
