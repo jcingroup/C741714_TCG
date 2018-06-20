@@ -17,7 +17,8 @@ namespace OutWeb.Models.FrontModels.News.LatestModels
         public string ContentUrl { get; set; }
         public string PublishDateString { get; set; }
         public string Remark { get; set; }
-
+        public int Sort { get; set; }
+        public string BD_DTString { get; set; }
         public ListKind DataType { get; set; }
 
     }

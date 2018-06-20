@@ -12,6 +12,9 @@ namespace OutWeb.Models.FrontModels.SearchSiteModels
         public string Content { get; set; }
         public string LinkAddr { get; set; }
         public int Type { get; set; }
+        public int Sort { get; set; }
+        public DateTime BD_DTString { get; set; }
         public DateTime UpDateTime { get; set; }
+        public DateTime CreateDateTime { get; set; }
     }
 }

@@ -623,10 +623,10 @@
                     c_html += "   <colgroup>";
                     c_html += "      <col style=\"width: 5%\">";
                     c_html += "      <col style=\"width: 7%\">";
-                    c_html += "      <col style=\"width: 76%\">";
+                    c_html += "      <col style=\"width: 39%\">";
                     c_html += "      <col style=\"width: 7%\">";
-                    // c_html += "      <col style=\"width: 7%\">";
-                    // c_html += "      <col style=\"width: 7%\">";
+                    //c_html += "      <col style=\"width: 7%\">";
+                    //c_html += "      <col style=\"width: 7%\">";
                     c_html += "      <col style=\"width: 5%\">";
                     c_html += "   </colgroup>";
                     c_html += "   <tr>";
@@ -647,6 +647,9 @@
                         c_html += "      <td>";
                         c_html += "          <button class=\"hover-primary oi\" title=\"修改\" data-glyph=\"pencil\" type=\"button\" onclick=\"detail_edit('" + obj.id + "');return false;\"></button>";
                         c_html += "      </td>";
+                        c_html += "      <td>";
+                        c_html += "          " + obj.sort;
+                        c_html += "      </td>";
                         c_html += "      <td class=\"text-left\">";
                         c_html += "          " + obj.c_title;
                         c_html += "      </td>";
@@ -665,9 +668,7 @@
 
                         c_html += "          <span class=\"label " + show_class + "\">" + show + "</span>";
                         c_html += "      </td>";
-                        c_html += "      <td>";
-                        c_html += "          " + obj.sort;
-                        c_html += "      </td>";
+
                         // c_html += "      <td>";
                         // c_html += "           <button class=\"btn info oi\" onclick=\"img_list('@c_detail_cate','" + obj.id + "');return false;\" id=\"btn_detail_Image\" name=\"btn_detail_Image\">圖片管理</button>";
                         // c_html += "      </td>";

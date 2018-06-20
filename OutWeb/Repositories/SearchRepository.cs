@@ -41,14 +41,12 @@ namespace OutWeb.Modules.FrontEnd
                 cateGroup.Add(8, new List<int>() { 9, 26, 27 });
 
                 var source = db.ABOUTUS
-                  .AsEnumerable()
-                        .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
-                   s.STATUS == "Y" &&(
-                    s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
-                   s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry)))
-                    .OrderByDescending(o => o.SORT) //排序大到小、建檔日期新到舊
-                    .ThenByDescending(d => d.BD_DT)
-                   .ToList();
+                .AsEnumerable()
+                .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                s.STATUS == "Y" &&
+                (s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                .ToList();
 
                 foreach (var about in source)
                 {
@@ -59,6 +57,8 @@ namespace OutWeb.Modules.FrontEnd
                     temp.Title = about.C_TITLE;
                     temp.Content = about.C_DESC.RemoveHtmlAllTags();
                     temp.UpDateTime = (DateTime)about.UPD_DT;
+                    temp.BD_DTString = (DateTime)about.BD_DT;
+                    temp.Sort = (about.SORT) ?? 0;
                     switch (cate.Keys.First())
                     {
                         case 0:
@@ -122,16 +122,14 @@ namespace OutWeb.Modules.FrontEnd
                 (main, details) => new { Main = main, Details = details })
                 .AsEnumerable()
                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
-                s.Main.STATUS == "Y" && (
-
-                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                (s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
 
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
                 .Where(w => w.Details.STATUS == "Y")
-                .OrderByDescending(o => o.Details.SORT) //排序大到小、建檔日期新到舊
-                .ThenByDescending(d => d.Details.BD_DT)
+                .Where(x=>x.Main.STATUS == "Y")
+                .OrderByDescending(d => d.Details.UPD_DT)
                 .GroupBy(g => g.Main.C_TITLE)
                 .ToList()
                 .Select(o => new SearchListDataModel()
@@ -141,7 +139,9 @@ namespace OutWeb.Modules.FrontEnd
                     Type = o.First().Main.ID,
                     Content = o.First().Details.C_DESC.RemoveHtmlAllTags(),
                     UpDateTime = (DateTime)o.First().Details.UPD_DT,
-                    LinkAddr = string.Format("/AboutUs/EducationContent?eduTypeID={0}&ID={1}&pagingID={2}", o.First().Main.CATE_ID, o.First().Details.CATE_ID, o.First().Details.ID)
+                    LinkAddr = string.Format("/AboutUs/EducationContent?eduTypeID={0}&ID={1}&pagingID={2}", o.First().Main.CATE_ID, o.First().Details.CATE_ID, o.First().Details.ID),
+                    BD_DTString = (DateTime)o.First().Details.BD_DT,
+                    Sort = o.First().Details.SORT??0,
                 })
                 .ToList();
 
@@ -165,14 +165,12 @@ namespace OutWeb.Modules.FrontEnd
                 cateGroup.Add(1, new List<int>() { 2, 6, 7 });
 
                 var source = db.JOINUS
-                  .AsEnumerable()
-                        .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
-                   s.STATUS == "Y" && (
-                    s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
-                   s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry)))
-                    .OrderByDescending(o => o.SORT) //排序大到小、建檔日期新到舊
-                    .ThenByDescending(d => d.BD_DT)
-                   .ToList();
+                 .AsEnumerable()
+                  .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                  s.STATUS == "Y" &&(
+                   s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
+                  s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                  .ToList();
 
                 foreach (var join in source)
                 {
@@ -183,6 +181,8 @@ namespace OutWeb.Modules.FrontEnd
                     temp.Title = join.C_TITLE;
                     temp.Content = join.C_DESC.RemoveHtmlAllTags();
                     temp.UpDateTime = (DateTime)join.UPD_DT;
+                    temp.BD_DTString = (DateTime)join.BD_DT;
+                    temp.Sort = (join.SORT) ?? 0;
                     switch (cate.Keys.First())
                     {
                         case 0:
@@ -218,16 +218,14 @@ namespace OutWeb.Modules.FrontEnd
                (main, details) => new { Main = main, Details = details })
                .AsEnumerable()
                .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
-                s.Main.STATUS == "Y" && (
-
-                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                (s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
 
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
                 .Where(w => w.Details.STATUS == "Y")
-                .OrderByDescending(o => o.Details.SORT) //排序大到小、建檔日期新到舊
-                .ThenByDescending(d => d.Details.BD_DT)
+                .Where(x=>x.Main.STATUS == "Y")
+                .OrderByDescending(d => d.Details.UPD_DT)
                 .GroupBy(g => g.Main.C_TITLE)
                 .ToList()
                .Select(o => new SearchListDataModel()
@@ -237,7 +235,9 @@ namespace OutWeb.Modules.FrontEnd
                    Type = o.First().Main.ID,
                    Content = o.First().Details.C_DESC.RemoveHtmlAllTags(),
                    UpDateTime = (DateTime)o.First().Details.UPD_DT,
-                   LinkAddr = string.Format("/News/EventLatestContent?ID={0}&pagingID={1}", o.First().Details.CATE_ID, o.First().Details.ID)
+                   LinkAddr = string.Format("/News/EventLatestContent?ID={0}&pagingID={1}", o.First().Details.CATE_ID, o.First().Details.ID),
+                   BD_DTString = (DateTime)o.First().Details.BD_DT,
+                   Sort = o.First().Details.SORT ?? 0,
                })
                .ToList();
 
@@ -257,34 +257,34 @@ namespace OutWeb.Modules.FrontEnd
             using (var db = new TCGDB(_connectionString))
             {
                 var query = db.STATES
-                .Join(db.STATES_DETAIL,
-                m => m.ID.ToString(),
-                d => d.CATE_ID,
-                (main, details) => new { Main = main, Details = details })
-                .AsEnumerable()
-                .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
-                s.Main.STATUS == "Y" && (
+                   .Join(db.STATES_DETAIL,
+                   m => m.ID.ToString(),
+                   d => d.CATE_ID,
+                   (main, details) => new { Main = main, Details = details })
+                   .AsEnumerable()
+                   .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
+                   (s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                   s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
 
-                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
-                s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
-
-                s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
-                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
-                .Where(w => w.Details.STATUS == "Y")
-                .OrderByDescending(o => o.Details.SORT) //排序大到小、建檔日期新到舊
-                .ThenByDescending(d => d.Details.BD_DT)
-                .GroupBy(g => g.Main.C_TITLE)
-                .ToList()
-                .Select(o => new SearchListDataModel()
-                {
-                    ID = o.First().Details.ID,
-                    Title = o.First().Main.C_TITLE,
-                    Type = o.First().Main.ID,
-                    Content = o.First().Details.C_DESC.RemoveHtmlAllTags(),
-                    UpDateTime = (DateTime)o.First().Details.UPD_DT,
-                    LinkAddr = string.Format("/News/EventStatesContent?statesTypeID=1&ID={0}&pagingID={1}", o.First().Details.CATE_ID, o.First().Details.ID)
-                })
-                .ToList();
+                   s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
+                   s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                   .Where(w => w.Details.STATUS == "Y")
+                   .Where(x=>x.Main.STATUS == "Y")
+                   .OrderByDescending(d => d.Details.UPD_DT)
+                   .GroupBy(g => g.Main.C_TITLE)
+                   .ToList()
+                   .Select(o => new SearchListDataModel()
+                   {
+                       ID = o.First().Details.ID,
+                       Title = o.First().Main.C_TITLE,
+                       Type = o.First().Main.ID,
+                       Content = o.First().Details.C_DESC.RemoveHtmlAllTags(),
+                       UpDateTime = (DateTime)o.First().Details.UPD_DT,
+                       LinkAddr = string.Format("/News/EventStatesContent?statesTypeID={0}&ID=1&pagingID={1}", o.First().Details.CATE_ID, o.First().Details.ID),
+                       BD_DTString = (DateTime)o.First().Details.BD_DT,
+                       Sort = o.First().Details.SORT ?? 0,
+                   })
+                   .ToList();
 
                 if (query.Count > 0)
                     model.AddRange(query);
@@ -302,15 +302,12 @@ namespace OutWeb.Modules.FrontEnd
             using (var db = new TCGDB(_connectionString))
             {
                 var source = db.NEWS
-                  .AsEnumerable()
-                        .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
-                   s.STATUS == "Y" &&(
-                    s.N_TITLE == qry || s.N_DESC.RemoveHtmlAllTags() == qry ||
-                   s.N_TITLE.Contains(qry) || s.N_DESC.RemoveHtmlAllTags().Contains(qry)))
-                    .OrderByDescending(o => o.SORT) //排序大到小、發布日期新到舊、建檔日期新到舊
-                    .ThenByDescending(s => s.N_DATE)
-                    .ThenByDescending(d => d.BD_DT)
-                   .ToList();
+                 .AsEnumerable()
+                    .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                  s.STATUS == "Y" &&
+                   (s.N_TITLE == qry || s.N_DESC.RemoveHtmlAllTags() == qry ||
+                  s.N_TITLE.Contains(qry) || s.N_DESC.RemoveHtmlAllTags().Contains(qry)))
+                  .ToList();
 
                 foreach (var news in source)
                 {
@@ -319,6 +316,8 @@ namespace OutWeb.Modules.FrontEnd
                     temp.Content = news.N_DESC.RemoveHtmlAllTags();
                     temp.UpDateTime = (DateTime)news.UPD_DT;
                     temp.LinkAddr = string.Format("/News/AnnouncementContent?ID={0}&typeID={1}", news.ID, news.CATE_ID);
+                    temp.BD_DTString = (DateTime)news.BD_DT;
+                    temp.Sort = (news.SORT) ?? 0;
                     model.Add(temp);
                 }
             }
@@ -341,16 +340,14 @@ namespace OutWeb.Modules.FrontEnd
                 (main, details) => new { Main = main, Details = details })
                 .AsEnumerable()
                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
-                s.Main.STATUS == "Y" && (
-
-                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                (s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
 
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
                 .Where(w => w.Details.STATUS == "Y")
-                .OrderByDescending(o => o.Details.SORT) //排序大到小、建檔日期新到舊
-                .ThenByDescending(d => d.Details.BD_DT)
+                .Where(x=>x.Main.STATUS == "Y")
+                .OrderByDescending(d => d.Details.UPD_DT)
                 .GroupBy(g => g.Main.C_TITLE)
                 .ToList()
                 .Select(o => new SearchListDataModel()
@@ -360,7 +357,9 @@ namespace OutWeb.Modules.FrontEnd
                     Type = o.First().Main.ID,
                     Content = o.First().Details.C_DESC.RemoveHtmlAllTags(),
                     UpDateTime = (DateTime)o.First().Details.UPD_DT,
-                    LinkAddr = string.Format("/News/FocusContent?focusTypeID={0}&ID={1}&pagingID={2}", o.First().Main.CATE_ID, o.First().Details.CATE_ID, o.First().Details.ID)
+                    LinkAddr = string.Format("/News/FocusContent?focusTypeID={0}&ID={1}&pagingID={2}", o.First().Main.CATE_ID, o.First().Details.CATE_ID, o.First().Details.ID),
+                    BD_DTString = (DateTime)o.First().Details.BD_DT,
+                    Sort = o.First().Details.SORT ?? 0,
                 })
                 .ToList();
 
@@ -386,7 +385,7 @@ namespace OutWeb.Modules.FrontEnd
             SearchFocus(filter.QueryString, filter.LangCode, ref data);
 
             //result.Data = data.OrderByDescending(o => o.UpDateTime).ToList();
-            result.Data = data.ToList();
+            result.Data = data.OrderByDescending(o => o.Sort).ThenByDescending(x => x.BD_DTString).ToList();
             result = ListPagination(result, (int)filter.CurrentPage, (int)PageSizeConfig.SIZE10);
 
             return result;

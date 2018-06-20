@@ -1343,6 +1343,7 @@ namespace OutWeb.Controllers
         {
             //定義變數
             string err_msg = "";
+            string c_sort = "sort desc,a1.c_date desc,a1.bd_dt desc"; //排序大到小、發布日期新到舊、資料建檔日期新到舊
             DataTable d_cate;
             DataTable d_lang;
             DataTable d_img;
@@ -1352,7 +1353,7 @@ namespace OutWeb.Controllers
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CEdu.Cate_List(ref err_msg, "", "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, "", "", "Edu");
-            d_detail = CEdu.Detail_List(ref err_msg, "0", "", "", "", "", "");
+            d_detail = CEdu.Detail_List(ref err_msg, "0", c_sort, "", "", "", "");
             //設定傳值
             ViewData["d_lang"] = d_lang;
             ViewData["d_cate"] = d_cate;
@@ -1435,7 +1436,7 @@ namespace OutWeb.Controllers
             string c_desc = "";
             DataTable dt;
 
-            dt = CEdu.Detail_List(ref err_msg, id, "sort desc", "", "", cate_id, "");
+            dt = CEdu.Detail_List(ref err_msg, id, "sort desc,a1.bd_dt desc", "", "", cate_id, ""); //排序大到小、資料建檔日期新到舊
             //if(dt.Rows.Count > 0)
             //{
             //    for(int i=0; i < dt.Rows.Count; i++)
@@ -1485,7 +1486,7 @@ namespace OutWeb.Controllers
                     break;
             }
 
-            dt = CEdu.Detail_List(ref err_msg, "", "sort desc", "", "", cate_id, "");
+            dt = CEdu.Detail_List(ref err_msg, "", "sort desc,a1.bd_dt desc", "", "", cate_id, ""); //排序大到小、資料建檔日期新到舊
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
         }
@@ -1502,7 +1503,7 @@ namespace OutWeb.Controllers
 
             CEdu.Detail_Del(id);
 
-            dt = CEdu.Detail_List(ref err_msg, "", "sort", "", "", cate_id, "");
+            dt = CEdu.Detail_List(ref err_msg, "", "sort desc,a1.bd_dt desc", "", "", cate_id, ""); //排序大到小、資料建檔日期新到舊
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
         }
@@ -1703,7 +1704,7 @@ namespace OutWeb.Controllers
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CFocus.Cate_List(ref err_msg, "", "sort", "Y", "", dt.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, id, "", "Focus");
-            d_detail = CFocus.Detail_List(ref err_msg, "", "sort desc,a1.bd_dt desc", "", "", id, ""); //排序大到小、發布日期新到舊、資料建檔日期新到舊
+            d_detail = CFocus.Detail_List(ref err_msg, "", "sort desc,a1.bd_dt desc", "", "", id, ""); //排序大到小、資料建檔日期新到舊
             //設定傳值
             ViewData["dt"] = dt;
             ViewData["d_lang"] = d_lang;
@@ -1808,7 +1809,7 @@ namespace OutWeb.Controllers
                     break;
             }
 
-            dt = CFocus.Detail_List(ref err_msg, "", "sort desc", "", "", cate_id, "");
+            dt = CFocus.Detail_List(ref err_msg, "", "sort desc,a1.bd_dt desc", "", "", cate_id, ""); //排序大到小、資料建檔日期新到舊
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
         }
@@ -2449,7 +2450,7 @@ namespace OutWeb.Controllers
                     break;
             }
 
-            dt = CActivity.Detail_List(ref err_msg, "", "sort desc", "", "", cate_id, "");
+            dt = CActivity.Detail_List(ref err_msg, "", "sort desc, a1.bd_dt desc", "", "", cate_id, "");//排序大到小、資料建檔日期新到舊
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
         }
@@ -2466,7 +2467,7 @@ namespace OutWeb.Controllers
 
             CActivity.Detail_Del(id);
 
-            dt = CActivity.Detail_List(ref err_msg, "", "sort", "", "", cate_id, "");
+            dt = CActivity.Detail_List(ref err_msg, "", "sort desc, a1.bd_dt desc", "", "", cate_id, ""); //排序大到小、資料建檔日期新到舊
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
         }
@@ -2551,7 +2552,7 @@ namespace OutWeb.Controllers
             d_lang = Clang.Lang_List(ref err_msg, "");
             d_cate = CStates.Cate_List(ref err_msg, c_cate, "sort", "Y", "", d_lang.Rows[0]["lang_id"].ToString());
             d_img = DB.Img_List(ref err_msg, "", "", "States", "0");
-            d_detail = CStates.Detail_List(ref err_msg, "0", "", "", "", "", "");
+            d_detail = CStates.Detail_List(ref err_msg, "0", "sort desc,a1, a1.bd_dt desc", "", "", "", ""); //排序大到小、資料建檔日期新到舊
 
             //清除明細 & 圖片資料
             d_detail.Clear();
@@ -2904,7 +2905,7 @@ namespace OutWeb.Controllers
             string c_desc = "";
             DataTable dt;
 
-            dt = CStates.Detail_List(ref err_msg, id, "sort desc", "", "", cate_id, "");
+            dt = CStates.Detail_List(ref err_msg, id, "sort desc, a1.bd_dt desc", "", "", cate_id, ""); //排序大到小、資料建檔日期新到舊
             //if(dt.Rows.Count > 0)
             //{
             //    for(int i=0; i < dt.Rows.Count; i++)
@@ -2955,7 +2956,7 @@ namespace OutWeb.Controllers
                     break;
             }
 
-            dt = CStates.Detail_List(ref err_msg, "", "sort desc", "", "", cate_id, "");
+            dt = CStates.Detail_List(ref err_msg, "", "sort desc, a1.bd_dt desc", "", "", cate_id, ""); //排序大到小、資料建檔日期新到舊
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
         }
@@ -2972,7 +2973,7 @@ namespace OutWeb.Controllers
 
             CStates.Detail_Del(id);
 
-            dt = CStates.Detail_List(ref err_msg, "", "sort", "", "", cate_id, "");
+            dt = CStates.Detail_List(ref err_msg, "", "sort desc, a1.bd_dt desc", "", "", cate_id, ""); //排序大到小、資料建檔日期新到舊
             str_return = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             return Content(str_return);
         }

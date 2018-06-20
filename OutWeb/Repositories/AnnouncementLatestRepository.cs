@@ -171,7 +171,9 @@ namespace OutWeb.Repositories
                             Img = GetMainImg(item.ID),
                             CateIDInfo = GetNewsCateByID((int)item.CATE_ID, filter.LangCode),
                             PublishDateString = item.N_DATE.Value.ToString("yyyy-MM-dd"),
-                            Content = item.N_DESC.RemoveHtmlAllTags()
+                            Content = item.N_DESC.RemoveHtmlAllTags(),
+                            BD_DTString = item.BD_DT.Value.ToString("yyyy-MM-dd"),
+                            Sort = item.SORT.Value,
                         };
                         data.Add(temp);
                     }

@@ -65,7 +65,9 @@ namespace OutWeb.Repositories
                     Title = acl.Title,
                     TypeInfo = aclRepo.GetNewsCateByID(acl.CateIDInfo.Keys.First(), langCode),
                     ListTitleUrl = @"/News/AnnouncementList?typeID=" + acl.CateIDInfo.Keys.First(),
-                    ContentUrl = @"/News/AnnouncementContent?ID=" + acl.ID + "&typeID=" + acl.CateIDInfo.Keys.First()
+                    ContentUrl = @"/News/AnnouncementContent?ID=" + acl.ID + "&typeID=" + acl.CateIDInfo.Keys.First(),
+                    BD_DTString = acl.BD_DTString,
+                    Sort = acl.Sort,
                 };
                 switch (acl.CateIDInfo.Keys.First())
                 {
@@ -137,7 +139,9 @@ namespace OutWeb.Repositories
                         TypeInfo = statesRepo.GetStatesCateByID(states.StatesTypeID, langCode),
                         //DataType = ListKind.各州活動,
                         ListTitleUrl = @"/News/EventStatesList?statesTypeID=" + states.StatesTypeID,
-                        ContentUrl = @"/News/EventStatesContent?statesTypeID=" + states.StatesTypeID + "&ID=" + d.ID
+                        ContentUrl = @"/News/EventStatesContent?statesTypeID=" + states.StatesTypeID + "&ID=" + d.ID,
+                        BD_DTString = d.BD_DTString,
+                        Sort = d.Sort,
                     };
 
                     switch (langCode)
@@ -185,7 +189,9 @@ namespace OutWeb.Repositories
                         TypeInfo = statesRepo.GetStatesCateByID(focus.FocusTypeInfo.Keys.First(), langCode),
                         //DataType = ListKind.焦點專欄,
                         ListTitleUrl = @"/News/FocusList?focusTypeID=" + focus.FocusTypeInfo.Keys.First(),
-                        ContentUrl = @"/News/FocusContent?focusTypeID=" + focus.FocusTypeInfo.Keys.First() + "&ID=" + d.ID
+                        ContentUrl = @"/News/FocusContent?focusTypeID=" + focus.FocusTypeInfo.Keys.First() + "&ID=" + d.ID,
+                        BD_DTString = d.BD_DTString,
+                        Sort = d.Sort,
                     };
 
                     switch (langCode)
@@ -223,7 +229,9 @@ namespace OutWeb.Repositories
                     Title = ev.Title,
                     //DataType = ListKind.中央活動,
                     ListTitleUrl = @"/News/EventLatest",
-                    ContentUrl = @"/News/EventLatestContent?&ID=" + ev.ID
+                    ContentUrl = @"/News/EventLatestContent?&ID=" + ev.ID,
+                    BD_DTString = ev.BD_DTString,
+                    Sort = ev.Sort,
                 };
 
                 switch (langCode)
@@ -247,7 +255,10 @@ namespace OutWeb.Repositories
 
             if (result.Count > 0)
             {
-                result = result.OrderByDescending(s => s.PublishDateString).ToList().Take(20).ToList();
+                //result = result.OrderByDescending(s => s.PublishDateString).ToList().Take(20).ToList();
+                result = result.OrderByDescending(s => s.Sort)
+                                .ThenByDescending(x=>x.PublishDateString)
+                                .ThenByDescending(y=>y.BD_DTString).ToList().Take(20).ToList();
             }
             return result;
         }

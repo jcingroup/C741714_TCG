@@ -222,6 +222,8 @@ namespace OutWeb.Repositories
                             Img = GetMainImg(item.ID),
                             PagingList = GetPagingListByID(item.ID),
                             PublishDateString = item.C_DATE.Value.ToString("yyyy-MM-dd"),
+                            Sort = item.SORT.Value,
+                            BD_DTString = item.BD_DT.Value.ToString("yyyy-MM-dd"),
                         };
                         temp.Remark = GetFirstPagingRemark(temp.PagingList);
                         data.Add(temp);
