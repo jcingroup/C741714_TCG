@@ -43,9 +43,10 @@ namespace OutWeb.Modules.FrontEnd
                 var source = db.ABOUTUS
                 .AsEnumerable()
                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
-                s.STATUS == "Y" &&
-                (s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
-                s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                s.STATUS != "Y" &&
+                 s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry))
+                .Where(x=>x.STATUS == "Y")
                 .ToList();
 
                 foreach (var about in source)
@@ -122,11 +123,13 @@ namespace OutWeb.Modules.FrontEnd
                 (main, details) => new { Main = main, Details = details })
                 .AsEnumerable()
                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
-                (s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Main.STATUS != "Y" &&
+
+                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
 
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
-                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry))
                 .Where(w => w.Details.STATUS == "Y")
                 .Where(x=>x.Main.STATUS == "Y")
                 .OrderByDescending(d => d.Details.UPD_DT)
@@ -166,10 +169,11 @@ namespace OutWeb.Modules.FrontEnd
 
                 var source = db.JOINUS
                  .AsEnumerable()
-                  .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
-                  s.STATUS == "Y" &&(
+                       .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                  s.STATUS != "Y" &&
                    s.C_TITLE == qry || s.C_DESC.RemoveHtmlAllTags() == qry ||
-                  s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                  s.C_TITLE.Contains(qry) || s.C_DESC.RemoveHtmlAllTags().Contains(qry))
+                  .Where(x=>x.STATUS == "Y")
                   .ToList();
 
                 foreach (var join in source)
@@ -218,11 +222,13 @@ namespace OutWeb.Modules.FrontEnd
                (main, details) => new { Main = main, Details = details })
                .AsEnumerable()
                .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
-                (s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Main.STATUS != "Y" &&
+
+                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
 
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
-                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry))
                 .Where(w => w.Details.STATUS == "Y")
                 .Where(x=>x.Main.STATUS == "Y")
                 .OrderByDescending(d => d.Details.UPD_DT)
@@ -263,11 +269,13 @@ namespace OutWeb.Modules.FrontEnd
                    (main, details) => new { Main = main, Details = details })
                    .AsEnumerable()
                    .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
-                   (s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                   s.Main.STATUS != "Y" &&
+
+                   s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
                    s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
 
                    s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
-                   s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                   s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry))
                    .Where(w => w.Details.STATUS == "Y")
                    .Where(x=>x.Main.STATUS == "Y")
                    .OrderByDescending(d => d.Details.UPD_DT)
@@ -303,10 +311,11 @@ namespace OutWeb.Modules.FrontEnd
             {
                 var source = db.NEWS
                  .AsEnumerable()
-                    .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
-                  s.STATUS == "Y" &&
-                   (s.N_TITLE == qry || s.N_DESC.RemoveHtmlAllTags() == qry ||
-                  s.N_TITLE.Contains(qry) || s.N_DESC.RemoveHtmlAllTags().Contains(qry)))
+                       .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.LANG_ID == langCode) &&
+                  s.STATUS != "Y" &&
+                   s.N_TITLE == qry || s.N_DESC.RemoveHtmlAllTags() == qry ||
+                  s.N_TITLE.Contains(qry) || s.N_DESC.RemoveHtmlAllTags().Contains(qry))
+                  .Where(x=>x.STATUS == "Y")
                   .ToList();
 
                 foreach (var news in source)
@@ -340,11 +349,13 @@ namespace OutWeb.Modules.FrontEnd
                 (main, details) => new { Main = main, Details = details })
                 .AsEnumerable()
                 .Where(s => (string.IsNullOrEmpty(langCode) ? true : s.Details.LANG_ID == langCode) &&
-                (s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
+                s.Main.STATUS != "Y" &&
+
+                s.Main.C_TITLE == (qry) || s.Main.C_DESC.RemoveHtmlAllTags() == qry ||
                 s.Main.C_TITLE.Contains(qry) || s.Main.C_DESC.RemoveHtmlAllTags().Contains(qry) ||
 
                 s.Details.C_TITLE == (qry) || s.Details.C_DESC.RemoveHtmlAllTags() == qry ||
-                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry)))
+                s.Details.C_TITLE.Contains(qry) || s.Details.C_DESC.RemoveHtmlAllTags().Contains(qry))
                 .Where(w => w.Details.STATUS == "Y")
                 .Where(x=>x.Main.STATUS == "Y")
                 .OrderByDescending(d => d.Details.UPD_DT)
