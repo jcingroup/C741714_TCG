@@ -124,6 +124,7 @@ namespace OutWeb.Repositories
                     .AsEnumerable()
                         .Where(o => o.CATE_ID == id.ToString() && o.STATUS == "Y")
                         .OrderByDescending(o => o.SORT)
+                        .ThenByDescending(y=>y.BD_DT) //排序大到小、建檔日期新到舊
                         .Select(s => new EvnentPaging()
                         {
                             ID = s.ID,
@@ -224,8 +225,9 @@ namespace OutWeb.Repositories
                  .AsEnumerable()
                  .Where(s => (string.IsNullOrEmpty(lagCode) ? true : s.LANG_ID == lagCode) &&
                  s.STATUS == "Y" && s.CATE_ID == statesTypeID)
-                 .OrderByDescending(o => o.SORT)
-                 .OrderByDescending(s => s.C_DATE)
+                 .OrderByDescending(o => o.SORT) //排序大到小、發布日期新到舊、建檔日期新到舊
+                 .ThenByDescending(s => s.C_DATE)
+                 .ThenByDescending(x=>x.BD_DT)
                  .ToList();
 
                 var source = sourceList.Where(s => s.ID == id).FirstOrDefault();
