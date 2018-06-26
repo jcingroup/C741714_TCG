@@ -136,7 +136,7 @@ string img_path = "/Images/";
         @* 照片的呈現方式，有資料才顯示 *@
         @if (pageInfo.ImagesList.Count > 0)
             {
-            <ul id="test" class="prolist list-inline">
+            <ul class="prolist list-inline">
 
                 @foreach (var img in pageInfo.ImagesList)
                 {
@@ -154,8 +154,11 @@ string img_path = "/Images/";
                 }
             </ul>
         }
+
+        <p class="counter">瀏覽人次：1234</p>
     </div>
    }
+
 </div>
 
 <ul class="pager list-unstyled">

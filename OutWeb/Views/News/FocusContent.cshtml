@@ -64,10 +64,12 @@
         ViewBag.Description = remark; //FB share description
         ViewBag.Image = img; //FB share img
         //=================
-            <div class="tab current">
+        <div class="tab current">
             <div class="mb-16 clearfix">
                 @Html.Raw(pageInfo.Description.ToString())
             </div>
+            
+            <p class="counter">瀏覽人次：1234</p>
         </div>
     }
 
