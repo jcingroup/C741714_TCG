@@ -55,6 +55,7 @@ namespace OutWeb.Controllers
             DataTable dt;
             DataTable d_detail;
             DataTable dt1;
+            DataTable d_log;
             string err_msg = "";
 
 
@@ -78,7 +79,11 @@ namespace OutWeb.Controllers
             ViewData["dt"] = dt;
             ViewData["d_detail"] = d_detail;
             ViewData["id"] = id;
-
+            //=瀏覽記錄====================
+            DB.Log_Insert(id, "AboutUs");
+            d_log = DB.Log_List(ref err_msg, id, "AboutUs");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================
             return View();
         }
 
@@ -90,6 +95,7 @@ namespace OutWeb.Controllers
             DataTable dt;
             DataTable dt1;
             DataTable d_detail;
+            DataTable d_log;
             string err_msg = "";
 
             //======語系取得========
@@ -111,6 +117,12 @@ namespace OutWeb.Controllers
             ViewData["dt"] = dt;
             ViewData["d_detail"] = d_detail;
             ViewData["id"] = id;
+
+            //=瀏覽記錄====================
+            DB.Log_Insert(id, "AboutUs");
+            d_log = DB.Log_List(ref err_msg, id, "AboutUs");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================
             return View();
         }
 
@@ -122,6 +134,7 @@ namespace OutWeb.Controllers
             DataTable dt;
             DataTable dt1;
             DataTable d_detail;
+            DataTable d_log;
             string err_msg = "";
 
             //======語系取得========
@@ -142,6 +155,11 @@ namespace OutWeb.Controllers
             ViewData["dt"] = dt;
             ViewData["d_detail"] = d_detail;
             ViewData["id"] = id;
+            //=瀏覽記錄====================
+            DB.Log_Insert(id, "AboutUs");
+            d_log = DB.Log_List(ref err_msg, id, "AboutUs");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================
             return View();
         }
 
@@ -154,6 +172,7 @@ namespace OutWeb.Controllers
             DataTable d_cate;
             DataTable dt1;
             DataTable d_detail;
+            DataTable d_log;
             string err_msg = "";
 
 
@@ -190,7 +209,11 @@ namespace OutWeb.Controllers
             ViewData["d_detail"] = d_detail;
             ViewData["id"] = id;
             ViewData["cate_id"] = cate_id;
-
+            //=瀏覽記錄====================
+            DB.Log_Insert(id, "AboutUs");
+            d_log = DB.Log_List(ref err_msg, id, "AboutUs");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================
             return View();
         }
 
@@ -209,6 +232,7 @@ namespace OutWeb.Controllers
         // 焦點專欄 - 列表
         public ActionResult EducationList(int? eduTypeID, int? page)
         {
+
             if (!eduTypeID.HasValue)
                 return View();
 
@@ -228,6 +252,7 @@ namespace OutWeb.Controllers
             EducationRepository repo = new EducationRepository();
             EducationResult mdoel = repo.GetList((int)eduTypeID, filter);
             GetLang();
+
             return View(mdoel);
         }
 
@@ -257,6 +282,15 @@ namespace OutWeb.Controllers
                 if (model.Data.PagingList.Count > 0)
                     model.Data.PagingList.First().Current = "current";
             }
+
+            //=瀏覽記錄====================
+            DataTable d_log;
+            string err_msg = "";
+            DB.Log_Insert(eduTypeID.ToString(), "Edu");
+            d_log = DB.Log_List(ref err_msg, eduTypeID.ToString(), "Edu");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================
+
             return View(model);
         }
 
@@ -366,6 +400,14 @@ namespace OutWeb.Controllers
             ViewData["d_detail"] = d_detail;
             ViewData["id"] = id;
             ViewData["cate_id"] = cate_id;
+
+            //=瀏覽記錄====================
+            DataTable d_log;
+
+            DB.Log_Insert(id, "AboutUs");
+            d_log = DB.Log_List(ref err_msg, id, "AboutUs");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================
 
             return View();
         }

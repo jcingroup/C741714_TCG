@@ -11,6 +11,7 @@ using System;
 using System.Web.Mvc;
 using System.Linq;
 using System.Web;
+using System.Data;
 
 namespace OutWeb.Controllers
 {
@@ -97,6 +98,15 @@ namespace OutWeb.Controllers
                 if (model.Data.PagingList.Count > 0)
                     model.Data.PagingList.First().Current = "current";
             }
+
+            //=瀏覽記錄====================
+            DataTable d_log;
+            string err_msg = "";
+            DB.Log_Insert(ID.ToString(), "News");
+            d_log = DB.Log_List(ref err_msg, ID.ToString(), "News");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================		
+
             return View(model);
         }
 
@@ -164,6 +174,15 @@ namespace OutWeb.Controllers
                 if (model.Data.PagingList.Count > 0)
                     model.Data.PagingList.First().Current = "current";
             }
+
+            //=瀏覽記錄====================
+            DataTable d_log;
+            string err_msg = "";
+            DB.Log_Insert(ID.ToString(), "News");
+            d_log = DB.Log_List(ref err_msg, ID.ToString(), "News");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================		
+
             return View(model);
         }
 
@@ -217,6 +236,15 @@ namespace OutWeb.Controllers
             //======================
             AnnouncementLatestRepository repo = new AnnouncementLatestRepository();
             AnnouncementLatestContent mdoel = repo.GetContentByID((int)ID, (int)typeID, langCd);
+            
+            //=瀏覽記錄====================
+            DataTable d_log;
+            string err_msg = "";
+            DB.Log_Insert(ID.ToString(), "News");
+            d_log = DB.Log_List(ref err_msg, ID.ToString(), "News");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================		
+
             return View(mdoel);
         }
 
@@ -277,6 +305,15 @@ namespace OutWeb.Controllers
                 if (model.Data.PagingList.Count > 0)
                     model.Data.PagingList.First().Current = "current";
             }
+
+            //=瀏覽記錄====================
+            DataTable d_log;
+            string err_msg = "";
+            DB.Log_Insert(ID.ToString(), "Focus");
+            d_log = DB.Log_List(ref err_msg, ID.ToString(), "Focus");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================		
+
             return View(model);
         }
     }

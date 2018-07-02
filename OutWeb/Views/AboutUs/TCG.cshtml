@@ -6,6 +6,7 @@
 
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_detail = (DataTable)ViewData["d_detail"];
+    string log_count = (string)ViewData["log_count"];
     string id = (string)ViewData["id"];
     string c_id = "";
     string cFile = "TCG";
@@ -79,7 +80,7 @@
         <div>
             @Html.Raw(c_desc)
 
-            <p class="counter">瀏覽人次：1234</p>
+            <p class="counter">瀏覽人次：@log_count</p>
         </div>
     }
 </div>

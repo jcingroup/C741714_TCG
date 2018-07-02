@@ -5,6 +5,7 @@
     ViewBag.Title = Model.Data.Title; @* 文章標題 *@
 ViewBag.BodyClass = "News Event";
 string img_path = "/Images/";
+string log_count = (string)ViewData["log_count"];
 
 }
 
@@ -155,7 +156,7 @@ string img_path = "/Images/";
             </ul>
         }
 
-        <p class="counter">瀏覽人次：1234</p>
+        <p class="counter">瀏覽人次：@log_count</p>
     </div>
    }
 

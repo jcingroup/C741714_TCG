@@ -7443,5 +7443,353 @@ namespace OutWeb.Service
         #endregion
 
         #endregion
+
+        #region 記錄 LOG
+
+        #region 記錄新增 Log_Insert
+        public string Log_Insert(string log_no = "", string log_kind = "", string log_title = "", string log_desc = "", string log_ip = "", string log_browser = "", string log_sys = "", string log_page = "", string log_id = "System")
+        {
+            string c_msg = "";
+
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+
+            try
+            {
+                csql = @"insert into logs(log_no, log_title, log_desc, log_kind, log_ip, log_browser, log_sys, log_page, bd_id) "
+                     + "values(@log_no ,@log_title ,@log_desc,@log_kind,@log_ip,@log_browser, @log_sys, @log_page, @log_id)";
+
+                cmd.CommandText = csql;
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@log_no", log_no);
+                cmd.Parameters.AddWithValue("@log_title", log_title);
+                cmd.Parameters.AddWithValue("@log_desc", log_desc);
+                cmd.Parameters.AddWithValue("@log_kind", log_kind);
+                cmd.Parameters.AddWithValue("@log_ip", log_ip);
+                cmd.Parameters.AddWithValue("@log_browser", log_browser);
+                cmd.Parameters.AddWithValue("@log_sys", log_sys);
+                cmd.Parameters.AddWithValue("@log_page", log_page);
+                cmd.Parameters.AddWithValue("@log_id", log_id);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                c_msg = ex.Message;
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                cmd = null;
+                conn = null;
+            }
+
+            return c_msg;
+        }
+        #endregion
+
+        #region 記錄陳列 Log_List
+        public DataTable Log_List(ref string err_msg, string log_no = "", string log_kind = "",string log_title = "", string log_desc = "", string log_ip = "",string log_browser = "", string log_sys = "", string log_page = "",string log_id = "")
+        {
+            DataSet dt = new DataSet();
+            DataTable d_t = new DataTable();
+
+            string[] Array_log_no;
+            string[] Array_log_title;
+            string[] Array_log_desc;
+            string[] Array_log_ip;
+            string[] Array_log_browser;
+            string[] Array_log_sys;
+            string[] Array_log_page;
+            string[] Array_log_id;
+            string[] Array_log_kind;            
+
+            SqlConnection conn = new SqlConnection(CService.conn_string());
+
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+
+            try
+            {
+                Array_log_no = log_no.Split(',');
+                Array_log_title = log_title.Split(',');
+                Array_log_desc = log_desc.Split(',');
+                Array_log_ip = log_ip.Split(',');
+                Array_log_browser = log_browser.Split(',');
+                Array_log_sys = log_sys.Split(',');
+                Array_log_page = log_page.Split(',');
+                Array_log_id = log_id.Split(',');
+                Array_log_kind = log_kind.Split(',');
+
+                csql = "select *  from logs where 1 = 1 ";
+
+
+                if (log_no.Trim().Length > 0)
+                {
+                    csql = csql + " and log_no in (";
+                    for (int i = 0; i < Array_log_no.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_log_no" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+                if (log_title.Trim().Length > 0)
+                {
+                    csql = csql + " and log_title in (";
+                    for (int i = 0; i < Array_log_title.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_log_title" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+                if (log_desc.Trim().Length > 0)
+                {
+                    csql = csql + " and log_desc in (";
+                    for (int i = 0; i < Array_log_desc.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_log_desc" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+                if (log_ip.Trim().Length > 0)
+                {
+                    csql = csql + " and log_ip in (";
+                    for (int i = 0; i < Array_log_ip.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_log_ip" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+
+                if (log_browser.Trim().Length > 0)
+                {
+                    csql = csql + " and log_browser in (";
+                    for (int i = 0; i < Array_log_browser.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_log_browser" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+
+                if (log_sys.Trim().Length > 0)
+                {
+                    csql = csql + " and log_sys in (";
+                    for (int i = 0; i < Array_log_sys.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_log_sys" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+                if (log_page.Trim().Length > 0)
+                {
+                    csql = csql + " and log_page in (";
+                    for (int i = 0; i < Array_log_page.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_log_page" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+                if (log_id.Trim().Length > 0)
+                {
+                    csql = csql + " and BD_ID in (";
+                    for (int i = 0; i < Array_log_id.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_log_id" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+                if (log_kind.Trim().Length > 0)
+                {
+                    csql = csql + " and log_kind in (";
+                    for (int i = 0; i < Array_log_kind.Length; i++)
+                    {
+                        if (i > 0)
+                        {
+                            csql = csql + ",";
+                        }
+                        csql = csql + "@str_log_kind" + i.ToString();
+                    }
+                    csql = csql + ") ";
+                }
+
+                csql = csql + "order by ";
+                //csql = csql + "  id ";
+                csql = csql + " BD_DT desc";
+
+                cmd.CommandText = csql;
+
+                cmd.Parameters.Clear();
+
+                if(log_no.Trim().Length > 0)
+                {
+                    for(int i = 0; i < Array_log_no.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_log_no" + i.ToString(), Array_log_no[i]);
+                    }
+                }
+
+                if (log_title.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_log_title.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_log_title" + i.ToString(), Array_log_title[i]);
+                    }
+                }
+
+                if (log_desc.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_log_desc.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_log_desc" + i.ToString(), Array_log_desc[i]);
+                    }
+                }
+
+                if (log_ip.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_log_ip.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_log_ip" + i.ToString(), Array_log_ip[i]);
+                    }
+                }
+
+                if (log_browser.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_log_browser.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_log_browser" + i.ToString(), Array_log_browser[i]);
+                    }
+                }
+
+                if (log_sys.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_log_sys.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_log_sys" + i.ToString(), Array_log_sys[i]);
+                    }
+                }
+
+                if (log_page.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_log_page.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_log_page" + i.ToString(), Array_log_page[i]);
+                    }
+                }
+
+                if (log_id.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_log_id.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_log_id" + i.ToString(), Array_log_id[i]);
+                    }
+                }
+
+                if (log_kind.Trim().Length > 0)
+                {
+                    for (int i = 0; i < Array_log_kind.Length; i++)
+                    {
+                        cmd.Parameters.AddWithValue("@str_log_kind" + i.ToString(), Array_log_kind[i]);
+                    }
+                }
+
+                //Array_log_no = log_no.Split(',');
+                //Array_log_title = log_title.Split(',');
+                //Array_log_desc = log_desc.Split(',');
+                //Array_log_ip = log_ip.Split(',');
+                //Array_log_browser = log_browser.Split(',');
+                //Array_log_sys = log_sys.Split(',');
+                //Array_log_page = log_page.Split(',');
+                //Array_log_id = log_id.Split(',');
+                //Array_log_kind = log_kind.Split(',');
+
+                if (dt.Tables["logs"] != null)
+                {
+                    dt.Tables["logs"].Clear();
+                }
+
+                SqlDataAdapter img_ada = new SqlDataAdapter();
+                img_ada.SelectCommand = cmd;
+                img_ada.Fill(dt, "logs");
+                img_ada = null;
+
+                d_t = dt.Tables["logs"];
+            }
+            catch (Exception ex)
+            {
+                err_msg = ex.Message;
+                CService.msg_write("Error", ex.Message, ex.StackTrace, System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                cmd = null;
+                conn = null;
+                dt = null;
+            }
+
+            return d_t;
+        }
+        #endregion
+
+        #endregion 記錄 LOG
     }
 }

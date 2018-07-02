@@ -6,6 +6,7 @@
     ViewBag.BodyClass = "News Focus";
     string listTitleUrl = Url.Content("~/News/FocusList?focusTypeID=" + Model.FocusCateInfo.Keys.First());
     string img_path = "/Images/";
+    string log_count = (string)ViewData["log_count"];
 }
 
 @section breadcrumb {
@@ -69,7 +70,7 @@
                 @Html.Raw(pageInfo.Description.ToString())
             </div>
             
-            <p class="counter">瀏覽人次：1234</p>
+            <p class="counter">瀏覽人次：@log_count</p>
         </div>
     }
 

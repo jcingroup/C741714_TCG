@@ -5,6 +5,7 @@
     ViewBag.BodyClass = "JoinUs School";
 
     DataTable dt = (DataTable)ViewData["dt"];
+    string log_count = (string)ViewData["log_count"];
 }
 
 @section breadcrumb {
@@ -44,5 +45,5 @@
             </div>
         }
     }
-    <p class="counter">瀏覽人次：1234</p>
+    <p class="counter">瀏覽人次：@log_count</p>
 </div>

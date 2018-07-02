@@ -54,6 +54,7 @@ namespace OutWeb.Controllers
             DataTable dt;
             DataTable d_detail;
             DataTable dt1;
+            DataTable d_log;
             string err_msg = "";
             //======語系取得========
             string lang_id = GetLang();
@@ -74,6 +75,11 @@ namespace OutWeb.Controllers
             ViewData["dt"] = dt;
             ViewData["d_detail"] = d_detail;
             ViewData["id"] = id;
+            //=瀏覽記錄====================
+            DB.Log_Insert(id, "JoinUs");
+            d_log = DB.Log_List(ref err_msg, id, "JoinUs");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================
             return View();
         }
 
@@ -85,6 +91,7 @@ namespace OutWeb.Controllers
             DataTable dt;
             DataTable d_detail;
             DataTable dt1;
+            DataTable d_log;
             string err_msg = "";
             //======語系取得========
             string lang_id = GetLang();
@@ -105,6 +112,11 @@ namespace OutWeb.Controllers
             ViewData["dt"] = dt;
             ViewData["d_detail"] = d_detail;
             ViewData["id"] = id;
+            //=瀏覽記錄====================
+            DB.Log_Insert(id, "JoinUs");
+            d_log = DB.Log_List(ref err_msg, id, "JoinUs");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================
             return View();
         }
 
@@ -112,12 +124,18 @@ namespace OutWeb.Controllers
         public ActionResult Live()
         {
             DataTable dt;
+            DataTable d_log;
             string err_msg = "";
             //======語系取得========
             string lang_id = GetLang();
             //======================
             dt = Cschool.Video_List(ref err_msg, "", "sort desc", "Y", "", lang_id);
             ViewData["dt"] = dt;
+            //=瀏覽記錄====================
+            DB.Log_Insert("1", "Vedio");
+            d_log = DB.Log_List(ref err_msg, "1", "Vedio");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================
             return View();
         }
 
@@ -127,11 +145,18 @@ namespace OutWeb.Controllers
             //抓取資料
             string cate_id = "3";
             DataTable dt;
+            DataTable d_log;
+            string log_count = "";
             string err_msg = "";
             //======語系取得========
             string lang_id = GetLang();
             //======================
             dt = CJoinUs.List(ref err_msg, "", "sort desc", "Y", "", cate_id, lang_id);
+            //=瀏覽記錄====================
+            DB.Log_Insert("1","Schedule");
+            d_log = DB.Log_List(ref err_msg, "1", "Schedule");
+            ViewData["log_count"] = d_log.Rows.Count.ToString();
+            //============================
 
             ViewData["dt"] = dt;
             return View();

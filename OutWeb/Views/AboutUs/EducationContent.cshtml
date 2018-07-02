@@ -5,6 +5,7 @@
     ViewBag.Title = Model.Data.Title;
     ViewBag.BodyClass = "AboutUs Education";
     string listTitleUrl = Url.Content("~/AboutUs/EducationList?eduTypeID=" + Model.EduCateInfo.Keys.First());
+    string log_count = (string)ViewData["log_count"];
 }
 
 @section breadcrumb {
@@ -55,7 +56,7 @@
                 @Html.Raw(pageInfo.Description.ToString())
             </div>
 
-            <p class="counter">瀏覽人次：1234</p>
+            <p class="counter">瀏覽人次：@log_count</p>
         </div>
     }
 

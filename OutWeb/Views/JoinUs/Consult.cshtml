@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = Res.joinUs_consult;
     ViewBag.BodyClass = "JoinUs Consult";
-
+    string log_count = (string)ViewData["log_count"];
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_detail = (DataTable)ViewData["d_detail"];
     string id = (string)ViewData["id"];
@@ -77,7 +77,7 @@
         <div>
             @Html.Raw(c_desc)
 
-            <p class="counter">瀏覽人次：1234</p>
+            <p class="counter">瀏覽人次：@log_count</p>
         </div>
     }
 

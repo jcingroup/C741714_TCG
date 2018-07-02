@@ -5,6 +5,7 @@
     ViewBag.BodyClass = "JoinUs School";
 
     DataTable dt = (DataTable)ViewData["dt"];
+    string log_count = (string)ViewData["log_count"];
     string img_path = "~/Images/";
     string c_title = "";
     string c_desc = "";
@@ -51,5 +52,5 @@
         <li><strong>Tel: </strong>(03)355-6363</li>
     </ul>
     
-    <p class="counter">瀏覽人次：1234</p>
+    <p class="counter">瀏覽人次：@log_count</p>
 </div>
