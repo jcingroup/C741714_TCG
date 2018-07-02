@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
+using OutWeb.Service;
 
 namespace OutWeb.Models
 {
@@ -10,9 +11,12 @@ namespace OutWeb.Models
         private string m_databaseUserID = string.Empty;
         private string m_databasePassword = string.Empty;
 
+        Service.Service CService = new Service.Service();
+
         public ConnectionConfig()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conn_string"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["conn_string"].ConnectionString;
+            string connectionString = CService.conn_string();
 
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectionString);
 
