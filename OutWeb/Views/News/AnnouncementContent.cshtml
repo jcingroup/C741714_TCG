@@ -62,8 +62,6 @@
     }
     <div class="tab current" id="">
         @Html.Raw(Model.Data.Content)
-
-        <p class="counter">瀏覽人次：@log_count</p>
     </div>
 
     @*<div class="tab" id="tab2">
@@ -74,6 +72,8 @@
             <p>文章分頁3</p>
         </div>*@
 </div>
+
+<p class="counter">@log_count</p>
 
 <ul class="pager list-unstyled">
     @if (!string.IsNullOrEmpty(Model.PreviousIDStr))
