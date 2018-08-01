@@ -72,7 +72,7 @@
         </li>
 
         <li>
-            <form action="/News/FocusNewsList" method="get" class="form-inline">
+            <form action="/News/FocusList" method="get" class="form-inline">
                 <input type="hidden" name="focusTypeID" value="@Model.FocusTypeInfo.Keys.First()" />
                 <select name="page" id="numPage" class="form-element">
                     @for (int i = Model.Pagination.FirstPage; i <= Model.Pagination.LastPage; i++)
