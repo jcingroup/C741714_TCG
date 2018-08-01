@@ -88,7 +88,8 @@
                             <a href="@Url.Action("Index", new { langCode = "zh-TW" })">漢字</a>
                         </li>
                         <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "en-US" ? "hidden" : "")">
-                            <a href="@Url.Action("Index", new { langCode = "en-US" })">English</a>
+                            @* <a href="@Url.Action("Index", new { langCode = "en-US" })">English</a> *@
+                            <a href="http://taiwancivilgovernment.com" target="new">English</a>
                         </li>
                         <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "ja-JP" ? "hidden" : "")">
                             <a href="@Url.Action("Index", new { langCode = "ja-JP" })">日本語</a>
