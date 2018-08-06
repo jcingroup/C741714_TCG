@@ -42,6 +42,21 @@
     string txt_start_date = (string)ViewData["txt_start_date"];
     string txt_end_date = (string)ViewData["txt_end_date"];
 
+    string txt_show = (string)ViewData["txt_show"];
+    string show_y = "";
+    string show_n = "";
+
+    switch (txt_show)
+    {
+        case "Y":
+            show_y = "selected";
+            show_n = "";
+            break;
+        case "N":
+            show_y = "";
+            show_n = "selected";
+            break;
+    }
 
     string c_selected = "";
 
@@ -210,7 +225,7 @@
     <input type="hidden" id="txt_a_d" name="txt_a_d" value="@txt_a_d" />
     <header class="table-head form-inline">
         <label>標題</label>
-        <input type="text" placeholder="請輸入關鍵字..." id="txt_title_query" name="txt_title_query">
+        <input type="text" placeholder="請輸入關鍵字..." id="txt_title_query" name="txt_title_query" value="@txt_title_query">
         @* 用 datetimepicker (之類的東西) 選日期 *@
         <label>起</label>
         <input type="date" id="txt_start_date" name="txt_start_date" value="@txt_start_date" max="9999-12-31">
@@ -261,8 +276,8 @@
         <label>狀態</label>
         <select id="txt_show" name="txt_show">
             <option value="">全部</option>
-            <option value="Y">發佈</option>
-            <option value="N">草稿</option>
+            <option value="Y" @show_y >發佈</option>
+            <option value="N" @show_n >草稿</option>
         </select>
         <button class="btn sm oi" data-glyph="magnifying-glass" id="btn_query" name="btn_query" onclick="form_ok();">搜尋</button>
     </header>

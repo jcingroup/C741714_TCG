@@ -487,7 +487,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -506,6 +507,7 @@ namespace OutWeb.Controllers
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
+            ViewData["txt_show"] = txt_show;
 
             return View();
         }
@@ -590,7 +592,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -669,6 +672,7 @@ namespace OutWeb.Controllers
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
             ViewData["txt_cate"] = txt_cate;
+            ViewData["txt_show"] = txt_show;
 
             //--Temp檔--釋放-------//
             CTemp.Dispose();
@@ -835,7 +839,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -855,6 +860,7 @@ namespace OutWeb.Controllers
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
+            ViewData["txt_show"] = txt_show;
 
             return View();
         }
@@ -939,7 +945,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -1034,6 +1041,7 @@ namespace OutWeb.Controllers
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
             ViewData["txt_cate"] = txt_cate;
+            ViewData["txt_show"] = txt_show;
 
             //--Temp檔--釋放-------//
             CTemp.Dispose();
@@ -1205,7 +1213,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -1228,6 +1237,7 @@ namespace OutWeb.Controllers
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
+            ViewData["txt_show"] = txt_show;
 
             return View();
         }
@@ -1310,7 +1320,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -1333,6 +1344,7 @@ namespace OutWeb.Controllers
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
             ViewData["txt_cate"] = txt_cate;
+            ViewData["txt_show"] = txt_show;
 
             return View();
         }
@@ -1529,7 +1541,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -1552,7 +1565,7 @@ namespace OutWeb.Controllers
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -1634,7 +1647,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -1658,7 +1672,7 @@ namespace OutWeb.Controllers
             ViewData["txt_lang"] = txt_lang;
             ViewData["txt_cate"] = txt_cate;
             ViewData["txt_index"] = txt_index;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -1852,7 +1866,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -1876,7 +1891,7 @@ namespace OutWeb.Controllers
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -1959,7 +1974,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -1978,7 +1994,7 @@ namespace OutWeb.Controllers
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -2060,7 +2076,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -2083,7 +2100,7 @@ namespace OutWeb.Controllers
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
             ViewData["txt_cate"] = txt_cate;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -2202,7 +2219,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -2226,7 +2244,7 @@ namespace OutWeb.Controllers
             ViewData["txt_lang"] = txt_lang;
             //ViewData["txt_cate"] = txt_cate;
             ViewData["txt_index"] = txt_index;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -2504,7 +2522,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -2528,7 +2547,7 @@ namespace OutWeb.Controllers
             ViewData["txt_lang"] = txt_lang;
             ViewData["txt_cate"] = txt_cate;
             ViewData["txt_index"] = txt_index;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -2664,7 +2683,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -2683,7 +2703,7 @@ namespace OutWeb.Controllers
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -2775,7 +2795,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -2798,7 +2819,7 @@ namespace OutWeb.Controllers
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
             ViewData["txt_cate"] = txt_cate;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -3014,7 +3035,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -3033,7 +3055,7 @@ namespace OutWeb.Controllers
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -3113,7 +3135,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -3138,7 +3161,7 @@ namespace OutWeb.Controllers
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_lang"] = txt_lang;
             ViewData["txt_cate"] = txt_cate;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion
@@ -3275,7 +3298,8 @@ namespace OutWeb.Controllers
             //排序設定
             if (txt_sort.Trim().Length > 0)
             {
-                c_sort = c_sort + "a1." + txt_sort;
+                //c_sort = c_sort + ", a1." + txt_sort;
+                c_sort = "a1." + txt_sort;
             }
             if (txt_a_d.Trim().Length > 0)
             {
@@ -3294,7 +3318,7 @@ namespace OutWeb.Controllers
             ViewData["txt_sort"] = txt_sort;
             ViewData["txt_a_d"] = txt_a_d;
             ViewData["txt_cate"] = txt_cate;
-
+            ViewData["txt_show"] = txt_show;
             return View();
         }
         #endregion

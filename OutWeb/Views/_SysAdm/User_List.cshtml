@@ -40,6 +40,22 @@
     string txt_a_d = (string)ViewData["txt_a_d"];
     string txt_cate = (string)ViewData["txt_cate"];
 
+    string txt_show = (string)ViewData["txt_show"];
+    string show_y = "";
+    string show_n = "";
+
+    switch (txt_show)
+    {
+        case "Y":
+            show_y = "selected";
+            show_n = "";
+            break;
+        case "N":
+            show_y = "";
+            show_n = "selected";
+            break;
+    }
+
     string c_selected = "";
 
     string a_d = "";
@@ -163,7 +179,7 @@
     <input type="hidden" id="txt_a_d" name="txt_a_d" value="@txt_a_d" />
     <header class="table-head form-inline">
         <label>標題</label>
-        <input type="text" placeholder="請輸入關鍵字..." id="txt_title_query" name="txt_title_query">
+        <input type="text" placeholder="請輸入關鍵字..." id="txt_title_query" name="txt_title_query" value="@txt_title_query" >
         <label>群組</label>
         <select class="form-element" id="txt_cate" name="txt_cate">
             <option value="">全部</option>
@@ -186,8 +202,8 @@
         <label>狀態</label>
         <select id="txt_show" name="txt_show">
             <option value="">全部</option>
-            <option value="Y">啟用</option>
-            <option value="N">停用</option>
+            <option value="Y" @show_y >啟用</option>
+            <option value="N" @show_n >停用</option>
         </select>
         <button class="btn sm oi" data-glyph="magnifying-glass" id="btn_query" name="btn_query" onclick="form_ok();">搜尋</button>
     </header>
