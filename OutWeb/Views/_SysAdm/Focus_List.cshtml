@@ -40,8 +40,8 @@
     string txt_title_query = (string)ViewData["txt_title_query"];
     string txt_sort = (string)ViewData["txt_sort"];
     string txt_a_d = (string)ViewData["txt_a_d"];
-    string txt_lang = (string)ViewData["txt_lang_id"];
-    string txt_cate = (string)ViewData["txt_cate_id"];
+    string txt_lang = (string)ViewData["txt_lang"];
+    string txt_cate = (string)ViewData["txt_cate"];
     string txt_start_date = (string)ViewData["txt_start_date"];
     string txt_end_date = (string)ViewData["txt_end_date"];
 
@@ -284,7 +284,7 @@
             {
                 for (int i = 0; i < d_cate.Rows.Count; i++)
                 {
-                    if (d_cate.Rows[i]["id"].ToString() == txt_lang)
+                    if (d_cate.Rows[i]["id"].ToString() == txt_cate)
                     {
                         c_selected = "selected";
                     }
