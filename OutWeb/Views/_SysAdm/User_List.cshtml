@@ -179,7 +179,7 @@
     <input type="hidden" id="txt_a_d" name="txt_a_d" value="@txt_a_d" />
     <header class="table-head form-inline">
         <label>標題</label>
-        <input type="text" placeholder="請輸入關鍵字..." id="txt_title_query" name="txt_title_query" value="@txt_title_query" >
+        <input type="text" placeholder="請輸入關鍵字..." id="txt_title_query" name="txt_title_query" value="@txt_title_query">
         <label>群組</label>
         <select class="form-element" id="txt_cate" name="txt_cate">
             <option value="">全部</option>
@@ -202,8 +202,8 @@
         <label>狀態</label>
         <select id="txt_show" name="txt_show">
             <option value="">全部</option>
-            <option value="Y" @show_y >啟用</option>
-            <option value="N" @show_n >停用</option>
+            <option value="Y" @show_y>啟用</option>
+            <option value="N" @show_n>停用</option>
         </select>
         <button class="btn sm oi" data-glyph="magnifying-glass" id="btn_query" name="btn_query" onclick="form_ok();">搜尋</button>
     </header>
@@ -263,9 +263,9 @@
                     show_class = "";
                 }
 
-                if(Convert.ToString(Session["usr_grp"]) == "3")
+                if (Convert.ToString(Session["usr_grp"]) == "3")
                 {
-                    if(usr_grp == "1" || usr_grp == "2" || usr_grp == "3")
+                    if (usr_grp == "1" || usr_grp == "2" || usr_grp == "3")
                     {
                         adm_chk = "hidden";
                     }
@@ -303,19 +303,35 @@
     <footer class="table-foot">
         <small class="float-r">第 @min_row - @max_row 筆，共 @row_count 筆</small>
         <nav class="pager">
-            <a href="@Url.Content(SysPath + cFile + "?page=" + top_page.ToString())" class="oi" data-glyph="media-step-backward" title="到最前頁"></a>
-            <a href="@Url.Content(SysPath + cFile + "?page=" + pre_page.ToString())" class="oi" data-glyph="caret-left" title="上一頁"></a>
+            <a href="javascript:void(0)" onclick="ToPage('@top_page');return false;" class="oi" data-glyph="media-step-backward" title="到最前頁"></a>
+            <a href="javascript:void(0)" onclick="ToPage('@pre_page');return false;" class="oi" data-glyph="caret-left" title="上一頁"></a>
             <span>
                 第
                 <input type="text" class="form-control form-control-sm text-xs-center" style="width:100px" name="page" id="page" value="@page">
                 頁，共 @total_page 頁
             </span>
-            <a href="@Url.Content(SysPath + cFile + "?page=" + next_page.ToString())" class="oi" data-glyph="caret-right" title="下一頁"></a>
-            <a href="@Url.Content(SysPath + cFile + "?page=" + end_page.ToString())" class="oi" data-glyph="media-step-forward" title="到最後頁"></a>
+            <a href="javascript:void(0)" onclick="ToPage('@next_page');return false;" class="oi" data-glyph="caret-right" title="下一頁"></a>
+            <a href="javascript:void(0)" onclick="ToPage('@end_page');return false;" class="oi" data-glyph="media-step-forward" title="到最後頁"></a>
+            @*
+                <a href="@Url.Content(SysPath + cFile + "?page=" + top_page.ToString())" class="oi" data-glyph="media-step-backward" title="到最前頁"></a>
+                <a href="@Url.Content(SysPath + cFile + "?page=" + pre_page.ToString())" class="oi" data-glyph="caret-left" title="上一頁"></a>
+                <span>
+                    第
+                    <input type="text" class="form-control form-control-sm text-xs-center" style="width:100px" name="page" id="page" value="@page">
+                    頁，共 @total_page 頁
+                </span>
+                <a href="@Url.Content(SysPath + cFile + "?page=" + next_page.ToString())" class="oi" data-glyph="caret-right" title="下一頁"></a>
+                <a href="@Url.Content(SysPath + cFile + "?page=" + end_page.ToString())" class="oi" data-glyph="media-step-forward" title="到最後頁"></a>
+            *@
         </nav>
     </footer>
 </form>
 <script>
+        function ToPage(pg) {
+            $('#page').val(pg);
+            $('#form1').submit();
+        }
+
         $('#form1').on('keyup keypress', function (e) {
             var keyCode = e.keyCode || e.which;
             if (keyCode === 13) {
@@ -323,12 +339,13 @@
                 return false;
             }
         });
-        //$('#page').on('keydown', function (e) {
-        //    if (e.which == 13) {
-        //        //alert('clicked');
-        //        document.form1.submit();
-        //    }
-        //});
+
+        $('#page').on('keydown', function (e) {
+            if (e.which == 13) {
+                //alert('clicked');
+                $('#form1').submit();
+            }
+        });
 
 
         function form_ok() {
