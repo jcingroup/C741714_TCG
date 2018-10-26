@@ -440,4 +440,10 @@
     <value>U.S.M.G.T.C.G</value>
     <comment>app icon title</comment>
   </data>
+  <data name="tacc_site" xml:space="preserve">
+    <value>TACC official website</value>
+  </data>
+  <data name="fbPage_3" xml:space="preserve">
+    <value>TACC official FB</value>
+  </data>
 </root>

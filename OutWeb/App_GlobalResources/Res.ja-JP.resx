@@ -444,4 +444,10 @@
     <value>台湾民政府</value>
     <comment>app icon title</comment>
   </data>
+  <data name="tacc_site" xml:space="preserve">
+    <value>TACCの公式ウェブサイト</value>
+  </data>
+  <data name="fbPage_3" xml:space="preserve">
+    <value>TACC公式FBページ</value>
+  </data>
 </root>

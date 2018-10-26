@@ -277,6 +277,15 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
+        ///   查詢類似 TACC官方FB專頁 的當地語系化字串。
+        /// </summary>
+        public static string fbPage_3 {
+            get {
+                return ResourceManager.GetString("fbPage_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 台灣政府 法理學院 的當地語系化字串。
         /// </summary>
         public static string gallery_t {
@@ -897,6 +906,15 @@ namespace OutWeb.App_GlobalResources {
         public static string spokesman_w {
             get {
                 return ResourceManager.GetString("spokesman_w", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 TACC官方網站 的當地語系化字串。
+        /// </summary>
+        public static string tacc_site {
+            get {
+                return ResourceManager.GetString("tacc_site", resourceCulture);
             }
         }
         
