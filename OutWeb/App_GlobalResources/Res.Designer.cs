@@ -919,7 +919,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 (03) 355-6363 的當地語系化字串。
+        ///   查詢類似 (03) 355-3669 的當地語系化字串。
         /// </summary>
         public static string tel {
             get {
