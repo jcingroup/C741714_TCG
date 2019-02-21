@@ -471,10 +471,6 @@
             $("#sitemap").fadeToggle();
             $("body").toggleClass("overlay");
         });
-        // $("#sitemap a").click(function(){
-        //     // 同一頁換tab需重載頁面
-        //     location.reload();
-        // });
 
         // 點 Popup 空白處可以關閉
         $(".popup").click(function () {
@@ -486,17 +482,14 @@
         });
     </script>
 
-    @* GA *@
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-32942313-1']);
-        _gaq.push(['_trackPageview']);
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134719752-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-        (function () {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
+        gtag('config', 'UA-134719752-1');
     </script>
 
     @if (!ViewBag.IsFirstPage)
