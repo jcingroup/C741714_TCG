@@ -19,7 +19,7 @@ namespace OutWeb.App_GlobalResources {
     // 類別透過 ResGen 或 Visual Studio 這類工具。
     // 若要加入或移除成員，請編輯您的 .ResX 檔，然後重新執行 ResGen
     // (利用 /str 選項)，或重建您的 VS 專案。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Res {
@@ -160,7 +160,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 新竹州桃園郡龜山鄉員林坑路100-1號 的當地語系化字串。
+        ///   查詢類似 高雄市三民區自立一路387號 的當地語系化字串。
         /// </summary>
         public static string address {
             get {
@@ -259,7 +259,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 FB 官方粉絲頁1 的當地語系化字串。
+        ///   查詢類似 FB 官方粉絲頁remove 的當地語系化字串。
         /// </summary>
         public static string fbPage_1 {
             get {
@@ -268,7 +268,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 FB 官方粉絲頁2 的當地語系化字串。
+        ///   查詢類似 FB 官方粉絲頁1 的當地語系化字串。
         /// </summary>
         public static string fbPage_2 {
             get {
@@ -817,7 +817,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 33391 的當地語系化字串。
+        ///   查詢類似 80745 的當地語系化字串。
         /// </summary>
         public static string postCode {
             get {
@@ -919,7 +919,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 (03) 355-3669 的當地語系化字串。
+        ///   查詢類似 (07) 323-1890 的當地語系化字串。
         /// </summary>
         public static string tel {
             get {

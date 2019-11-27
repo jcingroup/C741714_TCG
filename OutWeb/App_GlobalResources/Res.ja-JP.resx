@@ -139,7 +139,7 @@
     <value>台湾の地位に関する声明</value>
   </data>
   <data name="address" xml:space="preserve">
-    <value>桃園市亀山区員林坑路100-1号</value>
+    <value>高雄市三民区自立一路387号</value>
   </data>
   <data name="back" xml:space="preserve">
     <value>戻る</value>
@@ -169,10 +169,10 @@
     <comment>地方服務處諮詢 子分頁</comment>
   </data>
   <data name="fbPage_1" xml:space="preserve">
-    <value>台湾民政府公式フェイスブック1</value>
+    <value>台湾民政府公式フェイスブックremove</value>
   </data>
   <data name="fbPage_2" xml:space="preserve">
-    <value>台湾民政府公式フェイスブック2</value>
+    <value>台湾民政府公式フェイスブック1</value>
   </data>
   <data name="home_about" xml:space="preserve">
     <value>民政府とは</value>
@@ -296,7 +296,7 @@
     <comment>行政區域圖&amp;組織架構 子分頁</comment>
   </data>
   <data name="postCode" xml:space="preserve">
-    <value>33391</value>
+    <value>80745</value>
     <comment>郵遞區號</comment>
   </data>
   <data name="pre_page" xml:space="preserve">
@@ -315,7 +315,7 @@
     <value>台灣民政府 中央發言人</value>
   </data>
   <data name="tel" xml:space="preserve">
-    <value>+886-3-355-3669</value>
+    <value>+886-7-323-1890</value>
   </data>
   <data name="WV_site" xml:space="preserve">
     <value>台湾民政府（ワシントン）公式サイト</value>

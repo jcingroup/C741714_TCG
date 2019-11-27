@@ -136,7 +136,7 @@
     <value>台灣地位的聲明</value>
   </data>
   <data name="address" xml:space="preserve">
-    <value>新竹州桃園郡龜山鄉員林坑路100-1號</value>
+    <value>高雄市三民區自立一路387號</value>
   </data>
   <data name="back" xml:space="preserve">
     <value>回上頁</value>
@@ -166,10 +166,10 @@
     <comment>地方服務處諮詢 子分頁</comment>
   </data>
   <data name="fbPage_1" xml:space="preserve">
-    <value>FB 官方粉絲頁1</value>
+    <value>FB 官方粉絲頁remove</value>
   </data>
   <data name="fbPage_2" xml:space="preserve">
-    <value>FB 官方粉絲頁2</value>
+    <value>FB 官方粉絲頁1</value>
   </data>
   <data name="home_about" xml:space="preserve">
     <value>認識民政府</value>
@@ -275,7 +275,7 @@
     <comment>行政區域圖&amp;組織架構 子分頁</comment>
   </data>
   <data name="postCode" xml:space="preserve">
-    <value>33391</value>
+    <value>80745</value>
     <comment>郵遞區號</comment>
   </data>
   <data name="pre_site" xml:space="preserve">
@@ -288,7 +288,7 @@
     <value>台灣民政府 中央發言人</value>
   </data>
   <data name="tel" xml:space="preserve">
-    <value>(03) 355-3669</value>
+    <value>(07) 323-1890</value>
   </data>
   <data name="WV_site" xml:space="preserve">
     <value>TCG華盛頓官網</value>
