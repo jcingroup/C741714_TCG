@@ -87,13 +87,13 @@
                         <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "zh-TW" ? "hidden" : "")">
                             <a href="@Url.Action("Index", new { langCode = "zh-TW" })">漢字</a>
                         </li>
-                        <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "en-US" ? "hidden" : "")">
-                            @* <a href="@Url.Action("Index", new { langCode = "en-US" })">English</a> *@
+                        @* <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "en-US" ? "hidden" : "")">
+                            <a href="@Url.Action("Index", new { langCode = "en-US" })">English</a>
                             <a href="http://taiwancivilgovernment.com" target="new">English</a>
                         </li>
                         <li class="lang @(OutWeb.App_GlobalResources.Res.lang == "ja-JP" ? "hidden" : "")">
                             <a href="@Url.Action("Index", new { langCode = "ja-JP" })">日本語</a>
-                        </li>
+                        </li> *@
                         <li class="search">
                             <button class="search-trigger icon-search"></button>
                         </li>
@@ -168,20 +168,22 @@
                                 <i class="icon-people"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_1)
                             </a>
+                            @* 2019/12 關閉
                             <a class="@(ViewBag.BodyClass.Contains("Education") ? "current" : "")" href="~/AboutUs/EducationCategory?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-graduation-cap"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_eduCategory_1)
-                            </a>
+                            </a> *@
                             <a class="@(ViewBag.BodyClass.Contains("Organization") ? "current" : "")" href="~/AboutUs/Organization?cate_id=@OutWeb.App_GlobalResources.Res.MenuOrg_adminReg&langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-organization"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_org_1)
                             </a>
                         </li>
                         <li class="@(ViewBag.BodyClass.Contains("JoinUs") ? "" : "hidden")">
+                            @* 2019/12 "申請台灣民政府身分證" 頁面移到 [焦點專欄] 裡
                             <a class="@(ViewBag.BodyClass.Contains("Apply") ? "current" : "")" href="~/JoinUs/Apply?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-drivers-license-o"></i>
                                 @Html.Raw(OutWeb.App_GlobalResources.Res.joinUs_apply_1)
-                            </a>
+                            </a> *@
                             <a class="@(ViewBag.BodyClass.Contains("Consult") ? "current" : "")" href="~/JoinUs/Consult?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-phone"></i>
                                 @Html.Raw(OutWeb.App_GlobalResources.Res.joinUs_consult_1)
@@ -263,11 +265,11 @@
                     </a>
                 </h1>
                 <ul class="list-unstyled">
-                    <!-- <li>
+                    @* <li>
                         <h2>
                             <a href="~/AboutUs/TCG">台灣民政府由來</a>
                         </h2>
-                    </li> -->
+                    </li>  *@
                     <li>
                         <h2>
                             <a href="~/AboutUs/Position?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs</a>
@@ -295,11 +297,12 @@
                             </li>
                         </ul>
                     </li>
+                    @* 2019/12 關閉
                     <li>
                         <h2>
                             <a href="~/AboutUs/EducationCategory?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs_eduCategory</a>
                         </h2>
-                    </li>
+                    </li> *@
                     <li>
                         <h2>
                             <a href="~/AboutUs/Organization?cate_id=@OutWeb.App_GlobalResources.Res.MenuOrg_adminReg&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs_org</a>
@@ -359,11 +362,12 @@
                                     <a href="~/JoinUs/Live?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_live</a>
                                 </h3>
                             </li>
+                            @* 開課時間表
                             <li>
                                 <h3>
                                     <a href="~/JoinUs/Schedule?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_schedule</a>
                                 </h3>
-                            </li>
+                            </li> *@
                             <li>
                                 <h3>
                                     <a href="~/JoinUs/Gallery?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_gallery</a>
@@ -418,14 +422,14 @@
                     @OutWeb.App_GlobalResources.Res.link
                 </h1>
                 <ul class="list-unstyled">
-                    <li class="mt-0">
+                    @*<li class="mt-0">
                         <h2 class="text">@OutWeb.App_GlobalResources.Res.spokesman_w<br>@OutWeb.App_GlobalResources.Res.spokesman_p</h2>
                     </li>
-                    @*<li>
+                    <li>
                         <h2><a href="https://www.facebook.com/TaiwanCivilGovernment/" target="new">@OutWeb.App_GlobalResources.Res.fbPage_1</a></h2>
                     </li>*@
-                    <li>
-                        <h2><a href="https://www.facebook.com/usmgtcgov.tw/" target="new">@OutWeb.App_GlobalResources.Res.fbPage_2</a></h2>
+                    <li class="mt-0">
+                        <h2><a href="https://www.facebook.com/usmgtcgov.tw/" target="new">@OutWeb.App_GlobalResources.Res.fbPage_1</a></h2>
                     </li>
                     <li>
                         <h2><a href="http://usmgtcg.ning.com/" target="new">@OutWeb.App_GlobalResources.Res.pre_site</a></h2>

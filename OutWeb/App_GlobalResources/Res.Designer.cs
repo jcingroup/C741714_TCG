@@ -259,7 +259,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 FB 官方粉絲頁remove 的當地語系化字串。
+        ///   查詢類似 FB 官方粉絲頁1 的當地語系化字串。
         /// </summary>
         public static string fbPage_1 {
             get {

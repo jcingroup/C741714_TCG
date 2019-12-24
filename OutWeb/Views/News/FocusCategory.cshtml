@@ -16,14 +16,22 @@
 </h1>
 
 <ul class="list-category list-unstyled row row-center">
-@foreach (var focus in Model)
-{
+    @* 2019/12 搬家 *@
+    <li class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <a href="~/JoinUs/Apply?langCode=@OutWeb.App_GlobalResources.Res.lang">
+            <span>申請台灣民政府身份證</span>
+        </a>
+    </li>
+
+    @foreach (var focus in Model)
+    {
         <li class="col-lg-3 col-md-4 col-sm-6 col-12">
             <a href="@Url.Content("~/News/FocusList?focusTypeID=" + focus.Key + "&langCode=" + @OutWeb.App_GlobalResources.Res.lang)">
                 <span>@focus.Value</span>
             </a>
         </li>
     }
+
     @*
     <li class="col-lg-3 col-md-4 col-sm-6 col-12">
         <a href="~/News/FocusList">
@@ -54,6 +62,5 @@
         <a href="~/News/FocusList">
             <span>焦點專欄分類6</span>
         </a>
-    </li>
-    *@
+    </li> *@
 </ul>
