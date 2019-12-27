@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+//
+// label
+// --------------------------------------------------
+
+[class^="label"] {
+    display: inline-block;
+    padding: $label-pd;
+    line-height: 1;
+    @include rem(font-size, 14px);
+
+    &:not(:only-of-type) {margin: $label-mg;}
+    &:first-of-type {margin-left: 0;}
+    &:last-of-type  {margin-right: 0;}
+
+
+    @if $label-border-radius { border-radius: $label-border-radius;}
+    @if $label-border        { border-left: $label-border;}
+    @if $label-bg            { background: $label-bg; }
+    @if $label-color         { color: $label-color; }
+}
+
+em[class*="label"] {
+    font-style: normal;
+}
+
+@if $states {
+
+    @each $type, $color in $colors {
+        .label-#{$type} {
+            @if $type == "warning" {
+                background: lighten(desaturate($color, 20), 25);
+            }
+            @else {
+                background: lighten(desaturate($color, 20), 50);
+            }
+            border-left: 3px solid $color;
+        }
+        a.label-#{$type} {
+            &:hover, &:focus, &:active {
+                color: #fff;
+                background: $color;
+            }
+        }
+    }
+}

@@ -1,0 +1,265 @@
+@charset "UTF-8";
+
+// common ref: core/mixins
+// ------------------------------------------------------------
+// 常用樣式
+.clearfix      { @include clearfix; }
+.sr-only       { @include sr-only; }
+
+// 偶爾用到
+.pull-left     { float: left; }
+.pull-right    { float: right; }
+.block         { display: block; }
+.inline-block  { display: inline-block; }
+.inline        { display: inline; }
+.clear         { clear: both; }
+.hidden        { display: none; }
+.circle        { border-radius: 50%; } // 圓形
+.img-center    { display: block; margin: auto; }
+
+.center {
+    margin-right: auto;
+    margin-left:  auto;
+}
+
+// spacing (ref: core/_variables.scss)
+// src: https://gist.github.com/MatthewRDodds/8f171914ee6b826db29393f33229d509
+// ex. mt-6, p-12
+@each $prop, $abbrev in (margin: m, padding: p) {
+    @each $size, $value in $spacing {
+
+        .#{$abbrev}-#{$size}  { #{$prop}:        $value !important; } // All sides
+        .#{$abbrev}t-#{$size} { #{$prop}-top:    $value !important; }
+        .#{$abbrev}r-#{$size} { #{$prop}-right:  $value !important; }
+        .#{$abbrev}b-#{$size} { #{$prop}-bottom: $value !important; }
+        .#{$abbrev}l-#{$size} { #{$prop}-left:   $value !important; }
+
+        // Axes
+        .#{$abbrev}x-#{$size} {
+            #{$prop}-right:  $value !important;
+            #{$prop}-left:   $value !important;
+        }
+        .#{$abbrev}y-#{$size} {
+            #{$prop}-top:    $value !important;
+            #{$prop}-bottom: $value !important;
+        }
+    }
+}
+
+
+// vertical align
+// inline, inline-block, inline-table, and table cell elements.
+// ------------------------------------------------------------
+.align-top    { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+
+// text
+// ------------------------------------------------------------
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+.text-center { text-align: center; }
+
+.text-hide   { @include text-hide; }
+
+@if $font-family-sp {
+    .font-sp { font-family: $font-family-sp; }
+}
+
+// src: w3.css v4
+.font-tiny   { @include rem('font-size',13); }  // 10px
+.font-sm     { @include rem('font-size',14); }  // 12px
+.font-md     { @include rem('font-size',15); }  // 15px
+.font-lg     { @include rem('font-size',18); }  // 18px
+.font-xl     { @include rem('font-size',24); }  // 24px
+.font-xxl    { @include rem('font-size',32); }  // 36px
+.font-xxxl   { @include rem('font-size',48); }  // 48px
+.font-jumbo  { @include rem('font-size',64); }  // 64px
+
+
+// 情境
+// ------------------------------------------------------------
+.text-white { color: #fff; }
+.bg-white   { background-color: #fff; }
+.bg-black   { background-color: #000; }
+
+// ref: core/variables.scss $states: true
+@if $states {
+    @each $type, $color in $colors {
+        .text-#{$type}  { color: $color; }
+        .bg-#{$type}    { background-color: $color; }
+        .hover-#{$type} {
+            color: $color;
+            &:hover, &:active { color: darken($color, 15);}
+        }
+    }
+}
+
+
+// sizing
+// ------------------------------------------------------------
+@each $size, $value in $sizes {
+    .w-#{$size} { width: $value; }
+}
+.w-auto { width: auto; }
+
+// goTop
+// ------------------------------------------------------------
+.goTop {
+    z-index: z(goTop);
+
+    @extend .text-white;
+    @include fixed(bottom 70px right 1%);
+    // @include transition(.4s);
+    @include circle(40px, center, rgba(#000,.35));
+
+    display: none;
+    transition: none;
+    font-size: em(14);
+
+    &:hover, &:active {
+        @extend .text-white;
+        background: rgba(#000,.7);
+    }
+    &::before { top: 0 !important; }
+
+    @include mq-max(break(tablet,-1)) {
+        bottom: 100px;
+    }
+}
+
+
+// 本次專案才用到的樣式
+// ------------------------------------------------------------
+
+// type
+// font-family-sp for 阿拉伯數字專用字型
+@font-face {
+    font-family: NumberFont;
+    unicode-range: U+0030-0039;
+    src: local(\5FAE\8EDF\6B63\9ED1\9AD4),
+         local("微軟正黑體"),
+         local("Microsoft JhengHei"),
+         local("Arial"),
+         local("sans-serif");
+}
+
+.title {
+    font-weight: bold;
+
+    @if $isPage {
+        @include rem('font-size', 24);
+        color: lighten($brand-primary, 19%);
+        font-weight: bold;
+        letter-spacing: 0.05em;
+        margin: 20px 0 25px 0;
+
+        .underline {
+            display: inline-block;
+            // max-width: calc(100% - 120px);
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eac309;
+        }
+
+        .date {
+            @include rem('font-size', 14);
+        }
+
+        .label {
+            margin-bottom: $spacer*0.7;
+            padding-bottom: 6px;
+            font-weight: normal;
+            letter-spacing: 0;
+        }
+    }
+
+    @include mq-max(break(desktop,-1)) {
+        @include rem('font-size', 22);
+        margin: 16px 0 20px 0;
+        .underline {
+            padding-bottom: 6px;
+        }
+    } // desktop -1
+
+    @include mq-max(break(tablet,-1)) {
+        @include rem('font-size', 20);
+        margin: $spacer*1.2 0 $spacer*0.9;
+        .underline {
+            // max-width: none;
+            padding-bottom: 4px;
+        }
+    } // tablet -1
+}
+.title2 {
+    @include rem('font-size', 20);
+    font-weight: bold;
+    color: darken($brand-secondary, 20);
+}
+
+.list-cjk {
+    list-style-type: cjk-ideographic;
+}
+
+// media
+.embed-responsive {
+    display: block;
+    width: 100%;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+
+    &::before {
+        content: " ";
+        display: block;
+        padding-top: 9/16 * 100%;
+    }
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+// helper
+.hidden {
+    display: none !important;
+}
+.visible-md {
+    display: none;
+    @include mq-max(break(desktop,-1)) {
+        display: block;
+    } // desktop -1
+}
+.visible-sm {
+    display: none;
+    @include mq-max(break(tablet,-1)) {
+        display: block;
+    } // tablet -1
+}
+.hidden-sm {
+    @include mq-max(break(tablet,-1)) {
+        display: none;
+    } // tablet -1
+}
+.hidden-sm2 {
+    @include mq-max(tablet) {
+        display: none;
+    } // tablet (grid 誤差bug)
+}
+.visible-xs {
+    display: none;
+    @include mq-max(break(phone-plus,-1)) {
+        display: block;
+    } // phone-plus -1
+}
+.hidden-xs {
+    @include mq-max(break(phone-plus,-1)) {
+        display: none;
+    } // phone-plus -1
+}

@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+// button
+// ----------------------------------------------
+
+.btn {
+    // common
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+    user-select: none;
+
+    // color
+    @if $btn-bg            { background: $btn-bg; }
+    @if $btn-color         { color: $btn-color; }
+
+    // size
+    @if $btn-font-size     { font-size: rem($btn-font-size); }
+    @if $btn-line-height   { line-height: $btn-line-height; }
+    @if $btn-pd            { padding: $btn-pd; }
+
+    // other
+    @if $btn-border-radius { border-radius: $btn-border-radius; }
+    @if $btn-effect        { @include transition($btn-effect); }
+    letter-spacing: 1px;
+
+    &:hover, &:active, &:focus, &.active {
+        @if $btn-hover-bg     { background: $btn-hover-bg }
+        @if $btn-hover-color  { color: $btn-hover-color }
+    }
+
+    &.disabled, &[disabled], fieldset[disabled] & {
+        cursor: $cursor-disabled;
+        opacity: .65;
+        @if $btn-disabled-bg { background: $btn-disabled-bg; }
+    }
+
+    // 各尺寸按鈕
+    &.sm {
+        @extend .font-md, .px-12;
+        // font-size: $btn-sm;
+        // padding: ($btn-sm * $btn-line-height * 0.4) ($btn-sm * 0.8);
+    }
+    &.lg {
+        @extend .font-lg, .py-8, .px-32;
+        // font-size: $btn-lg;
+        // padding: ($btn-lg * $btn-line-height * 0.4) ($btn-lg * 0.8);
+    }
+
+    @if $btn-theme {
+        @each $type, $color in $btn-theme {
+            &.#{$type} {
+                background: #{$color};
+
+                &:hover, &:active, &.active {
+                    background: lighten($color,8);
+                }
+            }
+        }
+    }
+    &.white {
+        @extend .bg-white, .text-primary;
+        &:hover, &:active, &.active {
+            @extend .text-white;
+            background: lighten($brand-primary,8);
+        }
+    }
+}
+

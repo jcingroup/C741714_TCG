@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+// 本頁專用變數(覆蓋)
+// ------------------------------------------------------------
+$isIndex:                true;
+$img-index:              '../images/index';
+
+$header-height:          false;
+$modal-top:              false;
+$modal-close-size:       60px;
+// $table-pd:               8px 20px;
+
+
+// import
+// ------------------------------------------------------------
+@import "_client/variables"; // 前台用變數(置頂)
+
+@import "core/function";
+@import "core/variables";
+@import "core/mixins";
+
+// 由此 output css
+@import "vendor/normalize";  // 重置樣式
+@import "vendor/print";      // 列印樣式
+
+@import "_client/base/basic";
+@import "_client/base/link";
+@import "_client/base/type";
+@import "_client/base/form";
+
+@import "_client/layout";
+@import "_client/modules/nav";
+@import "_client/modules/btn";
+
+@import "_client/util"; // 建議置底
+
+
+// main
+// ------------------------------------------------------------
+
+// == banner
+#banner {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: url(#{$img-index}/banner.jpg) no-repeat center top / cover;
+    z-index: 1;
+
+    @include mq-max(break(tablet,-1)) {
+        background: url(#{$img-index}/bannerMobile.jpg) no-repeat center bottom / cover;
+    }
+}

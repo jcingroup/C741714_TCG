@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+@import "core/variables";
+@import "core/function";
+@import "core/mixins";
+
+
+// output
+// ------------------------------------------------------------
+.row {
+    @include clearfix;
+
+    margin-right: -($grid-gutter-width / 2);
+    margin-left:  -($grid-gutter-width / 2);
+    // &.row-x0 {
+    //     > [class*="col-"] {
+    //         &:first-of-type { padding-left: 0; }
+    //         &:last-of-type  { padding-right: 0; }
+    //     }
+    // }
+
+    & + & { margin-top: 0.5rem; }
+
+    &.row-center {
+        text-align: center;
+        li {
+            float: none;
+            display: inline-block;
+            margin-left: -4px;
+            text-align: left;
+            vertical-align: top;
+        }
+    }
+}
+
+// helper> mixins> grid
+@include make-grid-columns();
+
+.no-gutters {
+    > [class*="col-"] {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+// 簡單 col 應用
+// Ref: https://www.w3schools.com/w3css/w3css_grid.asp
+.col      { float: left; }
+.col-rest { overflow: hidden; }
+
+.cells    { display: table; width:100%; }
+.cell     { display: table-cell; }

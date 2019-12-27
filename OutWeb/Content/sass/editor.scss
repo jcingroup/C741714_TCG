@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+
+// import
+// ------------------------------------------------------------
+@import "_client/variables";
+
+@import "core/function";
+@import "core/variables";
+@import "core/mixins";
+
+@import "_client/base/basic";
+@import "_client/base/link";
+@import "_client/base/type";
+@import "_client/util";
+
+@import "grid";
+
+body {
+    padding: 10px 15px;
+    height: auto; 
+    @include rem('font-size', 17px);
+}
+h1,h2,h3,h4,h5,h6,p,blockquote,
+ul,ol,li,dl,dt,dd { text-align: left; }
+
+p {margin-bottom: $spacer*0.85;}
+
+table {
+    // width: 100% !important;
+}

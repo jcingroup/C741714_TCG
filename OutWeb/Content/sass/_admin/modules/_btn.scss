@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+// button
+// ----------------------------------------------
+
+.btn {
+    // common
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+    user-select: none;
+
+    // color
+    @if $btn-bg            { background: $btn-bg; }
+    @if $btn-color         { color: $btn-color; }
+
+    // size
+    @if $btn-font-size     { font-size: rem($btn-font-size); }
+    @if $btn-line-height   { line-height: $btn-line-height; }
+    @if $btn-pd            { padding: $btn-pd; }
+
+    // other
+    @if $btn-border-radius { border-radius: $btn-border-radius; }
+    @if $btn-effect        { @include transition($btn-effect); }
+    letter-spacing: 1px;
+
+    &:hover, &:active, &:focus, &.active {
+        @if $btn-hover-bg     { background: $btn-hover-bg }
+        @if $btn-hover-color  { color: $btn-hover-color }
+    }
+
+    &.disabled, &[disabled], fieldset[disabled] & {
+        cursor: $cursor-disabled;
+        opacity: .65;
+        @if $btn-disabled-bg { background: $btn-disabled-bg; }
+    }
+
+    // 各尺寸按鈕
+    &.sm {
+        @extend .font-sm, .py-0, .px-8;
+    }
+    &.lg {
+        @extend .font-lg, .py-12, .px-32;
+    }
+
+    @if $btn-theme {
+        @each $type, $color in $btn-theme {
+            &.#{$type} {
+                background: #{$color};
+
+                &:hover, &:active, &.active {
+                    background: lighten($color,8);
+                }
+            }
+        }
+    }
+    &.white {
+        @extend .bg-white, .text-primary;
+        &:hover, &:active, &.active {
+            @extend .text-white;
+            background: lighten(color('primary'),8);
+        }
+    }
+}
+
+// .btn-link {
+//     @if $btn-display       { display: inline; }
+//     @if $btn-line-height   { line-height: $line-height; }
+//     @if $btn-color         { color: $link-color; }
+//     @if $btn-effect        { @include transition($link-transition); }
+//     &:hover, &:active, &:focus {
+//         @if $btn-hover-bg     { background: none; }
+//         @if $btn-hover-color  { color: $link-hover-color }
+//     }
+//     &.disabled, &[disabled], fieldset[disabled] & {
+//         opacity: 1;
+//         @if $btn-disabled-bg { color: $btn-disabled-bg; background: none; }
+//     }
+// }

@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+// common - @extend in core/util
+// ------------------------------------------------------------
+// 常用樣式
+.clearfix           { @include clearfix; }
+.text-hide          { @include text-hide; }
+.sr-only            { @include sr-only; }
+
+// 偶爾用到
+.pull-left          { float: left; }
+.pull-right         { float: right; }
+.block              { display: block; }
+.inline-block       { display: inline-block; }
+.inline             { display: inline; }
+.clear              { clear: both; }
+[hidden], .hidden   { display: none; }
+.circle             { border-radius: 50%; } // 圓形
+.img-center         { display: block; margin: auto; }
+
+.center {
+    margin-right: auto;
+    margin-left:  auto;
+}
+
+// spacing (ref: core/_variables.scss)
+// src: https://gist.github.com/MatthewRDodds/8f171914ee6b826db29393f33229d509
+// ex. mt-6, p-12
+@each $prop, $abbrev in (margin: m, padding: p) {
+    @each $size, $value in $spacing {
+        // $length-x:   map-get($lengths, x);
+        // $length-y:   map-get($lengths, y);
+
+        .#{$abbrev}-#{$size}  { #{$prop}:        $value; } // All sides
+        .#{$abbrev}t-#{$size} { #{$prop}-top:    $value; }
+        .#{$abbrev}r-#{$size} { #{$prop}-right:  $value; }
+        .#{$abbrev}b-#{$size} { #{$prop}-bottom: $value; }
+        .#{$abbrev}l-#{$size} { #{$prop}-left:   $value; }
+
+        // Axes
+        .#{$abbrev}x-#{$size} {
+            #{$prop}-right:  $value;
+            #{$prop}-left:   $value;
+        }
+        .#{$abbrev}y-#{$size} {
+            #{$prop}-top:    $value;
+            #{$prop}-bottom: $value;
+        }
+    }
+}
+
+// vertical align
+// inline, inline-block, inline-table, and table cell elements.
+// ------------------------------------------------------------
+.align-top    { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+
+// text
+// ------------------------------------------------------------
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+.text-center { text-align: center; }
+
+@if $font-family-sp {
+    .font-sp     { font-family: $font-family-sp; }
+}
+
+// src: w3.css v4
+.font-tiny   { @include rem('font-size',12); }  // 13px
+.font-sm     { @include rem('font-size',13); }  // 14px
+.font-md     { @include rem('font-size',15); }
+.font-lg     { @include rem('font-size',20); }  // 20px
+.font-xl     { @include rem('font-size',24); }
+.font-xxl    { @include rem('font-size',32); }
+.font-xxxl   { @include rem('font-size',48); }
+.font-jumbo  { @include rem('font-size',64); }
+
+
+// 情境
+// ------------------------------------------------------------
+.text-white { color: #fff; }
+.bg-white   { background-color: #fff; }
+
+// ref: core/variables.scss $states: true
+@if $states {
+    @each $type, $color in $colors {
+        .text-#{$type} { color: $color; }
+        .bg-#{$type}   { background: $color; }
+        .hover-#{$type} {
+            color: $color;
+            &:hover, &:active { color: darken($color, 15); }
+
+
+        }
+    }
+    [class*="hover-"] {
+        &.disabled, &[disabled] {
+            color: $btn-disabled-bg;
+        }
+    }
+}
+
+
+// sizing
+// ------------------------------------------------------------
+@each $size, $value in $sizes {
+    .w-#{$size} { width: $value; }
+}
+.w-auto { width: auto; }
+
+
+// 本次專案才用到的樣式
+// ------------------------------------------------------------
+.underline {
+    border-bottom: 1px solid lighten(color("primary"),30);
+}
+
+h3.title {
+    @extend .mb-24, .font-lg, .text-primary, .underline;
+    line-height: 2;
+
+    small {
+        @extend .ml-8, .text-muted;
+    }
+}
+

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+//
+// == 單行欄位樣式：label + input + btn
+// <dl class="field"><dt></dt><dd></dd>
+// -------------------------------------------------
+.field {
+    @extend .mb-0;
+
+    @include clearfix;
+
+    & + & { margin-top: $fields-spacer; }
+
+    // label
+    dt {
+        // @extend .form-label, .text-right;
+        @extend .pl-0;
+        font-weight: normal;
+    }
+    dd {
+        @extend .pr-0;
+    }
+
+    input, select { vertical-align: middle; }
+
+    .btn {
+        // height: $input-height;
+        border-radius: 4px;
+        border: 1px solid darken($warning, 15);
+        @extend .px-48, .text-primary;
+
+        &:hover {
+            background-color: darken($warning, 8) !important;
+        }
+    }
+}

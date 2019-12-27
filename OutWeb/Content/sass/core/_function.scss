@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+// 去單位
+@function strip-unit($num) {
+    @return $num / ($num * 0 + 1);
+}
+
+// px換算至em
+@function em($px, $context: $font-size-base) {
+    @if (unitless($px)) {
+        $px: $px * 1px;
+    }
+
+    @if (unitless($context)) {
+        $context: $context * 1px;
+    }
+
+    @return $px / $context * 1em;
+}
+
+// px to rem
+@function rem($px, $base: $font-size-base) {
+
+    // 無單位時
+    @if unitless($px) {
+        @return ($px / strip-unit($base)) + rem;
+    }
+
+    @else {
+        // 單位 = px時
+        @if unit($px) == 'px' {
+            @return (strip-unit($px) / strip-unit($base)) + rem;
+        }
+        @if unit($px) == 'rem' {
+            @return $px;
+        }
+    }
+}
+
+// 編碼fix
+@function unicode($str){
+    @return unquote("\"")+unquote(str-insert($str, "\\", 1))+unquote("\"");
+}
+
+// z-index
+@function z($value) {
+    @return map-get($z-index, $value);
+}
+
+// 算頁面比例
+@function per($px, $datum: $max-width) {
+    @return (strip-unit($px) / strip-unit($datum)) * 100%;
+}
+
+// 取代變數
+// Replace `$search` with `$replace` in `$string`
+//
+// @author Hugo Giraudel src: https://css-tricks.com/snippets/sass/str-replace-function/
+// 使用方法:
+// .selector {
+//   $string: 'The answer to life the universe and everything is 42.';
+//   content: str-replace($string, 'e', 'xoxo');
+// }
+// str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#{$custom-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E"), "#", "%23") !default;
+@function str-replace($string, $search, $replace: "") {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}

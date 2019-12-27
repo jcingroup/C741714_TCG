@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+// == config
+// ----------------------------------------------------------------------
+$lte7:                    false !default;
+$enable-RWD:              true !default;
+$enable-flex:             false !default;     // 是否使用 flex 版
+$states:                  true !default;      // 情境文字是否輸出
+
+$isIndex:                 false !default;     // 前台首頁用
+$isPage:                  false !default;     // 前台內頁用
+$isLogin:                 false !default;     // 後台登入頁用
+$isAdmin:                 false !default;     // 後台系統用
+
+
+// == RWD-break
+// ----------------------------------------------------------------------
+$mq-breakpoints: (
+    mobile:           375px,  // 380px,
+    phone:            568px,  // 480px,
+    phone-plus:       667px,  // 640px,
+    tablet:           768px,  // 768px,
+    desktop:          1024px, // 980px,
+    wide:             1200px,
+    wider:            1400px
+) !default;
+
+
+// == grid
+// ----------------------------------------------------------------------
+$grid-columns:            12 !default;     // grid 格數
+$grid-gutter-width:       16px !default;   // grid 間距
+
+$grid-breakpoints: (
+    xs: phone,
+    sm: tablet,
+    md: desktop,
+    lg: wide,
+    xl: wider
+) !default;

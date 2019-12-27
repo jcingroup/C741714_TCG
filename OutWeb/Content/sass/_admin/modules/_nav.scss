@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+//
+// nav
+// 右上方資訊選單(回首頁,登出等)
+// ------------------------------------------------------------
+.navbar {
+    @if $navbar-height { height: $navbar-height }
+
+    @extend .pull-right;
+
+    #{$nav-name} {
+        @if $nav-bg        { background: $nav-bg; }
+        @if $nav-color     { color: $nav-color; }
+        @if $nav-font-size { font-size: em($nav-font-size); }
+        @if $nav-height {
+            height: if($nav-height == 'full', 100%, $nav-height);
+            @if $nav-height == 'full' {
+                line-height: $navbar-height;
+                // padding: ($height - $font-size)/2 0;  用pd的算法
+            }
+        }
+
+        @extend .px-12, .font-md;
+        display: block;
+        float: left;
+        border-left: 1px solid #fff;
+
+        &:last-child {
+            border-right: 1px solid #fff;
+        }
+
+        @each $class, $color in $nav-group {
+            &.#{$class} {
+                background: $color;
+
+                &:hover {
+                    background: lighten($color,10);
+                }
+                &:active, &:focus {
+                    background: draken($color,12);
+                    box-shadow: inset 3px 3px 10px rgba(#000,.3);
+                }
+            }
+        }
+    }
+}

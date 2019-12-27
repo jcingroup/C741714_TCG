@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+$height: 300px;
+$top:    $height/2;
+$bottom: 35px;
+
+figcaption {
+    @include prefix(backface-visibility, hidden);
+    &::before, &::after { pointer-events: none; }
+}
+figure {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    > a {
+        z-index: z(figure);
+        opacity: 0;
+        background: #fff; // for IE10 bugfix
+        top: 0;
+
+        @include size(100%);
+        @include absolute(left 0 top 0);
+    }
+}
