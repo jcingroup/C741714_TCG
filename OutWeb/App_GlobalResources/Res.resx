@@ -136,7 +136,8 @@
     <value>主張與立場</value>
   </data>
   <data name="aboutUs_statement" xml:space="preserve">
-    <value>台灣地位的聲明</value>
+    <value>台灣民政府基本法</value>
+    <comment>old:台灣地位的聲明</comment>
   </data>
   <data name="aboutUs_sub" xml:space="preserve">
     <value>什麼是台灣民政府</value>
@@ -251,7 +252,8 @@
     <value>認識台灣民政府</value>
   </data>
   <data name="nav_joinUs" xml:space="preserve">
-    <value>如何加入台灣民政府</value>
+    <value>地方服務處</value>
+    <comment>如何加入台灣民政府</comment>
   </data>
   <data name="nav_news" xml:space="preserve">
     <value>最新消息 活動公告</value>

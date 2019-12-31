@@ -640,6 +640,7 @@
     <Content Include="Views\Home\Search.en-US.cshtml" />
     <Content Include="Views\Home\Search.ja-JP.cshtml" />
     <Content Include="Views\JoinUs\sidebar.cshtml" />
+    <Content Include="Views\AboutUs\sidebar.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

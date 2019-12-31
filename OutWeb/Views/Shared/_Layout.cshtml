@@ -115,15 +115,25 @@
                 <nav id="menu">
                     <ul class="nav list-unstyled">
                         <li>
+                            @* 12.30 認識民政府 -> 主張與立場
                             <a href="~/AboutUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-about"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.home_about)
+                            </a> *@
+                            <a href="~/AboutUs/Position?langCode=@OutWeb.App_GlobalResources.Res.lang">
+                                <i class="icon-about"></i>
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_position)
                             </a>
                         </li>
                         <li>
+                            @* 12.30 如何加入 -> 組織架構
                             <a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-join-us"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.home_joinUs)
+                            </a> *@
+                            <a href="~/AboutUs/Organization?cate_id=8&langCode=@OutWeb.App_GlobalResources.Res.lang">
+                                <i class="icon-organization"></i>
+                                @Html.Raw(@OutWeb.App_GlobalResources.Res.org_org)
                             </a>
                         </li>
                         <li>
@@ -146,7 +156,9 @@
                             </a>
                         </li>
                         <li class="col-4">
-                            <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
+                            @* 12.30 url -> JoinUs/Consult
+                            <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang"> *@
+                            <a class="@(ViewBag.BodyClass.Contains("JoinUs") ? "current" : "")" href="~/JoinUs/Consult?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-join-us"></i>
                                 @OutWeb.App_GlobalResources.Res.nav_joinUs
                             </a>
@@ -281,6 +293,7 @@
                             <li>
                                 <h3><a href="~/AboutUs/Statement?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.aboutUs_statement</a></h3>
                             </li>
+                            @* 2019.12.30 隱藏
                             <li>
                                 <h3><a href="~/AboutUs/Law?cate_id=@OutWeb.App_GlobalResources.Res.MenuLaw_basic&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law</a></h3>
                                 <ul class="list-unstyled">
@@ -294,7 +307,7 @@
                                         <h4><a href="~/AboutUs/Law?cate_id=@OutWeb.App_GlobalResources.Res.MenuLaw_auth&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.law_paper</a></h4>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> *@
                         </ul>
                     </li>
                     @* 2019/12 關閉
@@ -323,14 +336,17 @@
             </li>
             <li>
                 <h1>
-                    <a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
+                    @* 2019.12.30 如何加入台灣民政府 -> 地方服務處
+                    <a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang"> *@
+                    <a href="~/JoinUs/Consult?langCode=@OutWeb.App_GlobalResources.Res.lang">
                         @OutWeb.App_GlobalResources.Res.nav_joinUs
                     </a>
                 </h1>
                 <ul class="list-unstyled">
+                    @* 2019.12.30 申請身份證隱藏
                     <li>
                         <h2><a href="~/JoinUs/Apply?langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_apply</a></h2>
-                    </li>
+                    </li> *@
                     <li>
                         <h2><a href="~/JoinUs/Consult?id=2&langCode=@OutWeb.App_GlobalResources.Res.lang">@OutWeb.App_GlobalResources.Res.joinUs_consult</a></h2>
                         <ul class="list-unstyled">

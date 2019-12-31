@@ -4,6 +4,7 @@
 
     ViewBag.BodyClass = "AboutUs Profile";
     ViewBag.Title = Res.aboutUs_position;
+    ViewBag.subnav = "Position";
 
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_detail = (DataTable)ViewData["d_detail"];
@@ -35,11 +36,7 @@
 
 <h1 class="sr-only">@Res.aboutUs</h1>
 
-<ul class="tabs list-inline text-center">
-    <li><a class="current" href="~/AboutUs/Position?langCode=@Res.lang">@Res.aboutUs_position</a></li>
-    <li><a href="~/AboutUs/Statement?langCode=@Res.lang">@Res.aboutUs_statement</a></li>
-    <li><a href="~/AboutUs/Law?cate_id=@Res.MenuLaw_basic&langCode=@Res.lang">@Res.law</a></li>
-</ul>
+@Html.Partial("sidebar")
 
 <h2 class="title">
     <span class="underline">@ViewBag.Title</span>

@@ -133,7 +133,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 台灣地位的聲明 的當地語系化字串。
+        ///   查詢類似 台灣民政府基本法 的當地語系化字串。
         /// </summary>
         public static string aboutUs_statement {
             get {
@@ -637,7 +637,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 如何加入台灣民政府 的當地語系化字串。
+        ///   查詢類似 地方服務處 的當地語系化字串。
         /// </summary>
         public static string nav_joinUs {
             get {

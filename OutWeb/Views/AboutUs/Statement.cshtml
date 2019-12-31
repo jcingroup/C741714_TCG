@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = Res.aboutUs_statement;
     ViewBag.BodyClass = "AboutUs Profile";
+    ViewBag.subnav = "Statement";
 
     DataTable dt = (DataTable)ViewData["dt"];
     DataTable d_detail = (DataTable)ViewData["d_detail"];
@@ -31,13 +32,9 @@
     <script src="~/Content/js/tabs.js"></script>
 } *@
 
-    <h1 class="sr-only">@Res.aboutUs</h1>
+<h1 class="sr-only">@Res.aboutUs</h1>
 
-<ul class="tabs list-inline text-center">
-    <li><a href="~/AboutUs/Position?langCode=@Res.lang">@Res.aboutUs_position</a></li>
-    <li><a class="current" href="~/AboutUs/Statement?langCode=@Res.lang">@Res.aboutUs_statement</a></li>
-    <li><a href="~/AboutUs/Law?cate_id=4&langCode=@Res.lang">@Res.law</a></li>
-</ul>
+@Html.Partial("sidebar")
 
 <h2 class="title">
     <span class="underline">@ViewBag.Title</span>
