@@ -255,12 +255,22 @@
             <div class="wrap">
                 <div class="copyright pull-left">
                     <i class="logo-sm"></i>
-                    <strong>台灣民政府 中央辦公廳</strong>
+                    <strong>台灣民政府 中央行政秘書處</strong>
                     <span class="hidden-sm">Taiwan Civil Government Central Headquarters</span> &copy; 2018 - @DateTime.Now.Year
                 </div>
                 <nav class="foot-nav pull-right">
-                    <span><a href="https://goo.gl/maps/9DmCY1X63dxzdmgd7" target="new"><span class="hidden-sm">@OutWeb.App_GlobalResources.Res.postCode</span>@OutWeb.App_GlobalResources.Res.address</a></span>
-                    <span>@OutWeb.App_GlobalResources.Res.tel</span>
+                    <span>
+                        <a href="https://goo.gl/maps/24TMZagdXMUkammF8" target="new">
+                            @* 2020-04 remove
+                            <span class="hidden-sm">@OutWeb.App_GlobalResources.Res.postCode</span> *@
+                            @OutWeb.App_GlobalResources.Res.address
+                        </a>
+                    </span>
+                    <span>
+                        @* 2020-04 remove
+                        @OutWeb.App_GlobalResources.Res.tel *@
+                        <a href="mailto:usmgtcg.srv@gmail.com">usmgtcg.srv@gmail.com</a>
+                    </span>
                 </nav>
             </div>
         </footer><!-- footer //-->
