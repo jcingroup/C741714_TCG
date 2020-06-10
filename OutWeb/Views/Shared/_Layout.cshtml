@@ -105,44 +105,47 @@
                         </li>
                     </ul>
                     <h1 class="logo">
-                        <a href="~/Home?langCode=@OutWeb.App_GlobalResources.Res.lang" title="@OutWeb.App_GlobalResources.Res.back_home">台灣民政府 Taiwan Civil Government</a>
+                        @if (ViewBag.IsFirstPage)
+                        {
+                            <a>台灣民政府 Taiwan Civil Government</a>
+                            <small class="logo-s">Taiwan Civil Government</small>
+                        }
+                        else
+                        {
+                            <a href="~/Home?langCode=@OutWeb.App_GlobalResources.Res.lang" title="@OutWeb.App_GlobalResources.Res.back_home">
+                                台灣民政府 Taiwan Civil Government
+                            </a>
+                        }
                     </h1>
+                    @if (ViewBag.IsFirstPage)
+                    {
+                        <h2 class="slogan">台灣法理地位正常化<em>即是復歸母國日本</em></h2>
+                    }
                 </div>
             </section>
 
             @if (ViewBag.IsFirstPage)
             {
-                <nav id="menu">
-                    <ul class="nav list-unstyled">
-                        <li>
-                            @* 12.30 認識民政府 -> 主張與立場
-                            <a href="~/AboutUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
-                                <i class="icon-about"></i>
-                                @Html.Raw(@OutWeb.App_GlobalResources.Res.home_about)
-                            </a> *@
-                            <a href="~/AboutUs/Position?langCode=@OutWeb.App_GlobalResources.Res.lang">
-                                <i class="icon-about"></i>
-                                @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_position)
-                            </a>
-                        </li>
-                        <li>
-                            @* 12.30 如何加入 -> 組織架構
-                            <a href="~/JoinUs?langCode=@OutWeb.App_GlobalResources.Res.lang">
-                                <i class="icon-join-us"></i>
-                                @Html.Raw(@OutWeb.App_GlobalResources.Res.home_joinUs)
-                            </a> *@
-                            <a href="~/AboutUs/Organization?cate_id=8&langCode=@OutWeb.App_GlobalResources.Res.lang">
-                                <i class="icon-organization"></i>
-                                @Html.Raw(@OutWeb.App_GlobalResources.Res.org_org)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">
-                                <i class="icon-news2"></i>
-                                @Html.Raw(@OutWeb.App_GlobalResources.Res.home_news)
-                            </a>
-                        </li>
-                    </ul>
+                <nav class="intro-nav">
+                    @* 2020.06 最新消息 *@
+                    <a href="~/News?langCode=@OutWeb.App_GlobalResources.Res.lang">
+                        @Html.Raw(@OutWeb.App_GlobalResources.Res.news)
+                    </a>
+
+                    @* 2020.06 焦欄專欄 *@
+                    <a href="~/News/FocusCategory?langCode=@OutWeb.App_GlobalResources.Res.lang">
+                        @Html.Raw(@OutWeb.App_GlobalResources.Res.news_focusCategory)
+                    </a>
+
+                    @* 2020.06 主張與立場 *@
+                    <a href="~/AboutUs/Position?langCode=@OutWeb.App_GlobalResources.Res.lang">
+                        @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_position)
+                    </a>
+
+                    @* 2020.06 組織架構 *@
+                    <a href="~/AboutUs/Organization?cate_id=8&langCode=@OutWeb.App_GlobalResources.Res.lang">
+                        @Html.Raw(@OutWeb.App_GlobalResources.Res.org_org)
+                    </a>
                 </nav>
             }
             else
@@ -246,9 +249,12 @@
 
     </div><!-- wrapper //-->
 
-    @if (!ViewBag.IsFirstPage)
+    @if (ViewBag.IsFirstPage)
     {
-
+        <footer class="copyright">&copy; 2018 - @DateTime.Now.Year TAWWAN CIVIL GOVERNMENT.</footer>
+    }
+    else
+    {
         <a href="#header" class="goTop oi" data-glyph="chevron-top" title="TOP"></a>
 
         <footer id="footer">
@@ -267,14 +273,13 @@
                         </a>
                     </span>
                     <span>
-                        @* 2020-04 remove
-                        @OutWeb.App_GlobalResources.Res.tel *@
-                        <a href="mailto:usmgtcg.srv@gmail.com">usmgtcg.srv@gmail.com</a>
+                        @* 2020-06 mail => tel *@
+                        <a href="tel:@OutWeb.App_GlobalResources.Res.tel">@OutWeb.App_GlobalResources.Res.tel</a>
+                        @* <a href="mailto:usmgtcg.srv@gmail.com">usmgtcg.srv@gmail.com</a> *@
                     </span>
                 </nav>
             </div>
         </footer><!-- footer //-->
-
     }
 
     <nav id="sitemap" class="popup">

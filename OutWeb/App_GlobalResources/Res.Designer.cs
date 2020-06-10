@@ -919,7 +919,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 (07) 323-1890 的當地語系化字串。
+        ///   查詢類似 (07) 787-6459 的當地語系化字串。
         /// </summary>
         public static string tel {
             get {

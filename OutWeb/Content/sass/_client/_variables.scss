@@ -8,7 +8,7 @@ $enable-RWD: true;
 // == color
 // ----------------------------------------------------------------------
 // 抽象色
-$brand-primary:           #3b1b0f;    // 主色
+$brand-primary:           #273764;    // 主色
 $brand-secondary:         #cea87a;    // 輔色
 $muted:                   #E3E3E4;    // 灰色
 $success:                 #88C200;    // 綠
@@ -188,8 +188,8 @@ $header-height:         false !default; // for page
 $header-bg:             false !default;
 
 // logo
-$logo-img:              'logo.png' !default; // 'logo.gif' or false
-$logo-size:             625px 92px !default;
+$logo-img:              'logo.gif' !default; // 'logo.gif' or false
+$logo-size:             568px 76px !default;
 
 // footer
 $footer-height:         60px !default;

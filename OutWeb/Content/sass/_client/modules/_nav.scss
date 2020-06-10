@@ -19,89 +19,40 @@
     }
 
     .nav {
+        width: 100%;
         margin: 0;
-
-        @if $isPage {
-            width: 100%;
-            max-width: 1400px;
-            position: fixed;
-            top: $bannerHeight;
-            z-index: z(overlay) - 20;
-        }
-
-        li {
-            @if $isIndex {
-                display: inline-block;
-
-                &:nth-child(1) i { line-height: 182px; }
-                // &:nth-child(2) i { font-size: em(78px); }
-            }
-        }
+        max-width: 1400px;
+        position: fixed;
+        top: $bannerHeight;
+        z-index: z(overlay) - 20;
 
         #{$nav-root} {
+            display: block;
+            padding: 10px;
+            position: relative;
+            color: color();
+            letter-spacing: 0.05em;
+            overflow: hidden;
+            z-index: 2;
+            background: #E1E2E6;
+            // background: lighten(desaturate($brand-primary,5%), 10%);
 
-            @if $isIndex {
+            i {
                 display: inline-block;
-                width: 200px;
-                text-align: center;
-                margin: 0 $spacer*3.5;
-                vertical-align: top;
-                line-height: 1.35;
-                color: #fff;
-                font-size: em(28px);
-                font-weight: bold;
-                text-shadow: 0 4px 4px hsla(0,0,0,0.7);
-                transition: margin 0.3s;
-
-                i {
-                    display: block;
-                    width: 100%;
-                    height: 200px;
-                    margin-top: 0;
-                    margin-bottom: $spacer*2;
-                    line-height: 200px;
-                    font-size: em(65px);
-                    text-shadow: none;
-                    background: hsla(200,50,23,0.7);
-                    border: 3px solid #ff9a52;
-                    border-radius: 50%;
-                    box-shadow: 0 5px 10px hsla(0,0,0,0.5);
-                    transition: box-shadow 0.3s;
-                }
-
-                &:hover, &:active {
-                    i {
-                        box-shadow: 0 0 80px hsla(0,0,100%,0.5);
-                    }
-                }
+                margin-right: 20px;
+                color: inherit;
+                transform: scale(10);
+                opacity: 0;
+                transition: transform 0.5s, opacity 0.5s;
             }
 
-            @if $isPage {
-                display: block;
-                padding: 10px;
-                position: relative;
+            &:hover, &:active, &:focus, &.current {
                 color: #fff;
-                letter-spacing: 0.05em;
-                overflow: hidden;
-                z-index: 2;
-                background: lighten(desaturate($brand-primary,5%), 10%);
+                background: color();
 
                 i {
-                    display: inline-block;
-                    margin-right: 20px;
-                    color: #fff;
-                    transform: scale(10);
-                    opacity: 0;
-                    transition: transform 0.5s, opacity 0.5s;
-                }
-
-                &:hover, &:active, &:focus, &.current {
-                    background: lighten(desaturate($brand-primary,5%), 15%);
-
-                    i {
-                        transform: scale(2);
-                        opacity: 0.2;
-                    }
+                    transform: scale(2);
+                    opacity: 0.2;
                 }
             }
         }
@@ -124,8 +75,8 @@
             padding: 12px;
             vertical-align: top;
             letter-spacing: 0.05em;
-            color: darken(desaturate($brand-secondary, 30%),10%);
-            border: 1px solid lighten(desaturate($brand-secondary, 10%),20%);
+            color: #808080;
+            border: solid #e6e6e6;
             border-width: 1px 0 1px 1px;
 
             .en-US & {width: 270px;}
@@ -140,54 +91,35 @@
                 display: block;
                 margin-bottom: $spacer*0.3;
                 font-size: em(50px);
-                opacity: 0.5;
+                opacity: 0.3;
             }
 
             &:hover, &:active, &:focus, &.current {
-                color: lighten($brand-primary, 20);
+                color: color(danger);
             }
 
             &.current {
                 font-weight: bold;
-                background: #ede4d7;
+                background: #f2f2f2;
             }
         }
     }
 
     @include mq-max(break(desktop,-1)) {
         .nav {
-            @if $isPage {
-                left: 0;
-                top: 100px;
-            }
-            li {
-                @if $isIndex {
-                    &:nth-child(1) i { line-height: 135px; }
-                    &:nth-child(2) i { font-size: em(60px); }
-                }
-            }
+            left: 0;
+            top: 100px;
+
             #{$nav-root} {
-                @if $isIndex {
-                    width: 150px;
-                    margin: 0 $spacer*2;
-                    font-size: em(26px);
+                .en-US & {
                     i {
-                        height: 150px;
-                        line-height: 150px;
-                        font-size: em(50px);
+                        margin-right: 15px;
                     }
                 }
-                @if $isPage {
-                    .en-US & {
-                        i {
-                            margin-right: 15px;
-                        }
-                    }
-                    .ja-JP & {
-                        font-size: em(14px);
-                        i {
-                            margin-right: 10px;
-                        }
+                .ja-JP & {
+                    font-size: em(14px);
+                    i {
+                        margin-right: 10px;
                     }
                 }
             }
@@ -208,18 +140,7 @@
 
     @include mq-max(break(tablet,-1)) {
         .nav {
-            @if $isPage {
-                display: none;
-            }
-
-            #{$nav-root} {
-                @if $isIndex {
-                    margin: 0 $spacer*1.5;
-                    i {
-                        background: hsla(0,0,0,0.6);
-                    }
-                }
-            }
+            display: none;
         }
         .sub-nav {
             width: 100%;
@@ -255,26 +176,6 @@
     } // tablet -1
 
     @include mq-max(break(phone-plus,-1)) {
-        .nav {
-            li {
-                @if $isIndex {
-                    &:nth-child(1) i { line-height: 110px; }
-                    &:nth-child(2) i { font-size: em(55px); }
-                }
-            }
-            #{$nav-root} {
-                @if $isIndex {
-                    width: 120px;
-                    margin: 0 $spacer*1.5;
-                    font-size: em(22px);
-                    i {
-                        height: 120px;
-                        line-height: 120px;
-                        font-size: em(45px);
-                    }
-                }
-            }
-        }
         .sub-nav {
             #{$nav-root} {
                 padding: 8px 10px;
@@ -284,45 +185,6 @@
     } // phone-plus -1
 
     @include mq-max(break(phone,-1)) {
-        .nav {
-            li {
-                @if $isIndex {
-                    width: 30%;
-                    &:nth-child(1) i { line-height: 1; }
-                    &:nth-child(2) i { font-size: em(65px); }
-                }
-            }
-            #{$nav-root} {
-                @if $isIndex {
-                    width: 135px;
-                    max-width: 100%;
-                    margin: 0;
-                    padding: 0 $spacer*0.75;
-                    font-size: em(14px);
-                    i {
-                        height: auto;
-                        position: relative;
-                        margin-bottom: $spacer;
-                        line-height: 1;
-                        font-size: em(55px);
-                        border-width: 2px;
-
-                        &::before {
-                            position: absolute;
-                            left: 50%;
-                            top: 50%;
-                            transform: translate(-50%, -50%);
-                        }
-
-                        @include el(after) {
-                            content: " ";
-                            display: block;
-                            padding-top: 100%;
-                        }
-                    }
-                }
-            }
-        }
         .sub-nav {
             #{$nav-root} {
                 .en-US & {
@@ -332,23 +194,6 @@
             }
         }
     } // phone -1
-
-    @include mq-max(break(mobile,-1)) {
-        .nav {
-            li {
-                @if $isIndex {
-                    &:nth-child(2) i { font-size: em(55px); }
-                }
-            }
-            #{$nav-root} {
-                @if $isIndex {
-                    i {
-                        font-size: em(45px);
-                    }
-                }
-            }
-        }
-    } // mobile -1
 }
 
 svg {

@@ -38,22 +38,23 @@
         position: relative;
         padding-top: 10px;
     }
-    @if $isPage {
-        background: linear-gradient(179deg, #f8f8f8 0%, #e8e5e1 100%);
+    @else {
+        background: linear-gradient(to right, #C7CFD6, #fff 28%, #fff 68%, #C7CFD6);
+
+        @include mq-max(break(tablet,-1)) {
+            padding-bottom: 100px + 15px + 60px + 15px;
+            .en-US &, .ja-JP & {
+                padding-bottom: 250px;
+            }
+        }
+        @include mq-max(break(phone,-1)) {
+            padding-bottom: 100px + 15px + 60px + 15px + 40px;
+            .en-US &, .ja-JP & {
+                padding-bottom: 268px;;
+            }
+        }
     }
 
-    @include mq-max(break(tablet,-1)) {
-        padding-bottom: 100px + 15px + 60px + 15px;
-        .en-US &, .ja-JP & {
-            padding-bottom: 250px;
-        }
-    }
-    @include mq-max(break(phone,-1)) {
-        padding-bottom: 100px + 15px + 60px + 15px + 40px;
-        .en-US &, .ja-JP & {
-            padding-bottom: 268px;;
-        }
-    }
 }
 
 // header
@@ -64,18 +65,29 @@
     z-index: z(header);
 
     // 本次專案
-    // @include fixed(top 0 left 0);
-    // @include transition(.3s ease-in);
-
-    // width: 100%;
-
     @if $isIndex {
         position: relative;
         z-index: 10;
     }
-
-    @if $isPage {
+    @else {
         padding-top: 120px;
+
+        @include mq-max(break(desktop,-1)) {
+            padding-top: 100px;
+        } // desktop -1
+
+        @include mq-max(break(tablet,-1)) {
+            padding-top: 70px;
+        } // tablet -1
+
+        @include mq-max(break(phone-plus,-1)) {
+            padding-top: 125px;
+        } // phone-plus -1
+
+        @include mq-max(break(phone,-1)) {
+            padding-top: 92px;
+        } // phone -1
+
         &::before {
             content: " ";
             display: block;
@@ -84,41 +96,18 @@
             position: fixed;
             left: 0;
             top: $bannerHeight;
-            background: lighten(desaturate($brand-primary,5%), 10%);
+            background: #E1E2E6;
             z-index: 1;
             transition: top 0.35s;
+
+            @include mq-max(break(desktop,-1)) {
+                display: none;
+            }
         }
         .wrap {
             position: relative;
         }
     }
-
-    @include mq-max(break(desktop,-1)) {
-        @if $isPage {
-            padding-top: 100px;
-            &::before {
-                display: none;
-            }
-        }
-    } // desktop -1
-
-    @include mq-max(break(tablet,-1)) {
-        @if $isPage {
-            padding-top: 70px;
-        }
-    } // tablet -1
-
-    @include mq-max(break(phone-plus,-1)) {
-        @if $isPage {
-            padding-top: 125px;
-        }
-    } // phone-plus -1
-
-    @include mq-max(break(phone,-1)) {
-        @if $isPage {
-            padding-top: 92px;
-        }
-    } // phone -1
 }
 
 .topNav {
@@ -134,15 +123,15 @@
         position: static;
     }
 
-    li{
+    li {
         vertical-align: middle;
         font-size: em(20px);
 
         a, button {
-            color: #fff;
-            text-shadow: 0 2px 2px hsla(0,0,0,0.5);
+            color: #4d4d4d;
+
             &:hover, &:active, &:focus {
-                color: lighten($brand-secondary,10%);
+                color: color(secondary);
             }
         }
 
@@ -169,59 +158,19 @@
         &.search {
             margin-left: $spacer*0.75;
 
-            // .search-form {
-            //     width: 0;
-            //     float: left;
-            //     margin-top: 2px;
-            //     border-bottom: 1px solid #fff;
-            //     white-space: nowrap;
-            //     overflow: hidden;
-            //     transition: width 0.35s ease-in-out;
-            //     .form-element {
-            //         width: 150px;
-            //         min-height: 0;
-            //         padding: 0 6px;
-            //         line-height: 26px;
-            //         background: none;
-            //         border: 0;
-            //     }
-            //     button {
-            //         line-height: 24px;
-            //         color: #fff;
-            //         background: none;
-            //     }
-            // }
-
             button[class*="trigger"] {
                 padding: 0;
                 line-height: 30px;
                 background: none;
             }
-
-            // &.active {
-            //     .search-form {
-            //         width: 190px;
-            //     }
-            //     button[class*="trigger"] {
-            //         margin-left: 5px;
-            //     }
-            // }
         }
-
-        // &.share {
-        //     addThis
-        //     .at-share-btn {
-        //         margin: 0;
-        //     }
-        // }
 
         .sitemap-trigger {
             padding: 0;
             font-size: em(22px);
-            color: #fff;
+            // color: #fff;
             background: none;
         }
-
     }
 
     @include mq-max($max-width) {
@@ -238,19 +187,6 @@
     @include mq-max(break(desktop,-1)) {
         li {
             font-size: em(16px);
-
-            // &.search {
-            //     .search-form {
-            //         .form-element {
-            //             width: 150px;
-            //         }
-            //     }
-            //     &.active {
-            //         .search-form {
-            //             width: 190px;
-            //         }
-            //     }
-            // }
         }
     } // desktop -1
 
@@ -266,19 +202,6 @@
                 margin-right: 0;
             }
 
-            // &.search {
-            //     .search-form {
-            //         .form-element {
-            //             width: 120px;
-            //         }
-            //     }
-            //     &.active {
-            //         .search-form {
-            //             width: 160px;
-            //         }
-            //     }
-            // }
-
             .sitemap-trigger {
                 font-size: em(20px);
             }
@@ -293,7 +216,6 @@
             @include rem('right', 24px);
         }
     } // phone-plus -1
-
 }
 
 .logo {
@@ -303,28 +225,37 @@
     a {transition: none;}
 
     @if $isIndex {
-        position: static;
-        margin: 7% auto 10% auto;
+        margin: 150px auto 6.2% auto;
 
-        @include mq-max($max-width) {
-            @include rem('padding', 0 32px);
+        a, &-s {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        a {
+            @include text-pic('index/logo.png', 528px, 108px, center);
+        }
+        // 小logo(國家)
+        &-s {
+            @include text-pic('index/logo-s.png', 248px, 73px);
+            margin-left: 27px;
+            margin-top: 5px;
+        }
+
+        @include mq-max(phone-plus) {
+            margin: 20% auto 15%;
+
+            a {
+                max-width: 100%;
+                background-size: contain;
+            }
         }
         @include mq-max(phone) {
-            @include rem('padding',0 24px);
+            a {
+                height: 80px;
+            }
         }
-
-        a {
-            @include text-pic($logo-img, nth($logo-size,1), nth($logo-size,2));
-            display: inline-block;
-            width: 490px;
-            height: 80px;
-            background: url(#{$img-index}/logo.png) no-repeat left top / contain;
-            transition: none;
-        }
-
     }
-
-    @if $isPage {
+    @else {
         position: absolute;
         left: 0;
         top: ($bannerHeight - nth($logo-size,2) ) / 2;
@@ -332,164 +263,118 @@
         @include mq-max($max-width) {
             @include rem('left', 32px);
         }
+        @include mq-max(break(desktop,-1)) {
+            top: 20px;
+        } // desktop -1
+        @include mq-max(break(tablet,-1)) {
+            top: 14px;
+
+            .scrolled & {
+                top: 9px;
+            }
+        } // tablet -1
 
         a {
             @include text-pic($logo-img, nth($logo-size,1), nth($logo-size,2));
             display: block;
             background-size: contain;
-        }
-    }
 
-    @include mq-max(break(desktop,-1)) {
-        @if $isIndex {
-            margin: 7% auto 20% auto;
-        }
-        @if $isPage {
-            top: 20px;
-            a {
+            @include mq-max(break(desktop,-1)) {
                 width: 380px;
                 height: 56px;
             }
-        }
-    } // desktop -1
-
-    @include mq-max(break(tablet,-1)) {
-        @if $isPage {
-            top: 14px;
-            a {
+            @include mq-max(break(tablet,-1)) {
                 width: 300px;
                 height: 44px;
-            }
 
-            .scrolled & {
-                top: 9px;
-                a {
+                .scrolled & {
                     width: 30px;
                     height: 30px;
                     background-size: cover;
                 }
             }
-        }
-    } // tablet -1
-
-    @include mq-max(break(phone-plus,-1)) {
-        @if $isPage {
-            position: static;
-
-            a {
-                width: 100%;
-                height: 75px;
-                background-position: center top;
-            }
-
-            .scrolled & {
-                position: absolute;
-                a {
-                    background-position: left top;
-                }
-            }
-        }
-    } // phone-plus -1
-
-    @include mq-max(break(phone,-1)) {
-        @if $isPage {
-            a {
+            @include mq-max(break(phone,-1)) {
                 height: 46px;
-            }
+            } // phone -1
         }
-    } // phone -1
-
-    @include mq-max(break(phone,-1)) {
-        @if $isIndex {
-            margin: 20% auto;
-
-            a {
-                max-width: 100%;
-                height: auto;
-
-                &::before {
-                    content: " ";
-                    display: block;
-                    padding-top: 8/49 * 100%;
-                }
-            }
-        }
-    } // phone -1
+    }
 }
 
 
 // footer 頁腳
 // ----------------------------------------------------------------------
-#footer {
-    @if $footer-bg { background: $footer-bg; }
-    @if $footer-color { color: $footer-color; }
-    @if not $enable-RWD { min-width: $min-width; }
-    min-height: $footer-height;
-    margin-top: -($footer-height);
-    z-index: z(footer);
+@if $isPage {
+    #footer {
+        @if $footer-bg { background: $footer-bg; }
+        @if $footer-color { color: $footer-color; }
+        @if not $enable-RWD { min-width: $min-width; }
+        min-height: $footer-height;
+        margin-top: -($footer-height);
+        z-index: z(footer);
 
-    // 本次專案
-    padding-top: 8px;
-    font-size: em(14px);
-    font-family: $font-family-sp;
-
-    @include mq-max(break(tablet,-1)) {
-        margin-top: -(100px + 60px + 15px);
-        padding: 0;
-        color: #444;
-        background: none;
-
-        .en-US &, .ja-JP & {
-            margin-top: -185px;
-        }
-    }
-
-    @include mq-max(break(phone,-1)) {
-        .en-US &, .ja-JP & {
-            margin-top: -203px;
-        }
-    }
-}
-
-.foot-nav {
-    padding: 11px 0;
-
-    > span {
-        @extend .px-8;
-        margin-right: -4px;
-
-        color: inherit;
-        line-height: 1;
-
-        &:not(:first-child) {
-            border-left: 2px solid $brand-secondary;
-        }
-    }
-
-    a {
-        line-height: 1.4;
-        color: inherit;
-
-        &:hover, &:active {
-            color: lighten($brand-secondary,15%);
-        }
-    }
-
-    @include mq-max(break(desktop,-1)) {
-        padding: 0 0 0 40px;
-        float: none !important;
-        text-align: left;
-    } // desktop -1
-
-    @include mq-max(break(tablet,-1)) {
-        padding: 0;
-        text-align: center;
+        // 本次專案
+        padding-top: 8px;
         font-size: em(14px);
+        font-family: $font-family-sp;
+
+        @include mq-max(break(tablet,-1)) {
+            margin-top: -(100px + 60px + 15px);
+            padding: 0;
+            color: #444;
+            background: none;
+
+            .en-US &, .ja-JP & {
+                margin-top: -185px;
+            }
+        }
+
+        @include mq-max(break(phone,-1)) {
+            .en-US &, .ja-JP & {
+                margin-top: -203px;
+            }
+        }
+    }
+
+    .foot-nav {
+        padding: 11px 0;
+
         > span {
-            display: block;
-            margin: 5px 0;
+            @extend .px-8;
+            margin-right: -4px;
+
+            color: inherit;
+            line-height: 1;
+
             &:not(:first-child) {
-                border: 0;
+                border-left: 2px solid $brand-secondary;
+            }
+        }
+
+        a {
+            line-height: 1.4;
+            color: inherit;
+
+            &:hover, &:active {
+                color: lighten($brand-secondary,15%);
+            }
+        }
+
+        @include mq-max(break(desktop,-1)) {
+            padding: 0 0 0 40px;
+            float: none !important;
+            text-align: left;
+        } // desktop -1
+
+        @include mq-max(break(tablet,-1)) {
+            padding: 0;
+            text-align: center;
+            font-size: em(14px);
+            > span {
+                display: block;
+                margin: 5px 0;
+                &:not(:first-child) {
+                    border: 0;
+                }
             }
         }
     }
@@ -497,73 +382,81 @@
 
 .copyright {
     position: relative;
-    padding-left: 55px;
-    text-align: left;
-    font-size: em(12px, 14px);
 
-    strong {
-        display: block;
-        font-size: em(16px, 12px);
+    @if $isIndex {
+        margin: auto;
+        margin-top: -35px;
+        z-index: 1;
+        letter-spacing: 2px;
+        color: #999;
+        font-size: em(12);
     }
+    @else {
+        padding-left: 55px;
+        font-size: em(12px, 14px);
+        text-align: left;
 
-    i {
-        position: absolute;
-        left: 0;
-        top: 2px;
-        width: 40px;
-        height: 40px;
-        background: url(#{$img-path}/logo_s.png) no-repeat 0 0 / cover;
-    }
+        @include mq-max(break(desktop,-1)) {
+            padding-left: 48px;
+            float: none !important;
+        } // desktop -1
 
-    @include mq-max(break(desktop,-1)) {
-        padding-left: 48px;
-        float: none !important;
-        strong {
-            display: inline;
-            margin-right: 4px;
-        }
-        i {top: 3px;}
-    } // desktop -1
-
-    @include mq-max(break(tablet,-1)) {
-        margin-bottom: 5px;
-        padding: 0;
-        text-align: center;
-
-        strong {
-            font-size: em(23px);
+        @include mq-max(break(tablet,-1)) {
+            margin-bottom: 5px;
+            padding: 0;
+            text-align: center;
         }
 
-        i {
-            left: 50%;
-            top: 6px;
-            margin-left: -155px;
-            line-height: 1;
-            font-family: 'icomoon';
-            font-style: normal;
-            font-size: em(46px);
-            color: lighten(desaturate($brand-secondary, 30%), 10%);
-            background: none;
+        strong {
+            display: block;
+            font-size: em(16px, 12px);
 
-            &::before {
-                content: "\e916";
+            @include mq-max(break(desktop,-1)) {
+                display: inline;
+                margin-right: 4px;
+            }
+            @include mq-max(break(tablet,-1)) {
+                font-size: em(23px);
             }
         }
 
-        .en-US & {
-            i {
+        i {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 40px;
+            height: 40px;
+            background: url(#{$img-path}/logo_s.png) no-repeat 0 0 / cover;
+
+            @include mq-max(break(desktop,-1)) {
+                top: 3px;
+            }
+            @include mq-max(break(tablet,-1)) {
+                left: 50%;
+                top: -3px;
+                margin-left: -200px;
+                line-height: 1;
+                font-family: 'icomoon';
+                font-style: normal;
+                font-size: em(46px);
+                color: lighten(desaturate($brand-secondary, 30%), 10%);
+                background: none;
+
+                &::before {
+                    content: "\e916";
+                }
+
+                .en-US & {
+                    top: -40px;
+                    margin: 0;
+                    transform: translateX(-50%);
+                }
+            }
+            @include mq-max(break(phone,-1)) {
                 top: -40px;
                 margin: 0;
                 transform: translateX(-50%);
             }
-        }
-    }
-
-    @include mq-max(break(phone,-1)) {
-        i {
-            top: -40px;
-            margin: 0;
-            transform: translateX(-50%);
         }
     }
 }
@@ -661,25 +554,12 @@
 
 #sitemap {
     padding: $spacer;
-    
+
     h1, h2, h3, h4 {
         margin: 0;
         @include rem('font-size', 17px);
         text-shadow: 0 2px 2px #000;
     }
-    // h1 {
-    //     @include rem('font-size', 24px);
-    //     font-weight: bold;
-    // }
-    // h2 {
-    //     @include rem('font-size', 20px);
-    // }
-    // h3 {
-    //     @include rem('font-size', 18px);
-    // }
-    // h4 {
-    //     @include rem('font-size', 16px);
-    // }
 
     ul {
         margin: 0;
@@ -783,7 +663,7 @@
         }
 
         .en-US &, .ja-JP & {
-    
+
             > ul {
                 width: auto;
                 position: static;
@@ -830,18 +710,6 @@
             line-height: 28px;
             font-size: 1em;
         }
-        // h1 {
-        //     @include rem('font-size', 22px);
-        // }
-        // h2 {
-        //     @include rem('font-size', 18px);
-        // }
-        // h3 {
-        //     @include rem('font-size', 16px);
-        // }
-        // h4 {
-        //     @include rem('font-size', 14px);
-        // }
         > ul {
             width: auto;
             position: static;
@@ -868,5 +736,5 @@
 @include mq-max(break(tablet,-1)) {
     body.overlay {
         overflow: hidden;
-    } 
+    }
 }

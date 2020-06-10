@@ -8,6 +8,8 @@ $img-index:              '../images/index';
 $header-height:          false;
 $modal-top:              false;
 $modal-close-size:       60px;
+$footer-height:          50px;
+$wrapper-bg:             radial-gradient(circle, #fff 56%, #c7cfd6);
 // $table-pd:               8px 20px;
 
 
@@ -29,8 +31,8 @@ $modal-close-size:       60px;
 @import "_client/base/form";
 
 @import "_client/layout";
-@import "_client/modules/nav";
-@import "_client/modules/btn";
+// @import "_client/modules/nav";
+// @import "_client/modules/btn";
 
 @import "_client/util"; // 建議置底
 
@@ -45,10 +47,95 @@ $modal-close-size:       60px;
     left: 0;
     top: 0;
     bottom: 0;
-    background: url(#{$img-index}/banner.jpg) no-repeat center top / cover;
+    background: url(#{$img-index}/banner.png) no-repeat 0 -312px;
     z-index: 1;
 
-    @include mq-max(break(tablet,-1)) {
-        background: url(#{$img-index}/bannerMobile.jpg) no-repeat center bottom / cover;
+    @include mq-max(wide) {
+        background-position: right -312px;
+    }
+    @include mq-max(phone-plus) {
+        background-position: 48% -318px;
+    }
+    @include mq-max(phone) {
+        background-position: 55% -318px;
+    }
+}
+
+// 2020 upt
+.slogan {
+    font-size: em(25);
+    color: color();
+    letter-spacing: em(2);
+    margin-bottom: 55px;
+
+    @include mq(mobile) {
+        font-size: em(31);
+    }
+    @include mq(desktop) {
+        font-size: em(35);
+        margin-bottom: 85px;
+    }
+
+    em {
+        font-style: normal;
+
+        @include mq-max(break(tablet,-1)) {
+            display: block;
+            margin-top: 12px;
+        }
+        @include mq(tablet) {
+            margin-left: 20px;
+        }
+    }
+}
+
+.intro-nav {
+    a {
+        background: color();
+        color: #fff;
+        font-size: em(30);
+
+        display: inline-block;
+        margin: 0 1.6% 5%;
+        padding: 8px 30px;
+        position: relative;
+        width: 80%;
+        max-width: 275px;
+
+        @include mq(phone) {
+            width: 44%;
+        }
+        @include mq(phone-plus) {
+            font-size: em(38);
+        }
+        @include mq(wide) {
+            width: auto;
+            max-width: auto;
+        }
+
+        @include el {
+            width: 21px;
+            border: solid color(secondary);
+            position: absolute;
+            top: -4px;
+            bottom: -4px;
+        }
+
+        &:before {
+            border-width: 4px 0 4px 4px;
+            left: -4px;
+        }
+        &:after {
+            border-width: 4px 4px 4px 0;
+            right: -4px;
+        }
+
+        &:hover {
+            background: color(secondary);
+
+            &:before, &:after {
+                border-color: lighten(color(secondary), 20);
+            }
+        }
     }
 }
