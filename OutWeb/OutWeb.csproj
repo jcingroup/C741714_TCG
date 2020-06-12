@@ -407,7 +407,9 @@
     <Content Include="Content\images\icon-view.png" />
     <Content Include="Content\images\icon-word.jpg" />
     <Content Include="Content\images\index\banner.jpg" />
+    <Content Include="Content\images\index\banner.png" />
     <Content Include="Content\images\index\bannerMobile.jpg" />
+    <Content Include="Content\images\index\logo-s.png" />
     <Content Include="Content\images\index\logo.png" />
     <Content Include="Content\images\JoinUs\caption-advanced.en-US.gif" />
     <Content Include="Content\images\JoinUs\caption-advanced.gif" />
@@ -416,7 +418,10 @@
     <Content Include="Content\images\JoinUs\caption-primary.gif" />
     <Content Include="Content\images\JoinUs\caption-primary.ja-JP.gif" />
     <Content Include="Content\images\JoinUs\gallery-sp.jpg" />
+    <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo2.png" />
+    <Content Include="Content\images\logo_s.gif" />
     <Content Include="Content\images\logo_s.png" />
     <Content Include="Content\images\NoImages.jpg" />
     <Content Include="Content\js\fancybox\jquery.fancybox.min.css" />
