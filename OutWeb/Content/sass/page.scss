@@ -69,7 +69,7 @@ $font-size-h3:           27px;
     }
 
     @include mq-max(break(phone-plus,-1)) {
-        height: 125px;
+        height: 100px;
         padding: 8px 0;
 
         .scrolled & {

@@ -124,7 +124,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 主張與立場 的當地語系化字串。
+        ///   查詢類似 主張立場 的當地語系化字串。
         /// </summary>
         public static string aboutUs_position {
             get {
@@ -808,7 +808,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 人事名單 的當地語系化字串。
+        ///   查詢類似 人事組織 的當地語系化字串。
         /// </summary>
         public static string org_people {
             get {

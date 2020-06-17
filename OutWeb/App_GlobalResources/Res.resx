@@ -133,7 +133,7 @@
     <value>行政區域圖&amp;amp;&lt;br class="visible-xs"&gt;組織架構</value>
   </data>
   <data name="aboutUs_position" xml:space="preserve">
-    <value>主張與立場</value>
+    <value>主張立場</value>
   </data>
   <data name="aboutUs_statement" xml:space="preserve">
     <value>台灣民政府基本法</value>
@@ -306,7 +306,7 @@
     <comment>行政區域圖&amp;組織架構 子分頁</comment>
   </data>
   <data name="org_people" xml:space="preserve">
-    <value>人事名單</value>
+    <value>人事組織</value>
     <comment>行政區域圖&amp;組織架構 子分頁</comment>
   </data>
   <data name="postCode" xml:space="preserve">

@@ -137,14 +137,14 @@
                         @Html.Raw(@OutWeb.App_GlobalResources.Res.news_focusCategory)
                     </a>
 
-                    @* 2020.06 主張與立場 *@
+                    @* 2020.06 主張立場 *@
                     <a href="~/AboutUs/Position?langCode=@OutWeb.App_GlobalResources.Res.lang">
                         @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_position)
                     </a>
 
-                    @* 2020.06 組織架構 *@
-                    <a href="~/AboutUs/Organization?cate_id=8&langCode=@OutWeb.App_GlobalResources.Res.lang">
-                        @Html.Raw(@OutWeb.App_GlobalResources.Res.org_org)
+                    @* 2020.06 人事組織 *@
+                    <a href="~/AboutUs/Organization?cate_id=9&langCode=@OutWeb.App_GlobalResources.Res.lang">
+                        @Html.Raw(@OutWeb.App_GlobalResources.Res.org_people)
                     </a>
                 </nav>
             }
@@ -175,10 +175,6 @@
                     </ul>
                     <ul class="sub-nav list-unstyled">
                         <li class="@(ViewBag.BodyClass.Contains("AboutUs") ? "" : "hidden")">
-                            <!-- <a class="@(ViewBag.BodyClass.Contains("TCG") ? "current" : "")" href="~/AboutUs/TCG">
-                                <i class="icon-taiwan"></i>
-                                台灣民政府由來
-                            </a> -->
                             <a class="@(ViewBag.BodyClass.Contains("Profile") ? "current" : "")" href="~/AboutUs/Position?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-people"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.aboutUs_1)
@@ -209,10 +205,6 @@
                             </a>
                         </li>
                         <li class="@(ViewBag.BodyClass.Contains("News") ? "" : "hidden")">
-                            <!-- <a class="@(ViewBag.BodyClass.Contains("Latest") ? "current" : "")" href="~/News/Latest">
-                                <i class="icon-paperplane"></i>
-                                最新訊息
-                            </a> -->
                             <a class="@(ViewBag.BodyClass.Contains("Event") ? "current" : "")" href="~/News/EventLatest?langCode=@OutWeb.App_GlobalResources.Res.lang">
                                 <i class="icon-camera"></i>
                                 @Html.Raw(@OutWeb.App_GlobalResources.Res.news_event_1)
@@ -468,12 +460,14 @@
                     <li>
                         <h2><a href="http://taiwancivilgovernment.com/events" target="new">@OutWeb.App_GlobalResources.Res.WV_site</a></h2>
                     </li>
+                    @* TACC 隱藏
                     <li>
                         <h2><a href="https://t-acc.com/" target="new">@OutWeb.App_GlobalResources.Res.tacc_site</a></h2>
                     </li>
                     <li>
                         <h2><a href="https://www.facebook.com/pg/TaiwaneseAmericanCC/about/?ref=page_internal" target="new">@OutWeb.App_GlobalResources.Res.fbPage_3</a></h2>
-                    </li>
+                    </li> *@
+                    <li><a href="mailto:usmgtcg.srv@gmail.com">usmgtcg.srv@gmail.com</a></li>
                 </ul>
             </li>
         </ul>

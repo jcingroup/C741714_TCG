@@ -710,7 +710,7 @@ input[type=month] {
 }
 @media (max-width: 41.625em) {
   #header {
-    padding-top: 125px;
+    padding-top: 100px;
   }
 }
 @media (max-width: 35.4375em) {
@@ -741,7 +741,7 @@ input[type=month] {
 
 .topNav {
   position: absolute;
-  top: 0.6rem;
+  top: 0.5rem;
   right: 0;
   margin-bottom: 0;
   text-align: right;
@@ -852,7 +852,7 @@ input[type=month] {
 }
 @media (max-width: 47.9375em) {
   .logo {
-    top: 14px;
+    top: 22px;
   }
   .scrolled .logo {
     top: 9px;
@@ -885,7 +885,7 @@ input[type=month] {
     height: 44px;
   }
   .scrolled .logo a {
-    width: 30px;
+    width: 32px;
     height: 30px;
     background-size: cover;
   }
@@ -2720,7 +2720,7 @@ a.label-pink:hover, a.label-pink:focus, a.label-pink:active {
 }
 @media (max-width: 41.625em) {
   #pageBanner {
-    height: 125px;
+    height: 100px;
     padding: 8px 0;
   }
   .scrolled #pageBanner {
