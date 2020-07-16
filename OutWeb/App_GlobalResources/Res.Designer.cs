@@ -259,7 +259,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 FB 官方粉絲頁1 的當地語系化字串。
+        ///   查詢類似 FB 官方粉絲頁 的當地語系化字串。
         /// </summary>
         public static string fbPage_1 {
             get {
@@ -349,7 +349,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 地方服務處諮詢 的當地語系化字串。
+        ///   查詢類似 各州訊息 的當地語系化字串。
         /// </summary>
         public static string joinUs_consult {
             get {
@@ -358,7 +358,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 地方服務處&lt;br class=&quot;visible-xs&quot;&gt;諮詢 的當地語系化字串。
+        ///   查詢類似 各州訊息 的當地語系化字串。
         /// </summary>
         public static string joinUs_consult_1 {
             get {
@@ -637,7 +637,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 地方服務處 的當地語系化字串。
+        ///   查詢類似 各州訊息 的當地語系化字串。
         /// </summary>
         public static string nav_joinUs {
             get {

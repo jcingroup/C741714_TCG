@@ -173,7 +173,7 @@
     <comment>地方服務處諮詢 子分頁</comment>
   </data>
   <data name="fbPage_1" xml:space="preserve">
-    <value>FB 官方粉絲頁1</value>
+    <value>FB 官方粉絲頁</value>
   </data>
   <data name="fbPage_2" xml:space="preserve">
     <value>FB 官方粉絲頁1</value>
@@ -200,10 +200,12 @@
     <value>申請台灣&lt;br class="visible-xs"&gt;民政府身分證</value>
   </data>
   <data name="joinUs_consult" xml:space="preserve">
-    <value>地方服務處諮詢</value>
+    <value>各州訊息</value>
+    <comment>old:地方服務處諮詢</comment>
   </data>
   <data name="joinUs_consult_1" xml:space="preserve">
-    <value>地方服務處&lt;br class="visible-xs"&gt;諮詢</value>
+    <value>各州訊息</value>
+    <comment>old: 地方服務處&lt;br class="visible-xs"&gt;諮詢</comment>
   </data>
   <data name="joinUs_gallery" xml:space="preserve">
     <value>歷屆合照</value>
@@ -252,8 +254,8 @@
     <value>認識台灣民政府</value>
   </data>
   <data name="nav_joinUs" xml:space="preserve">
-    <value>地方服務處</value>
-    <comment>如何加入台灣民政府</comment>
+    <value>各州訊息</value>
+    <comment>如何加入台灣民政府-&gt;地方服務處</comment>
   </data>
   <data name="nav_news" xml:space="preserve">
     <value>最新消息 活動公告</value>
