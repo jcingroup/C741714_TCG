@@ -937,7 +937,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。 的當地語系化字串。
+        ///   查詢類似 台灣民政府 唯一任務即是「台灣復歸母國日本」依循「琉球復歸模式」。 的當地語系化字串。
         /// </summary>
         public static string webDescription {
             get {
