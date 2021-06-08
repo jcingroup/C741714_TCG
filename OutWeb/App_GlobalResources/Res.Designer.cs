@@ -160,7 +160,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 高雄市大寮區光明路二段215號 的當地語系化字串。
+        ///   查詢類似 高雄市三民區自立一路387號 的當地語系化字串。
         /// </summary>
         public static string address {
             get {
@@ -919,7 +919,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 (07) 787-6459 的當地語系化字串。
+        ///   查詢類似 (07) 321123-0 的當地語系化字串。
         /// </summary>
         public static string tel {
             get {
