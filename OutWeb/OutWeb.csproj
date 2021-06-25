@@ -441,6 +441,7 @@
     <Content Include="Content\noIE\line.gif" />
     <Content Include="Content\noIE\noIE.css" />
     <Content Include="Content\noIE\noIE.html" />
+    <Content Include="Content\sass\vendor\icomoon\iconcread.txt" />
     <Content Include="Entities\TCGDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TCGDB.edmx</DependentUpon>
@@ -541,6 +542,9 @@
     <Content Include="Content\sass\_client\_layout.scss" />
     <Content Include="Content\sass\_client\_util.scss" />
     <Content Include="Content\sass\_client\_variables.scss" />
+    <Content Include="Content\sass\vendor\icomoon.scss" />
+    <Content Include="Content\sass\vendor\icomoon\selection.json" />
+    <Content Include="Content\sass\vendor\icomoon\_variables.scss" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

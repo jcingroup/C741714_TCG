@@ -1,125 +1,157 @@
+﻿@charset "UTF-8";
 @font-face {
-  font-family: 'icomoon';
-  src:  url('../../font/icomoon/icomoon.eot?wzh1of');
-  src:  url('../../font/icomoon/icomoon.eot?wzh1of#iefix') format('embedded-opentype'),
-    url('../../font/icomoon/icomoon.ttf?wzh1of') format('truetype'),
-    url('../../font/icomoon/icomoon.woff?wzh1of') format('woff'),
-    url('../../font/icomoon/icomoon.svg?wzh1of#icomoon') format('svg');
+  font-family: "icomoon";
+  src: url("../../font/icomoon/icomoon.ttf?lupi66") format("truetype"), url("../../font/icomoon/icomoon.woff?lupi66") format("woff"), url("../../font/icomoon/icomoon.svg?lupi66#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
-
-[class^="icon-"], [class*=" icon-"] {
+[class^=icon-], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
-  speak: none;
+  font-family: "icomoon" !important;
+  speak: never;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-facebook:before {
-  content: "\e917";
-}
-.icon-bullhorn:before {
-  content: "\e900";
-}
-.icon-megaphone:before {
-  content: "\e900";
-}
-.icon-announcement:before {
-  content: "\e900";
-}
-.icon-advertisement:before {
-  content: "\e900";
-}
-.icon-news:before {
-  content: "\e900";
-}
-.icon-camera:before {
-  content: "\e901";
-}
-.icon-photo:before {
-  content: "\e901";
-}
-.icon-picture:before {
-  content: "\e901";
-}
-.icon-image:before {
-  content: "\e901";
-}
-.icon-phone:before {
-  content: "\e902";
-}
-.icon-contact:before {
-  content: "\e902";
-}
-.icon-drivers-license-o:before {
-  content: "\e903";
-}
-.icon-id-card-o:before {
-  content: "\e903";
-}
-.icon-people:before {
-  content: "\e904";
-}
 .icon-about:before {
-  content: "\e905";
+  content: "";
 }
+
 .icon-focus:before {
-  content: "\e906";
+  content: "";
 }
+
 .icon-graduation-cap:before {
-  content: "\e907";
+  content: "";
 }
+
 .icon-join-us:before {
-  content: "\e908";
+  content: "";
 }
+
 .icon-menu:before {
-  content: "\e909";
+  content: "";
 }
+
 .icon-news2:before {
-  content: "\e90a";
+  content: "";
 }
+
 .icon-organization:before {
-  content: "\e90b";
+  content: "";
 }
+
 .icon-school:before {
-  content: "\e90c";
+  content: "";
 }
+
 .icon-search:before {
-  content: "\e90d";
+  content: "";
 }
+
 .icon-share:before {
-  content: "\e90e";
+  content: "";
 }
+
 .icon-state-hsinchu:before {
-  content: "\e90f";
+  content: "";
 }
+
 .icon-state-kaohsiung:before {
-  content: "\e910";
+  content: "";
 }
+
 .icon-state-taichung:before {
-  content: "\e911";
+  content: "";
 }
+
 .icon-state-tainan:before {
-  content: "\e912";
+  content: "";
 }
+
 .icon-state-taipei:before {
-  content: "\e913";
+  content: "";
 }
+
 .icon-state-yilan:before {
-  content: "\e914";
+  content: "";
 }
+
 .icon-taiwan:before {
-  content: "\e915";
+  content: "";
 }
+
 .icon-tcg:before {
-  content: "\e916";
+  content: "";
+}
+
+.icon-phone:before {
+  content: "";
+}
+
+.icon-contact:before {
+  content: "";
+}
+
+.icon-people:before {
+  content: "";
+}
+
+.icon-facebook:before {
+  content: "";
+}
+
+.icon-bullhorn:before {
+  content: "";
+}
+
+.icon-megaphone:before {
+  content: "";
+}
+
+.icon-announcement:before {
+  content: "";
+}
+
+.icon-advertisement:before {
+  content: "";
+}
+
+.icon-news:before {
+  content: "";
+}
+
+.icon-camera:before {
+  content: "";
+}
+
+.icon-photo:before {
+  content: "";
+}
+
+.icon-picture:before {
+  content: "";
+}
+
+.icon-image:before {
+  content: "";
+}
+
+.icon-twitter:before {
+  content: "";
+}
+
+.icon-drivers-license-o:before {
+  content: "";
+}
+
+.icon-id-card-o:before {
+  content: "";
 }

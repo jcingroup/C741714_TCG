@@ -892,24 +892,6 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 溫晟志 0987-577-175 的當地語系化字串。
-        /// </summary>
-        public static string spokesman_p {
-            get {
-                return ResourceManager.GetString("spokesman_p", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 台灣民政府 中央發言人 的當地語系化字串。
-        /// </summary>
-        public static string spokesman_w {
-            get {
-                return ResourceManager.GetString("spokesman_w", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查詢類似 TACC官方網站 的當地語系化字串。
         /// </summary>
         public static string tacc_site {
@@ -924,6 +906,15 @@ namespace OutWeb.App_GlobalResources {
         public static string tel {
             get {
                 return ResourceManager.GetString("tel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 @usmgtcgov | Twitter 的當地語系化字串。
+        /// </summary>
+        public static string twitter {
+            get {
+                return ResourceManager.GetString("twitter", resourceCulture);
             }
         }
         

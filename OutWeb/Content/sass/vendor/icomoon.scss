@@ -1,0 +1,201 @@
+﻿@charset "UTF-8";
+
+@import "icomoon/variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?lupi66') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?lupi66') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?lupi66##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-about {
+  &:before {
+    content: $icon-about; 
+  }
+}
+.icon-focus {
+  &:before {
+    content: $icon-focus; 
+  }
+}
+.icon-graduation-cap {
+  &:before {
+    content: $icon-graduation-cap; 
+  }
+}
+.icon-join-us {
+  &:before {
+    content: $icon-join-us; 
+  }
+}
+.icon-menu {
+  &:before {
+    content: $icon-menu; 
+  }
+}
+.icon-news2 {
+  &:before {
+    content: $icon-news2; 
+  }
+}
+.icon-organization {
+  &:before {
+    content: $icon-organization; 
+  }
+}
+.icon-school {
+  &:before {
+    content: $icon-school; 
+  }
+}
+.icon-search {
+  &:before {
+    content: $icon-search; 
+  }
+}
+.icon-share {
+  &:before {
+    content: $icon-share; 
+  }
+}
+.icon-state-hsinchu {
+  &:before {
+    content: $icon-state-hsinchu; 
+  }
+}
+.icon-state-kaohsiung {
+  &:before {
+    content: $icon-state-kaohsiung; 
+  }
+}
+.icon-state-taichung {
+  &:before {
+    content: $icon-state-taichung; 
+  }
+}
+.icon-state-tainan {
+  &:before {
+    content: $icon-state-tainan; 
+  }
+}
+.icon-state-taipei {
+  &:before {
+    content: $icon-state-taipei; 
+  }
+}
+.icon-state-yilan {
+  &:before {
+    content: $icon-state-yilan; 
+  }
+}
+.icon-taiwan {
+  &:before {
+    content: $icon-taiwan; 
+  }
+}
+.icon-tcg {
+  &:before {
+    content: $icon-tcg; 
+  }
+}
+.icon-phone {
+  &:before {
+    content: $icon-phone; 
+  }
+}
+.icon-contact {
+  &:before {
+    content: $icon-contact; 
+  }
+}
+.icon-people {
+  &:before {
+    content: $icon-people; 
+  }
+}
+.icon-facebook {
+  &:before {
+    content: $icon-facebook; 
+  }
+}
+.icon-bullhorn {
+  &:before {
+    content: $icon-bullhorn; 
+  }
+}
+.icon-megaphone {
+  &:before {
+    content: $icon-megaphone; 
+  }
+}
+.icon-announcement {
+  &:before {
+    content: $icon-announcement; 
+  }
+}
+.icon-advertisement {
+  &:before {
+    content: $icon-advertisement; 
+  }
+}
+.icon-news {
+  &:before {
+    content: $icon-news; 
+  }
+}
+.icon-camera {
+  &:before {
+    content: $icon-camera; 
+  }
+}
+.icon-photo {
+  &:before {
+    content: $icon-photo; 
+  }
+}
+.icon-picture {
+  &:before {
+    content: $icon-picture; 
+  }
+}
+.icon-image {
+  &:before {
+    content: $icon-image; 
+  }
+}
+.icon-twitter {
+  &:before {
+    content: $icon-twitter; 
+  }
+}
+.icon-drivers-license-o {
+  &:before {
+    content: $icon-drivers-license-o; 
+  }
+}
+.icon-id-card-o {
+  &:before {
+    content: $icon-id-card-o; 
+  }
+}
+

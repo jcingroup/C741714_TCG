@@ -6,43 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="@OutWeb.App_GlobalResources.Res.webKeywords">
     <meta name="description" content="@OutWeb.App_GlobalResources.Res.webDescription">
-    @if (ViewBag.IsFirstPage)
-    {
-        <title id="title">@OutWeb.App_GlobalResources.Res.webTitle</title>
-    }
-    else
-    {
-        <title id="title">@ViewBag.Title | @OutWeb.App_GlobalResources.Res.webTitle2</title>
-    }
-    @if (ViewBag.Description != null && ViewBag.Description != "")
-    {
-        <meta name="og:description" content="@ViewBag.Description">
-    }
-    else
-    {
-        @*<meta name="og:description" content="&hellip;">*@
-        <meta name="og:description" content="&nbsp;">
-    }
-    @if (ViewBag.IsFirstPage)
-    {
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="@OutWeb.App_GlobalResources.Res.webTitle" />
-    }
-    else
-    {
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content="@ViewBag.Title" />
-        if (@ViewBag.Image != null)
-        {
-            string urScheme = @HttpContext.Current.Request.Url.Scheme;
-            string urlAuth = @HttpContext.Current.Request.Url.Authority;
-            string img_path = urScheme + "://" + urlAuth + ViewBag.Image;
-            <meta property="og:image" content="@img_path" />
-        }
-    }
-    @*<meta property="og:description" content="台灣民政府(TCG) 是一個合法的政府組織，是在美國軍事政府(USMG)架構下，中華民國流亡代理政權即將結束，將由USMG TCG接管台灣。">*@
-    <meta property="og:site_name" content="@OutWeb.App_GlobalResources.Res.webTitle">
-    @RenderSection("OGMeta", false)
 
     <!-- Favicons -->
     <!-- Standard -->
@@ -54,8 +17,8 @@
     <!-- Apple -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-startup-image" href="~/favicon_apple.png">
     <meta name="apple-mobile-web-app-title" content="@OutWeb.App_GlobalResources.Res.webTitle3">
+    <link rel="apple-touch-startup-image" href="~/favicon_apple.png">
     <link rel="apple-touch-icon" sizes="256x256" href="~/favicon_apple.png">
     <!-- // Favicons -->
 
@@ -67,12 +30,34 @@
     <link rel="stylesheet" href="~/Content/css/vendor/icomoon.css">
     <link rel="stylesheet" href="~/Content/css/grid.css">
     <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+
     @if (ViewBag.IsFirstPage)
     {
+        @*<meta property="og:type" content="website">
+        <meta property="og:title" content="@OutWeb.App_GlobalResources.Res.webTitle">*@
+        <title id="title">@OutWeb.App_GlobalResources.Res.webTitle</title>
         <link rel="stylesheet" href="~/Content/css/index.css">
     }
     else
     {
+        <meta name="og:description" content="@(ViewBag.Description != null && ViewBag.Description != "" ? ViewBag.Description:"&nbsp;")">
+        <meta property="og:site_name" content="@OutWeb.App_GlobalResources.Res.webTitle">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="@ViewBag.Title">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@OutWeb.App_GlobalResources.Res.webTitle">
+        <meta name="twitter:creator" content="usmgtcgov">
+        <meta name="twitter:title" content="@ViewBag.Title">
+        <meta name="twitter:description" content="@(ViewBag.Description != null && ViewBag.Description != "" ? ViewBag.Description:"&nbsp;")">
+        if (@ViewBag.Image != null)
+        {
+            string urScheme = @HttpContext.Current.Request.Url.Scheme;
+            string urlAuth = @HttpContext.Current.Request.Url.Authority;
+            string img_path = urScheme + "://" + urlAuth + ViewBag.Image;
+            <meta property="og:image" content="@img_path">
+            <meta name="twitter:image" content="@img_path">
+        }
+        <title id="title">@ViewBag.Title | @OutWeb.App_GlobalResources.Res.webTitle2</title>
         <link rel="stylesheet" href="~/Content/css/page.css">
     }
     @RenderSection("css", false)
@@ -98,7 +83,7 @@
                             <button class="search-trigger icon-search"></button>
                         </li>
                         <li class="share">
-                            <a href="https://www.facebook.com/usmgtcgov.tw/" target="new" class="icon-facebook"></a>
+                            <a href="https://twitter.com/usmgtcgov" target="new" class="icon-twitter"></a>
                         </li>
                         <li class="menu">
                             <button class="sitemap-trigger icon-menu"></button>
@@ -454,14 +439,8 @@
                     @OutWeb.App_GlobalResources.Res.link
                 </h1>
                 <ul class="list-unstyled">
-                    @*<li class="mt-0">
-                        <h2 class="text">@OutWeb.App_GlobalResources.Res.spokesman_w<br>@OutWeb.App_GlobalResources.Res.spokesman_p</h2>
-                    </li>
-                    <li>
-                        <h2><a href="https://www.facebook.com/TaiwanCivilGovernment/" target="new">@OutWeb.App_GlobalResources.Res.fbPage_1</a></h2>
-                    </li>*@
                     <li class="mt-0">
-                        <h2><a href="https://www.facebook.com/usmgtcgov.tw/" target="new">@OutWeb.App_GlobalResources.Res.fbPage_1</a></h2>
+                        <h2><a href="https://twitter.com/usmgtcgov" target="new">@OutWeb.App_GlobalResources.Res.twitter</a></h2>
                     </li>
                     <li>
                         <h2><a href="http://usmgtcg.ning.com/" target="new">@OutWeb.App_GlobalResources.Res.pre_site</a></h2>
@@ -561,8 +540,12 @@
             $(".editor table").wrap("<div class='table-rwd'></div>");
         </script>
 
-        <!-- addThis share btn -->
-        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a72b8d4c87ca24b"></script>
+
+        @*<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a72b8d4c87ca24b"></script> *@
+
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60d58a87dd4048fb"></script>
+
     }
 
     @RenderSection("scripts", required: false)
