@@ -901,7 +901,7 @@ namespace OutWeb.App_GlobalResources {
         }
         
         /// <summary>
-        ///   查詢類似 (07) 321123-0 的當地語系化字串。
+        ///   查詢類似 (07) 3211230 的當地語系化字串。
         /// </summary>
         public static string tel {
             get {
