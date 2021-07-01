@@ -463,7 +463,6 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\font\icomoon\icomoon.eot" />
     <Content Include="Content\font\icomoon\icomoon.ttf" />
     <Content Include="Content\font\icomoon\icomoon.woff" />
     <EntityDeploy Include="Entities\TCGDB.edmx">
